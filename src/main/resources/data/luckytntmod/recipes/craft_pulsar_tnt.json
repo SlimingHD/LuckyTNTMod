@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "202",
+    "010",
+    "202"
+  ],
+  "key": {
+    "2": {
+      "item": "luckytntmod:tnt_x100"
+    },
+    "0": {
+      "item": "luckytntmod:pulse_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:pulsar_tnt",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 1 ",
+    "#0#",
+    " 1 "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:black_wool"
+    },
+    "0": {
+      "item": "luckytntmod:sand_firework"
+    },
+    "1": {
+      "item": "minecraft:lime_dye"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:lehk_firework",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "101",
+    "0#0",
+    "101"
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:dynamite_x5"
+    },
+    "0": {
+      "item": "luckytntmod:turret_tnt"
+    },
+    "#": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:cannon_tnt",
+    "count": 1
+  }
+}

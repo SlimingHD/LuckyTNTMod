@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "345",
+    "000"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:cobblestone"
+    },
+    "3": {
+      "item": "minecraft:torch"
+    },
+    "4": {
+      "item": "minecraft:tnt"
+    },
+    "5": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:cobblestone_house_tnt",
+    "count": 1
+  }
+}

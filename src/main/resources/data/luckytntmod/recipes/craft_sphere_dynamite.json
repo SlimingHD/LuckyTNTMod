@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:sphere_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:sphere_dynamite",
+    "count": 4
+  }
+}

@@ -1,0 +1,14 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/xray_tnt_bottom",
+        "up": "luckytntmod:block/xray_tnt_top",
+        "north": "luckytntmod:block/xray_tnt_side",
+        "east": "luckytntmod:block/xray_tnt_side",
+        "south": "luckytntmod:block/xray_tnt_side",
+        "west": "luckytntmod:block/xray_tnt_side",
+        "particle": "luckytntmod:block/xray_tnt_side"
+    },
+    "render_type": "cutout_mipped"
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#0#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:arrow"
+    },
+    "0": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:arrow_tnt",
+    "count": 1
+  }
+}

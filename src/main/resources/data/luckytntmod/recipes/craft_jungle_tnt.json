@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "#0#",
+    "1#1"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:hyperion"
+    },
+    "1": {
+      "item": "luckytntmod:grove_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:antimatter"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:jungle_tnt",
+    "count": 1
+  }
+}

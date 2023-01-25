@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/ore_tnt_bottom",
+        "up": "luckytntmod:block/ore_tnt_top",
+        "north": "luckytntmod:block/ore_tnt_side",
+        "east": "luckytntmod:block/ore_tnt_side",
+        "south": "luckytntmod:block/ore_tnt_side",
+        "west": "luckytntmod:block/ore_tnt_side",
+        "particle": "luckytntmod:block/ore_tnt_side"
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "101",
+    "0#0",
+    "101"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:tnt_x100"
+    },
+    "0": {
+      "item": "minecraft:string"
+    },
+    "1": {
+      "item": "luckytntmod:tnt_x20"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:dividing_tnt",
+    "count": 1
+  }
+}

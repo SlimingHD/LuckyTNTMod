@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:xray_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:xray_dynamite",
+    "count": 4
+  }
+}

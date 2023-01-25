@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/flat_tnt_bottom",
+        "up": "luckytntmod:block/mountain_top_removal_top",
+        "north": "luckytntmod:block/mountain_top_removal_side",
+        "east": "luckytntmod:block/mountain_top_removal_side",
+        "south": "luckytntmod:block/mountain_top_removal_side",
+        "west": "luckytntmod:block/mountain_top_removal_side",
+        "particle": "luckytntmod:block/mountain_top_removal_side"
+    }
+}

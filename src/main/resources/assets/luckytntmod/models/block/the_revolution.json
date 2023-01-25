@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/the_revolution_bottom",
+        "up": "luckytntmod:block/the_revolution_top",
+        "north": "luckytntmod:block/the_revolution_side2",
+        "east": "luckytntmod:block/the_revolution_side",
+        "south": "luckytntmod:block/the_revolution_side2",
+        "west": "luckytntmod:block/the_revolution_side",
+        "particle": "luckytntmod:block/the_revolution_side"
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "luckytntmod:block/tunneling_tnt",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "luckytntmod:block/tunneling_tnt"
+    },
+    "facing=south": {
+      "model": "luckytntmod:block/tunneling_tnt",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "luckytntmod:block/tunneling_tnt",
+      "y": 270
+    }
+  }
+}

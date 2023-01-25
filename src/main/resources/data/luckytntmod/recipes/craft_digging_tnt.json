@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0#0",
+    "0#0",
+    "0#0"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:cobblestone"
+    },
+    "#": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:digging_tnt",
+    "count": 1
+  }
+}

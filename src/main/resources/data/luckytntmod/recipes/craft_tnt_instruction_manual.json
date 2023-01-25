@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:gunpowder"
+    },
+    "0": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:tnt_instruction_manual",
+    "count": 1
+  }
+}

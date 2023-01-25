@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/fortress_bottom",
+        "up": "luckytntmod:block/fortress_top",
+        "north": "luckytntmod:block/bastion_side",
+        "east": "luckytntmod:block/bastion_side",
+        "south": "luckytntmod:block/bastion_side",
+        "west": "luckytntmod:block/bastion_side",
+        "particle": "luckytntmod:block/bastion_side"
+    }
+}

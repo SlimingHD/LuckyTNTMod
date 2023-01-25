@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "111",
+    "202",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_block"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "minecraft:diamond_block"
+    },
+    "2": {
+      "item": "luckytntmod:ore_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:mineral_tnt",
+    "count": 1
+  }
+}

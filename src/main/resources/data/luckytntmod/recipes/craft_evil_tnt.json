@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 2 ",
+    "010",
+    " 0 "
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:antimatter"
+    },
+    "0": {
+      "item": "luckytntmod:vicious_tnt"
+    },
+    "2": {
+      "item": "minecraft:netherite_sword"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:evil_tnt",
+    "count": 1
+  }
+}

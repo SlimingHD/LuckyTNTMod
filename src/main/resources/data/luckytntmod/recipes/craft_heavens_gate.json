@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "121",
+    "232"
+  ],
+  "key": {
+    "0": {
+      "tag": "minecraft:saplings"
+    },
+    "1": {
+      "item": "luckytntmod:floating_island"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "3": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:heavens_gate",
+    "count": 1
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "luckytntmod:block/toxic_remains",
+    "particle": "luckytntmod:block/toxic_remains"
+  }
+}

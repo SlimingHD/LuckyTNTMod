@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "010",
+    "222"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:bone_meal"
+    },
+    "1": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "2": {
+      "tag": "minecraft:saplings"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:grove_tnt",
+    "count": 1
+  }
+}

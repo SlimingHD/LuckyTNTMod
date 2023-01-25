@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#0#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:dense_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:antimatter"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:compressed_tnt",
+    "count": 1
+  }
+}

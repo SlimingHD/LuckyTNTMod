@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "212",
+    "101",
+    "212"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "luckytntmod:eating_tnt"
+    },
+    "2": {
+      "item": "minecraft:golden_apple"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:hungry_tnt",
+    "count": 1
+  }
+}

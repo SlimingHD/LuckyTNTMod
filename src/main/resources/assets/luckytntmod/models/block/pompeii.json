@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/pompeii_bottom",
+        "up": "luckytntmod:block/pompeii_top",
+        "north": "luckytntmod:block/pompeii_side",
+        "east": "luckytntmod:block/pompeii_side",
+        "south": "luckytntmod:block/pompeii_side",
+        "west": "luckytntmod:block/pompeii_side",
+        "particle": "luckytntmod:block/pompeii_side"
+    }
+}

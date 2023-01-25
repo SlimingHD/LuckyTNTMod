@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,streets=false": {
+      "model": "luckytntmod:block/gotthard_tunnel",
+      "y": 90
+    },
+    "facing=north,streets=false": {
+      "model": "luckytntmod:block/gotthard_tunnel"
+    },
+    "facing=south,streets=false": {
+      "model": "luckytntmod:block/gotthard_tunnel",
+      "y": 180
+    },
+    "facing=west,streets=false": {
+      "model": "luckytntmod:block/gotthard_tunnel",
+      "y": 270
+    },
+    "facing=east,streets=true": {
+      "model": "luckytntmod:block/gotthard_tunnel_streets",
+      "y": 90
+    },
+    "facing=north,streets=true": {
+      "model": "luckytntmod:block/gotthard_tunnel_streets"
+    },
+    "facing=south,streets=true": {
+      "model": "luckytntmod:block/gotthard_tunnel_streets",
+      "y": 180
+    },
+    "facing=west,streets=true": {
+      "model": "luckytntmod:block/gotthard_tunnel_streets",
+      "y": 270
+    }
+  }
+}

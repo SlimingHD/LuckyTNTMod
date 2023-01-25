@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#0#",
+    "#1#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "0": {
+      "item": "luckytntmod:night_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:animal_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:zombie_apocalypse",
+    "count": 1
+  }
+}

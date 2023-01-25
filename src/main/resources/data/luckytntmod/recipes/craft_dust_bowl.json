@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "222",
+    "333"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:dirt"
+    },
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "2": {
+      "item": "luckytntmod:vaporize_tnt"
+    },
+    "3": {
+      "tag": "minecraft:sand"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:dust_bowl",
+    "count": 1
+  }
+}

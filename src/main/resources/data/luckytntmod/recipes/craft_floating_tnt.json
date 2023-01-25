@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#0#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:feather"
+    },
+    "0": {
+      "item": "luckytntmod:tnt_x100"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:floating_tnt",
+    "count": 1
+  }
+}

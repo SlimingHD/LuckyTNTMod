@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "#0#",
+    "1#1"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "#": {
+      "item": "luckytntmod:freeze_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:snow_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:ice_age",
+    "count": 1
+  }
+}

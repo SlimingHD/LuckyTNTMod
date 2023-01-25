@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#0#",
+    "121",
+    "#0#"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:tnt_x500"
+    },
+    "0": {
+      "item": "luckytntmod:antimatter"
+    },
+    "1": {
+      "item": "luckytntmod:sphere_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:global_disaster"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:supernova",
+    "count": 1
+  }
+}

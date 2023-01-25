@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 2 ",
+    "010",
+    " 0 "
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "0": {
+      "item": "luckytntmod:attacking_tnt"
+    },
+    "2": {
+      "item": "minecraft:diamond_sword"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:vicious_tnt",
+    "count": 1
+  }
+}

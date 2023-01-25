@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/house_tnt_bottom",
+        "up": "luckytntmod:block/hyperion_top",
+        "north": "luckytntmod:block/hyperion_side",
+        "east": "luckytntmod:block/hyperion_side",
+        "south": "luckytntmod:block/hyperion_side",
+        "west": "luckytntmod:block/hyperion_side",
+        "particle": "luckytntmod:block/hyperion_side"
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#1#",
+    "#0#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:picky_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "minecraft:diamond_pickaxe"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:silk_touch_tnt",
+    "count": 1
+  }
+}
