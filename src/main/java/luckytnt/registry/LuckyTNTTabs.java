@@ -14,13 +14,19 @@ import net.minecraftforge.registries.RegistryObject;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class LuckyTNTTabs {
 
-	public static CreativeModeTab NORMAL_TNT;	
+	public static CreativeModeTab NORMAL_TNT;
+	public static CreativeModeTab GOD_TNT;
 	public static CreativeModeTab OTHER;
 	
 	@SubscribeEvent
 	public static void registerTabs(CreativeModeTabEvent.Register event) {
 		NORMAL_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt"), builder -> builder.title(Component.translatable("item_group.luckytntmod.normal_tnt")).icon(() -> new ItemStack(BlockRegistry.METEOR_TNT.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
 			for(RegistryObject<Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("n")) {
+				populator.accept(item.get());
+			}
+        }));
+		GOD_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt"), builder -> builder.title(Component.translatable("item_group.luckytntmod.god_tnt")).icon(() -> new ItemStack(BlockRegistry.THE_REVOLUTION.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
+			for(RegistryObject<Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("g")) {
 				populator.accept(item.get());
 			}
         }));
