@@ -18,11 +18,12 @@ public class TheRevolutionEffect extends PrimedTNTEffect{
 	public void explosionTick(IExplosiveEntity entity) {
 		if(entity instanceof PrimedLTNT) {
 			Entity ent = (Entity)entity;
-			ent.setDeltaMovement(ent.getDeltaMovement().x, 0.2f, ent.getDeltaMovement().z);
+			ent.setDeltaMovement(ent.getDeltaMovement().x, 0.15f, ent.getDeltaMovement().z);
 			if(entity.getTNTFuse() < 60) {
 				if(entity.getTNTFuse() % 6 == 0) {
 					ent.getPersistentData().putFloat("spiral_power", Mth.clamp(ent.getPersistentData().getFloat("spiral_power") + 0.15f, 0.15f, Float.MAX_VALUE));
 					PrimedLTNT spiral_tnt = EntityRegistry.SPIRAL_TNT.get().create(entity.level());
+					spiral_tnt.setTNTFuse(140);
 					spiral_tnt.setPos(entity.x(), entity.y(), entity.z());
 					spiral_tnt.setDeltaMovement(ent.getLookAngle().normalize().scale((double)ent.getPersistentData().getFloat("spiral_power")));
 					entity.level().playSound(null, new BlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);

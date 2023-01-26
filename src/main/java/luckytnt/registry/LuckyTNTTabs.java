@@ -1,5 +1,7 @@
 package luckytnt.registry;
 
+import java.util.List;
+
 import luckytnt.LuckyTNTMod;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -20,17 +22,17 @@ public class LuckyTNTTabs {
 	
 	@SubscribeEvent
 	public static void registerTabs(CreativeModeTabEvent.Register event) {
-		NORMAL_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt"), builder -> builder.title(Component.translatable("item_group.luckytntmod.normal_tnt")).icon(() -> new ItemStack(BlockRegistry.METEOR_TNT.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
+		NORMAL_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt")), List.of(new ResourceLocation("spawn_eggs")), builder -> builder.title(Component.translatable("item_group.luckytntmod.normal_tnt")).icon(() -> new ItemStack(BlockRegistry.METEOR_TNT.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
 			for(RegistryObject<Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("n")) {
 				populator.accept(item.get());
 			}
         }));
-		GOD_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt"), builder -> builder.title(Component.translatable("item_group.luckytntmod.god_tnt")).icon(() -> new ItemStack(BlockRegistry.THE_REVOLUTION.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
+		GOD_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "other")), List.of(new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt")), builder -> builder.title(Component.translatable("item_group.luckytntmod.god_tnt")).icon(() -> new ItemStack(BlockRegistry.THE_REVOLUTION.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
 			for(RegistryObject<Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("g")) {
 				populator.accept(item.get());
 			}
         }));
-		OTHER = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "other"), builder -> builder.title(Component.translatable("item_group.luckytntmod.other")).icon(() -> new ItemStack(ItemRegistry.BLUE_CANDY.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
+		OTHER = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "other"), List.of(), List.of(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt")), builder -> builder.title(Component.translatable("item_group.luckytntmod.other")).icon(() -> new ItemStack(ItemRegistry.BLUE_CANDY.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
 			populator.accept(ItemRegistry.NUCLEAR_WASTE.get());
 			populator.accept(ItemRegistry.RED_CANDY.get());
 			populator.accept(ItemRegistry.GREEN_CANDY.get());
