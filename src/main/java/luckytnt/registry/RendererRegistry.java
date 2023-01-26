@@ -112,6 +112,12 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.END_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHRISTMAS_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.EARTHQUAKE_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.GLOBAL_DISASTER.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HEAVENS_GATE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HELLS_GATE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.MANKINDS_MARK.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.POSEIDONS_WAVE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HEXAHEDRON.get(), LTNTRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);

@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
-import luckytnt.registry.BlockRegistry;
+import java.util.function.Supplier;
+
+import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -9,18 +11,31 @@ import luckytntlib.util.explosions.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.RegistryObject;
 
-public class OceanTNTEffect extends PrimedTNTEffect{
+public class OceanTNTEffect extends PrimedTNTEffect {
+	private final int radius;
+	private final int radiusY;
+	private final int squids;
+	private final Supplier<RegistryObject<LTNTBlock>> block;
 
+	public OceanTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int radius, int radiusY, int squids) {
+		this.radius = radius;
+		this.radiusY = radiusY;
+		this.squids = squids;
+		this.block = block;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos().x, entity.getPos().y, entity.getPos().z, 15);
-		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), 30, 20, new IForEachBlockExplosionEffect() {
+		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion();
+		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -32,16 +47,22 @@ public class OceanTNTEffect extends PrimedTNTEffect{
 				}
 			}
 		});
+		
+		for(int i = 0; i < squids; i++) {
+			Squid squid = new Squid(EntityType.SQUID, entity.level());
+			squid.setPos(entity.x() + (Math.random() * 50D - 25D), entity.y(), entity.z() + (Math.random() * 50D - 25D));
+			entity.level().addFreshEntity(squid);
+		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(ParticleTypes.SPLASH, entity.x(), entity.y() + 1.4f, entity.z(), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity ent) {
+		ent.level().addParticle(ParticleTypes.SPLASH, ent.x(), ent.y() + 0.7f, ent.z(), 0, 0, 0);
 	}
 
 	@Override
 	public Block getBlock() {
-		return BlockRegistry.OCEAN_TNT.get();
+		return block.get().get();
 	}
 	
 	@Override

@@ -18,10 +18,14 @@ public class HouseTNTEffect extends PrimedTNTEffect{
 
 	private final Supplier<RegistryObject<LTNTBlock>> TNT;
 	private final String house;
+	private final int offX;
+	private final int offZ;
 	
-	public HouseTNTEffect(Supplier<RegistryObject<LTNTBlock>> TNT, String house) {
+	public HouseTNTEffect(Supplier<RegistryObject<LTNTBlock>> TNT, String house, int offX, int offZ) {
 		this.TNT = TNT;
 		this.house = house;
+		this.offX = offX;
+		this.offZ = offZ;
 	}
 	
 	@Override
@@ -34,7 +38,7 @@ public class HouseTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		StructureTemplate template = ((ServerLevel)entity.level()).getStructureManager().getOrCreate(new ResourceLocation(LuckyTNTMod.MODID, house));
 		if(template != null) {
-			template.placeInWorld((ServerLevel)entity.level(), new BlockPos(entity.getPos()).offset(-5, 0, -3), new BlockPos(entity.getPos()).offset(-5, 0, -3), new StructurePlaceSettings(), entity.level().random, 3);
+			template.placeInWorld((ServerLevel)entity.level(), new BlockPos(entity.getPos()).offset(offX, 0, offZ), new BlockPos(entity.getPos()).offset(offX, 0, offZ), new StructurePlaceSettings(), entity.level().random, 3);
 		}
 	}
 }
