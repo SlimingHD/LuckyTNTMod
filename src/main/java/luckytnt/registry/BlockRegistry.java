@@ -29,7 +29,7 @@ public class BlockRegistry {
 	//TNT
 	public static final RegistryObject<LTNTBlock> TNT = LuckyTNTMod.RH.registerTNTBlock(EntityRegistry.TNT, new TNTBlockRegistryData.Builder("tnt").tab(null).addDispenserBehaviour(false).makeItem(false).build());
 
-	//Normal TNT
+	//Normal TNTs
 	public static final RegistryObject<LTNTBlock> TNT_X5 = LuckyTNTMod.RH.registerTNTBlock("tnt_x5", EntityRegistry.TNT_X5, "n", MaterialColor.COLOR_BLUE, true);
 	public static final RegistryObject<LTNTBlock> TNT_X20 = LuckyTNTMod.RH.registerTNTBlock("tnt_x20", EntityRegistry.TNT_X20, "n", MaterialColor.COLOR_GREEN, true);
 	public static final RegistryObject<LTNTBlock> TNT_X100 = LuckyTNTMod.RH.registerTNTBlock("tnt_x100", EntityRegistry.TNT_X100, "n", MaterialColor.COLOR_ORANGE, true);
@@ -128,7 +128,8 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> EARTHQUAKE_TNT = LuckyTNTMod.RH.registerTNTBlock("earthquake_tnt", EntityRegistry.EARTHQUAKE_TNT, "n", MaterialColor.COLOR_BROWN, true);
 	public static final RegistryObject<LTNTBlock> LUCKY_TNT = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new LuckyTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS), LuckyTNTMod.RH.TNTLists.get("n")), new TNTBlockRegistryData.Builder("lucky_tnt").tab("n").build());
 	
-	//God TNT
+	//God TNTs
+	
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));
