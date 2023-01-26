@@ -15,13 +15,12 @@ public class SphereTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 9);
 		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 9, new IForEachBlockExplosionEffect() {
 		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, dummyExplosion) < 100) {
-					state.getBlock().onBlockExploded(state, level, pos, new ImprovedExplosion(level, entity.getPos(), 9));
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
 				}
 			}
 		});

@@ -101,6 +101,8 @@
 	"block.luckytntmod.poseidons_wave" : "Poseidons Wave",
 	"block.luckytntmod.hexahedron" : "Hexahedron",
 	"block.luckytntmod.mountaintop_removal" : "Mountaintop Removal",
+	"block.luckytntmod.dust_bowl" : "Dust Bowl",
+	"block.luckytntmod.the_revolution" : "The Revolution",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -221,6 +223,8 @@
 	"entity.luckytntmod.poseidons_wave" : "Poseidons Wave",
 	"entity.luckytntmod.hexahedron" : "Hexahedron",
 	"entity.luckytntmod.mountaintop_removal" : "Mountaintop Removal",
+	"entity.luckytntmod.dust_bowl" : "Dust Bowl",
+	"entity.luckytntmod.the_revolution" : "The Revolution",
 				
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.spiral_projectile" : "Spiral TNT",

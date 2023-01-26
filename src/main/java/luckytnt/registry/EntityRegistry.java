@@ -154,6 +154,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> POSEIDONS_WAVE = LuckyTNTMod.RH.registerTNTEntity("poseidons_wave", new PoseidonsWaveEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HEXAHEDRON = LuckyTNTMod.RH.registerTNTEntity("hexahedron", new HexahedronEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> MOUNTAINTOP_REMOVAL = LuckyTNTMod.RH.registerTNTEntity("mountaintop_removal", new MountaintopRemovalEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> DUST_BOWL = LuckyTNTMod.RH.registerTNTEntity("dust_bowl", new DustBowlEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> THE_REVOLUTION = LuckyTNTMod.RH.registerTNTEntity("the_revolution", new TheRevolutionEffect());
 
 	//Projectile
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("meteor", new MeteorEffect(), 2f, false);

@@ -136,8 +136,8 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> POSEIDONS_WAVE = LuckyTNTMod.RH.registerTNTBlock("poseidons_wave", EntityRegistry.POSEIDONS_WAVE, "g", MaterialColor.COLOR_BLUE, true);
 	public static final RegistryObject<LTNTBlock> HEXAHEDRON = LuckyTNTMod.RH.registerTNTBlock("hexahedron", EntityRegistry.HEXAHEDRON, "g", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> MOUNTAINTOP_REMOVAL = LuckyTNTMod.RH.registerTNTBlock("mountaintop_removal", EntityRegistry.MOUNTAINTOP_REMOVAL, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
-	public static final RegistryObject<LTNTBlock> DUST_BOWL = LuckyTNTMod.RH.registerTNTBlock("dust_bowl", EntityRegistry.EARTHQUAKE_TNT, "g", MaterialColor.SAND, true);
-	public static final RegistryObject<LTNTBlock> THE_REVOLUTION = LuckyTNTMod.RH.registerTNTBlock("the_revolution", EntityRegistry.EARTHQUAKE_TNT, "g", MaterialColor.QUARTZ, true);
+	public static final RegistryObject<LTNTBlock> DUST_BOWL = LuckyTNTMod.RH.registerTNTBlock("dust_bowl", EntityRegistry.DUST_BOWL, "g", MaterialColor.SAND, true);
+	public static final RegistryObject<LTNTBlock> THE_REVOLUTION = LuckyTNTMod.RH.registerTNTBlock("the_revolution", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.QUARTZ, true);
 	
 	
 	//Other

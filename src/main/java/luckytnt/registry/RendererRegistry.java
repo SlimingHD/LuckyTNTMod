@@ -119,6 +119,8 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.POSEIDONS_WAVE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HEXAHEDRON.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.MOUNTAINTOP_REMOVAL.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DUST_BOWL.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.THE_REVOLUTION.get(), LTNTRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
