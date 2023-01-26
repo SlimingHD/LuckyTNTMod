@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
-import luckytnt.registry.BlockRegistry;
+import java.util.function.Supplier;
+
+import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -10,18 +12,28 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.RegistryObject;
 
 public class FlatTNTEffect extends PrimedTNTEffect{
-
+	private final int radius;
+	private final int radiusY;
+	private final Supplier<RegistryObject<LTNTBlock>> block;
+	
+	public FlatTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int radius, int radiusY) {
+		this.radius = radius;
+		this.radiusY = radiusY;
+		this.block = block;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 18);
-		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), 18, 9, new IForEachBlockExplosionEffect() {
+		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion();
+		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(pos.getY() >= entity.y()) {
-					if(state.getExplosionResistance(level, pos, dummyExplosion) < 100) {
+					if(state.getExplosionResistance(level, pos, dummyExplosion) <= 100) {
 						state.onBlockExploded(level, pos, dummyExplosion);
 					}
 				}
@@ -31,6 +43,6 @@ public class FlatTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public Block getBlock() {
-		return BlockRegistry.FLAT_TNT.get();
+		return block.get().get();
 	}
 }

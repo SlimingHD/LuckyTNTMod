@@ -94,6 +94,13 @@
 	"block.luckytntmod.end_tnt" : "End TNT",
 	"block.luckytntmod.christmas_tnt" : "Weihnachts TNT",
 	"block.luckytntmod.earthquake_tnt" : "Erdbeben TNT",
+	"block.luckytntmod.global_disaster" : "Globales Desaster",
+	"block.luckytntmod.heavens_gate" : "Himmelstor",
+	"block.luckytntmod.hells_gate" : "H\u00F6llentor",
+	"block.luckytntmod.mankinds_mark" : "Menschheitszeichen",
+	"block.luckytntmod.poseidons_wave" : "Poseidons Welle",
+	"block.luckytntmod.hexahedron" : "Hexahedron",
+	"block.luckytntmod.mountaintop_removal" : "Bergspitzenabbau",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -206,6 +213,13 @@
 	"entity.luckytntmod.end_tnt" : "End TNT",
 	"entity.luckytntmod.christmas_tnt" : "Weihnachts TNT",
 	"entity.luckytntmod.earthquake_tnt" : "Erdbeben TNT",
+	"entity.luckytntmod.global_disaster" : "Globales Desaster",
+	"entity.luckytntmod.heavens_gate" : "Himmelstor",
+	"entity.luckytntmod.hells_gate" : "H\u00F6llentor",
+	"entity.luckytntmod.mankinds_mark" : "Menschheitszeichen",
+	"entity.luckytntmod.poseidons_wave" : "Poseidons Welle",
+	"entity.luckytntmod.hexahedron" : "Hexahedron",
+	"entity.luckytntmod.mountaintop_removal" : "Bergspitzenabbau",
 		
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.spiral_projectile" : "Spiralen TNT",
@@ -217,6 +231,7 @@
 			
 	"item_group.luckytntmod.normal_tnt" : "Normale TNTs",
 	"item_group.luckytntmod.other" : "Anderes",
+	"item_group.luckytntmod.god_tnt" : "Gott TNTs",
 	
 	"effect.contaminated_effect" : "Kontaminiert",
 	

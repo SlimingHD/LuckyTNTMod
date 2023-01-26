@@ -94,6 +94,13 @@
 	"block.luckytntmod.end_tnt" : "End TNT",
 	"block.luckytntmod.christmas_tnt" : "Christmas TNT",
 	"block.luckytntmod.earthquake_tnt" : "Earthquake TNT",
+	"block.luckytntmod.global_disaster" : "Global Disaster",
+	"block.luckytntmod.heavens_gate" : "Heavens Gate",
+	"block.luckytntmod.hells_gate" : "Hells Gate",
+	"block.luckytntmod.mankinds_mark" : "Mankinds Mark",
+	"block.luckytntmod.poseidons_wave" : "Poseidons Wave",
+	"block.luckytntmod.hexahedron" : "Hexahedron",
+	"block.luckytntmod.mountaintop_removal" : "Mountaintop Removal",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -207,6 +214,13 @@
 	"entity.luckytntmod.end_tnt" : "End TNT",
 	"entity.luckytntmod.christmas_tnt" : "Christmas TNT",
 	"entity.luckytntmod.earthquake_tnt" : "Earthquake TNT",
+	"entity.luckytntmod.global_disaster" : "Global Disaster",
+	"entity.luckytntmod.heavens_gate" : "Heavens Gate",
+	"entity.luckytntmod.hells_gate" : "Hells Gate",
+	"entity.luckytntmod.mankinds_mark" : "Mankinds Mark",
+	"entity.luckytntmod.poseidons_wave" : "Poseidons Wave",
+	"entity.luckytntmod.hexahedron" : "Hexahedron",
+	"entity.luckytntmod.mountaintop_removal" : "Mountaintop Removal",
 				
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.spiral_projectile" : "Spiral TNT",
@@ -218,6 +232,7 @@
 		
 	"item_group.luckytntmod.normal_tnt" : "Normal TNTs",
 	"item_group.luckytntmod.other" : "Other",
+	"item_group.luckytntmod.god_tnt" : "God TNTs",
 	
 	"effect.contaminated_effect" : "Contaminated",
 	
