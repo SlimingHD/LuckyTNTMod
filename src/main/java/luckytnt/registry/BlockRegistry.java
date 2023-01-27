@@ -138,7 +138,15 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> MOUNTAINTOP_REMOVAL = LuckyTNTMod.RH.registerTNTBlock("mountaintop_removal", EntityRegistry.MOUNTAINTOP_REMOVAL, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
 	public static final RegistryObject<LTNTBlock> DUST_BOWL = LuckyTNTMod.RH.registerTNTBlock("dust_bowl", EntityRegistry.DUST_BOWL, "g", MaterialColor.SAND, true);
 	public static final RegistryObject<LTNTBlock> THE_REVOLUTION = LuckyTNTMod.RH.registerTNTBlock("the_revolution", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.QUARTZ, true);
-	
+	//public static final RegistryObject<LTNTBlock> POMPEII = LuckyTNTMod.RH.registerTNTBlock("pompeii", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_GRAY, true);
+	//public static final RegistryObject<LTNTBlock> CHICXULUB = LuckyTNTMod.RH.registerTNTBlock("chicxulub", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_BLUE, true);
+	//public static final RegistryObject<LTNTBlock> UNBREAKABLE_TNT = LuckyTNTMod.RH.registerTNTBlock("unbreakable_tnt", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_LIGHT_GRAY, true);
+	//public static final RegistryObject<LTNTBlock> END_GATE = LuckyTNTMod.RH.registerTNTBlock("end_gate", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_BLACK, true);
+	//public static final RegistryObject<LTNTBlock> DENSE_TNT = LuckyTNTMod.RH.registerTNTBlock("dense_tnt", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_RED, true);
+	//public static final RegistryObject<LTNTBlock> HYPERION = LuckyTNTMod.RH.registerTNTBlock("hyperion", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
+	//public static final RegistryObject<LTNTBlock> TNT_X2000 = LuckyTNTMod.RH.registerTNTBlock("tnt_x2000", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_YELLOW, true);
+	//public static final RegistryObject<LTNTBlock> TSAR_BOMBA = LuckyTNTMod.RH.registerTNTBlock("tsar_bomba_bomb", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_YELLOW, true);
+	//public static final RegistryObject<LTNTBlock> TOXIC_CLOUDS = LuckyTNTMod.RH.registerTNTBlock("toxic_clouds", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_GREEN, true);
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));
