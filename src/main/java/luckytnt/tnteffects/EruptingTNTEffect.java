@@ -23,7 +23,7 @@ public class EruptingTNTEffect extends PrimedTNTEffect{
 					LExplosiveProjectile erupting_tnt = EntityRegistry.ERUPTING_PROJECTILE.get().create(entity.level());
 					erupting_tnt.setPos(entity.getPos());
 					erupting_tnt.setOwner(entity.owner());
-					erupting_tnt.shoot((Math.random() - Math.random()) * 0.1f, 0.6f + Math.random() * 0.4f, (Math.random() - Math.random()) * 0.1f, 3f + entity.level().random.nextFloat() * 2f, 0f);	
+					erupting_tnt.shoot((Math.random() * 2D - 1D) * 0.1f, 0.6f + Math.random() * 0.4f, (Math.random() * 2D - 1D) * 0.1f, 3f + entity.level().random.nextFloat() * 2f, 0f);	
 					erupting_tnt.setSecondsOnFire(1000);
 					entity.level().addFreshEntity(erupting_tnt);
 					entity.level().playSound(null, new BlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.MASTER, 3, 1);

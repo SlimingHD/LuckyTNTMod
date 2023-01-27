@@ -121,6 +121,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.MOUNTAINTOP_REMOVAL.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DUST_BOWL.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.THE_REVOLUTION.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.POMPEII.get(), LTNTRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
@@ -132,5 +133,6 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SHRAPNEL.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.BOMB.get(), BombRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ICE_METEOR.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.POMPEII_PROJECTILE.get(), LTNTRenderer::new);
 	}
 }

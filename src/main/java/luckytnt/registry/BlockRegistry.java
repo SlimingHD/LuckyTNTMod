@@ -138,7 +138,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> MOUNTAINTOP_REMOVAL = LuckyTNTMod.RH.registerTNTBlock("mountaintop_removal", EntityRegistry.MOUNTAINTOP_REMOVAL, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
 	public static final RegistryObject<LTNTBlock> DUST_BOWL = LuckyTNTMod.RH.registerTNTBlock("dust_bowl", EntityRegistry.DUST_BOWL, "g", MaterialColor.SAND, true);
 	public static final RegistryObject<LTNTBlock> THE_REVOLUTION = LuckyTNTMod.RH.registerTNTBlock("the_revolution", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.QUARTZ, true);
-	//public static final RegistryObject<LTNTBlock> POMPEII = LuckyTNTMod.RH.registerTNTBlock("pompeii", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_GRAY, true);
+	public static final RegistryObject<LTNTBlock> POMPEII = LuckyTNTMod.RH.registerTNTBlock("pompeii", EntityRegistry.POMPEII, "g", MaterialColor.COLOR_GRAY, true);
 	//public static final RegistryObject<LTNTBlock> CHICXULUB = LuckyTNTMod.RH.registerTNTBlock("chicxulub", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_BLUE, true);
 	//public static final RegistryObject<LTNTBlock> UNBREAKABLE_TNT = LuckyTNTMod.RH.registerTNTBlock("unbreakable_tnt", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_LIGHT_GRAY, true);
 	//public static final RegistryObject<LTNTBlock> END_GATE = LuckyTNTMod.RH.registerTNTBlock("end_gate", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_BLACK, true);
