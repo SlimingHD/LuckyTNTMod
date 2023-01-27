@@ -103,6 +103,8 @@
 	"block.luckytntmod.mountaintop_removal" : "Mountaintop Removal",
 	"block.luckytntmod.dust_bowl" : "Dust Bowl",
 	"block.luckytntmod.the_revolution" : "The Revolution",
+	"block.luckytntmod.pompeii" : "Pompeii",
+	"block.luckytntmod.lucky_tnt" : "Lucky TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -225,6 +227,7 @@
 	"entity.luckytntmod.mountaintop_removal" : "Mountaintop Removal",
 	"entity.luckytntmod.dust_bowl" : "Dust Bowl",
 	"entity.luckytntmod.the_revolution" : "The Revolution",
+	"entity.luckytntmod.pompeii" : "Pompeii",
 				
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.spiral_projectile" : "Spiral TNT",
@@ -233,6 +236,7 @@
 	"entity.luckytntmod.cluster_bomb" : "Cluster Bomb",
 	"entity.luckytntmod.bomb" : "Bomb",
 	"entity.luckytntmod.ice_meteor" : "Ice Meteor",
+	"entity.luckytntmod.pompeii_projectile" : "Pompeii Projectile",
 		
 	"item_group.luckytntmod.normal_tnt" : "Normal TNTs",
 	"item_group.luckytntmod.other" : "Other",
