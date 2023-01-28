@@ -2,14 +2,69 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
+import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.PrimedTNTEffect;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.features.CaveFeatures;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.material.Material;
 
 public class DripstoneTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 20, new IForEachBlockExplosionEffect() {
+			
+			@Override
+			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && (!state.isCollisionShapeFullBlock(level, pos) || state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS))) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+				}
+			}
+		});
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 20, new IForEachBlockExplosionEffect() {
+
+			@Override
+			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
+				if(level.getBlockState(pos.below()).isAir() && !state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && !state.is(BlockTags.DRIPSTONE_REPLACEABLE)) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+					level.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState());
+				}
+				else if(level.getBlockState(pos.below()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && !level.getBlockState(pos.below()).isAir() && state.isAir() && !level.getBlockState(pos.below()).is(BlockTags.DRIPSTONE_REPLACEABLE)) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+					level.setBlockAndUpdate(pos.below(), Blocks.STONE.defaultBlockState());
+				}
+			}
+		});
+		if(entity.level() instanceof ServerLevel sLevel) {
+			ExplosionHelper.doSphericalExplosion(sLevel, entity.getPos(), 15, new IForEachBlockExplosionEffect() {
+
+				@Override
+				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
+					if(((level.getBlockState(pos.below()).isAir() && !state.isAir()) || (!level.getBlockState(pos.below()).isAir() && state.isAir())) && Math.random() < 0.1f) {
+						Holder<ConfiguredFeature<?, ?>> feature = null;
+						if(Math.random() < 0.9f) {
+							feature = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.DRIPSTONE_CLUSTER);
+							feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, pos);
+						}
+						else {
+							feature = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.LARGE_DRIPSTONE);
+							feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, pos);
+						}
+					}
+				}
+			});
+		}
 	}
 	
 	@Override

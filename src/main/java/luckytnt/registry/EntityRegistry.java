@@ -32,6 +32,7 @@ public class EntityRegistry {
 	//TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT = LuckyTNTMod.RH.registerTNTEntity("tnt", new TNTxStrengthEffect.Builder(() -> BlockRegistry.TNT).build());
 
+	//Normal TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X5 = LuckyTNTMod.RH.registerTNTEntity("tnt_x5", new TNTxStrengthEffect.Builder(() -> BlockRegistry.TNT_X5).fuse(120).explosionStrength(10f).randomVecLength(1.25f).knockbackStrength(1.5f).build());
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X20 = LuckyTNTMod.RH.registerTNTEntity("tnt_x20", new TNTxStrengthEffect.Builder(() -> BlockRegistry.TNT_X20).fuse(160).explosionStrength(20f).randomVecLength(1.5f).knockbackStrength(2f).build());
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X100 = LuckyTNTMod.RH.registerTNTEntity("tnt_x100", new TNTxStrengthEffect.Builder(() -> BlockRegistry.TNT_X100).fuse(200).explosionStrength(50f).yStrength(1.3f).knockbackStrength(3f).build());
@@ -147,6 +148,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> END_TNT = LuckyTNTMod.RH.registerTNTEntity("end_tnt", new EndTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHRISTMAS_TNT = LuckyTNTMod.RH.registerTNTEntity("christmas_tnt", new ChristmasTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> EARTHQUAKE_TNT = LuckyTNTMod.RH.registerTNTEntity("earthquake_tnt", new EarthquakeTNTEffect());
+	
+	//God TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> GLOBAL_DISASTER = LuckyTNTMod.RH.registerTNTEntity("global_disaster", new GlobalDisasterEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HEAVENS_GATE = LuckyTNTMod.RH.registerTNTEntity("heavens_gate", new HeavensGateEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HELLS_GATE = LuckyTNTMod.RH.registerTNTEntity("hells_gate", new HellsGateEffect());

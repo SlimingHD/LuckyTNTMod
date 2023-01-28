@@ -238,9 +238,9 @@
 	"entity.luckytntmod.ice_meteor" : "Ice Meteor",
 	"entity.luckytntmod.pompeii_projectile" : "Pompeii Projectile",
 		
-	"item_group.luckytntmod.normal_tnt" : "Normal TNTs",
+	"item_group.luckytntmod.normal_tnt" : "Normal TNT",
 	"item_group.luckytntmod.other" : "Other",
-	"item_group.luckytntmod.god_tnt" : "God TNTs",
+	"item_group.luckytntmod.god_tnt" : "God TNT",
 	
 	"effect.contaminated_effect" : "Contaminated",
 	
