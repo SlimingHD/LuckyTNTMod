@@ -34,7 +34,7 @@ public class HellfireTNTEffect extends PrimedTNTEffect{
 						level.setBlockAndUpdate(pos, Blocks.NETHERRACK.defaultBlockState());
 						if(Math.random() < 0.1f) {
 							if(level.getBlockState(pos.above()).isAir()) {
-								level.setBlockAndUpdate(pos, BaseFireBlock.getState(level, pos));
+								level.setBlockAndUpdate(pos.above(), BaseFireBlock.getState(level, pos.above()));
 							}
 						}
 					}

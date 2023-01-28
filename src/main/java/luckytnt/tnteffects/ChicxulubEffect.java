@@ -17,7 +17,7 @@ public class ChicxulubEffect extends PrimedTNTEffect{
 		meteor.setOwner(entity.owner());
 		entity.level().addFreshEntity(meteor);
 	}
-	
+
 	@Override
 	public boolean playsSound() {
 		return false;

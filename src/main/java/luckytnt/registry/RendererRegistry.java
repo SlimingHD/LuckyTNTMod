@@ -136,5 +136,6 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.ICE_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.POMPEII_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHICXULUB_METEOR.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.PRESENT.get(), LTNTRenderer::new);
 	}
 }

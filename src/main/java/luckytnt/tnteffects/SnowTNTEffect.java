@@ -14,10 +14,16 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class SnowTNTEffect extends PrimedTNTEffect{
 
+	private final int strength;
+	
+	public SnowTNTEffect(int strength) {
+		this.strength = strength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 10);
-		ExplosionHelper.doTopBlockExplosionForAll(entity.level(), entity.getPos(), 15, new IForEachBlockExplosionEffect() {
+		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), strength);
+		ExplosionHelper.doTopBlockExplosionForAll(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
