@@ -11,8 +11,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class PompeiiEffect extends PrimedTNTEffect{
 
@@ -60,8 +60,8 @@ public class PompeiiEffect extends PrimedTNTEffect{
 	}
 	
 	@Override
-	public Block getBlock() {
-		return BlockRegistry.POMPEII.get();
+	public BlockState getBlockState(IExplosiveEntity ent) {
+		return ent instanceof PrimedLTNT ? BlockRegistry.POMPEII.get().defaultBlockState() : Blocks.MAGMA_BLOCK.defaultBlockState();
 	}
 	
 	@Override
