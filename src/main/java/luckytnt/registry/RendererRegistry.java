@@ -123,6 +123,12 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.THE_REVOLUTION.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.POMPEII.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHICXULUB.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.UNBREAKABLE_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.END_GATE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DENSE_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HYPERION.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TNT_X2000.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TSAR_BOMBA.get(), LTNTRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
@@ -136,5 +142,6 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.ICE_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.POMPEII_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHICXULUB_METEOR.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TSAR_BOMBA_BOMB.get(), BombRenderer::new);
 	}
 }
