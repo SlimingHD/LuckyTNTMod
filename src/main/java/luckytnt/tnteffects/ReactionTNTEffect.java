@@ -3,17 +3,16 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
-import luckytntlib.network.ClientboundExplosionPacket;
-import luckytntlib.network.LuckyTNTLibPacketHandler;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.network.PacketDistributor;
 
 public class ReactionTNTEffect extends PrimedTNTEffect{
 
@@ -29,7 +28,7 @@ public class ReactionTNTEffect extends PrimedTNTEffect{
 				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos().add(randomPos), explosionSize);
 				explosion.doEntityExplosion(1f + 0.05f * explosionSize, true);
 				explosion.doBlockExplosion(1f, 1f, 0.75f, 1.25f, false, false);
-				LuckyTNTLibPacketHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientboundExplosionPacket("luckytntlib.client.ClientExplosions", "playExplosionSoundAt", new BlockPos(entity.getPos().add(randomPos))));
+				entity.level().playSound((Entity)entity, new BlockPos(entity.getPos()).offset(randomPos.x, randomPos.y, randomPos.z), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (entity.level().random.nextFloat() - entity.level().random.nextFloat()) * 0.2f) * 0.7f);
 				nextExplosion = 2 + entity.level().random.nextInt(3);
 			}
 			nextExplosion--;

@@ -3,15 +3,15 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
 import luckytntlib.entity.PrimedLTNT;
-import luckytntlib.network.ClientboundExplosionPacket;
-import luckytntlib.network.LuckyTNTLibPacketHandler;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.network.PacketDistributor;
 
 public class MultiplyingTNTEffect extends PrimedTNTEffect{
 	
@@ -21,7 +21,8 @@ public class MultiplyingTNTEffect extends PrimedTNTEffect{
 		if(((Entity)entity).isOnGround() && ((Entity)entity).getPersistentData().getInt("level") > 0) {
 			serverExplosion(entity);
 			if(((Entity)entity).getPersistentData().getInt("level") == 4) {
-				LuckyTNTLibPacketHandler.CHANNEL.send(PacketDistributor.ALL.noArg(), new ClientboundExplosionPacket("luckytntlib.client.ClientExplosions", "playExplosionSoundAt", new BlockPos(entity.getPos())));
+				Level level = entity.level();
+				entity.level().playSound((Entity)entity, new BlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 			}
 		}
 	}

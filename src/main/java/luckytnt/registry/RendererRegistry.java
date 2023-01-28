@@ -143,5 +143,6 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.POMPEII_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHICXULUB_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.TSAR_BOMBA_BOMB.get(), BombRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.PRESENT.get(), LTNTRenderer::new);
 	}
 }
