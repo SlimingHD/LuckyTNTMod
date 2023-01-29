@@ -129,6 +129,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.HYPERION.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.TNT_X2000.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.TSAR_BOMBA.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.WITHER_STORM.get(), LTNTRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
