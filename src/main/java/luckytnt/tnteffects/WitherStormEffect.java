@@ -73,7 +73,7 @@ public class WitherStormEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
+	public void explosionTick(IExplosiveEntity ent) {
 		if(ent.level() instanceof ServerLevel sl) {
 			sl.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), ent.x(), ent.y() + 2.25f, ent.z(), 20, 0.1f, 0.5f, 0.1f, 0);
 			sl.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), ent.x(), ent.y() + 3f, ent.z(), 20, 0.05f, 0.05f, 0.5f, 0);
@@ -83,6 +83,11 @@ public class WitherStormEffect extends PrimedTNTEffect {
 			sl.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), ent.x(), ent.y() + 3.25f, ent.z() + 1, 20, 0.15f, 0.15f, 0.15f, 0);
 			sl.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), ent.x(), ent.y() + 3.25f, ent.z() - 1, 20, 0.15f, 0.15f, 0.15f, 0);
 		}
+	}
+	
+	@Override
+	public void spawnParticles(IExplosiveEntity ent) {
+		
 	}
 	
 	@Override
