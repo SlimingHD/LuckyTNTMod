@@ -169,6 +169,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X2000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x2000", new TNTxStrengthEffect.Builder(() -> BlockRegistry.TNT_X2000).fuse(400).explosionStrength(160f).resistanceImpact(0.167f).randomVecLength(0.05f).knockbackStrength(15f).isStrongExplosion(true).build());
 	public static final RegistryObject<EntityType<PrimedLTNT>> TSAR_BOMBA = LuckyTNTMod.RH.registerTNTEntity("tsar_bomba", new TsarBombaEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> WITHER_STORM = LuckyTNTMod.RH.registerTNTEntity("wither_storm", new WitherStormEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> LEAPING_TNT = LuckyTNTMod.RH.registerTNTEntity("leaping_tnt", new LeapingTNTEffect());
 	
 	//Projectile
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("meteor", new MeteorEffect(), 2f, false);

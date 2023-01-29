@@ -41,7 +41,7 @@ public class BouncingTNTRenderer extends EntityRenderer<Entity>{
 	           posestack.scale(f1, f1, f1);
 	        }
 	        posestack.scale(ent.getEffect().getSize((IExplosiveEntity)entity), ent.getEffect().getSize((IExplosiveEntity)entity), ent.getEffect().getSize((IExplosiveEntity)entity));
-	        posestack.translate(-0.5d, 0, 0.5d);
+	        posestack.translate(-0.5d, 0, -0.5d);
 	        TntMinecartRenderer.renderWhiteSolidBlock(blockRenderer, ent.getEffect().getBlockState((IExplosiveEntity)entity), posestack, buffer, light, ent.getEffect().getBlock() instanceof LTNTBlock ? i / 5 % 2 == 0 : false);
 	        posestack.popPose();
     	}

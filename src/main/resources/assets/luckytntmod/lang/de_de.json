@@ -112,6 +112,8 @@
 	"block.luckytntmod.hyperion" : "Hyperion",
 	"block.luckytntmod.tnt_x2000" : "TNT x2000",
 	"block.luckytntmod.tsar_bomba" : "Zar Bombe",
+	"block.luckytntmod.wither_storm" : "Wither Storm",
+	"block.luckytntmod.leaping_tnt" : "H\u00FCpfendes TNT",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -241,6 +243,8 @@
 	"entity.luckytntmod.hyperion" : "Hyperion",
 	"entity.luckytntmod.tnt_x2000" : "TNT x2000",
 	"entity.luckytntmod.tsar_bomba" : "Zar Bombe",
+	"entity.luckytntmod.wither_storm" : "Wither Storm",
+	"entity.luckytntmod.leaping_tnt" : "H\u00FCpfendes TNT",
 		
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.spiral_projectile" : "Spiralen TNT",
