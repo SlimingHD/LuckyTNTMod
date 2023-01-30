@@ -115,6 +115,7 @@
 	"block.luckytntmod.wither_storm" : "Wither Storm",
 	"block.luckytntmod.leaping_tnt" : "Leaping TNT",
 	"block.luckytntmod.russian_roulette" : "Russian Roulette",
+	"block.luckytntmod.knockback_tnt" : "Knockback TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -248,6 +249,7 @@
 	"entity.luckytntmod.wither_storm" : "Wither Storm",
 	"entity.luckytntmod.leaping_tnt" : "Leaping TNT",
 	"entity.luckytntmod.russian_roulette" : "Russian Roulette",
+	"entity.luckytntmod.knockback_tnt" : "Knockback TNT",
 				
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.spiral_projectile" : "Spiral TNT",
