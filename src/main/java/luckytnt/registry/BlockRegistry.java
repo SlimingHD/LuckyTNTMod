@@ -155,7 +155,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> KNOCKBACK_TNT = LuckyTNTMod.RH.registerTNTBlock("knockback_tnt", EntityRegistry.KNOCKBACK_TNT, "g", MaterialColor.COLOR_GREEN, true);
 	public static final RegistryObject<LTNTBlock> MIDAS_TNT = LuckyTNTMod.RH.registerTNTBlock("midas_tnt", EntityRegistry.MIDAS_TNT, "g", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> NEW_YEARS_FIREWORK = LuckyTNTMod.RH.registerTNTBlock("new_years_firework", EntityRegistry.NEW_YEARS_FIREWORK, "g", MaterialColor.COLOR_BLACK, true);
-	//public static final RegistryObject<LTNTBlock> PULSAR_TNT = LuckyTNTMod.RH.registerTNTBlock("pulsar_tnt", EntityRegistry.THE_REVOLUTION, "g", MaterialColor.COLOR_PURPLE, true);
+	public static final RegistryObject<LTNTBlock> PULSAR_TNT = LuckyTNTMod.RH.registerTNTBlock("pulsar_tnt", EntityRegistry.PULSAR_TNT, "g", MaterialColor.COLOR_PURPLE, true);
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));

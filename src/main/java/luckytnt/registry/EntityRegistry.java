@@ -176,6 +176,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> KNOCKBACK_TNT = LuckyTNTMod.RH.registerTNTEntity("knockback_tnt", new KnockbackTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> MIDAS_TNT = LuckyTNTMod.RH.registerTNTEntity("midas_tnt", new MidasTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> NEW_YEARS_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("new_years_firework", new NewYearsFireworkEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> PULSAR_TNT = LuckyTNTMod.RH.registerTNTEntity("pulsar_tnt", new PulsarTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE).explosionStrength(2f).knockbackStrength(0.5f).build());
