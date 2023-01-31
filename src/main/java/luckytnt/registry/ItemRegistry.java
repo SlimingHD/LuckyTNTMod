@@ -1,6 +1,7 @@
 package luckytnt.registry;
 
 import luckytnt.LuckyTNTMod;
+import luckytntlib.item.LDynamiteItem;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -12,6 +13,10 @@ import net.minecraftforge.registries.RegistryObject;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ItemRegistry {
 
+	//Dynamite
+	public static final RegistryObject<LDynamiteItem> DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("dynamite", EntityRegistry.DYNAMITE, "dy");
+	
+	//Other
 	public static final RegistryObject<Item> NUCLEAR_WASTE = LuckyTNTMod.itemRegistry.register("nuclear_waste", () -> new BlockItem(BlockRegistry.NUCLEAR_WASTE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> RED_CANDY = LuckyTNTMod.itemRegistry.register("red_candy", () -> new Item(new Item.Properties().stacksTo(64).food(new FoodProperties.Builder().alwaysEat().fast().nutrition(1).effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 2), 1).effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, 0), 1).build())));
 	public static final RegistryObject<Item> GREEN_CANDY = LuckyTNTMod.itemRegistry.register("green_candy", () -> new Item(new Item.Properties().stacksTo(64).food(new FoodProperties.Builder().alwaysEat().fast().nutrition(1).effect(() -> new MobEffectInstance(MobEffects.JUMP, 200, 2), 1).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 2), 1).build())));

@@ -126,6 +126,8 @@
 	"block.floating_island.description" : "\u00A77\u00A7oChange the height of the island by adjusting the config file! On a server you will also have to adjust the server-config file!",	
 	"block.smoke_tnt.description" : "\u00A77\u00A7oChange the color of the smoke by right-clicking the TNT with red, green, blue, white or black dye!",
 
+	"item.luckytntmod.dynamite" : "Dynamite",
+
 	"item.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"item.luckytntmod.red_candy" : "Red Candy",
 	"item.luckytntmod.green_candy" : "Green Candy",
@@ -251,6 +253,8 @@
 	"entity.luckytntmod.russian_roulette" : "Russian Roulette",
 	"entity.luckytntmod.knockback_tnt" : "Knockback TNT",
 				
+	"entity.luckytntmod.dynamite" : "Dynamite",
+
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.spiral_projectile" : "Spiral TNT",
 	"entity.luckytntmod.erupting_projectile" : "Erupting TNT",
@@ -261,10 +265,13 @@
 	"entity.luckytntmod.pompeii_projectile" : "Pompeii Projectile",
 	"entity.luckytntmod.chicxulub_meteor": "Chicxulub Meteor",
 	"entity.luckytntmod.tsar_bomba_bomb" : "Tsar Bomba Bomb",
+
+	"entity.luckytntmod.angry_miner" : "Angry Miner",
 		
 	"item_group.luckytntmod.normal_tnt" : "Normal TNT",
-	"item_group.luckytntmod.other" : "Other",
 	"item_group.luckytntmod.god_tnt" : "God TNT",
+	"item_group.luckytntmod.dynamite" : "Dynamite",
+	"item_group.luckytntmod.other" : "Other",
 	
 	"effect.contaminated_effect" : "Contaminated",
 	

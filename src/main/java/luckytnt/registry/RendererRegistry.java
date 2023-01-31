@@ -1,8 +1,10 @@
 package luckytnt.registry;
 
+import luckytnt.client.renderer.AngryMinerRenderer;
 import luckytnt.client.renderer.BombRenderer;
 import luckytnt.client.renderer.BouncingTNTRenderer;
 import luckytntlib.client.renderer.LTNTRenderer;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -132,7 +134,13 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.WITHER_STORM.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.LEAPING_TNT.get(), BouncingTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.RUSSIAN_ROULETTE.get(), LTNTRenderer::new);
+<<<<<<< Updated upstream
 		event.registerEntityRenderer(EntityRegistry.KNOCKBACK_TNT.get(), LTNTRenderer::new);
+=======
+	
+		//Dynamite
+		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), ThrownItemRenderer::new);
+>>>>>>> Stashed changes
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
@@ -148,5 +156,8 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.CHICXULUB_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.TSAR_BOMBA_BOMB.get(), BombRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PRESENT.get(), LTNTRenderer::new);
+		
+		//Other
+		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);
 	}
 }
