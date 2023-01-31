@@ -172,6 +172,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> LEAPING_TNT = LuckyTNTMod.RH.registerTNTEntity("leaping_tnt", new LeapingTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> RUSSIAN_ROULETTE = LuckyTNTMod.RH.registerTNTEntity("russian_roulette", new RussianRouletteEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> KNOCKBACK_TNT = LuckyTNTMod.RH.registerTNTEntity("knockback_tnt", new KnockbackTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> MIDAS_TNT = LuckyTNTMod.RH.registerTNTEntity("midas_tnt", new MidasTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> NEW_YEARS_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("new_years_firework", new NewYearsFireworkEffect());
 	
 	//Projectile
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("meteor", new MeteorEffect(), 2f, false);

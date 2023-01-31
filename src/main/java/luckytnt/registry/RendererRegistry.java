@@ -133,6 +133,8 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.LEAPING_TNT.get(), BouncingTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.RUSSIAN_ROULETTE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.KNOCKBACK_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.MIDAS_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.NEW_YEARS_FIREWORK.get(), LTNTRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);

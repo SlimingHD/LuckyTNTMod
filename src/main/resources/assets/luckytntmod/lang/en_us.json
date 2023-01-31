@@ -267,6 +267,7 @@
 	"item_group.luckytntmod.god_tnt" : "God TNT",
 	
 	"effect.contaminated_effect" : "Contaminated",
+	"effect.midas_touch" : "Midas Touch",
 	
 	"luckytntmod.config.title" : "Lucky TNT Configuration",
 	"luckytntmod.config.done" : "Done",

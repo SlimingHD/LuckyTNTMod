@@ -266,6 +266,7 @@
 	"item_group.luckytntmod.god_tnt" : "Gott TNT",
 	
 	"effect.contaminated_effect" : "Kontaminiert",
+	"effect.midas_touch" : "Fluch von Midas",
 	
 	"luckytntmod.config.title" : "Lucky TNT Konfiguration",
 	"luckytntmod.config.done" : "Fertig",
