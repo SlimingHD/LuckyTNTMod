@@ -117,6 +117,11 @@
 	"block.luckytntmod.leaping_tnt" : "Leaping TNT",
 	"block.luckytntmod.russian_roulette" : "Russian Roulette",
 	"block.luckytntmod.knockback_tnt" : "Knockback TNT",
+	"block.luckytntmod.midas_tnt" : "Midas TNT",
+	"block.luckytntmod.new_years_firework" : "New Years Firework",
+	"block.luckytntmod.pulsar_tnt" : "Pulsar TNT",
+	"block.luckytntmod.lightning_storm" : "Lightning Storm",
+	"block.luckytntmod.silk_touch_tnt" : "Silk Touch TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -254,6 +259,11 @@
 	"entity.luckytntmod.leaping_tnt" : "Leaping TNT",
 	"entity.luckytntmod.russian_roulette" : "Russian Roulette",
 	"entity.luckytntmod.knockback_tnt" : "Knockback TNT",
+	"entity.luckytntmod.midas_tnt" : "Midas TNT",
+	"entity.luckytntmod.new_years_firework" : "New Years Firework",
+	"entity.luckytntmod.pulsar_tnt" : "Pulsar TNT",
+	"entity.luckytntmod.lightning_storm" : "Lightning Storm",
+	"entity.luckytntmod.silk_touch_tnt" : "Silk Touch TNT",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 
