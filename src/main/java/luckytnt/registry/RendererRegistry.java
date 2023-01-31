@@ -134,13 +134,10 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.WITHER_STORM.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.LEAPING_TNT.get(), BouncingTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.RUSSIAN_ROULETTE.get(), LTNTRenderer::new);
-<<<<<<< Updated upstream
 		event.registerEntityRenderer(EntityRegistry.KNOCKBACK_TNT.get(), LTNTRenderer::new);
-=======
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), ThrownItemRenderer::new);
->>>>>>> Stashed changes
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
