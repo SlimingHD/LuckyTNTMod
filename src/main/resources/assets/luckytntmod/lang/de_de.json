@@ -126,6 +126,8 @@
 	"block.floating_island.description" : "\u00A77\u00A7o\u00c4ndere die H\u00f6he der Insel indem du die Konfiguration bearbeitest! Auf einem Server wirst du auch die Server-Konfiguration \u00e4ndern m\u00fcssen!",	
 	"block.smoke_tnt.description" : "\u00A77\u00A7o\u00c4ndere die Farbe des Rauchs indem du mit roter, gr\u00fcner, blauer, wei\u00dfer oder schwarzer Farbe darauf rechts-klickst!",
 
+	"item.luckytntmod.dynamite" : "Dynamit",
+
 	"item.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"item.luckytntmod.red_candy" : "Rotes Bonbon",
 	"item.luckytntmod.green_candy" : "Gr\u00FCnes Bonbon",
@@ -250,6 +252,8 @@
 	"entity.luckytntmod.russian_roulette" : "Russisches Roulette",
 	"entity.luckytntmod.knockback_tnt" : "R\u00FCcksto\u00DF TNT",
 		
+	"entity.luckytntmod.dynamite" : "Dynamit",
+		
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.spiral_projectile" : "Spiralen TNT",
 	"entity.luckytntmod.erupting_projectile" : "Ausbrechendes TNT",
@@ -260,10 +264,13 @@
 	"entity.luckytntmod.pompeii_projectile" : "Pompeii Projektil",
 	"entity.luckytntmod.chicxulub_meteor": "Chicxulub Meteorit",
 	"entity.luckytntmod.tsar_bomba_bomb" : "Zar Bombe Bombe",
+	
+	"entity.luckytntmod.angry_miner" : "W\u00FCtender Minenarbeiter",
 			
 	"item_group.luckytntmod.normal_tnt" : "Normales TNT",
-	"item_group.luckytntmod.other" : "Anderes",
 	"item_group.luckytntmod.god_tnt" : "Gott TNT",
+	"item_group.luckytntmod.dynamite" : "Dynamit",
+	"item_group.luckytntmod.other" : "Anderes",
 	
 	"effect.contaminated_effect" : "Kontaminiert",
 	"effect.midas_touch" : "Fluch von Midas",
