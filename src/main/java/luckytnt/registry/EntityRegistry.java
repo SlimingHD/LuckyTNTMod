@@ -106,7 +106,7 @@ public class EntityRegistry {
 	}, 5f, 1024f, 0.4f, 1f, true);
 	public static final RegistryObject<EntityType<PrimedLTNT>> WOOL_TNT = LuckyTNTMod.RH.registerTNTEntity("wool_tnt", new WoolTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> SAY_GOODBYE = LuckyTNTMod.RH.registerTNTEntity("say_goodbye", new SayGoodbyeEffect());
-	//public static final RegistryObject<EntityType<PrimedLTNT>> ANGRY_MINERS = LuckyTNTMod.RH.registerTNTEntity("angry_miners", new LavaOceanTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> ANGRY_MINERS = LuckyTNTMod.RH.registerTNTEntity("angry_miners", new AngryMinersEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> WITHERING_TNT = LuckyTNTMod.RH.registerTNTEntity("withering_tnt", new WitheringTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> NUCLEAR_WASTE_TNT = LuckyTNTMod.RH.registerTNTEntity("nuclear_waste_tnt", new NuclearWasteTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> STATIC_TNT = LuckyTNTMod.RH.registerTNTEntity("static_tnt", new StackedPrimedTNTEffect(new StaticTNTEffect(), Collections.singletonList(new TNTXStrengthEffect.Builder(() -> BlockRegistry.TNT).build())));

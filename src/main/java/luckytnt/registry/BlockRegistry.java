@@ -82,7 +82,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> WALKING_TNT = LuckyTNTMod.RH.registerLivingTNTBlock("walking_tnt", EntityRegistry.WALKING_TNT, "n", false);
 	public static final RegistryObject<LTNTBlock> WOOL_TNT = LuckyTNTMod.RH.registerTNTBlock("wool_tnt", EntityRegistry.WOOL_TNT, "n", true);
 	public static final RegistryObject<LTNTBlock> SAY_GOODBYE = LuckyTNTMod.RH.registerTNTBlock("say_goodbye", EntityRegistry.SAY_GOODBYE, "n", MaterialColor.COLOR_GREEN, false);
-	//public static final RegistryObject<LTNTBlock> ANGRY_MINERS = LuckyTNTMod.RH.registerTNTBlock("angry_miners", EntityRegistry.ANGRY_MINERS, "n", true);
+	public static final RegistryObject<LTNTBlock> ANGRY_MINERS = LuckyTNTMod.RH.registerTNTBlock("angry_miners", EntityRegistry.ANGRY_MINERS, "n", true);
 	public static final RegistryObject<LTNTBlock> WITHERING_TNT = LuckyTNTMod.RH.registerTNTBlock("withering_tnt", EntityRegistry.WITHERING_TNT, "n", MaterialColor.COLOR_BROWN, true);
 	public static final RegistryObject<LTNTBlock> NUCLEAR_WASTE_TNT = LuckyTNTMod.RH.registerTNTBlock("nuclear_waste_tnt", EntityRegistry.NUCLEAR_WASTE_TNT, "n", MaterialColor.COLOR_LIGHT_GREEN, true);
 	public static final RegistryObject<LTNTBlock> STATIC_TNT = LuckyTNTMod.RH.registerTNTBlock("static_tnt", EntityRegistry.STATIC_TNT, "n", MaterialColor.COLOR_ORANGE, true);

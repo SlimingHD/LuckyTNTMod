@@ -38,7 +38,7 @@ public class LuckyTNTTabs {
 				populator.accept(item.get());
 			}
 		}));
-		OTHER = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "other"), List.of(), List.of(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt")), builder -> builder.title(Component.translatable("item_group.luckytntmod.other")).icon(() -> new ItemStack(ItemRegistry.BLUE_CANDY.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
+		OTHER = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "other"), List.of(), List.of(new ResourceLocation(LuckyTNTMod.MODID, "dynamite")), builder -> builder.title(Component.translatable("item_group.luckytntmod.other")).icon(() -> new ItemStack(ItemRegistry.BLUE_CANDY.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
 			populator.accept(ItemRegistry.NUCLEAR_WASTE.get());
 			populator.accept(ItemRegistry.RED_CANDY.get());
 			populator.accept(ItemRegistry.GREEN_CANDY.get());
