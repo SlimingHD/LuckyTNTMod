@@ -69,7 +69,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.WALKING_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.WOOL_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SAY_GOODBYE.get(), LTNTRenderer::new);
-		//event.registerEntityRenderer(EntityRegistry.ANGRY_MINERS.get(), LTNTRenderer::new);		
+		event.registerEntityRenderer(EntityRegistry.ANGRY_MINERS.get(), LTNTRenderer::new);		
 		event.registerEntityRenderer(EntityRegistry.WITHERING_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.NUCLEAR_WASTE_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.STATIC_TNT.get(), LTNTRenderer::new);
