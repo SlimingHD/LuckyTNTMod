@@ -140,6 +140,11 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.PULSAR_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.LIGHTNING_STORM.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SILK_TOUCH_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ITEM_FIREWORK.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ANIMAL_KINGDOM.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.GIANT_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.MIMIC_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.REVERSED_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), ThrownItemRenderer::new);

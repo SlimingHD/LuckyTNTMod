@@ -3,8 +3,10 @@ package luckytnt.registry;
 import java.util.Collections;
 
 import luckytnt.LuckyTNTMod;
+import luckytnt.block.entity.ItemFireworkBlockEntity;
 import luckytnt.block.entity.SmokeTNTBlockEntity;
 import luckytnt.entity.AngryMiner;
+import luckytnt.entity.PrimedItemFirework;
 import luckytnt.entity.PrimedOreTNT;
 import luckytnt.entity.PrimedReplayTNT;
 import luckytnt.tnteffects.*;
@@ -179,6 +181,11 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> PULSAR_TNT = LuckyTNTMod.RH.registerTNTEntity("pulsar_tnt", new PulsarTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> LIGHTNING_STORM = LuckyTNTMod.RH.registerTNTEntity("lightning_storm", new LightningStormEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> SILK_TOUCH_TNT = LuckyTNTMod.RH.registerTNTEntity("silk_touch_tnt", new SilkTouchTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> ITEM_FIREWORK = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "item_firework", () -> EntityType.Builder.<PrimedLTNT>of(PrimedItemFirework::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("item_firework"));
+	public static final RegistryObject<EntityType<PrimedLTNT>> ANIMAL_KINGDOM = LuckyTNTMod.RH.registerTNTEntity("animal_kingdom", new AnimalKingdomEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> GIANT_TNT = LuckyTNTMod.RH.registerTNTEntity("giant_tnt", new GiantTNTEffect(), 10f, true);
+	public static final RegistryObject<EntityType<PrimedLTNT>> MIMIC_TNT = LuckyTNTMod.RH.registerTNTEntity("mimic_tnt", new MimicTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> REVERSED_TNT = LuckyTNTMod.RH.registerTNTEntity("reversed_tnt", new ReversedTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE).explosionStrength(2f).knockbackStrength(0.5f).build());
@@ -203,4 +210,5 @@ public class EntityRegistry {
 	
 	//BlockEntities
 	public static final RegistryObject<BlockEntityType<SmokeTNTBlockEntity>> SMOKE_TNT_BLOCK_ENTITY = LuckyTNTMod.blockEntityRegistry.register("smoke_tnt_block_entity", () -> BlockEntityType.Builder.of(SmokeTNTBlockEntity::new, BlockRegistry.SMOKE_TNT.get()).build(null));
+	public static final RegistryObject<BlockEntityType<ItemFireworkBlockEntity>> ITEM_FIREWORK_BLOCK_ENTITY = LuckyTNTMod.blockEntityRegistry.register("item_firework_block_entity", () -> BlockEntityType.Builder.of(ItemFireworkBlockEntity::new, BlockRegistry.ITEM_FIREWORK.get()).build(null));
 }

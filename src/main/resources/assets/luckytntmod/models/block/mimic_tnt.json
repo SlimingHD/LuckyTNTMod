@@ -3,7 +3,7 @@
     "textures": 
     {
         "down": "minecraft:block/tnt_bottom",
-        "up": "minecraft:block/tnt_top",
+        "up": "luckytntmod:block/mankinds_mark_top",
         "north": "luckytntmod:block/mimic_tnt_side",
         "east": "luckytntmod:block/mimic_tnt_side",
         "south": "luckytntmod:block/mimic_tnt_side",

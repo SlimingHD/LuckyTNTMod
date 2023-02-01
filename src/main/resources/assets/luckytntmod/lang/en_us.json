@@ -122,6 +122,11 @@
 	"block.luckytntmod.pulsar_tnt" : "Pulsar TNT",
 	"block.luckytntmod.lightning_storm" : "Lightning Storm",
 	"block.luckytntmod.silk_touch_tnt" : "Silk Touch TNT",
+	"block.luckytntmod.item_firework" : "Item Firework",
+	"block.luckytntmod.animal_kingdom" : "Animal Kingdom",
+	"block.luckytntmod.giant_tnt" : "Giant TNT",
+	"block.luckytntmod.mimic_tnt" : "Mimic TNT",
+	"block.luckytntmod.reversed_tnt" : "Reversed TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -264,6 +269,11 @@
 	"entity.luckytntmod.pulsar_tnt" : "Pulsar TNT",
 	"entity.luckytntmod.lightning_storm" : "Lightning Storm",
 	"entity.luckytntmod.silk_touch_tnt" : "Silk Touch TNT",
+	"entity.luckytntmod.item_firework" : "Item Firework",
+	"entity.luckytntmod.animal_kingdom" : "Animal Kingdom",
+	"entity.luckytntmod.giant_tnt" : "Giant TNT",
+	"entity.luckytntmod.mimic_tnt" : "Mimic TNT",
+	"entity.luckytntmod.reversed_tnt" : "Reversed TNT",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 
