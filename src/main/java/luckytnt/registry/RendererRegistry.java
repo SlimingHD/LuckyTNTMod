@@ -97,7 +97,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.ORE_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.REDSTONE_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.RANDOM_TNT.get(), LTNTRenderer::new);
-		//event.registerEntityRenderer(EntityRegistry.TURRET_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TURRET_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PULSE_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DIVIDING_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PICKY_TNT.get(), LTNTRenderer::new);

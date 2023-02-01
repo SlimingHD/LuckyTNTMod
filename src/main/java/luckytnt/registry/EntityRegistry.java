@@ -136,7 +136,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> ORE_TNT = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "ore_tnt", () -> EntityType.Builder.<PrimedLTNT>of(PrimedOreTNT::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("ore_tnt"));
 	public static final RegistryObject<EntityType<PrimedLTNT>> REDSTONE_TNT = LuckyTNTMod.RH.registerTNTEntity("redstone_tnt", new RedstoneTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> RANDOM_TNT = LuckyTNTMod.RH.registerTNTEntity("random_tnt", new RandomTNTEffect());
-	//public static final RegistryObject<EntityType<PrimedLTNT>> TURRET_TNT = LuckyTNTMod.RH.registerTNTEntity("turret_tnt", new TurretTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> TURRET_TNT = LuckyTNTMod.RH.registerTNTEntity("turret_tnt", new TurretTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> PULSE_TNT = LuckyTNTMod.RH.registerTNTEntity("pulse_tnt", new PulseTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> DIVIDING_TNT = LuckyTNTMod.RH.registerTNTEntity("dividing_tnt", new DividingTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> PICKY_TNT = LuckyTNTMod.RH.registerTNTEntity("picky_tnt", new PickyTNTEffect());
