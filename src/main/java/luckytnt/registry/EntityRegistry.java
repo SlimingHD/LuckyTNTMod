@@ -186,6 +186,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> GIANT_TNT = LuckyTNTMod.RH.registerTNTEntity("giant_tnt", new GiantTNTEffect(), 10f, true);
 	public static final RegistryObject<EntityType<PrimedLTNT>> MIMIC_TNT = LuckyTNTMod.RH.registerTNTEntity("mimic_tnt", new MimicTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> REVERSED_TNT = LuckyTNTMod.RH.registerTNTEntity("reversed_tnt", new ReversedTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> ENTITY_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("entity_firework", new EntityFireworkEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE).explosionStrength(2f).knockbackStrength(0.5f).build());

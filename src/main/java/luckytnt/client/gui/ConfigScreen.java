@@ -3,6 +3,7 @@ package luckytnt.client.gui;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import luckytnt.config.LuckyTNTConfigValues;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -23,7 +24,8 @@ public class ConfigScreen extends Screen{
 	
 	@Override
 	public void init() {
-		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.done"), button -> onClose()).bounds((width - 100) / 2, height - 40, 100, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.next"), button -> nextPage()).bounds(width - 120, height - 30, 100, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.done"), button -> onClose()).bounds((width - 100) / 2, height - 30, 100, 20).build());
 		addRenderableWidget(island_slider = new ForgeSlider(20, 40, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 20, 160, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), true));		
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.ISLAND_HEIGHT, 50, island_slider)).bounds(width - 220, 40, 200, 20).build());
 		addRenderableWidget(dropped_slider = new ForgeSlider(20, 60, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 60, 400, LuckyTNTConfigValues.DROP_HEIGHT.get(), true));		
@@ -44,7 +46,15 @@ public class ConfigScreen extends Screen{
 		if(island_slider != null) {
 			LuckyTNTConfigValues.ISLAND_HEIGHT.set(island_slider.getValueInt());
 		}
+		if(dropped_slider != null) {
+			LuckyTNTConfigValues.DROP_HEIGHT.set(dropped_slider.getValueInt());
+		}
 		super.onClose();
+	}
+	
+	public void nextPage() {
+		onClose();
+		Minecraft.getInstance().setScreen(new ConfigScreen2());
 	}
 	
 	public void resetIntValue(ForgeConfigSpec.IntValue config, int newValue, ForgeSlider slider) {
