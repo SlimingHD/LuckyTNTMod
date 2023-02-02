@@ -6,7 +6,7 @@ import luckytnt.entity.AngryMiner;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.PrimedTNTEffect;
+import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.block.Block;
 

@@ -5,7 +5,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
-import luckytntlib.util.explosions.PrimedTNTEffect;
+import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -22,12 +22,11 @@ public class SnowTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), strength);
 		ExplosionHelper.doTopBlockExplosionForAll(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				state.onBlockExploded(level, pos, dummyExplosion);
+				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
 				level.setBlockAndUpdate(pos, Blocks.SNOW.defaultBlockState());
 			}
 		});

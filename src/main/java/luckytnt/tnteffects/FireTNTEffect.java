@@ -5,7 +5,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
-import luckytntlib.util.explosions.PrimedTNTEffect;
+import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.Level;
@@ -15,14 +15,19 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class FireTNTEffect extends PrimedTNTEffect{
 
+	private final int strength;
+	
+	public FireTNTEffect(int strength) {
+		this.strength = strength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 10);
-		ExplosionHelper.doTopBlockExplosionForAll(entity.level(), entity.getPos(), 15, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doTopBlockExplosionForAll(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				state.onBlockExploded(level, pos, dummyExplosion);
+				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
 				level.setBlockAndUpdate(pos, BaseFireBlock.getState(level, pos));
 			}
 		});

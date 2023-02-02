@@ -6,7 +6,7 @@ import luckytnt.entity.PrimedItemFirework;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.item.LDynamiteItem;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.PrimedTNTEffect;
+import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

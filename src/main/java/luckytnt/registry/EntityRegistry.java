@@ -10,13 +10,22 @@ import luckytnt.entity.PrimedItemFirework;
 import luckytnt.entity.PrimedOreTNT;
 import luckytnt.entity.PrimedReplayTNT;
 import luckytnt.tnteffects.*;
-import luckytnt.tnteffects.projectile.*;
+import luckytnt.tnteffects.projectile.BombEffect;
+import luckytnt.tnteffects.projectile.ChicxulubMeteorEffect;
+import luckytnt.tnteffects.projectile.ClusterBombEffect;
+import luckytnt.tnteffects.projectile.IceMeteorEffect;
+import luckytnt.tnteffects.projectile.MeteorEffect;
+import luckytnt.tnteffects.projectile.MiniMeteorEffect;
+import luckytnt.tnteffects.projectile.ShrapnelEffect;
+import luckytnt.tnteffects.projectile.TsarBombaBombEffect;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.entity.LivingPrimedLTNT;
 import luckytntlib.entity.PrimedLTNT;
-import luckytntlib.util.explosions.DynamiteXStrengthEffect;
-import luckytntlib.util.explosions.StackedPrimedTNTEffect;
-import luckytntlib.util.explosions.TNTXStrengthEffect;
+import luckytntlib.util.tnteffects.DynamiteXStrengthEffect;
+import luckytntlib.util.tnteffects.GeneralDynamiteEffect;
+import luckytntlib.util.tnteffects.StackedPrimedTNTEffect;
+import luckytntlib.util.tnteffects.TNTXStrengthEffect;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -51,7 +60,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> FLOATING_ISLAND = LuckyTNTMod.RH.registerTNTEntity("floating_island", new FloatingIslandEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> OCEAN_TNT = LuckyTNTMod.RH.registerTNTEntity("ocean_tnt", new OceanTNTEffect(() -> BlockRegistry.OCEAN_TNT, 30, 10, 10));
 	public static final RegistryObject<EntityType<PrimedLTNT>> HELLFIRE_TNT = LuckyTNTMod.RH.registerTNTEntity("hellfire_tnt", new HellfireTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> FIRE_TNT = LuckyTNTMod.RH.registerTNTEntity("fire_tnt", new FireTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> FIRE_TNT = LuckyTNTMod.RH.registerTNTEntity("fire_tnt", new FireTNTEffect(10));
 	public static final RegistryObject<EntityType<PrimedLTNT>> SNOW_TNT = LuckyTNTMod.RH.registerTNTEntity("snow_tnt", new SnowTNTEffect(10));
 	public static final RegistryObject<EntityType<PrimedLTNT>> FREEZE_TNT = LuckyTNTMod.RH.registerTNTEntity("freeze_tnt", new FreezeTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> VAPORIZE_TNT = LuckyTNTMod.RH.registerTNTEntity("vaporize_tnt", new VaporizeTNTEffect());
@@ -191,6 +200,12 @@ public class EntityRegistry {
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE).explosionStrength(2f).knockbackStrength(0.5f).build());
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE_X5 = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite_x5", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE_X5).build());
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE_X20 = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite_x20", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE_X20).explosionStrength(10f).randomVecLength(1.25f).knockbackStrength(1.5f).build());
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE_X100 = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite_x100", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE_X100).explosionStrength(25f).randomVecLength(1.5f).knockbackStrength(2.5f).build());
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE_X500 = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite_x500", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE_X500).explosionStrength(60f).yStrength(1.4f).knockbackStrength(3.5f).build());
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> FIRE_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("fire_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.FIRE_DYNAMITE, ParticleTypes.FLAME, new FireTNTEffect(5)));
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> SNOW_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("snow_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.SNOW_DYNAMITE, new SnowTNTEffect(5)));
 	
 	//Projectile
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("meteor", new MeteorEffect(), 2f, false);

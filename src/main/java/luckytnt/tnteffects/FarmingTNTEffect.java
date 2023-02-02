@@ -10,7 +10,7 @@ import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IBlockExplosionCondition;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
-import luckytntlib.util.explosions.PrimedTNTEffect;
+import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.tags.BlockTags;

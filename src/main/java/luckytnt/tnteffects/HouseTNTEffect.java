@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import luckytnt.LuckyTNTMod;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.PrimedTNTEffect;
+import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;

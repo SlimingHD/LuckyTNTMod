@@ -5,7 +5,7 @@ import java.util.List;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.ItemRegistry;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.PrimedTNTEffect;
+import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;

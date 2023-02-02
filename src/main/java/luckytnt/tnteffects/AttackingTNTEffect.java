@@ -1,6 +1,6 @@
 package luckytnt.tnteffects;
 
-import luckytntlib.util.explosions.PrimedTNTEffect;
+import luckytntlib.util.tnteffects.PrimedTNTEffect;
 
 public class AttackingTNTEffect extends PrimedTNTEffect{
 
