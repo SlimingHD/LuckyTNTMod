@@ -16,20 +16,27 @@ import net.minecraftforge.common.Tags;
 
 public class MiningflatTNTEffect extends PrimedTNTEffect{
 
+	private final int radius;
+	private final int radiusY;
+	
+	public MiningflatTNTEffect(int radius, int radiusY) {
+		this.radius = radius;
+		this.radiusY = radiusY;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 30);
-		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), 30, 9, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(pos.getY() >= entity.y()) {
-					if(state.getExplosionResistance(level, pos, dummyExplosion) < 100) {
+				if(pos.getY() >= entity.y() - 0.5f) {
+					if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100) {
 						if(state.is(Tags.Blocks.ORES)) {
 							Block.dropResources(state, level, pos);
 						}
-						state.onBlockExploded(level, pos, dummyExplosion);
-						if(pos.getY() - entity.y() == 0) {
+						state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+						if(pos.getY() - Math.round(entity.y()) == 0) {
 							if(Math.random() < 0.05f && Block.canSupportCenter(level, pos.below(), Direction.UP)) {
 								level.setBlockAndUpdate(pos, Blocks.TORCH.defaultBlockState());
 							}

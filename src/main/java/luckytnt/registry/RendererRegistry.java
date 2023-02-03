@@ -162,6 +162,9 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.NUCLEAR_DYNAMITE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FREEZE_DYNAMITE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FLOATING_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SPHERE_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FLAT_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.MININGFLAT_DYNAMITE.get(), ThrownItemRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
