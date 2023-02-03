@@ -1,6 +1,7 @@
 package luckytnt.registry;
 
 import java.util.Collections;
+import java.util.function.Predicate;
 
 import org.joml.Vector3f;
 
@@ -11,6 +12,7 @@ import luckytnt.entity.AngryMiner;
 import luckytnt.entity.PrimedItemFirework;
 import luckytnt.entity.PrimedOreTNT;
 import luckytnt.entity.PrimedReplayTNT;
+import luckytnt.entity.PrimedResetTNT;
 import luckytnt.tnteffects.*;
 import luckytnt.tnteffects.projectile.BombEffect;
 import luckytnt.tnteffects.projectile.ChicxulubMeteorEffect;
@@ -32,6 +34,7 @@ import luckytntlib.util.tnteffects.TNTXStrengthEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -47,6 +50,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class EntityRegistry {
+
+	public static Predicate<LivingEntity> PREDICATE = living -> { 
+		return living instanceof Player player && !player.isCreative() && !player.isSpectator() ? true : false;
+	};
 	
 	//TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT = LuckyTNTMod.RH.registerTNTEntity("tnt", new TNTXStrengthEffect.Builder(() -> BlockRegistry.TNT).build());
@@ -202,6 +209,19 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> REVERSED_TNT = LuckyTNTMod.RH.registerTNTEntity("reversed_tnt", new ReversedTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> ENTITY_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("entity_firework", new EntityFireworkEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CUSTOM_TNT = LuckyTNTMod.RH.registerTNTEntity("custom_tnt", new CustomTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> RESET_TNT = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "reset_tnt", () -> EntityType.Builder.<PrimedLTNT>of(PrimedResetTNT::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("reset_tnt"));
+	public static final RegistryObject<EntityType<LivingPrimedLTNT>> VICIOUS_TNT = LuckyTNTMod.RH.registerLivingTNTEntity(LuckyTNTMod.entityRegistry, "vicious_tnt", (EntityType<LivingPrimedLTNT> type, Level level) -> new LivingPrimedLTNT(type, level, new TNTXStrengthEffect.Builder(() -> BlockRegistry.VICIOUS_TNT).fuse(400).explosionStrength(10f).randomVecLength(1.25f).knockbackStrength(1.5f).build()) {		
+		@Override
+		public void registerGoals() {
+			super.registerGoals();
+			targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, 10, false, false, PREDICATE));
+			goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2D, false));
+			goalSelector.addGoal(2, new OpenDoorGoal(this, true));
+			goalSelector.addGoal(3, new RandomStrollGoal(this, 1));
+			goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+			goalSelector.addGoal(5, new FloatGoal(this));
+		}	
+	}, 10f, 1024f, 0.5f, 1f, true);
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE).explosionStrength(2f).knockbackStrength(0.5f).build());
