@@ -7,6 +7,8 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Ghast;
@@ -48,6 +50,7 @@ public class HellfireTNTEffect extends PrimedTNTEffect{
 		for(int i = 0; i <= 5; i++) {
 			Ghast ghast = new Ghast(EntityType.GHAST, entity.level());
 			ghast.setPos(entity.getPos().add(0, 20 + Math.random() * 20, 0));
+			entity.level().playSound(ghast, ghast.blockPosition(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 3f, 1f);
 			entity.level().addFreshEntity(ghast);
 		}
 	}

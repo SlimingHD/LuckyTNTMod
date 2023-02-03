@@ -21,6 +21,10 @@ public class ItemRegistry {
 	public static final RegistryObject<LDynamiteItem> DYNAMITE_X500 = LuckyTNTMod.RH.registerDynamiteItem("dynamite_x500", EntityRegistry.DYNAMITE_X500, "dy");
 	public static final RegistryObject<LDynamiteItem> FIRE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("fire_dynamite", EntityRegistry.FIRE_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> SNOW_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("snow_dynamite", EntityRegistry.SNOW_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> DYNAMITE_FIREWORK = LuckyTNTMod.RH.registerDynamiteItem("dynamite_firework", EntityRegistry.DYNAMITE_FIREWORK, "dy");
+	public static final RegistryObject<LDynamiteItem> NUCLEAR_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("nuclear_dynamite", EntityRegistry.NUCLEAR_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> FREEZE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("freeze_dynamite", EntityRegistry.FREEZE_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> FLOATING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("floating_dynamite", EntityRegistry.FLOATING_DYNAMITE, "dy");
 	
 	//Other
 	public static final RegistryObject<Item> NUCLEAR_WASTE = LuckyTNTMod.itemRegistry.register("nuclear_waste", () -> new BlockItem(BlockRegistry.NUCLEAR_WASTE.get(), new Item.Properties()));

@@ -16,15 +16,20 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class FreezeTNTEffect extends PrimedTNTEffect{
 
+	private final int strength;
+	
+	public FreezeTNTEffect(int strength) {
+		this.strength = strength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 10);
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 10, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if((state.getExplosionResistance(level, pos, dummyExplosion) < 100 || state.getBlock() instanceof LiquidBlock) && !(state.getBlock() instanceof BushBlock) && !state.isAir()) {
-					state.onBlockExploded(level, pos, dummyExplosion);
+				if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 || state.getBlock() instanceof LiquidBlock) && !(state.getBlock() instanceof BushBlock) && !state.isAir()) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
 					level.setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState());
 				}
 			}

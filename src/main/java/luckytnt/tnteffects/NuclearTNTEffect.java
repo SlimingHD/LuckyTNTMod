@@ -24,15 +24,21 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class NuclearTNTEffect extends PrimedTNTEffect{
 
+	private final int strength;
+	
+	public NuclearTNTEffect(int strength) {
+		this.strength = strength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos(), 50f);
-		explosion.doEntityExplosion(4f, true);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos(), strength);
+		explosion.doEntityExplosion(strength / 10f, true);
 		explosion.doEntityExplosion(new IForEachEntityExplosionEffect() {		
 			@Override
 			public void doEntityExplosion(Entity entity, double distance) {
 				if(entity instanceof LivingEntity living) {
-					living.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 2400));
+					living.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 48 * strength));
 				}
 			}
 		});
@@ -45,7 +51,7 @@ public class NuclearTNTEffect extends PrimedTNTEffect{
 				}
 			}
 		});
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 150, new IForEachBlockExplosionEffect() {		
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), strength * 3, new IForEachBlockExplosionEffect() {		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getBlock() instanceof BushBlock || state.getBlock() instanceof LeavesBlock) {
