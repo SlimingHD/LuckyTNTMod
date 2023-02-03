@@ -11,7 +11,6 @@ import luckytntlib.util.explosions.IForEachEntityExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -42,20 +41,22 @@ public class NuclearTNTEffect extends PrimedTNTEffect{
 				}
 			}
 		});
-		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, new IForEachBlockExplosionEffect() {			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				state.onBlockExploded(level, pos, explosion);
-				if(Math.random() < 0.33f && level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP) && level.getBlockState(pos).isAir()) {
-					level.setBlockAndUpdate(pos, BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState());
-				}
-			}
-		});
+		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
 		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), strength * 3, new IForEachBlockExplosionEffect() {		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getBlock() instanceof BushBlock || state.getBlock() instanceof LeavesBlock) {
 					state.onBlockExploded(level, pos, explosion);
+				}
+			}
+		});
+		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
+			
+			@Override
+			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
+				BlockState stateAbove = level.getBlockState(pos.above());
+				if(stateAbove.isAir() && !state.isAir() && Math.random() < 0.33f) {
+					level.setBlockAndUpdate(pos.above(), BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState());
 				}
 			}
 		});
