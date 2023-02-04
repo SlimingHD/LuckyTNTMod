@@ -153,6 +153,8 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SINKHOLE_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FIRESTORM_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SNOWSTORM_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ACIDIC_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.CATALYST_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), ThrownItemRenderer::new);
@@ -184,6 +186,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.CHICXULUB_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.TSAR_BOMBA_BOMB.get(), BombRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PRESENT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ACIDIC_PROJECTILE.get(), LTNTRenderer::new);
 		
 		//Other
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);

@@ -136,6 +136,8 @@
 	"block.luckytntmod.sinkhole_tnt" : "Sinkh\u00f6hlen TNT",
 	"block.luckytntmod.firestorm_tnt" : "Feuersturm TNT",
 	"block.luckytntmod.snowstorm_tnt" : "Schneesturm TNT",
+	"block.luckytntmod.acidic_tnt" : "\u00c4tzendes TNT",
+	"block.luckytntmod.catalyst_tnt" : "Katalysator TNT",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -304,6 +306,8 @@
 	"entity.luckytntmod.sinkhole_tnt" : "Sinkh\u00f6hlen TNT",
 	"entity.luckytntmod.firestorm_tnt" : "Feuersturm TNT",
 	"entity.luckytntmod.snowstorm_tnt" : "Schneesturm TNT",
+	"entity.luckytntmod.acidic_tnt" : "\u00c4tzendes TNT",
+	"entity.luckytntmod.catalyst_tnt" : "Katalysator TNT",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
@@ -333,6 +337,7 @@
 	"entity.luckytntmod.pompeii_projectile" : "Pompeii Projektil",
 	"entity.luckytntmod.chicxulub_meteor": "Chicxulub Meteorit",
 	"entity.luckytntmod.tsar_bomba_bomb" : "Zar Bombe Bombe",
+	"entity.luckytntmod.acidic_projectile" : "\u00c4tzendes Projektil",
 	
 	"entity.luckytntmod.angry_miner" : "W\u00FCtender Minenarbeiter",
 			
