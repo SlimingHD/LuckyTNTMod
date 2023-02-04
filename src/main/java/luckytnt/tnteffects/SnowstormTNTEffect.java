@@ -46,9 +46,7 @@ public class SnowstormTNTEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1f), ent.x(), ent.y() + 1D, ent.z(), 0, 0, 0);
-		
+	public void explosionTick(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() % 4 == 0) {
 			Vec3 vec31 = new Vec3(0.5D, 1D, 0D).normalize();
 			Snowball ball1 = new Snowball(ent.level(), ent.x() + 0.5D, ent.y() + 1D, ent.z());
@@ -90,6 +88,11 @@ public class SnowstormTNTEffect extends PrimedTNTEffect {
 			ball8.shoot(vec38.x, vec38.y, vec38.z, 1f, 5f);
 			ent.level().addFreshEntity(ball8);
 		}
+	}
+	
+	@Override
+	public void spawnParticles(IExplosiveEntity ent) {
+		ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1f), ent.x(), ent.y() + 1D, ent.z(), 0, 0, 0);
 	}
 
 	@Override
