@@ -171,9 +171,19 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SPHERE_DYNAMITE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FLAT_DYNAMITE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.MININGFLAT_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.VAPORIZE_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.METEOR_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.CUBIC_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.GROVE_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ENDER_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ARROW_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.LIGHTNING_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DIGGING_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.COMPACT_DYNAMITE.get(), ThrownItemRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.LITTLE_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SPIRAL_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ERUPTING_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.MINI_METEOR.get(), LTNTRenderer::new);

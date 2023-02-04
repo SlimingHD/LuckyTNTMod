@@ -24,7 +24,6 @@ public class WoolTNTEffect extends PrimedTNTEffect{
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(!state.isCollisionShapeFullBlock(level, pos)){
 					state.onBlockExploded(level, pos, explosion);
-					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 				}
 				else if(state.getMaterial() != Material.AIR) {
 					state.onBlockExploded(level, pos, explosion);
@@ -76,7 +75,7 @@ public class WoolTNTEffect extends PrimedTNTEffect{
 						else if(color == MaterialColor.COLOR_BLUE || color == MaterialColor.TERRACOTTA_BLUE || color == MaterialColor.WATER || color == MaterialColor.LAPIS) {
 							level.setBlock(pos, Blocks.BLUE_WOOL.defaultBlockState(), 3);
 						}
-						else if(color == MaterialColor.COLOR_BROWN || color == MaterialColor.TERRACOTTA_BROWN || color == MaterialColor.DIRT || color == MaterialColor.TERRACOTTA_GRAY || color == MaterialColor.WOOD) {
+						else if(color == MaterialColor.COLOR_BROWN || color == MaterialColor.TERRACOTTA_BROWN || color == MaterialColor.DIRT || color == MaterialColor.TERRACOTTA_GRAY || color == MaterialColor.WOOD || color == MaterialColor.PODZOL) {
 							level.setBlock(pos, Blocks.BROWN_WOOL.defaultBlockState(), 3);
 						}
 					}

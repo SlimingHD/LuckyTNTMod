@@ -28,6 +28,15 @@ public class ItemRegistry {
 	public static final RegistryObject<LDynamiteItem> SPHERE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("sphere_dynamite", EntityRegistry.SPHERE_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> FLAT_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("flat_dynamite", EntityRegistry.FLAT_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> MININGFLAT_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("miningflat_dynamite", EntityRegistry.MININGFLAT_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> VAPORIZE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("vaporize_dynamite", EntityRegistry.VAPORIZE_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> METEOR_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("meteor_dynamite", EntityRegistry.METEOR_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> CUBIC_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("cubic_dynamite", EntityRegistry.CUBIC_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> GROVE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("grove_dynamite", EntityRegistry.GROVE_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> ENDER_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("ender_dynamite", EntityRegistry.ENDER_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> ARROW_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("arrow_dynamite", EntityRegistry.ARROW_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> LIGHTNING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("lightning_dynamite", EntityRegistry.LIGHTNING_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> DIGGING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("digging_dynamite", EntityRegistry.DIGGING_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> COMPACT_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("compact_dynamite", EntityRegistry.COMPACT_DYNAMITE, "dy");
 	
 	//Other
 	public static final RegistryObject<Item> NUCLEAR_WASTE = LuckyTNTMod.itemRegistry.register("nuclear_waste", () -> new BlockItem(BlockRegistry.NUCLEAR_WASTE.get(), new Item.Properties()));

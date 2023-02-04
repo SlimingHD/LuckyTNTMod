@@ -99,7 +99,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> ROULETTE_TNT = LuckyTNTMod.RH.registerTNTBlock("roulette_tnt", EntityRegistry.ROULETTE_TNT, "n");
 	public static final RegistryObject<LTNTBlock> SENSOR_TNT = LuckyTNTMod.RH.registerTNTBlock("sensor_tnt", EntityRegistry.SENSOR_TNT, "n", MaterialColor.COLOR_BLUE, false);
 	public static final RegistryObject<LTNTBlock> RAINBOW_FIREWORK = LuckyTNTMod.RH.registerTNTBlock("rainbow_firework", EntityRegistry.RAINBOW_FIREWORK, "n", MaterialColor.WOOL, false);
-	public static final RegistryObject<LTNTBlock> XRAY_TNT = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new XRayTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("xray_tnt").tab("n").build());
+	public static final RegistryObject<LTNTBlock> XRAY_TNT = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new XRayTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).noOcclusion().sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("xray_tnt").tab("n").build());
 	public static final RegistryObject<LTNTBlock> FARMING_TNT = LuckyTNTMod.RH.registerTNTBlock("farming_tnt", EntityRegistry.FARMING_TNT, "n", MaterialColor.COLOR_BROWN, true);
 	public static final RegistryObject<LTNTBlock> PHANTOM_TNT = LuckyTNTMod.RH.registerTNTBlock("phantom_tnt", EntityRegistry.PHANTOM_TNT, "n", MaterialColor.COLOR_PURPLE, true);
 	public static final RegistryObject<LTNTBlock> SWAP_TNT = LuckyTNTMod.RH.registerTNTBlock("swap_tnt", EntityRegistry.SWAP_TNT, "n", false);
