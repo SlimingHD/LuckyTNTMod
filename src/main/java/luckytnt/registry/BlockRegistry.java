@@ -169,10 +169,10 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> CUSTOM_TNT = LuckyTNTMod.RH.registerTNTBlock("custom_tnt", EntityRegistry.CUSTOM_TNT, "g", MaterialColor.COLOR_GRAY, true);
 	public static final RegistryObject<LTNTBlock> RESET_TNT = LuckyTNTMod.RH.registerTNTBlock("reset_tnt", EntityRegistry.RESET_TNT, "g", MaterialColor.COLOR_RED, true);
 	public static final RegistryObject<LTNTBlock> VICIOUS_TNT = LuckyTNTMod.RH.registerLivingTNTBlock("vicious_tnt", EntityRegistry.VICIOUS_TNT, "g", MaterialColor.COLOR_RED, false);
-	public static final RegistryObject<LTNTBlock> HUNGRY_TNT = LuckyTNTMod.RH.registerTNTBlock("hungry_tnt", EntityRegistry.MIMIC_TNT, "g", MaterialColor.COLOR_ORANGE, true);
-	public static final RegistryObject<LTNTBlock> SINKHOLE_TNT = LuckyTNTMod.RH.registerTNTBlock("sinkhole_tnt", EntityRegistry.MIMIC_TNT, "g", MaterialColor.COLOR_BLACK, true);
-	public static final RegistryObject<LTNTBlock> FIRESTORM_TNT = LuckyTNTMod.RH.registerTNTBlock("firestorm_tnt", EntityRegistry.MIMIC_TNT, "g", MaterialColor.COLOR_RED, true);
-	public static final RegistryObject<LTNTBlock> SNOWSTORM_TNT = LuckyTNTMod.RH.registerTNTBlock("snowstorm_tnt", EntityRegistry.MIMIC_TNT, "g", MaterialColor.SNOW, true);
+	public static final RegistryObject<LTNTBlock> HUNGRY_TNT = LuckyTNTMod.RH.registerTNTBlock("hungry_tnt", EntityRegistry.HUNGRY_TNT, "g", MaterialColor.COLOR_ORANGE, true);
+	public static final RegistryObject<LTNTBlock> SINKHOLE_TNT = LuckyTNTMod.RH.registerTNTBlock("sinkhole_tnt", EntityRegistry.SINKHOLE_TNT, "g", MaterialColor.COLOR_BLACK, true);
+	public static final RegistryObject<LTNTBlock> FIRESTORM_TNT = LuckyTNTMod.RH.registerTNTBlock("firestorm_tnt", EntityRegistry.FIRESTORM_TNT, "g", MaterialColor.COLOR_RED, true);
+	public static final RegistryObject<LTNTBlock> SNOWSTORM_TNT = LuckyTNTMod.RH.registerTNTBlock("snowstorm_tnt", EntityRegistry.SNOWSTORM_TNT, "g", MaterialColor.SNOW, true);
 	public static final RegistryObject<LTNTBlock> ACIDIC_TNT = LuckyTNTMod.RH.registerTNTBlock("acidic_tnt", EntityRegistry.MIMIC_TNT, "g", MaterialColor.COLOR_YELLOW, true);
 	public static final RegistryObject<LTNTBlock> CATALYST_TNT = LuckyTNTMod.RH.registerTNTBlock("catalyst_tnt", EntityRegistry.MIMIC_TNT, "g", MaterialColor.COLOR_RED, true);
 	

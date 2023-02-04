@@ -222,6 +222,10 @@ public class EntityRegistry {
 			goalSelector.addGoal(5, new FloatGoal(this));
 		}	
 	}, 10f, 1024f, 0.5f, 1f, true);
+	public static final RegistryObject<EntityType<PrimedLTNT>> HUNGRY_TNT = LuckyTNTMod.RH.registerTNTEntity("hungry_tnt", new HungryTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> SINKHOLE_TNT = LuckyTNTMod.RH.registerTNTEntity("sinkhole_tnt", new SinkholeTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> FIRESTORM_TNT = LuckyTNTMod.RH.registerTNTEntity("firestorm_tnt", new FirestormTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> SNOWSTORM_TNT = LuckyTNTMod.RH.registerTNTEntity("snowstorm_tnt", new SnowstormTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE).explosionStrength(2f).knockbackStrength(0.5f).build());
