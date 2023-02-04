@@ -327,6 +327,7 @@
 	"entity.luckytntmod.erupting_projectile" : "Erupting TNT",
 	"entity.luckytntmod.chemical_projectile" : "Chemical TNT",
 	"entity.luckytntmod.cluster_bomb" : "Cluster Bomb",
+	"entity.luckytntmod.shrapnel" : "Shrapnel",
 	"entity.luckytntmod.bomb" : "Bomb",
 	"entity.luckytntmod.present" : "Present",
 	"entity.luckytntmod.ice_meteor" : "Ice Meteor",

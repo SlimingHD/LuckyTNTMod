@@ -326,6 +326,7 @@
 	"entity.luckytntmod.erupting_projectile" : "Ausbrechendes TNT",
 	"entity.luckytntmod.chemical_projectile" : "Chemisches TNT",
 	"entity.luckytntmod.cluster_bomb" : "Streubombe",
+	"entity.luckytntmod.shrapnel" : "Schrapnell",
 	"entity.luckytntmod.present" : "Geschenk",
 	"entity.luckytntmod.bomb" : "Bombe",
 	"entity.luckytntmod.ice_meteor" : "Eismeteor",
