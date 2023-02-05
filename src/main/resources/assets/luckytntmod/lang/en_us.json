@@ -138,6 +138,9 @@
 	"block.luckytntmod.snowstorm_tnt" : "Snowstorm TNT",
 	"block.luckytntmod.acidic_tnt" : "Acidic TNT",
 	"block.luckytntmod.catalyst_tnt" : "Catalyst TNT",
+	"block.luckytntmod.toxic_clouds" : "Toxic Clouds",
+	"block.luckytntmod.disaster_clearer" : "Disaster Clearer",
+	"block.luckytntmod.ice_age" : "Ice Age",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -309,6 +312,9 @@
 	"entity.luckytntmod.snowstorm_tnt" : "Snowstorm TNT",
 	"entity.luckytntmod.acidic_tnt" : "Acidic TNT",
 	"entity.luckytntmod.catalyst_tnt" : "Catalyst TNT",
+	"entity.luckytntmod.toxic_clouds" : "Toxic Clouds",
+	"entity.luckytntmod.disaster_clearer" : "Disaster Clearer",
+	"entity.luckytntmod.ice_age" : "Ice Age",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
@@ -327,6 +333,8 @@
 	
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.mini_meteor" : "Mini Meteor",
+	"entity.luckytntmod.little_meteor" : "Little Meteor",
+	"entity.luckytntmod.hailstone" : "Hailstone",
 	"entity.luckytntmod.spiral_projectile" : "Spiral TNT",
 	"entity.luckytntmod.erupting_projectile" : "Erupting TNT",
 	"entity.luckytntmod.chemical_projectile" : "Chemical TNT",
@@ -341,6 +349,7 @@
 	"entity.luckytntmod.acidic_projectile" : "Acidic Projectile",
 
 	"entity.luckytntmod.angry_miner" : "Angry Miner",
+	"entity.luckytntmod.toxic_cloud" : "Toxic Cloud",
 		
 	"item_group.luckytntmod.normal_tnt" : "Normal TNT",
 	"item_group.luckytntmod.god_tnt" : "God TNT",
@@ -375,6 +384,24 @@
 	"luckytntmod.config.back": "Back",
 	"luckytntmod.config.true": "True",
 	"luckytntmod.config.false": "False",
+   	"luckytntmod.config.maximum_time": "Maximum Disaster duration",
+   	"luckytntmod.config.average_intensity": "Average Disaster intensity",
+	"luckytntmod.config.render_overlay": "Render Contaminated Overlay",
 	
-	"death.attack.say_goodbye" : "%1$s said goodbye"
+	"death.attack.say_goodbye" : "%1$s said goodbye",
+	"death.attack.hailstone": "%1$s got hit in the eye by a hailstone",
+	
+	"command.ltmdisaster.iceageactive": "Disaster Ice Age currently active for ",
+  	"command.ltmdisaster.iceage": "Started the disaster Ice Age",
+  	"command.ltmdisaster.heatdeathactive": "Disaster Heat Death currently active for ",
+  	"command.ltmdisaster.heatdeath": "Started the disaster Heat Death",
+  	"command.ltmdisaster.tntrainactive": "Disaster TNT Rain currently active for ",
+  	"command.ltmdisaster.tntrain": "Started the disaster TNT Rain",
+  	"command.ltmdisaster.doomsdayactive": "Disaster Doomsday currently active for ",
+  	"command.ltmdisaster.doomsday": "Started the disaster Doomsday",
+  	"command.ltmdisaster.nothingactive": "Currently no disasters are active",
+  	"command.ltmdisaster.toxicactive": "Disaster Toxic Clouds currently active for ",
+  	"command.ltmdisaster.minute": " minutes",
+  	"command.ltmdisaster.toxicclouds": "Started the disaster Toxic Clouds",
+  	"command.ltmdisaster.clear": "All disasters have been stopped"
 }

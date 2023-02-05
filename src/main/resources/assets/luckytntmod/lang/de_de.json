@@ -138,6 +138,9 @@
 	"block.luckytntmod.snowstorm_tnt" : "Schneesturm TNT",
 	"block.luckytntmod.acidic_tnt" : "\u00c4tzendes TNT",
 	"block.luckytntmod.catalyst_tnt" : "Katalysator TNT",
+	"block.luckytntmod.toxic_clouds" : "Giftige Wolken",
+	"block.luckytntmod.disaster_clearer" : "Katastrophenklärer",
+	"block.luckytntmod.ice_age" : "Eiszeit",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -308,6 +311,9 @@
 	"entity.luckytntmod.snowstorm_tnt" : "Schneesturm TNT",
 	"entity.luckytntmod.acidic_tnt" : "\u00c4tzendes TNT",
 	"entity.luckytntmod.catalyst_tnt" : "Katalysator TNT",
+	"entity.luckytntmod.toxic_clouds" : "Giftige Wolken",
+	"entity.luckytntmod.disaster_clearer" : "Katastrophenklärer",
+	"entity.luckytntmod.ice_age" : "Eiszeit",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
@@ -326,6 +332,8 @@
 		
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.mini_meteor" : "Mini Meteor",
+	"entity.luckytntmod.little_meteor" : "Kleiner Meteor",
+	"entity.luckytntmod.hailstone" : "Hagelkorn",
 	"entity.luckytntmod.spiral_projectile" : "Spiralen TNT",
 	"entity.luckytntmod.erupting_projectile" : "Ausbrechendes TNT",
 	"entity.luckytntmod.chemical_projectile" : "Chemisches TNT",
@@ -340,6 +348,7 @@
 	"entity.luckytntmod.acidic_projectile" : "\u00c4tzendes Projektil",
 	
 	"entity.luckytntmod.angry_miner" : "W\u00FCtender Minenarbeiter",
+	"entity.luckytntmod.toxic_cloud" : "Giftige Wolke",
 			
 	"item_group.luckytntmod.normal_tnt" : "Normales TNT",
 	"item_group.luckytntmod.god_tnt" : "Gott TNT",
@@ -374,6 +383,24 @@
 	"luckytntmod.config.back": "Zur\u00fcck",
 	"luckytntmod.config.true": "Wahr",
 	"luckytntmod.config.false": "Falsch",
+   	"luckytntmod.config.maximum_time": "Maximale Desaster Dauer",
+   	"luckytntmod.config.average_intensity": "Durchschnittliche Desaster St\u00e4rke",
+	"luckytntmod.config.render_overlay": "Zeige Verstrahlt Overlay an",
 	
-	"death.attack.say_goodbye" : "%1$s sagte auf Wiedersehen"
+	"death.attack.say_goodbye" : "%1$s sagte auf Wiedersehen",
+	"death.attack.hailstone": "%1$s wurde von einem Hagelkorn ins Auge getroffen",
+	
+	"command.ltmdisaster.iceageactive": "Desaster Eiszeit ist noch aktiv f\u00fcr ",
+  	"command.ltmdisaster.iceage": "Das Desaster Eiszeit wurde gestartet",
+  	"command.ltmdisaster.heatdeathactive": "Desaster Hitzetod ist noch aktiv f\u00fcr ",
+  	"command.ltmdisaster.heatdeath": "Das Desaster Hitzetod wurde gestartet",
+  	"command.ltmdisaster.tntrainactive": "Desaster TNT-Regen ist noch aktiv f\u00fcr ",
+  	"command.ltmdisaster.tntrain": "Das Desaster TNT-Regen wurde gestartet",
+  	"command.ltmdisaster.nothingactive": "Gerade sind keine Desaster aktiv",
+  	"command.ltmdisaster.doomsday": "Das Desaster Weltuntergang wurde gestartet",
+  	"command.ltmdisaster.toxicactive": "Das Desaster Giftige Wolken ist noch aktiv f\u00fcr ",
+  	"command.ltmdisaster.toxicclouds": "Das Desaster Giftige Wolken wurde gestartet",
+  	"command.ltmdisaster.minute": " Minuten",
+	"command.ltmdisaster.clear": "Alle Desaster wurden beendet",
+	"command.ltmdisaster.doomsdayactive": "Das Desaster Weltuntergang ist noch aktiv f\u00fcr "
 }

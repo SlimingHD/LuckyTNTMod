@@ -155,6 +155,9 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SNOWSTORM_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ACIDIC_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CATALYST_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TOXIC_CLOUDS.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DISASTER_CLEARER.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ICE_AGE.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), ThrownItemRenderer::new);
@@ -197,8 +200,10 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.TSAR_BOMBA_BOMB.get(), BombRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PRESENT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ACIDIC_PROJECTILE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HAILSTONE.get(), LTNTRenderer::new);
 		
 		//Other
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TOXIC_CLOUD.get(), LTNTRenderer::new);
 	}
 }

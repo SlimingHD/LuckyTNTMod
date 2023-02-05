@@ -17,6 +17,10 @@ public class ConfigScreen extends Screen{
 
 	ForgeSlider island_slider = null;
 	ForgeSlider dropped_slider = null;
+	ForgeSlider average_disaster_time_silder = null;
+	ForgeSlider average_disaster_strength_slider = null;
+	
+	Button render_contaminated_overlay = null;
 	
 	public ConfigScreen() {
 		super(MutableComponent.create(new TranslatableContents("luckytntmod.config.title")));
@@ -30,14 +34,25 @@ public class ConfigScreen extends Screen{
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.ISLAND_HEIGHT, 50, island_slider)).bounds(width - 220, 40, 200, 20).build());
 		addRenderableWidget(dropped_slider = new ForgeSlider(20, 60, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 60, 400, LuckyTNTConfigValues.DROP_HEIGHT.get(), true));		
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.ISLAND_HEIGHT, 50, island_slider)).bounds(width - 220, 60, 200, 20).build());
+		
+		addRenderableWidget(average_disaster_time_silder = new ForgeSlider(20, 80, 200, 20, Component.literal(""), Component.literal(""), 2, 24, LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get().doubleValue(), true));		
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME, 12, average_disaster_time_silder)).bounds(width - 220, 80, 200, 20).build());
+		addRenderableWidget(average_disaster_strength_slider = new ForgeSlider(20, 100, 200, 20, Component.literal(""), Component.literal(""), 1d, 10d, LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().doubleValue(), true));		
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetDoubleValue(LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY, 1d, average_disaster_strength_slider)).bounds(width - 220, 100, 200, 20).build());
+	
+		addRenderableWidget(render_contaminated_overlay = new Button.Builder(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY.get().booleanValue() ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"), button -> nextBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, render_contaminated_overlay)).bounds(20, 120, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, true, render_contaminated_overlay)).bounds(width - 220, 120, 200, 20).build());
 	}
 	
 	@Override
 	public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
 		renderBackground(stack);
 		drawCenteredString(stack, font, title, width / 2, 8, 0xFFFFFF);
-		drawCenteredString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.island_offset")), width / 2, 46, 0xFFFFFF);
-		drawCenteredString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.drop_offset")), width / 2, 66, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.island_offset"), width / 2, 46, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.drop_offset"), width / 2, 66, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.maximum_time"), width / 2, 86, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.average_intensity"), width / 2, 106, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.render_overlay"), width / 2, 126, 0xFFFFFF);
 		super.render(stack, mouseX, mouseY, partialTicks);
 	}
 	
@@ -48,6 +63,12 @@ public class ConfigScreen extends Screen{
 		}
 		if(dropped_slider != null) {
 			LuckyTNTConfigValues.DROP_HEIGHT.set(dropped_slider.getValueInt());
+		}
+		if(average_disaster_time_silder != null) {
+			LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.set(average_disaster_time_silder.getValueInt());
+		}
+		if(average_disaster_strength_slider != null) {
+			LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.set(average_disaster_strength_slider.getValue());
 		}
 		super.onClose();
 	}
@@ -60,5 +81,26 @@ public class ConfigScreen extends Screen{
 	public void resetIntValue(ForgeConfigSpec.IntValue config, int newValue, ForgeSlider slider) {
 		config.set(newValue);
 		slider.setValue(newValue);
+	}
+	
+	public void resetDoubleValue(ForgeConfigSpec.DoubleValue config, double newValue, ForgeSlider slider) {
+		config.set(newValue);
+		slider.setValue(newValue);
+	}
+	
+	public void nextBooleanValue(ForgeConfigSpec.BooleanValue config, Button button) {
+		boolean value = config.get().booleanValue();
+		if(value) {
+			value = false;
+		} else {
+			value = true;
+		}
+		config.set(value);
+		button.setMessage(value ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"));
+	}
+	
+	public void resetBooleanValue(ForgeConfigSpec.BooleanValue config, boolean defaultValue, Button button) {
+		config.set(defaultValue);
+		button.setMessage(defaultValue ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"));
 	}
 }
