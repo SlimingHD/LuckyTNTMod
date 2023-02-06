@@ -141,6 +141,8 @@
 	"block.luckytntmod.toxic_clouds" : "Giftige Wolken",
 	"block.luckytntmod.disaster_clearer" : "Katastrophenklärer",
 	"block.luckytntmod.ice_age" : "Eiszeit",
+	"block.luckytntmod.cannon_tnt" : "Kanonen TNT",
+	"block.luckytntmod.plantation_tnt" : "Plantagen TNT",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -314,6 +316,8 @@
 	"entity.luckytntmod.toxic_clouds" : "Giftige Wolken",
 	"entity.luckytntmod.disaster_clearer" : "Katastrophenklärer",
 	"entity.luckytntmod.ice_age" : "Eiszeit",
+	"entity.luckytntmod.cannon_tnt" : "Kanonen TNT",
+	"entity.luckytntmod.plantation_tnt" : "Plantagen TNT",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",

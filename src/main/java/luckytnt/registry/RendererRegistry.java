@@ -159,6 +159,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.DISASTER_CLEARER.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ICE_AGE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CANNON_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.PLANTATION_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), ThrownItemRenderer::new);

@@ -141,6 +141,8 @@
 	"block.luckytntmod.toxic_clouds" : "Toxic Clouds",
 	"block.luckytntmod.disaster_clearer" : "Disaster Clearer",
 	"block.luckytntmod.ice_age" : "Ice Age",
+	"block.luckytntmod.cannon_tnt" : "Cannon TNT",
+	"block.luckytntmod.plantation_tnt" : "Plantation TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -315,6 +317,8 @@
 	"entity.luckytntmod.toxic_clouds" : "Toxic Clouds",
 	"entity.luckytntmod.disaster_clearer" : "Disaster Clearer",
 	"entity.luckytntmod.ice_age" : "Ice Age",
+	"entity.luckytntmod.cannon_tnt" : "Cannon TNT",
+	"entity.luckytntmod.plantation_tnt" : "Plantation TNT",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
