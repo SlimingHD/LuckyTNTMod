@@ -17,7 +17,12 @@ import net.minecraftforge.registries.RegistryObject;
 public class FlatTNTEffect extends PrimedTNTEffect{
 	private final int radius;
 	private final int radiusY;
-	private final Supplier<RegistryObject<LTNTBlock>> block;
+	private Supplier<RegistryObject<LTNTBlock>> block;
+	
+	public FlatTNTEffect( int radius, int radiusY) {
+		this.radius = radius;
+		this.radiusY = radiusY;
+	}
 	
 	public FlatTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int radius, int radiusY) {
 		this.radius = radius;

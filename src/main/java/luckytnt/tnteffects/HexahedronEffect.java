@@ -5,11 +5,12 @@ import org.joml.Vector3f;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.world.level.block.Block;
 
 public class HexahedronEffect extends CubicTNTEffect {
 
 	public HexahedronEffect() {
-		super(() -> BlockRegistry.HEXAHEDRON, 12);
+		super(12);
 	}
 
 	@Override
@@ -57,5 +58,10 @@ public class HexahedronEffect extends CubicTNTEffect {
 	@Override
 	public int getDefaultFuse(IExplosiveEntity ent) {
 		return 140;
+	}
+	
+	@Override
+	public Block getBlock() {
+		return BlockRegistry.HEXAHEDRON.get();
 	}
 }

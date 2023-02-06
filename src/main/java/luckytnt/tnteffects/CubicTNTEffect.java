@@ -1,8 +1,6 @@
 package luckytnt.tnteffects;
 
-import java.util.function.Supplier;
-
-import luckytntlib.block.LTNTBlock;
+import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -12,20 +10,17 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.registries.RegistryObject;
 
 public class CubicTNTEffect extends PrimedTNTEffect{
-	private final int radius;
-	private final Supplier<RegistryObject<LTNTBlock>> block;
+	private final int strength;
 	
-	public CubicTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int radius) {
-		this.block = block;
-		this.radius = radius;
+	public CubicTNTEffect(int strength) {
+		this.strength = strength;
 	}
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doCubicalExplosion(entity.level(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doCubicalExplosion(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -38,6 +33,6 @@ public class CubicTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public Block getBlock() {
-		return block.get().get();
+		return BlockRegistry.CUBIC_TNT.get();
 	}
 }

@@ -19,9 +19,15 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 public class GroveTNTEffect extends PrimedTNTEffect {
 
+	private final int strength;
+	
+	public GroveTNTEffect(int strength) {
+		this.strength = strength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 20);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), strength);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@SuppressWarnings("resource")

@@ -9,7 +9,6 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -17,13 +16,11 @@ public class CompactTNTEffect extends PrimedTNTEffect{
 	private final double chance;
 	private final float size;
 	private final Supplier<RegistryObject<LTNTBlock>> place;
-	private final Supplier<RegistryObject<LTNTBlock>> block;
-	
-	public CompactTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, double chance, float size, Supplier<RegistryObject<LTNTBlock>> place) {
+
+	public CompactTNTEffect(double chance, float size, Supplier<RegistryObject<LTNTBlock>> place) {
 		this.chance = chance;
 		this.size = size;
 		this.place = place;
-		this.block = block;
 	}
 
 	public void serverExplosion(IExplosiveEntity entity) {
@@ -38,10 +35,5 @@ public class CompactTNTEffect extends PrimedTNTEffect{
 				}
 			}
 		});
-	}
-	
-	@Override
-	public Block getBlock() {
-		return block.get().get();
 	}
 }
