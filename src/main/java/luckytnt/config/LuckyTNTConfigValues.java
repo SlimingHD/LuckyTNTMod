@@ -18,6 +18,8 @@ public class LuckyTNTConfigValues {
 	
 	public static ForgeConfigSpec.EnumValue<CustomTNTConfig> CUSTOM_TNT_THIRD_EXPLOSION;
 	public static ForgeConfigSpec.IntValue CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY;
+
+	public static ForgeConfigSpec.BooleanValue SEASON_EVENTS_ALWAYS_ACTIVE;
 	
 	public static ForgeConfigSpec.BooleanValue RENDER_CONTAMINATED_OVERLAY;
 	
@@ -41,6 +43,9 @@ public class LuckyTNTConfigValues {
 		builder.push("Third Explosion");
 		CUSTOM_TNT_THIRD_EXPLOSION = builder.comment("Explosion Effect of the third Explosion").defineEnum("explosionType", CustomTNTConfig.NO_EXPLOSION);
 		CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY = builder.comment("Multiplier to the power of the third explosion").defineInRange("explosionIntensity", 1, 1, 20);
+		builder.pop();
+		builder.comment("Spcial Events Settings").push("Event Settings");
+		SEASON_EVENTS_ALWAYS_ACTIVE = builder.comment("Whether season specific events ignore the date").define("seasonEventsAlwaysActive", false);
 		builder.pop();
 		builder.comment("Contaminated Effect Overlay Settings").push("Render Overlay Settings");
 		RENDER_CONTAMINATED_OVERLAY = builder.comment("Whether an Overlay is rendererd while the Contaminated Effect is active").define("renderContaminatedOverlay", true);

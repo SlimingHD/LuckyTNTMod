@@ -20,7 +20,8 @@ public class ConfigScreen extends Screen{
 	ForgeSlider average_disaster_time_silder = null;
 	ForgeSlider average_disaster_strength_slider = null;
 	
-	Button render_contaminated_overlay = null;
+	Button season_events_always_active = null;
+	Button render_contaminated_overlay = null;	
 	
 	public ConfigScreen() {
 		super(MutableComponent.create(new TranslatableContents("luckytntmod.config.title")));
@@ -40,8 +41,11 @@ public class ConfigScreen extends Screen{
 		addRenderableWidget(average_disaster_strength_slider = new ForgeSlider(20, 100, 200, 20, Component.literal(""), Component.literal(""), 1d, 10d, LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().doubleValue(), true));		
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetDoubleValue(LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY, 1d, average_disaster_strength_slider)).bounds(width - 220, 100, 200, 20).build());
 	
-		addRenderableWidget(render_contaminated_overlay = new Button.Builder(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY.get().booleanValue() ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"), button -> nextBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, render_contaminated_overlay)).bounds(20, 120, 200, 20).build());
-		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, true, render_contaminated_overlay)).bounds(width - 220, 120, 200, 20).build());
+		addRenderableWidget(season_events_always_active = new Button.Builder(LuckyTNTConfigValues.SEASON_EVENTS_ALWAYS_ACTIVE.get().booleanValue() ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"), button -> nextBooleanValue(LuckyTNTConfigValues.SEASON_EVENTS_ALWAYS_ACTIVE, season_events_always_active)).bounds(20, 120, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.SEASON_EVENTS_ALWAYS_ACTIVE, false, season_events_always_active)).bounds(width - 220, 120, 200, 20).build());
+		
+		addRenderableWidget(render_contaminated_overlay = new Button.Builder(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY.get().booleanValue() ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"), button -> nextBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, render_contaminated_overlay)).bounds(20, 140, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, true, render_contaminated_overlay)).bounds(width - 220, 140, 200, 20).build());
 	}
 	
 	@Override
@@ -52,7 +56,8 @@ public class ConfigScreen extends Screen{
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.drop_offset"), width / 2, 66, 0xFFFFFF);
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.maximum_time"), width / 2, 86, 0xFFFFFF);
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.average_intensity"), width / 2, 106, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.render_overlay"), width / 2, 126, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.event_always_active"), width / 2, 126, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.render_overlay"), width / 2, 146, 0xFFFFFF);
 		super.render(stack, mouseX, mouseY, partialTicks);
 	}
 	

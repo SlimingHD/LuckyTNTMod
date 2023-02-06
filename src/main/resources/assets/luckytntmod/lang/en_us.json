@@ -408,6 +408,7 @@
 	"luckytntmod.config.false": "False",
    	"luckytntmod.config.maximum_time": "Maximum Disaster duration",
    	"luckytntmod.config.average_intensity": "Average Disaster intensity",
+	"luckytntmod.config.event_always_active": "Permanent Season Events",
 	"luckytntmod.config.render_overlay": "Render Contaminated Overlay",
 	
 	"death.attack.say_goodbye" : "%1$s said goodbye",

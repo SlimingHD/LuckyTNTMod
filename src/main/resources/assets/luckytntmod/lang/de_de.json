@@ -407,6 +407,7 @@
 	"luckytntmod.config.false": "Falsch",
    	"luckytntmod.config.maximum_time": "Maximale Desaster Dauer",
    	"luckytntmod.config.average_intensity": "Durchschnittliche Desaster St\u00e4rke",
+	"luckytntmod.config.event_always_active": "Dauerhafte Saisonale Events",
 	"luckytntmod.config.render_overlay": "Zeige Verstrahlt Overlay an",
 	
 	"death.attack.say_goodbye" : "%1$s sagte auf Wiedersehen",

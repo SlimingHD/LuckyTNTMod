@@ -14,6 +14,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,6 +34,7 @@ public class LuckyTNTMod
     public static final DeferredRegister<Item> itemRegistry = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<EntityType<?>> entityRegistry = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
     public static final DeferredRegister<MobEffect> effectRegistry = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
+    public static final DeferredRegister<Feature<?>> featureRegistry = DeferredRegister.create(ForgeRegistries.FEATURES, MODID);
     public static final RegistryHelper RH = new RegistryHelper(blockRegistry, itemRegistry, entityRegistry);
     
     public LuckyTNTMod()
@@ -45,6 +47,7 @@ public class LuckyTNTMod
     	blockRegistry.register(bus);
     	itemRegistry.register(bus);
     	effectRegistry.register(bus);
+    	featureRegistry.register(bus);
         MinecraftForge.EVENT_BUS.register(this);
         LuckyTNTConfigs.register();
         ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class, () -> new ConfigScreenHandler.ConfigScreenFactory(new BiFunction<Minecraft, Screen, Screen>() {		
