@@ -234,6 +234,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> SNOWSTORM_TNT = LuckyTNTMod.RH.registerTNTEntity("snowstorm_tnt", new SnowstormTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> ACIDIC_TNT = LuckyTNTMod.RH.registerTNTEntity("acidic_tnt", new AcidicTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CATALYST_TNT = LuckyTNTMod.RH.registerTNTEntity("catalyst_tnt", new CatalystTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> CANNON_TNT = LuckyTNTMod.RH.registerTNTEntity("cannon_tnt", new CannonTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", new DynamiteXStrengthEffect.Builder(() -> ItemRegistry.DYNAMITE).explosionStrength(2f).knockbackStrength(0.5f).build());
