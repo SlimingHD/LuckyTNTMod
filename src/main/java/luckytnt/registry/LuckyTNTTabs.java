@@ -49,7 +49,8 @@ public class LuckyTNTTabs {
 			populator.accept(ItemRegistry.URANIUM_ORE.get());			
 			populator.accept(ItemRegistry.DEEPSLATE_URANIUM_ORE.get());			
 			populator.accept(ItemRegistry.GUNPOWDER_ORE.get());			
-			populator.accept(ItemRegistry.DEEPSLATE_GUNPOWDER_ORE.get());			
+			populator.accept(ItemRegistry.DEEPSLATE_GUNPOWDER_ORE.get());
+			populator.accept(ItemRegistry.CONFIGURATION_WAND.get());
 		}));
 	}
 }
