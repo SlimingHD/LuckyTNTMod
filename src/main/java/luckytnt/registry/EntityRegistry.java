@@ -1,6 +1,7 @@
 package luckytnt.registry;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.joml.Vector3f;
@@ -242,6 +243,9 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> CANNON_TNT = LuckyTNTMod.RH.registerTNTEntity("cannon_tnt", new CannonTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> PLANTATION_TNT = LuckyTNTMod.RH.registerTNTEntity("plantation_tnt", new PlantationTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> GOTTHARD_TUNNEL = LuckyTNTMod.RH.registerTNTEntity("gotthard_tunnel", new GotthardTunnelEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> LEVITATING_TNT = LuckyTNTMod.RH.registerTNTEntity("levitating_tnt", new StackedPrimedTNTEffect(TNT_X500_EFFECT.buildTNT(() -> BlockRegistry.LEVITATING_TNT, 160, false), List.of(new LevitatingTNTEffect())));
+	public static final RegistryObject<EntityType<PrimedLTNT>> SQUARING_TNT = LuckyTNTMod.RH.registerTNTEntity("squaring_tnt", new SquaringTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> MINERAL_TNT = LuckyTNTMod.RH.registerTNTEntity("mineral_tnt", new MineralTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE));

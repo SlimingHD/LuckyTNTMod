@@ -144,6 +144,9 @@
 	"block.luckytntmod.cannon_tnt" : "Cannon TNT",
 	"block.luckytntmod.plantation_tnt" : "Plantation TNT",
 	"block.luckytntmod.gotthard_tunnel" : "Gotthard Tunnel",
+	"block.luckytntmod.levitating_tnt" : "Levitating TNT",
+	"block.luckytntmod.squaring_tnt" : "Squaring TNT",
+	"block.luckytntmod.mineral_tnt" : "Mineral TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -333,6 +336,9 @@
 	"entity.luckytntmod.cannon_tnt" : "Cannon TNT",
 	"entity.luckytntmod.plantation_tnt" : "Plantation TNT",
 	"entity.luckytntmod.gotthard_tunnel" : "Gotthard Tunnel",
+	"entity.luckytntmod.levitating_tnt" : "Levitating TNT",
+	"entity.luckytntmod.squaring_tnt" : "Squaring TNT",
+	"entity.luckytntmod.mineral_tnt" : "Mineral TNT",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
