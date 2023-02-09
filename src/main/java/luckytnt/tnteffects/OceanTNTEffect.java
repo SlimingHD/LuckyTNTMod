@@ -23,13 +23,19 @@ public class OceanTNTEffect extends PrimedTNTEffect {
 	private final int radius;
 	private final int radiusY;
 	private final int squids;
-	private final Supplier<RegistryObject<LTNTBlock>> block;
+	private Supplier<RegistryObject<LTNTBlock>> block;
 
 	public OceanTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int radius, int radiusY, int squids) {
 		this.radius = radius;
 		this.radiusY = radiusY;
 		this.squids = squids;
 		this.block = block;
+	}
+	
+	public OceanTNTEffect(int radius, int radiusY, int squids) {
+		this.radius = radius;
+		this.radiusY = radiusY;
+		this.squids = squids;
 	}
 	
 	@Override
@@ -50,7 +56,7 @@ public class OceanTNTEffect extends PrimedTNTEffect {
 		
 		for(int i = 0; i < squids; i++) {
 			Squid squid = new Squid(EntityType.SQUID, entity.level());
-			squid.setPos(entity.x() + (Math.random() * 50D - 25D), entity.y(), entity.z() + (Math.random() * 50D - 25D));
+			squid.setPos(entity.x() + (Math.random() * radius * 2 - radius), entity.y(), entity.z() + (Math.random() * radius * 2 - radius));
 			entity.level().addFreshEntity(squid);
 		}
 	}

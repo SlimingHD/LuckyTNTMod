@@ -188,7 +188,15 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.ARROW_DYNAMITE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.LIGHTNING_DYNAMITE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DIGGING_DYNAMITE.get(), ThrownItemRenderer::new);
-		event.registerEntityRenderer(EntityRegistry.COMPACT_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ANIMAL_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.OCEAN_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SPIRAL_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.CHEMICAL_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.REACTION_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HELLFIRE_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FLOATING_ISLAND_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ERUPTING_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SHATTERPROOF_DYNAMITE.get(), ThrownItemRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
