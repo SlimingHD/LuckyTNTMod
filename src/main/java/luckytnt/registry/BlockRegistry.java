@@ -2,6 +2,7 @@ package luckytnt.registry;
 
 import luckytnt.LuckyTNTMod;
 import luckytnt.block.ChristmasTNTBlock;
+import luckytnt.block.GotthardTunnelBlock;
 import luckytnt.block.GunpowderOreBlock;
 import luckytnt.block.ItemFireworkBlock;
 import luckytnt.block.NuclearWasteBlock;
@@ -177,6 +178,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> CATALYST_TNT = LuckyTNTMod.RH.registerTNTBlock("catalyst_tnt", EntityRegistry.CATALYST_TNT, "g", MaterialColor.COLOR_RED, true);
 	public static final RegistryObject<LTNTBlock> CANNON_TNT = LuckyTNTMod.RH.registerTNTBlock("cannon_tnt", EntityRegistry.CANNON_TNT, "g", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> PLANTATION_TNT = LuckyTNTMod.RH.registerTNTBlock("plantation_tnt", EntityRegistry.PLANTATION_TNT, "g", MaterialColor.COLOR_LIGHT_GREEN, true);
+	public static final RegistryObject<LTNTBlock> GOTTHARD_TUNNEL = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new GotthardTunnelBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.STONE).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("gotthard_tunnel").tab("g").description(new TranslatableContents("item.gotthard_tunnel.info")).build());
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));

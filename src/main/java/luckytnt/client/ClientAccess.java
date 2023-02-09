@@ -15,6 +15,14 @@ public class ClientAccess {
 		}
 	}
 	
+	public static void setEntityBooleanTag(String name, boolean tag, int id) {
+		Minecraft minecraft = Minecraft.getInstance();
+		Entity ent = minecraft.level.getEntity(id);
+		if(ent != null) {
+			ent.getPersistentData().putBoolean(name, tag);
+		}
+	}
+	
 	public static void setEntityIntTag(String name, int tag, int id) {
 		Minecraft minecraft = Minecraft.getInstance();
 		Entity ent = minecraft.level.getEntity(id);

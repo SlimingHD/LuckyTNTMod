@@ -1,12 +1,20 @@
 package luckytnt.registry;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
 import luckytnt.LuckyTNTMod;
 import luckytntlib.item.LDynamiteItem;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -50,4 +58,11 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> DEEPSLATE_URANIUM_ORE = LuckyTNTMod.itemRegistry.register("deepslate_uranium_ore", () -> new BlockItem(BlockRegistry.DEEPSLATE_URANIUM_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> GUNPOWDER_ORE = LuckyTNTMod.itemRegistry.register("gunpowder_ore", () -> new BlockItem(BlockRegistry.GUNPOWDER_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> DEEPSLATE_GUNPOWDER_ORE = LuckyTNTMod.itemRegistry.register("deepslate_gunpowder_ore", () -> new BlockItem(BlockRegistry.DEEPSLATE_GUNPOWDER_ORE.get(), new Item.Properties()));
+	public static final RegistryObject<Item> CONFIGURATION_WAND = LuckyTNTMod.itemRegistry.register("configuration_wand", () -> new Item(new Item.Properties().stacksTo(1)) {
+		@Override
+		public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
+			super.appendHoverText(stack, level, components, flag);
+			components.add(Component.translatable("item.configuration_wand.info"));
+		}
+	});
 }

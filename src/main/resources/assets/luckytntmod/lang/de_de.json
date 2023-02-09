@@ -143,6 +143,7 @@
 	"block.luckytntmod.ice_age" : "Eiszeit",
 	"block.luckytntmod.cannon_tnt" : "Kanonen TNT",
 	"block.luckytntmod.plantation_tnt" : "Plantagen TNT",
+	"block.luckytntmod.gotthard_tunnel" : "Gotthard Tunnel",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -152,6 +153,8 @@
 	
 	"block.floating_island.description" : "\u00A77\u00A7o\u00c4ndere die H\u00f6he der Insel indem du die Konfiguration bearbeitest! Auf einem Server wirst du auch die Server-Konfiguration \u00e4ndern m\u00fcssen!",	
 	"block.smoke_tnt.description" : "\u00A77\u00A7o\u00c4ndere die Farbe des Rauchs indem du mit roter, gr\u00fcner, blauer, wei\u00dfer oder schwarzer Farbe darauf rechts-klickst!",
+ 	"item.configuration_wand.info": "\u00A77\u00A7oRechtklicke mit diesem Stab bestimmte TNTs, um deren Konfiguration zu \u00e4ndern!",
+   	"item.gotthard_tunnel.info": "\u00A77\u00A7o\u00c4ndere, dass das TNT auch Straßen generiert, indem du mit dem Konfigurierungs-Stab auf den Block rechts-klickst!",
 
 	"item.luckytntmod.dynamite" : "Dynamit",
 	"item.luckytntmod.dynamite_x5" : "Dynamit x5",
@@ -184,6 +187,7 @@
 	"item.luckytntmod.purple_candy" : "Lilanes Bonbon",
 	"item.luckytntmod.yellow_candy" : "Gelbes Bonbon",
 	"item.luckytntmod.uranium_ingot" : "Uranbarren",
+	"item.luckytntmod.configuration_wand" : "Konfigurations-Stab",
 
 	"entity.luckytntmod.tnt" : "TNT",
 	"entity.luckytntmod.tnt_x5" : "TNT x5",
@@ -327,6 +331,7 @@
 	"entity.luckytntmod.ice_age" : "Eiszeit",
 	"entity.luckytntmod.cannon_tnt" : "Kanonen TNT",
 	"entity.luckytntmod.plantation_tnt" : "Plantagen TNT",
+	"entity.luckytntmod.gotthard_tunnel" : "Gotthard Tunnel",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",

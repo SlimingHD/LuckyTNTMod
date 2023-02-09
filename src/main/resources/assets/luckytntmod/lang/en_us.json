@@ -143,6 +143,7 @@
 	"block.luckytntmod.ice_age" : "Ice Age",
 	"block.luckytntmod.cannon_tnt" : "Cannon TNT",
 	"block.luckytntmod.plantation_tnt" : "Plantation TNT",
+	"block.luckytntmod.gotthard_tunnel" : "Gotthard Tunnel",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -152,6 +153,8 @@
 
 	"block.floating_island.description" : "\u00A77\u00A7oChange the height of the island by adjusting the config file! On a server you will also have to adjust the server-config file!",	
 	"block.smoke_tnt.description" : "\u00A77\u00A7oChange the color of the smoke by right-clicking the TNT with red, green, blue, white or black dye!",
+   	"item.gotthard_tunnel.info": "\u00A77\u00A7oChange wether this TNT generates streets too by right-clicking the Block with the Configuration Wand!",
+ 	"item.configuration_wand.info": "\u00A77\u00A7oRight-click with this Wand on specific TNTs to change their Configuration!",
 
 	"item.luckytntmod.dynamite" : "Dynamite",
 	"item.luckytntmod.dynamite_x5" : "Dynamite x5",
@@ -184,6 +187,7 @@
 	"item.luckytntmod.purple_candy" : "Purple Candy",
 	"item.luckytntmod.yellow_candy" : "Yellow Candy",
 	"item.luckytntmod.uranium_ingot" : "Uranium Ingot",
+	"item.luckytntmod.configuration_wand" : "Configuration Wand",
 
 	"entity.luckytntmod.tnt" : "TNT",
 	"entity.luckytntmod.tnt_x5" : "TNT x5",
@@ -328,6 +332,7 @@
 	"entity.luckytntmod.ice_age" : "Ice Age",
 	"entity.luckytntmod.cannon_tnt" : "Cannon TNT",
 	"entity.luckytntmod.plantation_tnt" : "Plantation TNT",
+	"entity.luckytntmod.gotthard_tunnel" : "Gotthard Tunnel",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
