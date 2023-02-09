@@ -56,6 +56,7 @@ public class GotthardTunnelBlock extends LTNTBlock {
 			tnt.setFuse(40);
 			tnt.setPos(x + 0.5f, y, z + 0.5f);
 			tnt.setOwner(igniter);
+			tnt.setTNTFuse(200);
 			if(state.hasProperty(FACING)) {
 				tnt.getPersistentData().putString("direction", state.getValue(FACING).getName());
 			}
