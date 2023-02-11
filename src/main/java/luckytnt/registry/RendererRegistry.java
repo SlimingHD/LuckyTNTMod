@@ -164,6 +164,8 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.LEVITATING_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SQUARING_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.MINERAL_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FLOWER_FOREST_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ICY_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), ThrownItemRenderer::new);

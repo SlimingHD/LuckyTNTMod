@@ -182,6 +182,13 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> LEVITATING_TNT = LuckyTNTMod.RH.registerTNTBlock("levitating_tnt", EntityRegistry.LEVITATING_TNT, "g", MaterialColor.COLOR_CYAN, true);
 	public static final RegistryObject<LTNTBlock> SQUARING_TNT = LuckyTNTMod.RH.registerTNTBlock("squaring_tnt", EntityRegistry.SQUARING_TNT, "g", MaterialColor.TERRACOTTA_PINK, true);
 	public static final RegistryObject<LTNTBlock> MINERAL_TNT = LuckyTNTMod.RH.registerTNTBlock("mineral_tnt", EntityRegistry.MINERAL_TNT, "g", MaterialColor.DIAMOND, true);
+	public static final RegistryObject<LTNTBlock> FLOWER_FOREST_TNT = LuckyTNTMod.RH.registerTNTBlock("flower_forest_tnt", EntityRegistry.FLOWER_FOREST_TNT, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
+	public static final RegistryObject<LTNTBlock> ICY_TNT = LuckyTNTMod.RH.registerTNTBlock("icy_tnt", EntityRegistry.ICY_TNT, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
+	public static final RegistryObject<LTNTBlock> GHOST_TNT = LuckyTNTMod.RH.registerTNTBlock("ghost_tnt", EntityRegistry.MINERAL_TNT, "g", MaterialColor.COLOR_LIGHT_GRAY, true);
+	public static final RegistryObject<LTNTBlock> PARTICLE_PHYSICS_TNT = LuckyTNTMod.RH.registerTNTBlock("particle_physics_tnt", EntityRegistry.MINERAL_TNT, "g", MaterialColor.COLOR_RED, true);
+	public static final RegistryObject<LTNTBlock> HEAT_DEATH = LuckyTNTMod.RH.registerTNTBlock("heat_death", EntityRegistry.MINERAL_TNT, "g", MaterialColor.COLOR_ORANGE, true);
+	public static final RegistryObject<LTNTBlock> CONTINENTAL_DRIFT = LuckyTNTMod.RH.registerTNTBlock("continental_drift", EntityRegistry.MINERAL_TNT, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
+	public static final RegistryObject<LTNTBlock> LUCKY_GOD = LuckyTNTMod.RH.registerTNTBlock("lucky_god", EntityRegistry.MINERAL_TNT, "g", MaterialColor.COLOR_RED, true);
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));

@@ -3,7 +3,7 @@
     "textures": 
     {
         "down": "luckytntmod:block/house_tnt_bottom",
-        "up": "luckytntmod:block/day_tnt_top",
+        "up": "luckytntmod:block/animal_kingdom_top",
         "north": "luckytntmod:block/flower_forest_tnt_side",
         "east": "luckytntmod:block/flower_forest_tnt_side",
         "south": "luckytntmod:block/flower_forest_tnt_side",

@@ -9,6 +9,7 @@ import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -96,14 +97,11 @@ public class MineralTNTEffect extends PrimedTNTEffect {
 	}
 	
 	public boolean touchesAir(IExplosiveEntity ent, BlockPos pos) {
-		if(ent.level().getBlockState(pos.above()).getMaterial() == Material.AIR 
-		|| ent.level().getBlockState(pos.below()).getMaterial() == Material.AIR 
-		|| ent.level().getBlockState(pos.north()).getMaterial() == Material.AIR 
-		|| ent.level().getBlockState(pos.east()).getMaterial() == Material.AIR 
-		|| ent.level().getBlockState(pos.south()).getMaterial() == Material.AIR 
-		|| ent.level().getBlockState(pos.west()).getMaterial() == Material.AIR) 
-		{
-			return true;
+		for(Direction dir : Direction.values()) {
+			BlockPos pos1 = pos.offset(dir.getNormal());
+			if(ent.level().getBlockState(pos1).isAir()) {
+				return true;
+			}
 		}
 		return false;
 	}

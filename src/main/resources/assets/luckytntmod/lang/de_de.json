@@ -147,6 +147,8 @@
 	"block.luckytntmod.levitating_tnt" : "Aufsteigendes TNT",
 	"block.luckytntmod.squaring_tnt" : "Quadrierendes TNT",
 	"block.luckytntmod.mineral_tnt" : "Mineral TNT",
+	"block.luckytntmod.flower_forest_tnt" : "Blumenwald TNT",
+	"block.luckytntmod.icy_tnt" : "Vereistes TNT",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -338,6 +340,8 @@
 	"entity.luckytntmod.levitating_tnt" : "Aufsteigendes TNT",
 	"entity.luckytntmod.squaring_tnt" : "Quadrierendes TNT",
 	"entity.luckytntmod.mineral_tnt" : "Mineral TNT",
+	"entity.luckytntmod.flower_forest_tnt" : "Blumenwald TNT",
+	"entity.luckytntmod.icy_tnt" : "Vereistes TNT",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
