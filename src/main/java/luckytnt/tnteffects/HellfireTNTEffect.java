@@ -20,12 +20,20 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class HellfireTNTEffect extends PrimedTNTEffect{
 	
+	private final int strength;
+	private final int ghastCount;
+	
+	public HellfireTNTEffect(int strength, int ghastCount) {
+		this.strength = strength;
+		this.ghastCount = ghastCount;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos().x, entity.getPos().y + 0.5f, entity.getPos().z, 20);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos().x, entity.getPos().y + 0.5f, entity.getPos().z, strength);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
-		ImprovedExplosion netherExplosion = new ImprovedExplosion(entity.level(), entity.getPos().add(0, 0.5f, 0), 30);
+		ImprovedExplosion netherExplosion = new ImprovedExplosion(entity.level(), entity.getPos().add(0, 0.5f, 0), strength * 1.5f);
 		netherExplosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, new IForEachBlockExplosionEffect() {
 			
 			@Override
@@ -47,7 +55,7 @@ public class HellfireTNTEffect extends PrimedTNTEffect{
 				}
 			}
 		});
-		for(int i = 0; i <= 5; i++) {
+		for(int i = 0; i < ghastCount; i++) {
 			Ghast ghast = new Ghast(EntityType.GHAST, entity.level());
 			ghast.setPos(entity.getPos().add(0, 20 + Math.random() * 20, 0));
 			entity.level().playSound(ghast, ghast.blockPosition(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 3f, 1f);
