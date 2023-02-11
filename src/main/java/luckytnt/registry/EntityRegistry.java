@@ -249,6 +249,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> LEVITATING_TNT = LuckyTNTMod.RH.registerTNTEntity("levitating_tnt", new StackedPrimedTNTEffect(TNT_X500_EFFECT.buildTNT(() -> BlockRegistry.LEVITATING_TNT, 160, false), List.of(new LevitatingTNTEffect())));
 	public static final RegistryObject<EntityType<PrimedLTNT>> SQUARING_TNT = LuckyTNTMod.RH.registerTNTEntity("squaring_tnt", new SquaringTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> MINERAL_TNT = LuckyTNTMod.RH.registerTNTEntity("mineral_tnt", new MineralTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> FLOWER_FOREST_TNT = LuckyTNTMod.RH.registerTNTEntity("flower_forest_tnt", new FlowerForestTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> ICY_TNT = LuckyTNTMod.RH.registerTNTEntity("icy_tnt", new IcyTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE));
@@ -311,6 +313,6 @@ public class EntityRegistry {
 	public static final RegistryObject<BlockEntityType<ItemFireworkBlockEntity>> ITEM_FIREWORK_BLOCK_ENTITY = LuckyTNTMod.blockEntityRegistry.register("item_firework_block_entity", () -> BlockEntityType.Builder.of(ItemFireworkBlockEntity::new, BlockRegistry.ITEM_FIREWORK.get()).build(null));
 
 	public static Predicate<LivingEntity> PREDICATE = living -> { 
-		return living instanceof Player player && !player.isCreative() && !player.isSpectator() ? true : false;
+		return living instanceof Player player ? !player.isCreative() && !player.isSpectator() : false;
 	};
 }
