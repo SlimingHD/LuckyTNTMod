@@ -51,7 +51,7 @@ public class WitherStormEffect extends PrimedTNTEffect {
 		wither.setPos(ent.getPos());
 		ent.level().addFreshEntity(wither);
 		
-		for(int i = 0; i < 10 * (75 / 5 + 1); i++) {
+		for(int i = 0; i < 160; i++) {
 			int offX = (int)Math.round(Math.random() * 140D - 70D);
 			int offZ = (int)Math.round(Math.random() * 140D - 70D);
 			WitherSkeleton skeleton = new WitherSkeleton(EntityType.WITHER_SKELETON, ent.level());

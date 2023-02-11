@@ -22,7 +22,7 @@ public class ReactionDynamiteEffect extends PrimedTNTEffect{
 	public void baseTick(IExplosiveEntity entity) {
 		Level level = entity.level();
 		if(entity instanceof LExplosiveProjectile ent) {
-			if((ent.inGround())) {
+			if(ent.inGround()) {
 				ent.getPersistentData().putBoolean("hitBefore", true);
 			}
 			if(ent.getTNTFuse() == 0) {

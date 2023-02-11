@@ -15,9 +15,15 @@ import net.minecraft.world.level.material.MaterialColor;
 
 public class WoolTNTEffect extends PrimedTNTEffect{
 
+	private final int strength;
+	
+	public WoolTNTEffect(int strength) {
+		this.strength = strength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 40);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), strength);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@Override

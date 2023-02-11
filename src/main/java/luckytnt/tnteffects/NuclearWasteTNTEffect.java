@@ -16,14 +16,19 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class NuclearWasteTNTEffect extends PrimedTNTEffect{
 
+	private final int radius;
+	
+	public NuclearWasteTNTEffect(int radius) {
+		this.radius = radius;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 0);
-		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), 15, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(!level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) && level.getBlockState(pos.above()).getExplosionResistance(level, pos.above(), null) < 100) {
-					level.getBlockState(pos.above()).onBlockExploded(level, pos.above(), dummyExplosion);
+					level.getBlockState(pos.above()).onBlockExploded(level, pos.above(), ImprovedExplosion.dummyExplosion());
 					level.setBlockAndUpdate(pos, BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState());
 				}
 			}

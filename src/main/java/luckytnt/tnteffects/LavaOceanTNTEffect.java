@@ -11,7 +11,6 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -19,16 +18,23 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class LavaOceanTNTEffect extends PrimedTNTEffect{
 
+	private final int radius;
+	private final int radiusY;
+	
+	public LavaOceanTNTEffect(int radius, int radiusY) {
+		this.radius = radius;
+		this.radiusY = radiusY;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos().x, entity.getPos().y, entity.getPos().z, 15);
-		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), 15, 10, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(pos.getY() <= entity.getPos().y) {
-					if((!state.isFaceSturdy(level, pos, Direction.UP) && state.getExplosionResistance(level, pos, dummyExplosion) < 100) || state.getExplosionResistance(level, pos, dummyExplosion) < 4) {
-						state.onBlockExploded(level, pos, dummyExplosion);
+					if((!state.isFaceSturdy(level, pos, Direction.UP) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100) || state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 4) {
+						state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
 						level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
 					}
 				}

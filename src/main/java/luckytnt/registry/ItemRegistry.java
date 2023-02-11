@@ -54,6 +54,15 @@ public class ItemRegistry {
 	public static final RegistryObject<LDynamiteItem> FLOATING_ISLAND_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("floating_island_dynamite", EntityRegistry.FLOATING_ISLAND_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> ERUPTING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("erupting_dynamite", EntityRegistry.ERUPTING_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> SHATTERPROOF_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("shatterproof_dynamite", EntityRegistry.SHATTERPROOF_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> LAVA_OCEAN_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("lava_ocean_dynamite", EntityRegistry.LAVA_OCEAN_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> WOOL_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("wool_dynamite", EntityRegistry.WOOL_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> NUCLEAR_WASTE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("nuclear_waste_dynamite", EntityRegistry.NUCLEAR_WASTE_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> TIMER_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("timer_dynamite", EntityRegistry.TIMER_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> GRAVITY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("gravity_dynamite", EntityRegistry.GRAVITY_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> WITHERING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("withering_dynamite", EntityRegistry.WITHERING_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> SENSOR_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("sensor_dynamite", EntityRegistry.SENSOR_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> RAINBOW_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("rainbow_dynamite", EntityRegistry.RAINBOW_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> ROULETTE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("roulette_dynamite", EntityRegistry.ROULETTE_DYNAMITE, "dy");
 	
 	//Other
 	public static final RegistryObject<Item> NUCLEAR_WASTE = LuckyTNTMod.itemRegistry.register("nuclear_waste", () -> new BlockItem(BlockRegistry.NUCLEAR_WASTE.get(), new Item.Properties()));

@@ -199,6 +199,15 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.FLOATING_ISLAND_DYNAMITE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ERUPTING_DYNAMITE.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SHATTERPROOF_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.LAVA_OCEAN_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.WOOL_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.NUCLEAR_WASTE_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TIMER_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.GRAVITY_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.WITHERING_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SENSOR_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.RAINBOW_DYNAMITE.get(), ThrownItemRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ROULETTE_DYNAMITE.get(), ThrownItemRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
