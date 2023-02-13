@@ -22,6 +22,6 @@ public class BigDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public float getSize(IExplosiveEntity entity) {
-		return 2f;
+		return 3f;
 	}
 }
