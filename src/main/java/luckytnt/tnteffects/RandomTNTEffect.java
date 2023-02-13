@@ -10,9 +10,15 @@ import net.minecraft.world.level.block.Block;
 
 public class RandomTNTEffect extends PrimedTNTEffect{
 
+	private final int maxStrength;
+	
+	public RandomTNTEffect(int maxStrength) {
+		this.maxStrength = maxStrength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), new Random().nextInt(21));
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), new Random().nextInt(maxStrength + 1));
 		explosion.doEntityExplosion(1.25f, true);
 		explosion.doBlockExplosion();
 	}

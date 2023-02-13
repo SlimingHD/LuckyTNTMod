@@ -18,12 +18,18 @@ import net.minecraft.world.phys.Vec3;
 
 public class EndTNTEffect extends PrimedTNTEffect {
 
+	private final int strength;
+	
+	public EndTNTEffect(int strength) {
+		this.strength = strength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos().x, entity.getPos().y + 0.5f, entity.getPos().z, 20);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos().x, entity.getPos().y + 0.5f, entity.getPos().z, strength);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
-		ImprovedExplosion endExplosion = new ImprovedExplosion(entity.level(), entity.getPos().add(0, 0.5f, 0), 30);
+		ImprovedExplosion endExplosion = new ImprovedExplosion(entity.level(), entity.getPos().add(0, 0.5f, 0), strength * 1.5f);
 		endExplosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, new IForEachBlockExplosionEffect() {
 			
 			@Override
@@ -37,7 +43,7 @@ public class EndTNTEffect extends PrimedTNTEffect {
 								level.setBlockAndUpdate(pos.above(), Blocks.CHORUS_FLOWER.defaultBlockState());
 							}
 						}
-						if(Math.random() < 0.1f) {
+						if(Math.random() < 0.025f) {
 							EnderMan enderman = EntityType.ENDERMAN.create(level);
 							enderman.setPos(new Vec3(pos.getX(), pos.getY() + 1f, pos.getZ()));
 							level.addFreshEntity(enderman);

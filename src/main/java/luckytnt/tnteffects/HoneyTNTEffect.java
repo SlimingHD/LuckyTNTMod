@@ -25,10 +25,16 @@ import net.minecraft.world.phys.Vec3;
 
 public class HoneyTNTEffect extends PrimedTNTEffect{
 
+	private final int radius;
+	
+	public HoneyTNTEffect(int radius) {
+		this.radius = radius;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		Noise3D noise = new Noise3D(80, 80, 80, 5);
-		ExplosionHelper.doModifiedSphericalExplosion(entity.level(), entity.getPos(), 20, new Vec3(1f, 1.5f, 1f), new IBlockExplosionCondition() {			
+		Noise3D noise = new Noise3D(radius * 4, radius * 4, radius * 4, 5);
+		ExplosionHelper.doModifiedSphericalExplosion(entity.level(), entity.getPos(), radius, new Vec3(1f, 1.5f, 1f), new IBlockExplosionCondition() {			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
@@ -40,9 +46,9 @@ public class HoneyTNTEffect extends PrimedTNTEffect{
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				distance += Math.random();
-				if(distance <= 18) {
+				if(distance <= radius - 2) {
 					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
-					if(distance >= 17 && Math.random() < 0.05f) {
+					if(distance >= radius - 3 && Math.random() < 0.05f) {
 						level.setBlockAndUpdate(pos, Blocks.BEE_NEST.defaultBlockState().setValue(BeehiveBlock.FACING, getRandomDirectionHorizontal()).setValue(BeehiveBlock.HONEY_LEVEL, new Random().nextInt(6)));
 					}
 					if(Math.random() < 0.025f) {
@@ -51,12 +57,12 @@ public class HoneyTNTEffect extends PrimedTNTEffect{
 						level.addFreshEntity(bee);
 					}				
 				}
-				else if(distance <= 20){
+				else if(distance <= radius){
 					int offX = Math.round(pos.getX() - (float)entity.x());
 					int offY = Math.round(pos.getY() - (float)entity.y());
 					int offZ = Math.round(pos.getZ() - (float)entity.z());
 					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
-					if(noise.getValue(Mth.clamp(offX + 20, 0, 80), Mth.clamp((int)(offY + 20f * 1.5f), 0, 80), Mth.clamp(offZ + 20, 0, 80)) > 0.7f) {
+					if(noise.getValue(Mth.clamp(offX + radius, 0, radius * 4), Mth.clamp((int)(offY + radius * 1.5f), 0, radius * 4), Mth.clamp(offZ + radius, 0, radius * 4)) > 0.7f) {
 						level.setBlockAndUpdate(pos, Blocks.HONEY_BLOCK.defaultBlockState());
 					}
 					else {

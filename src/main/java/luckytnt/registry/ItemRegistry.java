@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import luckytnt.LuckyTNTMod;
 import luckytntlib.item.LDynamiteItem;
+import luckytntlib.item.LuckyDynamiteItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -63,6 +64,28 @@ public class ItemRegistry {
 	public static final RegistryObject<LDynamiteItem> SENSOR_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("sensor_dynamite", EntityRegistry.SENSOR_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> RAINBOW_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("rainbow_dynamite", EntityRegistry.RAINBOW_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> ROULETTE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("roulette_dynamite", EntityRegistry.ROULETTE_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> BOUNCING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("bouncing_dynamite", EntityRegistry.BOUNCING_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> IGNITER_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("igniter_dynamite", EntityRegistry.IGNITER_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> MULTIPLYING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("multiplying_dynamite", EntityRegistry.MULTIPLYING_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> RANDOM_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("random_dynamite", EntityRegistry.RANDOM_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> HOMING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("homing_dynamite", EntityRegistry.HOMING_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> PULSE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("pulse_dynamite", EntityRegistry.PULSE_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> PHYSICS_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("physics_dynamite", EntityRegistry.PHYSICS_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> PICKY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("picky_dynamite", EntityRegistry.PICKY_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> CLUSTER_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("cluster_dynamite", EntityRegistry.CLUSTER_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> TUNNELING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("tunneling_dynamite", EntityRegistry.TUNNELING_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> XRAY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("xray_dynamite", EntityRegistry.XRAY_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> FARMING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("farming_dynamite", EntityRegistry.FARMING_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> BIG_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("big_dynamite", EntityRegistry.BIG_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> ICE_METEOR_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("ice_meteor_dynamite", EntityRegistry.ICE_METEOR_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> HONEY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("honey_dynamite", EntityRegistry.HONEY_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> ULTRALIGHT_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("ultralight_dynamite", EntityRegistry.ULTRALIGHT_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> ACCELERATING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("accelerating_dynamite", EntityRegistry.ACCELERATING_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> NETHER_GROVE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("nether_grove_dynamite", EntityRegistry.NETHER_GROVE_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> LUSH_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("lush_dynamite", EntityRegistry.LUSH_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> DRIPSTONE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("dripstone_dynamite", EntityRegistry.DRIPSTONE_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> END_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("end_dynamite", EntityRegistry.END_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> LUCKY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem(LuckyTNTMod.itemRegistry, "lucky_dynamite", () -> new LuckyDynamiteItem(new Item.Properties(), LuckyTNTMod.RH.dynamiteLists.get("dy")), "dy", false, true);
 	
 	//Other
 	public static final RegistryObject<Item> NUCLEAR_WASTE = LuckyTNTMod.itemRegistry.register("nuclear_waste", () -> new BlockItem(BlockRegistry.NUCLEAR_WASTE.get(), new Item.Properties()));

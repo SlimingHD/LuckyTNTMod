@@ -23,6 +23,12 @@ import net.minecraft.world.level.material.Material;
 
 public class NetherGroveTNTEffect extends PrimedTNTEffect{
 
+	private final int radius;
+	
+	public NetherGroveTNTEffect(int radius) {
+		this.radius = radius;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		Holder<ConfiguredFeature<?, ?>> tree;
@@ -37,7 +43,7 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect{
 			vegetation = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL);
 			topBlock = Blocks.WARPED_NYLIUM;
 		}
-		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), 30, new IBlockExplosionCondition() {
+		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), radius, new IBlockExplosionCondition() {
 			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
@@ -57,7 +63,7 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect{
 				}
 			}
 		});
-		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), 30, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {

@@ -18,9 +18,15 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class PhysicsTNTEffect extends PrimedTNTEffect{
 
+	private final int strength;
+	
+	public PhysicsTNTEffect(int strength) {
+		this.strength = strength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 15f);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), strength);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@Override

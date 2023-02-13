@@ -14,9 +14,15 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class IgniterTNTEffect extends PrimedTNTEffect{
 
+	private final int strength;
+	
+	public IgniterTNTEffect(int strength) {
+		this.strength = strength;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 12, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {

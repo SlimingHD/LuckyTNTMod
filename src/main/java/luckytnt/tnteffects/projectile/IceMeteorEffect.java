@@ -14,16 +14,24 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class IceMeteorEffect extends PrimedTNTEffect{
 	
+	private final int strength;
+	private final float size;
+	
+	public IceMeteorEffect(int strength, float size) {
+		this.strength = strength;
+		this.size = size;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 40);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), strength);
 		explosion.doEntityExplosion(3, true);
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 40, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(!state.isAir()) {
-					if(distance <= 35 && state.getExplosionResistance(level, pos, explosion) <= 100) {
+					if(distance <= (strength - strength / 8) && state.getExplosionResistance(level, pos, explosion) <= 100) {
 						state.onBlockExploded(level, pos, explosion);
 					}
 					else if(Math.random() < 0.6f && state.getExplosionResistance(level, pos, explosion) <= 100) {
@@ -39,12 +47,12 @@ public class IceMeteorEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(ParticleTypes.ITEM_SNOWBALL, entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.level().addParticle(ParticleTypes.ITEM_SNOWBALL, entity.x(), entity.y() + size, entity.z(), 0, 0, 0);
 	}
 
 	@Override
 	public float getSize(IExplosiveEntity entity) {
-		return 2f;
+		return size;
 	}
 
 	@Override

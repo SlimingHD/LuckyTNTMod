@@ -24,9 +24,15 @@ import net.minecraft.world.level.material.Material;
 
 public class FarmingTNTEffect extends PrimedTNTEffect{
 
+	private final int radius;
+	
+	public FarmingTNTEffect(int radius) {
+		this.radius = radius;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), 10, new IBlockExplosionCondition() {
+		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), radius, new IBlockExplosionCondition() {
 			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {

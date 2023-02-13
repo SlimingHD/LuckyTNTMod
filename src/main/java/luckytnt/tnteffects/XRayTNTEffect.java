@@ -15,15 +15,20 @@ import net.minecraftforge.common.Tags;
 
 public class XRayTNTEffect extends PrimedTNTEffect{
 
+	private final int radius;
+	
+	public XRayTNTEffect(int radius) {
+		this.radius = radius;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 40);
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 40, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(!state.is(Tags.Blocks.ORES) && !state.isAir() && state.getExplosionResistance(level, pos, dummyExplosion) <= 100) {
-					state.onBlockExploded(level, pos, dummyExplosion);
+				if(!state.is(Tags.Blocks.ORES) && !state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
 					level.setBlockAndUpdate(pos, Blocks.GLASS.defaultBlockState());
 				}
 			}

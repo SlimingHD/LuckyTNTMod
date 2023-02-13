@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "luckytntmod:items/ultralight_dynamite"
+    "layer0": "luckytntmod:item/ultralight_dynamite"
   },
   "display": {
     "thirdperson_righthand": {

@@ -11,8 +11,8 @@ public class BigTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 10);
-		explosion.doEntityExplosion(1.5f, true);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 15);
+		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion();
 	}
 	

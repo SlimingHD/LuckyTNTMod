@@ -21,9 +21,15 @@ import net.minecraft.world.level.material.Material;
 
 public class DripstoneTNTEffect extends PrimedTNTEffect{
 
+	private final int radius;
+	
+	public DripstoneTNTEffect(int radius) {
+		this.radius = radius;
+	}
+	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 20, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -32,7 +38,7 @@ public class DripstoneTNTEffect extends PrimedTNTEffect{
 				}
 			}
 		});
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 20, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
 
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -47,7 +53,7 @@ public class DripstoneTNTEffect extends PrimedTNTEffect{
 			}
 		});
 		if(entity.level() instanceof ServerLevel sLevel) {
-			ExplosionHelper.doSphericalExplosion(sLevel, entity.getPos(), 15, new IForEachBlockExplosionEffect() {
+			ExplosionHelper.doSphericalExplosion(sLevel, entity.getPos(), Math.round(radius * 0.75f), new IForEachBlockExplosionEffect() {
 
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
