@@ -149,6 +149,11 @@
 	"block.luckytntmod.mineral_tnt" : "Mineral TNT",
 	"block.luckytntmod.flower_forest_tnt" : "Blumenwald TNT",
 	"block.luckytntmod.icy_tnt" : "Vereistes TNT",
+	"block.luckytntmod.ghost_tnt" : "Geist TNT",
+	"block.luckytntmod.particle_physics_tnt" : "Teilchenphysik TNT",
+	"block.luckytntmod.heat_death" : "Hitzetod",
+	"block.luckytntmod.continental_drift" : "Kontinentalverschiebung",
+	"block.luckytntmod.lucky_god" : "Lucky Gott",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -382,6 +387,10 @@
 	"entity.luckytntmod.mineral_tnt" : "Mineral TNT",
 	"entity.luckytntmod.flower_forest_tnt" : "Blumenwald TNT",
 	"entity.luckytntmod.icy_tnt" : "Vereistes TNT",
+	"entity.luckytntmod.ghost_tnt" : "Geist TNT",
+	"entity.luckytntmod.particle_physics_tnt" : "Teilchenphysik TNT",
+	"entity.luckytntmod.heat_death" : "Hitzetod",
+	"entity.luckytntmod.continental_drift" : "Kontinentalverschiebung",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
