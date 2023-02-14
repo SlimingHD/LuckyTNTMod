@@ -18,6 +18,7 @@ public class LuckyTNTTabs {
 
 	public static CreativeModeTab NORMAL_TNT;
 	public static CreativeModeTab GOD_TNT;
+	public static CreativeModeTab DOOMSDAY_TNT;
 	public static CreativeModeTab DYNAMITE;
 	public static CreativeModeTab OTHER;
 	
@@ -28,12 +29,17 @@ public class LuckyTNTTabs {
 				populator.accept(item.get());
 			}
         }));
-		GOD_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "dynamite")), List.of(new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt")), builder -> builder.title(Component.translatable("item_group.luckytntmod.god_tnt")).icon(() -> new ItemStack(BlockRegistry.THE_REVOLUTION.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
+		GOD_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "doomsday_tnt")), List.of(new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt")), builder -> builder.title(Component.translatable("item_group.luckytntmod.god_tnt")).icon(() -> new ItemStack(BlockRegistry.THE_REVOLUTION.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
 			for(RegistryObject<? extends Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("g")) {
 				populator.accept(item.get());
 			}
         }));
-		DYNAMITE = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "dynamite"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "other")), List.of(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt")), builder -> builder.title(Component.translatable("item_group.luckytntmod.dynamite")).icon(() -> new ItemStack(ItemRegistry.DYNAMITE.get())).displayItems((enabledFlags, populator, hasPermission) -> {
+		DOOMSDAY_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "doomsday_tnt"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "dynamite")), List.of(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt")), builder -> builder.title(Component.translatable("item_group.luckytntmod.doomsday_tnt")).icon(() -> new ItemStack(BlockRegistry.CHUNK_TNT.get())).displayItems((enabledFlags, populator, hasPermissions) -> {
+			for(RegistryObject<? extends Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("d")) {
+				populator.accept(item.get());
+			}
+        }));
+		DYNAMITE = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "dynamite"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "other")), List.of(new ResourceLocation(LuckyTNTMod.MODID, "doomsday_tnt")), builder -> builder.title(Component.translatable("item_group.luckytntmod.dynamite")).icon(() -> new ItemStack(ItemRegistry.DYNAMITE.get())).displayItems((enabledFlags, populator, hasPermission) -> {
 			for(RegistryObject<? extends Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("dy")) {
 				populator.accept(item.get());
 			}

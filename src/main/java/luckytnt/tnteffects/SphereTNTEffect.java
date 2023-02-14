@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
-import luckytnt.registry.BlockRegistry;
+import java.util.function.Supplier;
+
+import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -10,12 +12,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.RegistryObject;
 
 public class SphereTNTEffect extends PrimedTNTEffect{
 
+
+	private Supplier<RegistryObject<LTNTBlock>> block;
 	private final int strength;
 	
-	public SphereTNTEffect(int strength) {
+	public SphereTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int strength) {
+		this.block = block;
 		this.strength = strength;
 	}
 	
@@ -25,7 +31,7 @@ public class SphereTNTEffect extends PrimedTNTEffect{
 		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 100) {
 					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
 				}
 			}
@@ -34,6 +40,6 @@ public class SphereTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public Block getBlock() {
-		return BlockRegistry.SPHERE_TNT.get();
+		return block.get().get();
 	}
 }

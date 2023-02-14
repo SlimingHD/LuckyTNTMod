@@ -154,6 +154,10 @@
 	"block.luckytntmod.heat_death" : "Heat Death",
 	"block.luckytntmod.continental_drift" : "Continental Drift",
 	"block.luckytntmod.lucky_god" : "Lucky God",
+	"block.luckytntmod.supernova" : "Supernova",
+	"block.luckytntmod.city_firework" : "City Firework",
+	"block.luckytntmod.meteor_storm" : "Meteor Storm",
+	"block.luckytntmod.chunk_tnt" : "Chunk TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -392,6 +396,10 @@
 	"entity.luckytntmod.particle_physics_tnt" : "Particle Physics TNT",
 	"entity.luckytntmod.heat_death" : "Heat Death",
 	"entity.luckytntmod.continental_drift" : "Continental Drift",
+	"entity.luckytntmod.supernova" : "Supernova",
+	"entity.luckytntmod.city_firework" : "City Firework",
+	"entity.luckytntmod.meteor_storm" : "Meteor Storm",
+	"entity.luckytntmod.chunk_tnt" : "Chunk TNT",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
@@ -480,6 +488,7 @@
 		
 	"item_group.luckytntmod.normal_tnt" : "Normal TNT",
 	"item_group.luckytntmod.god_tnt" : "God TNT",
+	"item_group.luckytntmod.doomsday_tnt" : "Doomsday TNT",
 	"item_group.luckytntmod.dynamite" : "Dynamite",
 	"item_group.luckytntmod.other" : "Other",
 	

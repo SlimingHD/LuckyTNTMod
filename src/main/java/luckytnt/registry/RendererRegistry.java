@@ -170,6 +170,10 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.PARTICLE_PHYSICS_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HEAT_DEATH.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CONTINENTAL_DRIFT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SUPERNOVA.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.CITY_FIREWORK.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.METEOR_STORM.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.CHUNK_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
