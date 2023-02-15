@@ -237,6 +237,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.LUSH_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DRIPSTONE_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.END_DYNAMITE.get(), LDynamiteRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.CHRISTMAS_DYNAMITE.get(), LDynamiteRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
@@ -256,6 +257,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.PRESENT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ACIDIC_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HAILSTONE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.CHRISTMAS_DYNAMITE_PROJECTILE.get(), LDynamiteRenderer::new);
 		
 		//Other
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);

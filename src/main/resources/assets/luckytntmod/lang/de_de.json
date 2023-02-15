@@ -233,6 +233,7 @@
 	"item.luckytntmod.dripstone_dynamite" : "Tropfstein Dynamit",
 	"item.luckytntmod.end_dynamite" : "End Dynamit",
 	"item.luckytntmod.lucky_dynamite" : "Lucky Dynamit",
+	"item.luckytntmod.christmas_dynamite" : "Weihnachts Dynamit",
 
 	"item.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"item.luckytntmod.red_candy" : "Rotes Bonbon",
@@ -463,6 +464,7 @@
 	"entity.luckytntmod.dripstone_dynamite" : "Tropfstein Dynamit",
 	"entity.luckytntmod.end_dynamite" : "End Dynamit",
 	"entity.luckytntmod.lucky_dynamite" : "Lucky Dynamit",
+	"entity.luckytntmod.christmas_dynamite" : "Weihnachts Dynamit",
 		
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.mini_meteor" : "Mini Meteor",
@@ -481,6 +483,7 @@
 	"entity.luckytntmod.chicxulub_meteor": "Chicxulub Meteorit",
 	"entity.luckytntmod.tsar_bomba_bomb" : "Zar Bombe Bombe",
 	"entity.luckytntmod.acidic_projectile" : "\u00c4tzendes Projektil",
+	"entity.luckytntmod.christmas_dynamite_projectile" : "Weihnachts Dynamit",
 	
 	"entity.luckytntmod.angry_miner" : "W\u00FCtender Minenarbeiter",
 	"entity.luckytntmod.toxic_cloud" : "Giftige Wolke",

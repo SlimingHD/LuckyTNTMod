@@ -23,6 +23,8 @@ import luckytnt.tnteffects.projectile.BigDynamiteEffect;
 import luckytnt.tnteffects.projectile.BombEffect;
 import luckytnt.tnteffects.projectile.ChemicalDynamiteEffect;
 import luckytnt.tnteffects.projectile.ChicxulubMeteorEffect;
+import luckytnt.tnteffects.projectile.ChristmasDynamiteEffect;
+import luckytnt.tnteffects.projectile.ChristmasDynamiteProjectileEffect;
 import luckytnt.tnteffects.projectile.ClusterBombEffect;
 import luckytnt.tnteffects.projectile.ClusterDynamiteEffect;
 import luckytnt.tnteffects.projectile.DiggingDynamiteEffect;
@@ -342,6 +344,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> LUSH_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("lush_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.LUSH_DYNAMITE, new DustParticleOptions(new Vector3f(0.44f, 0.57f, 0.18f), 1f), new LushTNTEffect(10)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DRIPSTONE_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dripstone_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.DRIPSTONE_DYNAMITE, new DripstoneTNTEffect(10)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> END_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("end_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.END_DYNAMITE, ParticleTypes.END_ROD, new EndTNTEffect(10)), 0.25f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite", new ChristmasDynamiteEffect(), 0.25f, false);
 
 	//Projectile
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("meteor", new MeteorEffect(40, 2f), 2f, false);
@@ -361,6 +364,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> PRESENT = LuckyTNTMod.RH.registerExplosiveProjectile("present", new StackedPrimedTNTEffect(new ChristmasTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.build())));
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ACIDIC_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("acidic_projectile", new AcidicTNTEffect(), 1f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> HAILSTONE = LuckyTNTMod.entityRegistry.register("hailstone", () -> EntityType.Builder.<LExplosiveProjectile>of((EntityType<LExplosiveProjectile> type, Level level) -> new HailstoneProjectile(type, level, new HailstoneEffect()), MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).sized(0.1f, 0.1f).build("hailstone"));
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite_projectile", new ChristmasDynamiteProjectileEffect(), 0.25f, false);
 	
 	//Other
 	public static RegistryObject<EntityType<AngryMiner>> ANGRY_MINER = LuckyTNTMod.entityRegistry.register("angry_miner", () -> EntityType.Builder.<AngryMiner>of(AngryMiner::new, MobCategory.MISC).sized(0.6f, 1.8f).build("angry_miner"));

@@ -85,6 +85,7 @@ public class ItemRegistry {
 	public static final RegistryObject<LDynamiteItem> LUSH_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("lush_dynamite", EntityRegistry.LUSH_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> DRIPSTONE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("dripstone_dynamite", EntityRegistry.DRIPSTONE_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> END_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("end_dynamite", EntityRegistry.END_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> CHRISTMAS_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("christmas_dynamite", EntityRegistry.CHRISTMAS_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> LUCKY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem(LuckyTNTMod.itemRegistry, "lucky_dynamite", () -> new LuckyDynamiteItem(new Item.Properties(), LuckyTNTMod.RH.dynamiteLists.get("dy")), "dy", false, true);
 	
 	//Other

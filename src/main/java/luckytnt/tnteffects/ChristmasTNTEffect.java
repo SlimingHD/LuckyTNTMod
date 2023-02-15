@@ -22,10 +22,10 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		if(entity instanceof PrimedLTNT) {
-			((ServerLevel)entity.level()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + 1 + Math.random() * 0.5f, entity.z() + Math.random() * 0.5f, 500, 0.5f, 0.5f, 0.5f, 0f);
+			((ServerLevel)entity.level()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + 1 + Math.random() * 0.5f, entity.z() + Math.random() - 0.5f, 500, 0.5f, 0.5f, 0.5f, 0f);
 		}
 		else {			
-			((ServerLevel)entity.level()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + 1 + Math.random() * 0.5f, entity.z() + Math.random() * 0.5f, 100, 0.5f, 0.5f, 0.5f, 0f);
+			((ServerLevel)entity.level()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + 1 + Math.random() * 0.5f, entity.z() + Math.random() - 0.5f, 100, 0.5f, 0.5f, 0.5f, 0f);
 		}
 	}
 	
@@ -50,7 +50,7 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 					randomX *= new Random().nextBoolean() ? 1 : -1;
 					double randomZ = Math.random();
 					randomZ *= new Random().nextBoolean() ? 1 : -1;
-					present.setDeltaMovement(randomX, -Math.random() * 0.5D, randomZ);
+					present.setDeltaMovement(randomX, -Math.random() * 0.5f, randomZ);
 					entity.level().addFreshEntity(present);
 				}
 			}
@@ -73,7 +73,7 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 		if(entity instanceof PrimedLTNT) {
 			if(entity.getTNTFuse() < 230) {
 				for(int i = 0; i <= 10; i++) {
-					entity.level().addParticle(ParticleTypes.WAX_OFF, true, entity.x() + Math.random() - 0.5f, entity.y() + 1D + Math.random() * 0.5, entity.z() + Math.random() - 0.5f, 0, 0, 0);
+					entity.level().addParticle(ParticleTypes.WAX_OFF, true, entity.x() + Math.random() - 0.5f, entity.y() + 1f + Math.random() * 0.5f, entity.z() + Math.random() - 0.5f, 0, 0, 0);
 				}
 			}
 			else {
