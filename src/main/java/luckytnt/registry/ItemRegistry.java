@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 
 import luckytnt.LuckyTNTMod;
 import luckytntlib.item.LDynamiteItem;
+import luckytntlib.item.LTNTMinecartItem;
 import luckytntlib.item.LuckyDynamiteItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -87,6 +88,9 @@ public class ItemRegistry {
 	public static final RegistryObject<LDynamiteItem> END_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("end_dynamite", EntityRegistry.END_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> CHRISTMAS_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("christmas_dynamite", EntityRegistry.CHRISTMAS_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> LUCKY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem(LuckyTNTMod.itemRegistry, "lucky_dynamite", () -> new LuckyDynamiteItem(new Item.Properties(), LuckyTNTMod.RH.dynamiteLists.get("dy")), "dy", false, true);
+	
+	//Minecart
+	public static final RegistryObject<LTNTMinecartItem> TNT_X5_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("tnt_x5_minecart", () -> EntityRegistry.TNT_X5_MINECART, "m");
 	
 	//Other
 	public static final RegistryObject<Item> NUCLEAR_WASTE = LuckyTNTMod.itemRegistry.register("nuclear_waste", () -> new BlockItem(BlockRegistry.NUCLEAR_WASTE.get(), new Item.Properties()));

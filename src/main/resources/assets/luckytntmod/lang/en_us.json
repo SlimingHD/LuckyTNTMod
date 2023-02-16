@@ -492,6 +492,7 @@
 	"item_group.luckytntmod.god_tnt" : "God TNT",
 	"item_group.luckytntmod.doomsday_tnt" : "Doomsday TNT",
 	"item_group.luckytntmod.dynamite" : "Dynamite",
+	"item_group.luckytntmod.minecarts" : "TNT Minecarts",
 	"item_group.luckytntmod.other" : "Other",
 	
 	"effect.contaminated_effect" : "Contaminated",

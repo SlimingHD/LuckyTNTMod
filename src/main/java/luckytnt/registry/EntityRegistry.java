@@ -53,6 +53,7 @@ import luckytnt.tnteffects.projectile.TsarBombaBombEffect;
 import luckytnt.tnteffects.projectile.TunnelingDynamiteEffect;
 import luckytnt.tnteffects.projectile.UltralightDynamiteEffect;
 import luckytntlib.entity.LExplosiveProjectile;
+import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.LivingPrimedLTNT;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.tnteffects.GeneralDynamiteEffect;
@@ -346,6 +347,9 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> END_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("end_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.END_DYNAMITE, ParticleTypes.END_ROD, new EndTNTEffect(10)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite", new ChristmasDynamiteEffect(), 0.25f, false);
 
+	//Minecarts
+	public static final RegistryObject<EntityType<LTNTMinecart>> TNT_X5_MINECART = LuckyTNTMod.RH.registerTNTMinecart("tnt_x5_minecart", TNT_X5_EFFECT.buildTNT(() -> BlockRegistry.TNT_X5, 120), ItemRegistry.TNT_X5_MINECART);
+	
 	//Projectile
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("meteor", new MeteorEffect(40, 2f), 2f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> LITTLE_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("little_meteor", new MeteorEffect(20, 1.5f), 1.5f, false);

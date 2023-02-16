@@ -492,6 +492,7 @@
 	"item_group.luckytntmod.god_tnt" : "Gott TNT",
 	"item_group.luckytntmod.doomsday_tnt" : "Weltuntergangs TNT",
 	"item_group.luckytntmod.dynamite" : "Dynamit",
+	"item_group.luckytntmod.minecarts" : "TNT-Loren",
 	"item_group.luckytntmod.other" : "Anderes",
 	
 	"effect.contaminated_effect" : "Kontaminiert",

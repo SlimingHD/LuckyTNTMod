@@ -4,6 +4,7 @@ import luckytnt.client.renderer.AngryMinerRenderer;
 import luckytnt.client.renderer.BombRenderer;
 import luckytnt.client.renderer.BouncingTNTRenderer;
 import luckytntlib.client.renderer.LDynamiteRenderer;
+import luckytntlib.client.renderer.LTNTMinecartRenderer;
 import luckytntlib.client.renderer.LTNTRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -238,6 +239,9 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.DRIPSTONE_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.END_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHRISTMAS_DYNAMITE.get(), LDynamiteRenderer::new);
+
+		//Minecarts
+		event.registerEntityRenderer(EntityRegistry.TNT_X5_MINECART.get(), LTNTMinecartRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
