@@ -91,6 +91,23 @@ public class ItemRegistry {
 	
 	//Minecart
 	public static final RegistryObject<LTNTMinecartItem> TNT_X5_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("tnt_x5_minecart", () -> EntityRegistry.TNT_X5_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> TNT_X20_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("tnt_x20_minecart", () -> EntityRegistry.TNT_X20_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> TNT_X100_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("tnt_x100_minecart", () -> EntityRegistry.TNT_X100_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> TNT_X500_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("tnt_x500_minecart", () -> EntityRegistry.TNT_X500_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> DIGGING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("digging_tnt_minecart", () -> EntityRegistry.DIGGING_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> DRILLING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("drilling_tnt_minecart", () -> EntityRegistry.DRILLING_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> SPHERE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("sphere_tnt_minecart", () -> EntityRegistry.SPHERE_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> FLOATING_ISLAND_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("floating_island_minecart", () -> EntityRegistry.FLOATING_ISLAND_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> OCEAN_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("ocean_tnt_minecart", () -> EntityRegistry.OCEAN_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> HELLFIRE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("hellfire_tnt_minecart", () -> EntityRegistry.HELLFIRE_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> FIRE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("fire_tnt_minecart", () -> EntityRegistry.FIRE_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> SNOW_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("snow_tnt_minecart", () -> EntityRegistry.SNOW_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> FREEZE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("freeze_tnt_minecart", () -> EntityRegistry.FREEZE_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> VAPORIZE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("vaporize_tnt_minecart", () -> EntityRegistry.VAPORIZE_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> GRAVITY_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("gravity_tnt_minecart", () -> EntityRegistry.GRAVITY_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> LIGHTNING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("lightning_tnt_minecart", () -> EntityRegistry.LIGHTNING_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> CUBIC_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("cubic_tnt_minecart", () -> EntityRegistry.CUBIC_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> ARROW_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("arrow_tnt_minecart", () -> EntityRegistry.ARROW_TNT_MINECART, "m");
 	
 	//Other
 	public static final RegistryObject<Item> NUCLEAR_WASTE = LuckyTNTMod.itemRegistry.register("nuclear_waste", () -> new BlockItem(BlockRegistry.NUCLEAR_WASTE.get(), new Item.Properties()));

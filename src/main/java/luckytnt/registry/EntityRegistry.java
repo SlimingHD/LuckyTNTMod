@@ -348,7 +348,24 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite", new ChristmasDynamiteEffect(), 0.25f, false);
 
 	//Minecarts
-	public static final RegistryObject<EntityType<LTNTMinecart>> TNT_X5_MINECART = LuckyTNTMod.RH.registerTNTMinecart("tnt_x5_minecart", TNT_X5_EFFECT.buildTNT(() -> BlockRegistry.TNT_X5, 120), ItemRegistry.TNT_X5_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> TNT_X5_MINECART = LuckyTNTMod.RH.registerTNTMinecart("tnt_x5_minecart", TNT_X5, ItemRegistry.TNT_X5_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> TNT_X20_MINECART = LuckyTNTMod.RH.registerTNTMinecart("tnt_x20_minecart", TNT_X20, ItemRegistry.TNT_X20_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> TNT_X100_MINECART = LuckyTNTMod.RH.registerTNTMinecart("tnt_x100_minecart", TNT_X100, ItemRegistry.TNT_X100_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> TNT_X500_MINECART = LuckyTNTMod.RH.registerTNTMinecart("tnt_x500_minecart", TNT_X500, ItemRegistry.TNT_X500_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> DIGGING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("digging_tnt_minecart", DIGGING_TNT, ItemRegistry.DIGGING_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> DRILLING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("drilling_tnt_minecart", DRILLING_TNT, ItemRegistry.DRILLING_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> SPHERE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("sphere_tnt_minecart", SPHERE_TNT, ItemRegistry.SPHERE_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> FLOATING_ISLAND_MINECART = LuckyTNTMod.RH.registerTNTMinecart("floating_island_minecart", FLOATING_ISLAND, ItemRegistry.FLOATING_ISLAND_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> OCEAN_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("ocean_tnt_minecart", OCEAN_TNT, ItemRegistry.OCEAN_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> HELLFIRE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("hellfire_tnt_minecart", HELLFIRE_TNT, ItemRegistry.HELLFIRE_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> FIRE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("fire_tnt_minecart", FIRE_TNT, ItemRegistry.FIRE_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> SNOW_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("snow_tnt_minecart", SNOW_TNT, ItemRegistry.SNOW_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> FREEZE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("freeze_tnt_minecart", FREEZE_TNT, ItemRegistry.FREEZE_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> VAPORIZE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("vaporize_tnt_minecart", VAPORIZE_TNT, ItemRegistry.VAPORIZE_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> GRAVITY_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("gravity_tnt_minecart", GRAVITY_TNT, ItemRegistry.GRAVITY_TNT_MINECART, false);
+	public static final RegistryObject<EntityType<LTNTMinecart>> LIGHTNING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("lightning_tnt_minecart", LIGHTNING_TNT, ItemRegistry.LIGHTNING_TNT_MINECART, false);
+	public static final RegistryObject<EntityType<LTNTMinecart>> CUBIC_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("cubic_tnt_minecart", CUBIC_TNT, ItemRegistry.CUBIC_TNT_MINECART);
+	public static final RegistryObject<EntityType<LTNTMinecart>> ARROW_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecart("arrow_tnt_minecart", ARROW_TNT, ItemRegistry.ARROW_TNT_MINECART);
 	
 	//Projectile
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("meteor", new MeteorEffect(40, 2f), 2f, false);

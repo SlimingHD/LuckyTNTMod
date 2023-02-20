@@ -242,6 +242,23 @@ public class RendererRegistry {
 
 		//Minecarts
 		event.registerEntityRenderer(EntityRegistry.TNT_X5_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TNT_X20_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TNT_X100_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TNT_X500_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DIGGING_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DRILLING_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SPHERE_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FLOATING_ISLAND_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.OCEAN_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HELLFIRE_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FIRE_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SNOW_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FREEZE_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.VAPORIZE_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.GRAVITY_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.LIGHTNING_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.CUBIC_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ARROW_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		
 		//Projectiles
 		event.registerEntityRenderer(EntityRegistry.METEOR.get(), LTNTRenderer::new);
