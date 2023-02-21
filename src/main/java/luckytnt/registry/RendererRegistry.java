@@ -180,6 +180,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.MANSION.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HELIX.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DEATH_RAY.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DOOMSDAY.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
