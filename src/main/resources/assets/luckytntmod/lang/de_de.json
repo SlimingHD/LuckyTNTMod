@@ -158,6 +158,11 @@
 	"block.luckytntmod.city_firework" : "Stadt Feuerwerk",
 	"block.luckytntmod.meteor_storm" : "Meteoriten Sturm",
 	"block.luckytntmod.chunk_tnt" : "Chunk TNT",
+	"block.luckytntmod.compressed_tnt" : "Komprimiertes TNT",
+	"block.luckytntmod.extinction" : "Ausl\u00f6schung",
+	"block.luckytntmod.mansion" : "Villa",
+	"block.luckytntmod.helix" : "Helix",
+	"block.luckytntmod.death_ray" : "Todesstrahl",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -400,6 +405,11 @@
 	"entity.luckytntmod.city_firework" : "Stadt Feuerwerk",
 	"entity.luckytntmod.meteor_storm" : "Meteoriten Sturm",
 	"entity.luckytntmod.chunk_tnt" : "Chunk TNT",
+	"entity.luckytntmod.compressed_tnt" : "Komprimiertes TNT",
+	"entity.luckytntmod.extinction" : "Ausl\u00f6schung",
+	"entity.luckytntmod.mansion" : "Villa",
+	"entity.luckytntmod.helix" : "Helix",
+	"entity.luckytntmod.death_ray" : "Todesstrahl",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
