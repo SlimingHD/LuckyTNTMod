@@ -95,7 +95,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> TROLL_TNT_MK3 = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new TrollTNTMk3Block(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("troll_tnt_mk3").tab("n").build());
 	public static final RegistryObject<LTNTBlock> CLUSTER_BOMB = LuckyTNTMod.RH.registerTNTBlock("cluster_bomb", EntityRegistry.CLUSTER_BOMB_TNT, "n");
 	public static final RegistryObject<LTNTBlock> AIR_STRIKE = LuckyTNTMod.RH.registerTNTBlock("air_strike", EntityRegistry.AIR_STRIKE, "n");
-	public static final RegistryObject<LTNTBlock> SPAMMING_TNT = LuckyTNTMod.RH.registerTNTBlock("spamming_tnt", EntityRegistry.SPAMMING_TNT, "n", MaterialColor.COLOR_BROWN, true);
+	public static final RegistryObject<LTNTBlock> SPAMMING_TNT = LuckyTNTMod.RH.registerTNTBlock("spamming_tnt", EntityRegistry.SPAMMING_TNT, "n", MaterialColor.COLOR_BROWN, false);
 	public static final RegistryObject<LTNTBlock> BOUNCING_TNT = LuckyTNTMod.RH.registerTNTBlock("bouncing_tnt", EntityRegistry.BOUNCING_TNT, "n", MaterialColor.COLOR_RED, false);
 	public static final RegistryObject<LTNTBlock> ROULETTE_TNT = LuckyTNTMod.RH.registerTNTBlock("roulette_tnt", EntityRegistry.ROULETTE_TNT, "n");
 	public static final RegistryObject<LTNTBlock> SENSOR_TNT = LuckyTNTMod.RH.registerTNTBlock("sensor_tnt", EntityRegistry.SENSOR_TNT, "n", MaterialColor.COLOR_BLUE, false);

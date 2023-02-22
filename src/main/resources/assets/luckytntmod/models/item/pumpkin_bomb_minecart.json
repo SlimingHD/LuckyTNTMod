@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "luckytntmod:items/pumpkin_bomb_minecart"
+    "layer0": "luckytntmod:item/pumpkin_bomb_minecart"
   }
 }

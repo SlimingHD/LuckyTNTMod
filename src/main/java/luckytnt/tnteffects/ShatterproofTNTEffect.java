@@ -4,6 +4,7 @@ import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -18,16 +19,12 @@ public class ShatterproofTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 10);
-		explosion.doBlockExplosion(1f, 1f, 0.7f, 1f, false, new IForEachBlockExplosionEffect() {	
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 10, new IForEachBlockExplosionEffect() {
+			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				state.onBlockExploded(level, pos, explosion);
-				if(state.isCollisionShapeFullBlock(level, pos)) {
+				if(state.isCollisionShapeFullBlock(level, pos) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 1200) {
 					level.setBlockAndUpdate(pos, Blocks.OBSIDIAN.defaultBlockState());
-				}
-				else {
-					level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 				}
 			}
 		});

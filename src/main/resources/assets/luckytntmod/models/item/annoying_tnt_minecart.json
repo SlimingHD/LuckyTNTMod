@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "luckytntmod:items/annoying_tnt_minecart"
+    "layer0": "luckytntmod:item/annoying_tnt_minecart"
   }
 }

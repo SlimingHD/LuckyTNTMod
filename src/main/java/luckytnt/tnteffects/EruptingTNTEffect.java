@@ -3,6 +3,7 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
 import luckytntlib.entity.LExplosiveProjectile;
+import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -18,7 +19,7 @@ public class EruptingTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		Level level = entity.level();
-		if(entity instanceof PrimedLTNT) {
+		if(entity instanceof PrimedLTNT || entity instanceof LTNTMinecart) {
 			if(entity.getTNTFuse() < 60) {
 				if(entity.getTNTFuse() % 3 == 0) {
 					LExplosiveProjectile erupting_tnt = EntityRegistry.ERUPTING_PROJECTILE.get().create(level);
@@ -58,6 +59,6 @@ public class EruptingTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public int getDefaultFuse(IExplosiveEntity entity) {
-		return entity instanceof PrimedLTNT ? 140 : 100000;
+		return entity instanceof PrimedLTNT || entity instanceof LTNTMinecart ? 140 : 100000;
 	}
 }

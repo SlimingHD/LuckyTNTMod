@@ -3,6 +3,7 @@ package luckytnt.tnteffects;
 import java.util.List;
 
 import luckytnt.registry.BlockRegistry;
+import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -32,7 +33,7 @@ public class PickyTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		Block template;
-		if(entity instanceof PrimedLTNT) {
+		if(entity instanceof PrimedLTNT || entity instanceof LTNTMinecart) {
 			template = entity.level().getBlockState(new BlockPos(entity.getPos()).below()).getBlock();
 		}
 		else {

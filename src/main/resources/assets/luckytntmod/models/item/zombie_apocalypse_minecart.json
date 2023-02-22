@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "luckytntmod:items/zombie_apocalypse_minecart"
+    "layer0": "luckytntmod:item/zombie_apocalypse_minecart"
   }
 }
