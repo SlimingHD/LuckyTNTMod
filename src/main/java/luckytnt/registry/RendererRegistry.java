@@ -286,6 +286,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.ZOMBIE_APOCALYPSE_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SHATTERPROOF_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.LAVA_OCEAN_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.WOOL_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SAY_GOODBYE_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINERS_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.WITHERING_TNT_MINECART.get(), LTNTMinecartRenderer::new);
