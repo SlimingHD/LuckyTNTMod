@@ -201,8 +201,8 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> HELIX = LuckyTNTMod.RH.registerTNTBlock("helix", EntityRegistry.HELIX, "d", MaterialColor.QUARTZ, true);
 	public static final RegistryObject<LTNTBlock> DEATH_RAY = LuckyTNTMod.RH.registerTNTBlock("death_ray", EntityRegistry.DEATH_RAY, "d", MaterialColor.COLOR_GRAY, true);
 	public static final RegistryObject<LTNTBlock> DOOMSDAY = LuckyTNTMod.RH.registerTNTBlock("doomsday", EntityRegistry.DOOMSDAY, "d", MaterialColor.COLOR_BLACK, true);
-	public static final RegistryObject<LTNTBlock> FIERY_HELL = LuckyTNTMod.RH.registerTNTBlock("fiery_hell", EntityRegistry.DEATH_RAY, "d", MaterialColor.COLOR_ORANGE, true);
-	public static final RegistryObject<LTNTBlock> STONE_COLD = LuckyTNTMod.RH.registerTNTBlock("stone_cold", EntityRegistry.DEATH_RAY, "d", MaterialColor.COLOR_LIGHT_BLUE, true);
+	public static final RegistryObject<LTNTBlock> FIERY_HELL = LuckyTNTMod.RH.registerTNTBlock("fiery_hell", EntityRegistry.FIERY_HELL, "d", MaterialColor.COLOR_ORANGE, true);
+	public static final RegistryObject<LTNTBlock> STONE_COLD = LuckyTNTMod.RH.registerTNTBlock("stone_cold", EntityRegistry.STONE_COLD, "d", MaterialColor.COLOR_LIGHT_BLUE, true);
 	public static final RegistryObject<LTNTBlock> JUNGLE_TNT = LuckyTNTMod.RH.registerTNTBlock("jungle_tnt", EntityRegistry.DEATH_RAY, "d", MaterialColor.COLOR_GREEN, true);
 	public static final RegistryObject<LTNTBlock> JUMPING_TNT = LuckyTNTMod.RH.registerTNTBlock("jumping_tnt", EntityRegistry.DEATH_RAY, "d", MaterialColor.COLOR_YELLOW, true);
 	public static final RegistryObject<LTNTBlock> WASTELAND_TNT = LuckyTNTMod.RH.registerTNTBlock("wasteland_tnt", EntityRegistry.DEATH_RAY, "d", MaterialColor.COLOR_GRAY, true);
