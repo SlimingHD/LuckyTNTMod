@@ -175,6 +175,16 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.CITY_FIREWORK.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.METEOR_STORM.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHUNK_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.COMPRESSED_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.EXTINCTION.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.MANSION.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HELIX.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DEATH_RAY.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DOOMSDAY.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FIERY_HELL.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.STONE_COLD.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.JUNGLE_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.JUMPING_TNT.get(), BouncingTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
