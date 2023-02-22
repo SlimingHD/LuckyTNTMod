@@ -277,6 +277,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.ERUPTING_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.GROVE_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ENDER_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.METEOR_SHOWER_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.INVERTED_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.NUCLEAR_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHEMICAL_TNT_MINECART.get(), LTNTMinecartRenderer::new);

@@ -149,7 +149,7 @@ public class ItemRegistry {
 	public static final RegistryObject<LTNTMinecartItem> BIG_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("big_tnt_minecart", () -> EntityRegistry.BIG_TNT_MINECART, "m");
 	public static final RegistryObject<LTNTMinecartItem> HONEY_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("honey_tnt_minecart", () -> EntityRegistry.HONEY_TNT_MINECART, "m");
 	public static final RegistryObject<LTNTMinecartItem> EATING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("eating_tnt_minecart", () -> EntityRegistry.EATING_TNT_MINECART, "m");
-	public static final RegistryObject<LTNTMinecartItem> LUCKY_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("lucky_tnt_minecart", () -> EntityRegistry.LUCKY_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> LUCKY_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("lucky_tnt_minecart", () -> EntityRegistry.EATING_TNT_MINECART, "m");
 	
 	//Other
 	public static final RegistryObject<Item> NUCLEAR_WASTE = LuckyTNTMod.itemRegistry.register("nuclear_waste", () -> new BlockItem(BlockRegistry.NUCLEAR_WASTE.get(), new Item.Properties()));
