@@ -289,6 +289,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> DOOMSDAY = LuckyTNTMod.RH.registerTNTEntity("doomsday", new DisasterTNTEffect("doomsday", true));
 	public static final RegistryObject<EntityType<PrimedLTNT>> FIERY_HELL = LuckyTNTMod.RH.registerTNTEntity("fiery_hell", new FieryHellEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> STONE_COLD = LuckyTNTMod.RH.registerTNTEntity("stone_cold", new StoneColdEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> JUNGLE_TNT = LuckyTNTMod.RH.registerTNTEntity("jungle_tnt", new JungleTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> JUMPING_TNT = LuckyTNTMod.RH.registerTNTEntity("jumping_tnt", new JumpingTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);

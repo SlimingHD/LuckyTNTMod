@@ -183,6 +183,8 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.DOOMSDAY.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FIERY_HELL.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.STONE_COLD.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.JUNGLE_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.JUMPING_TNT.get(), BouncingTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);

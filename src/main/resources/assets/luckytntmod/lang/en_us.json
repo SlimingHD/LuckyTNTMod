@@ -163,6 +163,11 @@
 	"block.luckytntmod.mansion" : "Mansion",
 	"block.luckytntmod.helix" : "Helix",
 	"block.luckytntmod.death_ray" : "Death Ray",
+	"block.luckytntmod.doomsday" : "Doomsday",
+	"block.luckytntmod.fiery_hell" : "Fiery Hell",
+	"block.luckytntmod.stone_cold" : "Stone Cold",
+	"block.luckytntmod.jungle_tnt" : "Jungle TNT",
+	"block.luckytntmod.jumping_tnt" : "Jumping TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -411,6 +416,11 @@
 	"entity.luckytntmod.mansion" : "Mansion",
 	"entity.luckytntmod.helix" : "Helix",
 	"entity.luckytntmod.death_ray" : "Death Ray",
+	"entity.luckytntmod.doomsday" : "Doomsday",
+	"entity.luckytntmod.fiery_hell" : "Fiery Hell",
+	"entity.luckytntmod.stone_cold" : "Stone Cold",
+	"entity.luckytntmod.jungle_tnt" : "Jungle TNT",
+	"entity.luckytntmod.jumping_tnt" : "Jumping TNT",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
