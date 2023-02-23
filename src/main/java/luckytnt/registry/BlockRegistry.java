@@ -19,6 +19,9 @@ import luckytntlib.block.LuckyTNTBlock;
 import luckytntlib.registry.TNTBlockRegistryData;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DetectorRailBlock;
+import net.minecraft.world.level.block.PoweredRailBlock;
+import net.minecraft.world.level.block.RailBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -43,7 +46,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> DIGGING_TNT = LuckyTNTMod.RH.registerTNTBlock("digging_tnt", EntityRegistry.DIGGING_TNT, "n");
 	public static final RegistryObject<LTNTBlock> DRILLING_TNT = LuckyTNTMod.RH.registerTNTBlock("drilling_tnt", EntityRegistry.DRILLING_TNT, "n", MaterialColor.COLOR_ORANGE, true);
 	public static final RegistryObject<LTNTBlock> SPHERE_TNT = LuckyTNTMod.RH.registerTNTBlock("sphere_tnt", EntityRegistry.SPHERE_TNT, "n", MaterialColor.COLOR_ORANGE, true);
-	public static final RegistryObject<LTNTBlock> FLOATING_ISLAND = LuckyTNTMod.RH.registerTNTBlock(EntityRegistry.FLOATING_ISLAND, new TNTBlockRegistryData.Builder("floating_island").tab("n").description(new TranslatableContents("block.floating_island.description")).build());
+	public static final RegistryObject<LTNTBlock> FLOATING_ISLAND = LuckyTNTMod.RH.registerTNTBlock(EntityRegistry.FLOATING_ISLAND, new TNTBlockRegistryData.Builder("floating_island").tab("n").description(new TranslatableContents("item.floating_island.info")).build());
 	public static final RegistryObject<LTNTBlock> OCEAN_TNT = LuckyTNTMod.RH.registerTNTBlock("ocean_tnt", EntityRegistry.OCEAN_TNT, "n", MaterialColor.COLOR_BLUE, true);
 	public static final RegistryObject<LTNTBlock> HELLFIRE_TNT = LuckyTNTMod.RH.registerTNTBlock("hellfire_tnt", EntityRegistry.HELLFIRE_TNT, "n");
 	public static final RegistryObject<LTNTBlock> FIRE_TNT = LuckyTNTMod.RH.registerTNTBlock("fire_tnt", EntityRegistry.FIRE_TNT, "n", MaterialColor.COLOR_ORANGE, true);
@@ -89,7 +92,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> NUCLEAR_WASTE_TNT = LuckyTNTMod.RH.registerTNTBlock("nuclear_waste_tnt", EntityRegistry.NUCLEAR_WASTE_TNT, "n", MaterialColor.COLOR_LIGHT_GREEN, true);
 	public static final RegistryObject<LTNTBlock> STATIC_TNT = LuckyTNTMod.RH.registerTNTBlock("static_tnt", EntityRegistry.STATIC_TNT, "n", MaterialColor.COLOR_ORANGE, true);
 	public static final RegistryObject<LTNTBlock> PUMPKIN_BOMB = LuckyTNTMod.RH.registerTNTBlock("pumpkin_bomb", EntityRegistry.PUMPKIN_BOMB, "n", MaterialColor.COLOR_ORANGE, true);
-	public static final RegistryObject<LTNTBlock> SMOKE_TNT = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new SmokeTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("smoke_tnt").tab("n").description(new TranslatableContents("block.smoke_tnt.description")).build());
+	public static final RegistryObject<LTNTBlock> SMOKE_TNT = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new SmokeTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("smoke_tnt").tab("n").description(new TranslatableContents("item.smoke_tnt.info")).build());
 	public static final RegistryObject<LTNTBlock> TROLL_TNT = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new TrollTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("troll_tnt").tab("n").build());
 	public static final RegistryObject<LTNTBlock> TROLL_TNT_MK2 = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new TrollTNTMk2Block(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("troll_tnt_mk2").tab("n").build());
 	public static final RegistryObject<LTNTBlock> TROLL_TNT_MK3 = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new TrollTNTMk3Block(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("troll_tnt_mk3").tab("n").build());
@@ -216,4 +219,13 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> DEEPSLATE_GUNPOWDER_ORE = LuckyTNTMod.blockRegistry.register("deepslate_gunpowder_ore", () -> new GunpowderOreBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GRAY).sound(SoundType.STONE).requiresCorrectToolForDrops().strength(4.5f, 3f)));
 	public static final RegistryObject<Block> URANIUM_ORE = LuckyTNTMod.blockRegistry.register("uranium_ore", () -> new UraniumOreBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GREEN).sound(SoundType.STONE).requiresCorrectToolForDrops().strength(3f, 3f)));
 	public static final RegistryObject<Block> DEEPSLATE_URANIUM_ORE = LuckyTNTMod.blockRegistry.register("deepslate_uranium_ore", () -> new UraniumOreBlock(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_LIGHT_GREEN).sound(SoundType.STONE).requiresCorrectToolForDrops().strength(4.5f, 3f)));
+	public static final RegistryObject<Block> OBSIDIAN_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_rail", () -> new RailBlock(BlockBehaviour.Properties.of(Material.DECORATION).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noOcclusion()));
+	public static final RegistryObject<Block> OBSIDIAN_POWERED_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_powered_rail", () -> new PoweredRailBlock(BlockBehaviour.Properties.of(Material.DECORATION).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()) {
+		@Override
+		public boolean isActivatorRail() {
+			return false;
+		}
+	});
+	public static final RegistryObject<Block> OBSIDIAN_ACTIVATOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_activator_rail", () -> new PoweredRailBlock(BlockBehaviour.Properties.of(Material.DECORATION).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
+	public static final RegistryObject<Block> OBSIDIAN_DETECTOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_detector_rail", () -> new DetectorRailBlock(BlockBehaviour.Properties.of(Material.DECORATION).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
 }
