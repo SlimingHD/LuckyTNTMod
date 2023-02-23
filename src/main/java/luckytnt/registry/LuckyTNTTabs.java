@@ -45,7 +45,7 @@ public class LuckyTNTTabs {
 				populator.accept(item.get());
 			}
 		}));
-		MINECART = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "minecarts"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "other")), List.of(new ResourceLocation(LuckyTNTMod.MODID, "dynamite")), builder -> builder.title(Component.translatable("item_group.luckytntmod.minecart")).icon(() -> new ItemStack(ItemRegistry.TNT_X5_MINECART.get())).displayItems((enabledFlags, populator, hasPermission) -> {
+		MINECART = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "minecarts"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "other")), List.of(new ResourceLocation(LuckyTNTMod.MODID, "dynamite")), builder -> builder.title(Component.translatable("item_group.luckytntmod.minecarts")).icon(() -> new ItemStack(ItemRegistry.TNT_X5_MINECART.get())).displayItems((enabledFlags, populator, hasPermission) -> {
 			for(RegistryObject<? extends Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("m")) {
 				populator.accept(item.get());
 			}

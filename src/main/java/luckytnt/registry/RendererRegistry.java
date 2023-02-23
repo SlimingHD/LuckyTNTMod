@@ -236,6 +236,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.PULSE_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PHYSICS_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PICKY_DYNAMITE.get(), LDynamiteRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.CLUSTER_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.TUNNELING_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.XRAY_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FARMING_DYNAMITE.get(), LDynamiteRenderer::new);
