@@ -174,11 +174,10 @@
 	"block.luckytntmod.deepslate_uranium_ore" : "Tiefenschiefer-Uranerz",
 	"block.luckytntmod.gunpowder_ore" : "Schwarzpulvererz",
 	"block.luckytntmod.deepslate_gunpowder_ore" : "Tiefenschiefer-Schwarzpulvererz",
-	
-	"block.floating_island.description" : "\u00A77\u00A7o\u00c4ndere die H\u00f6he der Insel indem du die Konfiguration bearbeitest! Auf einem Server wirst du auch die Server-Konfiguration \u00e4ndern m\u00fcssen!",	
-	"block.smoke_tnt.description" : "\u00A77\u00A7o\u00c4ndere die Farbe des Rauchs indem du mit roter, gr\u00fcner, blauer, wei\u00dfer oder schwarzer Farbe darauf rechts-klickst!",
- 	"item.configuration_wand.info": "\u00A77\u00A7oRechtklicke mit diesem Stab bestimmte TNTs, um deren Konfiguration zu \u00e4ndern!",
-   	"item.gotthard_tunnel.info": "\u00A77\u00A7o\u00c4ndere, dass das TNT auch Straßen generiert, indem du mit dem Konfigurierungs-Stab auf den Block rechts-klickst!",
+	"block.luckytntmod.obsidian_rail" : "Obsidian Schiene",
+	"block.luckytntmod.obsidian_powered_rail" : "Obsidian Antriebsschiene",
+	"block.luckytntmod.obsidian_activator_rail" : "Obsidian Aktivierungsschiene",
+	"block.luckytntmod.obsidian_detector_rail" : "Obsidian Sensorschiene",
 
 	"item.luckytntmod.dynamite" : "Dynamit",
 	"item.luckytntmod.dynamite_x5" : "Dynamit x5",
@@ -313,8 +312,19 @@
 	"item.luckytntmod.purple_candy" : "Lilanes Bonbon",
 	"item.luckytntmod.yellow_candy" : "Gelbes Bonbon",
 	"item.luckytntmod.uranium_ingot" : "Uranbarren",
+	"item.luckytntmod.antimatter" : "Antimaterie",
 	"item.luckytntmod.configuration_wand" : "Konfigurations-Stab",
-
+	"item.luckytntmod.death_ray_ray" : "Todesstrahl-Strahl",
+	"item.luckytntmod.vacuum_cleaner" : "Staubsauger",
+	
+	"item.floating_island.info" : "\u00A77\u00A7o\u00c4ndere die H\u00f6he der Insel indem du die Konfiguration bearbeitest! Auf einem Server wirst du auch die Server-Konfiguration \u00e4ndern m\u00fcssen!",	
+	"item.smoke_tnt.info" : "\u00A77\u00A7o\u00c4ndere die Farbe des Rauchs indem du mit roter, gr\u00fcner, blauer, wei\u00dfer oder schwarzer Farbe darauf rechts-klickst!", 	
+ 	"item.configuration_wand.info": "\u00A77\u00A7oRechtklicke mit diesem Stab bestimmte TNTs, um deren Konfiguration zu \u00e4ndern!",
+   	"item.gotthard_tunnel.info": "\u00A77\u00A7o\u00c4ndere, dass das TNT auch Stra\u00dfen generiert, indem du mit dem Konfigurierungs-Stab auf den Block rechts-klickst!",
+	"item.antimatter.info": "\u00A77\u00A7oKann erstellt werden, wenn Uranerz von einem Todesstrahl-Strahl zerst\u00f6rt wurde!",
+	"item.obsidian_rails.info": "\u00A77\u00A7oObsidian Schienen haben eine Menge Explosionsresistenz! TNT-Loren, die auf ihnen explodieren verursachen keinen Block-Schaden!",
+	"item.vacuum_cleaner.info" : "\u00A77\u00A7oBenutze den Staubsauger um die nervigen Giftigen Wolken los zu werden",
+	
 	"entity.luckytntmod.tnt" : "TNT",
 	"entity.luckytntmod.tnt_x5" : "TNT x5",
 	"entity.luckytntmod.tnt_x20" : "TNT x20",
@@ -629,6 +639,8 @@
 	
 	"entity.luckytntmod.angry_miner" : "W\u00FCtender Minenarbeiter",
 	"entity.luckytntmod.toxic_cloud" : "Giftige Wolke",
+	"entity.luckytntmod.death_ray_ray" : "Todesstrahl-Strahl",
+	"entity.luckytntmod.vacuum_shot" : "Saugschuss",
 			
 	"item_group.luckytntmod.normal_tnt" : "Normales TNT",
 	"item_group.luckytntmod.god_tnt" : "Gott TNT",

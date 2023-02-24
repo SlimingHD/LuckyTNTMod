@@ -1,7 +1,7 @@
 {
-  "parent": "luckytntmod:custom/vacuumcleaner",
-  "textures": {
-    "0": "luckytntmod:blocks/vacuumcleaner",
-    "particle": "luckytntmod:item/dynamite"
-  }
+	"parent": "luckytntmod:custom/vacuumcleaner",
+	"textures": {
+		"0": "luckytntmod:block/vacuumcleaner",
+		"particle": "luckytntmod:item/dynamite"
+	}
 }

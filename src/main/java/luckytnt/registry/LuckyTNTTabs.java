@@ -58,11 +58,18 @@ public class LuckyTNTTabs {
 			populator.accept(ItemRegistry.PURPLE_CANDY.get());
 			populator.accept(ItemRegistry.YELLOW_CANDY.get());			
 			populator.accept(ItemRegistry.URANIUM_INGOT.get());			
+			populator.accept(ItemRegistry.ANTIMATTER.get());			
 			populator.accept(ItemRegistry.URANIUM_ORE.get());			
 			populator.accept(ItemRegistry.DEEPSLATE_URANIUM_ORE.get());			
 			populator.accept(ItemRegistry.GUNPOWDER_ORE.get());			
 			populator.accept(ItemRegistry.DEEPSLATE_GUNPOWDER_ORE.get());
 			populator.accept(ItemRegistry.CONFIGURATION_WAND.get());
+			populator.accept(ItemRegistry.OBSIDIAN_RAIL.get());
+			populator.accept(ItemRegistry.OBSIDIAN_POWERED_RAIL.get());
+			populator.accept(ItemRegistry.OBSIDIAN_ACTIVATOR_RAIL.get());
+			populator.accept(ItemRegistry.OBSIDIAN_DETECTOR_RAIL.get());
+			populator.accept(ItemRegistry.DEATH_RAY_RAY.get());
+			populator.accept(ItemRegistry.VACUUM_CLEANER.get());
 		}));
 	}
 }

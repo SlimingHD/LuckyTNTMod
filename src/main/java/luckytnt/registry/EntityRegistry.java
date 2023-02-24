@@ -29,6 +29,7 @@ import luckytnt.tnteffects.projectile.ChristmasDynamiteEffect;
 import luckytnt.tnteffects.projectile.ChristmasDynamiteProjectileEffect;
 import luckytnt.tnteffects.projectile.ClusterBombEffect;
 import luckytnt.tnteffects.projectile.ClusterDynamiteEffect;
+import luckytnt.tnteffects.projectile.DeathRayRayEffect;
 import luckytnt.tnteffects.projectile.DiggingDynamiteEffect;
 import luckytnt.tnteffects.projectile.DynamiteFireworkEffect;
 import luckytnt.tnteffects.projectile.EruptingDynamiteEffect;
@@ -54,6 +55,7 @@ import luckytnt.tnteffects.projectile.TimerDynamiteEffect;
 import luckytnt.tnteffects.projectile.TsarBombaBombEffect;
 import luckytnt.tnteffects.projectile.TunnelingDynamiteEffect;
 import luckytnt.tnteffects.projectile.UltralightDynamiteEffect;
+import luckytnt.tnteffects.projectile.VacuumShotEffect;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.LivingPrimedLTNT;
@@ -446,6 +448,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ACIDIC_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("acidic_projectile", new AcidicTNTEffect(), 1f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> HAILSTONE = LuckyTNTMod.entityRegistry.register("hailstone", () -> EntityType.Builder.<LExplosiveProjectile>of((EntityType<LExplosiveProjectile> type, Level level) -> new HailstoneProjectile(type, level, new HailstoneEffect()), MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).sized(0.1f, 0.1f).build("hailstone"));
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite_projectile", new ChristmasDynamiteProjectileEffect(), 0.25f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> DEATH_RAY_RAY = LuckyTNTMod.RH.registerExplosiveProjectile("death_ray_ray", new DeathRayRayEffect(), 0.25f, true);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> VACUUM_SHOT = LuckyTNTMod.RH.registerExplosiveProjectile("vacuum_shot", new VacuumShotEffect(), 0.25f, true);
 	
 	//Other
 	public static RegistryObject<EntityType<AngryMiner>> ANGRY_MINER = LuckyTNTMod.entityRegistry.register("angry_miner", () -> EntityType.Builder.<AngryMiner>of(AngryMiner::new, MobCategory.MISC).sized(0.6f, 1.8f).build("angry_miner"));

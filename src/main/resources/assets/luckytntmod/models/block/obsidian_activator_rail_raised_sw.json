@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/template_rail_raised_sw",
-  "textures": {
-    "rail": "luckytntmod:block/obsidian_activator_rail"
-  }
+	"parent": "minecraft:block/template_rail_raised_sw",
+	"textures": {
+		"rail": "luckytntmod:block/obsidian_activator_rail"
+	},
+	"render_type": "cutout_mipped"
 }
