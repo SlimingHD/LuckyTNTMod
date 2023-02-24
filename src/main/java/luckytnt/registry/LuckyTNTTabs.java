@@ -68,6 +68,8 @@ public class LuckyTNTTabs {
 			populator.accept(ItemRegistry.OBSIDIAN_POWERED_RAIL.get());
 			populator.accept(ItemRegistry.OBSIDIAN_ACTIVATOR_RAIL.get());
 			populator.accept(ItemRegistry.OBSIDIAN_DETECTOR_RAIL.get());
+			populator.accept(ItemRegistry.DEATH_RAY_RAY.get());
+			populator.accept(ItemRegistry.VACUUM_CLEANER.get());
 		}));
 	}
 }

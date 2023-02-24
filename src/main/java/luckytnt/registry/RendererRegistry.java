@@ -334,6 +334,8 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.ACIDIC_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HAILSTONE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHRISTMAS_DYNAMITE_PROJECTILE.get(), LDynamiteRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DEATH_RAY_RAY.get(), LDynamiteRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.VACUUM_SHOT.get(), LDynamiteRenderer::new);
 		
 		//Other
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);

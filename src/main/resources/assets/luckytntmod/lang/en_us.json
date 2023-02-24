@@ -314,6 +314,8 @@
 	"item.luckytntmod.uranium_ingot" : "Uranium Ingot",
 	"item.luckytntmod.antimatter" : "Antimatter",
 	"item.luckytntmod.configuration_wand" : "Configuration Wand",
+	"item.luckytntmod.death_ray_ray" : "Death Ray Ray",
+	"item.luckytntmod.vacuum_cleaner" : "Vacuum Cleaner",
   
 	"item.floating_island.info" : "\u00A77\u00A7oChange the height of the island by adjusting the config file! On a server you will also have to adjust the server-config file!",	
 	"item.smoke_tnt.info" : "\u00A77\u00A7oChange the color of the smoke by right-clicking the TNT with red, green, blue, white or black dye!",
@@ -321,6 +323,7 @@
  	"item.configuration_wand.info": "\u00A77\u00A7oRight-click with this Wand on specific TNTs to change their Configuration!",
 	"item.antimatter.info": "\u00A77\u00A7oMay be created when Uranium Ore is destroyed by a Death Ray Ray!",
 	"item.obsidian_rail.info" : "\u00A77\u00A7oObsidian Rails have a lot of Explosion Resistance! Minecarts exploding on them will not deal block damage!",
+	"item.vacuum_cleaner.info" : "\u00A77\u00A7oUse the Vacuum Cleaner to get rid of those pesky Toxic Clouds!",
 	
 	"entity.luckytntmod.tnt" : "TNT",
 	"entity.luckytntmod.tnt_x5" : "TNT x5",
@@ -636,6 +639,8 @@
 
 	"entity.luckytntmod.angry_miner" : "Angry Miner",
 	"entity.luckytntmod.toxic_cloud" : "Toxic Cloud",
+	"entity.luckytntmod.death_ray_ray" : "Death Ray Ray",
+	"entity.luckytntmod.vacuum_shot" : "Vacuum Shot",
 		
 	"item_group.luckytntmod.normal_tnt" : "Normal TNT",
 	"item_group.luckytntmod.god_tnt" : "God TNT",

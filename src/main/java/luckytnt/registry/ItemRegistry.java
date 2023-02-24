@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import luckytnt.LuckyTNTMod;
+import luckytnt.item.DeathRayRayItem;
+import luckytnt.item.VacuumCleaner;
 import luckytntlib.item.LDynamiteItem;
 import luckytntlib.item.LTNTMinecartItem;
 import luckytntlib.item.LuckyDynamiteItem;
@@ -206,4 +208,6 @@ public class ItemRegistry {
 			components.add(Component.translatable("item.obsidian_rail.info"));
 		}
 	});
+	public static final RegistryObject<LDynamiteItem> DEATH_RAY_RAY = LuckyTNTMod.RH.registerDynamiteItem(LuckyTNTMod.itemRegistry, "death_ray_ray", () -> new DeathRayRayItem(), "none", false, true);
+	public static final RegistryObject<Item> VACUUM_CLEANER = LuckyTNTMod.itemRegistry.register("vacuum_cleaner", () -> new VacuumCleaner());
 }
