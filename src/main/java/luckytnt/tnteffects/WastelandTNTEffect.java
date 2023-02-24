@@ -2,7 +2,6 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -43,7 +42,7 @@ public class WastelandTNTEffect extends PrimedTNTEffect {
 	public static void doVaporizeExplosion(IExplosiveEntity ent, double radius, boolean dryArea) {
 		if(!ent.level().isClientSide()) {
 			for(double offX = -radius; offX <= radius; offX++) {
-				for(double offY = radius; offY >= -radius; offY--) {
+				for(double offY = -radius; offY <= radius; offY++) {
 					for(double offZ = -radius; offZ <= radius; offZ++) {
 						double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ);
 						BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
@@ -53,40 +52,26 @@ public class WastelandTNTEffect extends PrimedTNTEffect {
 						
 						if(distance <= radius) {
 							if(state.getBlock() instanceof LiquidBlock || state.getMaterial() == Material.WATER_PLANT || state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getMaterial() == Material.BUBBLE_COLUMN) {
-								state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
 								ent.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 							}
 							if(state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)) {
 								ent.level().setBlock(pos, state.setValue(BlockStateProperties.WATERLOGGED, false), 3);
 							}
 							if(dryArea) {
-								
 								if(state.getMaterial() == Material.PLANT || state.getMaterial() == Material.REPLACEABLE_PLANT || state.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT) {
 									if(stateDown.canSustainPlant(ent.level(), posDown, Direction.UP, (IPlantable)Blocks.DEAD_BUSH)) {
-										state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
 										ent.level().setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 									}
 								}
 								if(state.getMaterial() == Material.GRASS) {
-									state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
 									ent.level().setBlock(pos, Blocks.DIRT.defaultBlockState(), 3);
-								}
-								else if(state.getMaterial() == Material.DIRT) {
-									state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+								} else if(state.getMaterial() == Material.DIRT) {
 									ent.level().setBlock(pos, Blocks.SAND.defaultBlockState(), 3);
-								}
-								else if(state.getMaterial() == Material.WOOL) {
-									state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+								} else if(state.getMaterial() == Material.WOOL) {
 									ent.level().setBlock(pos, Blocks.WHITE_WOOL.defaultBlockState(), 3);
-								}
-								else if(state.getBlock() instanceof WetSpongeBlock) {
-									state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+								} else if(state.getBlock() instanceof WetSpongeBlock) {
 									ent.level().setBlock(pos, Blocks.SPONGE.defaultBlockState(), 3);
-								}
-								else if(state.getMaterial() == Material.ICE || state.getMaterial() == Material.ICE_SOLID 
-										|| state.getMaterial() == Material.SNOW || state.getMaterial() == Material.TOP_SNOW 
-										|| state.getMaterial() == Material.POWDER_SNOW || state.getMaterial() == Material.LEAVES) {
-									state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+								} else if(state.getMaterial() == Material.ICE || state.getMaterial() == Material.ICE_SOLID || state.getMaterial() == Material.SNOW || state.getMaterial() == Material.TOP_SNOW || state.getMaterial() == Material.POWDER_SNOW || state.getMaterial() == Material.LEAVES) {
 									ent.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}

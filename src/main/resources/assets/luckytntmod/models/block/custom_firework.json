@@ -1,5 +1,6 @@
 {
-    "parent": "block/cube",
+    "parent": "block/block",
+    "render_type": "cutout_mipped",
     "textures": 
     {
         "down": "luckytntmod:block/custom_firework_bottom",

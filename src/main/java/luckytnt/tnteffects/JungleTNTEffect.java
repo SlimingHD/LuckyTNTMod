@@ -31,6 +31,7 @@ import net.minecraft.world.level.chunk.PalettedContainer;
 import net.minecraft.world.level.chunk.PalettedContainerRO;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Material;
+import net.minecraftforge.common.Tags;
 
 public class JungleTNTEffect extends PrimedTNTEffect {
 
@@ -74,7 +75,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 						BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 						BlockState state = ent.level().getBlockState(pos);
 						if(distance <= radius) {					
-							if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= maxResistance && state.getMaterial() != Material.AIR && (!state.isCollisionShapeFullBlock(ent.level(), pos) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS))))) {
+							if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= maxResistance && state.getMaterial() != Material.AIR && ((!state.isCollisionShapeFullBlock(ent.level(), pos) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS))))) {
 								if(state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getMaterial() == Material.WATER_PLANT) {
 									Block block1 = state.getBlock();
 									block1.onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());

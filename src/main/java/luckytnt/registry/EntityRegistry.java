@@ -13,6 +13,7 @@ import luckytnt.entity.AngryMiner;
 import luckytnt.entity.BouncingDynamite;
 import luckytnt.entity.HailstoneProjectile;
 import luckytnt.entity.OreTNTMinecart;
+import luckytnt.entity.PrimedCustomFirework;
 import luckytnt.entity.PrimedItemFirework;
 import luckytnt.entity.PrimedOreTNT;
 import luckytnt.entity.PrimedReplayTNT;
@@ -296,6 +297,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> JUMPING_TNT = LuckyTNTMod.RH.registerTNTEntity("jumping_tnt", new JumpingTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> WASTELAND_TNT = LuckyTNTMod.RH.registerTNTEntity("wasteland_tnt", new WastelandTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X10000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x10000",  TNT_X10000_EFFECT.buildTNT(() -> BlockRegistry.TNT_X10000, 480, false));
+	public static final RegistryObject<EntityType<PrimedLTNT>> CUSTOM_FIREWORK = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "custom_firework", () -> EntityType.Builder.<PrimedLTNT>of(PrimedCustomFirework::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("custom_firework"));
+	public static final RegistryObject<EntityType<PrimedLTNT>> ATLANTIS = LuckyTNTMod.RH.registerTNTEntity("atlantis", new AtlantisEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);
