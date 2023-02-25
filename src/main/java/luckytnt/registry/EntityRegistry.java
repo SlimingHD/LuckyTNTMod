@@ -63,7 +63,6 @@ import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.LivingPrimedLTNT;
 import luckytntlib.entity.LuckyTNTMinecart;
 import luckytntlib.entity.PrimedLTNT;
-import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.GeneralDynamiteEffect;
 import luckytntlib.util.tnteffects.StackedPrimedTNTEffect;
 import luckytntlib.util.tnteffects.TNTXStrengthEffect;
