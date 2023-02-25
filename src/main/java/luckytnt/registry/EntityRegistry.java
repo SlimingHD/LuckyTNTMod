@@ -50,12 +50,14 @@ import luckytnt.tnteffects.projectile.ReactionDynamiteEffect;
 import luckytnt.tnteffects.projectile.SensorDynamiteEffect;
 import luckytnt.tnteffects.projectile.ShatterproofDynamiteEffect;
 import luckytnt.tnteffects.projectile.ShrapnelEffect;
+import luckytnt.tnteffects.projectile.SolarEruptionProjectileEffect;
 import luckytnt.tnteffects.projectile.SpiralDynamiteEffect;
 import luckytnt.tnteffects.projectile.TimerDynamiteEffect;
 import luckytnt.tnteffects.projectile.TsarBombaBombEffect;
 import luckytnt.tnteffects.projectile.TunnelingDynamiteEffect;
 import luckytnt.tnteffects.projectile.UltralightDynamiteEffect;
 import luckytnt.tnteffects.projectile.VacuumShotEffect;
+import luckytnt.tnteffects.projectile.VredefortProjectileEffect;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.LivingPrimedLTNT;
@@ -301,6 +303,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X10000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x10000",  TNT_X10000_EFFECT.buildTNT(() -> BlockRegistry.TNT_X10000, 480, false));
 	public static final RegistryObject<EntityType<PrimedLTNT>> CUSTOM_FIREWORK = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "custom_firework", () -> EntityType.Builder.<PrimedLTNT>of(PrimedCustomFirework::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("custom_firework"));
 	public static final RegistryObject<EntityType<PrimedLTNT>> ATLANTIS = LuckyTNTMod.RH.registerTNTEntity("atlantis", new AtlantisEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> SOLAR_ERUPTION = LuckyTNTMod.RH.registerTNTEntity("solar_eruption", new SolarEruptionEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> VREDEFORT = LuckyTNTMod.RH.registerTNTEntity("vredefort", new VredefortEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);
@@ -450,6 +454,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite_projectile", new ChristmasDynamiteProjectileEffect(), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DEATH_RAY_RAY = LuckyTNTMod.RH.registerExplosiveProjectile("death_ray_ray", new DeathRayRayEffect(), 0.25f, true);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> VACUUM_SHOT = LuckyTNTMod.RH.registerExplosiveProjectile("vacuum_shot", new VacuumShotEffect(), 0.25f, true);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> SOLAR_ERUPTION_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("solar_eruption_projectile", new SolarEruptionProjectileEffect(), 1f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> VREDEFORT_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("vredefort_projectile", new VredefortProjectileEffect(), 6f, false);
 	
 	//Other
 	public static RegistryObject<EntityType<AngryMiner>> ANGRY_MINER = LuckyTNTMod.entityRegistry.register("angry_miner", () -> EntityType.Builder.<AngryMiner>of(AngryMiner::new, MobCategory.MISC).sized(0.6f, 1.8f).build("angry_miner"));
