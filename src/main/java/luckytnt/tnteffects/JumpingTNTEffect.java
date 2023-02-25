@@ -20,7 +20,7 @@ public class JumpingTNTEffect extends PrimedTNTEffect{
 		tnt.setOwner(ent.owner());
 		tnt.setTNTFuse(1000000);
 		ent.level().addFreshEntity(tnt);
-		EntityRegistry.TNT_X20_EFFECT.build(false).serverExplosion(ent);
+		EntityRegistry.TNT_X20_EFFECT.build().serverExplosion(ent);
 	}
 	
 	@Override

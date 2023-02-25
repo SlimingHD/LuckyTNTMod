@@ -61,7 +61,7 @@ public class FieryHellEffect extends PrimedTNTEffect {
 			}
 		});
 		
-		EntityRegistry.TNT_X20_EFFECT.build(false).serverExplosion(ent);
+		EntityRegistry.TNT_X20_EFFECT.build().serverExplosion(ent);
 		
 		for(int count = 0; count < 15; count++) {
 			Entity ghast = new Ghast(EntityType.GHAST, ent.level());
