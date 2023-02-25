@@ -214,7 +214,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> ATLANTIS = LuckyTNTMod.RH.registerTNTBlock("atlantis", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_BLUE, true);
 	public static final RegistryObject<LTNTBlock> SOLAR_ERUPTION = LuckyTNTMod.RH.registerTNTBlock("solar_eruption", EntityRegistry.SOLAR_ERUPTION, "d", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> VREDEFORT = LuckyTNTMod.RH.registerTNTBlock("vredefort", EntityRegistry.VREDEFORT, "d", MaterialColor.COLOR_BLUE, true);
-	public static final RegistryObject<LTNTBlock> COLOSSAL_TNT = LuckyTNTMod.RH.registerTNTBlock("colossal_tnt", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_RED, true);
+	public static final RegistryObject<LTNTBlock> COLOSSAL_TNT = LuckyTNTMod.RH.registerTNTBlock("colossal_tnt", EntityRegistry.COLOSSAL_TNT, "d", MaterialColor.COLOR_RED, true);
 	public static final RegistryObject<LTNTBlock> STRUCTURE_TNT = LuckyTNTMod.RH.registerTNTBlock("structure_tnt", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> GRANDE_FINALE = LuckyTNTMod.RH.registerTNTBlock("grande_finale", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> FLAT_EARTH = LuckyTNTMod.RH.registerTNTBlock("flat_earth", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_BLACK, true);

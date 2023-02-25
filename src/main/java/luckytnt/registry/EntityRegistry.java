@@ -63,6 +63,7 @@ import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.LivingPrimedLTNT;
 import luckytntlib.entity.LuckyTNTMinecart;
 import luckytntlib.entity.PrimedLTNT;
+import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.GeneralDynamiteEffect;
 import luckytntlib.util.tnteffects.StackedPrimedTNTEffect;
 import luckytntlib.util.tnteffects.TNTXStrengthEffect;
@@ -305,6 +306,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> ATLANTIS = LuckyTNTMod.RH.registerTNTEntity("atlantis", new AtlantisEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> SOLAR_ERUPTION = LuckyTNTMod.RH.registerTNTEntity("solar_eruption", new SolarEruptionEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> VREDEFORT = LuckyTNTMod.RH.registerTNTEntity("vredefort", new VredefortEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> COLOSSAL_TNT = LuckyTNTMod.RH.registerTNTEntity("colossal_tnt", new ColossalTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);
