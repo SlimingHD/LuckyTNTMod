@@ -175,6 +175,7 @@
 	"block.luckytntmod.solar_eruption" : "Sonneneruption",
 	"block.luckytntmod.vredefort" : "Vredefort",
 	"block.luckytntmod.colossal_tnt" : "Kolossales TNT",
+	"block.luckytntmod.structure_tnt" : "Struktur TNT",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -505,6 +506,7 @@
 	"entity.luckytntmod.solar_eruption" : "Sonneneruption",
 	"entity.luckytntmod.vredefort" : "Vredefort",
 	"entity.luckytntmod.colossal_tnt" : "Kolossales TNT",
+	"entity.luckytntmod.structure_tnt" : "Struktur TNT",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",

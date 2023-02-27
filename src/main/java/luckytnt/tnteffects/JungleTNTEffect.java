@@ -75,7 +75,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 						BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 						BlockState state = ent.level().getBlockState(pos);
 						if(distance <= radius) {					
-							if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= maxResistance && state.getMaterial() != Material.AIR && ((!state.isCollisionShapeFullBlock(ent.level(), pos) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS))))) {
+							if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= maxResistance && state.getMaterial() != Material.AIR && ((!state.isCollisionShapeFullBlock(ent.level(), pos) && !state.is(Blocks.MUD) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.getBlock() == Blocks.MANGROVE_ROOTS)))) {
 								if(state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getMaterial() == Material.WATER_PLANT) {
 									Block block1 = state.getBlock();
 									block1.onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());

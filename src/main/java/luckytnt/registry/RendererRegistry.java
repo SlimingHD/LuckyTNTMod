@@ -192,6 +192,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SOLAR_ERUPTION.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.VREDEFORT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.COLOSSAL_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.STRUCTURE_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);

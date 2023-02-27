@@ -8,6 +8,7 @@ import luckytnt.block.ItemFireworkBlock;
 import luckytnt.block.NuclearWasteBlock;
 import luckytnt.block.RedstoneTNTBlock;
 import luckytnt.block.SmokeTNTBlock;
+import luckytnt.block.StructureTNTBlock;
 import luckytnt.block.TrollTNTBlock;
 import luckytnt.block.TrollTNTMk2Block;
 import luckytnt.block.TrollTNTMk3Block;
@@ -215,7 +216,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> SOLAR_ERUPTION = LuckyTNTMod.RH.registerTNTBlock("solar_eruption", EntityRegistry.SOLAR_ERUPTION, "d", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> VREDEFORT = LuckyTNTMod.RH.registerTNTBlock("vredefort", EntityRegistry.VREDEFORT, "d", MaterialColor.COLOR_BLUE, true);
 	public static final RegistryObject<LTNTBlock> COLOSSAL_TNT = LuckyTNTMod.RH.registerTNTBlock("colossal_tnt", EntityRegistry.COLOSSAL_TNT, "d", MaterialColor.COLOR_RED, true);
-	public static final RegistryObject<LTNTBlock> STRUCTURE_TNT = LuckyTNTMod.RH.registerTNTBlock("structure_tnt", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_BLACK, true);
+	public static final RegistryObject<LTNTBlock> STRUCTURE_TNT = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new StructureTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_BLACK).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("structure_tnt").tab("d").build());
 	public static final RegistryObject<LTNTBlock> GRANDE_FINALE = LuckyTNTMod.RH.registerTNTBlock("grande_finale", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> FLAT_EARTH = LuckyTNTMod.RH.registerTNTBlock("flat_earth", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> EVIL_TNT = LuckyTNTMod.RH.registerTNTBlock("evil_tnt", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_RED, true);
