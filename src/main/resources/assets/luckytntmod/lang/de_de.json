@@ -177,6 +177,9 @@
 	"block.luckytntmod.colossal_tnt" : "Kolossales TNT",
 	"block.luckytntmod.structure_tnt" : "Struktur TNT",
 	"block.luckytntmod.grande_finale" : "Grande Finale",
+	"block.luckytntmod.flat_earth" : "Flache Erde",
+	"block.luckytntmod.evil_tnt" : "B\u00f6ses TNT",
+	"block.luckytntmod.kola_borehole_tnt" : "Kola Bohrloch TNT",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -511,6 +514,9 @@
 	"entity.luckytntmod.colossal_tnt" : "Kolossales TNT",
 	"entity.luckytntmod.structure_tnt" : "Struktur TNT",
 	"entity.luckytntmod.grande_finale" : "Grande Finale",
+	"entity.luckytntmod.flat_earth" : "Flache Erde",
+	"entity.luckytntmod.evil_tnt" : "B\u00f6ses TNT",
+	"entity.luckytntmod.kola_borehole_tnt" : "Kola Bohrloch TNT",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",

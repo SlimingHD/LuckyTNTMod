@@ -194,6 +194,9 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.COLOSSAL_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.STRUCTURE_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.GRANDE_FINALE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FLAT_EARTH.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.EVIL_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.KOLA_BOREHOLE_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
