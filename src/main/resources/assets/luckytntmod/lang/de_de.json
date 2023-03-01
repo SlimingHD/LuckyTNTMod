@@ -176,6 +176,7 @@
 	"block.luckytntmod.vredefort" : "Vredefort",
 	"block.luckytntmod.colossal_tnt" : "Kolossales TNT",
 	"block.luckytntmod.structure_tnt" : "Struktur TNT",
+	"block.luckytntmod.grande_finale" : "Grande Finale",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -332,6 +333,8 @@
 	"item.antimatter.info": "\u00A77\u00A7oKann erstellt werden, wenn Uranerz von einem Todesstrahl-Strahl zerst\u00f6rt wurde!",
 	"item.obsidian_rails.info": "\u00A77\u00A7oObsidian Schienen haben eine Menge Explosionsresistenz! TNT-Loren, die auf ihnen explodieren verursachen keinen Block-Schaden!",
 	"item.vacuum_cleaner.info" : "\u00A77\u00A7oBenutze den Staubsauger um die nervigen Giftigen Wolken los zu werden",
+	
+	"item.grande_finale.info": "\u00A77\u00A7o*Community TNT* Danke f\u00fcr 100.000 Downloads!",
 	
 	"entity.luckytntmod.tnt" : "TNT",
 	"entity.luckytntmod.tnt_x5" : "TNT x5",
@@ -507,6 +510,7 @@
 	"entity.luckytntmod.vredefort" : "Vredefort",
 	"entity.luckytntmod.colossal_tnt" : "Kolossales TNT",
 	"entity.luckytntmod.structure_tnt" : "Struktur TNT",
+	"entity.luckytntmod.grande_finale" : "Grande Finale",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",

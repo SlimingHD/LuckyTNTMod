@@ -176,6 +176,7 @@
 	"block.luckytntmod.vredefort" : "Vredefort",
 	"block.luckytntmod.colossal_tnt" : "Colossal TNT",
 	"block.luckytntmod.structure_tnt" : "Structure TNT",
+	"block.luckytntmod.grande_finale" : "Grande Finale",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -332,6 +333,8 @@
 	"item.antimatter.info": "\u00A77\u00A7oMay be created when Uranium Ore is destroyed by a Death Ray Ray!",
 	"item.obsidian_rail.info" : "\u00A77\u00A7oObsidian Rails have a lot of Explosion Resistance! Minecarts exploding on them will not deal block damage!",
 	"item.vacuum_cleaner.info" : "\u00A77\u00A7oUse the Vacuum Cleaner to get rid of those pesky Toxic Clouds!",
+	
+	"item.grande_finale.info": "\u00A77\u00A7o*Community TNT* Thank you for 100.000 downloads!",
 	
 	"entity.luckytntmod.tnt" : "TNT",
 	"entity.luckytntmod.tnt_x5" : "TNT x5",
@@ -508,6 +511,7 @@
 	"entity.luckytntmod.vredefort" : "Vredefort",
 	"entity.luckytntmod.colossal_tnt" : "Colossal TNT",
 	"entity.luckytntmod.structure_tnt" : "Structure TNT",
+	"entity.luckytntmod.grande_finale" : "Grande Finale",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
