@@ -24,5 +24,6 @@ public class PacketHandler {
 		CHANNEL.registerMessage(index++, ClientboundToxicCloudPacket.class, ClientboundToxicCloudPacket::encode, ClientboundToxicCloudPacket::new, ClientboundToxicCloudPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		CHANNEL.registerMessage(index++, ClientboundFreezeNBTPacket.class, ClientboundFreezeNBTPacket::encode, ClientboundFreezeNBTPacket::new, ClientboundFreezeNBTPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 		CHANNEL.registerMessage(index++, ClientboundBooleanNBTPacket.class, ClientboundBooleanNBTPacket::encode, ClientboundBooleanNBTPacket::new, ClientboundBooleanNBTPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+		CHANNEL.registerMessage(index++, ClientboundHydrogenBombPacket.class, ClientboundHydrogenBombPacket::encode, ClientboundHydrogenBombPacket::new, ClientboundHydrogenBombPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
 	}
 }

@@ -1,6 +1,8 @@
 package luckytnt.client;
 
 import luckytnt.LevelVariables;
+import luckytnt.tnteffects.projectile.HydrogenBombBombEffect;
+import luckytntlib.util.IExplosiveEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -48,6 +50,18 @@ public class ClientAccess {
 		Player player = Minecraft.getInstance().player;
 		if(player != null) {
 			player.getPersistentData().putInt(nbt, value);
+		}
+	}
+	
+	public static void displayHydrogenBombParticles(int id) {
+		Minecraft minecraft = Minecraft.getInstance();
+		Entity ent = minecraft.level.getEntity(id);
+		if(ent != null) {
+			if(ent instanceof IExplosiveEntity ient) {
+				if(ient.getEffect() instanceof HydrogenBombBombEffect effect) {
+					effect.displayMushroomCloud(ient);
+				}
+			}
 		}
 	}
 }
