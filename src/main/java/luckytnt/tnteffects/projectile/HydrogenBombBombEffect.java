@@ -8,6 +8,7 @@ import luckytnt.network.ClientboundHydrogenBombPacket;
 import luckytnt.network.PacketHandler;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EffectRegistry;
+import luckytnt.util.NuclearBombLike;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IBlockExplosionCondition;
@@ -30,7 +31,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
 
-public class HydrogenBombBombEffect extends PrimedTNTEffect {
+public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBombLike {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
@@ -70,6 +71,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect {
 		}
 	}
 	
+	@Override
 	public void displayMushroomCloud(IExplosiveEntity ent) {
 		for(int count = 0; count < 3000; count++) {
 			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 120 - Math.random() * 120, ent.y() + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 120 - Math.random() * 120, 0, 0, 0);

@@ -1,7 +1,7 @@
 package luckytnt.client;
 
 import luckytnt.LevelVariables;
-import luckytnt.tnteffects.projectile.HydrogenBombBombEffect;
+import luckytnt.util.NuclearBombLike;
 import luckytntlib.util.IExplosiveEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.Entity;
@@ -58,7 +58,7 @@ public class ClientAccess {
 		Entity ent = minecraft.level.getEntity(id);
 		if(ent != null) {
 			if(ent instanceof IExplosiveEntity ient) {
-				if(ient.getEffect() instanceof HydrogenBombBombEffect effect) {
+				if(ient.getEffect() instanceof NuclearBombLike effect) {
 					effect.displayMushroomCloud(ient);
 				}
 			}
