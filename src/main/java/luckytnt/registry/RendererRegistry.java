@@ -197,6 +197,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.FLAT_EARTH.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.EVIL_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.KOLA_BOREHOLE_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HYDROGEN_BOMB.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
@@ -348,6 +349,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.VACUUM_SHOT.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SOLAR_ERUPTION_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.VREDEFORT_PROJECTILE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HYDROGEN_BOMB_BOMB.get(), BombRenderer::new);
 		
 		//Other
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);

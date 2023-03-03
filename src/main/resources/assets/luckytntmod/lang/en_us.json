@@ -180,6 +180,7 @@
 	"block.luckytntmod.flat_earth" : "Flat Earth",
 	"block.luckytntmod.evil_tnt" : "Evil TNT",
 	"block.luckytntmod.kola_borehole_tnt" : "Kola Borehole TNT",
+	"block.luckytntmod.hydrogen_bomb" : "Hydrogen Bomb",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -518,6 +519,7 @@
 	"entity.luckytntmod.flat_earth" : "Flat Earth",
 	"entity.luckytntmod.evil_tnt" : "Evil TNT",
 	"entity.luckytntmod.kola_borehole_tnt" : "Kola Borehole TNT",
+	"entity.luckytntmod.hydrogen_bomb" : "Hydrogen Bomb",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
@@ -664,6 +666,7 @@
 	"entity.luckytntmod.christmas_dynamite_projectile" : "Christmas Dynamite",
 	"entity.luckytntmod.solar_eruption_projectile" : "Solar Eruption Projectile",
 	"entity.luckytntmod.vredefort_projectile" : "Vredefort Meteor",
+	"entity.luckytntmod.hydrogen_bomb_bomb" : "Hydrogen Bomb Bomb",
 
 	"entity.luckytntmod.angry_miner" : "Angry Miner",
 	"entity.luckytntmod.toxic_cloud" : "Toxic Cloud",

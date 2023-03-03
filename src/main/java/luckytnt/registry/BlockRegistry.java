@@ -221,7 +221,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> FLAT_EARTH = LuckyTNTMod.RH.registerTNTBlock("flat_earth", EntityRegistry.FLAT_EARTH, "d", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> EVIL_TNT = LuckyTNTMod.RH.registerLivingTNTBlock("evil_tnt", EntityRegistry.EVIL_TNT, "d", MaterialColor.COLOR_RED, true);
 	public static final RegistryObject<LTNTBlock> KOLA_BOREHOLE_TNT = LuckyTNTMod.RH.registerTNTBlock("kola_borehole_tnt", EntityRegistry.KOLA_BOREHOLE_TNT, "d", MaterialColor.COLOR_BLACK, true);
-	public static final RegistryObject<LTNTBlock> HYDROGEN_BOMB = LuckyTNTMod.RH.registerTNTBlock("hydrogen_bomb", EntityRegistry.ATLANTIS, "d", MaterialColor.COLOR_PURPLE, true);
+	public static final RegistryObject<LTNTBlock> HYDROGEN_BOMB = LuckyTNTMod.RH.registerTNTBlock("hydrogen_bomb", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.COLOR_PURPLE, true);
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));
