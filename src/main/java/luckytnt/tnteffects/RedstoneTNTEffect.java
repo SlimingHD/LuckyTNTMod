@@ -32,7 +32,7 @@ public class RedstoneTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
-				return (level.getBlockState(pos.below()).isCollisionShapeFullBlock(level, pos.below()) || level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP)) && (state.isAir() || state.canBeReplaced(new DirectionalPlaceContext(level, pos, Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !state.isCollisionShapeFullBlock(level, pos) || state.is(BlockTags.FLOWERS)) && (Math.random() < 0.4f && state.getMaterial() != Material.LEAVES);
+				return (state.isCollisionShapeFullBlock(level, pos) || state.isFaceSturdy(level, pos, Direction.UP)) && (level.getBlockState(pos.above()).isAir() || level.getBlockState(pos.above()).canBeReplaced(new DirectionalPlaceContext(level, pos.above(), Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) || level.getBlockState(pos.above()).is(BlockTags.FLOWERS)) && (Math.random() < 0.4f && state.getMaterial() != Material.LEAVES);
 			}
 		}, new IForEachBlockExplosionEffect() {
 			

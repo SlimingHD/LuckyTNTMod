@@ -54,7 +54,7 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect{
 					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
 					return false;
 				}
-				return (level.getBlockState(pos.below()).isCollisionShapeFullBlock(level, pos.below()) || level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP)) && (state.isAir() || state.canBeReplaced(new DirectionalPlaceContext(level, pos, Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !state.isCollisionShapeFullBlock(level, pos) || state.is(BlockTags.FLOWERS));
+				return (state.isCollisionShapeFullBlock(level, pos) || state.isFaceSturdy(level, pos, Direction.UP)) && (level.getBlockState(pos.above()).isAir() || level.getBlockState(pos.above()).canBeReplaced(new DirectionalPlaceContext(level, pos.above(), Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) || level.getBlockState(pos.above()).is(BlockTags.FLOWERS));
 			}
 		}, new IForEachBlockExplosionEffect() {
 			
