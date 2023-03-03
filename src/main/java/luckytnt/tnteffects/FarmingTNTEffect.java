@@ -12,8 +12,11 @@ import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.DirectionalPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -36,7 +39,7 @@ public class FarmingTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
-				return state.getMaterial() != Material.LEAVES && !state.is(BlockTags.LOGS) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100;
+				return (level.getBlockState(pos.below()).isCollisionShapeFullBlock(level, pos.below()) || level.getBlockState(pos.below()).isFaceSturdy(level, pos.below(), Direction.UP)) && (state.isAir() || state.canBeReplaced(new DirectionalPlaceContext(level, pos, Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !state.isCollisionShapeFullBlock(level, pos) || state.is(BlockTags.FLOWERS)) && (state.getMaterial() != Material.LEAVES && !state.is(BlockTags.LOGS) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100);
 			}
 		}, new IForEachBlockExplosionEffect() {
 			
