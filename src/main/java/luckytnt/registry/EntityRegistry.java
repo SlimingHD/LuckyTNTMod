@@ -325,6 +325,7 @@ public class EntityRegistry {
 	}, 20f, 1024f, 0.6f, 1f, true);
 	public static final RegistryObject<EntityType<PrimedLTNT>> KOLA_BOREHOLE_TNT = LuckyTNTMod.RH.registerTNTEntity("kola_borehole_tnt", new KolaBoreholeTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HYDROGEN_BOMB = LuckyTNTMod.RH.registerTNTEntity("hydrogen_bomb", new HydrogenBombEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> FLUORINE_TNT = LuckyTNTMod.RH.registerTNTEntity("fluorine_tnt", new FluorineTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);

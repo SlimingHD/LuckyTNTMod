@@ -198,6 +198,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.EVIL_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.KOLA_BOREHOLE_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HYDROGEN_BOMB.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FLUORINE_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);

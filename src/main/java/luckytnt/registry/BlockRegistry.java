@@ -222,6 +222,15 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> EVIL_TNT = LuckyTNTMod.RH.registerLivingTNTBlock("evil_tnt", EntityRegistry.EVIL_TNT, "d", MaterialColor.COLOR_RED, true);
 	public static final RegistryObject<LTNTBlock> KOLA_BOREHOLE_TNT = LuckyTNTMod.RH.registerTNTBlock("kola_borehole_tnt", EntityRegistry.KOLA_BOREHOLE_TNT, "d", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> HYDROGEN_BOMB = LuckyTNTMod.RH.registerTNTBlock("hydrogen_bomb", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.COLOR_PURPLE, true);
+	public static final RegistryObject<LTNTBlock> FLUORINE_TNT = LuckyTNTMod.RH.registerTNTBlock("fluorine_tnt", EntityRegistry.FLUORINE_TNT, "d", MaterialColor.COLOR_YELLOW, true);
+	public static final RegistryObject<LTNTBlock> DISINTEGRATING_TNT = LuckyTNTMod.RH.registerTNTBlock("disintegrating_tnt", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.SNOW, true);
+	public static final RegistryObject<LTNTBlock> FLYING_TNT = LuckyTNTMod.RH.registerTNTBlock("flying_tnt", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.COLOR_LIGHT_GREEN, true);
+	public static final RegistryObject<LTNTBlock> HEAT_WAVE = LuckyTNTMod.RH.registerTNTBlock("heat_wave", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.COLOR_RED, true);
+	public static final RegistryObject<LTNTBlock> WINTER_TNT = LuckyTNTMod.RH.registerTNTBlock("winter_tnt", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.QUARTZ, true);
+	public static final RegistryObject<LTNTBlock> BLACK_HOLE_TNT = LuckyTNTMod.RH.registerTNTBlock("black_hole_tnt", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.COLOR_BLACK, true);
+	public static final RegistryObject<LTNTBlock> FLAK_TNT = LuckyTNTMod.RH.registerTNTBlock("flak_tnt", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.COLOR_YELLOW, true);
+	public static final RegistryObject<LTNTBlock> TNT_RAIN = LuckyTNTMod.RH.registerTNTBlock("tnt_rain", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.COLOR_GRAY, true);
+	public static final RegistryObject<LTNTBlock> LUCKY_DOOMSDAY = LuckyTNTMod.RH.registerTNTBlock("lucky_doomsday", EntityRegistry.HYDROGEN_BOMB, "d", MaterialColor.COLOR_RED, true);
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of(Material.TOP_SNOW, MaterialColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));

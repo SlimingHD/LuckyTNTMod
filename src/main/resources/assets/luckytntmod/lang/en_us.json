@@ -181,6 +181,7 @@
 	"block.luckytntmod.evil_tnt" : "Evil TNT",
 	"block.luckytntmod.kola_borehole_tnt" : "Kola Borehole TNT",
 	"block.luckytntmod.hydrogen_bomb" : "Hydrogen Bomb",
+	"block.luckytntmod.fluorine_tnt" : "Fluorine TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -520,6 +521,7 @@
 	"entity.luckytntmod.evil_tnt" : "Evil TNT",
 	"entity.luckytntmod.kola_borehole_tnt" : "Kola Borehole TNT",
 	"entity.luckytntmod.hydrogen_bomb" : "Hydrogen Bomb",
+	"entity.luckytntmod.fluorine_tnt" : "Fluorine TNT",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
