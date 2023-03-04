@@ -11,7 +11,6 @@ import luckytnt.registry.EffectRegistry;
 import luckytnt.util.NuclearBombLike;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IBlockExplosionCondition;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -43,13 +42,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 		explosion.doEntityExplosion(25f, true);
 		explosion.doBlockExplosion(1f, 1f, 0.167f, 0.05f, false, true);
 		
-		ExplosionHelper.doModifiedSphericalExplosion(ent.level(), ent.getPos(), 250, new Vec3(1f, (2f/3f), 1f), new IBlockExplosionCondition() {
-			
-			@Override
-			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
-				return true;
-			}
-		}, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doModifiedSphericalExplosion(ent.level(), ent.getPos(), 250, new Vec3(1f, (2f/3f), 1f), new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
