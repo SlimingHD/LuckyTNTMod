@@ -70,6 +70,7 @@ public class LuckyTNTTabs {
 			populator.accept(ItemRegistry.OBSIDIAN_DETECTOR_RAIL.get());
 			populator.accept(ItemRegistry.DEATH_RAY_RAY.get());
 			populator.accept(ItemRegistry.VACUUM_CLEANER.get());
+			populator.accept(ItemRegistry.TOXIC_STONE.get());
 		}));
 	}
 }

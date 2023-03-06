@@ -32,6 +32,7 @@ import luckytnt.tnteffects.projectile.ClusterBombEffect;
 import luckytnt.tnteffects.projectile.ClusterDynamiteEffect;
 import luckytnt.tnteffects.projectile.DeathRayRayEffect;
 import luckytnt.tnteffects.projectile.DiggingDynamiteEffect;
+import luckytnt.tnteffects.projectile.DisintegratingProjectileEffect;
 import luckytnt.tnteffects.projectile.DynamiteFireworkEffect;
 import luckytnt.tnteffects.projectile.EruptingDynamiteEffect;
 import luckytnt.tnteffects.projectile.FloatingDynamiteEffect;
@@ -285,6 +286,9 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> PARTICLE_PHYSICS_TNT = LuckyTNTMod.RH.registerTNTEntity("particle_physics_tnt", new ParticlePhysicsTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HEAT_DEATH = LuckyTNTMod.RH.registerTNTEntity("heat_death", new DisasterTNTEffect("heat_death", false));
 	public static final RegistryObject<EntityType<PrimedLTNT>> CONTINENTAL_DRIFT = LuckyTNTMod.RH.registerTNTEntity("continental_drift", new ContinentalDriftEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> BLACK_HOLE_TNT = LuckyTNTMod.RH.registerTNTEntity("black_hole_tnt", new BlackHoleTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> FLAK_TNT = LuckyTNTMod.RH.registerTNTEntity("flak_tnt", new FlakTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_RAIN = LuckyTNTMod.RH.registerTNTEntity("tnt_rain", new DisasterTNTEffect("tnt_rain", false));
 	
 	//Doomsday
 	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERNOVA = LuckyTNTMod.RH.registerTNTEntity("supernova", new SupernovaEffect());
@@ -326,6 +330,10 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> KOLA_BOREHOLE_TNT = LuckyTNTMod.RH.registerTNTEntity("kola_borehole_tnt", new KolaBoreholeTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HYDROGEN_BOMB = LuckyTNTMod.RH.registerTNTEntity("hydrogen_bomb", new HydrogenBombEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> FLUORINE_TNT = LuckyTNTMod.RH.registerTNTEntity("fluorine_tnt", new FluorineTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> DISINTEGRATING_TNT = LuckyTNTMod.RH.registerTNTEntity("disintegrating_tnt", new DisintegratingTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> FLYING_TNT = LuckyTNTMod.RH.registerTNTEntity("flying_tnt", new StackedPrimedTNTEffect(TNT_X2000_EFFECT.fuse(200).buildTNT(() -> BlockRegistry.FLYING_TNT), List.of(new LevitatingTNTEffect())));
+	public static final RegistryObject<EntityType<PrimedLTNT>> HEAT_WAVE = LuckyTNTMod.RH.registerTNTEntity("heat_wave", new HeatWaveEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> WINTER_TNT = LuckyTNTMod.RH.registerTNTEntity("winter_tnt", new WinterTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);
@@ -478,6 +486,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> SOLAR_ERUPTION_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("solar_eruption_projectile", new SolarEruptionProjectileEffect(), 1f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> VREDEFORT_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("vredefort_projectile", new VredefortProjectileEffect(), 6f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> HYDROGEN_BOMB_BOMB = LuckyTNTMod.RH.registerExplosiveProjectile("hydrogen_bomb_bomb", new HydrogenBombBombEffect(), 1.4f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> DISINTEGRATING_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("disintegrating_projectile", new DisintegratingProjectileEffect(), 1f, false);
 	
 	//Other
 	public static RegistryObject<EntityType<AngryMiner>> ANGRY_MINER = LuckyTNTMod.entityRegistry.register("angry_miner", () -> EntityType.Builder.<AngryMiner>of(AngryMiner::new, MobCategory.MISC).sized(0.6f, 1.8f).build("angry_miner"));

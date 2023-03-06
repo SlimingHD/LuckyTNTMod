@@ -199,6 +199,13 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.KOLA_BOREHOLE_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HYDROGEN_BOMB.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FLUORINE_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DISINTEGRATING_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FLYING_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.HEAT_WAVE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.WINTER_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.TNT_RAIN.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.FLAK_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.BLACK_HOLE_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
@@ -351,6 +358,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SOLAR_ERUPTION_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.VREDEFORT_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HYDROGEN_BOMB_BOMB.get(), BombRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DISINTEGRATING_PROJECTILE.get(), LTNTRenderer::new);
 		
 		//Other
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);
