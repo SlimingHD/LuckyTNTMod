@@ -286,9 +286,6 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> PARTICLE_PHYSICS_TNT = LuckyTNTMod.RH.registerTNTEntity("particle_physics_tnt", new ParticlePhysicsTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HEAT_DEATH = LuckyTNTMod.RH.registerTNTEntity("heat_death", new DisasterTNTEffect("heat_death", false));
 	public static final RegistryObject<EntityType<PrimedLTNT>> CONTINENTAL_DRIFT = LuckyTNTMod.RH.registerTNTEntity("continental_drift", new ContinentalDriftEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> BLACK_HOLE_TNT = LuckyTNTMod.RH.registerTNTEntity("black_hole_tnt", new BlackHoleTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> FLAK_TNT = LuckyTNTMod.RH.registerTNTEntity("flak_tnt", new FlakTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_RAIN = LuckyTNTMod.RH.registerTNTEntity("tnt_rain", new DisasterTNTEffect("tnt_rain", false));
 	
 	//Doomsday
 	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERNOVA = LuckyTNTMod.RH.registerTNTEntity("supernova", new SupernovaEffect());
@@ -334,6 +331,9 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> FLYING_TNT = LuckyTNTMod.RH.registerTNTEntity("flying_tnt", new StackedPrimedTNTEffect(TNT_X2000_EFFECT.fuse(200).buildTNT(() -> BlockRegistry.FLYING_TNT), List.of(new LevitatingTNTEffect())));
 	public static final RegistryObject<EntityType<PrimedLTNT>> HEAT_WAVE = LuckyTNTMod.RH.registerTNTEntity("heat_wave", new HeatWaveEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> WINTER_TNT = LuckyTNTMod.RH.registerTNTEntity("winter_tnt", new WinterTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> BLACK_HOLE_TNT = LuckyTNTMod.RH.registerTNTEntity("black_hole_tnt", new BlackHoleTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> FLAK_TNT = LuckyTNTMod.RH.registerTNTEntity("flak_tnt", new FlakTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_RAIN = LuckyTNTMod.RH.registerTNTEntity("tnt_rain", new DisasterTNTEffect("tnt_rain", false));
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);

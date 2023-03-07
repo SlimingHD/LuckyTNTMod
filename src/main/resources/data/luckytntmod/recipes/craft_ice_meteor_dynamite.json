@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "luckytntmod:ice_meteor"
+      "item": "luckytntmod:ice_meteor_tnt"
     }
   ],
   "result": {
