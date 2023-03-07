@@ -3,7 +3,7 @@
     "textures": 
     {
         "down": "minecraft:block/tnt_bottom",
-        "up": "minecraft:block/tnt_top",
+        "up": "luckytntmod:block/mansion_top",
         "north": "luckytntmod:block/colossal_tnt_side",
         "east": "luckytntmod:block/colossal_tnt_side",
         "south": "luckytntmod:block/colossal_tnt_side",
