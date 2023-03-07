@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "luckytntmod:icy_meteor"
+      "item": "luckytntmod:christmas_tnt"
     }
   ],
   "result": {
-    "item": "luckytntmod:icy_meteor_dynamite",
+    "item": "luckytntmod:christmas_dynamite",
     "count": 4
   }
 }

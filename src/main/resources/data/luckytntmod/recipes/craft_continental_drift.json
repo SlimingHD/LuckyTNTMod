@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "020",
+    "010"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:earthquake_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:tnt_x100"
+    },
+    "2": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:continental_drift",
+    "count": 1
+  }
+}
