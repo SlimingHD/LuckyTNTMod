@@ -90,7 +90,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class EntityRegistry {
 
 	public static final TNTXStrengthEffect.Builder WEAK_TNT_EFFECT = new TNTXStrengthEffect.Builder().strength(2f).knockbackStrength(0.5f);	
-	public static final TNTXStrengthEffect.Builder TNT_EFFECT = new TNTXStrengthEffect.Builder();	
+	public static final TNTXStrengthEffect.Builder TNT_EFFECT = new TNTXStrengthEffect.Builder();
 	public static final TNTXStrengthEffect.Builder TNT_X5_EFFECT = new TNTXStrengthEffect.Builder().strength(10f).randomVecLength(1.25f).knockbackStrength(1.5f);
 	public static final TNTXStrengthEffect.Builder TNT_X20_EFFECT = new TNTXStrengthEffect.Builder().strength(20f).randomVecLength(1.5f).knockbackStrength(2f);
 	public static final TNTXStrengthEffect.Builder TNT_X100_EFFECT = new TNTXStrengthEffect.Builder().strength(50f).yStrength(1.3f).knockbackStrength(3f);
