@@ -36,7 +36,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class BlockRegistry {
 
 	//TNT
-	public static final RegistryObject<LTNTBlock> TNT = LuckyTNTMod.RH.registerTNTBlock(EntityRegistry.TNT, new TNTBlockRegistryData.Builder("tnt").tab(null).addDispenserBehaviour(false).makeItem(false).build());
+	public static final RegistryObject<LTNTBlock> TNT = LuckyTNTMod.RH.registerTNTBlock(EntityRegistry.TNT, new TNTBlockRegistryData.Builder("tnt").tab(null).addDispenseBehavior(false).makeItem(false).build());
 
 	//Normal TNT
 	public static final RegistryObject<LTNTBlock> TNT_X5 = LuckyTNTMod.RH.registerTNTBlock("tnt_x5", EntityRegistry.TNT_X5, "n", MaterialColor.COLOR_BLUE, true);
@@ -219,7 +219,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> VREDEFORT = LuckyTNTMod.RH.registerTNTBlock("vredefort", EntityRegistry.VREDEFORT, "d", MaterialColor.COLOR_BLUE, true);
 	public static final RegistryObject<LTNTBlock> COLOSSAL_TNT = LuckyTNTMod.RH.registerTNTBlock("colossal_tnt", EntityRegistry.COLOSSAL_TNT, "d", MaterialColor.COLOR_RED, true);
 	public static final RegistryObject<LTNTBlock> STRUCTURE_TNT = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new StructureTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_BLACK).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("structure_tnt").tab("d").build());
-	public static final RegistryObject<LTNTBlock> GRANDE_FINALE = LuckyTNTMod.RH.registerTNTBlock(EntityRegistry.GRANDE_FINALE, new TNTBlockRegistryData.Builder("grande_finale").color(MaterialColor.COLOR_BLACK).description(new TranslatableContents("item.grande_finale.info")).shouldRandomlyFuse(true).tab("d").build());
+	public static final RegistryObject<LTNTBlock> GRANDE_FINALE = LuckyTNTMod.RH.registerTNTBlock(EntityRegistry.GRANDE_FINALE, new TNTBlockRegistryData.Builder("grande_finale").color(MaterialColor.COLOR_BLACK).description(new TranslatableContents("item.grande_finale.info")).tab("d").build());
 	public static final RegistryObject<LTNTBlock> FLAT_EARTH = LuckyTNTMod.RH.registerTNTBlock("flat_earth", EntityRegistry.FLAT_EARTH, "d", MaterialColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> EVIL_TNT = LuckyTNTMod.RH.registerLivingTNTBlock("evil_tnt", EntityRegistry.EVIL_TNT, "d", MaterialColor.COLOR_RED, true);
 	public static final RegistryObject<LTNTBlock> KOLA_BOREHOLE_TNT = LuckyTNTMod.RH.registerTNTBlock("kola_borehole_tnt", EntityRegistry.KOLA_BOREHOLE_TNT, "d", MaterialColor.COLOR_BLACK, true);

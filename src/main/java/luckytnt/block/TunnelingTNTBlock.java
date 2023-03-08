@@ -84,7 +84,7 @@ public class TunnelingTNTBlock extends LTNTBlock{
     public PrimedLTNT explode(Level level, boolean exploded, double x, double y, double z, @Nullable LivingEntity igniter) throws NullPointerException {
 		if(TNT != null) {
 			PrimedLTNT tnt = TNT.get().create(level);
-			tnt.setFuse(exploded && shouldRandomlyFuse() ? tnt.getEffect().getDefaultFuse(tnt) / 8 + random.nextInt(Mth.clamp(tnt.getEffect().getDefaultFuse(tnt) / 4, 1, Integer.MAX_VALUE)) : tnt.getEffect().getDefaultFuse(tnt));
+			tnt.setFuse(exploded && randomizedFuseUponExploded() ? tnt.getEffect().getDefaultFuse(tnt) / 8 + random.nextInt(Mth.clamp(tnt.getEffect().getDefaultFuse(tnt) / 4, 1, Integer.MAX_VALUE)) : tnt.getEffect().getDefaultFuse(tnt));
 			tnt.setPos(x + 0.5f, y, z + 0.5f);
 			tnt.setOwner(igniter);
 			tnt.getPersistentData().putString("direction", level.getBlockState(new BlockPos(x, y, z)).getBlock() instanceof TunnelingTNTBlock ? level.getBlockState(new BlockPos(x, y, z)).getValue(FACING).getName() : "east");
