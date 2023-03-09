@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/sinkhole_tnt_bottom",
+        "up": "luckytntmod:block/sinkhole_tnt_top",
+        "north": "luckytntmod:block/sinkhole_tnt_side",
+        "east": "luckytntmod:block/sinkhole_tnt_side",
+        "south": "luckytntmod:block/sinkhole_tnt_side",
+        "west": "luckytntmod:block/sinkhole_tnt_side",
+        "particle": "luckytntmod:block/sinkhole_tnt_side"
+    }
+}

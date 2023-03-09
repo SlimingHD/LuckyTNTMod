@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#1#",
+    "202",
+    "#2#"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:snow_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:global_disaster"
+    },
+    "1": {
+      "item": "luckytntmod:antimatter"
+    },
+    "2": {
+      "item": "luckytntmod:freeze_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:stone_cold",
+    "count": 1
+  }
+}

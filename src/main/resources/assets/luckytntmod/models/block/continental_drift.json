@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/continental_drift_bottom",
+        "up": "luckytntmod:block/continental_drift_top",
+        "north": "luckytntmod:block/continental_drift_side",
+        "east": "luckytntmod:block/continental_drift_side",
+        "south": "luckytntmod:block/continental_drift_side",
+        "west": "luckytntmod:block/continental_drift_side",
+        "particle": "luckytntmod:block/continental_drift_side"
+    }
+}

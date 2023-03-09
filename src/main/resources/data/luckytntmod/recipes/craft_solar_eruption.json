@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "333",
+    "010",
+    "222"
+  ],
+  "key": {
+    "2": {
+      "item": "luckytntmod:erupting_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:lava_ocean_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:antimatter"
+    },
+    "3": {
+      "item": "luckytntmod:pompeii"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:solar_eruption",
+    "count": 1
+  }
+}

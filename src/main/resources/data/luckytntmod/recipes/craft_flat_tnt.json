@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "010",
+    "222"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:cobblestone"
+    },
+    "1": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "2": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:flat_tnt",
+    "count": 1
+  }
+}

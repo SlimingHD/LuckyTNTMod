@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "123",
+    "404",
+    "525"
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:sand_firework"
+    },
+    "0": {
+      "item": "luckytntmod:antimatter"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_firework"
+    },
+    "3": {
+      "item": "luckytntmod:gravel_firework"
+    },
+    "4": {
+      "item": "luckytntmod:rainbow_firework"
+    },
+    "5": {
+      "item": "luckytntmod:new_years_firework"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:grande_finale",
+    "count": 1
+  }
+}

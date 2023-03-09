@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/global_disaster_bottom",
+        "up": "luckytntmod:block/global_disaster_top",
+        "north": "luckytntmod:block/global_disaster_side",
+        "east": "luckytntmod:block/global_disaster_side",
+        "south": "luckytntmod:block/global_disaster_side",
+        "west": "luckytntmod:block/global_disaster_side",
+        "particle": "luckytntmod:block/global_disaster_side"
+    }
+}

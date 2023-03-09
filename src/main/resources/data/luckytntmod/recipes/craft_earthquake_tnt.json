@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "101",
+    "1#1"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:digging_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "1": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:earthquake_tnt",
+    "count": 1
+  }
+}

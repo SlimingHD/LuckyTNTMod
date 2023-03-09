@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:spider_eye"
+    },
+    "1": {
+      "item": "minecraft:porkchop"
+    },
+    "2": {
+      "item": "minecraft:bone"
+    },
+    "3": {
+      "item": "minecraft:saddle"
+    },
+    "4": {
+      "item": "minecraft:tnt"
+    },
+    "5": {
+      "item": "minecraft:blaze_powder"
+    },
+    "6": {
+      "item": "minecraft:leather"
+    },
+    "7": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "8": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:animal_tnt",
+    "count": 1
+  }
+}

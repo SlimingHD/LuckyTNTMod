@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "2#2",
+    "010",
+    "2#2"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:digging_tnt"
+    },
+    "#": {
+      "item": "luckytntmod:sinkhole_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:antimatter"
+    },
+    "2": {
+      "item": "luckytntmod:drilling_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:kola_borehole_tnt",
+    "count": 1
+  }
+}

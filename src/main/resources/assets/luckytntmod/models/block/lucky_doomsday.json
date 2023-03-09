@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "minecraft:block/tnt_bottom",
+        "up": "luckytntmod:block/city_firework_top",
+        "north": "luckytntmod:block/lucky_doomsday_side",
+        "east": "luckytntmod:block/lucky_doomsday_side",
+        "south": "luckytntmod:block/lucky_doomsday_side",
+        "west": "luckytntmod:block/lucky_doomsday_side",
+        "particle": "luckytntmod:block/lucky_doomsday_side"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/new_years_firework_bottom",
+        "up": "luckytntmod:block/item_firework_top",
+        "north": "luckytntmod:block/item_firework_side",
+        "east": "luckytntmod:block/item_firework_side",
+        "south": "luckytntmod:block/item_firework_side",
+        "west": "luckytntmod:block/item_firework_side",
+        "particle": "luckytntmod:block/item_firework_side"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/heat_wave_bottom",
+        "up": "luckytntmod:block/heat_wave_top",
+        "north": "luckytntmod:block/heat_wave_side",
+        "east": "luckytntmod:block/heat_wave_side",
+        "south": "luckytntmod:block/heat_wave_side",
+        "west": "luckytntmod:block/heat_wave_side",
+        "particle": "luckytntmod:block/heat_wave_side"
+    }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "2#2",
+    "010"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:smooth_basalt"
+    },
+    "1": {
+      "item": "minecraft:calcite"
+    },
+    "2": {
+      "item": "minecraft:amethyst_block"
+    },
+    "#": {
+      "item": "luckytntmod:tnt_x20"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:geode_tnt",
+    "count": 1
+  }
+}

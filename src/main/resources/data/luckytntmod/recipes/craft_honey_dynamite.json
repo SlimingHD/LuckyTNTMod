@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:honey_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:honey_dynamite",
+    "count": 4
+  }
+}

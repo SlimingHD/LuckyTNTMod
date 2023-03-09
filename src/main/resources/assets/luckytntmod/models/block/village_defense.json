@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/village_defense_bottom",
+        "up": "luckytntmod:block/village_defense_top",
+        "north": "luckytntmod:block/village_defense_side",
+        "east": "luckytntmod:block/village_defense_side",
+        "south": "luckytntmod:block/village_defense_side",
+        "west": "luckytntmod:block/village_defense_side",
+        "particle": "luckytntmod:block/village_defense_side"
+    }
+}

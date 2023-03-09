@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "121",
+    "111"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "1": {
+      "item": "minecraft:blue_ice"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x500"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:ice_meteor_tnt",
+    "count": 1
+  }
+}

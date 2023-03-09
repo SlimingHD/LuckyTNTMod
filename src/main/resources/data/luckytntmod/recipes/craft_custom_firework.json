@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "123",
+    "405",
+    "678"
+  ],
+  "key": {
+    "1": {
+      "item": "minecraft:grass_block"
+    },
+    "2": {
+      "item": "minecraft:note_block"
+    },
+    "3": {
+      "item": "minecraft:red_mushroom_block"
+    },
+    "4": {
+      "item": "minecraft:sponge"
+    },
+    "5": {
+      "item": "minecraft:obsidian"
+    },
+    "6": {
+      "item": "minecraft:warped_nylium"
+    },
+    "7": {
+      "item": "luckytntmod:tnt_firework"
+    },
+	"8": {
+      "item": "minecraft:end_stone"
+    },
+    "0": {
+      "item": "luckytntmod:antimatter"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:custom_firework",
+    "count": 1
+  }
+}

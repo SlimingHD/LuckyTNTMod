@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#1#",
+    "303",
+    "#2#"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "luckytntmod:sphere_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:cubic_tnt"
+    },
+    "3": {
+      "item": "luckytntmod:fire_tnt"
+    },
+    "#": {
+      "item": "luckytntmod:lucky_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:custom_tnt",
+    "count": 4
+  }
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/template_rail_raised_ne",
+	"textures": {
+		"rail": "luckytntmod:block/obsidian_powered_rail_on"
+	},
+	"render_type": "cutout_mipped"
+}

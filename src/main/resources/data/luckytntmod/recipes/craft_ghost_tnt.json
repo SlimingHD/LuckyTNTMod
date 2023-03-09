@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "101",
+    "020",
+    "101"
+  ],
+  "key": {
+    "2": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "0": {
+      "item": "luckytntmod:phantom_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:ghost_tnt",
+    "count": 1
+  }
+}

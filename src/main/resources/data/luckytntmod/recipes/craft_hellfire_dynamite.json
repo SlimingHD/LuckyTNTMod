@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:hellfire_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:hellfire_dynamite",
+    "count": 4
+  }
+}

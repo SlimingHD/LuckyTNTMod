@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "222",
+    "#0#",
+    "###"
+  ],
+  "key": {
+    "2": {
+      "item": "minecraft:chorus_flower"
+    },
+    "0": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "#": {
+      "item": "minecraft:end_stone"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:end_tnt",
+    "count": 1
+  }
+}

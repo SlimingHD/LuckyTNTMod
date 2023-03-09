@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/fiery_hell_bottom",
+        "up": "luckytntmod:block/fiery_hell_top",
+        "north": "luckytntmod:block/fiery_hell_side",
+        "east": "luckytntmod:block/fiery_hell_side",
+        "south": "luckytntmod:block/fiery_hell_side",
+        "west": "luckytntmod:block/fiery_hell_side",
+        "particle": "luckytntmod:block/fiery_hell_side"
+    }
+}

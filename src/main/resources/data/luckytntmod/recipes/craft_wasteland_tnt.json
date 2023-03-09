@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "111",
+    "#0#",
+    "111"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:dust_bowl"
+    },
+    "1": {
+      "item": "luckytntmod:vaporize_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:antimatter"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:wasteland_tnt",
+    "count": 1
+  }
+}

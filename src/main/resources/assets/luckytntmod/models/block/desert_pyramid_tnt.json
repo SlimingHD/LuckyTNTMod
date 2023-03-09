@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/desert_pyramid_bottom",
+        "up": "luckytntmod:block/desert_pyramid_top",
+        "north": "luckytntmod:block/desert_pyramid_side",
+        "east": "luckytntmod:block/desert_pyramid_side",
+        "south": "luckytntmod:block/desert_pyramid_side",
+        "west": "luckytntmod:block/desert_pyramid_side",
+        "particle": "luckytntmod:block/desert_pyramid_side"
+    }
+}

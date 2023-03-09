@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1",
+    "0"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:slime_block"
+    },
+    "1": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:bouncing_tnt",
+    "count": 1
+  }
+}
