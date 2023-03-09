@@ -1,7 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "luckytntmod:block/deepslate_uranium_ore",
-    "particle": "luckytntmod:block/deepslate_uranium_ore"
-  }
-}

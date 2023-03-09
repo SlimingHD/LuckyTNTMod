@@ -1,6 +1,0 @@
-{
-	"type": "forge:add_features",
-	"biomes": "#luckytntmod:feature/general_feature",
-	"features": "luckytntmod:graves",
-	"step": "surface_structures"
-}

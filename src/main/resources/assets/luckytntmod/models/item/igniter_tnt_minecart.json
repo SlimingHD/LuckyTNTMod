@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "luckytntmod:item/igniter_tnt_minecart"
-  }
-}
