@@ -2,7 +2,7 @@
     "parent": "block/cube",
     "textures": 
     {
-        "down": "luckytntmod:block/tntx5_bottom",
+        "down": "luckytntmod:block/tnt_x5_bottom",
         "up": "luckytntmod:block/timer_tnt_top",
         "north": "luckytntmod:block/timer_tnt_side",
         "east": "luckytntmod:block/timer_tnt_side",
