@@ -82,9 +82,9 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-  maven {
-  	url "https://sliminglibs.jfrog.io/artifactory/ltnt-libs-release/"
-  }
+  	maven {
+  		url "https://sliminglibs.jfrog.io/artifactory/ltnt-libs-release/"
+  	}
 }
 
 dependencies {
