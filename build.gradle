@@ -107,7 +107,16 @@ jar {
     }
 }
 
+task sourceJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allJava
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
 jar.finalizedBy('reobfJar')
+
+//publish should always depend on this, but build not
+//publish.dependsOn("reobfJar")
 
 publishing {
     publications {
@@ -116,8 +125,12 @@ publishing {
         }
     }
     repositories {
-        maven {       
-            url ""
+        maven{     	
+        	credentials {
+        		username "eliaskuehne@outlook.com"
+        		password "3Hallo284!"
+        	}
+			url "https://sliminglibs.jfrog.io/artifactory/ltnt-libs-release-local/"
         }
     }
 }
