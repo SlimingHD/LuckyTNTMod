@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:floating_island"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:floating_island_dynamite",
+    "count": 4
+  }
+}

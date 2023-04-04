@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "020",
+    "000"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:sphere_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x100"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:global_disaster",
+    "count": 1
+  }
+}

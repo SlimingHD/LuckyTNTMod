@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "101",
+    "000",
+    "101"
+  ],
+  "key": {
+    "1": {
+      "item": "minecraft:tnt"
+    },
+    "0": {
+      "item": "luckytntmod:snow_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:christmas_tnt",
+    "count": 1
+  }
+}

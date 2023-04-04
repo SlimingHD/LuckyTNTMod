@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:tnt"
+    },
+    {
+      "item": "minecraft:iron_boots"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:walking_tnt",
+    "count": 1
+  }
+}

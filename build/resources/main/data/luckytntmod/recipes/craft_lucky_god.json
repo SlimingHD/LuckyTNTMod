@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:global_disaster"
+    },
+    {
+      "item": "luckytntmod:end_gate"
+    },
+    {
+      "item": "luckytntmod:hyperion"
+    },
+    {
+      "item": "luckytntmod:giant_tnt"
+    },
+    {
+      "item": "luckytntmod:chicxulub"
+    },
+    {
+      "item": "luckytntmod:unbreakable_tnt"
+    },
+    {
+      "item": "luckytntmod:mankinds_mark"
+    },
+    {
+      "item": "luckytntmod:pompeii"
+    },
+    {
+      "item": "luckytntmod:dense_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:lucky_god",
+    "count": 4
+  }
+}

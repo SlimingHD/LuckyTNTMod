@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0#0",
+    "010",
+    "0#0"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:drilling_tnt"
+    },
+    "#": {
+      "item": "luckytntmod:sphere_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:sinkhole_tnt",
+    "count": 1
+  }
+}

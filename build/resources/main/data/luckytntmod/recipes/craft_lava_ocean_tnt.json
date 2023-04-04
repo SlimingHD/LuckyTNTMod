@@ -1,0 +1,21 @@
+{
+  "group": "luckytntmod",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#0#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:lava_bucket"
+    },
+    "0": {
+      "item": "luckytntmod:ocean_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:lava_ocean_tnt",
+    "count": 1
+  }
+}

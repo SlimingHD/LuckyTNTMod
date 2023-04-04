@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "#0#",
+    "121"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:tnt_x5"
+    },
+    "1": {
+      "item": "luckytntmod:sensor_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:picky_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:mimic_tnt",
+    "count": 1
+  }
+}

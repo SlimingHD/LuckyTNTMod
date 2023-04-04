@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#0#",
+    "010",
+    " 0 "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:iron_ingot"
+    },
+    "0": {
+      "item": "luckytntmod:vaporize_dynamite"
+    },
+    "1": {
+      "item": "luckytntmod:vaporize_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:vacuum_cleaner",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "0#0",
+    " 1 "
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:cobblestone"
+    },
+    "#": {
+      "item": "luckytntmod:sphere_tnt"
+    },
+    "1": {
+      "item": "minecraft:iron_pickaxe"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:picky_tnt",
+    "count": 1
+  }
+}

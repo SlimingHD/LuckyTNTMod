@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "121",
+    " 3 "
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "luckytntmod:meteor_shower"
+    },
+    "2": {
+      "item": "luckytntmod:meteor_tnt"
+    },
+    "3": {
+      "item": "luckytntmod:tnt_x100"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:chicxulub",
+    "count": 1
+  }
+}

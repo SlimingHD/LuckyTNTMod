@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "#1#",
+    "000"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:tunneling_tnt"
+    },
+    "#": {
+      "item": "minecraft:sea_lantern"
+    },
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:gotthard_tunnel",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "121",
+    " 0 "
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:hellfire_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:fire_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:antimatter"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:fiery_hell",
+    "count": 1
+  }
+}

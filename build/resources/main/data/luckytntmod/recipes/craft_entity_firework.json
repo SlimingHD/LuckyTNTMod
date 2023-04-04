@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:emerald"
+    },
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "2": {
+      "item": "minecraft:spider_eye"
+    },
+    "3": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "4": {
+      "item": "luckytntmod:tnt_firework"
+    },
+    "5": {
+      "item": "minecraft:leather"
+    },
+    "6": {
+      "tag": "minecraft:wool"
+    },
+    "7": {
+      "item": "minecraft:creeper_head"
+    },
+    "8": {
+      "item": "minecraft:porkchop"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:entity_firework",
+    "count": 1
+  }
+}

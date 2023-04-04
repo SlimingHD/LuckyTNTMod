@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:roulette_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:roulette_dynamite",
+    "count": 4
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "111",
+    "222"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:tnt_x100"
+    },
+    "1": {
+      "item": "minecraft:stone"
+    },
+    "2": {
+      "item": "minecraft:dirt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:inverted_tnt",
+    "count": 1
+  }
+}

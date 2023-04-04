@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "121",
+    " 0 "
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:magma_block"
+    },
+    "1": {
+      "item": "minecraft:fire_charge"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x100"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:meteor_shower",
+    "count": 1
+  }
+}

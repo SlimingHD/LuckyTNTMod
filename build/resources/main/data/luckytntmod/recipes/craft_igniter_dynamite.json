@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:igniter_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:igniter_dynamite",
+    "count": 4
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "101",
+    "020",
+    "101"
+  ],
+  "key": {
+    "2": {
+      "item": "luckytntmod:antimatter"
+    },
+    "1": {
+      "item": "luckytntmod:snow_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:snowstorm_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:winter_tnt",
+    "count": 1
+  }
+}

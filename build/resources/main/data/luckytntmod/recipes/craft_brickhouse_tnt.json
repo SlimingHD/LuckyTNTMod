@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "234",
+    "050"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:bricks"
+    },
+    "1": {
+      "item": "minecraft:chest"
+    },
+    "2": {
+      "item": "minecraft:torch"
+    },
+    "3": {
+      "item": "minecraft:tnt"
+    },
+    "4": {
+      "item": "minecraft:crafting_table"
+    },
+    "5": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:brickhouse_tnt",
+    "count": 1
+  }
+}

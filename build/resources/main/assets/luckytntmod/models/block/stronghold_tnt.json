@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/stronghold_bottom",
+        "up": "luckytntmod:block/stronghold_top",
+        "north": "luckytntmod:block/stronghold_side",
+        "east": "luckytntmod:block/stronghold_side",
+        "south": "luckytntmod:block/stronghold_side",
+        "west": "luckytntmod:block/stronghold_side",
+        "particle": "luckytntmod:block/stronghold_side"
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "101",
+    "020",
+    "101"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:red_dye"
+    },
+    "1": {
+      "item": "minecraft:black_dye"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x5"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:roulette_tnt",
+    "count": 1
+  }
+}

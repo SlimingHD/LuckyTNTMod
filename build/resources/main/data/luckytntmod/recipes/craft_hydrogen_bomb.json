@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "#0#",
+    "1#1"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:tsar_bomba"
+    },
+    "0": {
+      "item": "luckytntmod:antimatter"
+    },
+    "1": {
+      "item": "luckytntmod:nuclear_waste_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:hydrogen_bomb",
+    "count": 1
+  }
+}

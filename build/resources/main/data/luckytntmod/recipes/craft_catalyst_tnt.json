@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#1#",
+    "101",
+    "#1#"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "luckytntmod:reaction_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:catalyst_tnt",
+    "count": 1
+  }
+}

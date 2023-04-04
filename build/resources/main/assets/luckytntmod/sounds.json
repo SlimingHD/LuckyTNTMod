@@ -1,0 +1,273 @@
+{
+  "say_goodbye": {
+    "category": "hostile",
+    "subtitle": "subtitles.say_goodbye",
+    "sounds": [
+      {
+        "name": "luckytntmod:say_goodbye",
+        "stream": false
+      }
+    ]
+  },
+  "death_ray": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "luckytntmod:deathray",
+        "stream": false
+      }
+    ]
+  },
+  "vacuum_cleaner": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "luckytntmod:vacuumcleaner",
+        "stream": false
+      }
+    ]
+  },
+  "vacuum_cleaner_start": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "luckytntmod:vacuumcleanerstart",
+        "stream": false
+      }
+    ]
+  },
+  "spawn1": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaspawn1",
+        "stream": false
+      }
+    ]
+  },
+  "spawn2": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaspawn2",
+        "stream": false
+      }
+    ]
+  },
+  "ambient1": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaambient1",
+        "stream": false
+      }
+    ]
+  },
+  "ambient2": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaambient2",
+        "stream": false
+      }
+    ]
+  },
+  "ambient3": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaambient3",
+        "stream": false
+      }
+    ]
+  },
+  "ambient4": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaambient4",
+        "stream": false
+      }
+    ]
+  },
+  "ambient5": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaadvertisment1",
+        "stream": false
+      }
+    ]
+  },
+  "ambient6": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaadvertisment2",
+        "stream": false
+      }
+    ]
+  },
+  "vaporize_spawn": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaspawnvaporizetntinwater",
+        "stream": false
+      }
+    ]
+  },
+  "items": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaitemsonground",
+        "stream": false
+      }
+    ]
+  },
+  "potato": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaeatspotato",
+        "stream": false
+      }
+    ]
+  },
+  "blow_up_potato": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopablowuppotatos",
+        "stream": false
+      }
+    ]
+  },
+  "wood_sword": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lekoopaspawnwoodsword",
+        "stream": false
+      }
+    ]
+  },
+  "lachen": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lehklacht",
+        "stream": false
+      }
+    ]
+  },
+  "schrei": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:lehkschreit",
+        "stream": false
+      }
+    ]
+  },
+  "evil_spawn1": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopaspawn1",
+        "stream": false
+      }
+    ]
+  },
+  "evil_spawn2": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopaspawn2",
+        "stream": false
+      }
+    ]
+  },
+  "spawn_villagers": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopaspawnvillagers1",
+        "stream": false
+      }
+    ]
+  },
+  "kill_villagers": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopakillvillagers",
+        "stream": false
+      }
+    ]
+  },
+  "nokill": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopanokill",
+        "stream": false
+      }
+    ]
+  },
+  "spawn_attacking": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopaspawnattackingtnt",
+        "stream": false
+      }
+    ]
+  },
+  "spawn_zombie": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopaspawnzombie",
+        "stream": false
+      }
+    ]
+  },
+  "spawn_flat": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopaspawnflattnt",
+        "stream": false
+      }
+    ]
+  },
+  "spawn_tnt": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopaspawnnormaltnt",
+        "stream": false
+      }
+    ]
+  },
+  "spawn_tnt_firework": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:evillekoopaspawntntfirework",
+        "stream": false
+      }
+    ]
+  },
+  "brenn_und_stirb": {
+    "category": "neutral",
+    "sounds": [
+      {
+        "name": "luckytntmod:brennundstirb",
+        "stream": false
+      }
+    ]
+  }
+}

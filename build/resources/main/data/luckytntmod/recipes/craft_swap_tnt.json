@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#0#",
+    " # "
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:ender_tnt"
+    },
+    "#": {
+      "item": "luckytntmod:gravity_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:swap_tnt",
+    "count": 1
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:meteor_tnt"
+    },
+    {
+      "item": "luckytntmod:compact_tnt"
+    },
+    {
+      "item": "luckytntmod:sphere_tnt"
+    },
+    {
+      "item": "luckytntmod:digging_tnt"
+    },
+    {
+      "item": "luckytntmod:freeze_tnt"
+    },
+    {
+      "item": "luckytntmod:erupting_tnt"
+    },
+    {
+      "item": "luckytntmod:spiral_tnt"
+    },
+    {
+      "item": "luckytntmod:easter_egg"
+    },
+    {
+      "item": "luckytntmod:snow_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:lucky_tnt",
+    "count": 4
+  }
+}

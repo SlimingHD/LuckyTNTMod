@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/global_disaster_bottom",
+        "up": "luckytntmod:block/kola_borehole_tnt_top",
+        "north": "luckytntmod:block/kola_borehole_tnt_side",
+        "east": "luckytntmod:block/kola_borehole_tnt_side",
+        "south": "luckytntmod:block/kola_borehole_tnt_side",
+        "west": "luckytntmod:block/kola_borehole_tnt_side",
+        "particle": "luckytntmod:block/kola_borehole_tnt_side"
+    }
+}

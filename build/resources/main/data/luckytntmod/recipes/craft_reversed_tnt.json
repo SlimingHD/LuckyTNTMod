@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "434",
+    "121",
+    "000"
+  ],
+  "key": {
+    "0": {
+      "tag": "minecraft:saplings"
+    },
+    "1": {
+      "item": "luckytntmod:floating_island"
+    },
+    "2": {
+      "item": "luckytntmod:inverted_tnt"
+    },
+    "3": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "4": {
+      "item": "luckytntmod:tnt_x20"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:reversed_tnt",
+    "count": 1
+  }
+}

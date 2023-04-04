@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/floating_island_bottom",
+        "up": "luckytntmod:block/end_gate_top",
+        "north": "luckytntmod:block/end_gate_side",
+        "east": "luckytntmod:block/end_gate_side",
+        "south": "luckytntmod:block/end_gate_side",
+        "west": "luckytntmod:block/end_gate_side",
+        "particle": "luckytntmod:block/end_gate_side"
+    }
+}

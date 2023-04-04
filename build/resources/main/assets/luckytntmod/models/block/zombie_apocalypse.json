@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/zombie_apocalypse_bottom",
+        "up": "luckytntmod:block/zombie_apocalypse_top",
+        "north": "luckytntmod:block/zombie_apocalypse_side",
+        "east": "luckytntmod:block/zombie_apocalypse_side",
+        "south": "luckytntmod:block/zombie_apocalypse_side",
+        "west": "luckytntmod:block/zombie_apocalypse_side",
+        "particle": "luckytntmod:block/zombie_apocalypse_side"
+    }
+}
