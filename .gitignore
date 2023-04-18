@@ -17,8 +17,6 @@ out
 build
 .gradle
 build.gradle
-.gradle
-build
 
 # other
 eclipse
