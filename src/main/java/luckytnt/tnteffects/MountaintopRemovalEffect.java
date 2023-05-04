@@ -7,7 +7,7 @@ import net.minecraft.core.particles.ParticleTypes;
 public class MountaintopRemovalEffect extends FlatTNTEffect {
 
 	public MountaintopRemovalEffect() {
-		super(() -> BlockRegistry.MOUNTAINTOP_REMOVAL, 100, 30);
+		super(() -> BlockRegistry.MOUNTAINTOP_REMOVAL, 100, 30, 180);
 	}
 
 	@Override
