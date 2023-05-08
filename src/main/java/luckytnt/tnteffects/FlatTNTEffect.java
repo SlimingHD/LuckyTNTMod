@@ -17,17 +17,20 @@ import net.minecraftforge.registries.RegistryObject;
 public class FlatTNTEffect extends PrimedTNTEffect{
 	private final int radius;
 	private final int radiusY;
+	private int fuse = 80;
 	private Supplier<RegistryObject<LTNTBlock>> block;
 	
-	public FlatTNTEffect( int radius, int radiusY) {
+	public FlatTNTEffect(int radius, int radiusY, int fuse) {
 		this.radius = radius;
 		this.radiusY = radiusY;
+		this.fuse = fuse;
 	}
 	
-	public FlatTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int radius, int radiusY) {
+	public FlatTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int radius, int radiusY, int fuse) {
 		this.radius = radius;
 		this.radiusY = radiusY;
 		this.block = block;
+		this.fuse = fuse;
 	}
 	
 	@Override
@@ -49,5 +52,10 @@ public class FlatTNTEffect extends PrimedTNTEffect{
 	@Override
 	public Block getBlock() {
 		return block.get().get();
+	}
+	
+	@Override
+	public int getDefaultFuse(IExplosiveEntity ent) {
+		return fuse;
 	}
 }

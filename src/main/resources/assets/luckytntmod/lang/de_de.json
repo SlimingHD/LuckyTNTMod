@@ -60,7 +60,7 @@
 	"block.luckytntmod.troll_tnt" : "Troll TNT",
 	"block.luckytntmod.troll_tnt_mk2" : "Troll TNT Mk2",
 	"block.luckytntmod.troll_tnt_mk3" : "Troll TNT Mk3",
-	"block.luckytntmod.cluster_bomb_tnt" : "Streubombe",
+	"block.luckytntmod.cluster_bomb" : "Streubombe",
 	"block.luckytntmod.air_strike" : "Luftschlag",
 	"block.luckytntmod.spamming_tnt" : "Zum\u00FCllendes TNT",
 	"block.luckytntmod.bouncing_tnt" : "Abprallendes TNT",
