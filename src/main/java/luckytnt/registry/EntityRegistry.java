@@ -217,6 +217,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> END_TNT = LuckyTNTMod.RH.registerTNTEntity("end_tnt", new EndTNTEffect(20));
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHRISTMAS_TNT = LuckyTNTMod.RH.registerTNTEntity("christmas_tnt", new StackedPrimedTNTEffect(new ChristmasTNTEffect(), Collections.singletonList(new SnowTNTEffect(50))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> EARTHQUAKE_TNT = LuckyTNTMod.RH.registerTNTEntity("earthquake_tnt", new EarthquakeTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> PRISM_TNT = LuckyTNTMod.RH.registerTNTEntity("prism_tnt", new PrismTNTEffect());
 	
 	//God TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> GLOBAL_DISASTER = LuckyTNTMod.RH.registerTNTEntity("global_disaster", new GlobalDisasterEffect());
@@ -286,6 +287,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> PARTICLE_PHYSICS_TNT = LuckyTNTMod.RH.registerTNTEntity("particle_physics_tnt", new ParticlePhysicsTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HEAT_DEATH = LuckyTNTMod.RH.registerTNTEntity("heat_death", new DisasterTNTEffect("heat_death", false));
 	public static final RegistryObject<EntityType<PrimedLTNT>> CONTINENTAL_DRIFT = LuckyTNTMod.RH.registerTNTEntity("continental_drift", new ContinentalDriftEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> TETRAHEDRON_TNT = LuckyTNTMod.RH.registerTNTEntity("tetrahedron_tnt", new TetrahedronTNTEffect());
 	
 	//Doomsday
 	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERNOVA = LuckyTNTMod.RH.registerTNTEntity("supernova", new SupernovaEffect());
