@@ -63,7 +63,7 @@ public class IlluminatiTNTEffect extends PrimedTNTEffect {
 		Vec3 vec3 = new Vec3(0.5D, 1D, -0.5D);
 		Vec3 vec4 = new Vec3(-0.5D, 1D, -0.5D);
 		
-		for(double i = 0D; i <= vec1.length(); i += vec1.length() / 5D) {
+		for(double i = 0D; i < vec1.length(); i += vec1.length() / 5D) {
 			ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + vec1.x * i, ent.y() + 1D + vec1.y * i, ent.z() - 0.5D + vec1.z * i, 0, 0, 0);
 			ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D + vec2.x * i, ent.y() + 1D + vec2.y * i, ent.z() - 0.5D + vec2.z * i, 0, 0, 0);
 			ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + vec3.x * i, ent.y() + 1D + vec3.y * i, ent.z() + 0.5D + vec3.z * i, 0, 0, 0);

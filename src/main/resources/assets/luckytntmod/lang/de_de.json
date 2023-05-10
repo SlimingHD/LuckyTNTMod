@@ -190,6 +190,8 @@
 	"block.luckytntmod.flak_tnt" : "Flak TNT",
 	"block.luckytntmod.tnt_rain" : "TNT-Regen",
 	"block.luckytntmod.lucky_doomsday" : "Lucky Weltuntergang",
+	"block.luckytntmod.prism_tnt" : "Prisma TNT",
+	"block.luckytntmod.tetrahedron_tnt" : "Tetraeder TNT",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -541,6 +543,9 @@
 	"entity.luckytntmod.black_hole_tnt" : "Schwarzes Loch TNT",
 	"entity.luckytntmod.flak_tnt" : "Flak TNT",
 	"entity.luckytntmod.tnt_rain" : "TNT-Regen",
+	"entity.luckytntmod.prism_tnt" : "Prisma TNT",
+	"entity.luckytntmod.tetrahedron_tnt" : "Tetraeder TNT",
+	"entity.luckytntmod.illuminati_tnt" : "Illuminati TNT",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
