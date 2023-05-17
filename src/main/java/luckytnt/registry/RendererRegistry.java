@@ -209,6 +209,9 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.PRISM_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.TETRAHEDRON_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ILLUMINATI_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.RING_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.EYE_OF_THE_SAHARA.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ASTEROID_BELT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);

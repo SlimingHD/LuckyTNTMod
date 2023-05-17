@@ -218,6 +218,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHRISTMAS_TNT = LuckyTNTMod.RH.registerTNTEntity("christmas_tnt", new StackedPrimedTNTEffect(new ChristmasTNTEffect(), Collections.singletonList(new SnowTNTEffect(50))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> EARTHQUAKE_TNT = LuckyTNTMod.RH.registerTNTEntity("earthquake_tnt", new EarthquakeTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> PRISM_TNT = LuckyTNTMod.RH.registerTNTEntity("prism_tnt", new PrismTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> RING_TNT = LuckyTNTMod.RH.registerTNTEntity("ring_tnt", new RingTNTEffect());
 	
 	//God TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> GLOBAL_DISASTER = LuckyTNTMod.RH.registerTNTEntity("global_disaster", new GlobalDisasterEffect());
@@ -288,6 +289,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> HEAT_DEATH = LuckyTNTMod.RH.registerTNTEntity("heat_death", new DisasterTNTEffect("heat_death", false));
 	public static final RegistryObject<EntityType<PrimedLTNT>> CONTINENTAL_DRIFT = LuckyTNTMod.RH.registerTNTEntity("continental_drift", new ContinentalDriftEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> TETRAHEDRON_TNT = LuckyTNTMod.RH.registerTNTEntity("tetrahedron_tnt", new TetrahedronTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> EYE_OF_THE_SAHARA = LuckyTNTMod.RH.registerTNTEntity("eye_of_the_sahara", new EyeOfTheSaharaEffect());
 	
 	//Doomsday
 	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERNOVA = LuckyTNTMod.RH.registerTNTEntity("supernova", new SupernovaEffect());
@@ -337,6 +339,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> FLAK_TNT = LuckyTNTMod.RH.registerTNTEntity("flak_tnt", new FlakTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_RAIN = LuckyTNTMod.RH.registerTNTEntity("tnt_rain", new DisasterTNTEffect("tnt_rain", false));
 	public static final RegistryObject<EntityType<PrimedLTNT>> ILLUMINATI_TNT = LuckyTNTMod.RH.registerTNTEntity("illuminati_tnt", new IlluminatiTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> ASTEROID_BELT = LuckyTNTMod.RH.registerTNTEntity("asteroid_belt", new AsteroidBeltEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);
