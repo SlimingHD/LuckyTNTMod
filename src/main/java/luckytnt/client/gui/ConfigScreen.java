@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import luckytnt.config.LuckyTNTConfigValues;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -23,6 +24,8 @@ public class ConfigScreen extends Screen{
 	Button season_events_always_active = null;
 	Button render_contaminated_overlay = null;	
 	
+	ForgeSlider light_engine_speed_slider = null;
+	
 	public ConfigScreen() {
 		super(MutableComponent.create(new TranslatableContents("luckytntmod.config.title")));
 	}
@@ -31,6 +34,7 @@ public class ConfigScreen extends Screen{
 	public void init() {
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.next"), button -> nextPage()).bounds(width - 120, height - 30, 100, 20).build());
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.done"), button -> onClose()).bounds((width - 100) / 2, height - 30, 100, 20).build());
+		
 		addRenderableWidget(island_slider = new ForgeSlider(20, 40, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 20, 160, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), true));		
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.ISLAND_HEIGHT, 50, island_slider)).bounds(width - 220, 40, 200, 20).build());
 		addRenderableWidget(dropped_slider = new ForgeSlider(20, 60, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 60, 400, LuckyTNTConfigValues.DROP_HEIGHT.get(), true));		
@@ -46,6 +50,10 @@ public class ConfigScreen extends Screen{
 		
 		addRenderableWidget(render_contaminated_overlay = new Button.Builder(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY.get().booleanValue() ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"), button -> nextBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, render_contaminated_overlay)).bounds(20, 140, 200, 20).build());
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, true, render_contaminated_overlay)).bounds(width - 220, 140, 200, 20).build());
+		
+		addRenderableWidget(light_engine_speed_slider = new ForgeSlider(20, 160, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 5, 5000, LuckyTNTConfigValues.LIGHT_ENGINE_SPEED.get(), true));	
+		light_engine_speed_slider.setTooltip(Tooltip.create(Component.translatable("luckytntmod.config.light_engine_tooltip")));
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.LIGHT_ENGINE_SPEED, 100, light_engine_speed_slider)).bounds(width - 220, 160, 200, 20).build());
 	}
 	
 	@Override
@@ -58,6 +66,7 @@ public class ConfigScreen extends Screen{
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.average_intensity"), width / 2, 106, 0xFFFFFF);
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.event_always_active"), width / 2, 126, 0xFFFFFF);
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.render_overlay"), width / 2, 146, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.light_engine"), width / 2, 166, 0xFFFFFF);
 		super.render(stack, mouseX, mouseY, partialTicks);
 	}
 	
@@ -74,6 +83,9 @@ public class ConfigScreen extends Screen{
 		}
 		if(average_disaster_strength_slider != null) {
 			LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.set(average_disaster_strength_slider.getValue());
+		}
+		if(light_engine_speed_slider != null) {
+			LuckyTNTConfigValues.LIGHT_ENGINE_SPEED.set(light_engine_speed_slider.getValueInt());
 		}
 		super.onClose();
 	}

@@ -740,6 +740,8 @@
    	"luckytntmod.config.average_intensity": "Durchschnittliche Desaster St\u00e4rke",
 	"luckytntmod.config.event_always_active": "Dauerhafte Saisonale Events",
 	"luckytntmod.config.render_overlay": "Zeige Verstrahlt Overlay an",
+	"luckytntmod.config.light_engine": "Light Engine Geschwindigkeit",
+	"luckytntmod.config.light_engine_tooltip": "Bestimmt die Geschwindigkeit, mit der die Light Engine arbeitet. 5 ist der Minecraft Standard-Wert. Je h\u00f6her der Wert, desto schneller arbeitet die Light Engine. H\u00f6here Werte ben\u00f6tigen mehr Ressourcen.",
 	
 	"death.attack.say_goodbye" : "%1$s sagte auf Wiedersehen",
 	"death.attack.hailstone": "%1$s wurde von einem Hagelkorn ins Auge getroffen",

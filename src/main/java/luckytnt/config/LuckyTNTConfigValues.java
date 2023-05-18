@@ -23,6 +23,8 @@ public class LuckyTNTConfigValues {
 	
 	public static ForgeConfigSpec.BooleanValue RENDER_CONTAMINATED_OVERLAY;
 	
+	public static ForgeConfigSpec.IntValue LIGHT_ENGINE_SPEED;
+	
 	public static void registerConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("TNT Settings").push("Offsets");
 		ISLAND_HEIGHT = builder.comment("Y offset of floating islands").defineInRange("islandHeight", 50, 20, 160);
@@ -49,6 +51,9 @@ public class LuckyTNTConfigValues {
 		builder.pop();
 		builder.comment("Contaminated Effect Overlay Settings").push("Render Overlay Settings");
 		RENDER_CONTAMINATED_OVERLAY = builder.comment("Whether an Overlay is rendererd while the Contaminated Effect is active").define("renderContaminatedOverlay", true);
+		builder.pop();
+		builder.comment("Light Engine Speed").push("Light Engine Speed Setting");
+		LIGHT_ENGINE_SPEED = builder.comment("How fast the Light Engine works. 5 is the value that Minecraft uses").defineInRange("lightEngineSpeed", 100, 5, 5000);
 		builder.pop();
 	}
 }
