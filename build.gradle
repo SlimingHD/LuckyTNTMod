@@ -89,7 +89,7 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.19.3-44.1.23'
 
-    implementation fg.deobf("libs.luckytntlib:luckytntlib-1.19.3:44.1.2.8")
+    implementation fg.deobf("libs.luckytntlib:luckytntlib-1.19.3:44.1.2.9")
 }
 
 jar {
