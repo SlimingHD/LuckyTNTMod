@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/asteroid_belt_bottom",
+        "up": "luckytntmod:block/vredefort_top",
+        "north": "luckytntmod:block/asteroid_belt_side",
+        "east": "luckytntmod:block/asteroid_belt_side",
+        "south": "luckytntmod:block/asteroid_belt_side",
+        "west": "luckytntmod:block/asteroid_belt_side",
+        "particle": "luckytntmod:block/asteroid_belt_side"
+    }
+}

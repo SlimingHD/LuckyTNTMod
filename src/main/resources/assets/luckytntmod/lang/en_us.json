@@ -193,6 +193,9 @@
 	"block.luckytntmod.prism_tnt" : "Prism TNT",
 	"block.luckytntmod.tetrahedron_tnt" : "Tetrahedron TNT",
 	"block.luckytntmod.illuminati_tnt" : "Illuminati TNT",
+	"block.luckytntmod.ring_tnt" : "Ring TNT",
+	"block.luckytntmod.eye_of_the_sahara" : "Eye Of The Sahara",
+	"block.luckytntmod.asteroid_belt" : "Asteroid Belt",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -548,6 +551,9 @@
 	"entity.luckytntmod.prism_tnt" : "Prism TNT",
 	"entity.luckytntmod.tetrahedron_tnt" : "Tetrahedron TNT",
 	"entity.luckytntmod.illuminati_tnt" : "Illuminati TNT",
+	"entity.luckytntmod.ring_tnt" : "Ring TNT",
+	"entity.luckytntmod.eye_of_the_sahara" : "Eye Of The Sahara",
+	"entity.luckytntmod.asteroid_belt" : "Asteroid Belt",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
