@@ -2,8 +2,8 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -23,8 +23,7 @@ public class WoolTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), strength);
-		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
