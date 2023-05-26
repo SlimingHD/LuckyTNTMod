@@ -26,7 +26,7 @@ public class SnowTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 				level.setBlockAndUpdate(pos, Blocks.SNOW.defaultBlockState());
 			}
 		});

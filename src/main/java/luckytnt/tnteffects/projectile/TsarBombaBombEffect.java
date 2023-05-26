@@ -49,7 +49,7 @@ public class TsarBombaBombEffect extends PrimedTNTEffect implements NuclearBombL
 					double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ);
 					BlockPos pos = new BlockPos(entity.x() + offX, entity.y() + offY, entity.z() + offZ);
 					BlockState state = entity.level().getBlockState(pos);
-					if(distance <= 300 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion()) <= 200) {
+					if(distance <= 300 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 200) {
 						if(distance <= 150 && entity.level().getBlockState(pos.below()).isFaceSturdy(entity.level(), pos.below(), Direction.UP) && Math.random() < 0.2D && (state.isAir() || state.getBlock().defaultDestroyTime() <= 0.2f)) {
 							entity.level().setBlock(pos, BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState(), 3);
 						}

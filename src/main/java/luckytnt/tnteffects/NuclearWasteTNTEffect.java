@@ -28,7 +28,7 @@ public class NuclearWasteTNTEffect extends PrimedTNTEffect{
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(!level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) && level.getBlockState(pos.above()).getExplosionResistance(level, pos.above(), null) < 100) {
-					level.getBlockState(pos.above()).onBlockExploded(level, pos.above(), ImprovedExplosion.dummyExplosion());
+					level.getBlockState(pos.above()).onBlockExploded(level, pos.above(), ImprovedExplosion.dummyExplosion(entity.level()));
 					level.setBlockAndUpdate(pos, BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState());
 				}
 			}

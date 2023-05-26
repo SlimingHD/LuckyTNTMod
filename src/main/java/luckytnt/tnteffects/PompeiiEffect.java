@@ -39,7 +39,7 @@ public class PompeiiEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		if(ent instanceof LExplosiveProjectile) {
-			if(ent.level().getBlockState(new BlockPos(ent.x(), ent.y() + 1, ent.z())).getExplosionResistance(ent.level(), new BlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion()) <= 200) {
+			if(ent.level().getBlockState(new BlockPos(ent.x(), ent.y() + 1, ent.z())).getExplosionResistance(ent.level(), new BlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
 				ent.level().setBlock(new BlockPos(ent.x(), ent.y() + 1, ent.z()), Blocks.LAVA.defaultBlockState(), 3);
 			}
 		}

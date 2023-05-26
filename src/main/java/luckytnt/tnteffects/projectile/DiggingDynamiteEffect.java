@@ -18,8 +18,8 @@ public class DiggingDynamiteEffect extends PrimedTNTEffect{
 		explosion: for(float length = 0; length <= 40; length += 0.25f) {
 			BlockPos pos = new BlockPos(entity.getPos().add(direction.scale(length)));
 			BlockState state = entity.level().getBlockState(pos);
-			if(state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion()) < 100) {
-				state.onBlockExploded(entity.level(), pos, ImprovedExplosion.dummyExplosion());
+			if(state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
+				state.onBlockExploded(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level()));
 			}
 			else {
 				break explosion;

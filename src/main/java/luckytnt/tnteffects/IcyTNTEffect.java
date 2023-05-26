@@ -32,9 +32,9 @@ public class IcyTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if (distance <= 40 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+				if (distance <= 40 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
 					if(state.getMaterial() == Material.GRASS || state.getMaterial() == Material.LEAVES || state.getMaterial() == Material.SAND) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion()); 
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level())); 
 						level.setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
 					} if(state.getBlock() instanceof LiquidBlock) {
 						level.setBlock(pos, Blocks.ICE.defaultBlockState(), 3);
@@ -47,7 +47,7 @@ public class IcyTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100) {
 					level.setBlock(pos, Blocks.SNOW.defaultBlockState(), 3);
 				}
 			}

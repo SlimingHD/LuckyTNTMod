@@ -27,10 +27,10 @@ public class SnowstormTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= 10 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP)) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+				if(distance <= 10 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 200 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP)) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					level.setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
-				} else if(distance > 10 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200 && state.getBlock() == Blocks.WATER) {
+				} else if(distance > 10 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 200 && state.getBlock() == Blocks.WATER) {
 					level.setBlock(pos, Blocks.ICE.defaultBlockState(), 3);
 				}
 			}

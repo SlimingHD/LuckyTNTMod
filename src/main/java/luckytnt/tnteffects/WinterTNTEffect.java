@@ -25,7 +25,7 @@ public class WinterTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 200) {
 					if(state.getMaterial() == Material.BUBBLE_COLUMN || state.getMaterial() == Material.WATER || state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getBlock() == Blocks.WATER) {
 						level.setBlock(pos, Blocks.ICE.defaultBlockState(), 3);
 					}
@@ -38,7 +38,7 @@ public class WinterTNTEffect extends PrimedTNTEffect {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200 && Blocks.SNOW.canSurvive(state, level, pos)) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 200 && Blocks.SNOW.canSurvive(state, level, pos)) {
 					level.setBlock(pos, Blocks.SNOW.defaultBlockState(), 3);
 				}
 			}

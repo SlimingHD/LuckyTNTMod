@@ -39,8 +39,8 @@ public class StoneColdEffect extends PrimedTNTEffect {
 			double offZ = Math.random() * 15 - Math.random() * 15;
 			BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 			BlockState state = ent.level().getBlockState(pos);
-			if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) < 100 && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR) {
-				state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+			if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR) {
+				state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 				ent.level().setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
 			}
 		}
@@ -53,8 +53,8 @@ public class StoneColdEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && state != Blocks.BLUE_ICE.defaultBlockState()) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 200 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && state != Blocks.BLUE_ICE.defaultBlockState()) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					level.setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
 				}
 			}
@@ -65,7 +65,7 @@ public class StoneColdEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getBlock() == Blocks.WATER && state != Blocks.ICE.defaultBlockState()) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					level.setBlock(pos, Blocks.ICE.defaultBlockState(), 3);
 				}
 			}
@@ -75,8 +75,8 @@ public class StoneColdEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					level.setBlock(pos, Blocks.SNOW.defaultBlockState(), 3);
 				}
 			}

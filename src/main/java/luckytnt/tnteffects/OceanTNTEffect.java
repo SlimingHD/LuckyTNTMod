@@ -40,7 +40,7 @@ public class OceanTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion();
+		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.level());
 		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
 			
 			@Override

@@ -31,7 +31,7 @@ public class FirestormTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= 50 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
+				if(distance <= 50 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
 					if((state.getMaterial() == Material.BAMBOO || state.getMaterial() == Material.BAMBOO_SAPLING || state.getMaterial() == Material.CACTUS
 					|| state.getMaterial() == Material.CLOTH_DECORATION || state.getMaterial() == Material.DECORATION || state.getMaterial() == Material.FIRE
 					|| state.getMaterial() == Material.GRASS || state.getMaterial() == Material.LEAVES || state.getMaterial() == Material.MOSS
@@ -40,7 +40,7 @@ public class FirestormTNTEffect extends PrimedTNTEffect {
 					|| state.getMaterial() == Material.TOP_SNOW || state.getMaterial() == Material.VEGETABLE || state.getMaterial() == Material.WATER_PLANT
 					|| state.getMaterial() == Material.WOOD) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
 					{
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					}
 				}
 			}
@@ -50,8 +50,8 @@ public class FirestormTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200 && !state.isAir()) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200 && !state.isAir()) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					level.setBlock(pos, Blocks.NETHERRACK.defaultBlockState(), 3);
 				}
 			}

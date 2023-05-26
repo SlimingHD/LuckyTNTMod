@@ -30,7 +30,7 @@ public class MidasTNTEffect extends PrimedTNTEffect {
 				
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-					if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && !state.isAir() && state.getBlock() != Blocks.GOLD_BLOCK) {
+					if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && !state.isAir() && state.getBlock() != Blocks.GOLD_BLOCK) {
 						level.setBlock(pos, Blocks.GOLD_BLOCK.defaultBlockState(), 3);
 					}
 				}

@@ -44,8 +44,8 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 					if (distance(vec, NDAB, D) <= 0 && distance(vec, NDAC, D) <= 0 && distance(vec, NDCB, D) <= 0 && distance(vec, NABC, A) <= 0) {
 						BlockPos pos5 = new BlockPos(ent.getPos()).offset(offX, offY, offZ);
 
-						if (ent.level().getBlockState(pos5).getExplosionResistance(ent.level(), pos5, ImprovedExplosion.dummyExplosion()) <= 200) {
-							ent.level().getBlockState(pos5).onBlockExploded(ent.level(), pos5, ImprovedExplosion.dummyExplosion());
+						if (ent.level().getBlockState(pos5).getExplosionResistance(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+							ent.level().getBlockState(pos5).onBlockExploded(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					}
 				}

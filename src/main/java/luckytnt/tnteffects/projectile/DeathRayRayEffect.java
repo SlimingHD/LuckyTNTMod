@@ -36,7 +36,7 @@ public class DeathRayRayEffect extends PrimedTNTEffect{
 					level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 				}
 				else {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 				}
 			}
 		}); 

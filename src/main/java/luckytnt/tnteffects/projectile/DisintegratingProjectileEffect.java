@@ -48,8 +48,8 @@ public class DisintegratingProjectileEffect extends PrimedTNTEffect {
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 					if(distance < (10D + (Math.random() * 2))) {
-						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200) {
-							state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 200) {
+							state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					} else if(distance > 11 && distance <= 13) {
 						if(state.getBlock() == Blocks.STONE && Math.random() < 0.01D) {

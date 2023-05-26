@@ -50,8 +50,8 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.is(BlockTags.FLOWERS) || state.is(BlockTags.WART_BLOCKS) || (!state.isCollisionShapeFullBlock(level, pos) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100)) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+				if(state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.is(BlockTags.FLOWERS) || state.is(BlockTags.WART_BLOCKS) || (!state.isCollisionShapeFullBlock(level, pos) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100)) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 					return false;
 				}
 				return (state.isCollisionShapeFullBlock(level, pos) || state.isFaceSturdy(level, pos, Direction.UP)) && (level.getBlockState(pos.above()).isAir() || level.getBlockState(pos.above()).canBeReplaced(new DirectionalPlaceContext(level, pos.above(), Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) || level.getBlockState(pos.above()).is(BlockTags.FLOWERS));
@@ -60,8 +60,8 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos.below(), ImprovedExplosion.dummyExplosion()) < 100) {
-					level.getBlockState(pos.below()).onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+				if(state.getExplosionResistance(level, pos.below(), ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
+					level.getBlockState(pos.below()).onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 					level.setBlockAndUpdate(pos.below(), topBlock.defaultBlockState());
 				}
 			}

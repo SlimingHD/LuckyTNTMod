@@ -39,7 +39,7 @@ public class FarmingTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
-				return (state.isCollisionShapeFullBlock(level, pos) || state.isFaceSturdy(level, pos, Direction.UP)) && (level.getBlockState(pos.above()).isAir() || level.getBlockState(pos.above()).canBeReplaced(new DirectionalPlaceContext(level, pos.above(), Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) || level.getBlockState(pos.above()).is(BlockTags.FLOWERS)) && (state.getMaterial() != Material.LEAVES && !state.is(BlockTags.LOGS) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100);
+				return (state.isCollisionShapeFullBlock(level, pos) || state.isFaceSturdy(level, pos, Direction.UP)) && (level.getBlockState(pos.above()).isAir() || level.getBlockState(pos.above()).canBeReplaced(new DirectionalPlaceContext(level, pos.above(), Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) || level.getBlockState(pos.above()).is(BlockTags.FLOWERS)) && (state.getMaterial() != Material.LEAVES && !state.is(BlockTags.LOGS) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100);
 			}
 		}, new IForEachBlockExplosionEffect() {
 			

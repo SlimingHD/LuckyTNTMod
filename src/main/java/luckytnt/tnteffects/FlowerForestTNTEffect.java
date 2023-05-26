@@ -40,7 +40,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= 50 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
+				if(distance <= 50 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
 					if((state.getMaterial() == Material.BAMBOO || state.getMaterial() == Material.BAMBOO_SAPLING || state.getMaterial() == Material.CACTUS
 					|| state.getMaterial() == Material.CLOTH_DECORATION || state.getMaterial() == Material.DECORATION || state.getMaterial() == Material.FIRE
 					|| state.getMaterial() == Material.GRASS || state.getMaterial() == Material.LEAVES || state.getMaterial() == Material.MOSS
@@ -49,7 +49,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 					|| state.getMaterial() == Material.TOP_SNOW || state.getMaterial() == Material.VEGETABLE || state.getMaterial() == Material.WATER_PLANT
 					|| state.getMaterial() == Material.WOOD) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
 					{
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					}
 				}
 			}
@@ -60,7 +60,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 				double distance = Math.sqrt(offX * offX + offZ * offZ);
 				int y = LevelEvents.getTopBlock(ent.level(), ent.x() + offX, ent.z() + offZ, true);
 				BlockPos pos = new BlockPos(ent.x() + offX, y, ent.z() + offZ);
-				if(distance <= 75 && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 200 && ent.level().getBlockState(pos.above()).getMaterial() == Material.AIR) {
+				if(distance <= 75 && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200 && ent.level().getBlockState(pos.above()).getMaterial() == Material.AIR) {
 					ent.level().setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
 				}
 			}

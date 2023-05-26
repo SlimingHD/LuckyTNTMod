@@ -25,8 +25,8 @@ public class TunnelingDynamiteEffect extends PrimedTNTEffect{
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 					if(distance < 4) {
-						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100) {
-							state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
+							state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 						}
 					}
 				}

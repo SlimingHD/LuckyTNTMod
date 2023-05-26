@@ -46,8 +46,8 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 				BlockPos posTop = pos.offset(0, 1, 0);
 				BlockState stateTop = level.getBlockState(posTop);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && stateTop.getExplosionResistance(level, posTop, ImprovedExplosion.dummyExplosion()) < 100 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && (stateTop.getMaterial() == Material.AIR || stateTop.getMaterial() == Material.PLANT || stateTop.getMaterial() == Material.REPLACEABLE_PLANT || stateTop.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT || stateTop.getMaterial() == Material.TOP_SNOW)) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && stateTop.getExplosionResistance(level, posTop, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && (stateTop.getMaterial() == Material.AIR || stateTop.getMaterial() == Material.PLANT || stateTop.getMaterial() == Material.REPLACEABLE_PLANT || stateTop.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT || stateTop.getMaterial() == Material.TOP_SNOW)) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					level.setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
 				}
 			}
@@ -75,13 +75,13 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 						BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 						BlockState state = ent.level().getBlockState(pos);
 						if(distance <= radius) {					
-							if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= maxResistance && state.getMaterial() != Material.AIR && ((!state.isCollisionShapeFullBlock(ent.level(), pos) && !state.is(Blocks.MUD) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.getBlock() == Blocks.MANGROVE_ROOTS)))) {
+							if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= maxResistance && state.getMaterial() != Material.AIR && ((!state.isCollisionShapeFullBlock(ent.level(), pos) && !state.is(Blocks.MUD) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.getBlock() == Blocks.MANGROVE_ROOTS)))) {
 								if(state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getMaterial() == Material.WATER_PLANT) {
 									Block block1 = state.getBlock();
-									block1.onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									block1.onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
 								} else {
-									state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 							}
 						}

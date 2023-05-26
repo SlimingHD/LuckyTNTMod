@@ -23,8 +23,8 @@ public class GlobalDisasterEffect extends PrimedTNTEffect{
 		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200 && state.getMaterial() != Material.AIR) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 200 && state.getMaterial() != Material.AIR) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 				}
 			}
 		});

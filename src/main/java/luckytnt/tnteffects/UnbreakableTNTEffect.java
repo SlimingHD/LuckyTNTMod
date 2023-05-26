@@ -24,8 +24,8 @@ public class UnbreakableTNTEffect extends PrimedTNTEffect{
 		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 2000 && state.getMaterial() != Material.AIR) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 2000 && state.getMaterial() != Material.AIR) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 					level.setBlock(pos, Blocks.BEDROCK.defaultBlockState(), 3);
 				}
 			}

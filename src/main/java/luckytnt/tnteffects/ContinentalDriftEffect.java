@@ -62,7 +62,7 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 						if(distance <= 7) {
 							if(Math.random() > 0.1D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), ent.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
 									ent.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
@@ -70,7 +70,7 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 						if(distance <= 9 && distance > 7) {
 							if(Math.random() > 0.5D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), ent.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
 									ent.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
@@ -78,7 +78,7 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 						if(distance <= 10 && distance > 9) {
 							if(Math.random() > 0.9D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), ent.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
 									ent.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
@@ -95,7 +95,7 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 						if(distance <= 7) {
 							if(Math.random() > 0.1D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), ent.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
 									ent.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
@@ -103,7 +103,7 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 						if(distance <= 9 && distance > 7) {
 							if(Math.random() > 0.5D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), ent.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
 									ent.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
@@ -111,7 +111,7 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 						if(distance <= 10 && distance > 9) {
 							if(Math.random() > 0.9D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), ent.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
 									ent.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}

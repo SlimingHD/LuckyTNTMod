@@ -61,7 +61,7 @@ public class RedstoneTNTEffect extends PrimedTNTEffect{
 					case 16: replace = Blocks.COMPARATOR.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, getRandomDirectionHorizontal()).setValue(BlockStateProperties.MODE_COMPARATOR, Math.random() < 0.5f ? ComparatorMode.COMPARE : ComparatorMode.SUBTRACT); break;
 				}
 				Block block = state.getBlock();
-				block.onBlockExploded(state, entity.level(), pos, ImprovedExplosion.dummyExplosion());
+				block.onBlockExploded(state, entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level()));
 				entity.level().setBlock(pos, replace, 3);
 			}
 		});

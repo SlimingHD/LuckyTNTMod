@@ -204,7 +204,7 @@ public class OreTNTEffect extends PrimedTNTEffect{
 		ExplosionHelper.doSphericalExplosion(tnt.level(), tnt.getPos(), 12, new IForEachBlockExplosionEffect() {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if (!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && state.isCollisionShapeFullBlock(level, pos) && !state.is(Tags.Blocks.ORES)) {
+				if (!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(tnt.level())) < 100 && state.isCollisionShapeFullBlock(level, pos) && !state.is(Tags.Blocks.ORES)) {
 					tnt.availablePos.add(pos);
 				}
 			}
@@ -215,7 +215,7 @@ public class OreTNTEffect extends PrimedTNTEffect{
 		ExplosionHelper.doSphericalExplosion(tnt.level(), tnt.getPos(), 12, new IForEachBlockExplosionEffect() {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if (!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && state.isCollisionShapeFullBlock(level, pos) && !state.is(Tags.Blocks.ORES)) {
+				if (!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(tnt.level())) < 100 && state.isCollisionShapeFullBlock(level, pos) && !state.is(Tags.Blocks.ORES)) {
 					tnt.availablePos.add(pos);
 				}
 			}

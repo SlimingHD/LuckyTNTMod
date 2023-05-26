@@ -21,22 +21,22 @@ public class TrollTNTMk2Block extends LTNTBlock{
 
 	@Override
 	public void onCaughtFire(BlockState state, Level level, BlockPos pos, Direction direction, LivingEntity igniter) {
-    	if(level.getBlockState(pos.above()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200) {
+    	if(level.getBlockState(pos.above()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) < 200) {
     		level.setBlock(pos.above(), BlockRegistry.TROLL_TNT_MK2.get().defaultBlockState(), 3);
     	}
-    	if(level.getBlockState(pos.below()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200) {
+    	if(level.getBlockState(pos.below()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) < 200) {
     		level.setBlock(pos.below(), BlockRegistry.TROLL_TNT_MK2.get().defaultBlockState(), 3);
     	}
-    	if(level.getBlockState(pos.north()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200) {
+    	if(level.getBlockState(pos.north()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) < 200) {
     		level.setBlock(pos.north(), BlockRegistry.TROLL_TNT_MK2.get().defaultBlockState(), 3);
     	}
-    	if(level.getBlockState(pos.east()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200) {
+    	if(level.getBlockState(pos.east()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) < 200) {
     		level.setBlock(pos.east(), BlockRegistry.TROLL_TNT_MK2.get().defaultBlockState(), 3);
     	}
-    	if(level.getBlockState(pos.south()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200) {
+    	if(level.getBlockState(pos.south()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) < 200) {
     		level.setBlock(pos.south(), BlockRegistry.TROLL_TNT_MK2.get().defaultBlockState(), 3);
     	}
-    	if(level.getBlockState(pos.west()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200) {
+    	if(level.getBlockState(pos.west()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) < 200) {
     		level.setBlock(pos.west(), BlockRegistry.TROLL_TNT_MK2.get().defaultBlockState(), 3);
     	}
 	}

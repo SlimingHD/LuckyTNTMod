@@ -29,20 +29,20 @@ public class VredefortProjectileEffect extends PrimedTNTEffect {
 				BlockPos posDown = pos.offset(0, -1, 0);
 				BlockState stateDown = level.getBlockState(posDown);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 800 && distance < 120) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 800 && distance < 120) {
 					if(distance >= 115) {
 						if(Math.random() < 0.6f) {
-							state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+							state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 							level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 						}
 					}
 					else if(distance < 115) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);							
 					}	
 					if(Block.isFaceFull(stateDown.getCollisionShape(level, posDown), Direction.UP)) {
-						if(Math.random() < 0.05f && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 800) {
-							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						if(Math.random() < 0.05f && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 800) {
+							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 							level.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
 						}
 					}

@@ -33,7 +33,7 @@ public class EndGateEffect extends PrimedTNTEffect{
 				BlockPos posTop = pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0);
 				BlockState stateTop = level.getBlockState(posTop);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 200 && stateTop.getMaterial() == Material.AIR && state.getMaterial() != Material.AIR && Math.abs(entity.y() - pos.getY()) <= 20) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 200 && stateTop.getMaterial() == Material.AIR && state.getMaterial() != Material.AIR && Math.abs(entity.y() - pos.getY()) <= 20) {
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 					if(state.getMaterial() == Material.WOOD) {
 						level.setBlock(posTop, Blocks.OBSIDIAN.defaultBlockState(), 3);

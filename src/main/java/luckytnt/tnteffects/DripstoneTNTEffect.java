@@ -33,8 +33,8 @@ public class DripstoneTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && (!state.isCollisionShapeFullBlock(level, pos) || state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS))) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100 && (!state.isCollisionShapeFullBlock(level, pos) || state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS))) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 				}
 			}
 		});
@@ -42,12 +42,12 @@ public class DripstoneTNTEffect extends PrimedTNTEffect{
 
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(level.getBlockState(pos.below()).isAir() && !state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && !state.is(BlockTags.DRIPSTONE_REPLACEABLE)) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+				if(level.getBlockState(pos.below()).isAir() && !state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100 && !state.is(BlockTags.DRIPSTONE_REPLACEABLE)) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 					level.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState());
 				}
-				else if(level.getBlockState(pos.below()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && !level.getBlockState(pos.below()).isAir() && state.isAir() && !level.getBlockState(pos.below()).is(BlockTags.DRIPSTONE_REPLACEABLE)) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+				else if(level.getBlockState(pos.below()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100 && !level.getBlockState(pos.below()).isAir() && state.isAir() && !level.getBlockState(pos.below()).is(BlockTags.DRIPSTONE_REPLACEABLE)) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 					level.setBlockAndUpdate(pos.below(), Blocks.STONE.defaultBlockState());
 				}
 			}

@@ -27,8 +27,8 @@ public class SolarEruptionProjectileEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if((ent.y() - pos.getY()) >= 0 && (ent.y() - pos.getY()) <= 3) {
-					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 || state.getBlock() instanceof LiquidBlock || state.getMaterial() == Material.AIR) && state.getMaterial() != Material.STONE) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 || state.getBlock() instanceof LiquidBlock || state.getMaterial() == Material.AIR) && state.getMaterial() != Material.STONE) {
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 					}
 				}

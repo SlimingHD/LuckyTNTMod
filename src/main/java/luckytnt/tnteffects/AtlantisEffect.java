@@ -114,12 +114,12 @@ public class AtlantisEffect extends PrimedTNTEffect {
 				BlockState stateTop = level.getBlockState(posTop);
 				
 				if(((ent.y() + 8) - pos.getY()) >= 0 && ((ent.y() + 8) - pos.getY()) <= 50) {
-					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 0 || state.getBlock() instanceof LiquidBlock || state.getMaterial() == Material.AIR) && state.getMaterial() != Material.STONE) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 0 || state.getBlock() instanceof LiquidBlock || state.getMaterial() == Material.AIR) && state.getMaterial() != Material.STONE) {
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						level.setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
 					}
 					if(stateTop.getMaterial() == Material.WATER && state.getMaterial() != Material.AIR && (state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.STONE || state.getBlock() == Blocks.DEEPSLATE || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRAVEL) && level.getBlockState(pos.above()).getBlock() != Blocks.SAND) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						level.setBlock(pos, Blocks.SAND.defaultBlockState(), 3);
 					}
 				}

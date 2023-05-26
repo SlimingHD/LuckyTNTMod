@@ -48,13 +48,13 @@ public class PickyTNTEffect extends PrimedTNTEffect{
 		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && !state.isAir() && state.getBlock() == template) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100 && !state.isAir() && state.getBlock() == template) {
 					List<ItemStack> drops = Block.getDrops(state, (ServerLevel)level, pos, level.getBlockEntity(pos));
 					for(ItemStack stack : drops) {
 						ItemEntity item = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), stack);
 						level.addFreshEntity(item);
 					}
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 				}
 			}
 		});

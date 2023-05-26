@@ -61,7 +61,7 @@ public class AcidicTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(distance <= 5D + Math.random() * 2 && !state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
+						if(distance <= 5D + Math.random() * 2 && !state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
 							level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 						}
 					}

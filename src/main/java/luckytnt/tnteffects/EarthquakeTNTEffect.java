@@ -51,7 +51,7 @@ public class EarthquakeTNTEffect extends PrimedTNTEffect{
 						if(distance <= 3) {
 							if(Math.random() > 0.1D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), entity.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(entity.level().getBlockState(pos1).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if(entity.level().getBlockState(pos1).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 100) {
 									entity.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
@@ -59,7 +59,7 @@ public class EarthquakeTNTEffect extends PrimedTNTEffect{
 						if(distance <= 5 && distance > 3) {
 							if(Math.random() > 0.5D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), entity.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(entity.level().getBlockState(pos1).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if(entity.level().getBlockState(pos1).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 100) {
 									entity.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
@@ -67,7 +67,7 @@ public class EarthquakeTNTEffect extends PrimedTNTEffect{
 						if(distance <= 6 && distance > 5) {
 							if(Math.random() > 0.9D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), entity.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(entity.level().getBlockState(pos1).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if(entity.level().getBlockState(pos1).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 100) {
 									entity.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}

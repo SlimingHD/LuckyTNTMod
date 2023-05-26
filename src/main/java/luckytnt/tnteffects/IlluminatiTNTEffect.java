@@ -40,8 +40,8 @@ public class IlluminatiTNTEffect extends PrimedTNTEffect {
 					if (distance(vec, NEAB, E) <= 0 && distance(vec, NEAD, E) <= 0 && distance(vec, NEDC, E) <= 0 && distance(vec, NECB, E) <= 0 && distance(vec, NABCD, A) <= 0) {
 						BlockPos pos5 = new BlockPos(ent.getPos()).offset(offX, offY, offZ);
 
-						if (ent.level().getBlockState(pos5).getExplosionResistance(ent.level(), pos5, ImprovedExplosion.dummyExplosion()) <= 200) {
-							ent.level().getBlockState(pos5).onBlockExploded(ent.level(), pos5, ImprovedExplosion.dummyExplosion());
+						if (ent.level().getBlockState(pos5).getExplosionResistance(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+							ent.level().getBlockState(pos5).onBlockExploded(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					}
 				}

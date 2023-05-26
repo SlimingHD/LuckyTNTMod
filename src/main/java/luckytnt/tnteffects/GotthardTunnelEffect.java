@@ -39,8 +39,8 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								for(int offY = 0; offY <= 15; offY++) {
 									BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 									BlockState state = ent.level().getBlockState(pos);
-									if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 200) {
-										state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+										state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									}
 								}
 							}
@@ -57,8 +57,8 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								for(int offY = 0; offY <= 15; offY++) {
 									BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 									BlockState state = ent.level().getBlockState(pos);
-									if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 200) {	
-										state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {	
+										state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									}
 								}
 							}
@@ -75,8 +75,8 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								for(int offY = 0; offY <= 15; offY++) {
 									BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 									BlockState state = ent.level().getBlockState(pos);
-									if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 200) {
-										state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+										state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									}
 								}
 							}
@@ -93,8 +93,8 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								for(int offY = 0; offY <= 15; offY++) {
 									BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 									BlockState state = ent.level().getBlockState(pos);
-									if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) <= 200) {
-										state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+										state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									}
 								}
 							}
@@ -144,7 +144,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 							
 							for(BlockPos pos : list) {
 								if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos, Blocks.SEA_LANTERN.defaultBlockState(), 3);
 								}
 							}
@@ -167,7 +167,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 							
 							for(BlockPos pos : list) {
 								if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos, Blocks.SEA_LANTERN.defaultBlockState(), 3);
 								}
 							}
@@ -190,7 +190,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 							
 							for(BlockPos pos : list) {
 								if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos, Blocks.SEA_LANTERN.defaultBlockState(), 3);
 								}
 							}
@@ -213,7 +213,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 							
 							for(BlockPos pos : list) {
 								if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos, Blocks.SEA_LANTERN.defaultBlockState(), 3);
 								}
 							}
@@ -232,11 +232,11 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() + (offX * -1), ent.y() - 1, ent.z() + offZ);
 								if(!ent.level().canSeeSky(pos1) && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.GRAY_CONCRETE.defaultBlockState(), 3);
 								}
 								if(!ent.level().canSeeSky(pos2) && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.GRAY_CONCRETE.defaultBlockState(), 3);
 								}
 							}
@@ -248,7 +248,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 							
 							for(BlockPos pos : list) {
 								if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos, Blocks.SMOOTH_STONE.defaultBlockState(), 3);
 								}
 							}
@@ -265,7 +265,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								
 								for(BlockPos pos : list2) {
 									if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-										ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+										ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 										ent.level().setBlock(pos, Blocks.YELLOW_CONCRETE.defaultBlockState(), 3);
 									}
 								}
@@ -278,11 +278,11 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + (offZ * -1));
 								if(!ent.level().canSeeSky(pos1) && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.GRAY_CONCRETE.defaultBlockState(), 3);
 								}
 								if(!ent.level().canSeeSky(pos2) && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.GRAY_CONCRETE.defaultBlockState(), 3);
 								}
 							}
@@ -294,7 +294,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 							
 							for(BlockPos pos : list) {
 								if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos, Blocks.SMOOTH_STONE.defaultBlockState(), 3);
 								}
 							}
@@ -311,7 +311,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								
 								for(BlockPos pos : list2) {
 									if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-										ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+										ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 										ent.level().setBlock(pos, Blocks.YELLOW_CONCRETE.defaultBlockState(), 3);
 									}
 								}
@@ -324,11 +324,11 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() + (offX * -1), ent.y() - 1, ent.z() + offZ);
 								if(!ent.level().canSeeSky(pos1) && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.GRAY_CONCRETE.defaultBlockState(), 3);
 								}
 								if(!ent.level().canSeeSky(pos2) && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.GRAY_CONCRETE.defaultBlockState(), 3);
 								}
 							}
@@ -340,7 +340,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 							
 							for(BlockPos pos : list) {
 								if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos, Blocks.SMOOTH_STONE.defaultBlockState(), 3);
 								}
 							}
@@ -357,7 +357,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								
 								for(BlockPos pos : list2) {
 									if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-										ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+										ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 										ent.level().setBlock(pos, Blocks.YELLOW_CONCRETE.defaultBlockState(), 3);
 									}
 								}
@@ -370,11 +370,11 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + (offZ * -1));
 								if(!ent.level().canSeeSky(pos1) && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.GRAY_CONCRETE.defaultBlockState(), 3);
 								}
 								if(!ent.level().canSeeSky(pos2) && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.GRAY_CONCRETE.defaultBlockState(), 3);
 								}
 							}
@@ -386,7 +386,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 							
 							for(BlockPos pos : list) {
 								if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos, Blocks.SMOOTH_STONE.defaultBlockState(), 3);
 								}
 							}
@@ -403,7 +403,7 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								
 								for(BlockPos pos : list2) {
 									if(!ent.level().canSeeSky(pos) && ent.level().getBlockState(pos).getBlock().getExplosionResistance() <= 200) {
-										ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+										ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 										ent.level().setBlock(pos, Blocks.YELLOW_CONCRETE.defaultBlockState(), 3);
 									}
 								}
@@ -423,17 +423,17 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + 11, ent.y() + offY, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() - 11, ent.y() + offY, ent.z() + offZ);
 								if(ent.level().getBlockState(pos1).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos1).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBlockState(pos2).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos2).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos1) < 10 && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.STONE.defaultBlockState(), 3);
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos2) < 10 && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.STONE.defaultBlockState(), 3);
 								}
 							}
@@ -443,17 +443,17 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() + offX, ent.y() + 16, ent.z() + offZ);
 								if(ent.level().getBlockState(pos1).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos1).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBlockState(pos2).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos2).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos1) < 15 && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.STONE.defaultBlockState(), 3);
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos2) < 10 && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.STONE.defaultBlockState(), 3);
 								}
 							}
@@ -465,17 +465,17 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + 11);
 								BlockPos pos2 = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() - 11);
 								if(ent.level().getBlockState(pos1).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos1).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBlockState(pos2).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos2).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos1) < 10 && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.STONE.defaultBlockState(), 3);
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos2) < 10 && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.STONE.defaultBlockState(), 3);
 								}
 							}
@@ -485,17 +485,17 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() + offX, ent.y() + 16, ent.z() + offZ);
 								if(ent.level().getBlockState(pos1).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos1).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBlockState(pos2).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos2).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos1) < 15 && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.STONE.defaultBlockState(), 3);
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos2) < 10 && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.STONE.defaultBlockState(), 3);
 								}
 							}
@@ -507,17 +507,17 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + 11, ent.y() + offY, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() - 11, ent.y() + offY, ent.z() + offZ);
 								if(ent.level().getBlockState(pos1).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos1).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBlockState(pos2).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos2).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos1) < 10 && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.STONE.defaultBlockState(), 3);
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos2) < 10 && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.STONE.defaultBlockState(), 3);
 								}
 							}
@@ -527,17 +527,17 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() + offX, ent.y() + 16, ent.z() + offZ);
 								if(ent.level().getBlockState(pos1).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos1).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBlockState(pos2).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos2).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos1) < 15 && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.STONE.defaultBlockState(), 3);
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos2) < 10 && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.STONE.defaultBlockState(), 3);
 								}
 							}
@@ -549,17 +549,17 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + 11);
 								BlockPos pos2 = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() - 11);
 								if(ent.level().getBlockState(pos1).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos1).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBlockState(pos2).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos2).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos1) < 10 && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.STONE.defaultBlockState(), 3);
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos2) < 10 && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.STONE.defaultBlockState(), 3);
 								}
 							}
@@ -569,17 +569,17 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 								BlockPos pos1 = new BlockPos(ent.x() + offX, ent.y() - 1, ent.z() + offZ);
 								BlockPos pos2 = new BlockPos(ent.x() + offX, ent.y() + 16, ent.z() + offZ);
 								if(ent.level().getBlockState(pos1).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos1).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBlockState(pos2).getMaterial() == Material.LEAVES || ent.level().getBlockState(pos2).getMaterial() == Material.WOOD) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos1) < 15 && ent.level().getBlockState(pos1).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos1).getBlock().onBlockExploded(ent.level().getBlockState(pos1), ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos1, Blocks.STONE.defaultBlockState(), 3);
 								}
 								if(ent.level().getBrightness(LightLayer.SKY, pos2) < 10 && ent.level().getBlockState(pos2).getBlock().getExplosionResistance() <= 200) {
-									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion());
+									ent.level().getBlockState(pos2).getBlock().onBlockExploded(ent.level().getBlockState(pos2), ent.level(), pos2, ImprovedExplosion.dummyExplosion(ent.level()));
 									ent.level().setBlock(pos2, Blocks.STONE.defaultBlockState(), 3);
 								}
 							}

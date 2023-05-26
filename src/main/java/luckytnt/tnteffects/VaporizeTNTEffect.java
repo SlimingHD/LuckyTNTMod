@@ -32,7 +32,7 @@ public class VaporizeTNTEffect extends PrimedTNTEffect{
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getBlock() instanceof LiquidBlock  || state.getBlock() instanceof KelpPlantBlock || state.getBlock() instanceof SeagrassBlock || state.getBlock() instanceof TallSeagrassBlock || state.getBlock() instanceof CoralFanBlock) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 				}
 			}
 		});

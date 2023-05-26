@@ -83,8 +83,8 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
-							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					}
 				});
@@ -105,8 +105,8 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
-							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					}
 				});
@@ -185,8 +185,8 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
-							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					}
 				});
@@ -207,8 +207,8 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
-							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					}
 				});
@@ -276,8 +276,8 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
-							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					}
 				});
@@ -287,8 +287,8 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
-							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					}
 				});

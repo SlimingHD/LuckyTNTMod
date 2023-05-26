@@ -18,8 +18,8 @@ public class PrismTNTEffect extends PrimedTNTEffect {
 			for(int offX = 0; offX < 10; offX++) {
 				for(int offZ = 0; offZ < tri; offZ++) {
 					BlockPos pos1 = new BlockPos(pos.getX() + offX, pos.getY() + offY, pos.getZ() + offZ);
-					if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos1, ImprovedExplosion.dummyExplosion()) <= 100) {
-						ent.level().getBlockState(pos1).onBlockExploded(ent.level(), pos1, ImprovedExplosion.dummyExplosion());
+					if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
+						ent.level().getBlockState(pos1).onBlockExploded(ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level()));
 					}
 				}
 				tri--;

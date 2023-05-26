@@ -32,7 +32,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 200) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
 					if((state.getMaterial() == Material.BAMBOO || state.getMaterial() == Material.BAMBOO_SAPLING || state.getMaterial() == Material.CACTUS
 					|| state.getMaterial() == Material.CLOTH_DECORATION || state.getMaterial() == Material.DECORATION || state.getMaterial() == Material.FIRE
 					|| state.getMaterial() == Material.GRASS || state.getMaterial() == Material.LEAVES || state.getMaterial() == Material.MOSS
@@ -41,7 +41,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 					|| state.getMaterial() == Material.TOP_SNOW || state.getMaterial() == Material.VEGETABLE || state.getMaterial() == Material.WATER_PLANT
 					|| state.getMaterial() == Material.WOOD) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
 					{
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					}
 				}
 			}
@@ -53,7 +53,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 				if(distance <= 42) {
 					int y = LevelEvents.getTopBlock(ent.level(), ent.x() + offX, ent.z() + offZ, true);
 					BlockPos pos = new BlockPos(ent.x() + offX, y, ent.z() + offZ);
-					ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+					ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					ent.level().setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
 				}
 			}
@@ -72,7 +72,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 					BlockState state = ent.level().getBlockState(pos);
 					BlockState stateUp = ent.level().getBlockState(posUp);
 					
-					if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion()) < 200 && stateUp.getExplosionResistance(ent.level(), posUp, ImprovedExplosion.dummyExplosion()) < 200 && !blockFound) {
+					if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) < 200 && stateUp.getExplosionResistance(ent.level(), posUp, ImprovedExplosion.dummyExplosion(ent.level())) < 200 && !blockFound) {
 						if(state.isCollisionShapeFullBlock(ent.level(), pos) && !stateUp.isCollisionShapeFullBlock(ent.level(), posUp) && state.getMaterial() != Material.LEAVES && stateUp.getMaterial() != Material.WATER && stateUp.getMaterial() != Material.LAVA) {
 							blockFound = true;
 							if(distance > 40 && distance <= 41) {
@@ -122,7 +122,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 	
 	public void placeCropsAndFarmland(BlockPos pos, boolean melonOrPumpkin, IExplosiveEntity ent) {
 		if(!melonOrPumpkin) { 
-			ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+			ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 			int rand = new Random().nextInt(4);
 			BlockState crop = Blocks.POTATOES.defaultBlockState();
 			switch(rand) {
@@ -135,7 +135,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			if(!ent.level().getBlockState(pos.above()).isCollisionShapeFullBlock(ent.level(), pos.above()) && !(ent.level().getBlockState(pos.above()).getBlock() instanceof FarmBlock)) 
 				ent.level().setBlock(pos.above(), crop, 3);
 		} else if(melonOrPumpkin) {
-			ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+			ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 			int rand = Math.random() > 0.5 ? 0 : 1;
 			BlockState crop = Blocks.POTATOES.defaultBlockState();
 			switch(rand) {
@@ -167,10 +167,10 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			&& (ent.level().getBlockState(pos.east()).isCollisionShapeFullBlock(ent.level(), pos.east()) || ent.level().getBlockState(pos.east()).getBlock() instanceof FarmBlock || ent.level().getBlockState(pos.east()).getBlock() instanceof LiquidBlock) 
 			&& (ent.level().getBlockState(pos.west()).isCollisionShapeFullBlock(ent.level(), pos.west()) || ent.level().getBlockState(pos.west()).getBlock() instanceof FarmBlock || ent.level().getBlockState(pos.west()).getBlock() instanceof LiquidBlock)) 
 		{
-			ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion());
+			ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 			ent.level().setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
 			if(!ent.level().getBlockState(pos.below()).isCollisionShapeFullBlock(ent.level(), pos.below())) {
-				ent.level().getBlockState(pos.below()).getBlock().onBlockExploded(ent.level().getBlockState(pos.below()), ent.level(), pos.below(), ImprovedExplosion.dummyExplosion());
+				ent.level().getBlockState(pos.below()).getBlock().onBlockExploded(ent.level().getBlockState(pos.below()), ent.level(), pos.below(), ImprovedExplosion.dummyExplosion(ent.level()));
 				ent.level().setBlock(pos.below(), Blocks.DIRT.defaultBlockState(), 3);
 			}
 			placed = true;

@@ -171,7 +171,7 @@ public class LevelEvents {
 								BlockPos pos = new BlockPos(sPlayer.getX() + offX, posY + 1, sPlayer.getZ() + offZ);
 								BlockState state = sPlayer.level.getBlockState(pos);
 								Material material = state.getMaterial();
-								if((material == Material.BAMBOO_SAPLING || material == Material.PLANT || material == Material.REPLACEABLE_PLANT || material == Material.VEGETABLE || material == Material.AIR) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 100) {
+								if((material == Material.BAMBOO_SAPLING || material == Material.PLANT || material == Material.REPLACEABLE_PLANT || material == Material.VEGETABLE || material == Material.AIR) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100) {
 									if(Math.random() > 0.1D) {
 										BlockHitResult result = new BlockHitResult(new Vec3(sPlayer.getX(), sPlayer.getY(), sPlayer.getZ()), Direction.UP, pos, false);
 										BlockPlaceContext ctx = new BlockPlaceContext(sPlayer, InteractionHand.MAIN_HAND, sPlayer.getItemInHand(InteractionHand.MAIN_HAND), result);
@@ -199,7 +199,7 @@ public class LevelEvents {
 									BlockPos pos = new BlockPos(sPlayer.getX() + offX, posY + 1, sPlayer.getZ() + offZ);
 									BlockState state = sPlayer.level.getBlockState(pos);
 									Material material = state.getMaterial();
-									if((material == Material.BAMBOO_SAPLING || material == Material.PLANT || material == Material.REPLACEABLE_PLANT || material == Material.VEGETABLE) && sPlayer.level.getBlockState(pos.below()).canSustainPlant(level, pos.below(), Direction.UP, (IPlantable)Blocks.DEAD_BUSH) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
+									if((material == Material.BAMBOO_SAPLING || material == Material.PLANT || material == Material.REPLACEABLE_PLANT || material == Material.VEGETABLE) && sPlayer.level.getBlockState(pos.below()).canSustainPlant(level, pos.below(), Direction.UP, (IPlantable)Blocks.DEAD_BUSH) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
 										level.setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 									}
 								}

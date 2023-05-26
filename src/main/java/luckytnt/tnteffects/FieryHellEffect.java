@@ -29,8 +29,8 @@ public class FieryHellEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if((Math.round(ent.y()) - pos.getY()) >= 0 && (Math.round(ent.y()) - pos.getY()) <= 20) {
-					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 || state.getBlock() instanceof LiquidBlock || state.getMaterial() == Material.AIR) && state.getMaterial() != Material.STONE) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 || state.getBlock() instanceof LiquidBlock || state.getMaterial() == Material.AIR) && state.getMaterial() != Material.STONE) {
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 					} 
 				}
@@ -44,9 +44,9 @@ public class FieryHellEffect extends PrimedTNTEffect {
 				BlockPos posTop = pos.offset(0, 1, 0);
 				BlockState stateTop = level.getBlockState(posTop);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 && state.getMaterial() != Material.AIR) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && state.getMaterial() != Material.AIR) {
 					if(Math.random() < 0.9f) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						level.setBlock(pos, Blocks.NETHERRACK.defaultBlockState(), 3);
 						if(Math.random() < 0.1f) {
 							if(!Block.isFaceFull(stateTop.getCollisionShape(level, posTop), Direction.UP)) {
@@ -54,7 +54,7 @@ public class FieryHellEffect extends PrimedTNTEffect {
 							}
 						}
 					} else if(Math.random() < 0.3f) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 					}								
 				}

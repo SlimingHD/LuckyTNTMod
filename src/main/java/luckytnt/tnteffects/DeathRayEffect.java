@@ -38,15 +38,15 @@ public class DeathRayEffect extends PrimedTNTEffect {
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 					if(distance >= 75) {
-						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 2000 && state.getMaterial() != Material.AIR) {
+						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 2000 && state.getMaterial() != Material.AIR) {
 							if(Math.random() < 0.1f) {
 								level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 							} else if(Math.random() < 0.8f) {
 								level.setBlock(pos, Blocks.OBSIDIAN.defaultBlockState(), 3);
 							}
 						}
-					} else if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 2000 && state.getMaterial() != Material.AIR) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion());
+					} else if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 2000 && state.getMaterial() != Material.AIR) {
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					}
 				}
 			});

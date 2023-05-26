@@ -32,7 +32,7 @@ public class ReplayTNTEffect extends PrimedTNTEffect {
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 						if(state.getBlock() instanceof LTNTBlock) {
-							state.onBlockExploded(sLevel, pos, ImprovedExplosion.dummyExplosion());
+							state.onBlockExploded(sLevel, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 						}
 						tnt.blocks.put(pos, state);
 					}

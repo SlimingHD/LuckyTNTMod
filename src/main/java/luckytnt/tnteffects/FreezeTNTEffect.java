@@ -28,8 +28,8 @@ public class FreezeTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion()) < 100 || state.getBlock() instanceof LiquidBlock) && !(state.getBlock() instanceof BushBlock) && !state.isAir()) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion());
+				if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100 || state.getBlock() instanceof LiquidBlock) && !(state.getBlock() instanceof BushBlock) && !state.isAir()) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
 					level.setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState());
 				}
 			}

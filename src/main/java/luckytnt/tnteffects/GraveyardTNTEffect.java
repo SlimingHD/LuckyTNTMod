@@ -20,8 +20,8 @@ public class GraveyardTNTEffect extends PrimedTNTEffect {
 				for(int offZ = -20; offZ <= 20; offZ++) {
 					double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ);
 					BlockPos pos = new BlockPos(entity.x() + offX, entity.y() + offY - 10, entity.z() + offZ);
-					if(distance <= 20 && entity.level().getBlockState(pos).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion()) <= 100 && !entity.level().getBlockState(pos).isCollisionShapeFullBlock(entity.level(), pos)) {
-						entity.level().getBlockState(pos).onBlockExploded(entity.level(), pos, ImprovedExplosion.dummyExplosion());
+					if(distance <= 20 && entity.level().getBlockState(pos).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 100 && !entity.level().getBlockState(pos).isCollisionShapeFullBlock(entity.level(), pos)) {
+						entity.level().getBlockState(pos).onBlockExploded(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level()));
 						entity.level().setBlockAndUpdate(pos, Blocks.GRASS_BLOCK.defaultBlockState());
 					}
 				}
