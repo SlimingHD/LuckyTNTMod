@@ -290,6 +290,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> CONTINENTAL_DRIFT = LuckyTNTMod.RH.registerTNTEntity("continental_drift", new ContinentalDriftEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> TETRAHEDRON_TNT = LuckyTNTMod.RH.registerTNTEntity("tetrahedron_tnt", new TetrahedronTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> EYE_OF_THE_SAHARA = LuckyTNTMod.RH.registerTNTEntity("eye_of_the_sahara", new EyeOfTheSaharaEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> WORLD_OF_WOOLS = LuckyTNTMod.RH.registerTNTEntity("world_of_wools", new WorldOfWoolsEffect());
 	
 	//Doomsday
 	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERNOVA = LuckyTNTMod.RH.registerTNTEntity("supernova", new SupernovaEffect());

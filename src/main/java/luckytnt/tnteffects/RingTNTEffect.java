@@ -32,7 +32,6 @@ public class RingTNTEffect extends PrimedTNTEffect {
 		return BlockRegistry.RING_TNT.get();
 	}
 	
-	@SuppressWarnings("deprecation")
 	public static int getFirstMotionBlockingBlock(Level level, double x, double z) {
 		if(!level.isClientSide) {
 			boolean blockFound = false;
@@ -43,7 +42,7 @@ public class RingTNTEffect extends PrimedTNTEffect {
 				BlockState state = level.getBlockState(pos);
 				BlockState stateUp = level.getBlockState(posUp);				
 				if(!blockFound) {
-					if(!state.getBlock().getCollisionShape(state, level, pos, CollisionContext.empty()).isEmpty() && stateUp.getBlock().getCollisionShape(stateUp, level, posUp, CollisionContext.empty()).isEmpty()) {
+					if(!state.getCollisionShape(level, pos, CollisionContext.empty()).isEmpty() && stateUp.getCollisionShape(level, posUp, CollisionContext.empty()).isEmpty()) {
 						blockFound = true;
 						y = offY;
 					}	

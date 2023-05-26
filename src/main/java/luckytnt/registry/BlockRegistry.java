@@ -199,6 +199,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> CONTINENTAL_DRIFT = LuckyTNTMod.RH.registerTNTBlock("continental_drift", EntityRegistry.CONTINENTAL_DRIFT, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
 	public static final RegistryObject<LTNTBlock> TETRAHEDRON_TNT = LuckyTNTMod.RH.registerTNTBlock("tetrahedron_tnt", EntityRegistry.TETRAHEDRON_TNT, "g", MaterialColor.COLOR_ORANGE, true);
 	public static final RegistryObject<LTNTBlock> EYE_OF_THE_SAHARA = LuckyTNTMod.RH.registerTNTBlock("eye_of_the_sahara", EntityRegistry.EYE_OF_THE_SAHARA, "g", MaterialColor.COLOR_ORANGE, true);
+	public static final RegistryObject<LTNTBlock> WORLD_OF_WOOLS = LuckyTNTMod.RH.registerTNTBlock("world_of_wools", EntityRegistry.WORLD_OF_WOOLS, "g", MaterialColor.COLOR_ORANGE, true);
 	
 	public static final RegistryObject<LTNTBlock> LUCKY_GOD = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new LuckyTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS), LuckyTNTMod.RH.TNTLists.get("g")), new TNTBlockRegistryData.Builder("lucky_god").tab("g").build());
 	

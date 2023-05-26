@@ -212,6 +212,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.RING_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.EYE_OF_THE_SAHARA.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ASTEROID_BELT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.WORLD_OF_WOOLS.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
