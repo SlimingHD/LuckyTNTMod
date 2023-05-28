@@ -22,6 +22,7 @@ public class TNTFireworkEffect extends PrimedTNTEffect{
 		for(int count = 0; count <= 300; count++) {
 			PrimedLTNT TNT = EntityRegistry.TNT.get().create(entity.level());
 			TNT.setPos(entity.getPos());
+			TNT.setOwner(entity.owner());
 			TNT.setDeltaMovement((Math.random() - Math.random()) * 1.5f, (Math.random() - Math.random()) * 1.5f, (Math.random() - Math.random()) * 1.5f);
 			TNT.setFuse(TNT.getFuse() / 2 + (int)(TNT.getFuse() * (Math.random() + 0.2f)));
 			entity.level().addFreshEntity(TNT);
