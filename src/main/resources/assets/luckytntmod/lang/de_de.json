@@ -196,6 +196,9 @@
 	"block.luckytntmod.ring_tnt" : "Ring TNT",
 	"block.luckytntmod.eye_of_the_sahara" : "Auge Der Sahara",
 	"block.luckytntmod.asteroid_belt" : "Asteroideng\u00FCrtel",
+	"block.luckytntmod.world_of_wools" : "Welt aus Wolle",
+	"block.luckytntmod.nether_tnt" : "Nether TNT",
+	"block.luckytntmod.aether_tnt" : "Aether TNT",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -553,6 +556,9 @@
 	"entity.luckytntmod.ring_tnt" : "Ring TNT",
 	"entity.luckytntmod.eye_of_the_sahara" : "Auge Der Sahara",
 	"entity.luckytntmod.asteroid_belt" : "Asteroideng\u00FCrtel",
+	"entity.luckytntmod.world_of_wools" : "Welt aus Wolle",
+	"entity.luckytntmod.nether_tnt" : "Nether TNT",
+	"entity.luckytntmod.aether_tnt" : "Aether TNT",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
