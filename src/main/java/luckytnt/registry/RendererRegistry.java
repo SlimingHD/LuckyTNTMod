@@ -215,6 +215,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.WORLD_OF_WOOLS.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.NETHER_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.AETHER_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SCULK_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
@@ -280,6 +281,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.DRIPSTONE_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.END_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHRISTMAS_DYNAMITE.get(), LDynamiteRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SCULK_DYNAMITE.get(), LDynamiteRenderer::new);
 
 		//Minecarts
 		event.registerEntityRenderer(EntityRegistry.TNT_X5_MINECART.get(), LTNTMinecartRenderer::new);

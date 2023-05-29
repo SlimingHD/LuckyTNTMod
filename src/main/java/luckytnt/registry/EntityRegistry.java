@@ -219,6 +219,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> EARTHQUAKE_TNT = LuckyTNTMod.RH.registerTNTEntity("earthquake_tnt", new EarthquakeTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> PRISM_TNT = LuckyTNTMod.RH.registerTNTEntity("prism_tnt", new PrismTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> RING_TNT = LuckyTNTMod.RH.registerTNTEntity("ring_tnt", new RingTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> SCULK_TNT = LuckyTNTMod.RH.registerTNTEntity("sculk_tnt", new SculkTNTEffect(20));
 	
 	//God TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> GLOBAL_DISASTER = LuckyTNTMod.RH.registerTNTEntity("global_disaster", new GlobalDisasterEffect());
@@ -408,6 +409,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DRIPSTONE_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dripstone_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.DRIPSTONE_DYNAMITE, new DripstoneTNTEffect(10)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> END_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("end_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.END_DYNAMITE, ParticleTypes.END_ROD, new EndTNTEffect(10)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite", new ChristmasDynamiteEffect(), 0.25f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> SCULK_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("sculk_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.SCULK_DYNAMITE, new SculkTNTEffect(10)), 0.25f, false);
 
 	//Minecarts
 	public static final RegistryObject<EntityType<LTNTMinecart>> TNT_X5_MINECART = LuckyTNTMod.RH.registerTNTMinecart("tnt_x5_minecart", TNT_X5, ItemRegistry.TNT_X5_MINECART);

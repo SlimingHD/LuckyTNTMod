@@ -199,6 +199,7 @@
 	"block.luckytntmod.world_of_wools" : "Welt aus Wolle",
 	"block.luckytntmod.nether_tnt" : "Nether TNT",
 	"block.luckytntmod.aether_tnt" : "Aether TNT",
+	"block.luckytntmod.sculk_tnt" : "Sculk TNT",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -275,6 +276,7 @@
 	"item.luckytntmod.end_dynamite" : "End Dynamit",
 	"item.luckytntmod.lucky_dynamite" : "Lucky Dynamit",
 	"item.luckytntmod.christmas_dynamite" : "Weihnachts Dynamit",
+	"item.luckytntmod.sculk_dynamite" : "Sculk Dynamit",
 
 	"item.luckytntmod.tnt_x5_minecart" : "TNT x5-Lore",
 	"item.luckytntmod.tnt_x20_minecart" : "TNT x20-Lore",
@@ -559,6 +561,7 @@
 	"entity.luckytntmod.world_of_wools" : "Welt aus Wolle",
 	"entity.luckytntmod.nether_tnt" : "Nether TNT",
 	"entity.luckytntmod.aether_tnt" : "Aether TNT",
+	"entity.luckytntmod.sculk_tnt" : "Sculk TNT",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
@@ -624,6 +627,7 @@
 	"entity.luckytntmod.end_dynamite" : "End Dynamit",
 	"entity.luckytntmod.lucky_dynamite" : "Lucky Dynamit",
 	"entity.luckytntmod.christmas_dynamite" : "Weihnachts Dynamit",
+	"entity.luckytntmod.sculk_dynamite" : "Sculk Dynamit",
 
 	"entity.luckytntmod.tnt_x5_minecart" : "TNT x5-Lore",
 	"entity.luckytntmod.tnt_x20_minecart" : "TNT x20-Lore",
