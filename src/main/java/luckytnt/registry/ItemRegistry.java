@@ -90,6 +90,7 @@ public class ItemRegistry {
 	public static final RegistryObject<LDynamiteItem> DRIPSTONE_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("dripstone_dynamite", EntityRegistry.DRIPSTONE_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> END_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("end_dynamite", EntityRegistry.END_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> CHRISTMAS_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("christmas_dynamite", EntityRegistry.CHRISTMAS_DYNAMITE, "dy");
+	public static final RegistryObject<LDynamiteItem> PRISM_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("prism_dynamite", EntityRegistry.PRISM_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> SCULK_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("sculk_dynamite", EntityRegistry.SCULK_DYNAMITE, "dy");
 	
 	public static final RegistryObject<LDynamiteItem> LUCKY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem(LuckyTNTMod.itemRegistry, "lucky_dynamite", () -> new LuckyDynamiteItem(new Item.Properties(), LuckyTNTMod.RH.dynamiteLists.get("dy")), "dy", false, true);
@@ -154,6 +155,15 @@ public class ItemRegistry {
 	public static final RegistryObject<LTNTMinecartItem> BIG_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("big_tnt_minecart", () -> EntityRegistry.BIG_TNT_MINECART, "m");
 	public static final RegistryObject<LTNTMinecartItem> HONEY_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("honey_tnt_minecart", () -> EntityRegistry.HONEY_TNT_MINECART, "m");
 	public static final RegistryObject<LTNTMinecartItem> EATING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("eating_tnt_minecart", () -> EntityRegistry.EATING_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> LUSH_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("lush_tnt_minecart", () -> EntityRegistry.LUSH_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> GEODE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("geode_tnt_minecart", () -> EntityRegistry.GEODE_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> NETHER_GROVE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("nether_grove_tnt_minecart", () -> EntityRegistry.NETHER_GROVE_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> DRIPSTONE_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("dripstone_tnt_minecart", () -> EntityRegistry.DRIPSTONE_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> END_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("end_tnt_minecart", () -> EntityRegistry.END_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> PRISM_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("prism_tnt_minecart", () -> EntityRegistry.PRISM_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> RING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("ring_tnt_minecart", () -> EntityRegistry.RING_TNT_MINECART, "m");
+	public static final RegistryObject<LTNTMinecartItem> SCULK_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("sculk_tnt_minecart", () -> EntityRegistry.SCULK_TNT_MINECART, "m");
+	
 	public static final RegistryObject<LTNTMinecartItem> LUCKY_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("lucky_tnt_minecart", () -> new LTNTMinecartItem(new Item.Properties(), () -> EntityRegistry.LUCKY_TNT_MINECART), "m", false, true);
 	
 	//Other

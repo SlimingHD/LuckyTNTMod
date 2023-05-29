@@ -216,6 +216,8 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.NETHER_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.AETHER_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SCULK_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DEIMOS.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.PHOBOS.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
@@ -281,6 +283,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.DRIPSTONE_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.END_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHRISTMAS_DYNAMITE.get(), LDynamiteRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.PRISM_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SCULK_DYNAMITE.get(), LDynamiteRenderer::new);
 
 		//Minecarts
@@ -343,6 +346,15 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.BIG_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HONEY_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.EATING_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.LUSH_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.GEODE_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.NETHER_GROVE_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DRIPSTONE_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.END_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.PRISM_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.RING_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SCULK_TNT_MINECART.get(), LTNTMinecartRenderer::new);
+		
 		event.registerEntityRenderer(EntityRegistry.LUCKY_TNT_MINECART.get(), LTNTMinecartRenderer::new);
 		
 		//Projectiles
@@ -370,6 +382,9 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.VREDEFORT_PROJECTILE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HYDROGEN_BOMB_BOMB.get(), BombRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DISINTEGRATING_PROJECTILE.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.MINI_ICE_METEOR.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DEIMOS_METEOR.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.PHOBOS_METEOR.get(), LTNTRenderer::new);
 		
 		//Other
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);

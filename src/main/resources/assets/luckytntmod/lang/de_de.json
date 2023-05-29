@@ -200,6 +200,8 @@
 	"block.luckytntmod.nether_tnt" : "Nether TNT",
 	"block.luckytntmod.aether_tnt" : "Aether TNT",
 	"block.luckytntmod.sculk_tnt" : "Sculk TNT",
+	"block.luckytntmod.deimos" : "Deimos",
+	"block.luckytntmod.phobos" : "Phobos",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -276,6 +278,7 @@
 	"item.luckytntmod.end_dynamite" : "End Dynamit",
 	"item.luckytntmod.lucky_dynamite" : "Lucky Dynamit",
 	"item.luckytntmod.christmas_dynamite" : "Weihnachts Dynamit",
+	"item.luckytntmod.prism_dynamite" : "Prisma Dynamit",
 	"item.luckytntmod.sculk_dynamite" : "Sculk Dynamit",
 
 	"item.luckytntmod.tnt_x5_minecart" : "TNT x5-Lore",
@@ -338,6 +341,14 @@
 	"item.luckytntmod.honey_tnt_minecart" : "Honig TNT-Lore",
 	"item.luckytntmod.eating_tnt_minecart" : "Essende TNT-Lore",
 	"item.luckytntmod.lucky_tnt_minecart" : "Lucky TNT-Lore",
+	"item.luckytntmod.lush_tnt_minecart" : "\u00dcppige TNT-Lore",
+	"item.luckytntmod.geode_tnt_minecart" : "Geoden TNT-Lore",
+	"item.luckytntmod.nether_grove_tnt_minecart" : "Nether Hain TNT-Lore",
+	"item.luckytntmod.dripstone_tnt_minecart" : "Tropfstein TNT-Lore",
+	"item.luckytntmod.end_tnt_minecart" : "End TNT-Lore",
+	"item.luckytntmod.prism_tnt_minecart" : "Prisma TNT-Lore",
+	"item.luckytntmod.ring_tnt_minecart" : "Ring TNT-Lore",
+	"item.luckytntmod.sculk_tnt_minecart" : "Sculk TNT-Lore",
 
 	"item.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"item.luckytntmod.red_candy" : "Rotes Bonbon",
@@ -562,6 +573,8 @@
 	"entity.luckytntmod.nether_tnt" : "Nether TNT",
 	"entity.luckytntmod.aether_tnt" : "Aether TNT",
 	"entity.luckytntmod.sculk_tnt" : "Sculk TNT",
+	"entity.luckytntmod.deimos" : "Deimos",
+	"entity.luckytntmod.phobos" : "Phobos",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
@@ -627,6 +640,7 @@
 	"entity.luckytntmod.end_dynamite" : "End Dynamit",
 	"entity.luckytntmod.lucky_dynamite" : "Lucky Dynamit",
 	"entity.luckytntmod.christmas_dynamite" : "Weihnachts Dynamit",
+	"entity.luckytntmod.prism_dynamite" : "Prisma Dynamit",
 	"entity.luckytntmod.sculk_dynamite" : "Sculk Dynamit",
 
 	"entity.luckytntmod.tnt_x5_minecart" : "TNT x5-Lore",
@@ -689,6 +703,14 @@
 	"entity.luckytntmod.honey_tnt_minecart" : "Honig TNT-Lore",
 	"entity.luckytntmod.eating_tnt_minecart" : "Essende TNT-Lore",
 	"entity.luckytntmod.lucky_tnt_minecart" : "Lucky TNT-Lore",
+	"entity.luckytntmod.lush_tnt_minecart" : "\u00dcppige TNT-Lore",
+	"entity.luckytntmod.geode_tnt_minecart" : "Geoden TNT-Lore",
+	"entity.luckytntmod.nether_grove_tnt_minecart" : "Nether Hain TNT-Lore",
+	"entity.luckytntmod.dripstone_tnt_minecart" : "Tropfstein TNT-Lore",
+	"entity.luckytntmod.end_tnt_minecart" : "End TNT-Lore",
+	"entity.luckytntmod.prism_tnt_minecart" : "Prisma TNT-Lore",
+	"entity.luckytntmod.ring_tnt_minecart" : "Ring TNT-Lore",
+	"entity.luckytntmod.sculk_tnt_minecart" : "Sculk TNT-Lore",
 		
 	"entity.luckytntmod.meteor" : "Meteor",
 	"entity.luckytntmod.mini_meteor" : "Mini Meteor",
@@ -712,6 +734,9 @@
 	"entity.luckytntmod.vredefort_projectile" : "Vredefort Meteorit",
 	"entity.luckytntmod.hydrogen_bomb_bomb" : "Wasserstoffbombe Bombe",
 	"entity.luckytntmod.disintegrating_projectile" : "Aufl\u00f6sendes Projektil",
+	"entity.luckytntmod.mini_ice_meteor" : "Mini Eis Meteor",
+	"entity.luckytntmod.deimos_meteor" : "Deimos Meteor",
+	"entity.luckytntmod.phobos_meteor" : "Phobos Meteor",
 	
 	"entity.luckytntmod.angry_miner" : "W\u00FCtender Minenarbeiter",
 	"entity.luckytntmod.toxic_cloud" : "Giftige Wolke",

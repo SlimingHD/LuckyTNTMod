@@ -8,14 +8,20 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 
 public class PrismTNTEffect extends PrimedTNTEffect {
+	
+	public final int size;
+	
+	public PrismTNTEffect(int size) {
+		this.size = size;
+	}
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		BlockPos pos = new BlockPos(ent.getPos()).offset(-4, 0, -4);
+		BlockPos pos = new BlockPos(ent.getPos()).offset(-1 * (size / 2) + 1, 0, -1 * (size / 2) + 1);
 		
-		for(int offY = 5; offY > -6; offY--) {
-			int tri = 10;
-			for(int offX = 0; offX < 10; offX++) {
+		for(int offY = (size / 2); offY > (-1 * (size / 2) - 1); offY--) {
+			int tri = size;
+			for(int offX = 0; offX < size; offX++) {
 				for(int offZ = 0; offZ < tri; offZ++) {
 					BlockPos pos1 = new BlockPos(pos.getX() + offX, pos.getY() + offY, pos.getZ() + offZ);
 					if(ent.level().getBlockState(pos1).getExplosionResistance(ent.level(), pos1, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
