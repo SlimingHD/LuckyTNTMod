@@ -3,16 +3,16 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
-version = '1.1'
+version = '1.0'
 group = 'luckytnt.luckytntmod'
-archivesBaseName = 'luckytntmod-1.19.3'
+archivesBaseName = 'luckytntmod-1.19.2'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
 minecraft {
-    mappings channel: 'official', version: '1.19.3'
+    mappings channel: 'official', version: '1.19.2'
 
     runs {
         client {
@@ -87,9 +87,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.3-44.1.23'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.2.11'
 
-    implementation fg.deobf("libs.luckytntlib:luckytntlib-1.19.3:44.1.2.10")
+    implementation fg.deobf("libs.luckytntlib:luckytntlib-1.19.2:43.2.11.1")
 }
 
 jar {
