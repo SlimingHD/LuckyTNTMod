@@ -45,6 +45,7 @@ public class MultiplyingDynamiteEffect extends PrimedTNTEffect{
 			for(int count = 0; count < 4; count++) {
 				LExplosiveProjectile dynamite = EntityRegistry.MULTIPLYING_DYNAMITE.get().create(entity.level());
 				dynamite.setPos(entity.getPos());
+				dynamite.setOwner(entity.owner());
 				dynamite.setDeltaMovement(((Entity)entity).getDeltaMovement().add(Math.random() * 0.5f - 0.25f, Math.random() * 0.5f - 0.25f, Math.random() * 0.5f - 0.25f));
 				dynamite.getPersistentData().putInt("level", entity.getPersistentData().getInt("level") + 1);
 				entity.level().addFreshEntity(dynamite);

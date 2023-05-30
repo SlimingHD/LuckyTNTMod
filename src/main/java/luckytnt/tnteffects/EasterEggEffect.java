@@ -58,6 +58,7 @@ public class EasterEggEffect extends PrimedTNTEffect{
 			for(int count = 0; count < 4; count++) {
 				PrimedLTNT tnt = EntityRegistry.EASTER_EGG.get().create(entity.level());
 				tnt.setPos(entity.getPos());
+				tnt.setOwner(entity.owner());
 				tnt.setDeltaMovement(Math.random() * 2 - 1, 1 + Math.random(), Math.random() * 2 - 1);
 				tnt.getPersistentData().putInt("level", level + 1);
 				entity.level().addFreshEntity(tnt);

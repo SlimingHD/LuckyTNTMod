@@ -16,7 +16,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -71,7 +70,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					for(int count = 0; count < 3; count++) {
 						PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 						custom.setPos(ent.getPos());
-						custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+						custom.setOwner(ent.owner());
 						custom.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f, Math.random() * 2f - 1f);
 						custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 						ent.level().addFreshEntity(custom);
@@ -93,7 +92,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					for(int count = 0; count < 3; count++) {
 						PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 						custom.setPos(ent.getPos());
-						custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+						custom.setOwner(ent.owner());
 						custom.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f, Math.random() * 2f - 1f);
 						custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 						ent.level().addFreshEntity(custom);
@@ -115,7 +114,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					for(int count = 0; count < 3; count++) {
 						PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 						custom.setPos(ent.getPos());
-						custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+						custom.setOwner(ent.owner());
 						custom.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f, Math.random() * 2f - 1f);
 						custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 						ent.level().addFreshEntity(custom);
@@ -144,7 +143,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					for(int count = 0; count < 1 * LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get().intValue(); count++) {
 						PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 						custom.setPos(ent.getPos());
-						custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+						custom.setOwner(ent.owner());
 						custom.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f, Math.random() * 2f - 1f);
 						custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 						ent.level().addFreshEntity(custom);
@@ -155,7 +154,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 				for(int count = 0; count < 15 * LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get().intValue(); count++) {
 					PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 					custom.setPos(ent.getPos());
-					custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+					custom.setOwner(ent.owner());
 					custom.setDeltaMovement(Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f);
 					custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 					ent.level().addFreshEntity(custom);
@@ -173,7 +172,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					for(int count = 0; count < 3; count++) {
 						PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 						custom.setPos(ent.getPos());
-						custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+						custom.setOwner(ent.owner());
 						custom.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f, Math.random() * 2f - 1f);
 						custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 						ent.level().addFreshEntity(custom);
@@ -195,7 +194,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					for(int count = 0; count < 3; count++) {
 						PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 						custom.setPos(ent.getPos());
-						custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+						custom.setOwner(ent.owner());
 						custom.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f, Math.random() * 2f - 1f);
 						custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 						ent.level().addFreshEntity(custom);
@@ -217,7 +216,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					for(int count = 0; count < 3; count++) {
 						PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 						custom.setPos(ent.getPos());
-						custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+						custom.setOwner(ent.owner());
 						custom.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f, Math.random() * 2f - 1f);
 						custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 						ent.level().addFreshEntity(custom);
@@ -246,7 +245,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					for(int count = 0; count < 1 * LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get().intValue(); count++) {
 						PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 						custom.setPos(ent.getPos());
-						custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+						custom.setOwner(ent.owner());
 						custom.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f, Math.random() * 2f - 1f);
 						custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 						ent.level().addFreshEntity(custom);
@@ -257,7 +256,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 				for(int count = 0; count < 15 * LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get().intValue(); count++) {
 					PrimedLTNT custom = EntityRegistry.CUSTOM_TNT.get().create(ent.level());
 					custom.setPos(ent.getPos());
-					custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+					custom.setOwner(ent.owner());
 					custom.setDeltaMovement(Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f);
 					custom.getPersistentData().putInt("level", ent.getPersistentData().getInt("level") + 1);
 					ent.level().addFreshEntity(custom);
@@ -315,7 +314,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 				for(int count = 0; count < 15 * LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get().intValue(); count++) {
 					PrimedLTNT custom = EntityRegistry.TNT.get().create(ent.level());
 					custom.setPos(ent.getPos());
-					custom.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
+					custom.setOwner(ent.owner());
 					custom.setDeltaMovement(Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f);
 					ent.level().addFreshEntity(custom);
 				}

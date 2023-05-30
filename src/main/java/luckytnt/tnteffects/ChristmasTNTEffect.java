@@ -46,6 +46,7 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 				if(entity.getTNTFuse() % 10 == 0) {
 					LExplosiveProjectile present = EntityRegistry.PRESENT.get().create(entity.level());
 					present.setPos(entity.getPos());
+					present.setOwner(entity.owner());
 					double randomX = Math.random();
 					randomX *= new Random().nextBoolean() ? 1 : -1;
 					double randomZ = Math.random();

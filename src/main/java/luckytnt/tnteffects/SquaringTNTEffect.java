@@ -38,6 +38,7 @@ public class SquaringTNTEffect extends PrimedTNTEffect{
 			for(int count = 0; count < 4; count++) {
 				PrimedLTNT tnt = EntityRegistry.SQUARING_TNT.get().create(entity.level());
 				tnt.setPos(entity.getPos());
+				tnt.setOwner(entity.owner());
 				tnt.setDeltaMovement(Math.random() * 2.5D - 1.25D, 1 + Math.random(), Math.random() * 2.5D - 1.25D);
 				tnt.getPersistentData().putInt("level", level + 1);
 				entity.level().addFreshEntity(tnt);
@@ -46,6 +47,7 @@ public class SquaringTNTEffect extends PrimedTNTEffect{
 			for(int count = 0; count < level * level; count++) {
 				PrimedLTNT tnt = EntityRegistry.SQUARING_TNT.get().create(entity.level());
 				tnt.setPos(entity.getPos());
+				tnt.setOwner(entity.owner());
 				tnt.setDeltaMovement(Math.random() * 2.5D - 1.25D, 1 + Math.random(), Math.random() * 2.5D - 1.25D);
 				tnt.getPersistentData().putInt("level", level + 1);
 				entity.level().addFreshEntity(tnt);

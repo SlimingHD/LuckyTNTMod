@@ -14,6 +14,7 @@ public class VillageDefenseEffect extends PrimedTNTEffect{
 		for(int count = 0; count <= 15; count++) {
 			IronGolem golem = new IronGolem(EntityType.IRON_GOLEM, entity.level());
 			golem.setPos(entity.getPos());
+			golem.setPlayerCreated(true);
 			entity.level().addFreshEntity(golem);
 		}
 	}

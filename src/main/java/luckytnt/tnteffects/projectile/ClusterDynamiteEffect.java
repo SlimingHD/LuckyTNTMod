@@ -19,6 +19,7 @@ public class ClusterDynamiteEffect extends PrimedTNTEffect{
 				for(int count = 0; count < 75; count++) {
 					LExplosiveProjectile shrapnel = EntityRegistry.SHRAPNEL.get().create(entity.level());
 					shrapnel.setPos(entity.getPos());
+					shrapnel.setOwner(entity.owner());
 					shrapnel.setDeltaMovement(dynamite.getDeltaMovement().add(new Vec3(Math.random() - Math.random(), Math.random() - Math.random(), Math.random() - Math.random()).scale(0.4f)));
 					entity.level().addFreshEntity(shrapnel);
 				}
@@ -30,6 +31,7 @@ public class ClusterDynamiteEffect extends PrimedTNTEffect{
 				for(int count = 0; count < 50; count++) {
 					LExplosiveProjectile shrapnel = EntityRegistry.SHRAPNEL.get().create(entity.level());
 					shrapnel.setPos(entity.getPos());
+					shrapnel.setOwner(entity.owner());
 					shrapnel.setDeltaMovement(dynamite.getDeltaMovement().add(Math.random() * 2f - 1f, Math.random() * 2f - 1f, Math.random() * 2f - 1f).scale(-1f));
 					entity.level().addFreshEntity(shrapnel);
 				}

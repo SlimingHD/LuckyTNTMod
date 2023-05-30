@@ -41,6 +41,7 @@ public class ChicxulubMeteorEffect extends PrimedTNTEffect {
 		for(int count = 0; count < 300; count++) {
 			LExplosiveProjectile pompeii = EntityRegistry.POMPEII_PROJECTILE.get().create(entity.level());
 			pompeii.setPos(entity.getPos());
+			pompeii.setOwner(entity.owner());
 			pompeii.setDeltaMovement(Math.random() * 8D - 4D, 3 + Math.random() * 2, Math.random() * 8D - 4D);
 			pompeii.setTNTFuse(100000);
 			entity.level().addFreshEntity(pompeii);
