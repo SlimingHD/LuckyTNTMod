@@ -19,6 +19,6 @@ public class SoundRegistry {
 	public static RegistryObject<SoundEvent> VACUUM_CLEANER = register("vacuum_cleaner");
 	
 	public static RegistryObject<SoundEvent> register(String name){
-		return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(LuckyTNTMod.MODID, name)));
+		return SOUNDS.register(name, () -> new SoundEvent(new ResourceLocation(LuckyTNTMod.MODID, name)));
 	}
 }
