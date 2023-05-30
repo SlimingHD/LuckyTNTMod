@@ -12,7 +12,7 @@ public class VacuumShotEffect extends PrimedTNTEffect{
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 2);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 2);
 		explosion.doEntityExplosion(new IForEachEntityExplosionEffect() {
 			
 			@Override

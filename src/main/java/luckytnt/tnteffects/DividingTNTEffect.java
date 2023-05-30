@@ -54,7 +54,7 @@ public class DividingTNTEffect extends PrimedTNTEffect{
 		}
 		else {
 			if(entity.getPersistentData().getInt("level") >= entity.getPersistentData().getInt("maxLevel")) {
-				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 10);
+				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
 				explosion.doEntityExplosion(1f, true);
 				explosion.doBlockExplosion();
 				if(entity.getPersistentData().getInt("level") >= entity.getPersistentData().getInt("maxLevel")) {
@@ -64,7 +64,7 @@ public class DividingTNTEffect extends PrimedTNTEffect{
 				entity.destroy();
 			}
 			else {
-				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 10);
+				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
 				explosion.doEntityExplosion(1.5f, true);
 				explosion.doBlockExplosion();
 				PrimedLTNT projectile = EntityRegistry.DIVIDING_TNT.get().create(entity.level());

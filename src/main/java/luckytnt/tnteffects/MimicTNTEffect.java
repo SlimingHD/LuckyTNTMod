@@ -22,7 +22,7 @@ public class MimicTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), 20f);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 20f);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
 	}

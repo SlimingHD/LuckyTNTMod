@@ -80,7 +80,7 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 		float resistanceImpact = 1f - ((0.833f / 20f) * amount);
 		float knockback = 5f + ((10f / 20f) * amount);
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), (float)Math.floor((double)size));
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), (float)Math.floor((double)size));
 		explosion.doEntityExplosion(knockback, true);
 		explosion.doBlockExplosion(1f, yStrength, resistanceImpact, size >= 110f ? 0.05f : 1f, false, size >= 110f ? true : false);
 	}

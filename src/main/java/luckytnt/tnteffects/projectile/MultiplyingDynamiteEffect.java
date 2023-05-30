@@ -45,13 +45,14 @@ public class MultiplyingDynamiteEffect extends PrimedTNTEffect{
 			for(int count = 0; count < 4; count++) {
 				LExplosiveProjectile dynamite = EntityRegistry.MULTIPLYING_DYNAMITE.get().create(entity.level());
 				dynamite.setPos(entity.getPos());
+				dynamite.setOwner(entity.owner());
 				dynamite.setDeltaMovement(((Entity)entity).getDeltaMovement().add(Math.random() * 0.5f - 0.25f, Math.random() * 0.5f - 0.25f, Math.random() * 0.5f - 0.25f));
 				dynamite.getPersistentData().putInt("level", entity.getPersistentData().getInt("level") + 1);
 				entity.level().addFreshEntity(dynamite);
 			}
 		}
 		else {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 8);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 8);
 			explosion.doEntityExplosion(0.75f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 			level.playSound((Entity)entity, new BlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);

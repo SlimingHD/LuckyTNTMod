@@ -17,6 +17,7 @@ public class ClusterBombEffect extends PrimedTNTEffect{
 		for(int count = 0; count < 80; count++) {
 			LExplosiveProjectile shrapnel = EntityRegistry.SHRAPNEL.get().create(entity.level());
 			shrapnel.setPos(entity.getPos());
+			shrapnel.setOwner(entity.owner());
 			shrapnel.setDeltaMovement(Math.random() - 0.5f, Math.random() * 1.5f, Math.random() - 0.5f);
 			entity.level().addFreshEntity(shrapnel);
 		}

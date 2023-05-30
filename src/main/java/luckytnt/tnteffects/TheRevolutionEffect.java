@@ -25,6 +25,7 @@ public class TheRevolutionEffect extends PrimedTNTEffect{
 					PrimedLTNT spiral_tnt = EntityRegistry.SPIRAL_TNT.get().create(entity.level());
 					spiral_tnt.setTNTFuse(140);
 					spiral_tnt.setPos(entity.x(), entity.y(), entity.z());
+					spiral_tnt.setOwner(entity.owner());
 					spiral_tnt.setDeltaMovement(ent.getLookAngle().normalize().scale((double)ent.getPersistentData().getFloat("spiral_power")));
 					entity.level().playSound(null, new BlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
 					entity.level().addFreshEntity(spiral_tnt);

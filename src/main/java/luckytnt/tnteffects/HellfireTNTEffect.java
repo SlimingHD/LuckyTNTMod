@@ -33,7 +33,7 @@ public class HellfireTNTEffect extends PrimedTNTEffect{
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos().x, entity.getPos().y + 0.5f, entity.getPos().z, strength);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
-		ImprovedExplosion netherExplosion = new ImprovedExplosion(entity.level(), entity.getPos().add(0, 0.5f, 0), strength * 1.5f);
+		ImprovedExplosion netherExplosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos().add(0, 0.5f, 0), strength * 1.5f);
 		netherExplosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, new IForEachBlockExplosionEffect() {
 			
 			@Override

@@ -31,7 +31,7 @@ public class MultiplyingTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		int level = ((Entity)entity).getPersistentData().getInt("level");
 		if(level == 4) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 10f);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10f);
 			explosion.doEntityExplosion(1f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 		}
@@ -39,6 +39,7 @@ public class MultiplyingTNTEffect extends PrimedTNTEffect{
 			for(int count = 0; count < 4; count++) {
 				PrimedLTNT tnt = EntityRegistry.MULTIPLYING_TNT.get().create(entity.level());
 				tnt.setPos(entity.getPos());
+				tnt.setOwner(entity.owner());
 				tnt.setDeltaMovement(Math.random() * 2 - 1, 1 + Math.random(), Math.random() * 2 - 1);
 				tnt.getPersistentData().putInt("level", level + 1);
 				entity.level().addFreshEntity(tnt);
@@ -48,6 +49,7 @@ public class MultiplyingTNTEffect extends PrimedTNTEffect{
 			for(int count = 0; count < level * 2; count++) {
 				PrimedLTNT tnt = EntityRegistry.MULTIPLYING_TNT.get().create(entity.level());
 				tnt.setPos(entity.getPos());
+				tnt.setOwner(entity.owner());
 				tnt.setDeltaMovement(Math.random() * 2 - 1, 1 + Math.random(), Math.random() * 2 - 1);
 				tnt.getPersistentData().putInt("level", level + 1);
 				entity.level().addFreshEntity(tnt);

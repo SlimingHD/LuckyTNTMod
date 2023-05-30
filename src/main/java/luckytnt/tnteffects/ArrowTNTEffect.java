@@ -22,6 +22,7 @@ public class ArrowTNTEffect extends PrimedTNTEffect{
 			Arrow arrow = new Arrow(EntityType.ARROW, entity.level());
 			arrow.setPos(entity.x(), entity.y() + (entity instanceof PrimedLTNT ? 0.5f : 0f), entity.z());
 			arrow.setDeltaMovement(Math.random() * 3 - Math.random() * 3, Math.random() * 2 - Math.random(), Math.random() * 3 - Math.random() * 3);
+			arrow.setOwner(entity.owner());
 			arrow.setBaseDamage(10);
 			entity.level().addFreshEntity(arrow);
 		}
