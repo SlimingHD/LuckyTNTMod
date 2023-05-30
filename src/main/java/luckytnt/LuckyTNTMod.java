@@ -1,16 +1,19 @@
 package luckytnt;
 
+import java.util.HashMap;
 import java.util.function.BiFunction;
 
 import luckytnt.client.gui.ConfigScreen;
 import luckytnt.config.LuckyTNTConfigs;
 import luckytnt.network.PacketHandler;
+import luckytnt.registry.LuckyTNTTabs;
 import luckytnt.registry.SoundRegistry;
 import luckytntlib.registry.RegistryHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -35,12 +38,21 @@ public class LuckyTNTMod
     public static final DeferredRegister<EntityType<?>> entityRegistry = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
     public static final DeferredRegister<MobEffect> effectRegistry = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<Feature<?>> featureRegistry = DeferredRegister.create(ForgeRegistries.FEATURES, MODID);
-    public static final RegistryHelper RH = new RegistryHelper(blockRegistry, itemRegistry, entityRegistry);
+    @SuppressWarnings("serial")
+	private static final HashMap<String, CreativeModeTab> tabs = new HashMap<>(){{
+    	put("n", LuckyTNTTabs.NORMAL_TNT);
+    	put("g", LuckyTNTTabs.GOD_TNT);
+    	put("dy", LuckyTNTTabs.DYNAMITE);
+    	put("d", LuckyTNTTabs.DOOMSDAY_TNT);
+    	put("m", LuckyTNTTabs.MINECART);
+    }};
+    public static final RegistryHelper RH = new RegistryHelper(blockRegistry, itemRegistry, entityRegistry, tabs);
     
     public LuckyTNTMod()
     {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
     	IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+    	LuckyTNTTabs.load();
         SoundRegistry.SOUNDS.register(bus);
     	entityRegistry.register(bus);
     	blockEntityRegistry.register(bus);
