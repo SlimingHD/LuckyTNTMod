@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#1#",
+    "202",
+    "#1#"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:tnt"
+    },
+    "1": {
+      "item": "minecraft:sculk_sensor"
+    },
+    "2": {
+      "item": "minecraft:sculk_catalyst"
+    },
+    "#": {
+      "item": "minecraft:sculk"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:sculk_tnt",
+    "count": 1
+  }
+}

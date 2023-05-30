@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "323",
+    "010"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:heavens_gate"
+    },
+    "1": {
+      "item": "luckytntmod:grove_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:antimatter"
+    },
+    "3": {
+      "item": "luckytntmod:flower_forest_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:aether_tnt",
+    "count": 1
+  }
+}

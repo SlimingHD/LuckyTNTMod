@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:prism_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:prism_dynamite",
+    "count": 4
+  }
+}

@@ -279,6 +279,7 @@
 	"item.luckytntmod.christmas_dynamite" : "Christmas Dynamite",
 	"item.luckytntmod.lucky_dynamite" : "Lucky Dynamite",
 	"item.luckytntmod.prism_dynamite" : "Prism Dynamite",
+	"item.luckytntmod.ring_dynamite" : "Ring Dynamite",
 	"item.luckytntmod.sculk_dynamite" : "Sculk Dynamite",
 
 	"item.luckytntmod.tnt_x5_minecart" : "Minecart with TNT x5",
@@ -641,6 +642,7 @@
 	"entity.luckytntmod.end_dynamite" : "End Dynamite",
 	"entity.luckytntmod.christmas_dynamite" : "Christmas Dynamite",
 	"entity.luckytntmod.prism_dynamite" : "Prism Dynamite",
+	"entity.luckytntmod.ring_dynamite" : "Ring Dynamite",
 	"entity.luckytntmod.sculk_dynamite" : "Sculk Dynamite",
 
 	"entity.luckytntmod.tnt_x5_minecart" : "Minecart with TNT x5",

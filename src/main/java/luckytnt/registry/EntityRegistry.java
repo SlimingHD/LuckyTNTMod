@@ -53,6 +53,7 @@ import luckytnt.tnteffects.projectile.PhobosMeteorEffect;
 import luckytnt.tnteffects.projectile.PulseDynamiteEffect;
 import luckytnt.tnteffects.projectile.RainbowDynamiteEffect;
 import luckytnt.tnteffects.projectile.ReactionDynamiteEffect;
+import luckytnt.tnteffects.projectile.RingDynamiteEffect;
 import luckytnt.tnteffects.projectile.SensorDynamiteEffect;
 import luckytnt.tnteffects.projectile.ShatterproofDynamiteEffect;
 import luckytnt.tnteffects.projectile.ShrapnelEffect;
@@ -415,6 +416,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> END_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("end_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.END_DYNAMITE, ParticleTypes.END_ROD, new EndTNTEffect(10)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite", new ChristmasDynamiteEffect(), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> PRISM_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("prism_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.PRISM_DYNAMITE, new PrismTNTEffect(6)), 0.25f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> RING_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("ring_dynamite", new RingDynamiteEffect(), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> SCULK_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("sculk_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.SCULK_DYNAMITE, new SculkTNTEffect(10)), 0.25f, false);
 
 	//Minecarts

@@ -284,6 +284,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.END_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHRISTMAS_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PRISM_DYNAMITE.get(), LDynamiteRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.RING_DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SCULK_DYNAMITE.get(), LDynamiteRenderer::new);
 
 		//Minecarts
