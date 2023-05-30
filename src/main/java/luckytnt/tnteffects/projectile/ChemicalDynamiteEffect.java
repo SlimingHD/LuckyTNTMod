@@ -1,6 +1,6 @@
 package luckytnt.tnteffects.projectile;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import luckytnt.registry.ItemRegistry;
 import luckytntlib.util.IExplosiveEntity;

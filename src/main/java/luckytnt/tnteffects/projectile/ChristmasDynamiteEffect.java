@@ -2,8 +2,6 @@ package luckytnt.tnteffects.projectile;
 
 import java.util.Random;
 
-import org.joml.Math;
-
 import luckytnt.registry.EntityRegistry;
 import luckytnt.registry.ItemRegistry;
 import luckytnt.tnteffects.SnowTNTEffect;

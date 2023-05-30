@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import luckytnt.LuckyTNTMod;
 import luckytnt.block.entity.ItemFireworkBlockEntity;

@@ -2,7 +2,7 @@ package luckytnt.tnteffects.projectile;
 
 import java.util.List;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import luckytnt.network.ClientboundHydrogenBombPacket;
 import luckytnt.network.PacketHandler;

@@ -2,7 +2,7 @@ package luckytnt.tnteffects;
 
 import java.util.Random;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;

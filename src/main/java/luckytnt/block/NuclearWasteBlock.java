@@ -3,7 +3,7 @@ package luckytnt.block;
 import java.util.Collections;
 import java.util.List;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import luckytnt.registry.EffectRegistry;
 import net.minecraft.core.BlockPos;
@@ -88,7 +88,7 @@ public class NuclearWasteBlock extends FallingBlock {
 			l_Entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 120, 0, false, true));
 		}
 		else if(entity instanceof ItemEntity i_Entity) {
-			i_Entity.hurt(new Explosion(level, entity, null, null, 0, 0, 0, 0, false, Explosion.BlockInteraction.DESTROY_WITH_DECAY).getDamageSource(), 100);
+			i_Entity.hurt(new Explosion(level, entity, null, null, 0, 0, 0, 0, false, Explosion.BlockInteraction.DESTROY).getDamageSource(), 100);
 		}
 	}
 }

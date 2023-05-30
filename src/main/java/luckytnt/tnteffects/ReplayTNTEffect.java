@@ -2,7 +2,7 @@ package luckytnt.tnteffects;
 
 import java.util.HashMap;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import luckytnt.entity.PrimedReplayTNT;
 import luckytnt.registry.BlockRegistry;

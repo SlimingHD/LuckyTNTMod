@@ -2,8 +2,7 @@ package luckytnt.tnteffects;
 
 import java.util.List;
 
-import org.joml.Math;
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import luckytnt.network.ClientboundToxicCloudPacket;
 import luckytnt.network.PacketHandler;

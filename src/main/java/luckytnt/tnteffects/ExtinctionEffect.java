@@ -1,8 +1,7 @@
 package luckytnt.tnteffects;
 
-import org.joml.Vector3f;
-
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.math.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;

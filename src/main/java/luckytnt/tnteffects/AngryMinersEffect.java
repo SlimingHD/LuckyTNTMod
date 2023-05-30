@@ -1,6 +1,6 @@
 package luckytnt.tnteffects;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import luckytnt.entity.AngryMiner;
 import luckytnt.registry.BlockRegistry;

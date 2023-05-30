@@ -2,7 +2,7 @@ package luckytnt.block;
 
 import javax.annotation.Nullable;
 
-import org.joml.Vector3f;
+import com.mojang.math.Vector3f;
 
 import luckytnt.registry.EntityRegistry;
 import luckytntlib.block.LTNTBlock;

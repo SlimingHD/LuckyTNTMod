@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.joml.Math;
-import org.joml.Vector3f;
-
 import com.mojang.datafixers.util.Pair;
+import com.mojang.math.Vector3f;
 
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;

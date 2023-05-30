@@ -2,7 +2,6 @@ package luckytnt.entity;
 
 import luckytnt.tnteffects.projectile.BouncingDynamiteEffect;
 import luckytntlib.entity.LExplosiveProjectile;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -24,7 +23,7 @@ public class BouncingDynamite extends LExplosiveProjectile{
 			if(getPersistentData().getInt("bounces") >= 12) {
 				if(level instanceof ServerLevel) {
 					getEffect().serverExplosion(this);
-					level.playSound(this, new BlockPos(getPosition(1f)), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					level.playSound(null, this, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 				}
 				discard();
 			}

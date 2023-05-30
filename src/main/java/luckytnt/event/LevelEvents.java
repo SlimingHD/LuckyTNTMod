@@ -15,7 +15,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -115,8 +114,8 @@ public class LevelEvents {
 						}
 					}
 					if(variables.iceAgeTime > 0) {
-						Registry<Biome> registry = level.registryAccess().registryOrThrow(Registries.BIOME);
-						Holder<Biome> biome = registry.wrapAsHolder(registry.getOrThrow(Biomes.SNOWY_TAIGA));
+						Registry<Biome> registry = level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY);
+						Holder<Biome> biome = Holder.direct(registry.getOrThrow(Biomes.SNOWY_TAIGA));
 						if(player instanceof ServerPlayer sPlayer) {	
 							for(double offX = -32; offX <= 32; offX += 16) {
 								for(double offZ = -32; offZ <= 32; offZ += 16) {
@@ -125,7 +124,7 @@ public class LevelEvents {
 										for(int i = 0; i < 4; ++i) {
 											for(int j = 0; j < 4; ++j) {
 												for(int k = 0; k < 4; ++k) {
-													if(section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container && section.getBiomes().get(i, j, k).get() != level.registryAccess().registryOrThrow(Registries.BIOME).getOrThrow(Biomes.SNOWY_TAIGA)) {
+													if(section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container && section.getBiomes().get(i, j, k).get() != level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getOrThrow(Biomes.SNOWY_TAIGA)) {
 														container.getAndSetUnchecked(i, j, k, biome);
 														needsUpdate = true;
 													}
@@ -141,8 +140,8 @@ public class LevelEvents {
 						}
 					}
 					if(variables.heatDeathTime > 0) {
-						Registry<Biome> registry = level.registryAccess().registryOrThrow(Registries.BIOME);
-						Holder<Biome> biome = registry.wrapAsHolder(registry.getOrThrow(Biomes.DESERT));
+						Registry<Biome> registry = level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY);
+						Holder<Biome> biome = Holder.direct(registry.getOrThrow(Biomes.DESERT));
 						if(player instanceof ServerPlayer sPlayer) {	
 							for(double offX = -32; offX <= 32; offX += 16) {
 								for(double offZ = -32; offZ <= 32; offZ += 16) {
@@ -151,7 +150,7 @@ public class LevelEvents {
 										for(int i = 0; i < 4; ++i) {
 											for(int j = 0; j < 4; ++j) {
 												for(int k = 0; k < 4; ++k) {
-													if(section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container && section.getBiomes().get(i, j, k).get() != level.registryAccess().registryOrThrow(Registries.BIOME).getOrThrow(Biomes.DESERT)) {
+													if(section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container && section.getBiomes().get(i, j, k).get() != level.registryAccess().registryOrThrow(Registry.BIOME_REGISTRY).getOrThrow(Biomes.DESERT)) {
 														container.getAndSetUnchecked(i, j, k, biome);
 														needsUpdate = true;
 													}
