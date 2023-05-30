@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/house_tnt_bottom",
+        "up": "luckytntmod:block/pillager_outpost_top",
+        "north": "luckytntmod:block/village_plains_side",
+        "east": "luckytntmod:block/village_plains_side",
+        "south": "luckytntmod:block/village_plains_side",
+        "west": "luckytntmod:block/village_plains_side",
+        "particle": "luckytntmod:block/village_plains_side"
+    }
+}

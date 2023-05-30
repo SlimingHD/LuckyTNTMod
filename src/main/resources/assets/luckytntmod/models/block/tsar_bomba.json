@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/nuclear_tnt_bottom",
+        "up": "luckytntmod:block/tsar_bomba_top",
+        "north": "luckytntmod:block/tsar_bomba_side",
+        "east": "luckytntmod:block/tsar_bomba_side",
+        "south": "luckytntmod:block/tsar_bomba_side",
+        "west": "luckytntmod:block/tsar_bomba_side",
+        "particle": "luckytntmod:block/tsar_bomba_side"
+    }
+}

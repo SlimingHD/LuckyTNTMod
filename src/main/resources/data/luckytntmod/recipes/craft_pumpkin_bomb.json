@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "010",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:carved_pumpkin"
+    },
+    "0": {
+      "item": "minecraft:jack_o_lantern"
+    },
+    "1": {
+      "item": "luckytntmod:tnt_x5"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:pumpkin_bomb",
+    "count": 1
+  }
+}

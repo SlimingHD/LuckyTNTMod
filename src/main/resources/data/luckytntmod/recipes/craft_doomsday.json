@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "121",
+    " 0 "
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:meteor_shower"
+    },
+    "1": {
+      "item": "luckytntmod:lightning_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:meteor_storm"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:doomsday",
+    "count": 1
+  }
+}

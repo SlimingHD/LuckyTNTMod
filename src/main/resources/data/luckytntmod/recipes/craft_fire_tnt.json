@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "121",
+    " 0 "
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "1": {
+      "item": "minecraft:lava_bucket"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x5"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:fire_tnt",
+    "count": 1
+  }
+}

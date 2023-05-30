@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:tnt_x20"
+    },
+    {
+      "item": "luckytntmod:tnt_x100"
+    },
+    {
+      "item": "luckytntmod:tnt_x5"
+    },
+    {
+      "item": "minecraft:tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:death_ray_ray",
+    "count": 1
+  }
+}

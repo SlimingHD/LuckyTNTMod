@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "121",
+    "000"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:wool_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:rainbow_firework"
+    },
+    "2": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:world_of_wools",
+    "count": 1
+  }
+}

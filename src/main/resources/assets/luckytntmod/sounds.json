@@ -1,0 +1,39 @@
+{
+  "say_goodbye": {
+    "category": "hostile",
+    "subtitle": "subtitles.say_goodbye",
+    "sounds": [
+      {
+        "name": "luckytntmod:say_goodbye",
+        "stream": false
+      }
+    ]
+  },
+  "death_ray": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "luckytntmod:deathray",
+        "stream": false
+      }
+    ]
+  },
+  "vacuum_cleaner": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "luckytntmod:vacuumcleaner",
+        "stream": false
+      }
+    ]
+  },
+  "vacuum_cleaner_start": {
+    "category": "player",
+    "sounds": [
+      {
+        "name": "luckytntmod:vacuumcleanerstart",
+        "stream": false
+      }
+    ]
+  }
+}

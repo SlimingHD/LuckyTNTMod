@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:rainbow_firework"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:rainbow_dynamite",
+    "count": 2
+  }
+}

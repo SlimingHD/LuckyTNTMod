@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/supernova_bottom",
+        "up": "luckytntmod:block/supernova_top",
+        "north": "luckytntmod:block/supernova_side",
+        "east": "luckytntmod:block/supernova_side",
+        "south": "luckytntmod:block/supernova_side",
+        "west": "luckytntmod:block/supernova_side",
+        "particle": "luckytntmod:block/supernova_side"
+    }
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/template_rail_raised_sw",
+	"textures": {
+		"rail": "luckytntmod:block/obsidian_detector_rail"
+	},
+	"render_type": "cutout_mipped"
+}

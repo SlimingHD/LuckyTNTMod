@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/disintegrating_tnt_bottom",
+        "up": "luckytntmod:block/disintegrating_tnt_top",
+        "north": "luckytntmod:block/disintegrating_tnt_side_1",
+        "east": "luckytntmod:block/disintegrating_tnt_side_2",
+        "south": "luckytntmod:block/disintegrating_tnt_side_1",
+        "west": "luckytntmod:block/disintegrating_tnt_side_2",
+        "particle": "luckytntmod:block/disintegrating_tnt_side_1"
+    }
+}

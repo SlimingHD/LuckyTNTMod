@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "#0#",
+    "1#1"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:knockback_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:antimatter"
+    },
+    "1": {
+      "item": "luckytntmod:particle_physics_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:black_hole_tnt",
+    "count": 1
+  }
+}

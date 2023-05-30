@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "minecraft:block/tnt_bottom",
+        "up": "luckytntmod:block/mankinds_mark_top",
+        "north": "luckytntmod:block/particle_physics_tnt_side",
+        "east": "luckytntmod:block/particle_physics_tnt_side",
+        "south": "luckytntmod:block/particle_physics_tnt_side",
+        "west": "luckytntmod:block/particle_physics_tnt_side",
+        "particle": "luckytntmod:block/particle_physics_tnt_side"
+    }
+}

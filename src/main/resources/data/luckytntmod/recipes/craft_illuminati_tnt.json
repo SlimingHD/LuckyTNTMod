@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "020",
+    "000"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:tetrahedron_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:antimatter"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:illuminati_tnt",
+    "count": 1
+  }
+}

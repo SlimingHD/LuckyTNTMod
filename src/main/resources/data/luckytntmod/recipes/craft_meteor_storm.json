@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 1 ",
+    "343",
+    " 7 "
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:antimatter"
+    },
+    "3": {
+      "item": "luckytntmod:meteor_shower"
+    },
+    "4": {
+      "item": "luckytntmod:chicxulub"
+    },
+    "7": {
+      "item": "luckytntmod:meteor_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:meteor_storm",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#0#",
+    "#1#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:spiral_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "luckytntmod:floating_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:the_revolution",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "101",
+    "0#0",
+    "101"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:honey_block"
+    },
+    "1": {
+      "item": "minecraft:honeycomb_block"
+    },
+    "#": {
+      "item": "luckytntmod:tnt_x20"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:honey_tnt",
+    "count": 1
+  }
+}

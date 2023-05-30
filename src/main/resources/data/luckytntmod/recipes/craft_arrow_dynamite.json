@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:arrow_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:arrow_dynamite",
+    "count": 4
+  }
+}

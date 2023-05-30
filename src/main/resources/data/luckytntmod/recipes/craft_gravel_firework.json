@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "212",
+    "333"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:obsidian"
+    },
+    "1": {
+      "item": "minecraft:gravel"
+    },
+    "2": {
+      "item": "minecraft:firework_star"
+    },
+    "3": {
+      "item": "minecraft:firework_rocket"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:gravel_firework",
+    "count": 1
+  }
+}

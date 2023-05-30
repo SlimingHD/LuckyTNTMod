@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "020",
+    "000"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:ring_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:eye_of_the_sahara",
+    "count": 1
+  }
+}

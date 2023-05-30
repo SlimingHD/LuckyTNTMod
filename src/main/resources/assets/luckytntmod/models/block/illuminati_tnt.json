@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/tntx500_bottom",
+        "up": "luckytntmod:block/flat_earth_top",
+        "north": "luckytntmod:block/illuminati_tnt_side",
+        "east": "luckytntmod:block/illuminati_tnt_side",
+        "south": "luckytntmod:block/illuminati_tnt_side",
+        "west": "luckytntmod:block/illuminati_tnt_side",
+        "particle": "luckytntmod:block/illuminati_tnt_side"
+    }
+}
