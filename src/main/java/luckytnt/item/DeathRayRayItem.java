@@ -3,6 +3,7 @@ package luckytnt.item;
 import javax.annotation.Nullable;
 
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.LuckyTNTTabs;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.item.LDynamiteItem;
 import net.minecraft.core.BlockPos;
@@ -16,7 +17,7 @@ import net.minecraft.world.phys.Vec3;
 public class DeathRayRayItem extends LDynamiteItem{
 
 	public DeathRayRayItem() {
-		super(new Item.Properties(), EntityRegistry.DEATH_RAY_RAY);
+		super(new Item.Properties().tab(LuckyTNTTabs.OTHER), EntityRegistry.DEATH_RAY_RAY);
 	}
 	
 	@Override

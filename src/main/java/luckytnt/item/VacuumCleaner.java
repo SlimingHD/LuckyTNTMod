@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.LuckyTNTTabs;
 import luckytnt.registry.SoundRegistry;
 import luckytntlib.entity.LExplosiveProjectile;
 import net.minecraft.network.chat.Component;
@@ -26,7 +27,7 @@ public class VacuumCleaner extends Item{
 	public int soundCooldown = 0;
 	
 	public VacuumCleaner() {
-		super(new Item.Properties().stacksTo(1).durability(1000));
+		super(new Item.Properties().tab(LuckyTNTTabs.OTHER).stacksTo(1).durability(1000));
 	}
 	
 	@Override
