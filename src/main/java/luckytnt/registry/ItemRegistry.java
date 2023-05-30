@@ -94,7 +94,7 @@ public class ItemRegistry {
 	public static final RegistryObject<LDynamiteItem> RING_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("ring_dynamite", EntityRegistry.RING_DYNAMITE, "dy");
 	public static final RegistryObject<LDynamiteItem> SCULK_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem("sculk_dynamite", EntityRegistry.SCULK_DYNAMITE, "dy");
 	
-	public static final RegistryObject<LDynamiteItem> LUCKY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem(LuckyTNTMod.itemRegistry, "lucky_dynamite", () -> new LuckyDynamiteItem(new Item.Properties(), LuckyTNTMod.RH.dynamiteLists.get("dy")), "dy", false, true);
+	public static final RegistryObject<LDynamiteItem> LUCKY_DYNAMITE = LuckyTNTMod.RH.registerDynamiteItem(LuckyTNTMod.itemRegistry, "lucky_dynamite", () -> new LuckyDynamiteItem(new Item.Properties().tab(LuckyTNTTabs.DYNAMITE), LuckyTNTMod.RH.dynamiteLists.get("dy")), "dy", false, true);
 	
 	//Minecart
 	public static final RegistryObject<LTNTMinecartItem> TNT_X5_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("tnt_x5_minecart", () -> EntityRegistry.TNT_X5_MINECART, "m");
@@ -165,7 +165,7 @@ public class ItemRegistry {
 	public static final RegistryObject<LTNTMinecartItem> RING_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("ring_tnt_minecart", () -> EntityRegistry.RING_TNT_MINECART, "m");
 	public static final RegistryObject<LTNTMinecartItem> SCULK_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("sculk_tnt_minecart", () -> EntityRegistry.SCULK_TNT_MINECART, "m");
 	
-	public static final RegistryObject<LTNTMinecartItem> LUCKY_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("lucky_tnt_minecart", () -> new LTNTMinecartItem(new Item.Properties(), () -> EntityRegistry.LUCKY_TNT_MINECART), "m", false, true);
+	public static final RegistryObject<LTNTMinecartItem> LUCKY_TNT_MINECART = LuckyTNTMod.RH.registerTNTMinecartItem("lucky_tnt_minecart", () -> new LTNTMinecartItem(new Item.Properties().tab(LuckyTNTTabs.MINECART), () -> EntityRegistry.LUCKY_TNT_MINECART), "m", false, true);
 	
 	//Other
 	public static final RegistryObject<Item> NUCLEAR_WASTE = LuckyTNTMod.itemRegistry.register("nuclear_waste", () -> new BlockItem(BlockRegistry.NUCLEAR_WASTE.get(), new Item.Properties().tab(LuckyTNTTabs.OTHER)));
