@@ -8,6 +8,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.monster.WitherSkeleton;
@@ -26,7 +27,7 @@ public class WitheringTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), strength);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), strength);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {

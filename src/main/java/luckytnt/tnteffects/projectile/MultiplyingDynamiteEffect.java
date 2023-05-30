@@ -51,7 +51,7 @@ public class MultiplyingDynamiteEffect extends PrimedTNTEffect{
 			}
 		}
 		else {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 8);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 8);
 			explosion.doEntityExplosion(0.75f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 			level.playSound((Entity)entity, new BlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);

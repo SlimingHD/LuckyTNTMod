@@ -10,6 +10,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
@@ -20,7 +21,7 @@ public class ChicxulubMeteorEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 80);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 80);
 		explosion.doEntityExplosion(3, true);
 		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 60, new IForEachBlockExplosionEffect() {
 			

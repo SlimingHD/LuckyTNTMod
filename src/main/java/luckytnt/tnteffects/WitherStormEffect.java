@@ -13,6 +13,7 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
@@ -26,11 +27,11 @@ public class WitherStormEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), 50f);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50f);
 		explosion.doEntityExplosion(3f, true);
 		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
 		
-		ImprovedExplosion explosion2 = new ImprovedExplosion(ent.level(), ent.getPos(), 50f);
+		ImprovedExplosion explosion2 = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50f);
 		explosion2.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@Override

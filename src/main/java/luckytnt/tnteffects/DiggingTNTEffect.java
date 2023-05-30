@@ -10,6 +10,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,7 +25,7 @@ public class DiggingTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		Set<BlockPos> blocks = new HashSet<>();
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 4);
+		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 4);
 		for(float y = 0; y < VEC_LENGTH; y += 0.3f) {
 			BlockPos pos = new BlockPos(entity.getPos()).offset(0, -y, 0);
 			BlockState blockState = entity.level().getBlockState(pos);

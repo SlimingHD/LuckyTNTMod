@@ -16,6 +16,7 @@ public class DynamiteFireworkEffect extends PrimedTNTEffect{
 		for(int count = 0; count <= 300; count++) {
 			LExplosiveProjectile dynamite = EntityRegistry.DYNAMITE.get().create(entity.level());
 			dynamite.setPos(entity.getPos());
+			dynamite.setOwner(dynamite.owner());
 			dynamite.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f - 1f, Math.random() * 2f - 1f);
 			entity.level().addFreshEntity(dynamite);
 		}

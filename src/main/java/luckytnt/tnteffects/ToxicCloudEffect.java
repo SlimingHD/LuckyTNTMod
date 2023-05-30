@@ -39,7 +39,7 @@ public class ToxicCloudEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), (int)Math.round(ent.getPersistentData().getDouble("size") * 5D));
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), (int)Math.round(ent.getPersistentData().getDouble("size") * 5D));
 		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.1f, true, false);
 	}

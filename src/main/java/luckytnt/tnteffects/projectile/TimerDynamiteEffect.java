@@ -44,7 +44,7 @@ public class TimerDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 5f);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 5f);
 		explosion.doEntityExplosion(1f, true);
 		explosion.doBlockExplosion();
 	}

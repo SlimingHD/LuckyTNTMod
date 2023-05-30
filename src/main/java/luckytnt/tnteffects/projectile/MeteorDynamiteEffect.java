@@ -15,6 +15,7 @@ public class MeteorDynamiteEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		LExplosiveProjectile meteor = EntityRegistry.LITTLE_METEOR.get().create(entity.level());
 		meteor.setPos(entity.getPos().add(0, LuckyTNTConfigValues.DROP_HEIGHT.get(), 0));
+		meteor.setOwner(entity.owner());
 		entity.level().addFreshEntity(meteor);
 	}
 	

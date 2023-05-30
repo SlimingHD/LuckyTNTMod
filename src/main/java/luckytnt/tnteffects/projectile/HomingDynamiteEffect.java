@@ -23,7 +23,7 @@ public class HomingDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 20);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 20);
 		explosion.doEntityExplosion(1.5f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 	}

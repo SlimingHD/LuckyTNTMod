@@ -61,6 +61,7 @@ public class ChristmasDynamiteEffect extends PrimedTNTEffect{
 			if(entity.getTNTFuse() % 20 == 0) {
 				LExplosiveProjectile dynamite = EntityRegistry.CHRISTMAS_DYNAMITE_PROJECTILE.get().create(entity.level());
 				dynamite.setPos(entity.getPos());
+				dynamite.setOwner(entity.owner());
 				double randomX = Math.random();
 				randomX *= new Random().nextBoolean() ? 1 : -1;
 				double randomZ = Math.random();

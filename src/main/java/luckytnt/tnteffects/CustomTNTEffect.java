@@ -63,7 +63,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 		CustomTNTConfig config = LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION.get();
 		if(ent.getPersistentData().getInt("level") == 0) {
 			if(config == CustomTNTConfig.NORMAL_EXPLOSION) {
-				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get().floatValue());
+				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get().floatValue());
 				explosion.doEntityExplosion(3f, true);
 				explosion.doBlockExplosion(1f, 1.3f, 1f, 1.2f, LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get().intValue() > 10 ? true : false, false);
 				
@@ -123,7 +123,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 				}
 			}
 			if(config == CustomTNTConfig.EASTER_EGG) {
-				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), 3 * LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get().floatValue());
+				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 3 * LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get().floatValue());
 				explosion.doBlockExplosion(1f, 1f, 1f, 3 * LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get().floatValue() > 30f ? 1.75f : 1.5f, false, false);
 				explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {		
 					@Override
@@ -165,7 +165,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 		if(ent.getPersistentData().getInt("level") == 1) {
 			config = LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION.get();
 			if(config == CustomTNTConfig.NORMAL_EXPLOSION) {
-				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get().floatValue());
+				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get().floatValue());
 				explosion.doEntityExplosion(3f, true);
 				explosion.doBlockExplosion(1f, 1.3f, 1f, 1.2f, LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get().intValue() > 10 ? true : false, false);
 				
@@ -225,7 +225,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 				}
 			}
 			if(config == CustomTNTConfig.EASTER_EGG) {
-				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), 3 * LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get().floatValue());
+				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 3 * LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get().floatValue());
 				explosion.doBlockExplosion(1f, 1f, 1f, 3 * LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get().floatValue() > 30f ? 1.75f : 1.5f, false, false);
 				explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {		
 					@Override
@@ -267,7 +267,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 		if(ent.getPersistentData().getInt("level") == 2) {
 			config = LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION.get();
 			if(config == CustomTNTConfig.NORMAL_EXPLOSION) {
-				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get().floatValue());
+				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get().floatValue());
 				explosion.doEntityExplosion(3f, true);
 				explosion.doBlockExplosion(1f, 1.3f, 1f, 1.2f, LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get().intValue() > 10 ? true : false, false);
 			}
@@ -294,7 +294,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 				});
 			}
 			if(config == CustomTNTConfig.EASTER_EGG) {
-				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), ent.getPos(), 3 * LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get().floatValue());
+				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 3 * LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get().floatValue());
 				explosion.doBlockExplosion(1f, 1f, 1f, 3 * LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get().floatValue() > 30f ? 1.75f : 1.5f, false, false);
 				explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {		
 					@Override

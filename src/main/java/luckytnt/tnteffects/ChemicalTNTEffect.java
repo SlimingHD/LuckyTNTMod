@@ -12,6 +12,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,7 +42,7 @@ public class ChemicalTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		if(entity instanceof LExplosiveProjectile) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), entity.getPos(), 4);
+		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 4);
 			ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 4, new IForEachBlockExplosionEffect() {		
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {

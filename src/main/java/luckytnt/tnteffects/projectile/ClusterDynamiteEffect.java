@@ -6,6 +6,7 @@ import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec3;
 
@@ -23,7 +24,7 @@ public class ClusterDynamiteEffect extends PrimedTNTEffect{
 				}
 			}
 			else {
-				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 8);
+				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 8);
 				explosion.doEntityExplosion(1f, true);
 				explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 				for(int count = 0; count < 50; count++) {

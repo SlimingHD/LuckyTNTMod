@@ -6,6 +6,7 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 
 public class RandomTNTEffect extends PrimedTNTEffect{
@@ -18,7 +19,7 @@ public class RandomTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), new Random().nextInt(maxStrength + 1));
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), new Random().nextInt(maxStrength + 1));
 		explosion.doEntityExplosion(1.25f, true);
 		explosion.doBlockExplosion();
 	}

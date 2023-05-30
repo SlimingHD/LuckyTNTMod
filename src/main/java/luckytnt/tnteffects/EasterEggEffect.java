@@ -35,7 +35,7 @@ public class EasterEggEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		int level = ((Entity)entity).getPersistentData().getInt("level");
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 15);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 15);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {		
 			@Override

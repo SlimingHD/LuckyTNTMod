@@ -2,8 +2,8 @@ package luckytnt.tnteffects;
 
 import java.util.Random;
 
-import luckytnt.entity.PrimedOreTNT;
 import luckytnt.entity.OreTNTMinecart;
+import luckytnt.entity.PrimedOreTNT;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;

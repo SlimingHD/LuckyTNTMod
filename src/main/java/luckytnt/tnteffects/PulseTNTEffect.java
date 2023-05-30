@@ -22,7 +22,7 @@ public class PulseTNTEffect extends PrimedTNTEffect{
 		if(!level.isClientSide) {
 			if(entity.getTNTFuse() < 205) {
 				if(entity.getTNTFuse() % 20 == 0) {		      		
-					ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), entity.getPersistentData().getInt("strength"));
+					ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), entity.getPersistentData().getInt("strength"));
 					explosion.doEntityExplosion(1.5f, true);
 					explosion.doBlockExplosion();
 		      		

@@ -15,11 +15,11 @@ public class LeapingTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		if(((Entity)entity).getPersistentData().getInt("bounces") < 24) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 10f);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10f);
 			explosion.doEntityExplosion(1.5f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 		} else {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 20f);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 20f);
 			explosion.doEntityExplosion(2f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
 		}

@@ -34,7 +34,7 @@ public class TsarBombaBombEffect extends PrimedTNTEffect implements NuclearBombL
 			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)entity), new ClientboundHydrogenBombPacket(((Entity)entity).getId()));
 		}
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), entity.getPos(), 160f);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 160f);
 		explosion.doEntityExplosion(15f, true);
 		explosion.doBlockExplosion(1f, 1f, 0.167f, 0.05f, false, true);
 		
