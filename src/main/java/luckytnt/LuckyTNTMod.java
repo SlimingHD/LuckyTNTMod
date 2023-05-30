@@ -38,21 +38,20 @@ public class LuckyTNTMod
     public static final DeferredRegister<EntityType<?>> entityRegistry = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
     public static final DeferredRegister<MobEffect> effectRegistry = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, MODID);
     public static final DeferredRegister<Feature<?>> featureRegistry = DeferredRegister.create(ForgeRegistries.FEATURES, MODID);
-    @SuppressWarnings("serial")
-	private static final HashMap<String, CreativeModeTab> tabs = new HashMap<>(){{
-    	put("n", LuckyTNTTabs.NORMAL_TNT);
-    	put("g", LuckyTNTTabs.GOD_TNT);
-    	put("dy", LuckyTNTTabs.DYNAMITE);
-    	put("d", LuckyTNTTabs.DOOMSDAY_TNT);
-    	put("m", LuckyTNTTabs.MINECART);
-    }};
-    public static final RegistryHelper RH = new RegistryHelper(blockRegistry, itemRegistry, entityRegistry, tabs);
+	private static final HashMap<String, CreativeModeTab> tabs = new HashMap<>();
+    public static final RegistryHelper RH = new RegistryHelper(blockRegistry, itemRegistry, entityRegistry);
     
     public LuckyTNTMod()
     {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
     	IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
     	LuckyTNTTabs.load();
+    	tabs.put("n", LuckyTNTTabs.NORMAL_TNT);
+    	tabs.put("g", LuckyTNTTabs.GOD_TNT);
+    	tabs.put("d", LuckyTNTTabs.DOOMSDAY_TNT);
+    	tabs.put("dy", LuckyTNTTabs.DYNAMITE);
+    	tabs.put("m", LuckyTNTTabs.MINECART);
+    	RH.setTabs(tabs);
         SoundRegistry.SOUNDS.register(bus);
     	entityRegistry.register(bus);
     	blockEntityRegistry.register(bus);
