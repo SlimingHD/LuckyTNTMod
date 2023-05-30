@@ -15,7 +15,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BastionPieces;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -66,10 +65,9 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 			RandomSource random = RandomSource.create();
 			RandomState randomState = sLevel.getChunkSource().randomState();
 			
-			Registry<Structure> registry = sLevel.registryAccess().registryOrThrow(Registries.STRUCTURE);
-			Registry<StructureTemplatePool> pools = sLevel.registryAccess().registryOrThrow(Registries.TEMPLATE_POOL);
+			Registry<Structure> registry = sLevel.registryAccess().registryOrThrow(Registry.STRUCTURE_REGISTRY);
 
-			Holder<StructureTemplatePool> pool = pools.wrapAsHolder(pools.get(BastionPieces.START));
+			Holder<StructureTemplatePool> pool = BastionPieces.START;
 			
 			Structure pillager_outpost = registry.get(BuiltinStructures.PILLAGER_OUTPOST);
 			Structure mansion = registry.get(BuiltinStructures.WOODLAND_MANSION);

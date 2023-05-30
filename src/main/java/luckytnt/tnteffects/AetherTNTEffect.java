@@ -11,9 +11,7 @@ import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -24,7 +22,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.phys.Vec3;
 
 public class AetherTNTEffect extends PrimedTNTEffect {
@@ -58,13 +55,12 @@ public class AetherTNTEffect extends PrimedTNTEffect {
 				double z = ent.z() + offZ;
 				if(distance <= 100) {
 					BlockPos pos = new BlockPos(x, LevelEvents.getTopBlock(ent.level(), x, z, true), z).above();
-					Registry<ConfiguredFeature<?, ?>> features = ent.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 					double random = Math.random();
 					
 					if(random > 0.1D && random <= 0.1125D) {
-						features.get(VegetationFeatures.FOREST_FLOWERS).place((WorldGenLevel) ent.level(), ((ServerLevel) ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos);
+						VegetationFeatures.FOREST_FLOWERS.get().place((WorldGenLevel) ent.level(), ((ServerLevel) ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos);
 					} else if(random > 0.15D && random <= 0.1625D) {
-						features.get(VegetationFeatures.FLOWER_FLOWER_FOREST).place((WorldGenLevel) ent.level(), ((ServerLevel) ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos);
+						VegetationFeatures.FLOWER_FLOWER_FOREST.get().place((WorldGenLevel) ent.level(), ((ServerLevel) ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos);
 					}
 				}
 			}

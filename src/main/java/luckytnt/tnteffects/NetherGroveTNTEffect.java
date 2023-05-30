@@ -10,7 +10,6 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.NetherFeatures;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.server.level.ServerLevel;
@@ -22,6 +21,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.HugeFungusConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.NetherForestVegetationConfig;
 import net.minecraft.world.level.material.Material;
 
 public class NetherGroveTNTEffect extends PrimedTNTEffect{
@@ -34,16 +35,16 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		Holder<ConfiguredFeature<?, ?>> tree;
-		Holder<ConfiguredFeature<?, ?>> vegetation;
+		Holder<ConfiguredFeature<HugeFungusConfiguration, ?>> tree;
+		Holder<ConfiguredFeature<NetherForestVegetationConfig, ?>> vegetation;
 		Block topBlock;
 		if (Math.random() < 0.5D) {
-			tree = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(TreeFeatures.CRIMSON_FUNGUS);
-			vegetation = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL);
+			tree = TreeFeatures.CRIMSON_FUNGUS;
+			vegetation = NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL;
 			topBlock = Blocks.CRIMSON_NYLIUM;
 		} else {
-			tree = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(TreeFeatures.WARPED_FUNGUS);
-			vegetation = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL);
+			tree = TreeFeatures.WARPED_FUNGUS;
+			vegetation = NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL;
 			topBlock = Blocks.WARPED_NYLIUM;
 		}
 		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), radius, new IBlockExplosionCondition() {

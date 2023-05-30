@@ -13,16 +13,13 @@ import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 public class GeodeTNTEffect extends PrimedTNTEffect{
 
@@ -39,8 +36,7 @@ public class GeodeTNTEffect extends PrimedTNTEffect{
 			}
 		});
 		if(entity.level() instanceof ServerLevel sLevel) {
-			Holder<ConfiguredFeature<?, ?>> feature = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.AMETHYST_GEODE);
-			feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, new BlockPos(entity.getPos()));
+			CaveFeatures.AMETHYST_GEODE.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, new BlockPos(entity.getPos()));
 		}
 		for(int i = blocks.size() - 1; i > 0; i--) {
 			List<BlockPos> poses = new ArrayList<>(blocks.keySet());

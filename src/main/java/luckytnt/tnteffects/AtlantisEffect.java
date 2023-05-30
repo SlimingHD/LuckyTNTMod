@@ -12,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -57,8 +56,8 @@ public class AtlantisEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		Registry<Biome> registry = ent.level().registryAccess().registryOrThrow(Registries.BIOME);
-		Holder<Biome> biome = registry.wrapAsHolder(registry.get(Biomes.WARM_OCEAN));
+		Registry<Biome> registry = ent.level().registryAccess().registryOrThrow(Registry.BIOME_REGISTRY);
+		Holder<Biome> biome = new Holder.Direct<Biome>(registry.get(Biomes.WARM_OCEAN));
 		for(double offX = -100; offX < 100; offX++) {
 			for(double offZ = -100; offZ < 100; offZ++) {
 				boolean foundBlock = false;
@@ -84,7 +83,7 @@ public class AtlantisEffect extends PrimedTNTEffect {
 						player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.level().getChunkAt(new BlockPos(ent.x() + offX, 0, ent.z() + offZ)), ent.level().getLightEngine(), null, null, false));
 					}
 					if(distance < 50) {
-						Registry<Structure> structures = ent.level().registryAccess().registryOrThrow(Registries.STRUCTURE);
+						Registry<Structure> structures = ent.level().registryAccess().registryOrThrow(Registry.STRUCTURE_REGISTRY);
 						
 						Structure ocean_ruin = structures.get(BuiltinStructures.OCEAN_RUIN_WARM);
 						

@@ -10,7 +10,6 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -29,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
 import net.minecraft.world.level.chunk.PalettedContainerRO;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Material;
 
 public class FlowerForestTNTEffect extends PrimedTNTEffect {
@@ -66,8 +64,8 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 			}
 		}
 		
-		Registry<Biome> registry = ent.level().registryAccess().registryOrThrow(Registries.BIOME);
-		Holder<Biome> biome = registry.wrapAsHolder(registry.get(Biomes.FLOWER_FOREST));
+		Registry<Biome> registry = ent.level().registryAccess().registryOrThrow(Registry.BIOME_REGISTRY);
+		Holder<Biome> biome = Holder.direct(registry.get(Biomes.FLOWER_FOREST));
 		for(double offX = -75; offX < 75; offX++) {
 			for(double offZ = -75; offZ < 75; offZ++) {
 				boolean foundBlock = false;
@@ -80,7 +78,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 								for(int i = 0; i < 4; ++i) {
 									for(int j = 0; j < 4; ++j) {
 										for(int k = 0; k < 4; ++k) {
-											if(biomesRO instanceof PalettedContainer<Holder<Biome>> biomes && biomes.get(i, j, k) != registry.wrapAsHolder(registry.get(Biomes.FLOWER_FOREST))) {
+											if(biomesRO instanceof PalettedContainer<Holder<Biome>> biomes && biomes.get(i, j, k) != biome) {
 												biomes.getAndSetUnchecked(i, j, k, biome);
 											}
 										}
@@ -94,17 +92,16 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 						for(double offY = 320; offY > -64; offY--) {
 							BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 							BlockState state = ent.level().getBlockState(pos);
-							Registry<ConfiguredFeature<?, ?>> features = ent.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 							if(!foundBlock && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR && !(ent.level().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
 								double random = Math.random();
 								if(random <= 0.1D) {
-									features.get(VegetationFeatures.TREES_FLOWER_FOREST).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
+									VegetationFeatures.TREES_FLOWER_FOREST.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
 								} else if(random > 0.1D && random <= 0.1125D) {
-									features.get(VegetationFeatures.FOREST_FLOWERS).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
+									VegetationFeatures.FOREST_FLOWERS.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
 								} else if(random > 0.15D && random <= 0.1625D) {
-									features.get(VegetationFeatures.FLOWER_FLOWER_FOREST).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
+									VegetationFeatures.FLOWER_FLOWER_FOREST.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
 								} else if(random > 0.2D && random <= 0.2125D) {
-									features.get(VegetationFeatures.PATCH_GRASS).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
+									VegetationFeatures.PATCH_GRASS.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
 								}
 								foundBlock = true;
 							}

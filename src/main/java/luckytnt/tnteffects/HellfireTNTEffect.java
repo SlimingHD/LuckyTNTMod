@@ -58,7 +58,7 @@ public class HellfireTNTEffect extends PrimedTNTEffect{
 		for(int i = 0; i < ghastCount; i++) {
 			Ghast ghast = new Ghast(EntityType.GHAST, entity.level());
 			ghast.setPos(entity.getPos().add(0, 20 + Math.random() * 20, 0));
-			entity.level().playSound(ghast, ghast.blockPosition(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 3f, 1f);
+			entity.level().playSound(null, ghast.blockPosition(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 3f, 1f);
 			entity.level().addFreshEntity(ghast);
 		}
 	}

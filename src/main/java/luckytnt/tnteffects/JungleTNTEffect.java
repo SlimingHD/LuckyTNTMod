@@ -12,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -29,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
 import net.minecraft.world.level.chunk.PalettedContainerRO;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.Tags;
 
@@ -92,8 +90,8 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 	}
 	
 	public static void doJungleExplosion(IExplosiveEntity ent, double radius) {
-		Registry<Biome> registry = ent.level().registryAccess().registryOrThrow(Registries.BIOME);
-		Holder<Biome> biome = registry.wrapAsHolder(registry.get(Biomes.JUNGLE));
+		Registry<Biome> registry = ent.level().registryAccess().registryOrThrow(Registry.BIOME_REGISTRY);
+		Holder<Biome> biome = Holder.direct(registry.get(Biomes.JUNGLE));
 		for(double offX = -radius; offX < radius; offX++) {
 			for(double offZ = -radius; offZ < radius; offZ++) {
 				boolean foundBlock = false;
@@ -118,23 +116,17 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 							player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.level().getChunkAt(new BlockPos(ent.x() + offX, 0, ent.z() + offZ)), ent.level().getLightEngine(), null, null, false));
 						}
 						
-						Registry<ConfiguredFeature<?, ?>> features = ent.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
-						
-						ConfiguredFeature<?, ?> patch_melon = features.get(VegetationFeatures.PATCH_MELON);
-						ConfiguredFeature<?, ?> trees_jungle = features.get(VegetationFeatures.TREES_JUNGLE);
-						ConfiguredFeature<?, ?> patch_grass_jungle = features.get(VegetationFeatures.PATCH_GRASS_JUNGLE);
-						
 						for(double offY = 320; offY > -64; offY--) {
 							BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
 							BlockState state = ent.level().getBlockState(pos);
 							if(!foundBlock && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR && !(ent.level().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
 								if(offX % 30 == 0 && offZ % 30 == 0) {
-									patch_melon.place((ServerLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
+									VegetationFeatures.PATCH_MELON.get().place((ServerLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
 								}
 								int random = new Random().nextInt(3);
 								switch(random) {
-									case 0: trees_jungle.place((ServerLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above()); break;
-									case 1:	patch_grass_jungle.place((ServerLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above()); break;
+									case 0: VegetationFeatures.TREES_JUNGLE.get().place((ServerLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above()); break;
+									case 1:	VegetationFeatures.PATCH_GRASS_JUNGLE.get().place((ServerLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above()); break;
 								}
 								foundBlock = true;
 							}

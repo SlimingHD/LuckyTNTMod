@@ -6,8 +6,8 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -43,7 +43,7 @@ public class EntityFireworkEffect extends PrimedTNTEffect {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(new ResourceLocation(ent.getPersistentData().getString("type")));
+		EntityType<?> type = Registry.ENTITY_TYPE.get(new ResourceLocation(ent.getPersistentData().getString("type")));
 		if(type == null) {
 			type = EntityType.PIG;
 		}

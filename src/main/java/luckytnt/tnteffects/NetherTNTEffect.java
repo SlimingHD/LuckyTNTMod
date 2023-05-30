@@ -13,9 +13,7 @@ import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.NetherFeatures;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.server.level.ServerLevel;
@@ -33,7 +31,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
@@ -138,32 +135,30 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 				BlockState stateAbove = level.getBlockState(posAbove);
 				
 				if(list.contains(state.getBlock()) && stateAbove.isAir() && pos.getY() <= -10) {
-					Registry<ConfiguredFeature<?, ?>> registry = ent.level().registryAccess().registry(Registries.CONFIGURED_FEATURE).get();
-					
 					if(biome == 0) {
 						if(Math.random() < 0.02D) {
-							registry.get(NetherFeatures.PATCH_CRIMSON_ROOTS).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							NetherFeatures.PATCH_CRIMSON_ROOTS.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.04D) {
-							registry.get(TreeFeatures.CRIMSON_FUNGUS).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							TreeFeatures.CRIMSON_FUNGUS.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.02D) {
-							registry.get(NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 					}
 					
 					if(biome == 1) {
 						if(Math.random() < 0.02D) {
-							registry.get(NetherFeatures.NETHER_SPROUTS_BONEMEAL).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							NetherFeatures.NETHER_SPROUTS_BONEMEAL.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.01D) {
-							registry.get(NetherFeatures.TWISTING_VINES_BONEMEAL).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							NetherFeatures.TWISTING_VINES_BONEMEAL.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.04D) {
-							registry.get(TreeFeatures.WARPED_FUNGUS).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							TreeFeatures.WARPED_FUNGUS.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.02D) {
-							registry.get(NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 					}
 					
@@ -173,7 +168,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 							Feature.DISK.place(config, (WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos);
 						}
 						if(Math.random() < 0.01D) {
-							registry.get(NetherFeatures.PATCH_SOUL_FIRE).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							NetherFeatures.PATCH_SOUL_FIRE.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.001D) {
 							Structure structure = new NetherFossil(null, ConstantHeight.of(VerticalAnchor.absolute(pos.getY())), level);
@@ -184,8 +179,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 				}
 				
 				if(stateBelow.getMaterial() == Material.AIR && state.getBlock() == Blocks.NETHERRACK && pos.getY() >= 10 && Math.random() < 0.005D) {
-					Registry<ConfiguredFeature<?, ?>> registry = ent.level().registryAccess().registry(Registries.CONFIGURED_FEATURE).get();
-					registry.get(NetherFeatures.GLOWSTONE_EXTRA).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posBelow);
+					NetherFeatures.GLOWSTONE_EXTRA.get().place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posBelow);
 				}
 			}
 		});

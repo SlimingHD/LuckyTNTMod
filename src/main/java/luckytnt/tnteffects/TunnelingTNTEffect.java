@@ -27,7 +27,7 @@ public class TunnelingTNTEffect extends PrimedTNTEffect{
 									BlockState state = entity.level().getBlockState(pos);
 									if(distance < 4 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
 										Block block = state.getBlock();
-										block.onBlockExploded(state, entity.level(), pos, new Explosion(entity.level(), (Entity) entity, null, null, entity.x(), entity.y(), entity.z(), 0, false, Explosion.BlockInteraction.DESTROY_WITH_DECAY));
+										block.onBlockExploded(state, entity.level(), pos, new Explosion(entity.level(), (Entity) entity, null, null, entity.x(), entity.y(), entity.z(), 0, false, Explosion.BlockInteraction.DESTROY));
 										entity.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 									}
 								}
@@ -42,7 +42,7 @@ public class TunnelingTNTEffect extends PrimedTNTEffect{
 									BlockState state = entity.level().getBlockState(pos);
 									if(distance < 4 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
 										Block block = state.getBlock();
-										block.onBlockExploded(state, entity.level(), pos, new Explosion(entity.level(), (Entity) entity, null, null, entity.x(), entity.y(), entity.z(), 0, false, Explosion.BlockInteraction.DESTROY_WITH_DECAY));
+										block.onBlockExploded(state, entity.level(), pos, new Explosion(entity.level(), (Entity) entity, null, null, entity.x(), entity.y(), entity.z(), 0, false, Explosion.BlockInteraction.DESTROY));
 										entity.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 									}
 								}
@@ -57,7 +57,7 @@ public class TunnelingTNTEffect extends PrimedTNTEffect{
 									BlockState state = entity.level().getBlockState(pos);
 									if(distance < 4 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
 										Block block = state.getBlock();
-										block.onBlockExploded(state, entity.level(), pos, new Explosion(entity.level(), (Entity) entity, null, null, entity.x(), entity.y(), entity.z(), 0, false, Explosion.BlockInteraction.DESTROY_WITH_DECAY));
+										block.onBlockExploded(state, entity.level(), pos, new Explosion(entity.level(), (Entity) entity, null, null, entity.x(), entity.y(), entity.z(), 0, false, Explosion.BlockInteraction.DESTROY));
 										entity.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 									}
 								}
@@ -72,7 +72,7 @@ public class TunnelingTNTEffect extends PrimedTNTEffect{
 									BlockState state = entity.level().getBlockState(pos);
 									if(distance < 4 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
 										Block block = state.getBlock();
-										block.onBlockExploded(state, entity.level(), pos, new Explosion(entity.level(), (Entity) entity, null, null, entity.x(), entity.y(), entity.z(), 0, false, Explosion.BlockInteraction.DESTROY_WITH_DECAY));
+										block.onBlockExploded(state, entity.level(), pos, new Explosion(entity.level(), (Entity) entity, null, null, entity.x(), entity.y(), entity.z(), 0, false, Explosion.BlockInteraction.DESTROY));
 										entity.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 									}
 								}

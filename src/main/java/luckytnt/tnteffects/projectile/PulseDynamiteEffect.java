@@ -49,7 +49,7 @@ public class PulseDynamiteEffect extends PrimedTNTEffect{
 					ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), entity.getPersistentData().getInt("strength"));
 					explosion.doEntityExplosion(1f, true);
 					explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
-					level.playSound((Entity)entity, new BlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					level.playSound(null, new BlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 					entity.getPersistentData().putInt("strength", entity.getPersistentData().getInt("strength") + 1);
 				}
 			}

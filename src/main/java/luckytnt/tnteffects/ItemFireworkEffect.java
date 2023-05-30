@@ -71,7 +71,7 @@ public class ItemFireworkEffect extends PrimedTNTEffect {
 						if(hasChest) {
 							boat = new ChestBoat(ent.level(), ent.x(), ent.y(), ent.z());
 						}
-						boat.setVariant(type);
+						boat.setType(type);
 						boat.setDeltaMovement(Math.random() * 6D - 3D, Math.random() * 6D - 3D, Math.random() * 6D - 3D);
 						ent.level().addFreshEntity(boat);
 					}

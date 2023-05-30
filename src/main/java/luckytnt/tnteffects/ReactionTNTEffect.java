@@ -27,7 +27,7 @@ public class ReactionTNTEffect extends PrimedTNTEffect{
 				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos().add(randomPos), Math.round(explosionSize));
 				explosion.doEntityExplosion(1f + 0.05f * explosionSize, true);
 				explosion.doBlockExplosion(1f, 1f, 0.75f, 1.25f, false, false);
-				level.playSound((Entity)entity, new BlockPos(entity.getPos()).offset(randomPos.x, randomPos.y, randomPos.z), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+				level.playSound(null, new BlockPos(entity.getPos()).offset(randomPos.x, randomPos.y, randomPos.z), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 				entity.getPersistentData().putInt("nextExplosion", 2 + level.random.nextInt(3));
 			}
 			entity.getPersistentData().putInt("nextExplosion", entity.getPersistentData().getInt("nextExplosion") - 1);

@@ -7,8 +7,6 @@ import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -16,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Material;
 
 public class DripstoneTNTEffect extends PrimedTNTEffect{
@@ -58,14 +55,11 @@ public class DripstoneTNTEffect extends PrimedTNTEffect{
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 					if(((level.getBlockState(pos.below()).isAir() && !state.isAir()) || (!level.getBlockState(pos.below()).isAir() && state.isAir())) && Math.random() < 0.1f) {
-						Holder<ConfiguredFeature<?, ?>> feature = null;
 						if(Math.random() < 0.9f) {
-							feature = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.DRIPSTONE_CLUSTER);
-							feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, pos);
+							CaveFeatures.DRIPSTONE_CLUSTER.get().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, pos);
 						}
 						else {
-							feature = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.LARGE_DRIPSTONE);
-							feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, pos);
+							CaveFeatures.LARGE_DRIPSTONE.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, pos);
 						}
 					}
 				}
