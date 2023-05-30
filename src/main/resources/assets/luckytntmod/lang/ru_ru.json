@@ -746,12 +746,12 @@
 	"entity.luckytntmod.death_ray_ray" : "Луч Луча Смерти",
 	"entity.luckytntmod.vacuum_shot" : "Выстрел Пылесоса",
 		
-	"item_group.luckytntmod.normal_tnt" : "Обычный Динамит",
-	"item_group.luckytntmod.god_tnt" : "Божественный Динамит",
-	"item_group.luckytntmod.doomsday_tnt" : "Динамит Судного Дня",
-	"item_group.luckytntmod.dynamite" : "Динамитные Шашки",
-	"item_group.luckytntmod.minecarts" : "Вагонетки с Динамитом",
-	"item_group.luckytntmod.other" : "Прочее",
+	"itemGroup.normal_tnt" : "Обычный Динамит",
+	"itemGroup.god_tnt" : "Божественный Динамит",
+	"itemGroup.doomsday_tnt" : "Динамит Судного Дня",
+	"itemGroup.dynamite" : "Динамитные Шашки",
+	"itemGroup.minecart" : "Вагонетки с Динамитом",
+	"itemGroup.other" : "Прочее",
 	
 	"effect.contaminated_effect" : "Загрязнен",
 	"effect.midas_touch" : "Прикосновение Мидаса",

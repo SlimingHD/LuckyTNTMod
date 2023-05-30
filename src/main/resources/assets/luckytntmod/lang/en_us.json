@@ -745,12 +745,12 @@
 	"entity.luckytntmod.death_ray_ray" : "Death Ray Ray",
 	"entity.luckytntmod.vacuum_shot" : "Vacuum Shot",
 		
-	"item_group.luckytntmod.normal_tnt" : "Normal TNT",
-	"item_group.luckytntmod.god_tnt" : "God TNT",
-	"item_group.luckytntmod.doomsday_tnt" : "Doomsday TNT",
-	"item_group.luckytntmod.dynamite" : "Dynamite",
-	"item_group.luckytntmod.minecarts" : "TNT Minecarts",
-	"item_group.luckytntmod.other" : "Other",
+	"itemGroup.normal_tnt" : "Normal TNT",
+	"itemGroup.god_tnt" : "God TNT",
+	"itemGroup.doomsday_tnt" : "Doomsday TNT",
+	"itemGroup.dynamite" : "Dynamite",
+	"itemGroup.minecart" : "TNT Minecarts",
+	"itemGroup.other" : "Other",
 	
 	"effect.contaminated_effect" : "Contaminated",
 	"effect.midas_touch" : "Midas Touch",
