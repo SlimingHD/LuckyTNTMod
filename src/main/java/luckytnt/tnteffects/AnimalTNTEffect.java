@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 
 public class AnimalTNTEffect extends PrimedTNTEffect{
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		List<EntityType<?>> entities = List.of(EntityType.BAT, EntityType.SPIDER, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.CREEPER, EntityType.PILLAGER, EntityType.VILLAGER, EntityType.ENDERMAN, EntityType.EVOKER, EntityType.IRON_GOLEM,
