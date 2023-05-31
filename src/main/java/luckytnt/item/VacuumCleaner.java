@@ -40,6 +40,7 @@ public class VacuumCleaner extends Item{
 		components.add(Component.translatable("item.vacuum_cleaner.info"));
 	}
 	
+	@SuppressWarnings("removal")
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		onUsingTick(player.getItemInHand(hand), player, player.getItemInHand(hand).getCount());

@@ -8,7 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,13 +41,13 @@ public class EntityLivingEvent {
 			if(ent.getLevel() instanceof ServerLevel sLevel) {
 				if(LevelVariables.get(sLevel).iceAgeTime > 0) {
 					if((ent instanceof Player pl && !pl.isCreative()) || !(ent instanceof Player)) {
-						if(sLevel.getBrightness(LightLayer.BLOCK, new BlockPos(ent.getPosition(1))) < 11) {
+						if(sLevel.getBrightness(LightLayer.BLOCK, new BlockPos(Mth.floor(ent.getX()), Mth.floor(ent.getY()), Mth.floor(ent.getZ()))) < 11) {
 							ent.getPersistentData().putInt("freezeTime", ent.getPersistentData().getInt("freezeTime") + LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().intValue());
 							if(ent instanceof ServerPlayer player)
 								PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")));
 						}
 						else if(ent.getPersistentData().getInt("freezeTime") > 0){
-							ent.getPersistentData().putInt("freezeTime", (int)Mth.clamp(ent.getPersistentData().getInt("freezeTime") - 0.5f * sLevel.getBrightness(LightLayer.BLOCK, new BlockPos(ent.getPosition(1))), 0, Double.POSITIVE_INFINITY));
+							ent.getPersistentData().putInt("freezeTime", (int)Mth.clamp(ent.getPersistentData().getInt("freezeTime") - 0.5f * sLevel.getBrightness(LightLayer.BLOCK, new BlockPos(Mth.floor(ent.getX()), Mth.floor(ent.getY()), Mth.floor(ent.getZ()))), 0, Double.POSITIVE_INFINITY));
 							if(ent instanceof ServerPlayer player)
 								PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")));
 						}
@@ -67,7 +67,8 @@ public class EntityLivingEvent {
 					ent.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, ent.getPersistentData().getInt("freezeTime") / 900));
 				}
 				if(ent.getPersistentData().getInt("freezeTime") >= 1200 && ent.getPersistentData().getInt("freezeTime") % 10 == 0) {
-					ent.hurt(DamageSource.FREEZE, 1);
+					DamageSources sources = new DamageSources(ent.level.registryAccess());
+					ent.hurt(sources.freeze(), 1);
 				}
 				
 				
