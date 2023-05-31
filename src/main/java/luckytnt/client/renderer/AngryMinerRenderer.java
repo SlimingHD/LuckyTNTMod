@@ -12,7 +12,7 @@ public class AngryMinerRenderer extends HumanoidMobRenderer<AngryMiner, Humanoid
 
 	public AngryMinerRenderer(EntityRendererProvider.Context context) {
 		super(context, new HumanoidModel<AngryMiner>(context.bakeLayer(ModelLayers.PLAYER)), 0.5f);
-		addLayer(new HumanoidArmorLayer<>(this, new HumanoidModel<AngryMiner>(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new HumanoidModel<AngryMiner>(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR))));
+		addLayer(new HumanoidArmorLayer<>(this, new HumanoidModel<AngryMiner>(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR)), new HumanoidModel<AngryMiner>(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR)), context.getModelManager()));
 	}
 	
 	@Override

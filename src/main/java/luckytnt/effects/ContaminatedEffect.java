@@ -3,9 +3,7 @@ package luckytnt.effects;
 import java.lang.reflect.Field;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,7 +20,7 @@ public class ContaminatedEffect extends MobEffect{
 
 	@Override
 	public Component getDisplayName() {
-		return MutableComponent.create(new TranslatableContents("effect.contaminated_effect"));
+		return Component.translatable("effect.contaminated_effect");
 	}
 	
 	@Override
@@ -33,6 +31,8 @@ public class ContaminatedEffect extends MobEffect{
 
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
+		DamageSources sources = new DamageSources(entity.level.registryAccess());
+		
 		if(entity instanceof Player player) {
 			try {
                 Field field = FoodData.class.getDeclaredField("tickTimer");
@@ -46,7 +46,7 @@ public class ContaminatedEffect extends MobEffect{
 		if (i > 0) {
 			if(amplifier % i == 0) {
 				if (entity.getHealth() > 4.0F) {
-					entity.hurt(DamageSource.MAGIC, 1.0F);
+					entity.hurt(sources.magic(), 1.0F);
 				}
 			}
 		}

@@ -6,12 +6,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 
-public class BouncingDynamite extends LExplosiveProjectile{
+public class BouncingDynamite extends LExplosiveProjectile {
 
 	public BouncingDynamite(EntityType<LExplosiveProjectile> type, Level level) {
 		super(type, level, new BouncingDynamiteEffect());
@@ -24,7 +25,7 @@ public class BouncingDynamite extends LExplosiveProjectile{
 			if(getPersistentData().getInt("bounces") >= 12) {
 				if(level instanceof ServerLevel) {
 					getEffect().serverExplosion(this);
-					level.playSound(this, new BlockPos(getPosition(1f)), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					level.playSound(this, new BlockPos(Mth.floor(getX()), Mth.floor(getY()), Mth.floor(getZ())), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 				}
 				discard();
 			}

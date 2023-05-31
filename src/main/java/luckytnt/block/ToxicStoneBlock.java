@@ -5,7 +5,7 @@ import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -42,12 +42,13 @@ public class ToxicStoneBlock extends Block {
 		if(timer == 0) {	
 			List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.offset(-5, -5, -5), pos.offset(5, 5, 5)));
 			for(LivingEntity living : list) {
+				DamageSources sources = new DamageSources(level.registryAccess());
 				if(living instanceof Player player) {
 					if(!player.isCreative() && !player.isSpectator()) {
-						player.hurt(DamageSource.MAGIC, 8f);
+						player.hurt(sources.magic(), 8f);
 					}
 				} else {
-					living.hurt(DamageSource.MAGIC, 8f);
+					living.hurt(sources.magic(), 8f);
 				}
 			}
 			timer = 100;

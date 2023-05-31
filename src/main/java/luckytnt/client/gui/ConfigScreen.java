@@ -10,7 +10,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -27,7 +26,7 @@ public class ConfigScreen extends Screen{
 	ForgeSlider light_engine_speed_slider = null;
 	
 	public ConfigScreen() {
-		super(MutableComponent.create(new TranslatableContents("luckytntmod.config.title")));
+		super(Component.translatable("luckytntmod.config.title"));
 	}
 	
 	@Override

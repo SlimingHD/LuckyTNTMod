@@ -1,8 +1,6 @@
 package luckytnt.effects;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -33,7 +31,7 @@ public class MidasTouchEffect extends MobEffect {
 	
 	@Override
 	public Component getDisplayName() {
-		return MutableComponent.create(new TranslatableContents("effect.midas_touch"));
+		return Component.translatable("effect.midas_touch");
 	}
 	
 	@Override

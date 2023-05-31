@@ -10,7 +10,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.LiteralContents;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -29,39 +28,39 @@ public class ConfigScreen2 extends Screen {
 	
 	@Override
 	public void init() {
-		addRenderableWidget(new Button.Builder(MutableComponent.create(new TranslatableContents("luckytntmod.config.done")), button -> onClose()).bounds((width - 100) / 2, height - 30, 100, 20).build());
-		addRenderableWidget(new Button.Builder(MutableComponent.create(new TranslatableContents("luckytntmod.config.back")), button -> lastPage()).bounds(20, height - 30, 100, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.done"), button -> onClose()).bounds((width - 100) / 2, height - 30, 100, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.back"), button -> lastPage()).bounds(20, height - 30, 100, 20).build());
 		
 		addRenderableWidget(custom_tnt_first_explosion = new Button.Builder(MutableComponent.create(LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION.get().getComponent()), button -> nextExplosionValue(LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION, custom_tnt_first_explosion)).bounds(20, 80, 200, 20).build());
 		addRenderableWidget(custom_tnt_first_explosion_intensity = new ForgeSlider(20, 100, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 1, 20, LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get().intValue(), true));
-		addRenderableWidget(new Button.Builder(MutableComponent.create(new TranslatableContents("luckytntmod.config.reset")), button -> resetExplosion(LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION, custom_tnt_first_explosion)).bounds(width - 220, 80, 200, 20).build());
-		addRenderableWidget(new Button.Builder(MutableComponent.create(new TranslatableContents("luckytntmod.config.reset")), button -> resetIntValue(LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY, 1, custom_tnt_first_explosion_intensity)).bounds(width - 220, 100, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetExplosion(LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION, custom_tnt_first_explosion)).bounds(width - 220, 80, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY, 1, custom_tnt_first_explosion_intensity)).bounds(width - 220, 100, 200, 20).build());
 		
 		addRenderableWidget(custom_tnt_second_explosion = new Button.Builder(MutableComponent.create(LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION.get().getComponent()), button -> nextExplosionValue(LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION, custom_tnt_second_explosion)).bounds(20, 140, 200, 20).build());
 		addRenderableWidget(custom_tnt_second_explosion_intensity = new ForgeSlider(20, 160, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 1, 20, LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get().intValue(), true));
-		addRenderableWidget(new Button.Builder(MutableComponent.create(new TranslatableContents("luckytntmod.config.reset")), button -> resetExplosion(LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION, custom_tnt_second_explosion)).bounds(width - 220, 140, 200, 20).build());
-		addRenderableWidget(new Button.Builder(MutableComponent.create(new TranslatableContents("luckytntmod.config.reset")), button -> resetIntValue(LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY, 1, custom_tnt_second_explosion_intensity)).bounds(width - 220, 160, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetExplosion(LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION, custom_tnt_second_explosion)).bounds(width - 220, 140, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY, 1, custom_tnt_second_explosion_intensity)).bounds(width - 220, 160, 200, 20).build());
 		
 		addRenderableWidget(custom_tnt_third_explosion = new Button.Builder(MutableComponent.create(LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION.get().getComponent()), button -> nextExplosionValue(LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION, custom_tnt_third_explosion)).bounds(20, 200, 200, 20).build());
 		addRenderableWidget(custom_tnt_third_explosion_intensity = new ForgeSlider(20, 220, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 1, 20, LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get().intValue(), true));
-		addRenderableWidget(new Button.Builder(MutableComponent.create(new TranslatableContents("luckytntmod.config.reset")), button -> resetExplosion(LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION, custom_tnt_third_explosion)).bounds(width - 220, 200, 200, 20).build());
-		addRenderableWidget(new Button.Builder(MutableComponent.create(new TranslatableContents("luckytntmod.config.reset")), button -> resetIntValue(LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY, 1, custom_tnt_third_explosion_intensity)).bounds(width - 220, 220, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetExplosion(LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION, custom_tnt_third_explosion)).bounds(width - 220, 200, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY, 1, custom_tnt_third_explosion_intensity)).bounds(width - 220, 220, 200, 20).build());
 	}
 	
 	@Override
 	public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
 		renderBackground(stack);
 		drawCenteredString(stack, font, title, width / 2, 8, 0xFFFFFF);
-		drawString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.custom_tnt")), 20, 46, 0xFFFFFF);
-		drawString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.first_tnt")), 20, 66, 0xFFFFFF);
-		drawCenteredString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.first_type")), width / 2, 86, 0xFFFFFF);
-		drawCenteredString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.first_intensity")), width / 2, 106, 0xFFFFFF);
-		drawString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.second_tnt")), 20, 126, 0xFFFFFF);
-		drawCenteredString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.second_type")), width / 2, 146, 0xFFFFFF);
-		drawCenteredString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.second_intensity")), width / 2, 166, 0xFFFFFF);
-		drawString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.third_tnt")), 20, 186, 0xFFFFFF);
-		drawCenteredString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.third_type")), width / 2, 206, 0xFFFFFF);
-		drawCenteredString(stack, font, MutableComponent.create(new TranslatableContents("luckytntmod.config.third_intensity")), width / 2, 226, 0xFFFFFF);
+		drawString(stack, font, Component.translatable("luckytntmod.config.custom_tnt"), 20, 46, 0xFFFFFF);
+		drawString(stack, font, Component.translatable("luckytntmod.config.first_tnt"), 20, 66, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.first_type"), width / 2, 86, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.first_intensity"), width / 2, 106, 0xFFFFFF);
+		drawString(stack, font, Component.translatable("luckytntmod.config.second_tnt"), 20, 126, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.second_type"), width / 2, 146, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.second_intensity"), width / 2, 166, 0xFFFFFF);
+		drawString(stack, font, Component.translatable("luckytntmod.config.third_tnt"), 20, 186, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.third_type"), width / 2, 206, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.third_intensity"), width / 2, 226, 0xFFFFFF);
 		super.render(stack, mouseX, mouseY, partialTicks);
 	}
 	
