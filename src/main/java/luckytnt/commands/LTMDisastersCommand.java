@@ -8,9 +8,9 @@ import luckytnt.config.LuckyTNTConfigValues;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.network.chat.contents.TranslatableContents;
 
 public class LTMDisastersCommand {
 

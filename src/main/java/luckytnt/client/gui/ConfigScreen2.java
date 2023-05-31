@@ -7,6 +7,7 @@ import luckytnt.util.CustomTNTConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -23,7 +24,7 @@ public class ConfigScreen2 extends Screen {
 	ForgeSlider custom_tnt_third_explosion_intensity = null;
 
 	public ConfigScreen2() {
-		super(MutableComponent.create(new TranslatableContents("luckytntmod.config.title")));
+		super(Component.translatable("luckytntmod.config.title"));
 	}
 	
 	@Override

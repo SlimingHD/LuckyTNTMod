@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -34,7 +35,7 @@ public class ItemFireworkBlock extends LTNTBlock implements EntityBlock {
 	@Override
 	public PrimedLTNT explode(Level level, boolean exploded, double x, double y, double z, @Nullable LivingEntity igniter) throws NullPointerException {
 		if(TNT != null) {
-			BlockEntity blockEntity = level.getBlockEntity(new BlockPos(x, y, z));
+			BlockEntity blockEntity = level.getBlockEntity(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)));
 			PrimedItemFirework tnt = new PrimedItemFirework(EntityRegistry.ITEM_FIREWORK.get(), level);
 			tnt.setFuse(40);
 			tnt.setPos(x + 0.5f, y, z + 0.5f);
@@ -45,9 +46,9 @@ public class ItemFireworkBlock extends LTNTBlock implements EntityBlock {
 				tnt.getPersistentData().putInt("itemID", block.getPersistentData().getInt("itemID"));
 			}
 			level.addFreshEntity(tnt);
-			level.playSound(null, new BlockPos(x, y, z), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
-			if(level.getBlockState(new BlockPos(x, y, z)).getBlock() == this) {
-				level.setBlock(new BlockPos(x, y, z), Blocks.AIR.defaultBlockState(), 3);
+			level.playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
+			if(level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
+				level.setBlock(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), Blocks.AIR.defaultBlockState(), 3);
 			}
 			return tnt;
 		}
