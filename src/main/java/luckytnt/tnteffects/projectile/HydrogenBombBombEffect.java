@@ -38,7 +38,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)ent), new ClientboundHydrogenBombPacket(((Entity)ent).getId()));
 		}
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 230f);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 230);
 		explosion.doEntityExplosion(25f, true);
 		explosion.doBlockExplosion(1f, 1f, 0.167f, 0.05f, false, true);
 		

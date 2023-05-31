@@ -8,11 +8,11 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.material.Material;
 
 public class LightningDynamiteEffect extends PrimedTNTEffect{
 
@@ -24,7 +24,7 @@ public class LightningDynamiteEffect extends PrimedTNTEffect{
 			double offX = Math.random() * 20 - 10;
 			double offZ = Math.random() * 20 - 10;
 			for (double offY = 320; offY > -64; offY--) {
-				if (entity.level().getBlockState(new BlockPos(x + offX, offY, z + offZ)).getMaterial() != Material.AIR) {
+				if (!entity.level().getBlockState(new BlockPos(Mth.floor(x + offX), Mth.floor(offY), Mth.floor(z + offZ))).isAir()) {
 					Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.level());
 					lighting.setPos(x + offX, offY, z + offZ);
 					entity.level().addFreshEntity(lighting);

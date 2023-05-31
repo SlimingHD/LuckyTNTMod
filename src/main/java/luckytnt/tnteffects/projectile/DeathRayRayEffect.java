@@ -12,7 +12,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -50,13 +50,14 @@ public class DeathRayRayEffect extends PrimedTNTEffect{
 			@Override
 			public void doEntityExplosion(Entity ent, double distance) {
 				if(!ent.equals(entity.owner())) {
+					DamageSources sources = new DamageSources(ent.level.registryAccess());
 					if(ent instanceof ItemEntity itemEntity) {
 						if(!itemEntity.getItem().getItem().equals(ItemRegistry.ANTIMATTER.get())) {
-							ent.hurt(DamageSource.explosion(explosion), 1);
+							ent.hurt(sources.explosion(explosion), 1);
 						}
 					}
 					else {
-						ent.hurt(DamageSource.explosion(explosion), 200);
+						ent.hurt(sources.explosion(explosion), 200);
 					}
 				}
 			}

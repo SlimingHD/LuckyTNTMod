@@ -12,7 +12,7 @@ public class AcceleratingDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), Math.round(2f * Mth.clamp(entity.getPersistentData().getDouble("speed"), 1f, 20f)));
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), (int)Math.round(2f * Mth.clamp(entity.getPersistentData().getDouble("speed"), 1f, 20f)));
 		explosion.doEntityExplosion(1.5f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 	}

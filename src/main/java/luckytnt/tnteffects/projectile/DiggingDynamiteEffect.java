@@ -16,7 +16,7 @@ public class DiggingDynamiteEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		Vec3 direction = entity.getPos().subtract(((Entity)entity).xOld, ((Entity)entity).yOld, ((Entity)entity).zOld).normalize();
 		explosion: for(float length = 0; length <= 40; length += 0.25f) {
-			BlockPos pos = new BlockPos(entity.getPos().add(direction.scale(length)));
+			BlockPos pos = toBlockPos(entity.getPos().add(direction.scale(length))); 
 			BlockState state = entity.level().getBlockState(pos);
 			if(state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
 				state.onBlockExploded(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level()));

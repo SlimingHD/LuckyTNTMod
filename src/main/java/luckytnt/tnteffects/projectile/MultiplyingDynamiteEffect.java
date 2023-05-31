@@ -6,7 +6,6 @@ import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -41,7 +40,7 @@ public class MultiplyingDynamiteEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		Level level = entity.level();
-		if(entity.getPersistentData().getInt("level") < 3) {
+		if(entity.getPersistentData().getInt("level") < 3) {	
 			for(int count = 0; count < 4; count++) {
 				LExplosiveProjectile dynamite = EntityRegistry.MULTIPLYING_DYNAMITE.get().create(entity.level());
 				dynamite.setPos(entity.getPos());
