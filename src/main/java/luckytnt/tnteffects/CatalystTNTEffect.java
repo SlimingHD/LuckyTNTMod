@@ -27,7 +27,7 @@ public class CatalystTNTEffect extends PrimedTNTEffect {
 				double y = ent.y() + Math.random() * 15 - Math.random() * 15;
 				double z = ent.z() + Math.random() * 40 - Math.random() * 40;
 				if(!ent.level().isClientSide()) {
-					ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, new Vec3(x, y, z), 25f + Math.round(new Random().nextFloat(16f)));
+					ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, new Vec3(x, y, z), 25 + new Random().nextInt(16));
 					explosion.doEntityExplosion(2f, true);
 					explosion.doBlockExplosion(1f, 1f, 0.75f, 1f, false, false);
 				}

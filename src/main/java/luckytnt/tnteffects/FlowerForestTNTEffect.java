@@ -31,6 +31,7 @@ import net.minecraft.world.level.chunk.PalettedContainer;
 import net.minecraft.world.level.chunk.PalettedContainerRO;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.Vec3;
 
 public class FlowerForestTNTEffect extends PrimedTNTEffect {
 
@@ -59,7 +60,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 			for(int offZ = -75; offZ <= 75; offZ++) {
 				double distance = Math.sqrt(offX * offX + offZ * offZ);
 				int y = LevelEvents.getTopBlock(ent.level(), ent.x() + offX, ent.z() + offZ, true);
-				BlockPos pos = new BlockPos(ent.x() + offX, y, ent.z() + offZ);
+				BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, y, ent.z() + offZ));
 				if(distance <= 75 && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200 && ent.level().getBlockState(pos.above()).getMaterial() == Material.AIR) {
 					ent.level().setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
 				}
@@ -75,7 +76,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 				if(!ent.level().isClientSide()) {
 					if(distance < 75) {
 						if(offX % 16 == 0 && offZ % 16 == 0) {
-							for(LevelChunkSection section : ent.level().getChunk(new BlockPos(ent.x() + offX, 0, ent.z() + offZ)).getSections()) {
+							for(LevelChunkSection section : ent.level().getChunk(toBlockPos(new Vec3(ent.x() + offX, 0, ent.z() + offZ))).getSections()) {
 								PalettedContainerRO<Holder<Biome>> biomesRO = section.getBiomes();
 								for(int i = 0; i < 4; ++i) {
 									for(int j = 0; j < 4; ++j) {
@@ -89,10 +90,10 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 							}
 						}
 						for(ServerPlayer player : ((ServerLevel)ent.level()).players()) {
-							player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.level().getChunkAt(new BlockPos(ent.x() + offX, 0, ent.z() + offZ)), ent.level().getLightEngine(), null, null, false));
+							player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.level().getChunkAt(toBlockPos(new Vec3(ent.x() + offX, 0, ent.z() + offZ))), ent.level().getLightEngine(), null, null, false));
 						}
 						for(double offY = 320; offY > -64; offY--) {
-							BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
+							BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, ent.y() + offY, ent.z() + offZ));
 							BlockState state = ent.level().getBlockState(pos);
 							Registry<ConfiguredFeature<?, ?>> features = ent.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 							if(!foundBlock && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR && !(ent.level().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {

@@ -90,7 +90,7 @@ public class AtlantisEffect extends PrimedTNTEffect {
 						Structure ocean_ruin = structures.get(BuiltinStructures.OCEAN_RUIN_WARM);
 						
 						for(double offY = 320; offY > -64; offY--) {
-							BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY + 8, ent.z() + offZ);
+							BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, ent.y() + 8, ent.z() + offZ));
 							BlockState state = ent.level().getBlockState(pos);
 							if(!foundBlock && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR) {
 								if(Math.random() < 0.0005f) {

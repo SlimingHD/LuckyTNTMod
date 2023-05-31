@@ -27,7 +27,7 @@ public class DiggingTNTEffect extends PrimedTNTEffect{
 		Set<BlockPos> blocks = new HashSet<>();
 		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 4);
 		for(float y = 0; y < VEC_LENGTH; y += 0.3f) {
-			BlockPos pos = toBlockPos(entity.getPos()).offset(0, -y, 0);
+			BlockPos pos = toBlockPos(entity.getPos().add(0, -y, 0));
 			BlockState blockState = entity.level().getBlockState(pos);
 			FluidState fluidState = entity.level().getFluidState(pos);
 			Optional<Float> explosionResistance = damageCalculator.getBlockExplosionResistance(dummyExplosion, entity.level(), pos, blockState, fluidState);

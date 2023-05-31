@@ -12,7 +12,7 @@ public class GiantTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 100f);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 100);
 		explosion.doEntityExplosion(7f, true);
 		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
 	}

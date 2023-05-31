@@ -8,6 +8,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
@@ -18,9 +19,9 @@ public class GravityTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		double x = entity.getPos().x;
-		double y = entity.getPos().y;
-		double z = entity.getPos().z;
+		int x = Mth.floor(entity.getPos().x);
+		int y = Mth.floor(entity.getPos().y);
+		int z = Mth.floor(entity.getPos().z);
 		if(entity.getTNTFuse() < 200) {
 			List<Entity> ents = entity.level().getEntities((Entity)entity, new AABB(new BlockPos(x - 25, y - 25, z - 25), new BlockPos(x + 25, y + 25, z + 25)));
 			for(Entity ent : ents) {

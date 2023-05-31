@@ -13,7 +13,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
@@ -40,7 +40,7 @@ public class BlackHoleTNTEffect extends PrimedTNTEffect {
 					int offX = new Random().nextInt(75) - new Random().nextInt(75);
 					int offZ = new Random().nextInt(75) - new Random().nextInt(75);
 					int offY = LevelEvents.getTopBlock(ent.level(), (int)Math.round(ent.x()) + offX, (int)Math.round(ent.z()) + offZ, false);
-					BlockPos pos = new BlockPos(ent.x() + offX, offY, ent.z() + offZ);
+					BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, offY, ent.z() + offZ));
 					FallingBlockEntity.fall(ent.level(), pos, ent.level().getBlockState(pos));
 					ent.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 				}
@@ -66,8 +66,9 @@ public class BlackHoleTNTEffect extends PrimedTNTEffect {
 				double y = ent.y() - living.getEyeY();
 				double z = ent.z() - living.getZ();
 				Vec3 vec = new Vec3(x, y, z);
+				DamageSources sources = new DamageSources(ent.level().registryAccess());
 				if(vec.length() <= 2 && ent.getTNTFuse() % 80 == 0 && living instanceof Player) {
-					living.hurt(DamageSource.IN_WALL, 6f);
+					living.hurt(sources.inWall(), 6f);
 				}
 				if(vec.length() <= 2 && !(living instanceof Player)) {
 					living.discard();

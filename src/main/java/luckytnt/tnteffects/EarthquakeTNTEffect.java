@@ -39,15 +39,15 @@ public class EarthquakeTNTEffect extends PrimedTNTEffect{
 		}
 		
 		if(entity.getTNTFuse() <= 200 && entity.getTNTFuse() % 20 == 0 && !entity.level().isClientSide()) {
-			BlockPos origin = new BlockPos(entity.getPersistentData().getDouble("x"), entity.getPersistentData().getDouble("y"), entity.getPersistentData().getDouble("z"));
-			BlockPos start = origin.offset(entity.getPersistentData().getDouble("vecx") * -40, 0, entity.getPersistentData().getDouble("vecz") * -40);
+			BlockPos origin = toBlockPos(new Vec3(entity.getPersistentData().getDouble("x"), entity.getPersistentData().getDouble("y"), entity.getPersistentData().getDouble("z")));
+			BlockPos start = origin.offset(toBlockPos(new Vec3(entity.getPersistentData().getDouble("vecx") * -40, 0, entity.getPersistentData().getDouble("vecz") * -40)));
 			Vec3 vec = new Vec3(entity.getPersistentData().getDouble("vecx"), 0, entity.getPersistentData().getDouble("vecz"));
 			
 			for(double i = 0; i < 80D; i += 1D) {
 				for(int offX = -6; offX <= 6; offX++) {
 					for(int offZ = -6; offZ <= 6; offZ++) {
 						double distance = Math.sqrt(offX * offX + offZ * offZ);
-						BlockPos pos = start.offset(i * vec.x + offX, 0, i * vec.z + offZ);
+						BlockPos pos = start.offset(toBlockPos(new Vec3(i * vec.x + offX, 0, i * vec.z + offZ)));
 						if(distance <= 3) {
 							if(Math.random() > 0.1D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), entity.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
