@@ -34,7 +34,7 @@ public class PickyTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		Block template;
 		if(entity instanceof PrimedLTNT || entity instanceof LTNTMinecart) {
-			template = entity.level().getBlockState(new BlockPos(entity.getPos()).below()).getBlock();
+			template = entity.level().getBlockState(toBlockPos(entity.getPos()).below()).getBlock();
 		}
 		else {
 			BlockHitResult result = entity.level().clip(new ClipContext(entity.getPos(), entity.getPos().add(((Entity)entity).getDeltaMovement().normalize().scale(0.5f)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, (Entity)entity));

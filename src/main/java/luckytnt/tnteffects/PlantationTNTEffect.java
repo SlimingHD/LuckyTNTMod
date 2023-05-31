@@ -59,7 +59,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			}
 		}
 		
-		BlockPos posBelow = new BlockPos(ent.getPos()).below();
+		BlockPos posBelow = toBlockPos(ent.getPos()).below();
 		placeWater(posBelow, ent);
 		
 		for(double offX = -41; offX <= 41; offX++) {

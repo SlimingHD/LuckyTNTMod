@@ -45,7 +45,7 @@ public class WitheringTNTEffect extends PrimedTNTEffect{
 			int offZ = (int)Math.round(Math.random() * strength * 2f - strength);
 			WitherSkeleton skeleton = new WitherSkeleton(EntityType.WITHER_SKELETON, entity.level());
 			if(entity.level() instanceof ServerLevel sl) {
-				skeleton.finalizeSpawn(sl, entity.level().getCurrentDifficultyAt(new BlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
+				skeleton.finalizeSpawn(sl, entity.level().getCurrentDifficultyAt(toBlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
 			for(int y = entity.level().getMaxBuildHeight(); y >= entity.level().getMinBuildHeight(); y--) {
 				BlockPos pos = new BlockPos(entity.x() + offX, y, entity.z() + offZ);

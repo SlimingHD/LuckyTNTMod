@@ -6,7 +6,6 @@ import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -27,7 +26,7 @@ public class SpiralTNTEffect extends PrimedTNTEffect{
 					spiral_tnt.setPos(entity.x(), entity.y(), entity.z());
 					spiral_tnt.setOwner(entity.owner());
 					spiral_tnt.shoot(ent.getLookAngle().x, ent.getLookAngle().y, ent.getLookAngle().z, ent.getPersistentData().getFloat("spiral_power"), 0);
-					entity.level().playSound(null, new BlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
+					entity.level().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
 					entity.level().addFreshEntity(spiral_tnt);
 					ent.setYRot(ent.getYRot() + 30f);
 				}

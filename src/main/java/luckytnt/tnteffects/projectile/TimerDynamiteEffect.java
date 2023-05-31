@@ -27,7 +27,7 @@ public class TimerDynamiteEffect extends PrimedTNTEffect{
 			}
 			if(ent.getTNTFuse() == 0) {
 				if(ent.level instanceof ServerLevel) {
-					entity.level().playSound((Entity)entity, new BlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					entity.level().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 					serverExplosion(entity);
 				}
 				ent.destroy();

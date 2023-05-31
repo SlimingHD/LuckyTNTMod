@@ -57,7 +57,7 @@ public class WitherStormEffect extends PrimedTNTEffect {
 			int offZ = (int)Math.round(Math.random() * 140D - 70D);
 			WitherSkeleton skeleton = new WitherSkeleton(EntityType.WITHER_SKELETON, ent.level());
 			if(ent.level() instanceof ServerLevel sl) {
-				skeleton.finalizeSpawn(sl, ent.level().getCurrentDifficultyAt(new BlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
+				skeleton.finalizeSpawn(sl, ent.level().getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
 			for(int y = ent.level().getMaxBuildHeight(); y >= ent.level().getMinBuildHeight(); y--) {
 				BlockPos pos = new BlockPos(ent.x() + offX, y, ent.z() + offZ);

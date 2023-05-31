@@ -44,7 +44,7 @@ public class EruptingDynamiteEffect extends PrimedTNTEffect{
 			erupting_tnt.shoot((Math.random() * 2D - 1D) * 0.1f, 0.6f + Math.random() * 0.4f, (Math.random() * 2D - 1D) * 0.1f, 2f + level.random.nextFloat(), 0f);	
 			erupting_tnt.setSecondsOnFire(1000);
 			level.addFreshEntity(erupting_tnt);
-			level.playSound(null, new BlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.MASTER, 3, 1);
+			level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.MASTER, 3, 1);
 		}
 	}
 	

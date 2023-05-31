@@ -17,7 +17,7 @@ public class PrismTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		BlockPos pos = new BlockPos(ent.getPos()).offset(-1 * (size / 2) + 1, 0, -1 * (size / 2) + 1);
+		BlockPos pos = toBlockPos(ent.getPos()).offset(-1 * (size / 2) + 1, 0, -1 * (size / 2) + 1);
 		
 		for(int offY = (size / 2); offY > (-1 * (size / 2) - 1); offY--) {
 			int tri = size;
