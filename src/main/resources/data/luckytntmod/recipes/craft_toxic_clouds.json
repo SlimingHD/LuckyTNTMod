@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 1 ",
+    "#0#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:chemical_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:toxic_clouds",
+    "count": 1
+  }
+}

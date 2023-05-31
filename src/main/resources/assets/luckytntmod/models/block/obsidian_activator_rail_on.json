@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/rail_flat",
+	"textures": {
+		"rail": "luckytntmod:block/obsidian_activator_rail_on"
+	},
+	"render_type": "cutout_mipped"
+}

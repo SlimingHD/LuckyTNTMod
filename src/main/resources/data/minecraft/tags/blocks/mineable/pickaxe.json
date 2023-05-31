@@ -1,0 +1,12 @@
+{
+	"values":[
+		"luckytntmod:uranium_ore",
+		"luckytntmod:deepslate_uranium_ore",
+		"luckytntmod:gunpowder_ore",
+		"luckytntmod:deepslate_gunpowder_ore",
+		"luckytntmod:obsidian_rail",
+		"luckytntmod:obsidian_powered_rail",
+		"luckytntmod:obsidian_activator_rail",
+		"luckytntmod:obsidian_detector_rail"
+	]
+}

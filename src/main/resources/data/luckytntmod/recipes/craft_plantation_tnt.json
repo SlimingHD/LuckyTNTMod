@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "#0#",
+    "1#1"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:easter_egg"
+    },
+    "1": {
+      "item": "luckytntmod:farming_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:plantation_tnt",
+    "count": 1
+  }
+}

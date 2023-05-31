@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "121",
+    "010"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:nether_grove_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:hells_gate"
+    },
+    "2": {
+      "item": "luckytntmod:antimatter"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:nether_tnt",
+    "count": 1
+  }
+}

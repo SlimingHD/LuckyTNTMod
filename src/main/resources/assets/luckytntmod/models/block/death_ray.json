@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/toxicclouds_bottom",
+        "up": "luckytntmod:block/death_ray_top",
+        "north": "luckytntmod:block/death_ray_side",
+        "east": "luckytntmod:block/death_ray_side",
+        "south": "luckytntmod:block/death_ray_side",
+        "west": "luckytntmod:block/death_ray_side",
+        "particle": "luckytntmod:block/death_ray_side"
+    }
+}

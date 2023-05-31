@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/heavens_gate_bottom",
+        "up": "luckytntmod:block/heavens_gate_top",
+        "north": "luckytntmod:block/heavens_gate_side",
+        "east": "luckytntmod:block/heavens_gate_side",
+        "south": "luckytntmod:block/heavens_gate_side",
+        "west": "luckytntmod:block/heavens_gate_side",
+        "particle": "luckytntmod:block/heavens_gate_side"
+    }
+}

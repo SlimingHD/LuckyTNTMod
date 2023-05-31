@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "020",
+    " 0 "
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:withering_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:wither_storm",
+    "count": 1
+  }
+}

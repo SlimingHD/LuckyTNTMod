@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "020",
+    " 0 "
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:cluster_bomb"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x20"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:air_strike",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "#2#",
+    "#0#"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:lava_bucket"
+    },
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "#": {
+      "item": "luckytntmod:erupting_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x5"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:pompeii",
+    "count": 1
+  }
+}

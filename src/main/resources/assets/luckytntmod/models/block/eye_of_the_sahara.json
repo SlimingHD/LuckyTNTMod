@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/eye_of_the_sahara_bottom",
+        "up": "luckytntmod:block/eye_of_the_sahara_top",
+        "north": "luckytntmod:block/eye_of_the_sahara_side",
+        "east": "luckytntmod:block/eye_of_the_sahara_side",
+        "south": "luckytntmod:block/eye_of_the_sahara_side",
+        "west": "luckytntmod:block/eye_of_the_sahara_side",
+        "particle": "luckytntmod:block/eye_of_the_sahara_side"
+    }
+}

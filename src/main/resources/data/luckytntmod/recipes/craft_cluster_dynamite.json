@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:cluster_bomb"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:cluster_dynamite",
+    "count": 4
+  }
+}

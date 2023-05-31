@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:floating_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:floating_dynamite",
+    "count": 4
+  }
+}

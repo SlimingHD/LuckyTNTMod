@@ -1,0 +1,46 @@
+{
+	"variants": {
+		"structure=pillager_outpost": {
+			"model": "luckytntmod:block/pillager_outpost_tnt"
+		},
+		"structure=mansion": {
+			"model": "luckytntmod:block/woodland_mansion_tnt"
+		},
+		"structure=jungle_pyramid": {
+			"model": "luckytntmod:block/jungle_pyramid_tnt"
+		},
+		"structure=desert_pyramid": {
+			"model": "luckytntmod:block/desert_pyramid_tnt"
+		},
+		"structure=stronghold": {
+			"model": "luckytntmod:block/stronghold_tnt"
+		},
+		"structure=monument": {
+			"model": "luckytntmod:block/monument_tnt"
+		},
+		"structure=fortress": {
+			"model": "luckytntmod:block/fortress_tnt"
+		},
+		"structure=end_city": {
+			"model": "luckytntmod:block/end_city_tnt"
+		},
+		"structure=bastion": {
+			"model": "luckytntmod:block/bastion_tnt"
+		},
+		"structure=village_plains": {
+			"model": "luckytntmod:block/village_plains_tnt"
+		},
+		"structure=village_desert": {
+			"model": "luckytntmod:block/village_desert_tnt"
+		},
+		"structure=village_savanna": {
+			"model": "luckytntmod:block/village_savanna_tnt"
+		},
+		"structure=village_snowy": {
+			"model": "luckytntmod:block/village_snowy_tnt"
+		},
+		"structure=village_taiga": {
+			"model": "luckytntmod:block/village_taiga_tnt"
+		}
+	}
+}

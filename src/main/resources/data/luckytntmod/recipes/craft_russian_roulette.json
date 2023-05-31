@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 2 ",
+    "010",
+    " 0 "
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:roulette_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x100"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:russian_roulette",
+    "count": 1
+  }
+}

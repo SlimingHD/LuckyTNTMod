@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/withering_tnt_bottom",
+        "up": "luckytntmod:block/wither_storm_top",
+        "north": "luckytntmod:block/wither_storm_side",
+        "east": "luckytntmod:block/wither_storm_side",
+        "south": "luckytntmod:block/wither_storm_side",
+        "west": "luckytntmod:block/wither_storm_side",
+        "particle": "luckytntmod:block/wither_storm_side"
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "101",
+    "010",
+    "101"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "luckytntmod:physics_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:particle_physics_tnt",
+    "count": 1
+  }
+}

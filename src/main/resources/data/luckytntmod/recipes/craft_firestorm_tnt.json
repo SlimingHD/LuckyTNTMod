@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "#0#",
+    "1#1"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherrack"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "luckytntmod:fire_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:firestorm_tnt",
+    "count": 1
+  }
+}

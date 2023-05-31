@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/house_tnt_bottom",
+        "up": "minecraft:block/tnt_top",
+        "north": "luckytntmod:block/house_tnt_side",
+        "east": "luckytntmod:block/house_tnt_side",
+        "south": "luckytntmod:block/house_tnt_side",
+        "west": "luckytntmod:block/house_tnt_side",
+        "particle": "luckytntmod:block/house_tnt_side"
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 12",
+    "101",
+    " 12"
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:replay_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "2": {
+      "item": "luckytntmod:swap_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:reset_tnt",
+    "count": 1
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 1 ",
+    "343",
+    " 7 "
+  ],
+  "key": {
+    "1": {
+      "item": "minecraft:carved_pumpkin"
+    },
+    "3": {
+      "item": "minecraft:iron_block"
+    },
+    "4": {
+      "item": "luckytntmod:animal_tnt"
+    },
+    "7": {
+      "item": "luckytntmod:day_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:village_defense",
+    "count": 1
+  }
+}

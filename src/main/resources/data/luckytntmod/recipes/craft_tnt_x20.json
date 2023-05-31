@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "00",
+    "00"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:tnt_x5"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:tnt_x20",
+    "count": 1
+  }
+}

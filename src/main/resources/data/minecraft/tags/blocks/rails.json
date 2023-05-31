@@ -1,0 +1,9 @@
+{
+	"replace" : false,
+	"values" : [
+		"luckytntmod:obsidian_rail",
+		"luckytntmod:obsidian_powered_rail",
+		"luckytntmod:obsidian_activator_rail",
+		"luckytntmod:obsidian_detector_rail"
+	]
+}

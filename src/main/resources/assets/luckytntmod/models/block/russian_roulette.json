@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/russian_roulette_bottom",
+        "up": "luckytntmod:block/russian_roulette_top",
+        "north": "luckytntmod:block/russian_roulette_side_1",
+        "east": "luckytntmod:block/russian_roulette_side_2",
+        "south": "luckytntmod:block/russian_roulette_side_1",
+        "west": "luckytntmod:block/russian_roulette_side_2",
+        "particle": "luckytntmod:block/russian_roulette_side_1"
+    }
+}

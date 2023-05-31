@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "202",
+    "1#1"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:ender_pearl"
+    },
+    "1": {
+      "item": "minecraft:redstone"
+    },
+    "0": {
+      "item": "minecraft:tnt"
+    },
+    "2": {
+      "item": "minecraft:clock"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:replay_tnt",
+    "count": 1
+  }
+}

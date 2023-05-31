@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:dripstone_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:dripstone_dynamite",
+    "count": 4
+  }
+}

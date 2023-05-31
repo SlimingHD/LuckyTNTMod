@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "121",
+    "333"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:ghast_tear"
+    },
+    "1": {
+      "item": "luckytntmod:fire_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "3": {
+      "item": "minecraft:netherrack"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:hellfire_tnt",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0#0",
+    "###",
+    "0#0"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dirt"
+    },
+    "0": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:troll_tnt_mk2",
+    "count": 1
+  }
+}

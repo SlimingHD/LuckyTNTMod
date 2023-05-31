@@ -1,0 +1,7 @@
+{
+	"parent": "minecraft:block/rail_curved",
+	"textures": {
+		"rail": "luckytntmod:block/obsidian_rail_corner"
+	},
+	"render_type": "cutout_mipped"
+}

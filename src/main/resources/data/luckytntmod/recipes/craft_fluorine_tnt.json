@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#1#",
+    "101",
+    "#1#"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:tnt_x100"
+    },
+    "0": {
+      "item": "luckytntmod:antimatter"
+    },
+    "1": {
+      "item": "luckytntmod:catalyst_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:fluorine_tnt",
+    "count": 1
+  }
+}

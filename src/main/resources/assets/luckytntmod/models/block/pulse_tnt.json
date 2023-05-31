@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/pulse_tnt_bottom",
+        "up": "luckytntmod:block/pulse_tnt_top",
+        "north": "luckytntmod:block/pulse_tnt_side",
+        "east": "luckytntmod:block/pulse_tnt_side",
+        "south": "luckytntmod:block/pulse_tnt_side",
+        "west": "luckytntmod:block/pulse_tnt_side",
+        "particle": "luckytntmod:block/pulse_tnt_side"
+    }
+}

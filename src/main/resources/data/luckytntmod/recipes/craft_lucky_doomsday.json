@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:supernova"
+    },
+    {
+      "item": "luckytntmod:meteor_storm"
+    },
+    {
+      "item": "luckytntmod:extinction"
+    },
+    {
+      "item": "luckytntmod:mansion"
+    },
+    {
+      "item": "luckytntmod:helix"
+    },
+    {
+      "item": "luckytntmod:colossal_tnt"
+    },
+    {
+      "item": "luckytntmod:doomsday"
+    },
+    {
+      "item": "luckytntmod:death_ray"
+    },
+    {
+      "item": "luckytntmod:evil_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:lucky_doomsday",
+    "count": 4
+  }
+}

@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/atlantis_bottom",
+        "up": "luckytntmod:block/atlantis_top",
+        "north": "luckytntmod:block/atlantis_side",
+        "east": "luckytntmod:block/atlantis_side",
+        "south": "luckytntmod:block/atlantis_side",
+        "west": "luckytntmod:block/atlantis_side",
+        "particle": "luckytntmod:block/atlantis_side"
+    }
+}

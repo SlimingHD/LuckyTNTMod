@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/vredefort_bottom",
+        "up": "luckytntmod:block/vredefort_top",
+        "north": "luckytntmod:block/phobos_side",
+        "east": "luckytntmod:block/phobos_side",
+        "south": "luckytntmod:block/phobos_side",
+        "west": "luckytntmod:block/phobos_side",
+        "particle": "luckytntmod:block/phobos_side"
+    }
+}

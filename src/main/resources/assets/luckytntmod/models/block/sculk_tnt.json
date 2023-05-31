@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/sculk_tnt_bottom",
+        "up": "luckytntmod:block/sculk_tnt_top",
+        "north": "luckytntmod:block/sculk_tnt_side",
+        "east": "luckytntmod:block/sculk_tnt_side",
+        "south": "luckytntmod:block/sculk_tnt_side",
+        "west": "luckytntmod:block/sculk_tnt_side",
+        "particle": "luckytntmod:block/sculk_tnt_side"
+    }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#0#",
+    "###"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "#": {
+      "item": "luckytntmod:animal_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:animal_kingdom",
+    "count": 1
+  }
+}

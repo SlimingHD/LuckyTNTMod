@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "333",
+    "212",
+    "242"
+  ],
+  "key": {
+    "2": {
+      "item": "luckytntmod:meteor_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:antimatter"
+    },
+    "3": {
+      "item": "luckytntmod:chicxulub"
+    },
+    "4": {
+      "item": "luckytntmod:erupting_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:vredefort",
+    "count": 1
+  }
+}

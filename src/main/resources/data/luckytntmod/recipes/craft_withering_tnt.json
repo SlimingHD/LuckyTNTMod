@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#0#",
+    "#1#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:soul_sand"
+    },
+    "0": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "1": {
+      "item": "luckytntmod:tnt_x20"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:withering_tnt",
+    "count": 1
+  }
+}

@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"only_present=true": {
+			"model": "luckytntmod:block/present"
+		},
+		"only_present=false": {
+			"model": "luckytntmod:block/christmas_tnt"
+		}
+	}
+}

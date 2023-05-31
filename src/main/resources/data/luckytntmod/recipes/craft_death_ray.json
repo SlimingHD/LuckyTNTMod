@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "121",
+    " 3 "
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:lava_ocean_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:global_disaster"
+    },
+    "2": {
+      "item": "luckytntmod:antimatter"
+    },
+    "3": {
+      "item": "luckytntmod:death_ray_ray"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:death_ray",
+    "count": 1
+  }
+}
