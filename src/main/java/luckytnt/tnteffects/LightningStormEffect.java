@@ -8,6 +8,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -26,8 +27,8 @@ public class LightningStormEffect extends PrimedTNTEffect {
 				if(ent.level() instanceof ServerLevel S_Level) {
 					double offX = Math.random() * 150D - 75D;
 					double offZ = Math.random() * 150D - 75D;
-					for(double offY = ent.level().getMaxBuildHeight(); offY > ent.level().getMinBuildHeight(); offY--) {
-						if(ent.level().getBlockState(new BlockPos(ent.x() + offX, offY, ent.z() + offZ)).getMaterial() != Material.AIR) {
+					for(int offY = ent.level().getMaxBuildHeight(); offY > ent.level().getMinBuildHeight(); offY--) {
+						if(ent.level().getBlockState(new BlockPos(Mth.floor(ent.x() + offX), offY, Mth.floor(ent.z() + offZ))).getMaterial() != Material.AIR) {
 							Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, ent.level());
 							lighting.setPos(ent.x() + offX, offY, ent.z() + offZ);
 							ent.level().addFreshEntity(lighting);
@@ -43,13 +44,13 @@ public class LightningStormEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		List<LivingEntity> ents = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 75, ent.y() - 75, ent.z() - 75, ent.x() + 75, ent.y() + 75, ent.z() + 75));
 		for(LivingEntity lent : ents) {
-			for(double offY = ent.level().getMaxBuildHeight(); offY > ent.level().getMinBuildHeight(); offY--) {
-				if(ent.level().getBlockState(new BlockPos(lent.getX(), offY, lent.getZ())).getMaterial() != Material.AIR) {
+			for(int offY = ent.level().getMaxBuildHeight(); offY > ent.level().getMinBuildHeight(); offY--) {
+				if(ent.level().getBlockState(new BlockPos(Mth.floor(lent.getX()), offY, Mth.floor(lent.getZ()))).getMaterial() != Material.AIR) {
 					Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT,  ent.level());
 					lighting.setPos(lent.getX(), offY, lent.getZ());
 					ent.level().addFreshEntity(lighting);
 					
-					ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), new Vec3(lent.getX(), offY, lent.getZ()), 3f);
+					ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), new Vec3(lent.getX(), offY, lent.getZ()), 3);
 					explosion.doEntityExplosion(1f, true);
 					explosion.doBlockExplosion(1f, 1.2f, 1f, 1.2f, false, false);
 					

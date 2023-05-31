@@ -8,6 +8,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -48,7 +49,7 @@ public class WitheringTNTEffect extends PrimedTNTEffect{
 				skeleton.finalizeSpawn(sl, entity.level().getCurrentDifficultyAt(toBlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
 			for(int y = entity.level().getMaxBuildHeight(); y >= entity.level().getMinBuildHeight(); y--) {
-				BlockPos pos = new BlockPos(entity.x() + offX, y, entity.z() + offZ);
+				BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX), y, Mth.floor(entity.z() + offZ));
 				BlockState state = entity.level().getBlockState(pos);
 				if(!Block.isFaceFull(state.getCollisionShape(entity.level(), pos), Direction.UP) && Block.isFaceFull(entity.level().getBlockState(pos.below()).getCollisionShape(entity.level(), pos.below()), Direction.UP)) {
 					skeleton.setPos(pos.getX() + 0.5f, y, pos.getZ() + 0.5f);

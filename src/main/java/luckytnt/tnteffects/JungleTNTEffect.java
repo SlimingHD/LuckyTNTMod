@@ -18,6 +18,7 @@ import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -72,7 +73,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 				for(double offY = radius; offY >= -radius; offY--) {
 					for(double offZ = -radius; offZ <= radius; offZ++) {
 						double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ);
-						BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
+						BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
 						BlockState state = ent.level().getBlockState(pos);
 						if(distance <= radius) {					
 							if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= maxResistance && state.getMaterial() != Material.AIR && ((!state.isCollisionShapeFullBlock(ent.level(), pos) && !state.is(Blocks.MUD) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.getBlock() == Blocks.MANGROVE_ROOTS)))) {
@@ -101,7 +102,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 				if(!ent.level().isClientSide()) {
 					if(distance < radius) {
 						if(offX % 16 == 0 && offZ % 16 == 0) {
-							for(LevelChunkSection section : ent.level().getChunk(new BlockPos(ent.x() + offX, 0, ent.z() + offZ)).getSections()) {
+							for(LevelChunkSection section : ent.level().getChunk(new BlockPos(Mth.floor(ent.x() + offX), 0, Mth.floor(ent.z() + offZ))).getSections()) {
 								PalettedContainerRO<Holder<Biome>> biomesRO = section.getBiomes();
 								for(int i = 0; i < 4; ++i) {
 									for(int j = 0; j < 4; ++j) {
@@ -115,7 +116,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 							}
 						}
 						for(ServerPlayer player : ((ServerLevel)ent.level()).players()) {
-							player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.level().getChunkAt(new BlockPos(ent.x() + offX, 0, ent.z() + offZ)), ent.level().getLightEngine(), null, null, false));
+							player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.level().getChunkAt(new BlockPos(Mth.floor(ent.x() + offX), 0, Mth.floor(ent.z() + offZ))), ent.level().getLightEngine(), null, null, false));
 						}
 						
 						Registry<ConfiguredFeature<?, ?>> features = ent.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
@@ -125,7 +126,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 						ConfiguredFeature<?, ?> patch_grass_jungle = features.get(VegetationFeatures.PATCH_GRASS_JUNGLE);
 						
 						for(double offY = 320; offY > -64; offY--) {
-							BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
+							BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
 							BlockState state = ent.level().getBlockState(pos);
 							if(!foundBlock && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR && !(ent.level().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
 								if(offX % 30 == 0 && offZ % 30 == 0) {

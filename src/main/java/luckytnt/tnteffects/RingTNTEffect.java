@@ -6,6 +6,7 @@ import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -37,8 +38,8 @@ public class RingTNTEffect extends PrimedTNTEffect {
 			boolean blockFound = false;
 			int y = 0;
 			for(int offY = level.getMaxBuildHeight(); offY >= level.getMinBuildHeight(); offY--) {	
-				BlockPos pos = new BlockPos(x, offY, z);
-				BlockPos posUp = new BlockPos(x, offY + 1, z);
+				BlockPos pos = new BlockPos(Mth.floor(x), offY, Mth.floor(z));
+				BlockPos posUp = new BlockPos(Mth.floor(x), offY + 1, Mth.floor(z));
 				BlockState state = level.getBlockState(pos);
 				BlockState stateUp = level.getBlockState(posUp);				
 				if(!blockFound) {

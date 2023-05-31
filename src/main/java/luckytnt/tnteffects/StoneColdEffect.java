@@ -16,6 +16,7 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,7 +38,7 @@ public class StoneColdEffect extends PrimedTNTEffect {
 			double offX = Math.random() * 15 - Math.random() * 15;
 			double offY = Math.random() * 15 - Math.random() * 15;
 			double offZ = Math.random() * 15 - Math.random() * 15;
-			BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
+			BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
 			BlockState state = ent.level().getBlockState(pos);
 			if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR) {
 				state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));

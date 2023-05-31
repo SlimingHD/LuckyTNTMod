@@ -5,6 +5,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
@@ -25,7 +26,7 @@ public class SinkholeTNTEffect extends PrimedTNTEffect {
 				for(int offY = -33; offY <= 33; offY++) {
 					for(int offZ = -33; offZ <= 33; offZ++) {
 						double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ) + Math.random() * 4D - 2D;
-						BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY + ent.getPersistentData().getInt("depth"), ent.z() + offZ);
+						BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY + ent.getPersistentData().getInt("depth")), Mth.floor(ent.z() + offZ));
 						if(distance <= 30 && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), toBlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.level())) < 200) {
 							ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						}

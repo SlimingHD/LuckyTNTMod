@@ -4,6 +4,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -25,7 +26,7 @@ public class PhantomTNTEffect extends PrimedTNTEffect{
 			double offZ = Math.random() * 90 - 45;
 			boolean foundBlock = false;
 			for(int offY = 320; offY > -64; offY--) {
-	      		BlockPos pos = new BlockPos(entity.x() + offX, offY, entity.z() + offZ);
+	      		BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX), offY, Mth.floor(entity.z() + offZ));
 	      		BlockState state = entity.level().getBlockState(pos);
 	      		if(state.isCollisionShapeFullBlock(entity.level(), pos) && state.getMaterial() != Material.AIR && !foundBlock) {
 	      			((Entity)entity).setPos(entity.x() + offX, offY + 1, entity.z() + offZ);

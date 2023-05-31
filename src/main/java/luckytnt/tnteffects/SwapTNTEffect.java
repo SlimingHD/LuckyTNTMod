@@ -8,7 +8,6 @@ import org.joml.Vector3f;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -41,13 +40,13 @@ public class SwapTNTEffect extends PrimedTNTEffect{
 					Vec3 pos2 = ent2.getPosition(1);
 					
 					ent1.setPos(pos2);
-					entity.level().playSound(null, new BlockPos(pos2), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
+					entity.level().playSound(null, toBlockPos(pos2), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
 					for(int count = 0; count < 40; count++) {
 						entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 1f), 1f), pos2.x + Math.random() * ent1.getBbWidth() - Math.random() * ent1.getBbWidth(), pos2.y + Math.random() * ent1.getBbHeight(), pos2.z + Math.random() * ent1.getBbWidth() - Math.random() * ent1.getBbWidth(), 0, 0, 0);
 					}
 					
 					ent2.setPos(pos1);
-					entity.level().playSound(null, new BlockPos(pos1), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
+					entity.level().playSound(null, toBlockPos(pos1), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
 					for(int count = 0; count < 40; count++) {
 						entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 1f), 1f), pos1.x + Math.random() * ent2.getBbWidth() - Math.random() * ent2.getBbWidth(), pos1.y + Math.random() * ent2.getBbHeight(), pos1.z + Math.random() * ent2.getBbWidth() - Math.random() * ent2.getBbWidth(), 0, 0, 0);
 					}

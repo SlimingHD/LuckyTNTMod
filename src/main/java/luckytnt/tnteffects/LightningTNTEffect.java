@@ -5,6 +5,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -21,8 +22,8 @@ public class LightningTNTEffect extends PrimedTNTEffect{
 			if(entity.level() instanceof ServerLevel S_Level) {
 				double offX = Math.random() * 40 - 20;
 				double offZ = Math.random() * 40 - 20;
-				for(double offY = 320; offY > -64; offY--) {
-					if(entity.level().getBlockState(new BlockPos(x + offX, offY, z + offZ)).getMaterial() != Material.AIR) {
+				for(int offY = 320; offY > -64; offY--) {
+					if(entity.level().getBlockState(new BlockPos(Mth.floor(x + offX), offY, Mth.floor(z + offZ))).getMaterial() != Material.AIR) {
 						Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.level());
 						lighting.setPos(x + offX, offY, z + offZ);
 						entity.level().addFreshEntity(lighting);

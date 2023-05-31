@@ -8,7 +8,8 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -57,7 +58,9 @@ public class HungryTNTEffect extends PrimedTNTEffect {
         			}
         			target.discard();
 				} else if(target instanceof Player) {
-					target.hurt(DamageSource.OUT_OF_WORLD, 4f);
+					DamageSources sources = new DamageSources(ent.level().registryAccess());
+					
+					target.hurt(sources.outOfWorld(), 4f);
 					Vec3 vec3d = new Vec3(target.getX() - ent.x(), target.getY() - ent.y(), target.getZ() - ent.z()).normalize().scale(10);
 					target.setDeltaMovement(vec3d);
 				}
@@ -80,7 +83,7 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 		float resistanceImpact = 1f - ((0.833f / 20f) * amount);
 		float knockback = 5f + ((10f / 20f) * amount);
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), (float)Math.floor((double)size));
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), Mth.floor((double)size));
 		explosion.doEntityExplosion(knockback, true);
 		explosion.doBlockExplosion(1f, yStrength, resistanceImpact, size >= 110f ? 0.05f : 1f, false, size >= 110f ? true : false);
 	}

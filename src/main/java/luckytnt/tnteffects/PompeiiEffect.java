@@ -7,7 +7,6 @@ import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -39,8 +38,8 @@ public class PompeiiEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		if(ent instanceof LExplosiveProjectile) {
-			if(ent.level().getBlockState(new BlockPos(ent.x(), ent.y() + 1, ent.z())).getExplosionResistance(ent.level(), toBlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
-				ent.level().setBlock(new BlockPos(ent.x(), ent.y() + 1, ent.z()), Blocks.LAVA.defaultBlockState(), 3);
+			if(ent.level().getBlockState(toBlockPos(ent.getPos()).above()).getExplosionResistance(ent.level(), toBlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+				ent.level().setBlock(toBlockPos(ent.getPos()).above(), Blocks.LAVA.defaultBlockState(), 3);
 			}
 		}
 	}

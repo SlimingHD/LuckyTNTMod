@@ -20,10 +20,10 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 		double heigth = (Math.sqrt(3D) / 2D) * 60D;
 		double sideHeigth = Math.sqrt(60D * 60D - 30D * 30D);
 		
-		BlockPos A = pos.offset(-30, -30, -Math.round((1D / 3D) * sideHeigth));
-		BlockPos B = pos.offset(30, -30, -Math.round((1D / 3D) * sideHeigth));
-		BlockPos C = pos.offset(0, -30, Math.round((2D / 3D) * sideHeigth));
-		BlockPos D = pos.offset(0, Math.round(heigth - 30D), 0);
+		BlockPos A = pos.offset(-30, -30, (int)-Math.round((1D / 3D) * sideHeigth));
+		BlockPos B = pos.offset(30, -30, (int)-Math.round((1D / 3D) * sideHeigth));
+		BlockPos C = pos.offset(0, -30, (int)Math.round((2D / 3D) * sideHeigth));
+		BlockPos D = pos.offset(0, (int)Math.round(heigth - 30D), 0);
 		
 		Vec3 DA = new Vec3(A.getX() - D.getX(), A.getY() - D.getY(), A.getZ() - D.getZ());
 		Vec3 DB = new Vec3(B.getX() - D.getX(), B.getY() - D.getY(), B.getZ() - D.getZ());

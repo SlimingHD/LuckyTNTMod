@@ -19,6 +19,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Sheep;
@@ -123,7 +124,7 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 			int x = new Random().nextInt(151) - 75;
 			int z = new Random().nextInt(151) - 75;
 			
-			BlockPos origin = new BlockPos(ent.x() + x, LevelEvents.getTopBlock(ent.level(), ent.x() + x, ent.z() + z, true) + 1, ent.z() + z);
+			BlockPos origin = new BlockPos(Mth.floor(ent.x() + x), Mth.floor(LevelEvents.getTopBlock(ent.level(), ent.x() + x, ent.z() + z, true) + 1), Mth.floor(ent.z() + z));
 			boolean xOrZ = new Random().nextBoolean();
 			int rr = 16 + new Random().nextInt(11);
 			Block block = Blocks.RED_CONCRETE;

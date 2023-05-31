@@ -13,6 +13,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -52,7 +53,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 				double distance = Math.sqrt(offX * offX + offZ * offZ);
 				if(distance <= 42) {
 					int y = LevelEvents.getTopBlock(ent.level(), ent.x() + offX, ent.z() + offZ, true);
-					BlockPos pos = new BlockPos(ent.x() + offX, y, ent.z() + offZ);
+					BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), y, Mth.floor(ent.z() + offZ));
 					ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					ent.level().setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
 				}
@@ -67,8 +68,8 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 				double distance = Math.sqrt(offX * offX + offZ * offZ);
 				boolean blockFound = false;
 				for(double offY = 320; offY > -64; offY--) {	
-					BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
-					BlockPos posUp = new BlockPos(ent.x() + offX, ent.y() + offY + 1, ent.z() + offZ);
+					BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
+					BlockPos posUp = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY + 1), Mth.floor(ent.z() + offZ));
 					BlockState state = ent.level().getBlockState(pos);
 					BlockState stateUp = ent.level().getBlockState(posUp);
 					

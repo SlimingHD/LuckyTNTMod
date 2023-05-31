@@ -7,6 +7,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 
@@ -19,7 +20,7 @@ public class PulsarTNTEffect extends PrimedTNTEffect {
 		}
 		if(ent.getTNTFuse() < 305) {
 			if(ent.getTNTFuse() % 30 == 0 && !ent.level().isClientSide()) {
-				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), ent.getPersistentData().getFloat("size"));
+				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), Mth.floor(ent.getPersistentData().getFloat("size")));
 				explosion.doEntityExplosion(4f, true);
 				explosion.doBlockExplosion(1f, ent.getPersistentData().getFloat("size") > 45f ? 1.3f : 1f, 1f, ent.getPersistentData().getFloat("size") <= 80f ? 1.25f : 0.05f, false, ent.getPersistentData().getFloat("size") > 80f ? true : false);
 			

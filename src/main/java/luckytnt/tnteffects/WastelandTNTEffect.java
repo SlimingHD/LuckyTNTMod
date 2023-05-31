@@ -6,6 +6,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -45,7 +46,7 @@ public class WastelandTNTEffect extends PrimedTNTEffect {
 				for(double offY = -radius; offY <= radius; offY++) {
 					for(double offZ = -radius; offZ <= radius; offZ++) {
 						double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ);
-						BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY, ent.z() + offZ);
+						BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
 						BlockPos posDown = pos.offset(0, -1, 0);
 						BlockState state = ent.level().getBlockState(pos);
 						BlockState stateDown = ent.level().getBlockState(posDown);

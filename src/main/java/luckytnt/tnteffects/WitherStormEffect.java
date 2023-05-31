@@ -13,6 +13,7 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -27,11 +28,11 @@ public class WitherStormEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50f);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50);
 		explosion.doEntityExplosion(3f, true);
 		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
 		
-		ImprovedExplosion explosion2 = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50f);
+		ImprovedExplosion explosion2 = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50);
 		explosion2.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@Override
@@ -60,7 +61,7 @@ public class WitherStormEffect extends PrimedTNTEffect {
 				skeleton.finalizeSpawn(sl, ent.level().getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
 			for(int y = ent.level().getMaxBuildHeight(); y >= ent.level().getMinBuildHeight(); y--) {
-				BlockPos pos = new BlockPos(ent.x() + offX, y, ent.z() + offZ);
+				BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), y, Mth.floor(ent.z() + offZ));
 				BlockState state = ent.level().getBlockState(pos);
 				if(!Block.isFaceFull(state.getCollisionShape(ent.level(), pos), Direction.UP) && Block.isFaceFull(ent.level().getBlockState(pos.below()).getCollisionShape(ent.level(), pos.below()), Direction.UP)) {
 					skeleton.setPos(pos.getX() + 0.5D, y, pos.getZ() + 0.5D);

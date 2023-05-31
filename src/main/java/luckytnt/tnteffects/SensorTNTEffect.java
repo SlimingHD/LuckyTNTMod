@@ -27,7 +27,7 @@ public class SensorTNTEffect extends PrimedTNTEffect{
 			List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-10f, -10f, -10f), entity.getPos().add(10f, 10f, 10f)));
 			for(Player player : players) {
 				if(!player.equals(entity.owner())) {
-					ImprovedExplosion explosion = new ImprovedExplosion(level, entity.getPos(), 10f);
+					ImprovedExplosion explosion = new ImprovedExplosion(level, entity.getPos(), 10);
 					explosion.doEntityExplosion(1f, true);
 					explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 					level.playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);

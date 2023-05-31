@@ -5,6 +5,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -31,7 +32,7 @@ public class KolaBoreholeTNTEffect extends PrimedTNTEffect {
 			for(int offX = -10; offX <= 10; offX++) {
 				for(int offZ = -10; offZ <= 10; offZ++) {
 					double distance = Math.sqrt(offX * offX + offZ * offZ);
-					BlockPos pos = new BlockPos(ent.x() + offX, offY - 64, ent.z() + offZ);
+					BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), offY - 64, Mth.floor(ent.z() + offZ));
 					if(distance <= rad && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
 						ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 					}
@@ -69,7 +70,7 @@ public class KolaBoreholeTNTEffect extends PrimedTNTEffect {
 			}
 		}
 		for(int i = -59; i >= -65; i--) {
-			BlockPos pos = new BlockPos(ent.x(), i, ent.z());
+			BlockPos pos = new BlockPos(Mth.floor(ent.x()), i, Mth.floor(ent.z()));
 			ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 		}
 	}

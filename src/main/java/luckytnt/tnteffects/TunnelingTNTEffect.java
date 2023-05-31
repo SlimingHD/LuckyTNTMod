@@ -7,6 +7,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +24,7 @@ public class TunnelingTNTEffect extends PrimedTNTEffect{
 							for(double offY = -4; offY <= 4; offY++) {
 								for(double offZ = -90; offZ <= 0; offZ++) {
 									double distance = Math.sqrt(offX * offX + offY * offY);
-									BlockPos pos = new BlockPos(entity.x() + offX, entity.y() + offY, entity.z() + offZ);
+									BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX), Mth.floor(entity.y() + offY), Mth.floor(entity.z() + offZ));
 									BlockState state = entity.level().getBlockState(pos);
 									if(distance < 4 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
 										Block block = state.getBlock();
@@ -38,7 +39,7 @@ public class TunnelingTNTEffect extends PrimedTNTEffect{
 							for(double offY = -4; offY <= 4; offY++) {
 								for(double offZ = -4; offZ <= 4; offZ++) {
 									double distance = Math.sqrt(offZ * offZ + offY * offY);
-									BlockPos pos = new BlockPos(entity.x() + offX, entity.y() + offY, entity.z() + offZ);
+									BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX), Mth.floor(entity.y() + offY), Mth.floor(entity.z() + offZ));
 									BlockState state = entity.level().getBlockState(pos);
 									if(distance < 4 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
 										Block block = state.getBlock();
@@ -53,7 +54,7 @@ public class TunnelingTNTEffect extends PrimedTNTEffect{
 							for(double offY = -4; offY <= 4; offY++) {
 								for(double offZ = 0; offZ <= 90; offZ++) {
 									double distance = Math.sqrt(offX * offX + offY * offY);
-									BlockPos pos = new BlockPos(entity.x() + offX, entity.y() + offY, entity.z() + offZ);
+									BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX), Mth.floor(entity.y() + offY), Mth.floor(entity.z() + offZ));
 									BlockState state = entity.level().getBlockState(pos);
 									if(distance < 4 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
 										Block block = state.getBlock();
@@ -68,7 +69,7 @@ public class TunnelingTNTEffect extends PrimedTNTEffect{
 							for(double offY = -4; offY <= 4; offY++) {
 								for(double offZ = -4; offZ <= 4; offZ++) {
 									double distance = Math.sqrt(offZ * offZ + offY * offY);
-									BlockPos pos = new BlockPos(entity.x() + offX, entity.y() + offY, entity.z() + offZ);
+									BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX), Mth.floor(entity.y() + offY), Mth.floor(entity.z() + offZ));
 									BlockState state = entity.level().getBlockState(pos);
 									if(distance < 4 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
 										Block block = state.getBlock();

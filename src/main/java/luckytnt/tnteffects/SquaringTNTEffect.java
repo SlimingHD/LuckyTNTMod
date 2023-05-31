@@ -30,7 +30,7 @@ public class SquaringTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		int level = ((Entity)entity).getPersistentData().getInt("level");
 		if(level == 5) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 15f);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 15);
 			explosion.doEntityExplosion(1.5f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 		} else if(level == 0) {

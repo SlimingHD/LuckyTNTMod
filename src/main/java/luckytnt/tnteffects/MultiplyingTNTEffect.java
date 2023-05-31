@@ -30,7 +30,7 @@ public class MultiplyingTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		int level = ((Entity)entity).getPersistentData().getInt("level");
 		if(level == 4) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10f);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
 			explosion.doEntityExplosion(1f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 		}
