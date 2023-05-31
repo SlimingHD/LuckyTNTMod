@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 2 ",
+    "101"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:dynamite_x20"
+    },
+    "1": {
+      "item": "minecraft:feather"
+    },
+    "2": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:homing_dynamite",
+    "count": 2
+  }
+}

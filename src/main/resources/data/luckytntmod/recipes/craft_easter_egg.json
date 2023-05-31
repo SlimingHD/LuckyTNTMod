@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "010",
+    "234",
+    "565"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:melon"
+    },
+    "1": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "2": {
+      "item": "minecraft:potato"
+    },
+    "3": {
+      "item": "minecraft:carrot"
+    },
+    "4": {
+      "item": "minecraft:wheat"
+    },
+    "5": {
+      "item": "minecraft:carved_pumpkin"
+    },
+    "6": {
+      "item": "luckytntmod:tnt_x100"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:easter_egg",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "121",
+    "000"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:torch"
+    },
+    "1": {
+      "item": "luckytntmod:flat_tnt"
+    },
+    "2": {
+      "item": "luckytntmod:tnt_x100"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:miningflat_tnt",
+    "count": 1
+  }
+}

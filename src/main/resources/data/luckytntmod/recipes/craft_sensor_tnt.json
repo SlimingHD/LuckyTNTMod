@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "303",
+    "212",
+    "303"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:comparator"
+    },
+    "1": {
+      "item": "luckytntmod:tnt_x5"
+    },
+    "2": {
+      "item": "minecraft:observer"
+    },
+    "3": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:sensor_tnt",
+    "count": 1
+  }
+}

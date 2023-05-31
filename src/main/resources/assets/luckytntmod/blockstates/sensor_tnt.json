@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "luckytntmod:block/sensor_tnt" }
+  }
+}

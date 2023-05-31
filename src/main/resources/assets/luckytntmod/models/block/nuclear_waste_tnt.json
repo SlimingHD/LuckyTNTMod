@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/nuclear_waste_tnt_bottom",
+        "up": "luckytntmod:block/nuclear_waste_tnt_top",
+        "north": "luckytntmod:block/nuclear_waste_tnt_side",
+        "east": "luckytntmod:block/nuclear_waste_tnt_side",
+        "south": "luckytntmod:block/nuclear_waste_tnt_side",
+        "west": "luckytntmod:block/nuclear_waste_tnt_side",
+        "particle": "luckytntmod:block/nuclear_waste_tnt_side"
+    }
+}

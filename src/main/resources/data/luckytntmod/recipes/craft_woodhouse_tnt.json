@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#0#",
+    "345",
+    "#7#"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "0": {
+      "item": "minecraft:glass"
+    },
+    "3": {
+      "item": "minecraft:torch"
+    },
+    "4": {
+      "item": "minecraft:tnt"
+    },
+    "5": {
+      "item": "minecraft:crafting_table"
+    },
+    "7": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:woodhouse_tnt",
+    "count": 1
+  }
+}

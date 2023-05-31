@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 1 ",
+    "343",
+    " 7 "
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:hellfire_tnt"
+    },
+    "3": {
+      "item": "minecraft:netherrack"
+    },
+    "4": {
+      "item": "luckytntmod:heavens_gate"
+    },
+    "7": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:hells_gate",
+    "count": 1
+  }
+}

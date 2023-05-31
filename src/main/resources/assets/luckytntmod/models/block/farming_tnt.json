@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/farming_tnt_bottom",
+        "up": "luckytntmod:block/farming_tnt_top",
+        "north": "luckytntmod:block/farming_tnt_side_1",
+        "east": "luckytntmod:block/farming_tnt_side_4",
+        "south": "luckytntmod:block/farming_tnt_side_3",
+        "west": "luckytntmod:block/farming_tnt_side_2",
+        "particle": "luckytntmod:block/farming_tnt_side_1"
+    }
+}

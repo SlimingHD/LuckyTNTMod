@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "343",
+    "2#2",
+    "111"
+  ],
+  "key": {
+    "2": {
+      "item": "minecraft:moss_carpet"
+    },
+    "1": {
+      "item": "minecraft:moss_block"
+    },
+    "#": {
+      "item": "luckytntmod:tnt_x5"
+    },
+    "3": {
+      "item": "minecraft:azalea"
+    },
+    "4": {
+      "item": "minecraft:flowering_azalea"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:lush_tnt",
+    "count": 1
+  }
+}

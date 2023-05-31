@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#0#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:redstone_block"
+    },
+    "0": {
+      "item": "luckytntmod:tnt_x20"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:redstone_tnt",
+    "count": 1
+  }
+}

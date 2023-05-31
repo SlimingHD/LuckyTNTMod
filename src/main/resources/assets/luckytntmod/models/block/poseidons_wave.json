@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/poseidons_wave_bottom",
+        "up": "luckytntmod:block/poseidons_wave_top",
+        "north": "luckytntmod:block/poseidons_wave_side",
+        "east": "luckytntmod:block/poseidons_wave_side",
+        "south": "luckytntmod:block/poseidons_wave_side",
+        "west": "luckytntmod:block/poseidons_wave_side",
+        "particle": "luckytntmod:block/poseidons_wave_side"
+    }
+}

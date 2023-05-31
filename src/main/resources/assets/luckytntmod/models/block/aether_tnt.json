@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/floating_island_bottom",
+        "up": "luckytntmod:block/aether_tnt_top",
+        "north": "luckytntmod:block/aether_tnt_side",
+        "east": "luckytntmod:block/aether_tnt_side",
+        "south": "luckytntmod:block/aether_tnt_side",
+        "west": "luckytntmod:block/aether_tnt_side",
+        "particle": "luckytntmod:block/aether_tnt_side"
+    }
+}

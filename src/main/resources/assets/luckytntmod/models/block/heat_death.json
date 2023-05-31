@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/day_tnt_bottom",
+        "up": "luckytntmod:block/heat_death_top",
+        "north": "luckytntmod:block/heat_death_side",
+        "east": "luckytntmod:block/heat_death_side",
+        "south": "luckytntmod:block/heat_death_side",
+        "west": "luckytntmod:block/heat_death_side",
+        "particle": "luckytntmod:block/heat_death_side"
+    }
+}

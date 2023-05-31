@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "luckytntmod:block/gunpowder_ore",
+    "particle": "luckytntmod:block/gunpowder_ore"
+  }
+}

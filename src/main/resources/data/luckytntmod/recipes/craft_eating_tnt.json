@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "232",
+    "101",
+    "232"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:tnt"
+    },
+    "1": {
+      "item": "luckytntmod:tnt_x20"
+    },
+    "2": {
+      "item": "minecraft:cooked_beef"
+    },
+    "3": {
+      "item": "minecraft:cake"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:eating_tnt",
+    "count": 1
+  }
+}

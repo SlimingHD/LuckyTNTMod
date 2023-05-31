@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:nuclear_waste",
+    "count": 1
+  }
+}

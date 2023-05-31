@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/freeze_tnt_bottom",
+        "up": "luckytntmod:block/freeze_tnt_top",
+        "north": "luckytntmod:block/freeze_tnt_side",
+        "east": "luckytntmod:block/freeze_tnt_side",
+        "south": "luckytntmod:block/freeze_tnt_side",
+        "west": "luckytntmod:block/freeze_tnt_side",
+        "particle": "luckytntmod:block/freeze_tnt_side"
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 3 ",
+    "121",
+    " 3 "
+  ],
+  "key": {
+    "1": {
+      "item": "minecraft:iron_boots"
+    },
+    "2": {
+      "item": "luckytntmod:dynamite"
+    },
+    "3": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:accelerating_dynamite",
+    "count": 1
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#0#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "luckytntmod:concrete_powder"
+    },
+    "0": {
+      "item": "luckytntmod:sand_firework"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:rainbow_firework",
+    "count": 1
+  }
+}

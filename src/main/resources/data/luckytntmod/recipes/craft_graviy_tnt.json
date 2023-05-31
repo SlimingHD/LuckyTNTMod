@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " 0 ",
+    "101",
+    "222"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:tnt"
+    },
+    "1": {
+      "item": "minecraft:obsidian"
+    },
+    "2": {
+      "item": "minecraft:water_bucket"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:gravity_tnt",
+    "count": 1
+  }
+}

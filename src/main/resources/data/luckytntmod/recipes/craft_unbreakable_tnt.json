@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#0#",
+    "#1#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bedrock"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "1": {
+      "item": "luckytntmod:shatterproof_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:unbreakable_tnt",
+    "count": 1
+  }
+}

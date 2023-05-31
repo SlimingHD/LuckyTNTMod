@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "102",
+    "030",
+    "456"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:antimatter"
+    },
+    "1": {
+      "item": "luckytntmod:mankinds_mark"
+    },
+    "2": {
+      "item": "luckytntmod:mansion"
+    },
+    "3": {
+      "item": "luckytntmod:city_firework"
+    },
+    "4": {
+      "item": "luckytntmod:cobblestone_house_tnt"
+    },
+    "5": {
+      "item": "luckytntmod:woodhouse_tnt"
+    },
+    "6": {
+      "item": "luckytntmod:brickhouse_tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:structure_tnt",
+    "count": 1
+  }
+}

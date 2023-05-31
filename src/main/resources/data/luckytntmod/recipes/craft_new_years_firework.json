@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "202",
+    "1#1",
+    "202"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "0": {
+      "item": "luckytntmod:tnt_firework"
+    },
+    "1": {
+      "item": "luckytntmod:rainbow_firework"
+    },
+    "2": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:new_years_firework",
+    "count": 1
+  }
+}

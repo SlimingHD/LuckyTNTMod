@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#0#",
+    "#1#",
+    "#0#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:obsidian"
+    },
+    "0": {
+      "item": "minecraft:iron_ingot"
+    },
+    "1": {
+      "item": "minecraft:redstone_torch"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:obsidian_activator_rail",
+    "count": 6
+  }
+}

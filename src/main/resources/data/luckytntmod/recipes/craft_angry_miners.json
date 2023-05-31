@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#0#",
+    "010",
+    "#0#"
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:dynamite"
+    },
+    "0": {
+      "item": "minecraft:torch"
+    },
+    "#": {
+      "item": "minecraft:tnt"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:angry_miners",
+    "count": 1
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "101",
+    "0#0",
+    "101"
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:dynamite_x20"
+    },
+    "0": {
+      "item": "luckytntmod:cannon_tnt"
+    },
+    "#": {
+      "item": "luckytntmod:antimatter"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:flak_tnt",
+    "count": 1
+  }
+}
