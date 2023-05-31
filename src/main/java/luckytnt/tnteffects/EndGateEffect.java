@@ -21,6 +21,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.Vec3;
 
 public class EndGateEffect extends PrimedTNTEffect{
 
@@ -68,8 +69,8 @@ public class EndGateEffect extends PrimedTNTEffect{
 			int offZ = (int)Math.round(Math.random() * 30D - 15D);
 			EnderMan man = new EnderMan(EntityType.ENDERMAN, entity.level());
 			for(int offY = 320; offY >= -64; offY--) {
-				BlockPos pos = new BlockPos(entity.x() + offX, offY, entity.z() + offZ);
-				BlockPos posDown = new BlockPos(entity.x() + offX, offY - 1, entity.z() + offZ);
+				BlockPos pos = toBlockPos(new Vec3(entity.x() + offX, offY, entity.z() + offZ));
+				BlockPos posDown = toBlockPos(new Vec3(entity.x() + offX, offY - 1, entity.z() + offZ));
 				BlockState state = entity.level().getBlockState(pos);
 				BlockState stateDown = entity.level().getBlockState(posDown);
 				

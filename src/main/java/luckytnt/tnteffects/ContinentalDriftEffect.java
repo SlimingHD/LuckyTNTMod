@@ -48,17 +48,17 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 		}
 		
 		if(ent.getTNTFuse() <= 400 && (ent.getTNTFuse() % 60 == 0 || ent.getTNTFuse() == 400) && !ent.level().isClientSide()) {
-			BlockPos origin = new BlockPos(((Entity)ent).getPersistentData().getDouble("x"), ((Entity)ent).getPersistentData().getDouble("y"), ((Entity)ent).getPersistentData().getDouble("z"));
-			BlockPos start = origin.offset(((Entity)ent).getPersistentData().getDouble("vecx") * -80, 0, ((Entity)ent).getPersistentData().getDouble("vecz") * -80);
+			BlockPos origin = toBlockPos(new Vec3(((Entity)ent).getPersistentData().getDouble("x"), ((Entity)ent).getPersistentData().getDouble("y"), ((Entity)ent).getPersistentData().getDouble("z")));
+			BlockPos start = origin.offset(toBlockPos(new Vec3(((Entity)ent).getPersistentData().getDouble("vecx") * -80, 0, ((Entity)ent).getPersistentData().getDouble("vecz") * -80)));
 			Vec3 vec = new Vec3(((Entity)ent).getPersistentData().getDouble("vecx"), 0, ((Entity)ent).getPersistentData().getDouble("vecz"));
 			Vec3 vec2 = new Vec3(((Entity)ent).getPersistentData().getDouble("vecx2"), 0, ((Entity)ent).getPersistentData().getDouble("vecz2"));
-			BlockPos start2 = start.offset(vec.x * ((Entity)ent).getPersistentData().getInt("second"), 0, vec.z * ((Entity)ent).getPersistentData().getInt("second")).offset(vec2.x * 8, 0, vec2.z * 8);
+			BlockPos start2 = start.offset(toBlockPos(new Vec3(vec.x * ((Entity)ent).getPersistentData().getInt("second"), 0, vec.z * ((Entity)ent).getPersistentData().getInt("second")))).offset(toBlockPos(new Vec3(vec2.x * 8, 0, vec2.z * 8)));
 			
 			for(double i = 0; i < 160D; i += 1D) {
 				for(int offX = -10; offX <= 10; offX++) {
 					for(int offZ = -10; offZ <= 10; offZ++) {
 						double distance = Math.sqrt(offX * offX + offZ * offZ);
-						BlockPos pos = start.offset(i * vec.x + offX, 0, i * vec.z + offZ);
+						BlockPos pos = start.offset(toBlockPos(new Vec3(i * vec.x + offX, 0, i * vec.z + offZ)));
 						if(distance <= 7) {
 							if(Math.random() > 0.1D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), ent.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
@@ -91,7 +91,7 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 				for(int offX = -10; offX <= 10; offX++) {
 					for(int offZ = -10; offZ <= 10; offZ++) {
 						double distance = Math.sqrt(offX * offX + offZ * offZ);
-						BlockPos pos = start2.offset(i * vec2.x + offX, 0, i * vec2.z + offZ);
+						BlockPos pos = start2.offset(toBlockPos(new Vec3(i * vec2.x + offX, 0, i * vec2.z + offZ)));
 						if(distance <= 7) {
 							if(Math.random() > 0.1D) {
 								BlockPos pos1 = new BlockPos(pos.getX(), ent.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());

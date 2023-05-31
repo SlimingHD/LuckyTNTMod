@@ -15,6 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.Vec3;
 
 public class DividingTNTEffect extends PrimedTNTEffect{
 	
@@ -35,7 +36,7 @@ public class DividingTNTEffect extends PrimedTNTEffect{
 			for(int offX = -50; offX < 50; offX += 10) {
 				for(int offZ = -50; offZ < 50; offZ += 10) {
 					findBlock: for(int offY = 320; offY > -64; offY--) {
-						BlockPos pos = new BlockPos(entity.x() + offX, entity.y() + offY, entity.z() + offZ);
+						BlockPos pos = toBlockPos(new Vec3(entity.x() + offX, entity.y() + offY, entity.z() + offZ));
 						if(entity.level().getBlockState(pos).isCollisionShapeFullBlock(entity.level(), pos) && !entity.level().getBlockState(pos.above()).isCollisionShapeFullBlock(entity.level(), pos.above())) {
 							PrimedLTNT projectile = EntityRegistry.DIVIDING_TNT.get().create(entity.level());
 							projectile.setPos(entity.getPos().add(offX, offY, offZ));

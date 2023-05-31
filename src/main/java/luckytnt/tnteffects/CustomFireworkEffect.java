@@ -18,13 +18,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 public class CustomFireworkEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() == 40 && ent instanceof PrimedCustomFirework tnt) {
-			BlockPos pos = new BlockPos(ent.x(), ent.y() - 1f, ent.z());
+			BlockPos pos = toBlockPos(new Vec3(ent.x(), ent.y() - 1f, ent.z()));
 			ent.getPersistentData().putInt("x", pos.getX());
 			ent.getPersistentData().putInt("y", pos.getY());
 			ent.getPersistentData().putInt("z", pos.getZ());

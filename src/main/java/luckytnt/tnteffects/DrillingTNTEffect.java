@@ -31,7 +31,7 @@ public class DrillingTNTEffect extends PrimedTNTEffect{
 				double distance = Math.sqrt(x * x + z * z);
 				if(distance <= 3) {
 					for(float y = 0; y < VEC_LENGTH; y += 0.3f) {
-						BlockPos pos = toBlockPos(entity.getPos()).offset(x, -y, z);
+						BlockPos pos = toBlockPos(entity.getPos().add(x, -y, z));
 						BlockState blockState = entity.level().getBlockState(pos);
 						FluidState fluidState = entity.level().getFluidState(pos);
 						Optional<Float> explosionResistance = damageCalculator.getBlockExplosionResistance(dummyExplosion, entity.level(), pos, blockState, fluidState);

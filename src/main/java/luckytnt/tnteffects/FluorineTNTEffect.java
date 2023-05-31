@@ -23,7 +23,7 @@ public class FluorineTNTEffect extends PrimedTNTEffect {
 	public void explosionTick(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() == 310) {
 			if(!ent.level().isClientSide()) {
-				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50f + Math.round(new Random().nextFloat(31f)));
+				ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50 + Math.round(new Random().nextInt(31)));
 				explosion.doEntityExplosion(7f, true);
 				explosion.doBlockExplosion(1f, 1f, 0.75f, 0.5f, false, false);
 			}
@@ -34,7 +34,7 @@ public class FluorineTNTEffect extends PrimedTNTEffect {
 				double y = ent.y() + Math.random() * 30 - Math.random() * 30;
 				double z = ent.z() + Math.random() * 80 - Math.random() * 80;
 				if(!ent.level().isClientSide()) {
-					ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, new Vec3(x, y, z), 50f + Math.round(new Random().nextFloat(31f)));
+					ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, new Vec3(x, y, z), 50 + Math.round(new Random().nextInt(31)));
 					explosion.doEntityExplosion(7f, true);
 					explosion.doBlockExplosion(1f, 1f, 0.75f, 0.5f, false, false);
 				}

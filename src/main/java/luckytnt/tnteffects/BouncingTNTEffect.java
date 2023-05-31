@@ -14,7 +14,7 @@ public class BouncingTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10f);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
 		explosion.doEntityExplosion(1.25f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 	}

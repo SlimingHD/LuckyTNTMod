@@ -15,10 +15,10 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class CompactTNTEffect extends PrimedTNTEffect{
 	private final double chance;
-	private final float size;
+	private final int size;
 	private final Supplier<RegistryObject<LTNTBlock>> place;
 
-	public CompactTNTEffect(double chance, float size, Supplier<RegistryObject<LTNTBlock>> place) {
+	public CompactTNTEffect(double chance, int size, Supplier<RegistryObject<LTNTBlock>> place) {
 		this.chance = chance;
 		this.size = size;
 		this.place = place;

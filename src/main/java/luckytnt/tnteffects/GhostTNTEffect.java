@@ -30,7 +30,7 @@ public class GhostTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 30f);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 30);
 		explosion.doEntityExplosion(1.5f, true);
 		explosion.doBlockExplosion(1f, 1.1f, 1f, 1.2f, false, false);
 	}
