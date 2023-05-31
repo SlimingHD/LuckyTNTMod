@@ -81,7 +81,7 @@ public class EndGateEffect extends PrimedTNTEffect{
 			entity.level().addFreshEntity(man);
 		}
 		
-		entity.level().playSound(null, new BlockPos(entity.getPos()), SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 0.5f, 1);
+		entity.level().playSound(null, toBlockPos(entity.getPos()), SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 0.5f, 1);
 		if(entity.level() instanceof ServerLevel sLevel) {
 			sLevel.setDayTime(18000);
 		}

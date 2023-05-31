@@ -43,7 +43,7 @@ public class CustomFireworkEffect extends PrimedTNTEffect {
 			
 			for(int count = 0; count < 200; count++) {
 				if(state.getBlock() instanceof TntBlock tnt) {
-					tnt.onCaughtFire(state, ent.level(), new BlockPos(ent.getPos()), null, ent.owner());
+					tnt.onCaughtFire(state, ent.level(), toBlockPos(ent.getPos()), null, ent.owner());
 				} else {
 					try {
 						@SuppressWarnings("rawtypes")
@@ -58,7 +58,7 @@ public class CustomFireworkEffect extends PrimedTNTEffect {
 					}
 				}
 			}
-			List<PrimedTnt> tnts = ent.level().getEntitiesOfClass(PrimedTnt.class, new AABB(new BlockPos(ent.getPos()).offset(2, 2, 2), new BlockPos(ent.getPos()).offset(-2, -2, -2)));
+			List<PrimedTnt> tnts = ent.level().getEntitiesOfClass(PrimedTnt.class, new AABB(toBlockPos(ent.getPos()).offset(2, 2, 2), toBlockPos(ent.getPos()).offset(-2, -2, -2)));
 			for(PrimedTnt tnt : tnts) {
 				tnt.setDeltaMovement(Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f);
 			}

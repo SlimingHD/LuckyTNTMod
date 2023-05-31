@@ -9,7 +9,6 @@ import luckytnt.registry.EntityRegistry;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -39,15 +38,15 @@ public class GrandeFinaleEffect extends PrimedTNTEffect {
 				case 3: entity = EntityRegistry.NEW_YEARS_FIREWORK.get().create(ent.level());
 						entity.getPersistentData().putInt("type", 1); break;
 			}
-			ent.level().playSound(null, new BlockPos(ent.getPos()), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.MASTER, 3, 1);
+			ent.level().playSound(null, toBlockPos(ent.getPos()), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.MASTER, 3, 1);
 			entity.setPos(ent.getPos());
 			entity.setOwner(ent.owner());
 			entity.setDeltaMovement(Math.random() * 5 - Math.random() * 5, 0, Math.random() * 5 - Math.random() * 5);
 			entity.setTNTFuse(40 + new Random().nextInt(41));
 			ent.level().addFreshEntity(entity);
 		}
-		ent.level().setBlock(new BlockPos(ent.getPos()), Blocks.AIR.defaultBlockState(), 3);
-		ent.level().setBlock(new BlockPos(ent.getPos()).offset(0, 1, 0), Blocks.AIR.defaultBlockState(), 3);
+		ent.level().setBlock(toBlockPos(ent.getPos()), Blocks.AIR.defaultBlockState(), 3);
+		ent.level().setBlock(toBlockPos(ent.getPos()).offset(0, 1, 0), Blocks.AIR.defaultBlockState(), 3);
 		if(ent.getTNTFuse() <= 40) {
 			((Entity)ent).setDeltaMovement(((Entity)ent).getDeltaMovement().x, 1.6f, ((Entity)ent).getDeltaMovement().z);
 			ent.level().addParticle(ParticleTypes.LARGE_SMOKE, ent.x(), ent.y(), ent.z(), 0, -0.5f, 0);

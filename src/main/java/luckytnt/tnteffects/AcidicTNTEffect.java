@@ -54,7 +54,7 @@ public class AcidicTNTEffect extends PrimedTNTEffect {
 			}
 		} else {
 			if(ent.getTNTFuse() == 0) {
-				ent.level().playSound(null, new BlockPos(ent.getPos()), SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 1f, 1f);
+				ent.level().playSound(null, toBlockPos(ent.getPos()), SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 1f, 1f);
 			}
 			if(!ent.level().isClientSide()) {
 				ExplosionHelper.doCubicalExplosion(ent.level(), ent.getPos(), 7, new IForEachBlockExplosionEffect() {
@@ -68,7 +68,7 @@ public class AcidicTNTEffect extends PrimedTNTEffect {
 				});
 			}
 			if(ent.getTNTFuse() % 20 == 0) {
-				List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(new BlockPos(ent.getPos()).offset(-3, -3, -3), new BlockPos(ent.getPos()).offset(3, 3, 3)));
+				List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-3, -3, -3), toBlockPos(ent.getPos()).offset(3, 3, 3)));
 				for(LivingEntity lent : list) {
 					lent.hurt(DamageSource.MAGIC, 3f);
 				}

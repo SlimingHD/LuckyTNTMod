@@ -28,7 +28,7 @@ public class SpiralDynamiteEffect extends PrimedTNTEffect{
 				spiral_tnt.setPos(entity.x(), entity.y(), entity.z());
 				spiral_tnt.setOwner(entity.owner());
 				spiral_tnt.shoot(ent.getLookAngle().x, ent.getLookAngle().y, ent.getLookAngle().z, ent.getPersistentData().getFloat("spiral_power"), 0);
-				entity.level().playSound(null, new BlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
+				entity.level().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
 				entity.level().addFreshEntity(spiral_tnt);
 			}
 		}

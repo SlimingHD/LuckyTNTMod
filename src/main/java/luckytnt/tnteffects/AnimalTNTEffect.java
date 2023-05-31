@@ -5,7 +5,6 @@ import java.util.List;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -15,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 
 public class AnimalTNTEffect extends PrimedTNTEffect{
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		List<EntityType<?>> entities = List.of(EntityType.BAT, EntityType.SPIDER, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.CREEPER, EntityType.PILLAGER, EntityType.VILLAGER, EntityType.ENDERMAN, EntityType.EVOKER, EntityType.IRON_GOLEM,
@@ -25,7 +25,7 @@ public class AnimalTNTEffect extends PrimedTNTEffect{
 				Entity ent = entType.create(entity.level());
 				ent.setPos(entity.getPos());
 				if(entity.level() instanceof ServerLevel sLevel && ent instanceof Mob mob) {
-					mob.finalizeSpawn(sLevel, entity.level().getCurrentDifficultyAt(new BlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
+					mob.finalizeSpawn(sLevel, entity.level().getCurrentDifficultyAt(toBlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 				}
 				entity.level().addFreshEntity(ent);
 			}

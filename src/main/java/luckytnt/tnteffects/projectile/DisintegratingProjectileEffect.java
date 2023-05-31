@@ -40,7 +40,7 @@ public class DisintegratingProjectileEffect extends PrimedTNTEffect {
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() == 0) {
-			ent.level().playSound(null, new BlockPos(ent.getPos()), SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 1f, 1f);
+			ent.level().playSound(null, toBlockPos(ent.getPos()), SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 1f, 1f);
 		}
 		if(!ent.level().isClientSide()) {
 			ExplosionHelper.doCubicalExplosion(ent.level(), ent.getPos(), 12, new IForEachBlockExplosionEffect() {
@@ -60,7 +60,7 @@ public class DisintegratingProjectileEffect extends PrimedTNTEffect {
 			});
 		}
 		if(ent.getTNTFuse() % 20 == 0) {
-			List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(new BlockPos(ent.getPos()).offset(-6, -6, -6), new BlockPos(ent.getPos()).offset(6, 6, 6)));
+			List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-6, -6, -6), toBlockPos(ent.getPos()).offset(6, 6, 6)));
 			for(LivingEntity lent : list) {
 				lent.hurt(DamageSource.MAGIC, 5f);
 			}

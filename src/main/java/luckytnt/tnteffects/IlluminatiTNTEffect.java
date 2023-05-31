@@ -13,7 +13,7 @@ public class IlluminatiTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		BlockPos pos = new BlockPos(ent.getPos());
+		BlockPos pos = toBlockPos(ent.getPos());
 		
 		BlockPos A = pos.offset(-60, -60, -60);
 		BlockPos B = pos.offset(60, -60, -60);
@@ -38,7 +38,7 @@ public class IlluminatiTNTEffect extends PrimedTNTEffect {
 					Vec3 vec = new Vec3(Math.round(ent.x() + offX), Math.round(ent.y() + offY), Math.round(ent.z() + offZ));
 
 					if (distance(vec, NEAB, E) <= 0 && distance(vec, NEAD, E) <= 0 && distance(vec, NEDC, E) <= 0 && distance(vec, NECB, E) <= 0 && distance(vec, NABCD, A) <= 0) {
-						BlockPos pos5 = new BlockPos(ent.getPos()).offset(offX, offY, offZ);
+						BlockPos pos5 = toBlockPos(ent.getPos()).offset(offX, offY, offZ);
 
 						if (ent.level().getBlockState(pos5).getExplosionResistance(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
 							ent.level().getBlockState(pos5).onBlockExploded(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level()));

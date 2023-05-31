@@ -26,7 +26,7 @@ public class SinkholeTNTEffect extends PrimedTNTEffect {
 					for(int offZ = -33; offZ <= 33; offZ++) {
 						double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ) + Math.random() * 4D - 2D;
 						BlockPos pos = new BlockPos(ent.x() + offX, ent.y() + offY + ent.getPersistentData().getInt("depth"), ent.z() + offZ);
-						if(distance <= 30 && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), new BlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.level())) < 200) {
+						if(distance <= 30 && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), toBlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.level())) < 200) {
 							ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
 						}
 					}

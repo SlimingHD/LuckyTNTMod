@@ -4,7 +4,6 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -34,7 +33,7 @@ public class MimicTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public BlockState getBlockState(IExplosiveEntity ent) {
-		return ent.level().getBlockState(new BlockPos(ent.getPos()).below()).isAir() ? BlockRegistry.MIMIC_TNT.get().defaultBlockState() : ent.level().getBlockState(new BlockPos(ent.getPos()).below());
+		return ent.level().getBlockState(toBlockPos(ent.getPos()).below()).isAir() ? BlockRegistry.MIMIC_TNT.get().defaultBlockState() : ent.level().getBlockState(toBlockPos(ent.getPos()).below());
 	}
 
 	@Override

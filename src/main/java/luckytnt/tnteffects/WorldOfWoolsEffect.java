@@ -153,11 +153,11 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 			int z = new Random().nextInt(151) - 75;
 			
 			sheep.setPos(ent.x() + x, LevelEvents.getTopBlock(ent.level(), ent.x() + x, ent.z() + z, true) + 1, ent.z() + z);
-			sheep.finalizeSpawn((ServerLevel)ent.level(), ent.level().getCurrentDifficultyAt(new BlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
+			sheep.finalizeSpawn((ServerLevel)ent.level(), ent.level().getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			ent.level().addFreshEntity(sheep);
 		}
 		
-		List<Sheep> list = ent.level().getEntitiesOfClass(Sheep.class, new AABB(new BlockPos(ent.getPos()).offset(100, 100, 100), new BlockPos(ent.getPos()).offset(-100, -100, -100)));
+		List<Sheep> list = ent.level().getEntitiesOfClass(Sheep.class, new AABB(toBlockPos(ent.getPos()).offset(100, 100, 100), toBlockPos(ent.getPos()).offset(-100, -100, -100)));
 		for(Sheep sheep : list) {
 			sheep.setColor(randomColor());
 		}

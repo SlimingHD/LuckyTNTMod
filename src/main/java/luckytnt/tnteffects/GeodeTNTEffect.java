@@ -40,7 +40,7 @@ public class GeodeTNTEffect extends PrimedTNTEffect{
 		});
 		if(entity.level() instanceof ServerLevel sLevel) {
 			Holder<ConfiguredFeature<?, ?>> feature = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.AMETHYST_GEODE);
-			feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, new BlockPos(entity.getPos()));
+			feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, toBlockPos(entity.getPos()));
 		}
 		for(int i = blocks.size() - 1; i > 0; i--) {
 			List<BlockPos> poses = new ArrayList<>(blocks.keySet());

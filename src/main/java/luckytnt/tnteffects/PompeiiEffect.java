@@ -29,7 +29,7 @@ public class PompeiiEffect extends PrimedTNTEffect{
 						pompeii.shoot((Math.random() * 3D - 1.5D) * 0.1f, 0.6f + Math.random() * 0.4f, (Math.random() * 3D - 1.5D) * 0.1f, 3f + entity.level().random.nextFloat() * 2f, 0f);	
 						pompeii.setSecondsOnFire(1000);
 						entity.level().addFreshEntity(pompeii);
-						entity.level().playSound(null, new BlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.MASTER, 3, 1);
+						entity.level().playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.MASTER, 3, 1);
 					}
 				}
 			}
@@ -39,7 +39,7 @@ public class PompeiiEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		if(ent instanceof LExplosiveProjectile) {
-			if(ent.level().getBlockState(new BlockPos(ent.x(), ent.y() + 1, ent.z())).getExplosionResistance(ent.level(), new BlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+			if(ent.level().getBlockState(new BlockPos(ent.x(), ent.y() + 1, ent.z())).getExplosionResistance(ent.level(), toBlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
 				ent.level().setBlock(new BlockPos(ent.x(), ent.y() + 1, ent.z()), Blocks.LAVA.defaultBlockState(), 3);
 			}
 		}

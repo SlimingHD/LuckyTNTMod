@@ -15,7 +15,7 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		BlockPos pos = new BlockPos(ent.getPos());
+		BlockPos pos = toBlockPos(ent.getPos());
 		
 		double heigth = (Math.sqrt(3D) / 2D) * 60D;
 		double sideHeigth = Math.sqrt(60D * 60D - 30D * 30D);
@@ -42,7 +42,7 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 					Vec3 vec = new Vec3(Math.round(ent.x() + offX), Math.round(ent.y() + offY), Math.round(ent.z() + offZ));
 
 					if (distance(vec, NDAB, D) <= 0 && distance(vec, NDAC, D) <= 0 && distance(vec, NDCB, D) <= 0 && distance(vec, NABC, A) <= 0) {
-						BlockPos pos5 = new BlockPos(ent.getPos()).offset(offX, offY, offZ);
+						BlockPos pos5 = toBlockPos(ent.getPos()).offset(offX, offY, offZ);
 
 						if (ent.level().getBlockState(pos5).getExplosionResistance(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
 							ent.level().getBlockState(pos5).onBlockExploded(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level()));
