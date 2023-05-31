@@ -78,9 +78,11 @@ import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 public class AnimalKingdomEffect extends PrimedTNTEffect {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		List<Mob> list = new ArrayList<>();
@@ -341,7 +343,7 @@ public class AnimalKingdomEffect extends PrimedTNTEffect {
 			int offX = new Random().nextInt(101) - 50;
 			int offZ = new Random().nextInt(101) - 50;
 			for(int y = ent.level().getMaxBuildHeight(); y > ent.level().getMinBuildHeight(); y--) {
-				BlockPos pos = new BlockPos(ent.x() + offX, y, ent.z() + offZ);
+				BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, y, ent.z() + offZ));
 				BlockState state = ent.level().getBlockState(pos);
 				if(Block.isFaceFull(ent.level().getBlockState(pos.below()).getCollisionShape(ent.level(), pos.below()), Direction.UP) && !Block.isFaceFull(state.getCollisionShape(ent.level(), pos), Direction.UP)) {
 					mob.setPos(pos.getX(), pos.getY(), pos.getZ());

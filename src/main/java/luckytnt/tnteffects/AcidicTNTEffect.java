@@ -17,7 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -68,9 +68,10 @@ public class AcidicTNTEffect extends PrimedTNTEffect {
 				});
 			}
 			if(ent.getTNTFuse() % 20 == 0) {
-				List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-3, -3, -3), toBlockPos(ent.getPos()).offset(3, 3, 3)));
+				List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-3, -3, -3), toBlockPos(ent.getPos()).offset(3, 3, 3)));			
+				DamageSources sources = new DamageSources(ent.level().registryAccess());
 				for(LivingEntity lent : list) {
-					lent.hurt(DamageSource.MAGIC, 3f);
+					lent.hurt(sources.magic(), 3f);
 				}
 			}
 		}

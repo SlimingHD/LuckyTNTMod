@@ -38,6 +38,7 @@ import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.Vec3;
 
 public class AtlantisEffect extends PrimedTNTEffect {
 	
@@ -66,7 +67,7 @@ public class AtlantisEffect extends PrimedTNTEffect {
 				if(ent.level() instanceof ServerLevel sLevel) {
 					if(distance < 100) {
 						if(offX % 16 == 0 && offZ % 16 == 0) {
-							for(LevelChunkSection section : ent.level().getChunk(new BlockPos(ent.x() + offX, 0, ent.z() + offZ)).getSections()) {
+							for(LevelChunkSection section : ent.level().getChunk(toBlockPos(new Vec3(ent.x() + offX, 0, ent.z() + offZ))).getSections()) {
 								PalettedContainerRO<Holder<Biome>> biomesRO = section.getBiomes();
 								for(int i = 0; i < 4; ++i) {
 									for(int j = 0; j < 4; ++j) {
@@ -81,7 +82,7 @@ public class AtlantisEffect extends PrimedTNTEffect {
 						}
 					}
 					for(ServerPlayer player : sLevel.players()) {
-						player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.level().getChunkAt(new BlockPos(ent.x() + offX, 0, ent.z() + offZ)), ent.level().getLightEngine(), null, null, false));
+						player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.level().getChunkAt(toBlockPos(new Vec3(ent.x() + offX, 0, ent.z() + offZ))), ent.level().getLightEngine(), null, null, false));
 					}
 					if(distance < 50) {
 						Registry<Structure> structures = ent.level().registryAccess().registryOrThrow(Registries.STRUCTURE);

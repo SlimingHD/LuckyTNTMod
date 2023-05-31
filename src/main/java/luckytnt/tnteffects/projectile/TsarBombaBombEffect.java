@@ -24,6 +24,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
 
 public class TsarBombaBombEffect extends PrimedTNTEffect implements NuclearBombLike {
@@ -34,7 +35,7 @@ public class TsarBombaBombEffect extends PrimedTNTEffect implements NuclearBombL
 			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)entity), new ClientboundHydrogenBombPacket(((Entity)entity).getId()));
 		}
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 160f);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 160);
 		explosion.doEntityExplosion(15f, true);
 		explosion.doBlockExplosion(1f, 1f, 0.167f, 0.05f, false, true);
 		
@@ -47,7 +48,7 @@ public class TsarBombaBombEffect extends PrimedTNTEffect implements NuclearBombL
 			for(int offY = -300 / 3; offY <= 300 / 3; offY++) {
 				for(int offZ = -300; offZ <= 300; offZ++) {
 					double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ);
-					BlockPos pos = new BlockPos(entity.x() + offX, entity.y() + offY, entity.z() + offZ);
+					BlockPos pos = toBlockPos(new Vec3(entity.x() + offX, entity.y() + offY, entity.z() + offZ));
 					BlockState state = entity.level().getBlockState(pos);
 					if(distance <= 300 && state.getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 200) {
 						if(distance <= 150 && entity.level().getBlockState(pos.below()).isFaceSturdy(entity.level(), pos.below(), Direction.UP) && Math.random() < 0.2D && (state.isAir() || state.getBlock().defaultDestroyTime() <= 0.2f)) {

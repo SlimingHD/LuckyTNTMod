@@ -18,6 +18,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
@@ -58,7 +59,7 @@ public class AetherTNTEffect extends PrimedTNTEffect {
 				double x = ent.x() + offX;
 				double z = ent.z() + offZ;
 				if(distance <= 100) {
-					BlockPos pos = new BlockPos(x, LevelEvents.getTopBlock(ent.level(), x, z, true), z).above();
+					BlockPos pos = new BlockPos(Mth.floor(x), LevelEvents.getTopBlock(ent.level(), x, z, true), Mth.floor(z)).above();
 					Registry<ConfiguredFeature<?, ?>> features = ent.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 					double random = Math.random();
 					
