@@ -82,14 +82,14 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
   	maven {
-  		url "https://sliminglibs.jfrog.io/artifactory/ltnt-libs-release/"
+  		url "https://jitpack.io"
   	}
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.19.4-45.0.64'
 
-    implementation fg.deobf("libs.luckytntlib:luckytntlib-1.19.4:45.0.64.1")
+    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.19.4-45.0.64.1")
 }
 
 jar {
@@ -114,8 +114,6 @@ task sourceJar(type: Jar) {
 
 jar.finalizedBy('reobfJar')
 
-//publish should always depend on this, but build not
-//publish.dependsOn("reobfJar")
 
 publishing {
     publications {
@@ -124,9 +122,6 @@ publishing {
         }
     }
     repositories {
-        maven{     	
-
-        }
     }
 }
 
