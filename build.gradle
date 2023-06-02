@@ -81,15 +81,18 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+	mavenCentral()
   	maven {
-  		url "https://sliminglibs.jfrog.io/artifactory/ltnt-libs-release/"
+  		url "https://jitpack.io"
   	}
 }
 
-dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.2.11'
-
-    implementation fg.deobf("libs.luckytntlib:luckytntlib-1.19.2:43.2.11.1")
+allprojects{
+	dependencies {
+	    minecraft 'net.minecraftforge:forge:1.19.2-43.2.11'
+	
+	    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.19.2-43.2.11.1")
+	}
 }
 
 jar {
@@ -121,12 +124,10 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
+            artifact tasks.sourceJar
         }
     }
     repositories {
-        maven{     	
-
-        }
     }
 }
 
