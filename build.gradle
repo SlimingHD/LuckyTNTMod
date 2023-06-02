@@ -117,9 +117,6 @@ task sourceJar(type: Jar) {
 
 jar.finalizedBy('reobfJar')
 
-//publish should always depend on this, but build not
-//publish.dependsOn("reobfJar")
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
