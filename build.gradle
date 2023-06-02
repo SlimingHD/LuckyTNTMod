@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
+
 version = '1.19.2-1.0'
 group = 'luckytnt.luckytntmod'
 archivesBaseName = 'luckytntmod-1.19.2'
@@ -81,18 +82,15 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-	mavenCentral()
   	maven {
   		url "https://jitpack.io"
   	}
 }
 
-allprojects{
-	dependencies {
-	    minecraft 'net.minecraftforge:forge:1.19.2-43.2.11'
+dependencies {
+	minecraft 'net.minecraftforge:forge:1.19.2-43.2.11'
 	
-	    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.19.2-43.2.11.1")
-	}
+	implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.19.2-43.2.11.1")
 }
 
 jar {
