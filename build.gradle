@@ -114,6 +114,7 @@ task sourceJar(type: Jar) {
 }
 
 jar.finalizedBy('reobfJar')
+build.dependsOn('sourceJar')
 
 publishing {
     publications {
