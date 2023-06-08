@@ -25,7 +25,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
@@ -34,15 +33,15 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		if(ent.level() instanceof ServerLevel sl) {
+		if(ent.getLevel() instanceof ServerLevel sl) {
 			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)ent), new ClientboundHydrogenBombPacket(((Entity)ent).getId()));
 		}
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 230);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 230);
 		explosion.doEntityExplosion(25f, true);
 		explosion.doBlockExplosion(1f, 1f, 0.167f, 0.05f, false, true);
 		
-		ExplosionHelper.doModifiedSphericalExplosion(ent.level(), ent.getPos(), 250, new Vec3(1f, (2f/3f), 1f), new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doModifiedSphericalExplosion(ent.getLevel(), ent.getPos(), 250, new Vec3(1f, (2f/3f), 1f), new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -50,7 +49,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 				BlockState stateTop = level.getBlockState(posTop);
 				if(distance <= 250) {
 					if(Math.random() < 0.25f) {
-						if(Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && state.getMaterial() != Material.AIR && !Block.isFaceFull(stateTop.getCollisionShape(level, posTop), Direction.UP) && stateTop.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 200) {
+						if(Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && !state.isAir() && !Block.isFaceFull(stateTop.getCollisionShape(level, posTop), Direction.UP) && stateTop.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200) {
 							level.setBlock(posTop, BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState(), 3);
 						}
 					}
@@ -58,7 +57,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 			}
 		});
 		
-		List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 90, ent.y() - 65, ent.z() - 90, ent.x() + 90, ent.y() + 65, ent.z() + 90));
+		List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 90, ent.y() - 65, ent.z() - 90, ent.x() + 90, ent.y() + 65, ent.z() + 90));
 		for(LivingEntity living : list) {
 			living.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 4800, 0, true, true, true));
 		}
@@ -67,31 +66,31 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 	@Override
 	public void displayMushroomCloud(IExplosiveEntity ent) {
 		for(int count = 0; count < 3000; count++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 120 - Math.random() * 120, ent.y() + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 120 - Math.random() * 120, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 120 - Math.random() * 120, ent.y() + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 120 - Math.random() * 120, 0, 0, 0);
 		}
 		for(int count = 0; count < 2000; count++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 40 - Math.random() * 40, ent.y() + 6 + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 40 - Math.random() * 40, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 40 - Math.random() * 40, ent.y() + 6 + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 40 - Math.random() * 40, 0, 0, 0);
 		}
 		for(int count = 0; count < 1600; count++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 20 - Math.random() * 20, ent.y() + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 20 - Math.random() * 20, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 20 - Math.random() * 20, ent.y() + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 20 - Math.random() * 20, 0, 0, 0);
 		}
 		for(int count = 0; count < 1200; count++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 12 - Math.random() * 12, ent.y() + 8 + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 12 - Math.random() * 12, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 12 - Math.random() * 12, ent.y() + 8 + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 12 - Math.random() * 12, 0, 0, 0);
 		}
 		for(int count = 0; count < 1200; count++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 4 - Math.random() * 4, ent.y() + 30 + Math.random() * 24 - Math.random() * 24, ent.z() + Math.random() * 4 - Math.random() * 4, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 4 - Math.random() * 4, ent.y() + 30 + Math.random() * 24 - Math.random() * 24, ent.z() + Math.random() * 4 - Math.random() * 4, 0, 0, 0);
 		}
 		for(int count = 0; count < 1200; count++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 12 - Math.random() * 12, ent.y() + 44 + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 12 - Math.random() * 12, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 12 - Math.random() * 12, ent.y() + 44 + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 12 - Math.random() * 12, 0, 0, 0);
 		}
 		for(int count = 0; count < 1200; count++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 12 - Math.random() * 12, ent.y() + 58 + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 12 - Math.random() * 12, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 12 - Math.random() * 12, ent.y() + 58 + Math.random() * 6 - Math.random() * 6, ent.z() + Math.random() * 12 - Math.random() * 12, 0, 0, 0);
 		}
 		for(int count = 0; count < 4000; count++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 24 - Math.random() * 24, ent.y() + 48 + Math.random() * 12 - Math.random() * 12, ent.z() + Math.random() * 24 - Math.random() * 24, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 2f, 0f), 10f), true, ent.x() + Math.random() * 24 - Math.random() * 24, ent.y() + 48 + Math.random() * 12 - Math.random() * 12, ent.z() + Math.random() * 24 - Math.random() * 24, 0, 0, 0);
 		}
 		for(int count = 0; count < 4000; count++) {
-			ent.level().addParticle(ParticleTypes.LARGE_SMOKE, true, ent.x() + Math.random() * 4 - Math.random() * 4, ent.y() + 44 + Math.random() * 4 - Math.random() * 4, ent.z() + Math.random() * 4 - Math.random() * 4, Math.random() * 4 - Math.random() * 4, Math.random() * 4 - Math.random() * 4, Math.random() * 4 - Math.random() * 4);
+			ent.getLevel().addParticle(ParticleTypes.LARGE_SMOKE, true, ent.x() + Math.random() * 4 - Math.random() * 4, ent.y() + 44 + Math.random() * 4 - Math.random() * 4, ent.z() + Math.random() * 4 - Math.random() * 4, Math.random() * 4 - Math.random() * 4, Math.random() * 4 - Math.random() * 4, Math.random() * 4 - Math.random() * 4);
 		}
 	}
 	

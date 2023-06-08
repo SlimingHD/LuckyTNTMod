@@ -32,18 +32,18 @@ public class CityFireworkEffect extends PrimedTNTEffect {
 			}
 			
 			if(type != null) {
-				PrimedLTNT tnt = type.get().create(ent.level());
+				PrimedLTNT tnt = type.get().create(ent.getLevel());
 				tnt.setPos(ent.getPos());
 				tnt.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
 				tnt.setDeltaMovement(Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f  - Math.random() * 1.5f);
-				ent.level().addFreshEntity(tnt);
+				ent.getLevel().addFreshEntity(tnt);
 			}
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
 	}
 	
 	@Override

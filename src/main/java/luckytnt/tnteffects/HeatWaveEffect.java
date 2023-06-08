@@ -24,12 +24,12 @@ public class HeatWaveEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ExplosionHelper.doSphericalExplosion(ent.level(), ent.getPos(), 150, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 150, new IForEachBlockExplosionEffect() {
 			
 			@SuppressWarnings("deprecation")
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
 					if(state.getMaterial() == Material.AIR && Blocks.FIRE.canSurvive(state, level, pos)) {
 						BlockPlaceContext ctx = new BlockPlaceContext(level, null, InteractionHand.MAIN_HAND, new ItemStack(Items.FLINT_AND_STEEL), new BlockHitResult(ent.getPos(), Direction.DOWN, pos, true));
 						BlockState stateForPlacement = Blocks.FIRE.getStateForPlacement(ctx);
@@ -43,7 +43,7 @@ public class HeatWaveEffect extends PrimedTNTEffect {
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
 		for(int i = 0; i < 50; i++) {
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() + Math.random() * 10 - Math.random() * 10, ent.y() + Math.random() * 10 - Math.random() * 10, ent.z() + Math.random() * 10 - Math.random() * 10, Math.random() * 0.1 - Math.random() * 0.1, Math.random() * 0.1 - Math.random() * 0.1, Math.random() * 0.1 - Math.random() * 0.1);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + Math.random() * 10 - Math.random() * 10, ent.y() + Math.random() * 10 - Math.random() * 10, ent.z() + Math.random() * 10 - Math.random() * 10, Math.random() * 0.1 - Math.random() * 0.1, Math.random() * 0.1 - Math.random() * 0.1, Math.random() * 0.1 - Math.random() * 0.1);
 		}	
 	}
 	

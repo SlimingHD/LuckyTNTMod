@@ -17,25 +17,25 @@ public class ZombieApocalypseEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		for(int count = 0; count <= 30 + Math.random() * 15; count++) {
-			Zombie zombie = new Zombie(EntityType.ZOMBIE, entity.level());
+			Zombie zombie = new Zombie(EntityType.ZOMBIE, entity.getLevel());
 			zombie.setPos(entity.getPos());
-			entity.level().addFreshEntity(zombie);
+			entity.getLevel().addFreshEntity(zombie);
 		}
 		for(int count = 0; count <= 10 + Math.random() * 5; count++) {
-			ZombieHorse zombie = new ZombieHorse(EntityType.ZOMBIE_HORSE, entity.level());
+			ZombieHorse zombie = new ZombieHorse(EntityType.ZOMBIE_HORSE, entity.getLevel());
 			zombie.setPos(entity.getPos());
-			entity.level().addFreshEntity(zombie);
+			entity.getLevel().addFreshEntity(zombie);
 		}
 		for(int count = 0; count <= 15 + Math.random() * 10; count++) {
-			ZombieVillager zombie = new ZombieVillager(EntityType.ZOMBIE_VILLAGER, entity.level());
+			ZombieVillager zombie = new ZombieVillager(EntityType.ZOMBIE_VILLAGER, entity.getLevel());
 			zombie.setPos(entity.getPos());
-			entity.level().addFreshEntity(zombie);
+			entity.getLevel().addFreshEntity(zombie);
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(0, 0.7f, 0), 1), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0, 0.7f, 0), 1), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
 	}
 	
 	@Override

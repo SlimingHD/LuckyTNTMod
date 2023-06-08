@@ -20,14 +20,14 @@ public class LightningDynamiteEffect extends PrimedTNTEffect{
 	public void explosionTick(IExplosiveEntity entity) {
 		double x = entity.getPos().x;
 		double z = entity.getPos().z;
-		if (entity.level() instanceof ServerLevel S_Level) {
+		if (entity.getLevel() instanceof ServerLevel S_Level) {
 			double offX = Math.random() * 20 - 10;
 			double offZ = Math.random() * 20 - 10;
 			for (double offY = 320; offY > -64; offY--) {
-				if (!entity.level().getBlockState(new BlockPos(Mth.floor(x + offX), Mth.floor(offY), Mth.floor(z + offZ))).isAir()) {
-					Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.level());
+				if (!entity.getLevel().getBlockState(new BlockPos(Mth.floor(x + offX), Mth.floor(offY), Mth.floor(z + offZ))).isAir()) {
+					Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.getLevel());
 					lighting.setPos(x + offX, offY, z + offZ);
-					entity.level().addFreshEntity(lighting);
+					entity.getLevel().addFreshEntity(lighting);
 					break;
 				}
 			}
@@ -36,7 +36,7 @@ public class LightningDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 0.5f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 0.5f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override

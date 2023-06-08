@@ -19,7 +19,7 @@ public class ReactionDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(entity instanceof LExplosiveProjectile ent) {
 			if(ent.inGround()) {
 				ent.getPersistentData().putBoolean("hitBefore", true);
@@ -39,12 +39,12 @@ public class ReactionDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity){
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(!level.isClientSide) {
 			if(entity.getPersistentData().getInt("nextExplosion") == 0) {
 				Vec3 randomPos = new Vec3(Math.random() * 20 - 10, Math.random() * 10 - 5, Math.random() * 20 - 10);
 				float explosionSize = 5 + level.random.nextFloat() * 5;
-				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos().add(randomPos), Math.round(explosionSize));
+				ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos().add(randomPos), Math.round(explosionSize));
 				explosion.doEntityExplosion(1f + 0.05f * explosionSize, true);
 				explosion.doBlockExplosion(1f, 1f, 0.75f, 1.25f, false, false);
 				level.playSound((Entity)entity, toBlockPos(entity.getPos().add(randomPos)), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
@@ -57,16 +57,16 @@ public class ReactionDynamiteEffect extends PrimedTNTEffect{
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		if(Math.random() < 0.15f) {
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.37f, 1f, 1f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.37f, 1f, 1f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
 		}
 		if(Math.random() < 0.15f) {
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.59f, 1f, 0f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.59f, 1f, 0f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
 		}
 		if(Math.random() < 0.15f) {
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.11f, 0.26f, 0.11f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.11f, 0.26f, 0.11f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
 		}
 		if(Math.random() < 0.15f) {
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.16f, 0.42f, 0.15f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.16f, 0.42f, 0.15f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
 		}
 	}
 	

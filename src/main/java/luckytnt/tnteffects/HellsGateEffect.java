@@ -21,14 +21,14 @@ public class HellsGateEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 30, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 30, new IForEachBlockExplosionEffect() {
 		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				BlockPos posTop = pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0);
 				BlockState stateTop = level.getBlockState(posTop);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 200 && stateTop.getMaterial() == Material.AIR && state.getMaterial() != Material.AIR && Math.abs(entity.y() - pos.getY()) <= 20) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 200 && stateTop.getMaterial() == Material.AIR && state.getMaterial() != Material.AIR && Math.abs(entity.y() - pos.getY()) <= 20) {
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 					if(state.getMaterial() == Material.WOOD) {
 						level.setBlock(posTop, Blocks.OBSIDIAN.defaultBlockState(), 3);
@@ -43,7 +43,7 @@ public class HellsGateEffect extends PrimedTNTEffect{
 			}
 		});
 		
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 30, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 30, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -61,30 +61,30 @@ public class HellsGateEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0, -0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0, -0.1f);
 		
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0.1f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0.1f, -0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0.1f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0.1f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0.1f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0.1f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0.1f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0.1f, -0.1f);
 		
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0.2f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0.2f, -0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0.2f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0.2f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0.2f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0.2f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, 0.2f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, 0.2f, -0.1f);
 		
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.1f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.1f, -0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.1f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.1f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.1f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.1f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.1f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.1f, -0.1f);
 		
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.2f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.2f, -0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.2f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.2f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.2f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.2f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.2f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.2f, -0.1f);
 	}
 
 	@Override

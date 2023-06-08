@@ -21,9 +21,9 @@ public class ChicxulubMeteorEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 80);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 80);
 		explosion.doEntityExplosion(3, true);
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 60, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 60, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -39,18 +39,18 @@ public class ChicxulubMeteorEffect extends PrimedTNTEffect {
 		});
 		
 		for(int count = 0; count < 300; count++) {
-			LExplosiveProjectile pompeii = EntityRegistry.POMPEII_PROJECTILE.get().create(entity.level());
+			LExplosiveProjectile pompeii = EntityRegistry.POMPEII_PROJECTILE.get().create(entity.getLevel());
 			pompeii.setPos(entity.getPos());
 			pompeii.setOwner(entity.owner());
 			pompeii.setDeltaMovement(Math.random() * 8D - 4D, 3 + Math.random() * 2, Math.random() * 8D - 4D);
 			pompeii.setTNTFuse(100000);
-			entity.level().addFreshEntity(pompeii);
+			entity.getLevel().addFreshEntity(pompeii);
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(ParticleTypes.EXPLOSION, entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(ParticleTypes.EXPLOSION, entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
 	}
 
 	@Override

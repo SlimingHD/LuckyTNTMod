@@ -23,7 +23,7 @@ public class ChristmasDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(entity instanceof LExplosiveProjectile ent) {
 			if(ent.inGround() && ent.getTNTFuse() < 60) {
 				if(level instanceof ServerLevel) {
@@ -46,7 +46,7 @@ public class ChristmasDynamiteEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		SnowTNTEffect snowEffect = new SnowTNTEffect(25);
 		snowEffect.serverExplosion(entity);
-		((ServerLevel)entity.level()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + Math.random() - 0.5f, entity.z() + Math.random() - 0.5f, 500, 0.5f, 0.5f, 0.5f, 0f);
+		((ServerLevel)entity.getLevel()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + Math.random() - 0.5f, entity.z() + Math.random() - 0.5f, 500, 0.5f, 0.5f, 0.5f, 0f);
 	}
 	
 	@Override
@@ -58,7 +58,7 @@ public class ChristmasDynamiteEffect extends PrimedTNTEffect{
 		if(entity.getTNTFuse() <= 220 && entity.getTNTFuse() > 60) {
 			((Entity)entity).setDeltaMovement(new Vec3(entity.getPersistentData().getDouble("vecx"), 0, entity.getPersistentData().getDouble("vecz")).normalize().scale(0.25f));
 			if(entity.getTNTFuse() % 20 == 0) {
-				LExplosiveProjectile dynamite = EntityRegistry.CHRISTMAS_DYNAMITE_PROJECTILE.get().create(entity.level());
+				LExplosiveProjectile dynamite = EntityRegistry.CHRISTMAS_DYNAMITE_PROJECTILE.get().create(entity.getLevel());
 				dynamite.setPos(entity.getPos());
 				dynamite.setOwner(entity.owner());
 				double randomX = Math.random();
@@ -66,7 +66,7 @@ public class ChristmasDynamiteEffect extends PrimedTNTEffect{
 				double randomZ = Math.random();
 				randomZ *= new Random().nextBoolean() ? 1 : -1;
 				dynamite.setDeltaMovement(randomX, -Math.random() * 0.5f, randomZ);
-				entity.level().addFreshEntity(dynamite);
+				entity.getLevel().addFreshEntity(dynamite);
 			}
 		}
 		else if(entity.getTNTFuse() > 60){
@@ -77,7 +77,7 @@ public class ChristmasDynamiteEffect extends PrimedTNTEffect{
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		for(int i = 0; i < 7; i++) {
-			entity.level().addParticle(ParticleTypes.WAX_OFF, true, entity.x() + Math.random() - 0.5f, entity.y() + Math.random() - 0.5f, entity.z() + Math.random() - 0.5f, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.WAX_OFF, true, entity.x() + Math.random() - 0.5f, entity.y() + Math.random() - 0.5f, entity.z() + Math.random() - 0.5f, 0, 0, 0);
 		}
 	}
 	

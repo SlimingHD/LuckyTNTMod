@@ -14,11 +14,11 @@ public class DynamiteFireworkEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		for(int count = 0; count <= 300; count++) {
-			LExplosiveProjectile dynamite = EntityRegistry.DYNAMITE.get().create(entity.level());
+			LExplosiveProjectile dynamite = EntityRegistry.DYNAMITE.get().create(entity.getLevel());
 			dynamite.setPos(entity.getPos());
 			dynamite.setOwner(dynamite.owner());
 			dynamite.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f - 1f, Math.random() * 2f - 1f);
-			entity.level().addFreshEntity(dynamite);
+			entity.getLevel().addFreshEntity(dynamite);
 		}
 	}
 	
@@ -29,7 +29,7 @@ public class DynamiteFireworkEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override

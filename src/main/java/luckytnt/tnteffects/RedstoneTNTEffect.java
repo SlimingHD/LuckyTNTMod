@@ -28,7 +28,7 @@ public class RedstoneTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), 10, new IBlockExplosionCondition() {
+		ExplosionHelper.doTopBlockExplosion(entity.getLevel(), entity.getPos(), 10, new IBlockExplosionCondition() {
 			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
@@ -61,15 +61,15 @@ public class RedstoneTNTEffect extends PrimedTNTEffect{
 					case 16: replace = Blocks.COMPARATOR.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, getRandomDirectionHorizontal()).setValue(BlockStateProperties.MODE_COMPARATOR, Math.random() < 0.5f ? ComparatorMode.COMPARE : ComparatorMode.SUBTRACT); break;
 				}
 				Block block = state.getBlock();
-				block.onBlockExploded(state, entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level()));
-				entity.level().setBlock(pos, replace, 3);
+				block.onBlockExploded(state, entity.getLevel(), pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
+				entity.getLevel().setBlock(pos, replace, 3);
 			}
 		});
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(DustParticleOptions.REDSTONE, entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(DustParticleOptions.REDSTONE, entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
 	}
 	
 	@Override

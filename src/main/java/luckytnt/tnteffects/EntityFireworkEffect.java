@@ -24,7 +24,7 @@ public class EntityFireworkEffect extends PrimedTNTEffect {
 	public void explosionTick(IExplosiveEntity ent) {
 		((Entity)ent).setDeltaMovement(((Entity)ent).getDeltaMovement().x, 0.8f, ((Entity)ent).getDeltaMovement().z);
 		if(ent.getTNTFuse() == 40) {
-			List<LivingEntity> ents = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 20, ent.y() - 20, ent.z() - 20, ent.x() + 20, ent.y() + 20, ent.z() + 20));
+			List<LivingEntity> ents = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 20, ent.y() - 20, ent.z() - 20, ent.x() + 20, ent.y() + 20, ent.z() + 20));
 	      	double distance = 2000;
 	      	for(LivingEntity lent : ents) {
 	      		double xD = lent.getX() - ent.x();
@@ -47,19 +47,19 @@ public class EntityFireworkEffect extends PrimedTNTEffect {
 			type = EntityType.PIG;
 		}
 		for(int count = 0; count < 300; count++) {
-			Entity lent = type.create(ent.level());	
+			Entity lent = type.create(ent.getLevel());	
 			lent.setPos(ent.x(), ent.y(), ent.z());
 			lent.setDeltaMovement(Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f);
-			if(lent instanceof Mob mob && ent.level() instanceof ServerLevel sLevel) {
+			if(lent instanceof Mob mob && ent.getLevel() instanceof ServerLevel sLevel) {
 				mob.finalizeSpawn(sLevel, sLevel.getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
-			ent.level().addFreshEntity(lent);
+			ent.getLevel().addFreshEntity(lent);
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
 	}
 	
 	@Override

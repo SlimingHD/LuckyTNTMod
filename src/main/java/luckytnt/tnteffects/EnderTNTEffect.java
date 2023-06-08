@@ -21,13 +21,13 @@ public class EnderTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos(), Mth.floor(strength * 1.5f));
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), Mth.floor(strength * 1.5f));
 		explosion.doEntityExplosion(strength, false);
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(0.6f, 0f, 0.9f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.6f, 0f, 0.9f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
 	}
 	
 	@Override

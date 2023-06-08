@@ -31,7 +31,7 @@ public class ContaminatedEffect extends MobEffect{
 
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		DamageSources sources = new DamageSources(entity.level.registryAccess());
+		DamageSources sources = new DamageSources(entity.level().registryAccess());
 		
 		if(entity instanceof Player player) {
 			try {

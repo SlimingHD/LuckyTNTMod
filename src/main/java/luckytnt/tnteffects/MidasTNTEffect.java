@@ -25,12 +25,12 @@ public class MidasTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() < 80 && ent.getTNTFuse() % 2 == 0 && !ent.level().isClientSide()) {
-			ExplosionHelper.doSphericalExplosion(ent.level(), ent.getPos(), ent.getPersistentData().getInt("size"), new IForEachBlockExplosionEffect() {
+		if(ent.getTNTFuse() < 80 && ent.getTNTFuse() % 2 == 0 && !ent.getLevel().isClientSide()) {
+			ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), ent.getPersistentData().getInt("size"), new IForEachBlockExplosionEffect() {
 				
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-					if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && !state.isAir() && state.getBlock() != Blocks.GOLD_BLOCK) {
+					if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && !state.isAir() && state.getBlock() != Blocks.GOLD_BLOCK) {
 						level.setBlock(pos, Blocks.GOLD_BLOCK.defaultBlockState(), 3);
 					}
 				}
@@ -39,7 +39,7 @@ public class MidasTNTEffect extends PrimedTNTEffect {
 			ent.getPersistentData().putInt("size", ent.getPersistentData().getInt("size") + 1);
 			
 			int i = ent.getPersistentData().getInt("size");
-			List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-i, -i, -i), toBlockPos(ent.getPos()).offset(i, i, i)));
+			List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-i, -i, -i), toBlockPos(ent.getPos()).offset(i, i, i)));
 			for(LivingEntity lent : list) {
 				lent.addEffect(new MobEffectInstance(EffectRegistry.MIDAS_TOUCH_EFFECT.get(), 2000, 0));
 			}
@@ -48,7 +48,7 @@ public class MidasTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 0.4f), 1f), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 0.4f), 1f), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
 	}
 	
 	@Override

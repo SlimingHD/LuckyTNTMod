@@ -31,6 +31,7 @@ public class LuckyTNTTabs {
 		
 		/*event.register(Registries.CREATIVE_MODE_TAB, new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt"), () -> NORMAL_TNT);
 		
+	public static void registerTabs(CreativeModeTabRegistry event) {
 		NORMAL_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt")), List.of(new ResourceLocation("spawn_eggs")), builder -> builder.title(Component.translatable("item_group.luckytntmod.normal_tnt")).icon(() -> new ItemStack(BlockRegistry.METEOR_TNT.get())).displayItems((enabledFlags, populator) -> {
 			for(RegistryObject<? extends Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("n")) {
 				populator.accept(item.get());

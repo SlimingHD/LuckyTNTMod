@@ -17,13 +17,13 @@ public class SolarEruptionEffect extends PrimedTNTEffect {
 		if(ent.getTNTFuse() < 260) {
 			if(ent.getTNTFuse() % 20 == 0) {
 				for(int count = 0; count < 40; count++) {
-					LExplosiveProjectile tnt = EntityRegistry.SOLAR_ERUPTION_PROJECTILE.get().create(ent.level());
+					LExplosiveProjectile tnt = EntityRegistry.SOLAR_ERUPTION_PROJECTILE.get().create(ent.getLevel());
 					tnt.setPos(ent.getPos());
 					tnt.setOwner(ent.owner());
 					tnt.setDeltaMovement(Math.random() * 3f - Math.random() * 3f, 5 + Math.random() * 2, Math.random() * 3f - Math.random() * 3f);		
 					tnt.setSecondsOnFire(1000);
-					ent.level().addFreshEntity(tnt);
-					ent.level().playSound(null, toBlockPos(ent.getPos()), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 3, 1);
+					ent.getLevel().addFreshEntity(tnt);
+					ent.getLevel().playSound(null, toBlockPos(ent.getPos()), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 3, 1);
 				}
 			}
 		}
@@ -31,18 +31,18 @@ public class SolarEruptionEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, 0.1f, 0.4f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, -0.1f, 0.4f, -0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, 0.1f, 0.4f, -0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, -0.1f, 0.4f, 0.1f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, 0.05f, 0f, 0.05f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, -0.05f, 0f, -0.05f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, 0.05f, 0f, -0.05f);
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, -0.05f, 0f, 0.05f);
-		ent.level().addParticle(ParticleTypes.LAVA, ent.x() + 0.5f, ent.y() + 1f, ent.z() + 0.5f, 0, 0, 0);
-		ent.level().addParticle(ParticleTypes.LAVA, ent.x() - 0.5f, ent.y() + 1f, ent.z() - 0.5f, 0, 0, 0);
-		ent.level().addParticle(ParticleTypes.LAVA, ent.x() + 0.5f, ent.y() + 1f, ent.z() - 0.5f, 0, 0, 0);
-		ent.level().addParticle(ParticleTypes.LAVA, ent.x() - 0.5f, ent.y() + 1f, ent.z() + 0.5f, 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, 0.1f, 0.4f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, -0.1f, 0.4f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, 0.1f, 0.4f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, -0.1f, 0.4f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, 0.05f, 0f, 0.05f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, -0.05f, 0f, -0.05f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, 0.05f, 0f, -0.05f);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, -0.05f, 0f, 0.05f);
+		ent.getLevel().addParticle(ParticleTypes.LAVA, ent.x() + 0.5f, ent.y() + 1f, ent.z() + 0.5f, 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.LAVA, ent.x() - 0.5f, ent.y() + 1f, ent.z() - 0.5f, 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.LAVA, ent.x() + 0.5f, ent.y() + 1f, ent.z() - 0.5f, 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.LAVA, ent.x() - 0.5f, ent.y() + 1f, ent.z() + 0.5f, 0, 0, 0);
 	}
 	
 	@Override

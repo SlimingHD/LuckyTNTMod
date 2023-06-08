@@ -23,21 +23,21 @@ public class SayGoodbyeEffect extends PrimedTNTEffect{
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		if(entity.getTNTFuse() == 30) {
-			entity.level().playSound(null, entity.x(), entity.y(), entity.z(), SoundRegistry.SAY_GOODBYE.get(), SoundSource.HOSTILE, 20, 1);
+			entity.getLevel().playSound(null, entity.x(), entity.y(), entity.z(), SoundRegistry.SAY_GOODBYE.get(), SoundSource.HOSTILE, 20, 1);
 		}
 	}
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {		
-		Player ent = entity.level().getNearestPlayer((Entity)entity, 60);
+		Player ent = entity.getLevel().getNearestPlayer((Entity)entity, 60);
 		if(ent != null) {
 			DamageType type = new DamageType("say_goodbye", DamageScaling.NEVER, 0f, DamageEffects.HURT, DeathMessageType.DEFAULT);
 			DamageSource source = new DamageSource(Holder.direct(type), (Entity)entity, entity.owner());
 			
-			ImprovedExplosion explosion = new ImprovedExplosion(ent.level, (Entity) entity, source, ent.getX(), ent.getY(), ent.getZ(), 20);
+			ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity) entity, source, ent.getX(), ent.getY(), ent.getZ(), 20);
 			explosion.doEntityExplosion(2f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
-			if(entity.level() instanceof ServerLevel sLevel) {
+			if(entity.getLevel() instanceof ServerLevel sLevel) {
 				sLevel.sendParticles(ParticleTypes.EXPLOSION, ent.getX(), ent.getY(), ent.getZ(), 60, 2, 2, 2, 0);
 			}
 		}

@@ -22,12 +22,12 @@ public class FloatingIslandEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= 20 && Math.abs(pos.getY() - entity.getPos().y) <= 15 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 100) {
-					if(level.getBlockState(pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0)).getExplosionResistance(level, pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0), ImprovedExplosion.dummyExplosion(entity.level())) <= 100) {
+				if(distance <= 20 && Math.abs(pos.getY() - entity.getPos().y) <= 15 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 100) {
+					if(level.getBlockState(pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0)).getExplosionResistance(level, pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0), ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 100) {
 						level.setBlockAndUpdate(pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0), state);
 					}
 				}

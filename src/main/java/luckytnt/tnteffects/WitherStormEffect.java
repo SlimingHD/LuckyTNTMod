@@ -28,11 +28,11 @@ public class WitherStormEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 50);
 		explosion.doEntityExplosion(3f, true);
 		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
 		
-		ImprovedExplosion explosion2 = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 50);
+		ImprovedExplosion explosion2 = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 50);
 		explosion2.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@Override
@@ -49,34 +49,34 @@ public class WitherStormEffect extends PrimedTNTEffect {
 			}
 		});
 		
-		WitherBoss wither = new WitherBoss(EntityType.WITHER, ent.level());
+		WitherBoss wither = new WitherBoss(EntityType.WITHER, ent.getLevel());
 		wither.setPos(ent.getPos());
-		ent.level().addFreshEntity(wither);
+		ent.getLevel().addFreshEntity(wither);
 		
 		for(int i = 0; i < 160; i++) {
 			int offX = (int)Math.round(Math.random() * 140D - 70D);
 			int offZ = (int)Math.round(Math.random() * 140D - 70D);
-			WitherSkeleton skeleton = new WitherSkeleton(EntityType.WITHER_SKELETON, ent.level());
-			if(ent.level() instanceof ServerLevel sl) {
-				skeleton.finalizeSpawn(sl, ent.level().getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
+			WitherSkeleton skeleton = new WitherSkeleton(EntityType.WITHER_SKELETON, ent.getLevel());
+			if(ent.getLevel() instanceof ServerLevel sl) {
+				skeleton.finalizeSpawn(sl, ent.getLevel().getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
-			for(int y = ent.level().getMaxBuildHeight(); y >= ent.level().getMinBuildHeight(); y--) {
+			for(int y = ent.getLevel().getMaxBuildHeight(); y >= ent.getLevel().getMinBuildHeight(); y--) {
 				BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), y, Mth.floor(ent.z() + offZ));
-				BlockState state = ent.level().getBlockState(pos);
-				if(!Block.isFaceFull(state.getCollisionShape(ent.level(), pos), Direction.UP) && Block.isFaceFull(ent.level().getBlockState(pos.below()).getCollisionShape(ent.level(), pos.below()), Direction.UP)) {
+				BlockState state = ent.getLevel().getBlockState(pos);
+				if(!Block.isFaceFull(state.getCollisionShape(ent.getLevel(), pos), Direction.UP) && Block.isFaceFull(ent.getLevel().getBlockState(pos.below()).getCollisionShape(ent.getLevel(), pos.below()), Direction.UP)) {
 					skeleton.setPos(pos.getX() + 0.5D, y, pos.getZ() + 0.5D);
 					break;
 				}
 			}
-			ent.level().addFreshEntity(skeleton);
+			ent.getLevel().addFreshEntity(skeleton);
 		}
 		
-		ent.level().playSound(null, ent.x(), ent.y(), ent.z(), SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 3, 1);
+		ent.getLevel().playSound(null, ent.x(), ent.y(), ent.z(), SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 3, 1);
 	}
 	
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.level() instanceof ServerLevel sl) {
+		if(ent.getLevel() instanceof ServerLevel sl) {
 			sl.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), ent.x(), ent.y() + 2.25f, ent.z(), 20, 0.1f, 0.5f, 0.1f, 0);
 			sl.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), ent.x(), ent.y() + 3f, ent.z(), 20, 0.05f, 0.05f, 0.5f, 0);
 			sl.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), ent.x(), ent.y() + 2.5f, ent.z(), 20, 0.05f, 0.05f, 0.3f, 0);

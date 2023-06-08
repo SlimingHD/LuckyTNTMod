@@ -26,7 +26,7 @@ public class PhysicsTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), strength);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), strength);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@Override

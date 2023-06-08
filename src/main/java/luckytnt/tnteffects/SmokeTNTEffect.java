@@ -15,14 +15,14 @@ public class SmokeTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		spawnParticles(entity);
-		if(entity.getTNTFuse() < 460 && entity.level() instanceof ServerLevel sLevel) {
+		if(entity.getTNTFuse() < 460 && entity.getLevel() instanceof ServerLevel sLevel) {
 			sLevel.sendParticles(new DustParticleOptions(new Vector3f(((Entity)entity).getPersistentData().getFloat("r"), ((Entity)entity).getPersistentData().getFloat("g"), ((Entity)entity).getPersistentData().getFloat("b")), 10f), entity.x(), entity.y(), entity.z(), 30, 2.5f, 2.5f, 2.5f, 0);
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		if(entity.level() instanceof ServerLevel sLevel) {
+		if(entity.getLevel() instanceof ServerLevel sLevel) {
 			sLevel.sendParticles(new DustParticleOptions(new Vector3f(((Entity)entity).getPersistentData().getFloat("r"), ((Entity)entity).getPersistentData().getFloat("g"), ((Entity)entity).getPersistentData().getFloat("b")), 1f), entity.x(), entity.y() + 1f, entity.z(), 1, 0, 0, 0, 0);
 		}
 	}

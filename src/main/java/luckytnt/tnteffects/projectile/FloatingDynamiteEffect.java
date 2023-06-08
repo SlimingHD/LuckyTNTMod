@@ -11,7 +11,7 @@ public class FloatingDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 25);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 25);
 		explosion.doEntityExplosion(2.5f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
 	}

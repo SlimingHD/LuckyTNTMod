@@ -23,13 +23,13 @@ public class ToxicCloudEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() == 1200 && !ent.level().isClientSide()) {
+		if(ent.getTNTFuse() == 1200 && !ent.getLevel().isClientSide()) {
 			ent.getPersistentData().putDouble("size", 1D + Math.random() * 3D);
 			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)ent), new ClientboundToxicCloudPacket(ent.getPersistentData().getDouble("size"), ((Entity)ent).getId()));
 		}
 		((Entity)ent).setDeltaMovement(0, 0, 0);
 		((Entity)ent).setPos(((Entity)ent).xOld, ((Entity)ent).yOld, ((Entity)ent).zOld);
-		List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, ((Entity)ent).getBoundingBox());
+		List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, ((Entity)ent).getBoundingBox());
 		for(LivingEntity lent : list) {
 			lent.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 4));
 			lent.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 400, 0));
@@ -39,7 +39,7 @@ public class ToxicCloudEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), (int)Math.round(ent.getPersistentData().getDouble("size") * 5D));
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), (int)Math.round(ent.getPersistentData().getDouble("size") * 5D));
 		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.1f, true, false);
 	}
@@ -47,7 +47,7 @@ public class ToxicCloudEffect extends PrimedTNTEffect {
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
 		for(int count = 0; count < ent.getPersistentData().getDouble("size") * 5; count++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(0.7f, 1f, 0.5f), 10f), true, ent.x() + ent.getPersistentData().getDouble("size") * 1.5f * Math.random() - ent.getPersistentData().getDouble("size") * 1.5f * Math.random(), ent.y() + ent.getPersistentData().getDouble("size") * 1.5f * Math.random() - ent.getPersistentData().getDouble("size") * 1.5f * Math.random(), ent.z() + ent.getPersistentData().getDouble("size") * 1.5f * Math.random() - ent.getPersistentData().getDouble("size") * 1.5f * Math.random(), 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.7f, 1f, 0.5f), 10f), true, ent.x() + ent.getPersistentData().getDouble("size") * 1.5f * Math.random() - ent.getPersistentData().getDouble("size") * 1.5f * Math.random(), ent.y() + ent.getPersistentData().getDouble("size") * 1.5f * Math.random() - ent.getPersistentData().getDouble("size") * 1.5f * Math.random(), ent.z() + ent.getPersistentData().getDouble("size") * 1.5f * Math.random() - ent.getPersistentData().getDouble("size") * 1.5f * Math.random(), 0, 0, 0);
 		}
 	}
 	

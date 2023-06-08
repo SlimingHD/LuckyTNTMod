@@ -12,13 +12,13 @@ public class MansionEffect extends HouseTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0.1f, -0.15f, 0.1f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), -0.1f, -0.15f, -0.1f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0.1f, -0.15f, -0.1f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), -0.1f, -0.15f, 0.1f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0f, -0.15f, 0.1f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0f, -0.15f, -0.1f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0.1f, -0.15f, 0f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), -0.1f, -0.15f, 0f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0.1f, -0.15f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), -0.1f, -0.15f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0.1f, -0.15f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), -0.1f, -0.15f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0f, -0.15f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0f, -0.15f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0.1f, -0.15f, 0f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), -0.1f, -0.15f, 0f);
 	}
 }

@@ -12,14 +12,14 @@ public class ShrapnelEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 3);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 3);
 		explosion.doEntityExplosion(0.5f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1f, false, false);
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(ParticleTypes.CLOUD, true, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(ParticleTypes.CLOUD, true, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0, 0);
 	}
 	
 	@Override

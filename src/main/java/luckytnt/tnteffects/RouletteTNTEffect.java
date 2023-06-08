@@ -18,7 +18,7 @@ public class RouletteTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		if(Math.random() < 0.2f) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), strength);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), strength);
 			explosion.doEntityExplosion(1.25f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1f, false, false);
 		}

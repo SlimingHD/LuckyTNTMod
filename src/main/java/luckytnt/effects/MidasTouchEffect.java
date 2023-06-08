@@ -52,7 +52,7 @@ public class MidasTouchEffect extends MobEffect {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		Level level = entity.level;
+		Level level = entity.level();
 		if(!level.isClientSide) {
 
 			BlockHitResult result = level.clip(new ClipContext(entity.getPosition(1), entity.getPosition(1).add(0, -1, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));

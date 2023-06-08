@@ -22,13 +22,13 @@ public class PompeiiEffect extends PrimedTNTEffect{
 			if(entity.getTNTFuse() < 150) {
 				if(entity.getTNTFuse() % 15 == 0) {
 					for(int i = 0; i < 30; i++) {
-						LExplosiveProjectile pompeii = EntityRegistry.POMPEII_PROJECTILE.get().create(entity.level());
+						LExplosiveProjectile pompeii = EntityRegistry.POMPEII_PROJECTILE.get().create(entity.getLevel());
 						pompeii.setPos(entity.getPos());
 						pompeii.setOwner(entity.owner());
-						pompeii.shoot((Math.random() * 3D - 1.5D) * 0.1f, 0.6f + Math.random() * 0.4f, (Math.random() * 3D - 1.5D) * 0.1f, 3f + entity.level().random.nextFloat() * 2f, 0f);	
+						pompeii.shoot((Math.random() * 3D - 1.5D) * 0.1f, 0.6f + Math.random() * 0.4f, (Math.random() * 3D - 1.5D) * 0.1f, 3f + entity.getLevel().random.nextFloat() * 2f, 0f);	
 						pompeii.setSecondsOnFire(1000);
-						entity.level().addFreshEntity(pompeii);
-						entity.level().playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.MASTER, 3, 1);
+						entity.getLevel().addFreshEntity(pompeii);
+						entity.getLevel().playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.MASTER, 3, 1);
 					}
 				}
 			}
@@ -38,8 +38,8 @@ public class PompeiiEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		if(ent instanceof LExplosiveProjectile) {
-			if(ent.level().getBlockState(toBlockPos(ent.getPos()).above()).getExplosionResistance(ent.level(), toBlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
-				ent.level().setBlock(toBlockPos(ent.getPos()).above(), Blocks.LAVA.defaultBlockState(), 3);
+			if(ent.getLevel().getBlockState(toBlockPos(ent.getPos()).above()).getExplosionResistance(ent.getLevel(), toBlockPos(ent.getPos()), ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
+				ent.getLevel().setBlock(toBlockPos(ent.getPos()).above(), Blocks.LAVA.defaultBlockState(), 3);
 			}
 		}
 	}
@@ -47,14 +47,14 @@ public class PompeiiEffect extends PrimedTNTEffect{
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
 		if(ent instanceof PrimedLTNT) {
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 1f, ent.z() + 0.5f, 0.05f, 0.2f, 0.05f);
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 1f, ent.z() - 0.5f, -0.05f, 0.2f, -0.05f);
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 1f, ent.z() - 0.5f, 0.05f, 0.2f, -0.05f);
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 1f, ent.z() + 0.5f, -0.05f, 0.2f, 0.05f);
-			ent.level().addParticle(ParticleTypes.LAVA, ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 1f, ent.z() + 0.5f, 0.05f, 0.2f, 0.05f);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 1f, ent.z() - 0.5f, -0.05f, 0.2f, -0.05f);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 1f, ent.z() - 0.5f, 0.05f, 0.2f, -0.05f);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 1f, ent.z() + 0.5f, -0.05f, 0.2f, 0.05f);
+			ent.getLevel().addParticle(ParticleTypes.LAVA, ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
 		}
 		else {
-			ent.level().addParticle(ParticleTypes.LARGE_SMOKE, true, ent.x(), ent.y() + 0.5f, ent.z(), 0, 0.1f, 0);
+			ent.getLevel().addParticle(ParticleTypes.LARGE_SMOKE, true, ent.x(), ent.y() + 0.5f, ent.z(), 0, 0.1f, 0);
 		}
 	}
 	

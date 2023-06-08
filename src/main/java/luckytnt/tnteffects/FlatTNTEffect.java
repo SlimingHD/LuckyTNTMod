@@ -35,8 +35,8 @@ public class FlatTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.level());
-		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
+		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.getLevel());
+		ExplosionHelper.doCylindricalExplosion(entity.getLevel(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {

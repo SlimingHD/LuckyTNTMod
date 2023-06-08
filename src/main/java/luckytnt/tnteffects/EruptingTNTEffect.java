@@ -17,7 +17,7 @@ public class EruptingTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(entity instanceof PrimedLTNT || entity instanceof LTNTMinecart) {
 			if(entity.getTNTFuse() < 60) {
 				if(entity.getTNTFuse() % 3 == 0) {
@@ -36,13 +36,13 @@ public class EruptingTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		if(entity instanceof PrimedLTNT) {
-			entity.level().addParticle(ParticleTypes.SMOKE, entity.x() + 0.5f, entity.y() + 1f, entity.z() + 0.5f, 0.05f, 0.2f, 0.05f);
-			entity.level().addParticle(ParticleTypes.SMOKE, entity.x() - 0.5f, entity.y() + 1f, entity.z() - 0.5f, -0.05f, 0.2f, -0.05f);
-			entity.level().addParticle(ParticleTypes.SMOKE, entity.x() + 0.5f, entity.y() + 1f, entity.z() - 0.5f, 0.05f, 0.2f, -0.05f);
-			entity.level().addParticle(ParticleTypes.SMOKE, entity.x() - 0.5f, entity.y() + 1f, entity.z() + 0.5f, -0.05f, 0.2f, 0.05f);
+			entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() + 0.5f, entity.y() + 1f, entity.z() + 0.5f, 0.05f, 0.2f, 0.05f);
+			entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() - 0.5f, entity.y() + 1f, entity.z() - 0.5f, -0.05f, 0.2f, -0.05f);
+			entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() + 0.5f, entity.y() + 1f, entity.z() - 0.5f, 0.05f, 0.2f, -0.05f);
+			entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() - 0.5f, entity.y() + 1f, entity.z() + 0.5f, -0.05f, 0.2f, 0.05f);
 		}
 		else {
-			entity.level().addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0, 0);
 		}
 	}
 	

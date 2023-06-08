@@ -21,7 +21,7 @@ public class KnockbackTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() > 1) {
-			List<LivingEntity> ents = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 75, ent.y() - 75, ent.z() - 75, ent.x() + 75, ent.y() + 75, ent.z() + 75));
+			List<LivingEntity> ents = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 75, ent.y() - 75, ent.z() - 75, ent.x() + 75, ent.y() + 75, ent.z() + 75));
 			for (LivingEntity lent : ents) {
 				if (lent.getPersistentData().getInt("knockbacktime") > 0) {
 					lent.getPersistentData().putInt("knockbacktime", lent.getPersistentData().getInt("knockbacktime") - 1);
@@ -56,7 +56,7 @@ public class KnockbackTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		List<Entity> entities = ent.level().getEntities((Entity)ent, new AABB(ent.x() - 75, ent.y() - 75, ent.z() - 75, ent.x() + 75, ent.y() + 75, ent.z() + 75));
+		List<Entity> entities = ent.getLevel().getEntities((Entity)ent, new AABB(ent.x() - 75, ent.y() - 75, ent.z() - 75, ent.x() + 75, ent.y() + 75, ent.z() + 75));
 		for(Entity entity : entities) {
 			if(!entity.ignoreExplosion()) {
 				double distance = Math.sqrt(entity.distanceToSqr(ent.getPos())) / (75 * 2);
@@ -90,7 +90,7 @@ public class KnockbackTNTEffect extends PrimedTNTEffect {
 			double x = Math.cos(theta) * radius;
 			double z = Math.sin(theta) * radius;
 			
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.8f, 0.2f), 0.75f), ent.x() + x * 2, ent.y() + 0.5D + y * 2, ent.z() + 2 * z, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.8f, 0.2f), 0.75f), ent.x() + x * 2, ent.y() + 0.5D + y * 2, ent.z() + 2 * z, 0, 0, 0);
 		}
 	}
 	

@@ -15,11 +15,11 @@ public class LeapingTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		if(((Entity)entity).getPersistentData().getInt("bounces") < 24) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 			explosion.doEntityExplosion(1.5f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 		} else {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 20);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 20);
 			explosion.doEntityExplosion(2f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
 		}
@@ -30,14 +30,14 @@ public class LeapingTNTEffect extends PrimedTNTEffect{
 		if(((Entity)entity).isOnGround()) {
 			((Entity)entity).getPersistentData().putInt("bounces", ((Entity)entity).getPersistentData().getInt("bounces") + 1);
 			((Entity)entity).setDeltaMovement(Math.random() * 1.5D - Math.random() * 1.5D, Math.random() * 2f, Math.random() * 1.5D - Math.random() * 1.5D);
-			entity.level().playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);
+			entity.getLevel().playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);
 			if(((Entity)entity).getPersistentData().getInt("bounces") >= 24) {
-				if(entity.level() instanceof ServerLevel) {
+				if(entity.getLevel() instanceof ServerLevel) {
 					serverExplosion(entity);
 				}
 				entity.destroy();
 			}
-			if(((Entity)entity).getPersistentData().getInt("bounces") >= 1 && ((Entity)entity).getPersistentData().getInt("bounces") < 24 && entity.level() instanceof ServerLevel) {
+			if(((Entity)entity).getPersistentData().getInt("bounces") >= 1 && ((Entity)entity).getPersistentData().getInt("bounces") < 24 && entity.getLevel() instanceof ServerLevel) {
 				serverExplosion(entity);
 			}
 		}

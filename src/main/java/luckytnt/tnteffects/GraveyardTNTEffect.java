@@ -21,9 +21,9 @@ public class GraveyardTNTEffect extends PrimedTNTEffect {
 				for(int offZ = -20; offZ <= 20; offZ++) {
 					double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ);
 					BlockPos pos = toBlockPos(new Vec3(entity.x() + offX, entity.y() + offY - 10, entity.z() + offZ));
-					if(distance <= 20 && entity.level().getBlockState(pos).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 100 && !entity.level().getBlockState(pos).isCollisionShapeFullBlock(entity.level(), pos)) {
-						entity.level().getBlockState(pos).onBlockExploded(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level()));
-						entity.level().setBlockAndUpdate(pos, Blocks.GRASS_BLOCK.defaultBlockState());
+					if(distance <= 20 && entity.getLevel().getBlockState(pos).getExplosionResistance(entity.getLevel(), pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 100 && !entity.getLevel().getBlockState(pos).isCollisionShapeFullBlock(entity.getLevel(), pos)) {
+						entity.getLevel().getBlockState(pos).onBlockExploded(entity.getLevel(), pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
+						entity.getLevel().setBlockAndUpdate(pos, Blocks.GRASS_BLOCK.defaultBlockState());
 					}
 				}
 			}
@@ -33,8 +33,8 @@ public class GraveyardTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		for(int count = 0; count <= 20; count++) {
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0.2f, 0f), 0.75f), entity.x(), entity.y() + 1D + 0.05D * count, entity.z(), 0, 0, 0);
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0.2f, 0f), 0.75f), entity.x() - 0.5D + count * 0.05D, entity.y() + 1D + (2D / 3D), entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0.2f, 0f), 0.75f), entity.x(), entity.y() + 1D + 0.05D * count, entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0.2f, 0f), 0.75f), entity.x() - 0.5D + count * 0.05D, entity.y() + 1D + (2D / 3D), entity.z(), 0, 0, 0);
 		}
 	}
 	

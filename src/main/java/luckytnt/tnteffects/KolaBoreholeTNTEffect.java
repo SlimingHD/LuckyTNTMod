@@ -33,31 +33,31 @@ public class KolaBoreholeTNTEffect extends PrimedTNTEffect {
 				for(int offZ = -10; offZ <= 10; offZ++) {
 					double distance = Math.sqrt(offX * offX + offZ * offZ);
 					BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), offY - 64, Mth.floor(ent.z() + offZ));
-					if(distance <= rad && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
-						ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
+					if(distance <= rad && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
+						ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					}
-					if(distance > rad && distance <= (rad + 1) && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
+					if(distance > rad && distance <= (rad + 1) && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
 						if(rad != prevRad) {
-							if((Block.isShapeFullBlock(ent.level().getBlockState(pos.above().north()).getShape(ent.level(), pos.above().north())) && ent.level().getBlockState(pos.above().north()).canOcclude())
-							|| (Block.isShapeFullBlock(ent.level().getBlockState(pos.above().east()).getShape(ent.level(), pos.above().east())) && ent.level().getBlockState(pos.above().east()).canOcclude())
-							|| (Block.isShapeFullBlock(ent.level().getBlockState(pos.above().south()).getShape(ent.level(), pos.above().south())) && ent.level().getBlockState(pos.above().south()).canOcclude())
-							|| (Block.isShapeFullBlock(ent.level().getBlockState(pos.above().west()).getShape(ent.level(), pos.above().west())) && ent.level().getBlockState(pos.above().west()).canOcclude()))
+							if((Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above().north()).getShape(ent.getLevel(), pos.above().north())) && ent.getLevel().getBlockState(pos.above().north()).canOcclude())
+							|| (Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above().east()).getShape(ent.getLevel(), pos.above().east())) && ent.getLevel().getBlockState(pos.above().east()).canOcclude())
+							|| (Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above().south()).getShape(ent.getLevel(), pos.above().south())) && ent.getLevel().getBlockState(pos.above().south()).canOcclude())
+							|| (Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above().west()).getShape(ent.getLevel(), pos.above().west())) && ent.getLevel().getBlockState(pos.above().west()).canOcclude()))
 							{
-								ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
+								ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 								if(pos.getY() > (Math.random() * 2 - Math.random() * 2)) {
-									ent.level().setBlock(pos, Blocks.STONE.defaultBlockState(), 3);
+									ent.getLevel().setBlock(pos, Blocks.STONE.defaultBlockState(), 3);
 								} else {
-									ent.level().setBlock(pos, Blocks.DEEPSLATE.defaultBlockState(), 3);
+									ent.getLevel().setBlock(pos, Blocks.DEEPSLATE.defaultBlockState(), 3);
 								}
 							}
 						} else if(prevRad == rad) {
-							if(Block.isShapeFullBlock(ent.level().getBlockState(pos.above()).getShape(ent.level(), pos)) && ent.level().getBlockState(pos.above()).canOcclude()) {
-								Block block = ent.level().getBlockState(pos).getBlock();
-								block.onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
+							if(Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above()).getShape(ent.getLevel(), pos)) && ent.getLevel().getBlockState(pos.above()).canOcclude()) {
+								Block block = ent.getLevel().getBlockState(pos).getBlock();
+								block.onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 								if(pos.getY() > (Math.random() * 2 - Math.random() * 2)) {
-									ent.level().setBlock(pos, Blocks.STONE.defaultBlockState(), 3);
+									ent.getLevel().setBlock(pos, Blocks.STONE.defaultBlockState(), 3);
 								} else {
-									ent.level().setBlock(pos, Blocks.DEEPSLATE.defaultBlockState(), 3);
+									ent.getLevel().setBlock(pos, Blocks.DEEPSLATE.defaultBlockState(), 3);
 								}
 							}
 						}
@@ -71,7 +71,7 @@ public class KolaBoreholeTNTEffect extends PrimedTNTEffect {
 		}
 		for(int i = -59; i >= -65; i--) {
 			BlockPos pos = new BlockPos(Mth.floor(ent.x()), i, Mth.floor(ent.z()));
-			ent.level().getBlockState(pos).getBlock().onBlockExploded(ent.level().getBlockState(pos), ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
+			ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 		}
 	}
 	
