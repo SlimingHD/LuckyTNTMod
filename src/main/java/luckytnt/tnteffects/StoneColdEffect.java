@@ -31,7 +31,7 @@ public class StoneColdEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.level() instanceof ServerLevel s_Level) {
+		if(ent.getLevel() instanceof ServerLevel s_Level) {
 			s_Level.setDayTime(s_Level.getDayTime() + 200);
 		}
 		for(int count = 0; count < 7; count++) {
@@ -39,51 +39,51 @@ public class StoneColdEffect extends PrimedTNTEffect {
 			double offY = Math.random() * 15 - Math.random() * 15;
 			double offZ = Math.random() * 15 - Math.random() * 15;
 			BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
-			BlockState state = ent.level().getBlockState(pos);
-			if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR) {
-				state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
-				ent.level().setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
+			BlockState state = ent.getLevel().getBlockState(pos);
+			if(state.getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && state.isCollisionShapeFullBlock(ent.getLevel(), pos) && state.getMaterial() != Material.AIR) {
+				state.getBlock().onBlockExploded(state, ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
+				ent.getLevel().setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
 			}
 		}
-		ent.level().playSound(null, ent.x(), ent.y(), ent.z(), SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 0.5f, 1);
+		ent.getLevel().playSound(null, ent.x(), ent.y(), ent.z(), SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 0.5f, 1);
 	}
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ExplosionHelper.doSphericalExplosion(ent.level(), ent.getPos(), 90, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 90, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 200 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && state != Blocks.BLUE_ICE.defaultBlockState()) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && state != Blocks.BLUE_ICE.defaultBlockState()) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					level.setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
 				}
 			}
 		});
 		
-		ExplosionHelper.doSphericalExplosion(ent.level(), ent.getPos(), 130, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 130, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getBlock() == Blocks.WATER && state != Blocks.ICE.defaultBlockState()) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					level.setBlock(pos, Blocks.ICE.defaultBlockState(), 3);
 				}
 			}
 		});
 		
-		ExplosionHelper.doTopBlockExplosionForAll(ent.level(), ent.getPos(), 130, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doTopBlockExplosionForAll(ent.getLevel(), ent.getPos(), 130, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					level.setBlock(pos, Blocks.SNOW.defaultBlockState(), 3);
 				}
 			}
 		});
 		
-		List<LivingEntity> entities = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 90, ent.y() - 90, ent.z() - 90, ent.x() + 90, ent.y() + 90, ent.z() + 90));
+		List<LivingEntity> entities = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 90, ent.y() - 90, ent.z() - 90, ent.x() + 90, ent.y() + 90, ent.z() + 90));
 		for(LivingEntity lEnt : entities) {
 			lEnt.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 800, 2));
 		}
@@ -91,7 +91,7 @@ public class StoneColdEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.9f, 1f), 1f), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.9f, 1f), 1f), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
 	}
 	
 	@Override

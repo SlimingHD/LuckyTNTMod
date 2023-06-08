@@ -20,8 +20,8 @@ public class MultiplyingTNTEffect extends PrimedTNTEffect{
 		if(((Entity)entity).isOnGround() && ((Entity)entity).getPersistentData().getInt("level") > 0) {
 			serverExplosion(entity);
 			if(((Entity)entity).getPersistentData().getInt("level") == 4) {
-				Level level = entity.level();
-				entity.level().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+				Level level = entity.getLevel();
+				entity.getLevel().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 			}
 		}
 	}
@@ -30,28 +30,28 @@ public class MultiplyingTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		int level = ((Entity)entity).getPersistentData().getInt("level");
 		if(level == 4) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 			explosion.doEntityExplosion(1f, true);
 			explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 		}
 		else if(level == 0) {
 			for(int count = 0; count < 4; count++) {
-				PrimedLTNT tnt = EntityRegistry.MULTIPLYING_TNT.get().create(entity.level());
+				PrimedLTNT tnt = EntityRegistry.MULTIPLYING_TNT.get().create(entity.getLevel());
 				tnt.setPos(entity.getPos());
 				tnt.setOwner(entity.owner());
 				tnt.setDeltaMovement(Math.random() * 2 - 1, 1 + Math.random(), Math.random() * 2 - 1);
 				tnt.getPersistentData().putInt("level", level + 1);
-				entity.level().addFreshEntity(tnt);
+				entity.getLevel().addFreshEntity(tnt);
 			}
 		}
 		else {
 			for(int count = 0; count < level * 2; count++) {
-				PrimedLTNT tnt = EntityRegistry.MULTIPLYING_TNT.get().create(entity.level());
+				PrimedLTNT tnt = EntityRegistry.MULTIPLYING_TNT.get().create(entity.getLevel());
 				tnt.setPos(entity.getPos());
 				tnt.setOwner(entity.owner());
 				tnt.setDeltaMovement(Math.random() * 2 - 1, 1 + Math.random(), Math.random() * 2 - 1);
 				tnt.getPersistentData().putInt("level", level + 1);
-				entity.level().addFreshEntity(tnt);
+				entity.getLevel().addFreshEntity(tnt);
 			}
 		}
 		entity.destroy();

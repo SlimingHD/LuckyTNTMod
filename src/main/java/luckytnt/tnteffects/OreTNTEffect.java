@@ -24,7 +24,7 @@ public class OreTNTEffect extends PrimedTNTEffect{
 	@SuppressWarnings("resource")
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(!entity.level().isClientSide) {
+		if(!entity.getLevel().isClientSide) {
 			if(entity instanceof PrimedOreTNT tnt) {
 				if(tnt.availablePos.isEmpty()) {
 					fillAvailablePos(tnt);
@@ -61,8 +61,8 @@ public class OreTNTEffect extends PrimedTNTEffect{
 						if(tnt.availablePos.get(rand) != null) {
 							BlockPos pos = tnt.availablePos.get(rand);
 							tnt.availablePos.remove(rand);
-							entity.level().setBlockAndUpdate(pos, block.defaultBlockState());
-							entity.level().playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1f, 1f);
+							entity.getLevel().setBlockAndUpdate(pos, block.defaultBlockState());
+							entity.getLevel().playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1f, 1f);
 						}
 					}
 				}
@@ -103,8 +103,8 @@ public class OreTNTEffect extends PrimedTNTEffect{
 						if(tnt.availablePos.get(rand) != null) {
 							BlockPos pos = tnt.availablePos.get(rand);
 							tnt.availablePos.remove(rand);
-							entity.level().setBlockAndUpdate(pos, block.defaultBlockState());
-							entity.level().playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1f, 1f);
+							entity.getLevel().setBlockAndUpdate(pos, block.defaultBlockState());
+							entity.getLevel().playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1f, 1f);
 						}
 					}
 				}		
@@ -150,8 +150,8 @@ public class OreTNTEffect extends PrimedTNTEffect{
 					if(tnt.availablePos.get(rand) != null) {
 						BlockPos pos = tnt.availablePos.get(rand);
 						tnt.availablePos.remove(rand);
-						entity.level().setBlockAndUpdate(pos, block.defaultBlockState());
-						entity.level().playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1f, 1f);
+						entity.getLevel().setBlockAndUpdate(pos, block.defaultBlockState());
+						entity.getLevel().playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1f, 1f);
 					}
 				}				
 			}
@@ -192,8 +192,8 @@ public class OreTNTEffect extends PrimedTNTEffect{
 					if(tnt.availablePos.get(rand) != null) {
 						BlockPos pos = tnt.availablePos.get(rand);
 						tnt.availablePos.remove(rand);
-						entity.level().setBlockAndUpdate(pos, block.defaultBlockState());
-						entity.level().playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1f, 1f);
+						entity.getLevel().setBlockAndUpdate(pos, block.defaultBlockState());
+						entity.getLevel().playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1f, 1f);
 					}
 				}
 			}

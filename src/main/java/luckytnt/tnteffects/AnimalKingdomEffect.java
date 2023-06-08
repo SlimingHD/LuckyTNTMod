@@ -87,270 +87,270 @@ public class AnimalKingdomEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		List<Mob> list = new ArrayList<>();
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Allay(EntityType.ALLAY, ent.level());
+			Mob mob = new Allay(EntityType.ALLAY, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Axolotl(EntityType.AXOLOTL, ent.level());
+			Mob mob = new Axolotl(EntityType.AXOLOTL, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Bat(EntityType.BAT, ent.level());
+			Mob mob = new Bat(EntityType.BAT, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Bee(EntityType.BEE, ent.level());
+			Mob mob = new Bee(EntityType.BEE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Blaze(EntityType.BLAZE, ent.level());
+			Mob mob = new Blaze(EntityType.BLAZE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Cat(EntityType.CAT, ent.level());
+			Mob mob = new Cat(EntityType.CAT, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new CaveSpider(EntityType.CAVE_SPIDER, ent.level());
+			Mob mob = new CaveSpider(EntityType.CAVE_SPIDER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Chicken(EntityType.CHICKEN, ent.level());
+			Mob mob = new Chicken(EntityType.CHICKEN, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Cow(EntityType.COW, ent.level());
+			Mob mob = new Cow(EntityType.COW, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Creeper(EntityType.CREEPER, ent.level());
+			Mob mob = new Creeper(EntityType.CREEPER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Donkey(EntityType.DONKEY, ent.level());
+			Mob mob = new Donkey(EntityType.DONKEY, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Drowned(EntityType.DROWNED, ent.level());
+			Mob mob = new Drowned(EntityType.DROWNED, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 2 + new Random().nextInt(2); i++) {
-			Mob mob = new ElderGuardian(EntityType.ELDER_GUARDIAN, ent.level());
+			Mob mob = new ElderGuardian(EntityType.ELDER_GUARDIAN, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new EnderMan(EntityType.ENDERMAN, ent.level());
+			Mob mob = new EnderMan(EntityType.ENDERMAN, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Endermite(EntityType.ENDERMITE, ent.level());
+			Mob mob = new Endermite(EntityType.ENDERMITE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 2 + new Random().nextInt(2); i++) {
-			Mob mob = new Evoker(EntityType.EVOKER, ent.level());
+			Mob mob = new Evoker(EntityType.EVOKER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Fox(EntityType.FOX, ent.level());
+			Mob mob = new Fox(EntityType.FOX, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Frog(EntityType.FROG, ent.level());
+			Mob mob = new Frog(EntityType.FROG, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Ghast(EntityType.GHAST, ent.level());
+			Mob mob = new Ghast(EntityType.GHAST, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Giant(EntityType.GIANT, ent.level());
+			Mob mob = new Giant(EntityType.GIANT, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Goat(EntityType.GOAT, ent.level());
+			Mob mob = new Goat(EntityType.GOAT, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Guardian(EntityType.GUARDIAN, ent.level());
+			Mob mob = new Guardian(EntityType.GUARDIAN, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 2 + new Random().nextInt(2); i++) {
-			Mob mob = new Hoglin(EntityType.HOGLIN, ent.level());
+			Mob mob = new Hoglin(EntityType.HOGLIN, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Horse(EntityType.HORSE, ent.level());
+			Mob mob = new Horse(EntityType.HORSE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Husk(EntityType.HUSK, ent.level());
+			Mob mob = new Husk(EntityType.HUSK, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new IronGolem(EntityType.IRON_GOLEM, ent.level());
+			Mob mob = new IronGolem(EntityType.IRON_GOLEM, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Llama(EntityType.LLAMA, ent.level());
+			Mob mob = new Llama(EntityType.LLAMA, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new MagmaCube(EntityType.MAGMA_CUBE, ent.level());
+			Mob mob = new MagmaCube(EntityType.MAGMA_CUBE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new MushroomCow(EntityType.MOOSHROOM, ent.level());
+			Mob mob = new MushroomCow(EntityType.MOOSHROOM, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Mule(EntityType.MULE, ent.level());
+			Mob mob = new Mule(EntityType.MULE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Ocelot(EntityType.OCELOT, ent.level());
+			Mob mob = new Ocelot(EntityType.OCELOT, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Panda(EntityType.PANDA, ent.level());
+			Mob mob = new Panda(EntityType.PANDA, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Parrot(EntityType.PARROT, ent.level());
+			Mob mob = new Parrot(EntityType.PARROT, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Phantom(EntityType.PHANTOM, ent.level());
+			Mob mob = new Phantom(EntityType.PHANTOM, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Pig(EntityType.PIG, ent.level());
+			Mob mob = new Pig(EntityType.PIG, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Piglin(EntityType.PIGLIN, ent.level());
+			Mob mob = new Piglin(EntityType.PIGLIN, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new PiglinBrute(EntityType.PIGLIN_BRUTE, ent.level());
+			Mob mob = new PiglinBrute(EntityType.PIGLIN_BRUTE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Pillager(EntityType.PILLAGER, ent.level());
+			Mob mob = new Pillager(EntityType.PILLAGER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new PolarBear(EntityType.POLAR_BEAR, ent.level());
+			Mob mob = new PolarBear(EntityType.POLAR_BEAR, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Rabbit(EntityType.RABBIT, ent.level());
+			Mob mob = new Rabbit(EntityType.RABBIT, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 2; i++) {
-			Mob mob = new Ravager(EntityType.RAVAGER, ent.level());
+			Mob mob = new Ravager(EntityType.RAVAGER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Sheep(EntityType.SHEEP, ent.level());
+			Mob mob = new Sheep(EntityType.SHEEP, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Shulker(EntityType.SHULKER, ent.level());
+			Mob mob = new Shulker(EntityType.SHULKER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Silverfish(EntityType.SILVERFISH, ent.level());
+			Mob mob = new Silverfish(EntityType.SILVERFISH, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Skeleton(EntityType.SKELETON, ent.level());
+			Mob mob = new Skeleton(EntityType.SKELETON, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new SkeletonHorse(EntityType.SKELETON_HORSE, ent.level());
+			Mob mob = new SkeletonHorse(EntityType.SKELETON_HORSE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Slime(EntityType.SLIME, ent.level());
+			Mob mob = new Slime(EntityType.SLIME, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new SnowGolem(EntityType.SNOW_GOLEM, ent.level());
+			Mob mob = new SnowGolem(EntityType.SNOW_GOLEM, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Spider(EntityType.SPIDER, ent.level());
+			Mob mob = new Spider(EntityType.SPIDER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Stray(EntityType.STRAY, ent.level());
+			Mob mob = new Stray(EntityType.STRAY, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Strider(EntityType.STRIDER, ent.level());
+			Mob mob = new Strider(EntityType.STRIDER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Turtle(EntityType.TURTLE, ent.level());
+			Mob mob = new Turtle(EntityType.TURTLE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Vex(EntityType.VEX, ent.level());
+			Mob mob = new Vex(EntityType.VEX, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Villager(EntityType.VILLAGER, ent.level());
+			Mob mob = new Villager(EntityType.VILLAGER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Vindicator(EntityType.VINDICATOR, ent.level());
+			Mob mob = new Vindicator(EntityType.VINDICATOR, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Witch(EntityType.WITCH, ent.level());
+			Mob mob = new Witch(EntityType.WITCH, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new WitherSkeleton(EntityType.WITHER_SKELETON, ent.level());
+			Mob mob = new WitherSkeleton(EntityType.WITHER_SKELETON, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Wolf(EntityType.WOLF, ent.level());
+			Mob mob = new Wolf(EntityType.WOLF, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Zoglin(EntityType.ZOGLIN, ent.level());
+			Mob mob = new Zoglin(EntityType.ZOGLIN, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new Zombie(EntityType.ZOMBIE, ent.level());
+			Mob mob = new Zombie(EntityType.ZOMBIE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new ZombieHorse(EntityType.ZOMBIE_HORSE, ent.level());
+			Mob mob = new ZombieHorse(EntityType.ZOMBIE_HORSE, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new ZombieVillager(EntityType.ZOMBIE_VILLAGER, ent.level());
+			Mob mob = new ZombieVillager(EntityType.ZOMBIE_VILLAGER, ent.getLevel());
 			list.add(mob);
 		}
 		for(int i = 0; i < 4 + new Random().nextInt(3); i++) {
-			Mob mob = new ZombifiedPiglin(EntityType.ZOMBIFIED_PIGLIN, ent.level());
+			Mob mob = new ZombifiedPiglin(EntityType.ZOMBIFIED_PIGLIN, ent.getLevel());
 			list.add(mob);
 		}
 		
 		for(Mob mob : list) {
 			int offX = new Random().nextInt(101) - 50;
 			int offZ = new Random().nextInt(101) - 50;
-			for(int y = ent.level().getMaxBuildHeight(); y > ent.level().getMinBuildHeight(); y--) {
+			for(int y = ent.getLevel().getMaxBuildHeight(); y > ent.getLevel().getMinBuildHeight(); y--) {
 				BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, y, ent.z() + offZ));
-				BlockState state = ent.level().getBlockState(pos);
-				if(Block.isFaceFull(ent.level().getBlockState(pos.below()).getCollisionShape(ent.level(), pos.below()), Direction.UP) && !Block.isFaceFull(state.getCollisionShape(ent.level(), pos), Direction.UP)) {
+				BlockState state = ent.getLevel().getBlockState(pos);
+				if(Block.isFaceFull(ent.getLevel().getBlockState(pos.below()).getCollisionShape(ent.getLevel(), pos.below()), Direction.UP) && !Block.isFaceFull(state.getCollisionShape(ent.getLevel(), pos), Direction.UP)) {
 					mob.setPos(pos.getX(), pos.getY(), pos.getZ());
-					if(ent.level() instanceof ServerLevel sl) {
-						mob.finalizeSpawn(sl, ent.level().getCurrentDifficultyAt(pos), MobSpawnType.MOB_SUMMONED, null, null);
+					if(ent.getLevel() instanceof ServerLevel sl) {
+						mob.finalizeSpawn(sl, ent.getLevel().getCurrentDifficultyAt(pos), MobSpawnType.MOB_SUMMONED, null, null);
 					}
-					ent.level().addFreshEntity(mob);
+					ent.getLevel().addFreshEntity(mob);
 					break;
 				}
 			}

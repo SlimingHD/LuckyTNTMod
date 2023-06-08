@@ -33,7 +33,7 @@ public class AetherTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ExplosionHelper.doModifiedSphericalExplosion(ent.level(), ent.getPos(), 100, new Vec3(1f, 0.5f, 1f), new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doModifiedSphericalExplosion(ent.getLevel(), ent.getPos(), 100, new Vec3(1f, 0.5f, 1f), new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -59,14 +59,14 @@ public class AetherTNTEffect extends PrimedTNTEffect {
 				double x = ent.x() + offX;
 				double z = ent.z() + offZ;
 				if(distance <= 100) {
-					BlockPos pos = new BlockPos(Mth.floor(x), LevelEvents.getTopBlock(ent.level(), x, z, true), Mth.floor(z)).above();
-					Registry<ConfiguredFeature<?, ?>> features = ent.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
+					BlockPos pos = new BlockPos(Mth.floor(x), LevelEvents.getTopBlock(ent.getLevel(), x, z, true), Mth.floor(z)).above();
+					Registry<ConfiguredFeature<?, ?>> features = ent.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 					double random = Math.random();
 					
 					if(random > 0.1D && random <= 0.1125D) {
-						features.get(VegetationFeatures.FOREST_FLOWERS).place((WorldGenLevel) ent.level(), ((ServerLevel) ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos);
+						features.get(VegetationFeatures.FOREST_FLOWERS).place((WorldGenLevel) ent.getLevel(), ((ServerLevel) ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos);
 					} else if(random > 0.15D && random <= 0.1625D) {
-						features.get(VegetationFeatures.FLOWER_FLOWER_FOREST).place((WorldGenLevel) ent.level(), ((ServerLevel) ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos);
+						features.get(VegetationFeatures.FLOWER_FLOWER_FOREST).place((WorldGenLevel) ent.getLevel(), ((ServerLevel) ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos);
 					}
 				}
 			}
@@ -77,20 +77,20 @@ public class AetherTNTEffect extends PrimedTNTEffect {
 	public void spawnParticles(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() % 3 == 0) {
 			for(double d = 0D; d <= 1.5D; d += 0.1D) {
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.4D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() - 0.5D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() - 0.4D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.4D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() - 0.5D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() - 0.4D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
 			}
 			for(double d = 0D; d <= 1D; d += 0.1D) {
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D - d, ent.y() + 1.1D, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D - d, ent.y() + 1.2D, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D - d, ent.y() + 2.6D, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D - d, ent.y() + 2.5D, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D - d, ent.y() + 1.1D, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D - d, ent.y() + 1.2D, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D - d, ent.y() + 2.6D, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.97f, 0.84f, 0.45f), 0.75f), ent.x() + 0.5D - d, ent.y() + 2.5D, ent.z(), 0, 0, 0);
 			}
 			for(double x = -0.3D; x <= 0.3D; x += 0.1D) {
 				for(double y = 0.2D; y <= 1.3D; y += 0.1D) {
-					ent.level().addParticle(new DustParticleOptions(new Vector3f(0.31f, 0.46f, 0.86f), 0.75f), ent.x() + x + 0.05D, ent.y() + 1.1D + y, ent.z(), 0, 0, 0);
+					ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.31f, 0.46f, 0.86f), 0.75f), ent.x() + x + 0.05D, ent.y() + 1.1D + y, ent.z(), 0, 0, 0);
 				}
 			}
 		}

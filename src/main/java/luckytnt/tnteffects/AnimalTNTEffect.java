@@ -22,12 +22,12 @@ public class AnimalTNTEffect extends PrimedTNTEffect{
 												EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.CAT, EntityType.STRIDER);
 		for(EntityType<?> entType : entities) {
 			for(int count = 0; count < 2; count++){
-				Entity ent = entType.create(entity.level());
+				Entity ent = entType.create(entity.getLevel());
 				ent.setPos(entity.getPos());
-				if(entity.level() instanceof ServerLevel sLevel && ent instanceof Mob mob) {
-					mob.finalizeSpawn(sLevel, entity.level().getCurrentDifficultyAt(toBlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
+				if(entity.getLevel() instanceof ServerLevel sLevel && ent instanceof Mob mob) {
+					mob.finalizeSpawn(sLevel, entity.getLevel().getCurrentDifficultyAt(toBlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 				}
-				entity.level().addFreshEntity(ent);
+				entity.getLevel().addFreshEntity(ent);
 			}
 		}
 	}

@@ -29,7 +29,7 @@ public class CustomFireworkEffect extends PrimedTNTEffect {
 			ent.getPersistentData().putInt("x", pos.getX());
 			ent.getPersistentData().putInt("y", pos.getY());
 			ent.getPersistentData().putInt("z", pos.getZ());
-			tnt.state = ent.level().getBlockState(pos);
+			tnt.state = ent.getLevel().getBlockState(pos);
 		}
 		((Entity)ent).setDeltaMovement(((Entity)ent).getDeltaMovement().x, 0.8f, ((Entity)ent).getDeltaMovement().z);
 	}
@@ -37,29 +37,29 @@ public class CustomFireworkEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		if(ent instanceof PrimedCustomFirework fire) {
-			BlockState state = ent.level().getBlockState(new BlockPos(ent.getPersistentData().getInt("x"), ent.getPersistentData().getInt("y"), ent.getPersistentData().getInt("z")));
+			BlockState state = ent.getLevel().getBlockState(new BlockPos(ent.getPersistentData().getInt("x"), ent.getPersistentData().getInt("y"), ent.getPersistentData().getInt("z")));
 			if(fire.state != null) {
 				state = fire.state;
 			}
 			
 			for(int count = 0; count < 200; count++) {
 				if(state.getBlock() instanceof TntBlock tnt) {
-					tnt.onCaughtFire(state, ent.level(), toBlockPos(ent.getPos()), null, ent.owner());
+					tnt.onCaughtFire(state, ent.getLevel(), toBlockPos(ent.getPos()), null, ent.owner());
 				} else {
 					try {
 						@SuppressWarnings("rawtypes")
 						Class[] parameters = new Class[]{Level.class, double.class, double.class, double.class, BlockState.class};
 						Constructor<FallingBlockEntity> sandConstructor = FallingBlockEntity.class.getDeclaredConstructor(parameters);
 						sandConstructor.setAccessible(true);
-						FallingBlockEntity sand = sandConstructor.newInstance(ent.level(), ent.getPos().x, ent.getPos().y, ent.getPos().z, state);
+						FallingBlockEntity sand = sandConstructor.newInstance(ent.getLevel(), ent.getPos().x, ent.getPos().y, ent.getPos().z, state);
 						sand.setDeltaMovement(Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f);
-						ent.level().addFreshEntity(sand);
+						ent.getLevel().addFreshEntity(sand);
 					} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-			List<PrimedTnt> tnts = ent.level().getEntitiesOfClass(PrimedTnt.class, new AABB(toBlockPos(ent.getPos()).offset(2, 2, 2), toBlockPos(ent.getPos()).offset(-2, -2, -2)));
+			List<PrimedTnt> tnts = ent.getLevel().getEntitiesOfClass(PrimedTnt.class, new AABB(toBlockPos(ent.getPos()).offset(2, 2, 2), toBlockPos(ent.getPos()).offset(-2, -2, -2)));
 			for(PrimedTnt tnt : tnts) {
 				tnt.setDeltaMovement(Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f);
 			}
@@ -68,7 +68,7 @@ public class CustomFireworkEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
 	}
 	
 	@Override

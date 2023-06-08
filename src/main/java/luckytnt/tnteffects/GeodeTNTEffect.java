@@ -29,32 +29,32 @@ public class GeodeTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		HashMap<BlockPos, BlockState> blocks = new HashMap<>();
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 10, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 10, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				blocks.put(pos, state);
-				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 				level.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState());
 			}
 		});
-		if(entity.level() instanceof ServerLevel sLevel) {
-			Holder<ConfiguredFeature<?, ?>> feature = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.AMETHYST_GEODE);
+		if(entity.getLevel() instanceof ServerLevel sLevel) {
+			Holder<ConfiguredFeature<?, ?>> feature = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.AMETHYST_GEODE);
 			feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, toBlockPos(entity.getPos()));
 		}
 		for(int i = blocks.size() - 1; i > 0; i--) {
 			List<BlockPos> poses = new ArrayList<>(blocks.keySet());
 			BlockPos pos = poses.get(i);
-			if(entity.level().getBlockState(pos).is(Blocks.STONE)) {
-				entity.level().setBlockAndUpdate(pos, blocks.get(pos));
+			if(entity.getLevel().getBlockState(pos).is(Blocks.STONE)) {
+				entity.getLevel().setBlockAndUpdate(pos, blocks.get(pos));
 			}
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(0.6f, 0.1f, 1f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(0.3f, 0.3f, 0.3f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.6f, 0.1f, 1f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.3f, 0.3f, 0.3f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
 	}
 	
 	@Override

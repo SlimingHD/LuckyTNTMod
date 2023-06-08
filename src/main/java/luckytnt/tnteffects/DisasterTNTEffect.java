@@ -20,7 +20,7 @@ public class DisasterTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		LevelVariables var = LevelVariables.get(ent.level());
+		LevelVariables var = LevelVariables.get(ent.getLevel());
 		int time = 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() + 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() * (int)Math.random();
 		
 		if(disaster.equals("doomsday")) {
@@ -33,7 +33,7 @@ public class DisasterTNTEffect extends PrimedTNTEffect {
 			var.iceAgeTime = 0;
 			var.tntRainTime = 0;
 			var.toxicCloudsTime = 0;
-			if(ent.level() instanceof ServerLevel sl) {
+			if(ent.getLevel() instanceof ServerLevel sl) {
 				sl.setWeatherParameters(1000000, 0, false, false);
 			}
 		} else if(disaster.equals("ice_age")) {
@@ -44,7 +44,7 @@ public class DisasterTNTEffect extends PrimedTNTEffect {
 			var.tntRainTime = time;
 		}
 		
-		if(ent.level() instanceof ServerLevel sl) {
+		if(ent.getLevel() instanceof ServerLevel sl) {
 			var.sync(sl);
 			if(rain) {
 				sl.setWeatherParameters(0, time, true, true);

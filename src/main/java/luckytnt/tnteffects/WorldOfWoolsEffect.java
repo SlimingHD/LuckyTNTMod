@@ -57,7 +57,7 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		List<Pair<BlockPos, Block>> blocks = new ArrayList<>();
 		
-		ExplosionHelper.doSphericalExplosion(ent.level(), ent.getPos(), 100, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 100, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -117,14 +117,14 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 		});
 		
 		for(Pair<BlockPos, Block> pair : blocks) {
-			ent.level().setBlock(pair.getFirst(), pair.getSecond().defaultBlockState(), 3);
+			ent.getLevel().setBlock(pair.getFirst(), pair.getSecond().defaultBlockState(), 3);
 		}
 		
 		for(int i = 0; i < 3 + new Random().nextInt(6); i++) {
 			int x = new Random().nextInt(151) - 75;
 			int z = new Random().nextInt(151) - 75;
 			
-			BlockPos origin = new BlockPos(Mth.floor(ent.x() + x), Mth.floor(LevelEvents.getTopBlock(ent.level(), ent.x() + x, ent.z() + z, true) + 1), Mth.floor(ent.z() + z));
+			BlockPos origin = new BlockPos(Mth.floor(ent.x() + x), Mth.floor(LevelEvents.getTopBlock(ent.getLevel(), ent.x() + x, ent.z() + z, true) + 1), Mth.floor(ent.z() + z));
 			boolean xOrZ = new Random().nextBoolean();
 			int rr = 16 + new Random().nextInt(11);
 			Block block = Blocks.RED_CONCRETE;
@@ -148,17 +148,17 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 		}
 		
 		for(int i = 0; i <= 60 + new Random().nextInt(21); i++) {
-			Sheep sheep = new Sheep(EntityType.SHEEP, ent.level());
+			Sheep sheep = new Sheep(EntityType.SHEEP, ent.getLevel());
 			
 			int x = new Random().nextInt(151) - 75;
 			int z = new Random().nextInt(151) - 75;
 			
-			sheep.setPos(ent.x() + x, LevelEvents.getTopBlock(ent.level(), ent.x() + x, ent.z() + z, true) + 1, ent.z() + z);
-			sheep.finalizeSpawn((ServerLevel)ent.level(), ent.level().getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
-			ent.level().addFreshEntity(sheep);
+			sheep.setPos(ent.x() + x, LevelEvents.getTopBlock(ent.getLevel(), ent.x() + x, ent.z() + z, true) + 1, ent.z() + z);
+			sheep.finalizeSpawn((ServerLevel)ent.getLevel(), ent.getLevel().getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
+			ent.getLevel().addFreshEntity(sheep);
 		}
 		
-		List<Sheep> list = ent.level().getEntitiesOfClass(Sheep.class, new AABB(toBlockPos(ent.getPos()).offset(100, 100, 100), toBlockPos(ent.getPos()).offset(-100, -100, -100)));
+		List<Sheep> list = ent.getLevel().getEntitiesOfClass(Sheep.class, new AABB(toBlockPos(ent.getPos()).offset(100, 100, 100), toBlockPos(ent.getPos()).offset(-100, -100, -100)));
 		for(Sheep sheep : list) {
 			sheep.setColor(randomColor());
 		}
@@ -167,7 +167,7 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
 		for(int i = 0; i < 50; i++) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(20f, 20f, 20f), 1f), ent.x() + Math.random() * 2 - Math.random() * 2, ent.y() + 1D + Math.random() * 2 - Math.random() * 2, ent.z() + Math.random() * 2 - Math.random() * 2, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(20f, 20f, 20f), 1f), ent.x() + Math.random() * 2 - Math.random() * 2, ent.y() + 1D + Math.random() * 2 - Math.random() * 2, ent.z() + Math.random() * 2 - Math.random() * 2, 0, 0, 0);
 		}
 	}
 	
@@ -192,8 +192,8 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 				for(int offY = 0; offY <= radius + 1; offY++) {
 					BlockPos pos = origin.offset(offX, offY, 0);
 					double distance = Math.sqrt(offX * offX + offY * offY);
-					if(distance > radius && distance <= (radius + 1) && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
-						ent.level().setBlock(pos, block.defaultBlockState(), 3);
+					if(distance > radius && distance <= (radius + 1) && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
+						ent.getLevel().setBlock(pos, block.defaultBlockState(), 3);
 					}
 				}
 			}
@@ -202,8 +202,8 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 				for(int offY = 0; offY <= radius + 1; offY++) {
 					BlockPos pos = origin.offset(0, offY, offZ);
 					double distance = Math.sqrt(offZ * offZ + offY * offY);
-					if(distance > radius && distance <= (radius + 1) && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
-						ent.level().setBlock(pos, block.defaultBlockState(), 3);
+					if(distance > radius && distance <= (radius + 1) && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
+						ent.getLevel().setBlock(pos, block.defaultBlockState(), 3);
 					}
 				}
 			}
@@ -214,8 +214,8 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 		if(xOrZ) {
 			for(int offY = -1; offY > -200; offY--) {
 				BlockPos pos = origin.offset(radius + 1, offY, 0);
-				if(ent.level().getBlockState(pos).getCollisionShape(ent.level(), pos, CollisionContext.empty()).isEmpty() && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
-					ent.level().setBlock(pos, block.defaultBlockState(), 3);
+				if(ent.getLevel().getBlockState(pos).getCollisionShape(ent.getLevel(), pos, CollisionContext.empty()).isEmpty() && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
+					ent.getLevel().setBlock(pos, block.defaultBlockState(), 3);
 				} else {
 					break;
 				}
@@ -223,8 +223,8 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 			
 			for(int offY = -1; offY > -200; offY--) {
 				BlockPos pos = origin.offset(-radius - 1, offY, 0);
-				if(ent.level().getBlockState(pos).getCollisionShape(ent.level(), pos, CollisionContext.empty()).isEmpty() && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
-					ent.level().setBlock(pos, block.defaultBlockState(), 3);
+				if(ent.getLevel().getBlockState(pos).getCollisionShape(ent.getLevel(), pos, CollisionContext.empty()).isEmpty() && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
+					ent.getLevel().setBlock(pos, block.defaultBlockState(), 3);
 				} else {
 					break;
 				}
@@ -232,8 +232,8 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 		} else {
 			for(int offY = -1; offY > -200; offY--) {
 				BlockPos pos = origin.offset(0, offY, radius + 1);
-				if(ent.level().getBlockState(pos).getCollisionShape(ent.level(), pos, CollisionContext.empty()).isEmpty() && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
-					ent.level().setBlock(pos, block.defaultBlockState(), 3);
+				if(ent.getLevel().getBlockState(pos).getCollisionShape(ent.getLevel(), pos, CollisionContext.empty()).isEmpty() && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
+					ent.getLevel().setBlock(pos, block.defaultBlockState(), 3);
 				} else {
 					break;
 				}
@@ -241,8 +241,8 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 			
 			for(int offY = -1; offY > -200; offY--) {
 				BlockPos pos = origin.offset(0, offY, -radius - 1);
-				if(ent.level().getBlockState(pos).getCollisionShape(ent.level(), pos, CollisionContext.empty()).isEmpty() && ent.level().getBlockState(pos).getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= 100) {
-					ent.level().setBlock(pos, block.defaultBlockState(), 3);
+				if(ent.getLevel().getBlockState(pos).getCollisionShape(ent.getLevel(), pos, CollisionContext.empty()).isEmpty() && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
+					ent.getLevel().setBlock(pos, block.defaultBlockState(), 3);
 				} else {
 					break;
 				}

@@ -11,15 +11,15 @@ public class ClusterBombEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 		explosion.doEntityExplosion(1f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 		for(int count = 0; count < 80; count++) {
-			LExplosiveProjectile shrapnel = EntityRegistry.SHRAPNEL.get().create(entity.level());
+			LExplosiveProjectile shrapnel = EntityRegistry.SHRAPNEL.get().create(entity.getLevel());
 			shrapnel.setPos(entity.getPos());
 			shrapnel.setOwner(entity.owner());
 			shrapnel.setDeltaMovement(Math.random() - 0.5f, Math.random() * 1.5f, Math.random() - 0.5f);
-			entity.level().addFreshEntity(shrapnel);
+			entity.getLevel().addFreshEntity(shrapnel);
 		}
 	}
 }

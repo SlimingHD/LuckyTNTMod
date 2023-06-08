@@ -55,7 +55,7 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		String value = ent.getPersistentData().getString("structure");
-		if(ent.level() instanceof ServerLevel sLevel) {
+		if(ent.getLevel() instanceof ServerLevel sLevel) {
 			RegistryAccess rAccess = sLevel.registryAccess();
 			ChunkGenerator chunkGenerator = sLevel.getChunkSource().getGenerator();
 			BiomeSource biomeSource = sLevel.getChunkSource().getGenerator().getBiomeSource();

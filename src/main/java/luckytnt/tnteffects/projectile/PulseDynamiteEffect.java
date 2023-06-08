@@ -19,7 +19,7 @@ public class PulseDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(entity instanceof LExplosiveProjectile ent) {
 			if(ent.inGround()) {
 				ent.getPersistentData().putBoolean("hitBefore", true);
@@ -39,13 +39,13 @@ public class PulseDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if (entity.getTNTFuse() <= 185) {
 			((Entity)entity).setDeltaMovement(0, 0, 0);
 			((Entity)entity).setPos(((Entity) entity).getPosition(0f));
 			if (entity.getTNTFuse() % 20 == 0) {
-				if (entity.level() instanceof ServerLevel) {
-					ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), entity.getPersistentData().getInt("strength"));
+				if (entity.getLevel() instanceof ServerLevel) {
+					ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), entity.getPersistentData().getInt("strength"));
 					explosion.doEntityExplosion(1f, true);
 					explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 					level.playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
@@ -67,7 +67,7 @@ public class PulseDynamiteEffect extends PrimedTNTEffect{
 			double x = Math.cos(theta) * radius;
 			double z = Math.sin(theta) * radius;
 			
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + x, entity.y() + y + 0.5f, entity.z() + z, 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + x, entity.y() + y + 0.5f, entity.z() + z, 0, 0, 0);
 		}
 	}
 	

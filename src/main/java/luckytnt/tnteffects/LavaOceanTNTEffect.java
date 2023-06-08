@@ -28,13 +28,13 @@ public class LavaOceanTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doCylindricalExplosion(entity.level(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doCylindricalExplosion(entity.getLevel(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(pos.getY() <= entity.getPos().y) {
-					if((!state.isFaceSturdy(level, pos, Direction.UP) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100) || state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 4) {
-						state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+					if((!state.isFaceSturdy(level, pos, Direction.UP) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100) || state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 4) {
+						state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 						level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
 					}
 				}
@@ -44,7 +44,7 @@ public class LavaOceanTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0.1f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0.1f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
 	}
 
 	@Override

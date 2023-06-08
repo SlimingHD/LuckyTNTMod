@@ -31,7 +31,7 @@ public class NuclearTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity) entity, entity.getPos(), strength);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), strength);
 		explosion.doEntityExplosion(strength / 10f, true);
 		explosion.doEntityExplosion(new IForEachEntityExplosionEffect() {		
 			@Override
@@ -42,7 +42,7 @@ public class NuclearTNTEffect extends PrimedTNTEffect{
 			}
 		});
 		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), strength * 3, new IForEachBlockExplosionEffect() {		
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), strength * 3, new IForEachBlockExplosionEffect() {		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getBlock() instanceof BushBlock || state.getBlock() instanceof LeavesBlock) {
@@ -64,7 +64,7 @@ public class NuclearTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(0.9f, 1f, 0f), 1), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.9f, 1f, 0f), 1), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
 	}
 	
 	@Override

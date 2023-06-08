@@ -37,15 +37,15 @@ public class DividingTNTEffect extends PrimedTNTEffect{
 				for(int offZ = -50; offZ < 50; offZ += 10) {
 					findBlock: for(int offY = 320; offY > -64; offY--) {
 						BlockPos pos = toBlockPos(new Vec3(entity.x() + offX, entity.y() + offY, entity.z() + offZ));
-						if(entity.level().getBlockState(pos).isCollisionShapeFullBlock(entity.level(), pos) && !entity.level().getBlockState(pos.above()).isCollisionShapeFullBlock(entity.level(), pos.above())) {
-							PrimedLTNT projectile = EntityRegistry.DIVIDING_TNT.get().create(entity.level());
+						if(entity.getLevel().getBlockState(pos).isCollisionShapeFullBlock(entity.getLevel(), pos) && !entity.getLevel().getBlockState(pos.above()).isCollisionShapeFullBlock(entity.getLevel(), pos.above())) {
+							PrimedLTNT projectile = EntityRegistry.DIVIDING_TNT.get().create(entity.getLevel());
 							projectile.setPos(entity.getPos().add(offX, offY, offZ));
 							projectile.setOwner(entity.owner() instanceof LivingEntity ? (LivingEntity)entity.owner() : null);
 							projectile.getPersistentData().putInt("maxLevel", new Random().nextInt(5));
 							projectile.getPersistentData().putInt("level", entity.getPersistentData().getInt("level") + 1);
 							projectile.getPersistentData().putDouble("x", entity.x());
 							projectile.getPersistentData().putDouble("z", entity.z());
-							entity.level().addFreshEntity(projectile);
+							entity.getLevel().addFreshEntity(projectile);
 							break findBlock;
 						}
 					}
@@ -55,20 +55,20 @@ public class DividingTNTEffect extends PrimedTNTEffect{
 		}
 		else {
 			if(entity.getPersistentData().getInt("level") >= entity.getPersistentData().getInt("maxLevel")) {
-				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
+				ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 				explosion.doEntityExplosion(1f, true);
 				explosion.doBlockExplosion();
 				if(entity.getPersistentData().getInt("level") >= entity.getPersistentData().getInt("maxLevel")) {
-					Level level = entity.level();
-					entity.level().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					Level level = entity.getLevel();
+					entity.getLevel().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 				}
 				entity.destroy();
 			}
 			else {
-				ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
+				ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 				explosion.doEntityExplosion(1.5f, true);
 				explosion.doBlockExplosion();
-				PrimedLTNT projectile = EntityRegistry.DIVIDING_TNT.get().create(entity.level());
+				PrimedLTNT projectile = EntityRegistry.DIVIDING_TNT.get().create(entity.getLevel());
 				projectile.setOwner(entity.owner() instanceof LivingEntity ? (LivingEntity)entity.owner() : null);
 				projectile.setPos(entity.getPos());
 				projectile.setDeltaMovement(Math.random() - Math.random(), 1 + Math.random() * 0.75f, Math.random() - Math.random());
@@ -77,7 +77,7 @@ public class DividingTNTEffect extends PrimedTNTEffect{
 				projectile.getPersistentData().putDouble("x", entity.getPersistentData().getDouble("x"));
 				projectile.getPersistentData().putDouble("z", entity.getPersistentData().getDouble("z"));
 				projectile.setDeltaMovement(0, 0, 0);
-				entity.level().addFreshEntity(projectile);
+				entity.getLevel().addFreshEntity(projectile);
 			}
 		}
 	}

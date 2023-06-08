@@ -36,8 +36,8 @@ public class ResetTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		if(entity instanceof PrimedResetTNT ent) {
 			for(Pair<BlockPos, BlockState> pair : ent.blocks) {
-				if(!ent.level().getBlockState(pair.getFirst()).equals(pair.getSecond())) {
-					ent.level().setBlock(pair.getFirst(), pair.getSecond(), 3);
+				if(!ent.getLevel().getBlockState(pair.getFirst()).equals(pair.getSecond())) {
+					ent.getLevel().setBlock(pair.getFirst(), pair.getSecond(), 3);
 				}
 			}
 			
@@ -55,7 +55,7 @@ public class ResetTNTEffect extends PrimedTNTEffect {
 	
 	public void saveBlocks(PrimedResetTNT ent) {
 		ent.blocks = Lists.newArrayList();
-		ExplosionHelper.doSphericalExplosion(ent.level(), ent.getPos(), 100, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 100, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -68,7 +68,7 @@ public class ResetTNTEffect extends PrimedTNTEffect {
 	
 	public void saveEntities(PrimedResetTNT ent) {
 		ent.entities = Lists.newArrayList();
-		List<Entity> list = ent.level().getEntities(ent, new AABB(ent.x() - 100, ent.y() - 100, ent.z() - 100, ent.x() + 100, ent.y() + 100, ent.z() + 100));
+		List<Entity> list = ent.getLevel().getEntities(ent, new AABB(ent.x() - 100, ent.y() - 100, ent.z() - 100, ent.x() + 100, ent.y() + 100, ent.z() + 100));
 
     	for(int i = 0; i < list.size(); i++) {
     		Entity entity = list.get(i);

@@ -17,8 +17,8 @@ public class ButterTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 9);
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 9, new IForEachBlockExplosionEffect() {
+		ImprovedExplosion dummyExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 9);
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 9, new IForEachBlockExplosionEffect() {
 		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {

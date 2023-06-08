@@ -29,27 +29,27 @@ public class GrandeFinaleEffect extends PrimedTNTEffect {
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() % (int)(1 + Math.random() * 50) == 0) {
-			PrimedLTNT entity = EntityRegistry.SAND_FIREWORK.get().create(ent.level());
+			PrimedLTNT entity = EntityRegistry.SAND_FIREWORK.get().create(ent.getLevel());
 			int random = new Random().nextInt(4);
 			switch(random){
-				case 0: entity = EntityRegistry.SAND_FIREWORK.get().create(ent.level()); break;
-				case 1: entity = EntityRegistry.GRAVEL_FIREWORK.get().create(ent.level()); break;
-				case 2: entity = EntityRegistry.RAINBOW_FIREWORK.get().create(ent.level());; break;
-				case 3: entity = EntityRegistry.NEW_YEARS_FIREWORK.get().create(ent.level());
+				case 0: entity = EntityRegistry.SAND_FIREWORK.get().create(ent.getLevel()); break;
+				case 1: entity = EntityRegistry.GRAVEL_FIREWORK.get().create(ent.getLevel()); break;
+				case 2: entity = EntityRegistry.RAINBOW_FIREWORK.get().create(ent.getLevel());; break;
+				case 3: entity = EntityRegistry.NEW_YEARS_FIREWORK.get().create(ent.getLevel());
 						entity.getPersistentData().putInt("type", 1); break;
 			}
-			ent.level().playSound(null, toBlockPos(ent.getPos()), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.MASTER, 3, 1);
+			ent.getLevel().playSound(null, toBlockPos(ent.getPos()), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.MASTER, 3, 1);
 			entity.setPos(ent.getPos());
 			entity.setOwner(ent.owner());
 			entity.setDeltaMovement(Math.random() * 5 - Math.random() * 5, 0, Math.random() * 5 - Math.random() * 5);
 			entity.setTNTFuse(40 + new Random().nextInt(41));
-			ent.level().addFreshEntity(entity);
+			ent.getLevel().addFreshEntity(entity);
 		}
-		ent.level().setBlock(toBlockPos(ent.getPos()), Blocks.AIR.defaultBlockState(), 3);
-		ent.level().setBlock(toBlockPos(ent.getPos()).offset(0, 1, 0), Blocks.AIR.defaultBlockState(), 3);
+		ent.getLevel().setBlock(toBlockPos(ent.getPos()), Blocks.AIR.defaultBlockState(), 3);
+		ent.getLevel().setBlock(toBlockPos(ent.getPos()).offset(0, 1, 0), Blocks.AIR.defaultBlockState(), 3);
 		if(ent.getTNTFuse() <= 40) {
 			((Entity)ent).setDeltaMovement(((Entity)ent).getDeltaMovement().x, 1.6f, ((Entity)ent).getDeltaMovement().z);
-			ent.level().addParticle(ParticleTypes.LARGE_SMOKE, ent.x(), ent.y(), ent.z(), 0, -0.5f, 0);
+			ent.getLevel().addParticle(ParticleTypes.LARGE_SMOKE, ent.x(), ent.y(), ent.z(), 0, -0.5f, 0);
 			if(ent.getTNTFuse() == 0) {
 				Block template = Blocks.WHITE_CONCRETE;
 				for(int count = 0; count < 1000; count++) {
@@ -74,23 +74,23 @@ public class GrandeFinaleEffect extends PrimedTNTEffect {
 						Class[] classes = new Class[]{Level.class, double.class, double.class, double.class, BlockState.class};
 						Constructor<FallingBlockEntity> constructor = FallingBlockEntity.class.getDeclaredConstructor(classes);
 						constructor.setAccessible(true);
-						block = constructor.newInstance(ent.level(), ent.x(), ent.y(), ent.z(), template.defaultBlockState());
+						block = constructor.newInstance(ent.getLevel(), ent.x(), ent.y(), ent.z(), template.defaultBlockState());
 					} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 						e.printStackTrace();
 					}
 					if(block != null) {
 						block.dropItem = false;
 						block.setDeltaMovement(Math.random() * 5f - Math.random() * 5f, Math.random() * 5f - Math.random() * 5f, Math.random() * 5f - Math.random() * 5f);
-						ent.level().addFreshEntity(block);
+						ent.getLevel().addFreshEntity(block);
 					}
 				}
 				for(int count = 0; count < 500; count++) {
-					PrimedLTNT tnt = EntityRegistry.TNT.get().create(ent.level());
+					PrimedLTNT tnt = EntityRegistry.TNT.get().create(ent.getLevel());
 					tnt.setOwner(ent.owner());
 					tnt.setPos(ent.getPos());
 					tnt.setTNTFuse(80 + (int)(Math.random() * 100));
 					tnt.setDeltaMovement(Math.random() * 5f - Math.random() * 5f, Math.random() * 5f - Math.random() * 5f, Math.random() * 5f - Math.random() * 5f);
-					ent.level().addFreshEntity(tnt);
+					ent.getLevel().addFreshEntity(tnt);
 				}
 			}
 		}

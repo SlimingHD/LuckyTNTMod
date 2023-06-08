@@ -38,20 +38,20 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect{
 		Holder<ConfiguredFeature<?, ?>> vegetation;
 		Block topBlock;
 		if (Math.random() < 0.5D) {
-			tree = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(TreeFeatures.CRIMSON_FUNGUS);
-			vegetation = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL);
+			tree = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(TreeFeatures.CRIMSON_FUNGUS);
+			vegetation = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL);
 			topBlock = Blocks.CRIMSON_NYLIUM;
 		} else {
-			tree = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(TreeFeatures.WARPED_FUNGUS);
-			vegetation = entity.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL);
+			tree = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(TreeFeatures.WARPED_FUNGUS);
+			vegetation = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL);
 			topBlock = Blocks.WARPED_NYLIUM;
 		}
-		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), radius, new IBlockExplosionCondition() {
+		ExplosionHelper.doTopBlockExplosion(entity.getLevel(), entity.getPos(), radius, new IBlockExplosionCondition() {
 			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.is(BlockTags.FLOWERS) || state.is(BlockTags.WART_BLOCKS) || (!state.isCollisionShapeFullBlock(level, pos) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100)) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+				if(state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.is(BlockTags.FLOWERS) || state.is(BlockTags.WART_BLOCKS) || (!state.isCollisionShapeFullBlock(level, pos) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100)) {
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 					return false;
 				}
 				return (state.isCollisionShapeFullBlock(level, pos) || state.isFaceSturdy(level, pos, Direction.UP)) && (level.getBlockState(pos.above()).isAir() || level.getBlockState(pos.above()).canBeReplaced(new DirectionalPlaceContext(level, pos.above(), Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) || level.getBlockState(pos.above()).is(BlockTags.FLOWERS));
@@ -60,13 +60,13 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos.below(), ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
-					level.getBlockState(pos.below()).onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+				if(state.getExplosionResistance(level, pos.below(), ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100) {
+					level.getBlockState(pos.below()).onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 					level.setBlockAndUpdate(pos.below(), topBlock.defaultBlockState());
 				}
 			}
 		});
-		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doTopBlockExplosion(entity.getLevel(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {

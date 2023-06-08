@@ -20,7 +20,7 @@ public class ExtinctionEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		if(ent.level() instanceof ServerLevel sLevel) {
+		if(ent.getLevel() instanceof ServerLevel sLevel) {
 			try {
 				sLevel.getServer().getCommands().getDispatcher().execute("kill @e", new CommandSourceStack(CommandSource.NULL, ent.getPos(), Vec2.ZERO, sLevel, 4, "", Component.literal(""), ((Entity)ent).getServer(), ent.owner()));
 			} catch (CommandSyntaxException e) {
@@ -31,8 +31,8 @@ public class ExtinctionEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
-		ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
 	}
 	
 	@Override

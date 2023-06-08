@@ -25,7 +25,7 @@ public class CompactTNTEffect extends PrimedTNTEffect{
 	}
 
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), size);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), size);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@Override

@@ -52,9 +52,9 @@ public class RainbowFireworkEffect extends PrimedTNTEffect{
 						case 10: state = Blocks.ORANGE_CONCRETE.defaultBlockState(); break;
 						case 11: state = Blocks.LIGHT_BLUE_CONCRETE.defaultBlockState(); break;
 					}
-					FallingBlockEntity sand = sandConstructor.newInstance(entity.level(), entity.getPos().x, entity.getPos().y, entity.getPos().z, state);
+					FallingBlockEntity sand = sandConstructor.newInstance(entity.getLevel(), entity.getPos().x, entity.getPos().y, entity.getPos().z, state);
 					sand.setDeltaMovement((Math.random() - Math.random()) * 1.5f, (Math.random() - Math.random()) * 1.5f, (Math.random() - Math.random()) * 1.5f);
-					entity.level().addFreshEntity(sand);
+					entity.getLevel().addFreshEntity(sand);
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 					e.printStackTrace();
 				}
@@ -66,7 +66,7 @@ public class RainbowFireworkEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(10f, 10f, 10f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(10f, 10f, 10f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
 	}
 	
 	@Override

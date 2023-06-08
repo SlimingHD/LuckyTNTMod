@@ -19,14 +19,14 @@ public class LightningTNTEffect extends PrimedTNTEffect{
 		double x = entity.getPos().x;
 		double z = entity.getPos().z;
 		if(entity.getTNTFuse() < 120) {
-			if(entity.level() instanceof ServerLevel S_Level) {
+			if(entity.getLevel() instanceof ServerLevel S_Level) {
 				double offX = Math.random() * 40 - 20;
 				double offZ = Math.random() * 40 - 20;
 				for(int offY = 320; offY > -64; offY--) {
-					if(entity.level().getBlockState(new BlockPos(Mth.floor(x + offX), offY, Mth.floor(z + offZ))).getMaterial() != Material.AIR) {
-						Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.level());
+					if(entity.getLevel().getBlockState(new BlockPos(Mth.floor(x + offX), offY, Mth.floor(z + offZ))).getMaterial() != Material.AIR) {
+						Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.getLevel());
 						lighting.setPos(x + offX, offY, z + offZ);
-						entity.level().addFreshEntity(lighting);
+						entity.getLevel().addFreshEntity(lighting);
 						break;
 					}
 				}

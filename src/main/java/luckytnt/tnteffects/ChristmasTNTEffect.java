@@ -22,10 +22,10 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		if(entity instanceof PrimedLTNT) {
-			((ServerLevel)entity.level()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + 1 + Math.random() * 0.5f, entity.z() + Math.random() - 0.5f, 500, 0.5f, 0.5f, 0.5f, 0f);
+			((ServerLevel)entity.getLevel()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + 1 + Math.random() * 0.5f, entity.z() + Math.random() - 0.5f, 500, 0.5f, 0.5f, 0.5f, 0f);
 		}
 		else {			
-			((ServerLevel)entity.level()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + 1 + Math.random() * 0.5f, entity.z() + Math.random() - 0.5f, 100, 0.5f, 0.5f, 0.5f, 0f);
+			((ServerLevel)entity.getLevel()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + 1 + Math.random() * 0.5f, entity.z() + Math.random() - 0.5f, 100, 0.5f, 0.5f, 0.5f, 0f);
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 			if(entity.getTNTFuse() <= 220) {
 				((Entity)entity).setDeltaMovement(new Vec3(entity.getPersistentData().getDouble("flyingX"), entity.getPersistentData().getDouble("flyingY"), entity.getPersistentData().getDouble("flyingZ")).normalize().scale(40D / 220D));
 				if(entity.getTNTFuse() % 10 == 0) {
-					LExplosiveProjectile present = EntityRegistry.PRESENT.get().create(entity.level());
+					LExplosiveProjectile present = EntityRegistry.PRESENT.get().create(entity.getLevel());
 					present.setPos(entity.getPos());
 					present.setOwner(entity.owner());
 					double randomX = Math.random();
@@ -52,10 +52,10 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 					double randomZ = Math.random();
 					randomZ *= new Random().nextBoolean() ? 1 : -1;
 					present.setDeltaMovement(randomX, -Math.random() * 0.5f, randomZ);
-					entity.level().addFreshEntity(present);
+					entity.getLevel().addFreshEntity(present);
 				}
 			}
-			if(entity.level() instanceof ServerLevel sLevel) {
+			if(entity.getLevel() instanceof ServerLevel sLevel) {
 				for(ServerPlayer player : sLevel.players()) {
 					double x = player.getX() - entity.x();
 					double y = player.getY() - entity.y();
@@ -74,7 +74,7 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 		if(entity instanceof PrimedLTNT) {
 			if(entity.getTNTFuse() < 230) {
 				for(int i = 0; i <= 10; i++) {
-					entity.level().addParticle(ParticleTypes.WAX_OFF, true, entity.x() + Math.random() - 0.5f, entity.y() + 1f + Math.random() * 0.5f, entity.z() + Math.random() - 0.5f, 0, 0, 0);
+					entity.getLevel().addParticle(ParticleTypes.WAX_OFF, true, entity.x() + Math.random() - 0.5f, entity.y() + 1f + Math.random() * 0.5f, entity.z() + Math.random() - 0.5f, 0, 0, 0);
 				}
 			}
 			else {

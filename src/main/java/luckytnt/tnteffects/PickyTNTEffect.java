@@ -34,27 +34,27 @@ public class PickyTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		Block template;
 		if(entity instanceof PrimedLTNT || entity instanceof LTNTMinecart) {
-			template = entity.level().getBlockState(toBlockPos(entity.getPos()).below()).getBlock();
+			template = entity.getLevel().getBlockState(toBlockPos(entity.getPos()).below()).getBlock();
 		}
 		else {
-			BlockHitResult result = entity.level().clip(new ClipContext(entity.getPos(), entity.getPos().add(((Entity)entity).getDeltaMovement().normalize().scale(0.5f)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, (Entity)entity));
+			BlockHitResult result = entity.getLevel().clip(new ClipContext(entity.getPos(), entity.getPos().add(((Entity)entity).getDeltaMovement().normalize().scale(0.5f)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, (Entity)entity));
 			if(result != null) {
-				template = entity.level().getBlockState(result.getBlockPos()).getBlock();
+				template = entity.getLevel().getBlockState(result.getBlockPos()).getBlock();
 			}
 			else {
 				template = Blocks.AIR;
 			}
 		}
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {		
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 100 && !state.isAir() && state.getBlock() == template) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100 && !state.isAir() && state.getBlock() == template) {
 					List<ItemStack> drops = Block.getDrops(state, (ServerLevel)level, pos, level.getBlockEntity(pos));
 					for(ItemStack stack : drops) {
 						ItemEntity item = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), stack);
 						level.addFreshEntity(item);
 					}
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 				}
 			}
 		});

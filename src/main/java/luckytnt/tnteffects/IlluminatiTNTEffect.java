@@ -40,8 +40,8 @@ public class IlluminatiTNTEffect extends PrimedTNTEffect {
 					if (distance(vec, NEAB, E) <= 0 && distance(vec, NEAD, E) <= 0 && distance(vec, NEDC, E) <= 0 && distance(vec, NECB, E) <= 0 && distance(vec, NABCD, A) <= 0) {
 						BlockPos pos5 = toBlockPos(ent.getPos()).offset(offX, offY, offZ);
 
-						if (ent.level().getBlockState(pos5).getExplosionResistance(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level())) <= 200) {
-							ent.level().getBlockState(pos5).onBlockExploded(ent.level(), pos5, ImprovedExplosion.dummyExplosion(ent.level()));
+						if (ent.getLevel().getBlockState(pos5).getExplosionResistance(ent.getLevel(), pos5, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
+							ent.getLevel().getBlockState(pos5).onBlockExploded(ent.getLevel(), pos5, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						}
 					}
 				}
@@ -52,10 +52,10 @@ public class IlluminatiTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
 		for(double i = 0D; i <= 1D; i += 0.2D) {
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + i, ent.y() + 1D, ent.z() - 0.5D, 0, 0, 0);
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + i, ent.y() + 1D, ent.z() + 0.5D, 0, 0, 0);
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D, ent.y() + 1D, ent.z() - 0.5D + i, 0, 0, 0);
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D, ent.y() + 1D, ent.z() - 0.5D + i, 0, 0, 0);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + i, ent.y() + 1D, ent.z() - 0.5D, 0, 0, 0);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + i, ent.y() + 1D, ent.z() + 0.5D, 0, 0, 0);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D, ent.y() + 1D, ent.z() - 0.5D + i, 0, 0, 0);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D, ent.y() + 1D, ent.z() - 0.5D + i, 0, 0, 0);
 		}
 		
 		Vec3 vec1 = new Vec3(0.5D, 1D, 0.5D);
@@ -64,10 +64,10 @@ public class IlluminatiTNTEffect extends PrimedTNTEffect {
 		Vec3 vec4 = new Vec3(-0.5D, 1D, -0.5D);
 		
 		for(double i = 0D; i < vec1.length(); i += vec1.length() / 5D) {
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + vec1.x * i, ent.y() + 1D + vec1.y * i, ent.z() - 0.5D + vec1.z * i, 0, 0, 0);
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D + vec2.x * i, ent.y() + 1D + vec2.y * i, ent.z() - 0.5D + vec2.z * i, 0, 0, 0);
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + vec3.x * i, ent.y() + 1D + vec3.y * i, ent.z() + 0.5D + vec3.z * i, 0, 0, 0);
-			ent.level().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D + vec4.x * i, ent.y() + 1D + vec4.y * i, ent.z() + 0.5D + vec4.z * i, 0, 0, 0);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + vec1.x * i, ent.y() + 1D + vec1.y * i, ent.z() - 0.5D + vec1.z * i, 0, 0, 0);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D + vec2.x * i, ent.y() + 1D + vec2.y * i, ent.z() - 0.5D + vec2.z * i, 0, 0, 0);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D + vec3.x * i, ent.y() + 1D + vec3.y * i, ent.z() + 0.5D + vec3.z * i, 0, 0, 0);
+			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D + vec4.x * i, ent.y() + 1D + vec4.y * i, ent.z() + 0.5D + vec4.z * i, 0, 0, 0);
 		}
 	}
 	

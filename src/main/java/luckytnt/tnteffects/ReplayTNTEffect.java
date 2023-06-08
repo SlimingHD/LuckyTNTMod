@@ -25,14 +25,14 @@ public class ReplayTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(entity.level() instanceof ServerLevel sLevel && entity instanceof PrimedReplayTNT tnt) {
+		if(entity.getLevel() instanceof ServerLevel sLevel && entity instanceof PrimedReplayTNT tnt) {
 			if(tnt.getTNTFuse() == 400) {
 				ExplosionHelper.doSphericalExplosion(sLevel, tnt.getPos(), 10, new IForEachBlockExplosionEffect() {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 						if(state.getBlock() instanceof LTNTBlock) {
-							state.onBlockExploded(sLevel, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+							state.onBlockExploded(sLevel, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 						}
 						tnt.blocks.put(pos, state);
 					}
@@ -72,29 +72,29 @@ public class ReplayTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		if(entity.getTNTFuse() > 200) {
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 0.5f), entity.x(), entity.y() + 1.5D, entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 0.5f), entity.x(), entity.y() + 1.5D, entity.z(), 0, 0, 0);
 			for(double angle = 0; angle < 360; angle += 36D) {
-				entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), entity.x() + 0.125 * Math.cos(angle * Math.PI / 180), entity.y() + 1.5f + 0.125 * Math.sin(angle * Math.PI / 180), entity.z(), 0, 0, 0);
-				entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), entity.x() + 0.0675 * Math.cos(angle * Math.PI / 180), entity.y() + 1.5f + 0.0675 * Math.sin(angle * Math.PI / 180), entity.z(), 0, 0, 0);
+				entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), entity.x() + 0.125 * Math.cos(angle * Math.PI / 180), entity.y() + 1.5f + 0.125 * Math.sin(angle * Math.PI / 180), entity.z(), 0, 0, 0);
+				entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), entity.x() + 0.0675 * Math.cos(angle * Math.PI / 180), entity.y() + 1.5f + 0.0675 * Math.sin(angle * Math.PI / 180), entity.z(), 0, 0, 0);
 			}
 			for(double angle = 0; angle < 360; angle += 12D) {
-				entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), entity.x() + 0.175 * Math.cos(angle * Math.PI / 180), entity.y() + 1.5f + 0.175 * Math.sin(angle * Math.PI / 180), entity.z(), 0, 0, 0);
+				entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), entity.x() + 0.175 * Math.cos(angle * Math.PI / 180), entity.y() + 1.5f + 0.175 * Math.sin(angle * Math.PI / 180), entity.z(), 0, 0, 0);
 			}
 		}
 		if(entity.getTNTFuse() <= 200) {
 			Vec3 vec31 = new Vec3((entity.x() + 0.175D) - (entity.x() - 0.175D), (entity.y() + 1.5D) - (entity.y() + 1.5D + 0.175D), 0);
 			Vec3 vec32 = new Vec3((entity.x() + 0.175D) - (entity.x() - 0.175D), (entity.y() + 1.5D) - (entity.y() + 1.5D - 0.175D), 0);
 			
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x(), entity.y() + 1.5D, entity.z(), 0, 0, 0);
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.0875D, entity.y() + 1.5D, entity.z(), 0, 0, 0);
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.0875D, entity.y() + 1.5D + 0.08D, entity.z(), 0, 0, 0);
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.0875D, entity.y() + 1.5D - 0.08D, entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x(), entity.y() + 1.5D, entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.0875D, entity.y() + 1.5D, entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.0875D, entity.y() + 1.5D + 0.08D, entity.z(), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.0875D, entity.y() + 1.5D - 0.08D, entity.z(), 0, 0, 0);
 			for(double i = 0D; i <= 0.35D; i += 0.05D) {
-				entity.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.175D, entity.y() + 1.5D - 0.175D + i, entity.z(), 0, 0, 0);
+				entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.175D, entity.y() + 1.5D - 0.175D + i, entity.z(), 0, 0, 0);
 			}
 			for(double i = 0; i <= 1; i += 0.1D) {
-				entity.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.175D + i * vec31.x, entity.y() + 1.5D + 0.175D + i * vec31.y, entity.z(), 0, 0, 0);
-				entity.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.175D + i * vec32.x, entity.y() + 1.5D - 0.175D + i * vec32.y, entity.z(), 0, 0, 0);
+				entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.175D + i * vec31.x, entity.y() + 1.5D + 0.175D + i * vec31.y, entity.z(), 0, 0, 0);
+				entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), entity.x() - 0.175D + i * vec32.x, entity.y() + 1.5D - 0.175D + i * vec32.y, entity.z(), 0, 0, 0);
 			}
 		}
 	}

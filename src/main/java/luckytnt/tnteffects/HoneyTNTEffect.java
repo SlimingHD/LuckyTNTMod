@@ -33,13 +33,13 @@ public class HoneyTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		Noise3D noise = new Noise3D(radius * 4, radius * 4, radius * 4, 5);
-		ExplosionHelper.doModifiedSphericalExplosion(entity.level(), entity.getPos(), radius, new Vec3(1f, 1.5f, 1f), new IForEachBlockExplosionEffect() {		
+		ExplosionHelper.doModifiedSphericalExplosion(entity.getLevel(), entity.getPos(), radius, new Vec3(1f, 1.5f, 1f), new IForEachBlockExplosionEffect() {		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 200) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 200) {
 					distance += Math.random();
 					if(distance <= radius - 2) {
-						state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+						state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 						if(distance >= radius - 3 && Math.random() < 0.05f) {
 							level.setBlockAndUpdate(pos, Blocks.BEE_NEST.defaultBlockState().setValue(BeehiveBlock.FACING, getRandomDirectionHorizontal()).setValue(BeehiveBlock.HONEY_LEVEL, new Random().nextInt(6)));
 						}
@@ -53,7 +53,7 @@ public class HoneyTNTEffect extends PrimedTNTEffect{
 						int offX = Math.round(pos.getX() - (float)entity.x());
 						int offY = Math.round(pos.getY() - (float)entity.y());
 						int offZ = Math.round(pos.getZ() - (float)entity.z());
-						state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+						state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 						if(noise.getValue(Mth.clamp(offX + radius, 0, radius * 4), Mth.clamp((int)(offY + radius * 1.5f), 0, radius * 4), Mth.clamp(offZ + radius, 0, radius * 4)) > 0.7f) {
 							level.setBlockAndUpdate(pos, Blocks.HONEY_BLOCK.defaultBlockState());
 						}
@@ -68,7 +68,7 @@ public class HoneyTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity){
-		entity.level().addParticle(ParticleTypes.DRIPPING_HONEY, entity.x(), entity.y(), entity.z(), 0f, 0f, 0f);
+		entity.getLevel().addParticle(ParticleTypes.DRIPPING_HONEY, entity.x(), entity.y(), entity.z(), 0f, 0f, 0f);
 	}
 	
 	@Override

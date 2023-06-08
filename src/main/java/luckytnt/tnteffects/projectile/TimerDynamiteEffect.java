@@ -19,14 +19,14 @@ public class TimerDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(entity instanceof LExplosiveProjectile ent) {
 			if(ent.inGround() || ent.hitEntity()) {
 				ent.getPersistentData().putBoolean("hitBefore", true);
 			}
 			if(ent.getTNTFuse() == 0) {
 				if(ent.level instanceof ServerLevel) {
-					entity.level().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					entity.getLevel().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 					serverExplosion(entity);
 				}
 				ent.destroy();
@@ -43,7 +43,7 @@ public class TimerDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 5);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 5);
 		explosion.doEntityExplosion(1f, true);
 		explosion.doBlockExplosion();
 	}
@@ -52,7 +52,7 @@ public class TimerDynamiteEffect extends PrimedTNTEffect{
 	public void spawnParticles(IExplosiveEntity entity) {
 		float r = entity.getTNTFuse() < 200 ? 1f : 2f - 0.005f * entity.getTNTFuse();
 		float g = entity.getTNTFuse() >= 200 ? 1f : 0.005f * entity.getTNTFuse();
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(r, g, 0), 1f), entity.x(), entity.y(), entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(r, g, 0), 1f), entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override

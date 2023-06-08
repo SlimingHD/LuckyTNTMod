@@ -38,11 +38,11 @@ public class RingDynamiteEffect extends PrimedTNTEffect {
 		array[8] = vec.add(leftup).normalize();
 		
 		for(int i = 1; i <= 8; i++) {
-			LExplosiveProjectile dynamite = EntityRegistry.DYNAMITE.get().create(ent.level());
+			LExplosiveProjectile dynamite = EntityRegistry.DYNAMITE.get().create(ent.getLevel());
 			dynamite.setOwner(ent.owner());
 			dynamite.setPos(ent.getPos());
 			dynamite.setDeltaMovement(array[i].scale(2D));
-			ent.level().addFreshEntity(dynamite);
+			ent.getLevel().addFreshEntity(dynamite);
 		}
 	}
 	

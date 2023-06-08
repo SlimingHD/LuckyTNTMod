@@ -28,7 +28,7 @@ public class GroveTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), strength);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), strength);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@SuppressWarnings("resource")
@@ -47,9 +47,9 @@ public class GroveTNTEffect extends PrimedTNTEffect {
 							case 4: string = "birchtree"; break;
 							case 5: string = "jungletree"; break;
 						}
-						StructureTemplate template = ((ServerLevel)entity.level()).getStructureManager().getOrCreate(new ResourceLocation(LuckyTNTMod.MODID, string));
+						StructureTemplate template = ((ServerLevel)entity.getLevel()).getStructureManager().getOrCreate(new ResourceLocation(LuckyTNTMod.MODID, string));
 						if(template != null) {
-							template.placeInWorld((ServerLevel)entity.level(), pos.offset(-1, 0, -1), pos.offset(-1, 0, -1), new StructurePlaceSettings(), entity.level().random, 3);
+							template.placeInWorld((ServerLevel)entity.getLevel(), pos.offset(-1, 0, -1), pos.offset(-1, 0, -1), new StructurePlaceSettings(), entity.getLevel().random, 3);
 						}
 					}
 				}

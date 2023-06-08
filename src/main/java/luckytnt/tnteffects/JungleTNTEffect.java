@@ -40,15 +40,15 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		replaceNonSolidBlockOrVegetationWithAir(ent, 150, 99, true);
 		
-		ExplosionHelper.doSphericalExplosion(ent.level(), ent.getPos(), 150, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 150, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				BlockPos posTop = pos.offset(0, 1, 0);
 				BlockState stateTop = level.getBlockState(posTop);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && stateTop.getExplosionResistance(level, posTop, ImprovedExplosion.dummyExplosion(ent.level())) < 100 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && (stateTop.getMaterial() == Material.AIR || stateTop.getMaterial() == Material.PLANT || stateTop.getMaterial() == Material.REPLACEABLE_PLANT || stateTop.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT || stateTop.getMaterial() == Material.TOP_SNOW)) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && stateTop.getExplosionResistance(level, posTop, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && (stateTop.getMaterial() == Material.AIR || stateTop.getMaterial() == Material.PLANT || stateTop.getMaterial() == Material.REPLACEABLE_PLANT || stateTop.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT || stateTop.getMaterial() == Material.TOP_SNOW)) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					level.setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
 				}
 			}
@@ -68,21 +68,21 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 	}
 	
 	public static void replaceNonSolidBlockOrVegetationWithAir(IExplosiveEntity ent, double radius, float maxResistance, boolean vegetation) {
-		if(!ent.level().isClientSide()) {
+		if(!ent.getLevel().isClientSide()) {
 			for(double offX = -radius; offX <= radius; offX++) {
 				for(double offY = radius; offY >= -radius; offY--) {
 					for(double offZ = -radius; offZ <= radius; offZ++) {
 						double distance = Math.sqrt(offX * offX + offY * offY + offZ * offZ);
 						BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
-						BlockState state = ent.level().getBlockState(pos);
+						BlockState state = ent.getLevel().getBlockState(pos);
 						if(distance <= radius) {					
-							if(state.getExplosionResistance(ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level())) <= maxResistance && state.getMaterial() != Material.AIR && ((!state.isCollisionShapeFullBlock(ent.level(), pos) && !state.is(Blocks.MUD) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.getBlock() == Blocks.MANGROVE_ROOTS)))) {
+							if(state.getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= maxResistance && state.getMaterial() != Material.AIR && ((!state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !state.is(Blocks.MUD) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.getBlock() == Blocks.MANGROVE_ROOTS)))) {
 								if(state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getMaterial() == Material.WATER_PLANT) {
 									Block block1 = state.getBlock();
-									block1.onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
-									ent.level().setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
+									block1.onBlockExploded(state, ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
+									ent.getLevel().setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
 								} else {
-									state.getBlock().onBlockExploded(state, ent.level(), pos, ImprovedExplosion.dummyExplosion(ent.level()));
+									state.getBlock().onBlockExploded(state, ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 								}
 							}
 						}
@@ -93,16 +93,16 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 	}
 	
 	public static void doJungleExplosion(IExplosiveEntity ent, double radius) {
-		Registry<Biome> registry = ent.level().registryAccess().registryOrThrow(Registries.BIOME);
+		Registry<Biome> registry = ent.getLevel().registryAccess().registryOrThrow(Registries.BIOME);
 		Holder<Biome> biome = registry.wrapAsHolder(registry.get(Biomes.JUNGLE));
 		for(double offX = -radius; offX < radius; offX++) {
 			for(double offZ = -radius; offZ < radius; offZ++) {
 				boolean foundBlock = false;
 				double distance = Math.sqrt(offX * offX + offZ * offZ);
-				if(!ent.level().isClientSide()) {
+				if(!ent.getLevel().isClientSide()) {
 					if(distance < radius) {
 						if(offX % 16 == 0 && offZ % 16 == 0) {
-							for(LevelChunkSection section : ent.level().getChunk(new BlockPos(Mth.floor(ent.x() + offX), 0, Mth.floor(ent.z() + offZ))).getSections()) {
+							for(LevelChunkSection section : ent.getLevel().getChunk(new BlockPos(Mth.floor(ent.x() + offX), 0, Mth.floor(ent.z() + offZ))).getSections()) {
 								PalettedContainerRO<Holder<Biome>> biomesRO = section.getBiomes();
 								for(int i = 0; i < 4; ++i) {
 									for(int j = 0; j < 4; ++j) {
@@ -115,11 +115,11 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 								}
 							}
 						}
-						for(ServerPlayer player : ((ServerLevel)ent.level()).players()) {
-							player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.level().getChunkAt(new BlockPos(Mth.floor(ent.x() + offX), 0, Mth.floor(ent.z() + offZ))), ent.level().getLightEngine(), null, null, false));
+						for(ServerPlayer player : ((ServerLevel)ent.getLevel()).players()) {
+							player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.getLevel().getChunkAt(new BlockPos(Mth.floor(ent.x() + offX), 0, Mth.floor(ent.z() + offZ))), ent.getLevel().getLightEngine(), null, null, false));
 						}
 						
-						Registry<ConfiguredFeature<?, ?>> features = ent.level().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
+						Registry<ConfiguredFeature<?, ?>> features = ent.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 						
 						ConfiguredFeature<?, ?> patch_melon = features.get(VegetationFeatures.PATCH_MELON);
 						ConfiguredFeature<?, ?> trees_jungle = features.get(VegetationFeatures.TREES_JUNGLE);
@@ -127,15 +127,15 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 						
 						for(double offY = 320; offY > -64; offY--) {
 							BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
-							BlockState state = ent.level().getBlockState(pos);
-							if(!foundBlock && state.isCollisionShapeFullBlock(ent.level(), pos) && state.getMaterial() != Material.AIR && !(ent.level().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
+							BlockState state = ent.getLevel().getBlockState(pos);
+							if(!foundBlock && state.isCollisionShapeFullBlock(ent.getLevel(), pos) && state.getMaterial() != Material.AIR && !(ent.getLevel().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
 								if(offX % 30 == 0 && offZ % 30 == 0) {
-									patch_melon.place((ServerLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
+									patch_melon.place((ServerLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
 								}
 								int random = new Random().nextInt(3);
 								switch(random) {
-									case 0: trees_jungle.place((ServerLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above()); break;
-									case 1:	patch_grass_jungle.place((ServerLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos.above()); break;
+									case 0: trees_jungle.place((ServerLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos.above()); break;
+									case 1:	patch_grass_jungle.place((ServerLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos.above()); break;
 								}
 								foundBlock = true;
 							}

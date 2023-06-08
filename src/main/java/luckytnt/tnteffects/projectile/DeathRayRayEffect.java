@@ -24,7 +24,7 @@ public class DeathRayRayEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 5, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 5, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -36,7 +36,7 @@ public class DeathRayRayEffect extends PrimedTNTEffect{
 					level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 				}
 				else {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 				}
 			}
 		}); 
@@ -44,7 +44,7 @@ public class DeathRayRayEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 4);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 4);
 		explosion.doEntityExplosion(new IForEachEntityExplosionEffect() {
 			
 			@Override
@@ -66,7 +66,7 @@ public class DeathRayRayEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0.25f, 0f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0.25f, 0f), 1), entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override
