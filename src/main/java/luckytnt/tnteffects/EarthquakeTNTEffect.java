@@ -32,13 +32,13 @@ public class EarthquakeTNTEffect extends PrimedTNTEffect{
 	      	entity.getPersistentData().putDouble("y", entity.y());
 	      	entity.getPersistentData().putDouble("z", entity.z());
 	      	
-	      	List<Player> list = entity.level().getEntitiesOfClass(Player.class, new AABB(entity.x() - 100, entity.y() - 100, entity.z() - 100, entity.x() + 100, entity.y() + 100, entity.z() + 100));
+	      	List<Player> list = entity.getLevel().getEntitiesOfClass(Player.class, new AABB(entity.x() - 100, entity.y() - 100, entity.z() - 100, entity.x() + 100, entity.y() + 100, entity.z() + 100));
 	      	for(Player player : list) {
 	      		player.getPersistentData().putInt("shakeTime", 200);
 	      	}
 		}
 		
-		if(entity.getTNTFuse() <= 200 && entity.getTNTFuse() % 20 == 0 && !entity.level().isClientSide()) {
+		if(entity.getTNTFuse() <= 200 && entity.getTNTFuse() % 20 == 0 && !entity.getLevel().isClientSide()) {
 			BlockPos origin = toBlockPos(new Vec3(entity.getPersistentData().getDouble("x"), entity.getPersistentData().getDouble("y"), entity.getPersistentData().getDouble("z")));
 			BlockPos start = origin.offset(toBlockPos(new Vec3(entity.getPersistentData().getDouble("vecx") * -40, 0, entity.getPersistentData().getDouble("vecz") * -40)));
 			Vec3 vec = new Vec3(entity.getPersistentData().getDouble("vecx"), 0, entity.getPersistentData().getDouble("vecz"));
@@ -50,25 +50,25 @@ public class EarthquakeTNTEffect extends PrimedTNTEffect{
 						BlockPos pos = start.offset(toBlockPos(new Vec3(i * vec.x + offX, 0, i * vec.z + offZ)));
 						if(distance <= 3) {
 							if(Math.random() > 0.1D) {
-								BlockPos pos1 = new BlockPos(pos.getX(), entity.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(entity.level().getBlockState(pos1).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 100) {
-									entity.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
+								BlockPos pos1 = new BlockPos(pos.getX(), entity.getLevel().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
+								if(entity.getLevel().getBlockState(pos1).getExplosionResistance(entity.getLevel(), pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 100) {
+									entity.getLevel().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
 						}
 						if(distance <= 5 && distance > 3) {
 							if(Math.random() > 0.5D) {
-								BlockPos pos1 = new BlockPos(pos.getX(), entity.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(entity.level().getBlockState(pos1).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 100) {
-									entity.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
+								BlockPos pos1 = new BlockPos(pos.getX(), entity.getLevel().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
+								if(entity.getLevel().getBlockState(pos1).getExplosionResistance(entity.getLevel(), pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 100) {
+									entity.getLevel().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
 						}
 						if(distance <= 6 && distance > 5) {
 							if(Math.random() > 0.9D) {
-								BlockPos pos1 = new BlockPos(pos.getX(), entity.level().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(entity.level().getBlockState(pos1).getExplosionResistance(entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 100) {
-									entity.level().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
+								BlockPos pos1 = new BlockPos(pos.getX(), entity.getLevel().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
+								if(entity.getLevel().getBlockState(pos1).getExplosionResistance(entity.getLevel(), pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 100) {
+									entity.getLevel().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}
 						}

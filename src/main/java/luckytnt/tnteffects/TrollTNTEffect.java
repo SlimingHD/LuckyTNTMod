@@ -9,7 +9,7 @@ public class TrollTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 4);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 4);
 		explosion.doEntityExplosion(1f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1f, false, false);
 	}

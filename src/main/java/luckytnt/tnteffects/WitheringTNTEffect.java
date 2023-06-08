@@ -28,7 +28,7 @@ public class WitheringTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), strength);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), strength);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
@@ -44,19 +44,19 @@ public class WitheringTNTEffect extends PrimedTNTEffect{
 		for(int i = 0; i < strength * 2f; i++) {
 			int offX = (int)Math.round(Math.random() * strength * 2f - strength);
 			int offZ = (int)Math.round(Math.random() * strength * 2f - strength);
-			WitherSkeleton skeleton = new WitherSkeleton(EntityType.WITHER_SKELETON, entity.level());
-			if(entity.level() instanceof ServerLevel sl) {
-				skeleton.finalizeSpawn(sl, entity.level().getCurrentDifficultyAt(toBlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
+			WitherSkeleton skeleton = new WitherSkeleton(EntityType.WITHER_SKELETON, entity.getLevel());
+			if(entity.getLevel() instanceof ServerLevel sl) {
+				skeleton.finalizeSpawn(sl, entity.getLevel().getCurrentDifficultyAt(toBlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
-			for(int y = entity.level().getMaxBuildHeight(); y >= entity.level().getMinBuildHeight(); y--) {
+			for(int y = entity.getLevel().getMaxBuildHeight(); y >= entity.getLevel().getMinBuildHeight(); y--) {
 				BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX), y, Mth.floor(entity.z() + offZ));
-				BlockState state = entity.level().getBlockState(pos);
-				if(!Block.isFaceFull(state.getCollisionShape(entity.level(), pos), Direction.UP) && Block.isFaceFull(entity.level().getBlockState(pos.below()).getCollisionShape(entity.level(), pos.below()), Direction.UP)) {
+				BlockState state = entity.getLevel().getBlockState(pos);
+				if(!Block.isFaceFull(state.getCollisionShape(entity.getLevel(), pos), Direction.UP) && Block.isFaceFull(entity.getLevel().getBlockState(pos.below()).getCollisionShape(entity.getLevel(), pos.below()), Direction.UP)) {
 					skeleton.setPos(pos.getX() + 0.5f, y, pos.getZ() + 0.5f);
 					break;
 				}
 			}
-			entity.level().addFreshEntity(skeleton);
+			entity.getLevel().addFreshEntity(skeleton);
 		}
 	}
 	

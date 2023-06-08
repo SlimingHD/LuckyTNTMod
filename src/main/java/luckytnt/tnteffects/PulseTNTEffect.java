@@ -17,11 +17,11 @@ public class PulseTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(!level.isClientSide) {
 			if(entity.getTNTFuse() < 205) {
 				if(entity.getTNTFuse() % 20 == 0) {		      		
-					ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), entity.getPersistentData().getInt("strength"));
+					ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), entity.getPersistentData().getInt("strength"));
 					explosion.doEntityExplosion(1.5f, true);
 					explosion.doBlockExplosion();
 		      		
@@ -42,9 +42,9 @@ public class PulseTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		for(double angle = 0; angle < 360; angle += 6D) {
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + 0.75f * Math.cos(angle * Math.PI / 180), entity.y(), entity.z() + 0.75f * Math.sin(angle * Math.PI / 180), 0, 0, 0);
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + Math.cos(angle * Math.PI / 180), entity.y() + 0.5f, entity.z() + Math.sin(angle * Math.PI / 180), 0, 0, 0);
-			entity.level().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + 0.75f * Math.cos(angle * Math.PI / 180), entity.y() + 1f, entity.z() + 0.75f * Math.sin(angle * Math.PI / 180), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + 0.75f * Math.cos(angle * Math.PI / 180), entity.y(), entity.z() + 0.75f * Math.sin(angle * Math.PI / 180), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + Math.cos(angle * Math.PI / 180), entity.y() + 0.5f, entity.z() + Math.sin(angle * Math.PI / 180), 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + 0.75f * Math.cos(angle * Math.PI / 180), entity.y() + 1f, entity.z() + 0.75f * Math.sin(angle * Math.PI / 180), 0, 0, 0);
 		}
 	}
 	

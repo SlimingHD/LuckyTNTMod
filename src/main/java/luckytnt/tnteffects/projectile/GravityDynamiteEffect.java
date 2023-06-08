@@ -15,7 +15,7 @@ public class GravityDynamiteEffect extends PrimedTNTEffect{
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		((Entity)entity).setDeltaMovement(((Entity)entity).getDeltaMovement().add(0f, 0.08f, 0f));
-		List<Entity> ents = entity.level().getEntities((Entity)entity, new AABB(entity.getPos().add(-10f, -10f, -10f), entity.getPos().add(10f, 10f, 10f)));
+		List<Entity> ents = entity.getLevel().getEntities((Entity)entity, new AABB(entity.getPos().add(-10f, -10f, -10f), entity.getPos().add(10f, 10f, 10f)));
 		for(Entity ent : ents) {
 			if(!ent.equals(entity.owner()) && !(ent instanceof IExplosiveEntity)) {
 				Vec3 direction = entity.getPos().subtract(ent.getPosition(1f)).normalize();

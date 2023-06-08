@@ -23,7 +23,7 @@ public class HomingDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 20);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 20);
 		explosion.doEntityExplosion(1.5f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 	}
@@ -31,14 +31,14 @@ public class HomingDynamiteEffect extends PrimedTNTEffect{
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		if(entity.getTNTFuse() < 390) {
-			Entity target = entity.level().getEntity(entity.getPersistentData().getInt("targetID"));
+			Entity target = entity.getLevel().getEntity(entity.getPersistentData().getInt("targetID"));
 			if(target == null) {
 				target = setTarget(entity);
 			}
 			else {
 				Vec3 movement = target.getPosition(1f).subtract(entity.getPos()).normalize();
 				((Entity)entity).setDeltaMovement(movement);
-				if(entity.level() instanceof ServerLevel server) {
+				if(entity.getLevel() instanceof ServerLevel server) {
 					for(ServerPlayer splayer : server.players()) {
 						splayer.connection.send(new ClientboundSetEntityMotionPacket(((Entity)entity).getId(), ((Entity)entity).getDeltaMovement()));
 					}
@@ -49,7 +49,7 @@ public class HomingDynamiteEffect extends PrimedTNTEffect{
 	
 	@Nullable
 	public Entity setTarget(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		Entity target = null;
 		List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-100, -100, -100), entity.getPos().add(100, 100, 100)));
 		double distance = Math.sqrt(20000);

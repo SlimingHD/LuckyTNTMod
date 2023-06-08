@@ -15,7 +15,7 @@ public class PoseidonsWaveEffect extends OceanTNTEffect {
 	public void baseTick(IExplosiveEntity entity) {
 		super.baseTick(entity);
 		if(entity.getTNTFuse() == 179) {
-			if(entity.level() instanceof ServerLevel sl) {
+			if(entity.getLevel() instanceof ServerLevel sl) {
 				sl.setWeatherParameters(0, 10000, true, true);
 			}
 		}
@@ -23,7 +23,7 @@ public class PoseidonsWaveEffect extends OceanTNTEffect {
 
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.SPLASH, ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.SPLASH, ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
 	}
 	
 	@Override

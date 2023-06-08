@@ -22,11 +22,11 @@ public class SnowTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doTopBlockExplosionForAll(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doTopBlockExplosionForAll(entity.getLevel(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 				level.setBlockAndUpdate(pos, Blocks.SNOW.defaultBlockState());
 			}
 		});

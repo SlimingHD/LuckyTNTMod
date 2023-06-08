@@ -13,14 +13,14 @@ public class NightTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		if(entity.level() instanceof ServerLevel sLevel) {
+		if(entity.getLevel() instanceof ServerLevel sLevel) {
 			sLevel.setDayTime(18000);
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, -0.1f, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, -0.1f, 0);
 	}
 	
 	@Override

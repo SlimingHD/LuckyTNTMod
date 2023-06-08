@@ -16,7 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class DeathRayEffect extends PrimedTNTEffect {
 
@@ -25,7 +24,7 @@ public class DeathRayEffect extends PrimedTNTEffect {
 		if(ent.getTNTFuse() == 480) {
 			ent.getPersistentData().putInt("explosionSize", 1);
 			ent.getPersistentData().putInt("particleSize", 1);
-			ent.level().playSound(null, ent.x(), ent.y(), ent.z(), SoundRegistry.DEATH_RAY.get(), SoundSource.HOSTILE, 20, 1);
+			ent.getLevel().playSound(null, ent.x(), ent.y(), ent.z(), SoundRegistry.DEATH_RAY.get(), SoundSource.HOSTILE, 20, 1);
 			((Entity)ent).setDeltaMovement(0, 0, 0);
 		}
 		
@@ -33,20 +32,20 @@ public class DeathRayEffect extends PrimedTNTEffect {
 			((Entity)ent).setDeltaMovement(0, 0, 0);
 			((Entity)ent).setPos(((Entity)ent).xOld, ((Entity)ent).yOld, ((Entity)ent).zOld);
 			
-			ExplosionHelper.doSphericalExplosion(ent.level(), ent.getPos(), ent.getPersistentData().getInt("explosionSize"), new IForEachBlockExplosionEffect() {
+			ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), ent.getPersistentData().getInt("explosionSize"), new IForEachBlockExplosionEffect() {
 				
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 					if(distance >= 75) {
-						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 2000 && state.getMaterial() != Material.AIR) {
+						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 2000 && !state.isAir()) {
 							if(Math.random() < 0.1f) {
 								level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 							} else if(Math.random() < 0.8f) {
 								level.setBlock(pos, Blocks.OBSIDIAN.defaultBlockState(), 3);
 							}
 						}
-					} else if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.level())) < 2000 && state.getMaterial() != Material.AIR) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.level()));
+					} else if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 2000 && !state.isAir()) {
+						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					}
 				}
 			});
@@ -58,11 +57,11 @@ public class DeathRayEffect extends PrimedTNTEffect {
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() > 120) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(0.8f, 0f, 0f), 1f), true, ent.x(), ent.y(), ent.z(), 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.8f, 0f, 0f), 1f), true, ent.x(), ent.y(), ent.z(), 0, 0, 0);
 		}
 		if(ent.getTNTFuse() < 140) {
 			for(int count = 0; count < 200; count++) {
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0f, 2f), 10f), true, ent.x() + Math.random() - Math.random(), ent.y() + 135f - Math.random() * ent.getPersistentData().getInt("particleSize"), ent.z() + Math.random() - Math.random(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0f, 2f), 10f), true, ent.x() + Math.random() - Math.random(), ent.y() + 135f - Math.random() * ent.getPersistentData().getInt("particleSize"), ent.z() + Math.random() - Math.random(), 0, 0, 0);
 			}
 			ent.getPersistentData().putInt("particleSize", ent.getPersistentData().getInt("particleSize") + 2);
 		}

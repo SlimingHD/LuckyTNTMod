@@ -17,7 +17,7 @@ public class TrollTNTMk3Effect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 		explosion.doBlockExplosion(new IBlockExplosionCondition() {
 			
 			@Override

@@ -13,15 +13,15 @@ public class MeteorDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		LExplosiveProjectile meteor = EntityRegistry.LITTLE_METEOR.get().create(entity.level());
+		LExplosiveProjectile meteor = EntityRegistry.LITTLE_METEOR.get().create(entity.getLevel());
 		meteor.setPos(entity.getPos().add(0, LuckyTNTConfigValues.DROP_HEIGHT.get(), 0));
 		meteor.setOwner(entity.owner());
-		entity.level().addFreshEntity(meteor);
+		entity.getLevel().addFreshEntity(meteor);
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(ParticleTypes.LAVA, entity.x(), entity.y(), entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(ParticleTypes.LAVA, entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override

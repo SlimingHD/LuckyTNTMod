@@ -12,9 +12,9 @@ public class MankindsMarkEffect extends HouseTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 1.5f, ent.z(), 0.05f, -0.1f, 0.05f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 1.5f, ent.z(), -0.05f, -0.1f, -0.05f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 1.5f, ent.z(), 0.05f, -0.1f, -0.05f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 1.5f, ent.z(), -0.05f, -0.1f, 0.05f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 1.5f, ent.z(), 0.05f, -0.1f, 0.05f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 1.5f, ent.z(), -0.05f, -0.1f, -0.05f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 1.5f, ent.z(), 0.05f, -0.1f, -0.05f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 1.5f, ent.z(), -0.05f, -0.1f, 0.05f);
 	}
 }

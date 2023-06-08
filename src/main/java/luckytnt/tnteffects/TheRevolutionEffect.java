@@ -21,13 +21,13 @@ public class TheRevolutionEffect extends PrimedTNTEffect{
 			if(entity.getTNTFuse() < 60) {
 				if(entity.getTNTFuse() % 6 == 0) {
 					ent.getPersistentData().putFloat("spiral_power", Mth.clamp(ent.getPersistentData().getFloat("spiral_power") + 0.15f, 0.15f, Float.MAX_VALUE));
-					PrimedLTNT spiral_tnt = EntityRegistry.SPIRAL_TNT.get().create(entity.level());
+					PrimedLTNT spiral_tnt = EntityRegistry.SPIRAL_TNT.get().create(entity.getLevel());
 					spiral_tnt.setTNTFuse(140);
 					spiral_tnt.setPos(entity.x(), entity.y(), entity.z());
 					spiral_tnt.setOwner(entity.owner());
 					spiral_tnt.setDeltaMovement(ent.getLookAngle().normalize().scale((double)ent.getPersistentData().getFloat("spiral_power")));
-					entity.level().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
-					entity.level().addFreshEntity(spiral_tnt);
+					entity.getLevel().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
+					entity.getLevel().addFreshEntity(spiral_tnt);
 					ent.setYRot(ent.getYRot() + 60f);
 				}
 			}

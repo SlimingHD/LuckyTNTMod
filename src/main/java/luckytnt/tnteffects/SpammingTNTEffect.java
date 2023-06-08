@@ -13,18 +13,18 @@ public class SpammingTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		for(int count = 0; count <= 400; count++) {
-			ItemEntity dirt = new ItemEntity(entity.level(), entity.x(), entity.y(), entity.z(), new ItemStack(Items.DIRT));
+			ItemEntity dirt = new ItemEntity(entity.getLevel(), entity.x(), entity.y(), entity.z(), new ItemStack(Items.DIRT));
 			dirt.setDeltaMovement(Math.random() * 6 - 3, 3 + Math.random() * 3, Math.random() * 6 - 3);
-			entity.level().addFreshEntity(dirt);
+			entity.getLevel().addFreshEntity(dirt);
 		}
 	}
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		for(int count = 0; count <= 20; count++) {
-			ItemEntity dirt = new ItemEntity(entity.level(), entity.x(), entity.y(), entity.z(), new ItemStack(Items.DIRT));
+			ItemEntity dirt = new ItemEntity(entity.getLevel(), entity.x(), entity.y(), entity.z(), new ItemStack(Items.DIRT));
 			dirt.setDeltaMovement(Math.random() * 4 - 2, 2 + Math.random() * 2, Math.random() * 4 - 2);
-			entity.level().addFreshEntity(dirt);
+			entity.getLevel().addFreshEntity(dirt);
 		}
 	}
 	

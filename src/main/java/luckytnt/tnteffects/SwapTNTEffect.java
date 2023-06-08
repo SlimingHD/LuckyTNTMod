@@ -22,7 +22,7 @@ public class SwapTNTEffect extends PrimedTNTEffect{
 	public void explosionTick(IExplosiveEntity entity) {
 		int[] ids = ((Entity)entity).getPersistentData().getIntArray("entities");
 		if(entity.getTNTFuse() < 40 && ids.length == 0) {
-			List<Entity> entList = entity.level().getEntities((Entity)entity, new AABB(entity.x() - 70, entity.y() - 70, entity.z() - 70, entity.x() + 70, entity.y() + 70, entity.z() + 70));
+			List<Entity> entList = entity.getLevel().getEntities((Entity)entity, new AABB(entity.x() - 70, entity.y() - 70, entity.z() - 70, entity.x() + 70, entity.y() + 70, entity.z() + 70));
 			ids = new int[entList.size()];
 			entity.setTNTFuse(0);
 			for(int i = 0; i < entList.size(); i++) {
@@ -33,22 +33,22 @@ public class SwapTNTEffect extends PrimedTNTEffect{
 		}
 		if(ids.length != 0 && entity.getTNTFuse() % 2 == 0) {
 			if(((Entity)entity).getPersistentData().getInt("count") < ids.length) {
-				Entity ent1 = entity.level().getEntity(ids[((Entity)entity).getPersistentData().getInt("count")]);
-				Entity ent2 = entity.level().getEntity(ids[new Random().nextInt(ids.length)]);
+				Entity ent1 = entity.getLevel().getEntity(ids[((Entity)entity).getPersistentData().getInt("count")]);
+				Entity ent2 = entity.getLevel().getEntity(ids[new Random().nextInt(ids.length)]);
 				if(ent1 != null && ent2 != null) {
 					Vec3 pos1 = ent1.getPosition(1);
 					Vec3 pos2 = ent2.getPosition(1);
 					
 					ent1.setPos(pos2);
-					entity.level().playSound(null, toBlockPos(pos2), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
+					entity.getLevel().playSound(null, toBlockPos(pos2), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
 					for(int count = 0; count < 40; count++) {
-						entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 1f), 1f), pos2.x + Math.random() * ent1.getBbWidth() - Math.random() * ent1.getBbWidth(), pos2.y + Math.random() * ent1.getBbHeight(), pos2.z + Math.random() * ent1.getBbWidth() - Math.random() * ent1.getBbWidth(), 0, 0, 0);
+						entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 1f), 1f), pos2.x + Math.random() * ent1.getBbWidth() - Math.random() * ent1.getBbWidth(), pos2.y + Math.random() * ent1.getBbHeight(), pos2.z + Math.random() * ent1.getBbWidth() - Math.random() * ent1.getBbWidth(), 0, 0, 0);
 					}
 					
 					ent2.setPos(pos1);
-					entity.level().playSound(null, toBlockPos(pos1), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
+					entity.getLevel().playSound(null, toBlockPos(pos1), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
 					for(int count = 0; count < 40; count++) {
-						entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 1f), 1f), pos1.x + Math.random() * ent2.getBbWidth() - Math.random() * ent2.getBbWidth(), pos1.y + Math.random() * ent2.getBbHeight(), pos1.z + Math.random() * ent2.getBbWidth() - Math.random() * ent2.getBbWidth(), 0, 0, 0);
+						entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 1f), 1f), pos1.x + Math.random() * ent2.getBbWidth() - Math.random() * ent2.getBbWidth(), pos1.y + Math.random() * ent2.getBbHeight(), pos1.z + Math.random() * ent2.getBbWidth() - Math.random() * ent2.getBbWidth(), 0, 0, 0);
 					}
 				}
 				((Entity)entity).getPersistentData().putInt("count", ((Entity)entity).getPersistentData().getInt("count") + 1);

@@ -35,9 +35,9 @@ public class HouseTNTEffect extends PrimedTNTEffect{
 	@SuppressWarnings("resource")
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		StructureTemplate template = ((ServerLevel)entity.level()).getStructureManager().getOrCreate(new ResourceLocation(LuckyTNTMod.MODID, house));
+		StructureTemplate template = ((ServerLevel)entity.getLevel()).getStructureManager().getOrCreate(new ResourceLocation(LuckyTNTMod.MODID, house));
 		if(template != null) {
-			template.placeInWorld((ServerLevel)entity.level(), toBlockPos(entity.getPos()).offset(offX, 0, offZ), toBlockPos(entity.getPos()).offset(offX, 0, offZ), new StructurePlaceSettings(), entity.level().random, 3);
+			template.placeInWorld((ServerLevel)entity.getLevel(), toBlockPos(entity.getPos()).offset(offX, 0, offZ), toBlockPos(entity.getPos()).offset(offX, 0, offZ), new StructurePlaceSettings(), entity.getLevel().random, 3);
 		}
 	}
 }

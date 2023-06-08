@@ -10,7 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
 public class WoolTNTEffect extends PrimedTNTEffect{
@@ -23,12 +23,12 @@ public class WoolTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				MaterialColor color = state.getMapColor(level, pos);
-				if(color != MaterialColor.NONE & !state.getCollisionShape(level, pos, CollisionContext.empty()).isEmpty()) {
+				MapColor color = state.getMapColor(level, pos);
+				if(color != MapColor.NONE & !state.getCollisionShape(level, pos, CollisionContext.empty()).isEmpty()) {
 					if(WorldOfWoolsEffect.WHITE.contains(color)) {
 						level.setBlock(pos, Blocks.WHITE_WOOL.defaultBlockState(), 3);
 					} else if(WorldOfWoolsEffect.LIGHT_GRAY.contains(color)) {

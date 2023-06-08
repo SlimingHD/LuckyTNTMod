@@ -22,17 +22,16 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.ComparatorMode;
-import net.minecraft.world.level.material.Material;
 
 public class RedstoneTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doTopBlockExplosion(entity.level(), entity.getPos(), 10, new IBlockExplosionCondition() {
+		ExplosionHelper.doTopBlockExplosion(entity.getLevel(), entity.getPos(), 10, new IBlockExplosionCondition() {
 			
 			@Override
 			public boolean conditionMet(Level level, BlockPos pos, BlockState state, double distance) {
-				return (state.isCollisionShapeFullBlock(level, pos) || state.isFaceSturdy(level, pos, Direction.UP)) && (level.getBlockState(pos.above()).isAir() || level.getBlockState(pos.above()).canBeReplaced(new DirectionalPlaceContext(level, pos.above(), Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) || level.getBlockState(pos.above()).is(BlockTags.FLOWERS)) && (Math.random() < 0.4f && state.getMaterial() != Material.LEAVES);
+				return (state.isCollisionShapeFullBlock(level, pos) || state.isFaceSturdy(level, pos, Direction.UP)) && (level.getBlockState(pos.above()).isAir() || level.getBlockState(pos.above()).canBeReplaced(new DirectionalPlaceContext(level, pos.above(), Direction.DOWN, ItemStack.EMPTY, Direction.UP)) || !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above()) || level.getBlockState(pos.above()).is(BlockTags.FLOWERS)) && (Math.random() < 0.4f && !state.is(BlockTags.LEAVES));
 			}
 		}, new IForEachBlockExplosionEffect() {
 			
@@ -61,15 +60,15 @@ public class RedstoneTNTEffect extends PrimedTNTEffect{
 					case 16: replace = Blocks.COMPARATOR.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, getRandomDirectionHorizontal()).setValue(BlockStateProperties.MODE_COMPARATOR, Math.random() < 0.5f ? ComparatorMode.COMPARE : ComparatorMode.SUBTRACT); break;
 				}
 				Block block = state.getBlock();
-				block.onBlockExploded(state, entity.level(), pos, ImprovedExplosion.dummyExplosion(entity.level()));
-				entity.level().setBlock(pos, replace, 3);
+				block.onBlockExploded(state, entity.getLevel(), pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
+				entity.getLevel().setBlock(pos, replace, 3);
 			}
 		});
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(DustParticleOptions.REDSTONE, entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(DustParticleOptions.REDSTONE, entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
 	}
 	
 	@Override

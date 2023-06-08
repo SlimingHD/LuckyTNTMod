@@ -24,10 +24,10 @@ public class EasterEggEffect extends PrimedTNTEffect{
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
 		super.baseTick(entity);
-		if(((Entity)entity).isOnGround() && ((Entity)entity).getPersistentData().getInt("level") > 0) {
+		if(((Entity)entity).onGround() && ((Entity)entity).getPersistentData().getInt("level") > 0) {
 			serverExplosion(entity);
-			Level level = entity.level();
-			entity.level().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+			Level level = entity.getLevel();
+			entity.getLevel().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 			entity.destroy();
 		}
 	}
@@ -35,7 +35,7 @@ public class EasterEggEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		int level = ((Entity)entity).getPersistentData().getInt("level");
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 15);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 15);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {		
 			@Override
@@ -43,10 +43,10 @@ public class EasterEggEffect extends PrimedTNTEffect{
 				if(Math.random() < 0.66f && !state.isAir()) {
 					state.onBlockExploded(level, pos, explosion);
 					if(Math.random() < 0.5f) {
-						entity.level().setBlockAndUpdate(pos, Blocks.MELON.defaultBlockState());
+						entity.getLevel().setBlockAndUpdate(pos, Blocks.MELON.defaultBlockState());
 					}
 					else {
-						entity.level().setBlockAndUpdate(pos, Blocks.PUMPKIN.defaultBlockState());
+						entity.getLevel().setBlockAndUpdate(pos, Blocks.PUMPKIN.defaultBlockState());
 					}
 				}
 			}
@@ -56,23 +56,23 @@ public class EasterEggEffect extends PrimedTNTEffect{
 		}
 		else {
 			for(int count = 0; count < 4; count++) {
-				PrimedLTNT tnt = EntityRegistry.EASTER_EGG.get().create(entity.level());
+				PrimedLTNT tnt = EntityRegistry.EASTER_EGG.get().create(entity.getLevel());
 				tnt.setPos(entity.getPos());
 				tnt.setOwner(entity.owner());
 				tnt.setDeltaMovement(Math.random() * 2 - 1, 1 + Math.random(), Math.random() * 2 - 1);
 				tnt.getPersistentData().putInt("level", level + 1);
-				entity.level().addFreshEntity(tnt);
+				entity.getLevel().addFreshEntity(tnt);
 			}
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0.5f, 0f), 1), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1), entity.x() + 0.2f, entity.y() + 1f, entity.z() + 0.2f, 0, 0, 0);
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1), entity.x() - 0.2f, entity.y() + 1f, entity.z() - 0.2f, 0, 0, 0);
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1), entity.x() + 0.2f, entity.y() + 1f, entity.z() - 0.2f, 0, 0, 0);
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1), entity.x() - 0.2f, entity.y() + 1f, entity.z() + 0.2f, 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0.5f, 0f), 1), entity.x(), entity.y() + 1f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1), entity.x() + 0.2f, entity.y() + 1f, entity.z() + 0.2f, 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1), entity.x() - 0.2f, entity.y() + 1f, entity.z() - 0.2f, 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1), entity.x() + 0.2f, entity.y() + 1f, entity.z() - 0.2f, 0, 0, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1), entity.x() - 0.2f, entity.y() + 1f, entity.z() + 0.2f, 0, 0, 0);
 	}
 	
 	@Override

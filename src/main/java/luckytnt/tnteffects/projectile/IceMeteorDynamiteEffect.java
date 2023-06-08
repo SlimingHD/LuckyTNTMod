@@ -13,15 +13,15 @@ public class IceMeteorDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		LExplosiveProjectile meteor = EntityRegistry.LITTLE_ICE_METEOR.get().create(entity.level());
+		LExplosiveProjectile meteor = EntityRegistry.LITTLE_ICE_METEOR.get().create(entity.getLevel());
 		meteor.setPos(entity.x(), entity.y() + LuckyTNTConfigValues.DROP_HEIGHT.get(), entity.z());
 		meteor.setOwner(entity.owner());
-		entity.level().addFreshEntity(meteor);
+		entity.getLevel().addFreshEntity(meteor);
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(ParticleTypes.ITEM_SNOWBALL, entity.x(), entity.y(), entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(ParticleTypes.ITEM_SNOWBALL, entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override

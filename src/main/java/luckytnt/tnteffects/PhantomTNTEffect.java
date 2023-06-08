@@ -9,13 +9,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class PhantomTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 20);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 20);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
 	}
@@ -27,8 +26,8 @@ public class PhantomTNTEffect extends PrimedTNTEffect{
 			boolean foundBlock = false;
 			for(int offY = 320; offY > -64; offY--) {
 	      		BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX), offY, Mth.floor(entity.z() + offZ));
-	      		BlockState state = entity.level().getBlockState(pos);
-	      		if(state.isCollisionShapeFullBlock(entity.level(), pos) && state.getMaterial() != Material.AIR && !foundBlock) {
+	      		BlockState state = entity.getLevel().getBlockState(pos);
+	      		if(state.isCollisionShapeFullBlock(entity.getLevel(), pos) && !state.isAir() && !foundBlock) {
 	      			((Entity)entity).setPos(entity.x() + offX, offY + 1, entity.z() + offZ);
 	      			foundBlock = true;
 	      		}

@@ -24,7 +24,7 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 	public void explosionTick(IExplosiveEntity ent) {
 		Entity target = null;
 		double distance = 2000;
-		List<LivingEntity> list = ent.level().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 50, ent.y() - 50, ent.z() - 50, ent.x() + 50, ent.y() + 50, ent.z() + 50));
+		List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 50, ent.y() - 50, ent.z() - 50, ent.x() + 50, ent.y() + 50, ent.z() + 50));
 
 		for(LivingEntity living : list) {
 			double x = living.getX() - ent.x();
@@ -53,14 +53,14 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 			} else if(magnitude <= 2) {
 				if(!(target instanceof Player)) {
 					ent.getPersistentData().putInt("amount", ent.getPersistentData().getInt("amount") + 1);
-					if(!ent.level().isClientSide()) {
+					if(!ent.getLevel().isClientSide()) {
         				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)ent), new ClientboundIntNBTPacket("amount", ent.getPersistentData().getInt("amount"), ((Entity)ent).getId()));
         			}
         			target.discard();
 				} else if(target instanceof Player) {
-					DamageSources sources = new DamageSources(ent.level().registryAccess());
+					DamageSources sources = new DamageSources(ent.getLevel().registryAccess());
 					
-					target.hurt(sources.outOfWorld(), 4f);
+					target.hurt(sources.fellOutOfWorld(), 4f);
 					Vec3 vec3d = new Vec3(target.getX() - ent.x(), target.getY() - ent.y(), target.getZ() - ent.z()).normalize().scale(10);
 					target.setDeltaMovement(vec3d);
 				}
@@ -83,7 +83,7 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 		float resistanceImpact = 1f - ((0.833f / 20f) * amount);
 		float knockback = 5f + ((10f / 20f) * amount);
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), Mth.floor((double)size));
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), Mth.floor((double)size));
 		explosion.doEntityExplosion(knockback, true);
 		explosion.doBlockExplosion(1f, yStrength, resistanceImpact, size >= 110f ? 0.05f : 1f, false, size >= 110f ? true : false);
 	}

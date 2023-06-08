@@ -14,19 +14,19 @@ public class BouncingTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.level(), (Entity)entity, entity.getPos(), 10);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 		explosion.doEntityExplosion(1.25f, true);
 		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
 	}
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(((Entity)entity).isOnGround()) {
+		if(((Entity)entity).onGround()) {
 			((Entity)entity).getPersistentData().putInt("bounces", ((Entity)entity).getPersistentData().getInt("bounces") + 1);
 			((Entity)entity).setDeltaMovement(Math.random() - Math.random(), Math.random() * 1.5f, Math.random() - Math.random());
-			entity.level().playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);
+			entity.getLevel().playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);
 		}
-		if(((Entity)entity).getPersistentData().getInt("bounces") >= 12 && entity.level() instanceof ServerLevel) {
+		if(((Entity)entity).getPersistentData().getInt("bounces") >= 12 && entity.getLevel() instanceof ServerLevel) {
 			serverExplosion(entity);
 			entity.destroy();
 		}

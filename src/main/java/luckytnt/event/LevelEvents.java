@@ -7,6 +7,7 @@ import luckytnt.LevelVariables;
 import luckytnt.LuckyTNTMod;
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.entity.LivingPrimedLTNT;
 import luckytntlib.entity.PrimedLTNT;
@@ -19,7 +20,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ThreadedLevelLightEngine;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -34,7 +35,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IPlantable;
@@ -48,10 +48,6 @@ public class LevelEvents {
 	@SubscribeEvent
 	public static void onLevelUpdate(TickEvent.LevelTickEvent event) {
 		Level level = event.level;
-		
-		if(level.getChunkSource().getLightEngine() instanceof ThreadedLevelLightEngine engine) {
-			engine.setTaskPerBatch(LuckyTNTConfigValues.LIGHT_ENGINE_SPEED.get());
-		}
 		
 		List<? extends Player> players = level.players();
 		LevelVariables variables = LevelVariables.get(level);
@@ -95,7 +91,7 @@ public class LevelEvents {
 								double offX = Math.random() * 200 - Math.random() * 200;
 								double offZ = Math.random() * 200 - Math.random() * 200;
 								for(double offY = 320; offY > -64; offY--) {
-									if(level.getBlockState(new BlockPos(Mth.floor(x + offX), Mth.floor(offY), Mth.floor(z + offZ))).getMaterial() != Material.AIR) {
+									if(!level.getBlockState(new BlockPos(Mth.floor(x + offX), Mth.floor(offY), Mth.floor(z + offZ))).isAir()) {
 										Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT,  level);
 										lighting.setPos(x + offX, offY, z + offZ);
 										level.addFreshEntity(lighting);
@@ -108,7 +104,7 @@ public class LevelEvents {
 					if(variables.toxicCloudsTime > 0) {
 						if(Math.random() < 0.005f * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()) {
 							BlockPos pos = new BlockPos(Mth.floor(x + Math.random() * 100 - Math.random() * 100), Mth.floor(y + Math.random() * 50 - Math.random() * 50), Mth.floor(z + Math.random() * 100 - Math.random() * 100));
-							if(!level.getBlockState(pos).isCollisionShapeFullBlock(level, pos) || level.getBlockState(pos).getMaterial() == Material.AIR) {
+							if(!level.getBlockState(pos).isCollisionShapeFullBlock(level, pos) || level.getBlockState(pos).isAir()) {
 								PrimedLTNT cloud = EntityRegistry.TOXIC_CLOUD.get().create(level);
 								cloud.setPos(pos.getX(), pos.getY(), pos.getZ());
 								level.addFreshEntity(cloud);
@@ -135,7 +131,7 @@ public class LevelEvents {
 										}
 									}
 									if(needsUpdate) {
-										sPlayer.connection.send(new ClientboundLevelChunkWithLightPacket(level.getChunkAt(new BlockPos(Mth.floor(x + offX), 0, Mth.floor(z + offZ))), level.getLightEngine(), null, null, false));
+										sPlayer.connection.send(new ClientboundLevelChunkWithLightPacket(level.getChunkAt(new BlockPos(Mth.floor(x + offX), 0, Mth.floor(z + offZ))), level.getLightEngine(), null, null));
 									}
 								}
 							}
@@ -161,18 +157,17 @@ public class LevelEvents {
 										}
 									}
 									if(needsUpdate) {
-										sPlayer.connection.send(new ClientboundLevelChunkWithLightPacket(level.getChunkAt(new BlockPos(Mth.floor(x + offX), 0, Mth.floor(z + offZ))), level.getLightEngine(), null, null, false));
+										sPlayer.connection.send(new ClientboundLevelChunkWithLightPacket(level.getChunkAt(new BlockPos(Mth.floor(x + offX), 0, Mth.floor(z + offZ))), level.getLightEngine(), null, null));
 									}
 								}
 							}
 							for(int i = 0; i < 1 + (int)(0.5D * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()); i++) {
 								int offX = new Random().nextInt(60) - 30;
 								int offZ = new Random().nextInt(60) - 30;
-								int posY = getTopBlock(sPlayer.level, sPlayer.getX() + offX, sPlayer.getZ() + offZ, false);
+								int posY = getTopBlock(sPlayer.level(), sPlayer.getX() + offX, sPlayer.getZ() + offZ, false);
 								BlockPos pos = new BlockPos(Mth.floor(sPlayer.getX() + offX), Mth.floor(posY + 1), Mth.floor(sPlayer.getZ() + offZ));
-								BlockState state = sPlayer.level.getBlockState(pos);
-								Material material = state.getMaterial();
-								if((material == Material.BAMBOO_SAPLING || material == Material.PLANT || material == Material.REPLACEABLE_PLANT || material == Material.VEGETABLE || material == Material.AIR) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100) {
+								BlockState state = sPlayer.level().getBlockState(pos);
+								if((Materials.isPlant(state) || state.isAir()) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100) {
 									if(Math.random() > 0.1D) {
 										BlockHitResult result = new BlockHitResult(new Vec3(sPlayer.getX(), sPlayer.getY(), sPlayer.getZ()), Direction.UP, pos, false);
 										BlockPlaceContext ctx = new BlockPlaceContext(sPlayer, InteractionHand.MAIN_HAND, sPlayer.getItemInHand(InteractionHand.MAIN_HAND), result);
@@ -185,22 +180,21 @@ public class LevelEvents {
 							for(int i = 0; i < 1 + (int)(0.5D * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()); i++) {
 								int offX = new Random().nextInt(60) - 30;
 								int offZ = new Random().nextInt(60) - 30;
-								int posY = getTopBlock(sPlayer.level, sPlayer.getX() + offX, sPlayer.getZ() + offZ, true);
+								int posY = getTopBlock(sPlayer.level(), sPlayer.getX() + offX, sPlayer.getZ() + offZ, true);
 								BlockPos pos = new BlockPos(Mth.floor(sPlayer.getX() + offX), posY, Mth.floor(sPlayer.getZ() + offZ));
-								BlockState state = sPlayer.level.getBlockState(pos);
+								BlockState state = sPlayer.level().getBlockState(pos);
 								if(state.is(Blocks.GRASS_BLOCK)) {
 									level.setBlock(pos, Math.random() > 0.5D ? Blocks.COARSE_DIRT.defaultBlockState() : Blocks.DIRT.defaultBlockState(), 3);
-								} else if(sPlayer.level.getBlockState(pos.above()).is(Blocks.WATER) && Math.random() > 0.6D) {
+								} else if(sPlayer.level().getBlockState(pos.above()).is(Blocks.WATER) && Math.random() > 0.6D) {
 									level.setBlock(pos, Blocks.MAGMA_BLOCK.defaultBlockState(), 3);
 								}
 							}
 							for(int offX = -30; offX < 30; offX += 2) {
 								for(int offZ = -30; offZ < 30; offZ += 2) {
-									int posY = getTopBlock(sPlayer.level, sPlayer.getX() + offX, sPlayer.getZ() + offZ, true);
+									int posY = getTopBlock(sPlayer.level(), sPlayer.getX() + offX, sPlayer.getZ() + offZ, true);
 									BlockPos pos = new BlockPos(Mth.floor(sPlayer.getX() + offX), posY + 1, Mth.floor(sPlayer.getZ() + offZ));
-									BlockState state = sPlayer.level.getBlockState(pos);
-									Material material = state.getMaterial();
-									if((material == Material.BAMBOO_SAPLING || material == Material.PLANT || material == Material.REPLACEABLE_PLANT || material == Material.VEGETABLE) && sPlayer.level.getBlockState(pos.below()).canSustainPlant(level, pos.below(), Direction.UP, (IPlantable)Blocks.DEAD_BUSH) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
+									BlockState state = sPlayer.level().getBlockState(pos);
+									if((Materials.isPlant(state) || state.isAir()) && sPlayer.level().getBlockState(pos.below()).canSustainPlant(level, pos.below(), Direction.UP, (IPlantable)Blocks.DEAD_BUSH) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
 										level.setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 									}
 								}
@@ -283,7 +277,7 @@ public class LevelEvents {
 				BlockState stateUp = level.getBlockState(posUp);				
 				if(state.getBlock().getExplosionResistance() < 200 && stateUp.getBlock().getExplosionResistance() < 200 && !blockFound) {
 					if(ignoreLeaves) {
-						if(state.isCollisionShapeFullBlock(level, pos) && !stateUp.isCollisionShapeFullBlock(level, posUp) && state.getMaterial() != Material.LEAVES) {
+						if(state.isCollisionShapeFullBlock(level, pos) && !stateUp.isCollisionShapeFullBlock(level, posUp) && !state.is(BlockTags.LEAVES)) {
 							blockFound = true;
 							y = offY;
 						}	

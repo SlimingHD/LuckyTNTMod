@@ -20,7 +20,6 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class MidasTouchEffect extends MobEffect {
@@ -52,13 +51,13 @@ public class MidasTouchEffect extends MobEffect {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		Level level = entity.level;
+		Level level = entity.level();
 		if(!level.isClientSide) {
 
 			BlockHitResult result = level.clip(new ClipContext(entity.getPosition(1), entity.getPosition(1).add(0, -1, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));
 			if(result != null) {
 				BlockState state = level.getBlockState(result.getBlockPos());
-				if(state.getBlock().getExplosionResistance() < 100 && state.getMaterial() != Material.AIR) {
+				if(state.getBlock().getExplosionResistance() < 100 && !state.isAir()) {
 					level.setBlock(result.getBlockPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
 				}
 			}
@@ -66,7 +65,7 @@ public class MidasTouchEffect extends MobEffect {
 			result = level.clip(new ClipContext(entity.getPosition(1).add(0, entity.getEyeHeight(), 0), entity.getPosition(1).add(0, entity.getEyeHeight(), 0).add(entity.getViewVector(1).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));
 			if(result != null) {
 				BlockState state = level.getBlockState(result.getBlockPos());
-				if(state.getBlock().getExplosionResistance() < 100 && state.getMaterial() != Material.AIR) {
+				if(state.getBlock().getExplosionResistance() < 100 && !state.isAir()) {
 					level.setBlock(result.getBlockPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
 				}
 			}

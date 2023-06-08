@@ -15,7 +15,7 @@ public class DustBowlEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.CLOUD, ent.x() + Math.random() * 6 - Math.random() * 6, ent.y() + 0.5f, ent.z() + Math.random() * 6 - Math.random() * 6, 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.CLOUD, ent.x() + Math.random() * 6 - Math.random() * 6, ent.y() + 0.5f, ent.z() + Math.random() * 6 - Math.random() * 6, 0, 0, 0);
 	}
 
 	@Override

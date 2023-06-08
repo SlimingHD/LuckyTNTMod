@@ -24,11 +24,11 @@ public class DisintegratingTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		for(int count = 0; count < 50; count++) {
-			LExplosiveProjectile projectile = EntityRegistry.DISINTEGRATING_PROJECTILE.get().create(ent.level());
+			LExplosiveProjectile projectile = EntityRegistry.DISINTEGRATING_PROJECTILE.get().create(ent.getLevel());
 			projectile.setPos(ent.getPos());
 			projectile.setOwner(ent.owner());
 			projectile.setDeltaMovement(Math.random() * 4f - Math.random() * 4f, Math.random() * 4f - Math.random() * 4f, Math.random() * 4f - Math.random() * 4f);
-			ent.level().addFreshEntity(projectile);
+			ent.getLevel().addFreshEntity(projectile);
 		}
 	}
 	
@@ -39,12 +39,12 @@ public class DisintegratingTNTEffect extends PrimedTNTEffect {
 		
 		for(double offX = 0D; offX <= 1D; offX += 0.1D) {
 			for(double offY = 0D; offY <= 1D; offY += 0.1D) {
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 0.5f), ent.x() - 0.5D + offX, ent.y() + 1.25D + offY, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 0.5f), ent.x() - 0.5D + offX, ent.y() + 1.25D + offY, ent.z(), 0, 0, 0);
 			}
 		}
 		for(double i = 0; i < 1; i += 0.1D) {
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), ent.x() + 0.4D + i * vec32.x, ent.y() + 1.35D + i * vec32.y, ent.z(), 0, 0, 0);
-			ent.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), ent.x() - 0.4D + i * vec31.x, ent.y() + 1.35D + i * vec31.y, ent.z(), 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), ent.x() + 0.4D + i * vec32.x, ent.y() + 1.35D + i * vec32.y, ent.z(), 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 0.5f), ent.x() - 0.4D + i * vec31.x, ent.y() + 1.35D + i * vec31.y, ent.z(), 0, 0, 0);
 		}
 	}
 	

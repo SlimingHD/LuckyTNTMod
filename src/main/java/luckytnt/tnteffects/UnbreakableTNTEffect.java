@@ -14,18 +14,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class UnbreakableTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.level(), entity.getPos(), 15, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 15, new IForEachBlockExplosionEffect() {
 		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) <= 2000 && state.getMaterial() != Material.AIR) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 2000 && !state.isAir()) {
+					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 					level.setBlock(pos, Blocks.BEDROCK.defaultBlockState(), 3);
 				}
 			}
@@ -34,8 +33,8 @@ public class UnbreakableTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
-		ent.level().addParticle(new DustParticleOptions(new Vector3f(0.8f, 0.8f, 0.8f), 1), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.8f, 0.8f, 0.8f), 1), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
 	}
 
 	@Override

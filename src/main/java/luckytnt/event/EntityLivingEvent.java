@@ -38,7 +38,7 @@ public class EntityLivingEvent {
 	public static void onLivingTick(LivingEvent.LivingTickEvent event) {
 		LivingEntity ent = event.getEntity();
 		if(ent != null) {
-			if(ent.getLevel() instanceof ServerLevel sLevel) {
+			if(ent.level() instanceof ServerLevel sLevel) {
 				if(LevelVariables.get(sLevel).iceAgeTime > 0) {
 					if((ent instanceof Player pl && !pl.isCreative()) || !(ent instanceof Player)) {
 						if(sLevel.getBrightness(LightLayer.BLOCK, new BlockPos(Mth.floor(ent.getX()), Mth.floor(ent.getY()), Mth.floor(ent.getZ()))) < 11) {
@@ -67,7 +67,7 @@ public class EntityLivingEvent {
 					ent.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, ent.getPersistentData().getInt("freezeTime") / 900));
 				}
 				if(ent.getPersistentData().getInt("freezeTime") >= 1200 && ent.getPersistentData().getInt("freezeTime") % 10 == 0) {
-					DamageSources sources = new DamageSources(ent.level.registryAccess());
+					DamageSources sources = new DamageSources(ent.level().registryAccess());
 					ent.hurt(sources.freeze(), 1);
 				}
 				

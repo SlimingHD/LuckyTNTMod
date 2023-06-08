@@ -22,7 +22,7 @@ public class SensorTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(level instanceof ServerLevel) {
 			List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-10f, -10f, -10f), entity.getPos().add(10f, 10f, 10f)));
 			for(Player player : players) {
@@ -39,7 +39,7 @@ public class SensorTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0f, 0f, 0f);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0f, 0f, 0f);
 	}
 	
 	@Override

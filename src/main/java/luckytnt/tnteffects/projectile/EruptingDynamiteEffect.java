@@ -15,7 +15,7 @@ public class EruptingDynamiteEffect extends PrimedTNTEffect{
 
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(entity instanceof LExplosiveProjectile ent) {
 			if(ent.inGround()) {
 				ent.getPersistentData().putBoolean("hitBefore", true);
@@ -35,7 +35,7 @@ public class EruptingDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		Level level = entity.level();
+		Level level = entity.getLevel();
 		if(entity.getTNTFuse() < 15 && entity.getTNTFuse() % 3 == 0) {
 			LExplosiveProjectile erupting_tnt = EntityRegistry.ERUPTING_PROJECTILE.get().create(level);
 			erupting_tnt.setPos(entity.getPos());
@@ -49,7 +49,7 @@ public class EruptingDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.level().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override

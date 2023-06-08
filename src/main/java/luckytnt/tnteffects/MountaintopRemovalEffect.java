@@ -12,15 +12,15 @@ public class MountaintopRemovalEffect extends FlatTNTEffect {
 
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0.2f, -0.05f, 0);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), -0.2f, -0.05f, 0);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0, -0.05f, 0.2f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0, -0.05f, -0.2f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0.2f, -0.05f, 0);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), -0.2f, -0.05f, 0);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0, -0.05f, 0.2f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0, -0.05f, -0.2f);
 		
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.05f, 0.1f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.05f, -0.1f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.05f, -0.1f);
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.05f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.05f, 0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.05f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.05f, -0.1f);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.05f, 0.1f);
 	}
 	
 	@Override

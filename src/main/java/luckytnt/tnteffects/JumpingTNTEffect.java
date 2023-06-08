@@ -15,28 +15,28 @@ public class JumpingTNTEffect extends PrimedTNTEffect{
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		PrimedLTNT tnt = EntityRegistry.LEAPING_TNT.get().create(ent.level());
+		PrimedLTNT tnt = EntityRegistry.LEAPING_TNT.get().create(ent.getLevel());
 		tnt.setPos(ent.getPos());
 		tnt.setOwner(ent.owner());
 		tnt.setTNTFuse(1000000);
-		ent.level().addFreshEntity(tnt);
+		ent.getLevel().addFreshEntity(tnt);
 		EntityRegistry.TNT_X20_EFFECT.build().serverExplosion(ent);
 	}
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(((Entity)entity).isOnGround()) {
+		if(((Entity)entity).onGround()) {
 			((Entity)entity).getPersistentData().putInt("bounces", ((Entity)entity).getPersistentData().getInt("bounces") + 1);
 			((Entity)entity).setDeltaMovement(Math.random() * 2D - Math.random() * 2D, Math.random() * 3f, Math.random() * 2D - Math.random() * 2D);
-			entity.level().playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);
+			entity.getLevel().playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);
 			
 			if(((Entity)entity).getPersistentData().getInt("bounces") >= 10) {
-				if(entity.level() instanceof ServerLevel) {
+				if(entity.getLevel() instanceof ServerLevel) {
 					serverExplosion(entity);
 				}
 				entity.destroy();
 			}
-			if(((Entity)entity).getPersistentData().getInt("bounces") >= 1 && entity.level() instanceof ServerLevel) {
+			if(((Entity)entity).getPersistentData().getInt("bounces") >= 1 && entity.getLevel() instanceof ServerLevel) {
 				serverExplosion(entity);
 			}
 		}

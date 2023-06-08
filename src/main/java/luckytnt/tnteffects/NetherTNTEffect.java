@@ -7,6 +7,7 @@ import java.util.Random;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -44,7 +45,6 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.levelgen.structure.structures.NetherFossilPieces;
 import net.minecraft.world.level.levelgen.structure.structures.NetherFossilStructure;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
@@ -53,7 +53,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ExplosionHelper.doSphericalExplosion(ent.level(), new Vec3(ent.x(), 0, ent.z()), 40, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(ent.getLevel(), new Vec3(ent.x(), 0, ent.z()), 40, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
@@ -63,14 +63,14 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 			}
 		});
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), new Vec3(ent.x(), 0, ent.z()), 100);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), new Vec3(ent.x(), 0, ent.z()), 100);
 		explosion.doBlockExplosion(1f, 0.8f, 1f, 0.2f, false, true);
 		
-		ExplosionHelper.doSphericalExplosion(ent.level(), new Vec3(ent.x(), 0, ent.z()), 100, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doSphericalExplosion(ent.getLevel(), new Vec3(ent.x(), 0, ent.z()), 100, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if((state.getBlock() instanceof LiquidBlock || state.getBlock() instanceof BubbleColumnBlock || state.getMaterial() == Material.WATER_PLANT || state.getMaterial() == Material.REPLACEABLE_WATER_PLANT) && pos.getY() <= 50) {
+				if((state.getBlock() instanceof LiquidBlock || state.getBlock() instanceof BubbleColumnBlock || Materials.isWaterPlant(state)) && pos.getY() <= 50) {
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 				}
 				
@@ -80,7 +80,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 			}
 		});
 		
-		ImprovedExplosion explosion3 = new ImprovedExplosion(ent.level(), new Vec3(ent.x(), 0, ent.z()), 80);
+		ImprovedExplosion explosion3 = new ImprovedExplosion(ent.getLevel(), new Vec3(ent.x(), 0, ent.z()), 80);
 		explosion3.doBlockExplosion(1f, 0.8f, 1f, 0.2f, true, new IForEachBlockExplosionEffect() {
 			
 			@Override
@@ -91,11 +91,11 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 			}
 		});
 		
-		ExplosionHelper.doCylindricalExplosion(ent.level(), new Vec3(ent.x(), -40, ent.z()), 40, 20, new IForEachBlockExplosionEffect() {
+		ExplosionHelper.doCylindricalExplosion(ent.getLevel(), new Vec3(ent.x(), -40, ent.z()), 40, 20, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(pos.getY() <= -44 && state.getMaterial() == Material.AIR) {
+				if(pos.getY() <= -44 && state.isAir()) {
 					level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 				}
 			}
@@ -103,7 +103,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 		
 		int biome = new Random().nextInt(3);
 		
-		ImprovedExplosion explosion4 = new ImprovedExplosion(ent.level(), new Vec3(ent.x(), 0, ent.z()), 80);
+		ImprovedExplosion explosion4 = new ImprovedExplosion(ent.getLevel(), new Vec3(ent.x(), 0, ent.z()), 80);
 		explosion4.doBlockExplosion(1f, 0.8f, 1f, 0.2f, true, new IForEachBlockExplosionEffect() {
 			
 			@Override
@@ -127,7 +127,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 			}
 		});
 		
-		ImprovedExplosion explosion5 = new ImprovedExplosion(ent.level(), new Vec3(ent.x(), 0, ent.z()), 150);
+		ImprovedExplosion explosion5 = new ImprovedExplosion(ent.getLevel(), new Vec3(ent.x(), 0, ent.z()), 150);
 		explosion5.doBlockExplosion(1f, 0.8f, 1f, 0.2f, true, new IForEachBlockExplosionEffect() {
 			
 			@Override
@@ -138,54 +138,54 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 				BlockState stateAbove = level.getBlockState(posAbove);
 				
 				if(list.contains(state.getBlock()) && stateAbove.isAir() && pos.getY() <= -10) {
-					Registry<ConfiguredFeature<?, ?>> registry = ent.level().registryAccess().registry(Registries.CONFIGURED_FEATURE).get();
+					Registry<ConfiguredFeature<?, ?>> registry = ent.getLevel().registryAccess().registry(Registries.CONFIGURED_FEATURE).get();
 					
 					if(biome == 0) {
 						if(Math.random() < 0.02D) {
-							registry.get(NetherFeatures.PATCH_CRIMSON_ROOTS).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							registry.get(NetherFeatures.PATCH_CRIMSON_ROOTS).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.04D) {
-							registry.get(TreeFeatures.CRIMSON_FUNGUS).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							registry.get(TreeFeatures.CRIMSON_FUNGUS).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.02D) {
-							registry.get(NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							registry.get(NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 					}
 					
 					if(biome == 1) {
 						if(Math.random() < 0.02D) {
-							registry.get(NetherFeatures.NETHER_SPROUTS_BONEMEAL).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							registry.get(NetherFeatures.NETHER_SPROUTS_BONEMEAL).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.01D) {
-							registry.get(NetherFeatures.TWISTING_VINES_BONEMEAL).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							registry.get(NetherFeatures.TWISTING_VINES_BONEMEAL).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.04D) {
-							registry.get(TreeFeatures.WARPED_FUNGUS).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							registry.get(TreeFeatures.WARPED_FUNGUS).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.02D) {
-							registry.get(NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							registry.get(NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 					}
 					
 					if(biome == 2) {
 						if(Math.random() < 0.025D) {
 							DiskConfiguration config = new DiskConfiguration(RuleBasedBlockStateProvider.simple(Blocks.SOUL_SOIL), BlockPredicate.matchesBlocks(List.of(Blocks.NETHERRACK, Blocks.SOUL_SAND, Blocks.SOUL_SOIL)), UniformInt.of(3, 6), 2);
-							Feature.DISK.place(config, (WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), pos);
+							Feature.DISK.place(config, (WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos);
 						}
 						if(Math.random() < 0.01D) {
-							registry.get(NetherFeatures.PATCH_SOUL_FIRE).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
+							registry.get(NetherFeatures.PATCH_SOUL_FIRE).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posAbove);
 						}
 						if(Math.random() < 0.001D) {
 							Structure structure = new NetherFossil(null, ConstantHeight.of(VerticalAnchor.absolute(pos.getY())), level);
-							StructureStart start = structure.generate(ent.level().registryAccess(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), ((ServerLevel)ent.level()).getChunkSource().getGenerator().getBiomeSource(), ((ServerLevel)ent.level()).getChunkSource().randomState(), ((ServerLevel)ent.level()).getStructureManager(), ((ServerLevel)ent.level()).getSeed(), new ChunkPos(posAbove), 20, level, holder -> true);
-							start.placeInChunk((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).structureManager(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), new BoundingBox(pos.getX() - 150, pos.getY() - 150, pos.getZ() - 150, pos.getX() + 150, pos.getY() + 150, pos.getZ() + 150), new ChunkPos(posAbove));
+							StructureStart start = structure.generate(ent.getLevel().registryAccess(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator().getBiomeSource(), ((ServerLevel)ent.getLevel()).getChunkSource().randomState(), ((ServerLevel)ent.getLevel()).getStructureManager(), ((ServerLevel)ent.getLevel()).getSeed(), new ChunkPos(posAbove), 20, level, holder -> true);
+							start.placeInChunk((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).structureManager(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), new BoundingBox(pos.getX() - 150, pos.getY() - 150, pos.getZ() - 150, pos.getX() + 150, pos.getY() + 150, pos.getZ() + 150), new ChunkPos(posAbove));
 						}
 					}
 				}
 				
-				if(stateBelow.getMaterial() == Material.AIR && state.getBlock() == Blocks.NETHERRACK && pos.getY() >= 10 && Math.random() < 0.005D) {
-					Registry<ConfiguredFeature<?, ?>> registry = ent.level().registryAccess().registry(Registries.CONFIGURED_FEATURE).get();
-					registry.get(NetherFeatures.GLOWSTONE_EXTRA).place((WorldGenLevel)ent.level(), ((ServerLevel)ent.level()).getChunkSource().getGenerator(), RandomSource.create(), posBelow);
+				if(stateBelow.isAir() && state.getBlock() == Blocks.NETHERRACK && pos.getY() >= 10 && Math.random() < 0.005D) {
+					Registry<ConfiguredFeature<?, ?>> registry = ent.getLevel().registryAccess().registry(Registries.CONFIGURED_FEATURE).get();
+					registry.get(NetherFeatures.GLOWSTONE_EXTRA).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posBelow);
 				}
 			}
 		});
@@ -195,20 +195,20 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 	public void spawnParticles(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() % 3 == 0) {
 			for(double d = 0D; d <= 1.5D; d += 0.1D) {
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.4D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() - 0.5D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() - 0.4D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.4D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() - 0.5D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() - 0.4D, ent.y() + 1.1D + d, ent.z(), 0, 0, 0);
 			}
 			for(double d = 0D; d <= 1D; d += 0.1D) {
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D - d, ent.y() + 1.1D, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D - d, ent.y() + 1.2D, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D - d, ent.y() + 2.6D, ent.z(), 0, 0, 0);
-				ent.level().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D - d, ent.y() + 2.5D, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D - d, ent.y() + 1.1D, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D - d, ent.y() + 1.2D, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D - d, ent.y() + 2.6D, ent.z(), 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + 0.5D - d, ent.y() + 2.5D, ent.z(), 0, 0, 0);
 			}
 			for(double x = -0.3D; x <= 0.3D; x += 0.1D) {
 				for(double y = 0.2D; y <= 1.3D; y += 0.1D) {
-					ent.level().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0f, 1f), 0.75f), ent.x() + x + 0.05D, ent.y() + 1.1D + y, ent.z(), 0, 0, 0);
+					ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.5f, 0f, 1f), 0.75f), ent.x() + x + 0.05D, ent.y() + 1.1D + y, ent.z(), 0, 0, 0);
 				}
 			}
 		}

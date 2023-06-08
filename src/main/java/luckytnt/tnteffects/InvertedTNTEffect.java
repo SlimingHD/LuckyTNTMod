@@ -1,13 +1,13 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Material;
 
 public class InvertedTNTEffect extends PrimedTNTEffect{
 
@@ -21,9 +21,9 @@ public class InvertedTNTEffect extends PrimedTNTEffect{
 				double magnitude = Math.sqrt(offX * offX + offY * offY + offZ * offZ) + 0.1f;
 				for(int j = 1; j < magnitude; j++) {
 					BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX * j / magnitude), Mth.floor(entity.y() + offY * j / magnitude), Mth.floor(entity.z() + offZ * j / magnitude));
-					if(entity.level().getBlockState(pos).getMaterial() == Material.AIR || entity.level().getBlockState(pos).getMaterial() == Material.PLANT || entity.level().getBlockState(pos).getMaterial() == Material.REPLACEABLE_PLANT || entity.level().getBlockState(pos).getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT) {
-						if(entity.level().getBlockState(new BlockPos(pos.getX(), pos.getY() - 30 * 2, pos.getZ())).getBlock().getExplosionResistance() < 100) {
-							entity.level().setBlock(pos, entity.level().getBlockState(new BlockPos(pos.getX(), pos.getY() - 30 * 2, pos.getZ())), 3);
+					if(entity.getLevel().getBlockState(pos).isAir() || Materials.isPlant(entity.getLevel().getBlockState(pos))) {
+						if(entity.getLevel().getBlockState(new BlockPos(pos.getX(), pos.getY() - 30 * 2, pos.getZ())).getBlock().getExplosionResistance() < 100) {
+							entity.getLevel().setBlock(pos, entity.getLevel().getBlockState(new BlockPos(pos.getX(), pos.getY() - 30 * 2, pos.getZ())), 3);
 						}
 					}
 				}

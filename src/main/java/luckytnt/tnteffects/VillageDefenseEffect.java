@@ -12,10 +12,10 @@ public class VillageDefenseEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		for(int count = 0; count <= 15; count++) {
-			IronGolem golem = new IronGolem(EntityType.IRON_GOLEM, entity.level());
+			IronGolem golem = new IronGolem(EntityType.IRON_GOLEM, entity.getLevel());
 			golem.setPos(entity.getPos());
 			golem.setPlayerCreated(true);
-			entity.level().addFreshEntity(golem);
+			entity.getLevel().addFreshEntity(golem);
 		}
 	}
 	

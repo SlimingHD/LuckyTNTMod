@@ -23,12 +23,12 @@ public class SpiralDynamiteEffect extends PrimedTNTEffect{
 				ent.setYRot(ent.getPersistentData().getFloat("angle") + 30f);
 				ent.getPersistentData().putFloat("angle", ent.getYRot());
 				ent.getPersistentData().putFloat("spiral_power", Mth.clamp(ent.getPersistentData().getFloat("spiral_power") + 0.12f, 0.2f, Float.MAX_VALUE));
-				LExplosiveProjectile spiral_tnt = EntityRegistry.SPIRAL_PROJECTILE.get().create(entity.level());
+				LExplosiveProjectile spiral_tnt = EntityRegistry.SPIRAL_PROJECTILE.get().create(entity.getLevel());
 				spiral_tnt.setPos(entity.x(), entity.y(), entity.z());
 				spiral_tnt.setOwner(entity.owner());
 				spiral_tnt.shoot(ent.getLookAngle().x, ent.getLookAngle().y, ent.getLookAngle().z, ent.getPersistentData().getFloat("spiral_power"), 0);
-				entity.level().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
-				entity.level().addFreshEntity(spiral_tnt);
+				entity.getLevel().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
+				entity.getLevel().addFreshEntity(spiral_tnt);
 			}
 		}
 	}

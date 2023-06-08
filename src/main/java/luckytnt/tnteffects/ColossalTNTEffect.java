@@ -12,14 +12,14 @@ public class ColossalTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity)ent, ent.getPos(), 190);
+		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 190);
 		explosion.doEntityExplosion(20f, true);
 		explosion.doBlockExplosion(1f, 1f, 0.167f, 0.05f, false, true);
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.level().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 19.5f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 19.5f, ent.z(), 0, 0, 0);
 	}
 	
 	@Override
