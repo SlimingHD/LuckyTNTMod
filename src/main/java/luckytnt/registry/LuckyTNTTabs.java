@@ -1,16 +1,14 @@
 package luckytnt.registry;
 
-import java.util.List;
-
 import luckytnt.LuckyTNTMod;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -24,7 +22,15 @@ public class LuckyTNTTabs {
 	public static CreativeModeTab OTHER;
 	
 	@SubscribeEvent
-	public static void registerTabs(CreativeModeTabEvent.Register event) {
+	public static void registerTabs(RegisterEvent event) {
+		NORMAL_TNT = CreativeModeTab.builder().title(Component.translatable("item_group.luckytntmod.normal_tnt")).icon(() -> new ItemStack(BlockRegistry.METEOR_TNT.get())).displayItems((enabledFlags, populator) -> {
+			for(RegistryObject<? extends Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("n")) {
+				populator.accept(item.get());
+			}
+        }).withTabsBefore(new ResourceLocation("spawn_eggs")).withTabsAfter(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt")).build();
+		
+		/*event.register(Registries.CREATIVE_MODE_TAB, new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt"), () -> NORMAL_TNT);
+		
 		NORMAL_TNT = event.registerCreativeModeTab(new ResourceLocation(LuckyTNTMod.MODID, "normal_tnt"), List.of(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt")), List.of(new ResourceLocation("spawn_eggs")), builder -> builder.title(Component.translatable("item_group.luckytntmod.normal_tnt")).icon(() -> new ItemStack(BlockRegistry.METEOR_TNT.get())).displayItems((enabledFlags, populator) -> {
 			for(RegistryObject<? extends Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("n")) {
 				populator.accept(item.get());
@@ -71,6 +77,6 @@ public class LuckyTNTTabs {
 			populator.accept(ItemRegistry.DEATH_RAY_RAY.get());
 			populator.accept(ItemRegistry.VACUUM_CLEANER.get());
 			populator.accept(ItemRegistry.TOXIC_STONE.get());
-		}));
+		}));*/
 	}
 }
