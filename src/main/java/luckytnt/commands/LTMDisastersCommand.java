@@ -17,27 +17,27 @@ public class LTMDisastersCommand {
 			ServerLevel level = command.getSource().getLevel();
 			boolean disasterActive = false;
 			if(LevelVariables.get(level).doomsdayTime > 0) {
-				command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.doomsdayactive").append(Component.literal("" + LevelVariables.get(level).doomsdayTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
+				command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.doomsdayactive").append(Component.literal("" + LevelVariables.get(level).doomsdayTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
 				disasterActive = true;
 			}
 			if(LevelVariables.get(level).toxicCloudsTime > 0) {
-				command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.toxicactive").append(Component.literal("" + LevelVariables.get(level).toxicCloudsTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
+				command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.toxicactive").append(Component.literal("" + LevelVariables.get(level).toxicCloudsTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
 				disasterActive = true;
 			}
 			if(LevelVariables.get(level).iceAgeTime > 0) {
-				command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.iceageactive").append(Component.literal("" + LevelVariables.get(level).iceAgeTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
+				command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.iceageactive").append(Component.literal("" + LevelVariables.get(level).iceAgeTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
 				disasterActive = true;
 			}
 			if(LevelVariables.get(level).heatDeathTime > 0) {
-				command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.heatdeathactive").append(Component.literal("" + LevelVariables.get(level).heatDeathTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
+				command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.heatdeathactive").append(Component.literal("" + LevelVariables.get(level).heatDeathTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
 				disasterActive = true;
 			}
 			if(LevelVariables.get(level).tntRainTime > 0) {
-				command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.tntrainactive").append(Component.literal("" + LevelVariables.get(level).tntRainTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
+				command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.tntrainactive").append(Component.literal("" + LevelVariables.get(level).tntRainTime / 1200)).append(Component.translatable("command.ltmdisaster.minute")), false);
 				disasterActive = true;
 			}
 			if(!disasterActive) {
-				command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.nothingactive"), false);				
+				command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.nothingactive"), false);				
 			}
 		}
 		return 1;
@@ -53,7 +53,7 @@ public class LTMDisastersCommand {
 			LevelVariables.get(level).tntRainTime = 0;
 			LevelVariables.get(level).sync(level);
 			level.setWeatherParameters(0, 0, false, false);
-			command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.clear"), false);
+			command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.clear"), false);
 		}		
 		return 1;
 	}
@@ -64,7 +64,7 @@ public class LTMDisastersCommand {
 			LevelVariables.get(level).doomsdayTime = 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() + (int)Math.random() * 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get();
 			LevelVariables.get(level).sync(level);
 			level.setWeatherParameters(0, LevelVariables.get(level).doomsdayTime, true, true);
-			command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.doomsday"), false);
+			command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.doomsday"), false);
 		}		
 		return 1;
 	}
@@ -74,7 +74,7 @@ public class LTMDisastersCommand {
 			ServerLevel level = command.getSource().getLevel();
 			LevelVariables.get(level).toxicCloudsTime = 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() + (int)Math.random() * 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get();
 			LevelVariables.get(level).sync(level);
-			command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.toxicclouds"), false);
+			command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.toxicclouds"), false);
 		}		
 		return 1;
 	}
@@ -85,7 +85,7 @@ public class LTMDisastersCommand {
 			LevelVariables.get(level).iceAgeTime = 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() + (int)Math.random() * 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get();
 			LevelVariables.get(level).sync(level);
 			level.setWeatherParameters(0, LevelVariables.get(level).iceAgeTime, true, true);
-			command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.iceage"), false);
+			command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.iceage"), false);
 		}		
 		return 1;
 	}
@@ -95,7 +95,7 @@ public class LTMDisastersCommand {
 			ServerLevel level = command.getSource().getLevel();
 			LevelVariables.get(level).heatDeathTime = 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() + (int)Math.random() * 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get();
 			LevelVariables.get(level).sync(level);
-			command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.heatdeath"), false);
+			command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.heatdeath"), false);
 		}		
 		return 1;
 	}
@@ -105,7 +105,7 @@ public class LTMDisastersCommand {
 			ServerLevel level = command.getSource().getLevel();
 			LevelVariables.get(level).tntRainTime = 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() + (int)Math.random() * 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get();
 			LevelVariables.get(level).sync(level);
-			command.getSource().sendSuccess(Component.translatable("command.ltmdisaster.tntrain"), false);
+			command.getSource().sendSuccess(() -> Component.translatable("command.ltmdisaster.tntrain"), false);
 		}		
 		return 1;
 	}

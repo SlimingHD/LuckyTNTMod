@@ -1,9 +1,8 @@
 package luckytnt.client.gui;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-
 import luckytnt.config.LuckyTNTConfigValues;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.Screen;
@@ -56,16 +55,16 @@ public class ConfigScreen extends Screen{
 	}
 	
 	@Override
-	public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+	public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks) {
 		renderBackground(stack);
-		drawCenteredString(stack, font, title, width / 2, 8, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.island_offset"), width / 2, 46, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.drop_offset"), width / 2, 66, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.maximum_time"), width / 2, 86, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.average_intensity"), width / 2, 106, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.event_always_active"), width / 2, 126, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.render_overlay"), width / 2, 146, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.light_engine"), width / 2, 166, 0xFFFFFF);
+		stack.drawCenteredString(font, title, width / 2, 8, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.island_offset"), width / 2, 46, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.drop_offset"), width / 2, 66, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.maximum_time"), width / 2, 86, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.average_intensity"), width / 2, 106, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.event_always_active"), width / 2, 126, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.render_overlay"), width / 2, 146, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.light_engine"), width / 2, 166, 0xFFFFFF);
 		super.render(stack, mouseX, mouseY, partialTicks);
 	}
 	
