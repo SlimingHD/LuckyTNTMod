@@ -17,7 +17,7 @@ public class MultiplyingTNTEffect extends PrimedTNTEffect{
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
 		super.baseTick(entity);
-		if(((Entity)entity).isOnGround() && ((Entity)entity).getPersistentData().getInt("level") > 0) {
+		if(((Entity)entity).onGround() && ((Entity)entity).getPersistentData().getInt("level") > 0) {
 			serverExplosion(entity);
 			if(((Entity)entity).getPersistentData().getInt("level") == 4) {
 				Level level = entity.getLevel();

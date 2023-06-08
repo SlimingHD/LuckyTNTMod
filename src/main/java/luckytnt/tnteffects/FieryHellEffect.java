@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class FieryHellEffect extends PrimedTNTEffect {
 
@@ -29,7 +28,7 @@ public class FieryHellEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if((Math.round(ent.y()) - pos.getY()) >= 0 && (Math.round(ent.y()) - pos.getY()) <= 20) {
-					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 || state.getBlock() instanceof LiquidBlock || state.getMaterial() == Material.AIR) && state.getMaterial() != Material.STONE) {
+					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 || state.getBlock() instanceof LiquidBlock || state.isAir()) && state.getMaterial() != Material.STONE) {
 						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 					} 
@@ -44,7 +43,7 @@ public class FieryHellEffect extends PrimedTNTEffect {
 				BlockPos posTop = pos.offset(0, 1, 0);
 				BlockState stateTop = level.getBlockState(posTop);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && state.getMaterial() != Material.AIR) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && !state.isAir()) {
 					if(Math.random() < 0.9f) {
 						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						level.setBlock(pos, Blocks.NETHERRACK.defaultBlockState(), 3);

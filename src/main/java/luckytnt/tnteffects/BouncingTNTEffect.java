@@ -21,7 +21,7 @@ public class BouncingTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(((Entity)entity).isOnGround()) {
+		if(((Entity)entity).onGround()) {
 			((Entity)entity).getPersistentData().putInt("bounces", ((Entity)entity).getPersistentData().getInt("bounces") + 1);
 			((Entity)entity).setDeltaMovement(Math.random() - Math.random(), Math.random() * 1.5f, Math.random() - Math.random());
 			entity.getLevel().playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);

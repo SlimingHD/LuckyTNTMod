@@ -16,7 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class DeathRayEffect extends PrimedTNTEffect {
 
@@ -38,14 +37,14 @@ public class DeathRayEffect extends PrimedTNTEffect {
 				@Override
 				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 					if(distance >= 75) {
-						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 2000 && state.getMaterial() != Material.AIR) {
+						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 2000 && !state.isAir()) {
 							if(Math.random() < 0.1f) {
 								level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 							} else if(Math.random() < 0.8f) {
 								level.setBlock(pos, Blocks.OBSIDIAN.defaultBlockState(), 3);
 							}
 						}
-					} else if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 2000 && state.getMaterial() != Material.AIR) {
+					} else if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 2000 && !state.isAir()) {
 						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					}
 				}

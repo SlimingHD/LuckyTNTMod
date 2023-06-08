@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class HellsGateEffect extends PrimedTNTEffect{
 
@@ -28,7 +27,7 @@ public class HellsGateEffect extends PrimedTNTEffect{
 				BlockPos posTop = pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0);
 				BlockState stateTop = level.getBlockState(posTop);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 200 && stateTop.getMaterial() == Material.AIR && state.getMaterial() != Material.AIR && Math.abs(entity.y() - pos.getY()) <= 20) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 200 && stateTop.isAir() && !state.isAir() && Math.abs(entity.y() - pos.getY()) <= 20) {
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 					if(state.getMaterial() == Material.WOOD) {
 						level.setBlock(posTop, Blocks.OBSIDIAN.defaultBlockState(), 3);
@@ -52,7 +51,7 @@ public class HellsGateEffect extends PrimedTNTEffect{
 				BlockPos posAbove = pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get() + 1, 0);
 				BlockState stateAbove = level.getBlockState(posAbove);
 				
-				if(stateAbove.getMaterial() == Material.AIR && Block.isFaceFull(stateTop.getCollisionShape(level, posTop), Direction.UP) && Math.random() <= 0.1D) {
+				if(stateAbove.isAir() && Block.isFaceFull(stateTop.getCollisionShape(level, posTop), Direction.UP) && Math.random() <= 0.1D) {
 					level.setBlock(posAbove, Blocks.FIRE.defaultBlockState(), 3);
 				}
 			}

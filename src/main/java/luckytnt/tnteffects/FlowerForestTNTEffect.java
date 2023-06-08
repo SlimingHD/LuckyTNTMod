@@ -30,7 +30,6 @@ import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
 import net.minecraft.world.level.chunk.PalettedContainerRO;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 
 public class FlowerForestTNTEffect extends PrimedTNTEffect {
@@ -61,7 +60,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 				double distance = Math.sqrt(offX * offX + offZ * offZ);
 				int y = LevelEvents.getTopBlock(ent.getLevel(), ent.x() + offX, ent.z() + offZ, true);
 				BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, y, ent.z() + offZ));
-				if(distance <= 75 && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200 && ent.getLevel().getBlockState(pos.above()).getMaterial() == Material.AIR) {
+				if(distance <= 75 && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200 && ent.getLevel().getBlockState(pos.above()).isAir()) {
 					ent.getLevel().setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
 				}
 			}
@@ -96,7 +95,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 							BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, ent.y() + offY, ent.z() + offZ));
 							BlockState state = ent.getLevel().getBlockState(pos);
 							Registry<ConfiguredFeature<?, ?>> features = ent.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
-							if(!foundBlock && state.isCollisionShapeFullBlock(ent.getLevel(), pos) && state.getMaterial() != Material.AIR && !(ent.getLevel().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
+							if(!foundBlock && state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !state.isAir() && !(ent.getLevel().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
 								double random = Math.random();
 								if(random <= 0.1D) {
 									features.get(VegetationFeatures.TREES_FLOWER_FOREST).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());

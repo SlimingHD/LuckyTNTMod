@@ -24,7 +24,7 @@ public class EasterEggEffect extends PrimedTNTEffect{
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
 		super.baseTick(entity);
-		if(((Entity)entity).isOnGround() && ((Entity)entity).getPersistentData().getInt("level") > 0) {
+		if(((Entity)entity).onGround() && ((Entity)entity).getPersistentData().getInt("level") > 0) {
 			serverExplosion(entity);
 			Level level = entity.getLevel();
 			entity.getLevel().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);

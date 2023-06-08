@@ -14,7 +14,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class UnbreakableTNTEffect extends PrimedTNTEffect{
 
@@ -24,7 +23,7 @@ public class UnbreakableTNTEffect extends PrimedTNTEffect{
 		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 2000 && state.getMaterial() != Material.AIR) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 2000 && !state.isAir()) {
 					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 					level.setBlock(pos, Blocks.BEDROCK.defaultBlockState(), 3);
 				}

@@ -17,7 +17,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class HeatWaveEffect extends PrimedTNTEffect {
@@ -30,7 +29,7 @@ public class HeatWaveEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-					if(state.getMaterial() == Material.AIR && Blocks.FIRE.canSurvive(state, level, pos)) {
+					if(state.isAir() && Blocks.FIRE.canSurvive(state, level, pos)) {
 						BlockPlaceContext ctx = new BlockPlaceContext(level, null, InteractionHand.MAIN_HAND, new ItemStack(Items.FLINT_AND_STEEL), new BlockHitResult(ent.getPos(), Direction.DOWN, pos, true));
 						BlockState stateForPlacement = Blocks.FIRE.getStateForPlacement(ctx);
 						level.setBlock(pos, stateForPlacement, 3);

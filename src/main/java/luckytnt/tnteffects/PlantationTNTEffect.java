@@ -23,7 +23,6 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.MyceliumBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 
 public class PlantationTNTEffect extends PrimedTNTEffect {
 

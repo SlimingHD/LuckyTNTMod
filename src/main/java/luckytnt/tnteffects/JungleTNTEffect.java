@@ -31,7 +31,6 @@ import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
 import net.minecraft.world.level.chunk.PalettedContainerRO;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.Tags;
 
 public class JungleTNTEffect extends PrimedTNTEffect {
@@ -47,7 +46,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 				BlockPos posTop = pos.offset(0, 1, 0);
 				BlockState stateTop = level.getBlockState(posTop);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && stateTop.getExplosionResistance(level, posTop, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && (stateTop.getMaterial() == Material.AIR || stateTop.getMaterial() == Material.PLANT || stateTop.getMaterial() == Material.REPLACEABLE_PLANT || stateTop.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT || stateTop.getMaterial() == Material.TOP_SNOW)) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && stateTop.getExplosionResistance(level, posTop, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && (stateTop.isAir() || stateTop.getMaterial() == Material.PLANT || stateTop.getMaterial() == Material.REPLACEABLE_PLANT || stateTop.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT || stateTop.getMaterial() == Material.TOP_SNOW)) {
 					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					level.setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
 				}
@@ -76,7 +75,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 						BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
 						BlockState state = ent.getLevel().getBlockState(pos);
 						if(distance <= radius) {					
-							if(state.getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= maxResistance && state.getMaterial() != Material.AIR && ((!state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !state.is(Blocks.MUD) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.getBlock() == Blocks.MANGROVE_ROOTS)))) {
+							if(state.getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= maxResistance && !state.isAir() && ((!state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !state.is(Blocks.MUD) && !state.is(Tags.Blocks.CHESTS)) || (vegetation && (state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS) || state.getBlock() == Blocks.MANGROVE_ROOTS)))) {
 								if(state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getMaterial() == Material.WATER_PLANT) {
 									Block block1 = state.getBlock();
 									block1.onBlockExploded(state, ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
@@ -128,7 +127,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 						for(double offY = 320; offY > -64; offY--) {
 							BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
 							BlockState state = ent.getLevel().getBlockState(pos);
-							if(!foundBlock && state.isCollisionShapeFullBlock(ent.getLevel(), pos) && state.getMaterial() != Material.AIR && !(ent.getLevel().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
+							if(!foundBlock && state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !state.isAir() && !(ent.getLevel().getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
 								if(offX % 30 == 0 && offZ % 30 == 0) {
 									patch_melon.place((ServerLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos.above());
 								}

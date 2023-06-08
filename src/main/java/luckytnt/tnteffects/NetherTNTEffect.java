@@ -44,7 +44,6 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.levelgen.structure.structures.NetherFossilPieces;
 import net.minecraft.world.level.levelgen.structure.structures.NetherFossilStructure;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
@@ -95,7 +94,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(pos.getY() <= -44 && state.getMaterial() == Material.AIR) {
+				if(pos.getY() <= -44 && state.isAir()) {
 					level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 				}
 			}
@@ -183,7 +182,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 					}
 				}
 				
-				if(stateBelow.getMaterial() == Material.AIR && state.getBlock() == Blocks.NETHERRACK && pos.getY() >= 10 && Math.random() < 0.005D) {
+				if(stateBelow.isAir() && state.getBlock() == Blocks.NETHERRACK && pos.getY() >= 10 && Math.random() < 0.005D) {
 					Registry<ConfiguredFeature<?, ?>> registry = ent.getLevel().registryAccess().registry(Registries.CONFIGURED_FEATURE).get();
 					registry.get(NetherFeatures.GLOWSTONE_EXTRA).place((WorldGenLevel)ent.getLevel(), ((ServerLevel)ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), posBelow);
 				}

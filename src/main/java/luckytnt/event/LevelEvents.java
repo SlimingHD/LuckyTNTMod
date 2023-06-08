@@ -34,7 +34,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IPlantable;
@@ -108,7 +107,7 @@ public class LevelEvents {
 					if(variables.toxicCloudsTime > 0) {
 						if(Math.random() < 0.005f * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()) {
 							BlockPos pos = new BlockPos(Mth.floor(x + Math.random() * 100 - Math.random() * 100), Mth.floor(y + Math.random() * 50 - Math.random() * 50), Mth.floor(z + Math.random() * 100 - Math.random() * 100));
-							if(!level.getBlockState(pos).isCollisionShapeFullBlock(level, pos) || level.getBlockState(pos).getMaterial() == Material.AIR) {
+							if(!level.getBlockState(pos).isCollisionShapeFullBlock(level, pos) || level.getBlockState(pos).isAir()) {
 								PrimedLTNT cloud = EntityRegistry.TOXIC_CLOUD.get().create(level);
 								cloud.setPos(pos.getX(), pos.getY(), pos.getZ());
 								level.addFreshEntity(cloud);

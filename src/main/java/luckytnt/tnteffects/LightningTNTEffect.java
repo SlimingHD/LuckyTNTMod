@@ -10,7 +10,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Material;
 
 public class LightningTNTEffect extends PrimedTNTEffect{
 

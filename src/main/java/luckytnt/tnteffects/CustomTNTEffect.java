@@ -20,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 
 public class CustomTNTEffect extends PrimedTNTEffect {
 
@@ -82,7 +81,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
+						if(!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
 							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						}
 					}
@@ -104,7 +103,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
+						if(!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
 							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						}
 					}
@@ -184,7 +183,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
+						if(!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
 							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						}
 					}
@@ -206,7 +205,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
+						if(!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
 							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						}
 					}
@@ -275,7 +274,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
+						if(!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
 							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						}
 					}
@@ -286,7 +285,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					
 					@Override
 					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-						if(state.getMaterial() != Material.AIR && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
+						if(!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
 							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						}
 					}

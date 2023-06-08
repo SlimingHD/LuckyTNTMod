@@ -24,7 +24,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 
 public class StoneColdEffect extends PrimedTNTEffect {
@@ -40,7 +39,7 @@ public class StoneColdEffect extends PrimedTNTEffect {
 			double offZ = Math.random() * 15 - Math.random() * 15;
 			BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
 			BlockState state = ent.getLevel().getBlockState(pos);
-			if(state.getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && state.isCollisionShapeFullBlock(ent.getLevel(), pos) && state.getMaterial() != Material.AIR) {
+			if(state.getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !state.isAir()) {
 				state.getBlock().onBlockExploded(state, ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 				ent.getLevel().setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
 			}

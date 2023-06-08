@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.WetSpongeBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.IPlantable;
 
 public class WastelandTNTEffect extends PrimedTNTEffect {
