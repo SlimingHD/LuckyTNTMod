@@ -48,7 +48,7 @@ public class AngryMiner extends Monster implements RangedAttackMob{
 		double xVel = entity.getX() - getX();
 		double yVel = entity.getY() + getEyeHeight() - 1.1f;
 		double zVel = entity.getZ() - getZ();
-		ItemRegistry.DYNAMITE.get().shoot(level, getX(), getY() + getEyeHeight(), getZ(), new Vec3(xVel, yVel - getY() - getEyeHeight() + Math.sqrt(xVel * xVel + zVel * zVel) * 0.2f, zVel), 2, this);
+		ItemRegistry.DYNAMITE.get().shoot(level(), getX(), getY() + getEyeHeight(), getZ(), new Vec3(xVel, yVel - getY() - getEyeHeight() + Math.sqrt(xVel * xVel + zVel * zVel) * 0.2f, zVel), 2, this);
 	}
 	
 	@Override

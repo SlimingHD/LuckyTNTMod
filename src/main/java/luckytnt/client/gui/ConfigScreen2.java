@@ -1,10 +1,9 @@
 package luckytnt.client.gui;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.util.CustomTNTConfig;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -48,19 +47,19 @@ public class ConfigScreen2 extends Screen {
 	}
 	
 	@Override
-	public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks) {
+	public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks) {
 		renderBackground(stack);
-		drawCenteredString(stack, font, title, width / 2, 8, 0xFFFFFF);
-		drawString(stack, font, Component.translatable("luckytntmod.config.custom_tnt"), 20, 46, 0xFFFFFF);
-		drawString(stack, font, Component.translatable("luckytntmod.config.first_tnt"), 20, 66, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.first_type"), width / 2, 86, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.first_intensity"), width / 2, 106, 0xFFFFFF);
-		drawString(stack, font, Component.translatable("luckytntmod.config.second_tnt"), 20, 126, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.second_type"), width / 2, 146, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.second_intensity"), width / 2, 166, 0xFFFFFF);
-		drawString(stack, font, Component.translatable("luckytntmod.config.third_tnt"), 20, 186, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.third_type"), width / 2, 206, 0xFFFFFF);
-		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.third_intensity"), width / 2, 226, 0xFFFFFF);
+		stack.drawCenteredString(font, title, width / 2, 8, 0xFFFFFF);
+		stack.drawString(font, Component.translatable("luckytntmod.config.custom_tnt"), 20, 46, 0xFFFFFF);
+		stack.drawString(font, Component.translatable("luckytntmod.config.first_tnt"), 20, 66, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.first_type"), width / 2, 86, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.first_intensity"), width / 2, 106, 0xFFFFFF);
+		stack.drawString(font, Component.translatable("luckytntmod.config.second_tnt"), 20, 126, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.second_type"), width / 2, 146, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.second_intensity"), width / 2, 166, 0xFFFFFF);
+		stack.drawString(font, Component.translatable("luckytntmod.config.third_tnt"), 20, 186, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.third_type"), width / 2, 206, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.third_intensity"), width / 2, 226, 0xFFFFFF);
 		super.render(stack, mouseX, mouseY, partialTicks);
 	}
 	

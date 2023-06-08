@@ -16,7 +16,7 @@ public class PrimedStructureTNT extends PrimedLTNT{
 	
 	@Override
 	public void onAddedToWorld() {
-		if(!level.isClientSide) {
+		if(!level().isClientSide()) {
       		PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new ClientboundStringNBTPacket("structure", getPersistentData().getString("structure"), getId()));
       	}
 	}

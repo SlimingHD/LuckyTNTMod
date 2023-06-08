@@ -6,6 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class SnowySnowball extends Snowball {
@@ -27,8 +28,8 @@ public class SnowySnowball extends Snowball {
 	protected void onHitBlock(BlockHitResult result) {
 		super.onHitBlock(result);
 		BlockPos pos = result.getBlockPos();
-		if(Blocks.SNOW.canSurvive(level.getBlockState(pos.above()), level, pos.above()) && level.getBlockState(pos.above()).getBlock().getExplosionResistance() < 100 && level.getBlockState(pos.above()).getMaterial() != Material.WATER_PLANT && level.getBlockState(pos.above()).getMaterial() != Material.REPLACEABLE_WATER_PLANT) {
-			level.setBlock(pos.above(), Blocks.SNOW.defaultBlockState(), 3);
+		if(Blocks.SNOW.canSurvive(level().getBlockState(pos.above()), level(), pos.above()) && level().getBlockState(pos.above()).getBlock().getExplosionResistance() < 100 && level().getFluidState(pos.above()).is(Fluids.EMPTY)) {
+			level().setBlock(pos.above(), Blocks.SNOW.defaultBlockState(), 3);
 		}
 	}
 }

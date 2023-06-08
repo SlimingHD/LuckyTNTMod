@@ -23,9 +23,9 @@ public class BouncingDynamite extends LExplosiveProjectile {
 		Vec3 flyDir = getDeltaMovement();
 		if(hitResult != null) {
 			if(getPersistentData().getInt("bounces") >= 12) {
-				if(level instanceof ServerLevel) {
+				if(level() instanceof ServerLevel) {
 					getEffect().serverExplosion(this);
-					level.playSound(this, new BlockPos(Mth.floor(getX()), Mth.floor(getY()), Mth.floor(getZ())), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					level().playSound(this, new BlockPos(Mth.floor(getX()), Mth.floor(getY()), Mth.floor(getZ())), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level().getRandom().nextFloat() - level().getRandom().nextFloat()) * 0.2f) * 0.7f);
 				}
 				discard();
 			}
@@ -36,7 +36,7 @@ public class BouncingDynamite extends LExplosiveProjectile {
 			Vec3 bounceDir = flyDir.subtract(result.scale(2f));
 			setDeltaMovement(bounceDir.scale(0.5f + Math.random() * 0.25f));
 			getPersistentData().putInt("bounces", getPersistentData().getInt("bounces") + 1);
-			level.playSound(null, x(), y(), z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);		
+			level().playSound(null, x(), y(), z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);		
 		}
 	}
 }
