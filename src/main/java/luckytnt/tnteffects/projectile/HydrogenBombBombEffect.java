@@ -25,7 +25,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
@@ -50,7 +49,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 				BlockState stateTop = level.getBlockState(posTop);
 				if(distance <= 250) {
 					if(Math.random() < 0.25f) {
-						if(Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && state.getMaterial() != Material.AIR && !Block.isFaceFull(stateTop.getCollisionShape(level, posTop), Direction.UP) && stateTop.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200) {
+						if(Block.isFaceFull(state.getCollisionShape(level, pos), Direction.UP) && !state.isAir() && !Block.isFaceFull(stateTop.getCollisionShape(level, posTop), Direction.UP) && stateTop.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200) {
 							level.setBlock(posTop, BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState(), 3);
 						}
 					}

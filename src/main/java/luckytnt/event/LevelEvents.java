@@ -47,7 +47,7 @@ public class LevelEvents {
 
 	@SubscribeEvent
 	public static void onLevelUpdate(TickEvent.LevelTickEvent event) {
-		Level level = event.level;
+		Level level = event.level();
 		
 		if(level.getChunkSource().getLightEngine() instanceof ThreadedLevelLightEngine engine) {
 			engine.setTaskPerBatch(LuckyTNTConfigValues.LIGHT_ENGINE_SPEED.get());

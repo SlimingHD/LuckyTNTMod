@@ -67,7 +67,7 @@ public class EntityLivingEvent {
 					ent.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, ent.getPersistentData().getInt("freezeTime") / 900));
 				}
 				if(ent.getPersistentData().getInt("freezeTime") >= 1200 && ent.getPersistentData().getInt("freezeTime") % 10 == 0) {
-					DamageSources sources = new DamageSources(ent.level.registryAccess());
+					DamageSources sources = new DamageSources(ent.level().registryAccess());
 					ent.hurt(sources.freeze(), 1);
 				}
 				

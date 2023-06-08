@@ -50,7 +50,7 @@ public class DeathRayRayEffect extends PrimedTNTEffect{
 			@Override
 			public void doEntityExplosion(Entity ent, double distance) {
 				if(!ent.equals(entity.owner())) {
-					DamageSources sources = new DamageSources(ent.level.registryAccess());
+					DamageSources sources = new DamageSources(ent.level().registryAccess());
 					if(ent instanceof ItemEntity itemEntity) {
 						if(!itemEntity.getItem().getItem().equals(ItemRegistry.ANTIMATTER.get())) {
 							ent.hurt(sources.explosion(explosion), 1);
