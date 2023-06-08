@@ -3,16 +3,17 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
-version = '1.19.4-1.0'
+
+version = '1.20-2.0'
 group = 'luckytnt.luckytntmod'
-archivesBaseName = 'luckytntmod-1.19.4'
+archivesBaseName = 'luckytntmod-1.20'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
 minecraft {
-    mappings channel: 'official', version: '1.19.4'
+    mappings channel: 'official', version: '1.20'
 
     runs {
         client {
@@ -87,9 +88,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.4-45.0.64'
+    minecraft 'net.minecraftforge:forge:1.20-46.0.1'
 
-    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.19.4-45.0.64.1")
+    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.20-46.0.1.0")
 }
 
 jar {
@@ -114,10 +115,9 @@ task sourceJar(type: Jar) {
 
 jar.finalizedBy('reobfJar')
 
-
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+    	mavenJava(MavenPublication) {
             artifact jar
         }
     }
