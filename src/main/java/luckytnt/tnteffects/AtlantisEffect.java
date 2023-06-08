@@ -3,6 +3,7 @@ package luckytnt.tnteffects;
 import com.google.common.base.Predicate;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -39,7 +40,6 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.Tags;
 
 public class AtlantisEffect extends PrimedTNTEffect {
 	
@@ -116,7 +116,7 @@ public class AtlantisEffect extends PrimedTNTEffect {
 				BlockState stateTop = level.getBlockState(posTop);
 				
 				if(((ent.y() + 8) - pos.getY()) >= 0 && ((ent.y() + 8) - pos.getY()) <= 50) {
-					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 0 || state.getBlock() instanceof LiquidBlock || state.isAir()) && !state.is(Tags.Blocks.STONE)) {
+					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 0 || state.getBlock() instanceof LiquidBlock || state.isAir()) && !Materials.isStone(state)) {
 						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						level.setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
 					}

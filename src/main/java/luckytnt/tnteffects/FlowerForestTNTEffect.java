@@ -2,6 +2,7 @@ package luckytnt.tnteffects;
 
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -15,6 +16,7 @@ import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
@@ -41,13 +43,9 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(distance <= 50 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-					if((state.getMaterial() == Material.BAMBOO || state.getMaterial() == Material.BAMBOO_SAPLING || state.getMaterial() == Material.CACTUS
-					|| state.getMaterial() == Material.CLOTH_DECORATION || state.getMaterial() == Material.DECORATION || state.getMaterial() == Material.FIRE
-					|| state.getMaterial() == Material.GRASS || state.getMaterial() == Material.LEAVES || state.getMaterial() == Material.MOSS
-					|| state.getMaterial() == Material.NETHER_WOOD || state.getMaterial() == Material.PLANT || state.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT
-					|| state.getMaterial() == Material.REPLACEABLE_PLANT || state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getMaterial() == Material.SNOW
-					|| state.getMaterial() == Material.TOP_SNOW || state.getMaterial() == Material.VEGETABLE || state.getMaterial() == Material.WATER_PLANT
-					|| state.getMaterial() == Material.WOOD) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
+					if((!state.isCollisionShapeFullBlock(level, pos) || state.is(Blocks.FIRE) || state.is(Blocks.SOUL_FIRE) 
+					|| state.is(BlockTags.LEAVES) || Materials.isPlant(state) || state.is(BlockTags.SNOW)
+					|| Materials.isWood(state)) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
 					{
 						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					}
@@ -89,7 +87,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 							}
 						}
 						for(ServerPlayer player : ((ServerLevel)ent.getLevel()).players()) {
-							player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.getLevel().getChunkAt(toBlockPos(new Vec3(ent.x() + offX, 0, ent.z() + offZ))), ent.getLevel().getLightEngine(), null, null, false));
+							player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.getLevel().getChunkAt(toBlockPos(new Vec3(ent.x() + offX, 0, ent.z() + offZ))), ent.getLevel().getLightEngine(), null, null));
 						}
 						for(double offY = 320; offY > -64; offY--) {
 							BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, ent.y() + offY, ent.z() + offZ));

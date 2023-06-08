@@ -2,6 +2,7 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -28,7 +29,7 @@ public class FieryHellEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if((Math.round(ent.y()) - pos.getY()) >= 0 && (Math.round(ent.y()) - pos.getY()) <= 20) {
-					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 || state.getBlock() instanceof LiquidBlock || state.isAir()) && state.getMaterial() != Material.STONE) {
+					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 || state.getBlock() instanceof LiquidBlock || state.isAir()) && !Materials.isStone(state)) {
 						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 						level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
 					} 
