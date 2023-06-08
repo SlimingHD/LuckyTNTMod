@@ -115,7 +115,6 @@ task sourceJar(type: Jar) {
 
 jar.finalizedBy('reobfJar')
 
-
 publishing {
     publications {
         mavenJava(MavenPublication) {
