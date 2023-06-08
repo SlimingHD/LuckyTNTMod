@@ -4,6 +4,7 @@ import org.joml.Vector3f;
 
 import luckytnt.entity.SnowySnowball;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -25,7 +26,7 @@ public class WinterTNTEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200) {
-					if(state.getMaterial() == Material.BUBBLE_COLUMN || state.getMaterial() == Material.WATER || state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getBlock() == Blocks.WATER) {
+					if(state.is(Blocks.BUBBLE_COLUMN) || state.is(Blocks.WATER) || Materials.isWaterPlant(state) || state.getBlock() == Blocks.WATER) {
 						level.setBlock(pos, Blocks.ICE.defaultBlockState(), 3);
 					}
 				}

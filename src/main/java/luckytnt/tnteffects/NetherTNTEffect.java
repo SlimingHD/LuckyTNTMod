@@ -7,6 +7,7 @@ import java.util.Random;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -69,7 +70,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if((state.getBlock() instanceof LiquidBlock || state.getBlock() instanceof BubbleColumnBlock || state.getMaterial() == Material.WATER_PLANT || state.getMaterial() == Material.REPLACEABLE_WATER_PLANT) && pos.getY() <= 50) {
+				if((state.getBlock() instanceof LiquidBlock || state.getBlock() instanceof BubbleColumnBlock || Materials.isWaterPlant(state)) && pos.getY() <= 50) {
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 				}
 				

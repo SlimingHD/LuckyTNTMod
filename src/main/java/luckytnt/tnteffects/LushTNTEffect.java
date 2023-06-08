@@ -35,7 +35,7 @@ public class LushTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100 && (!state.isCollisionShapeFullBlock(level, pos) || state.getMaterial() == Material.LEAVES || state.is(BlockTags.LOGS))) {
+				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100 && (!state.isCollisionShapeFullBlock(level, pos) || state.is(BlockTags.LEAVES) || state.is(BlockTags.LOGS))) {
 					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 				}
 			}

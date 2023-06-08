@@ -30,27 +30,27 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 
 public class WorldOfWoolsEffect extends PrimedTNTEffect {
-	public static List<MaterialColor> WHITE = List.of(MaterialColor.SNOW, MaterialColor.QUARTZ, MaterialColor.TERRACOTTA_WHITE, MaterialColor.WOOL);
-	public static List<MaterialColor> LIGHT_GRAY = List.of(MaterialColor.METAL, MaterialColor.CLAY, MaterialColor.COLOR_LIGHT_GRAY);
-	public static List<MaterialColor> GRAY = List.of(MaterialColor.STONE, MaterialColor.COLOR_GRAY, MaterialColor.TERRACOTTA_CYAN, MaterialColor.DEEPSLATE);
-	public static List<MaterialColor> BLACK = List.of(MaterialColor.COLOR_BLACK);
-	public static List<MaterialColor> BROWN = List.of(MaterialColor.DIRT, MaterialColor.WOOD, MaterialColor.COLOR_BROWN, MaterialColor.PODZOL, MaterialColor.TERRACOTTA_BLACK, MaterialColor.TERRACOTTA_BROWN, MaterialColor.TERRACOTTA_GRAY, MaterialColor.TERRACOTTA_LIGHT_GRAY, MaterialColor.RAW_IRON);
-	public static List<MaterialColor> RED = List.of(MaterialColor.FIRE, MaterialColor.COLOR_RED, MaterialColor.NETHER, MaterialColor.TERRACOTTA_RED, MaterialColor.CRIMSON_HYPHAE, MaterialColor.CRIMSON_NYLIUM, MaterialColor.TERRACOTTA_PINK);
-	public static List<MaterialColor> ORANGE = List.of(MaterialColor.COLOR_ORANGE, MaterialColor.TERRACOTTA_ORANGE);
-	public static List<MaterialColor> YELLOW = List.of(MaterialColor.SAND, MaterialColor.COLOR_YELLOW, MaterialColor.GOLD, MaterialColor.TERRACOTTA_YELLOW);
-	public static List<MaterialColor> LIME = List.of(MaterialColor.GRASS, MaterialColor.COLOR_LIGHT_GREEN, MaterialColor.EMERALD, MaterialColor.GLOW_LICHEN);
-	public static List<MaterialColor> GREEN = List.of(MaterialColor.PLANT, MaterialColor.COLOR_GREEN, MaterialColor.TERRACOTTA_LIGHT_GREEN, MaterialColor.TERRACOTTA_GREEN);
-	public static List<MaterialColor> CYAN = List.of(MaterialColor.COLOR_CYAN, MaterialColor.WARPED_NYLIUM, MaterialColor.WARPED_STEM, MaterialColor.WARPED_WART_BLOCK);
-	public static List<MaterialColor> LIGHT_BLUE = List.of(MaterialColor.ICE, MaterialColor.COLOR_LIGHT_BLUE, MaterialColor.DIAMOND);
-	public static List<MaterialColor> BLUE = List.of(MaterialColor.WATER, MaterialColor.COLOR_BLUE, MaterialColor.LAPIS, MaterialColor.TERRACOTTA_LIGHT_BLUE);
-	public static List<MaterialColor> PURPLE = List.of(MaterialColor.COLOR_PURPLE, MaterialColor.TERRACOTTA_BLUE, MaterialColor.WARPED_HYPHAE);
-	public static List<MaterialColor> MAGENTA = List.of(MaterialColor.COLOR_MAGENTA, MaterialColor.TERRACOTTA_MAGENTA, MaterialColor.TERRACOTTA_PURPLE, MaterialColor.CRIMSON_STEM);
-	public static List<MaterialColor> PINK = List.of(MaterialColor.COLOR_PINK);
+	public static List<MapColor> WHITE = List.of(MapColor.SNOW, MapColor.QUARTZ, MapColor.TERRACOTTA_WHITE, MapColor.WOOL);
+	public static List<MapColor> LIGHT_GRAY = List.of(MapColor.METAL, MapColor.CLAY, MapColor.COLOR_LIGHT_GRAY);
+	public static List<MapColor> GRAY = List.of(MapColor.STONE, MapColor.COLOR_GRAY, MapColor.TERRACOTTA_CYAN, MapColor.DEEPSLATE);
+	public static List<MapColor> BLACK = List.of(MapColor.COLOR_BLACK);
+	public static List<MapColor> BROWN = List.of(MapColor.DIRT, MapColor.WOOD, MapColor.COLOR_BROWN, MapColor.PODZOL, MapColor.TERRACOTTA_BLACK, MapColor.TERRACOTTA_BROWN, MapColor.TERRACOTTA_GRAY, MapColor.TERRACOTTA_LIGHT_GRAY, MapColor.RAW_IRON);
+	public static List<MapColor> RED = List.of(MapColor.FIRE, MapColor.COLOR_RED, MapColor.NETHER, MapColor.TERRACOTTA_RED, MapColor.CRIMSON_HYPHAE, MapColor.CRIMSON_NYLIUM, MapColor.TERRACOTTA_PINK);
+	public static List<MapColor> ORANGE = List.of(MapColor.COLOR_ORANGE, MapColor.TERRACOTTA_ORANGE);
+	public static List<MapColor> YELLOW = List.of(MapColor.SAND, MapColor.COLOR_YELLOW, MapColor.GOLD, MapColor.TERRACOTTA_YELLOW);
+	public static List<MapColor> LIME = List.of(MapColor.GRASS, MapColor.COLOR_LIGHT_GREEN, MapColor.EMERALD, MapColor.GLOW_LICHEN);
+	public static List<MapColor> GREEN = List.of(MapColor.PLANT, MapColor.COLOR_GREEN, MapColor.TERRACOTTA_LIGHT_GREEN, MapColor.TERRACOTTA_GREEN);
+	public static List<MapColor> CYAN = List.of(MapColor.COLOR_CYAN, MapColor.WARPED_NYLIUM, MapColor.WARPED_STEM, MapColor.WARPED_WART_BLOCK);
+	public static List<MapColor> LIGHT_BLUE = List.of(MapColor.ICE, MapColor.COLOR_LIGHT_BLUE, MapColor.DIAMOND);
+	public static List<MapColor> BLUE = List.of(MapColor.WATER, MapColor.COLOR_BLUE, MapColor.LAPIS, MapColor.TERRACOTTA_LIGHT_BLUE);
+	public static List<MapColor> PURPLE = List.of(MapColor.COLOR_PURPLE, MapColor.TERRACOTTA_BLUE, MapColor.WARPED_HYPHAE);
+	public static List<MapColor> MAGENTA = List.of(MapColor.COLOR_MAGENTA, MapColor.TERRACOTTA_MAGENTA, MapColor.TERRACOTTA_PURPLE, MapColor.CRIMSON_STEM);
+	public static List<MapColor> PINK = List.of(MapColor.COLOR_PINK);
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
@@ -60,8 +60,8 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				MaterialColor color = state.getMapColor(level, pos);
-				if(color != MaterialColor.NONE & !state.getCollisionShape(level, pos, CollisionContext.empty()).isEmpty() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 200) {
+				MapColor color = state.getMapColor(level, pos);
+				if(color != MapColor.NONE & !state.getCollisionShape(level, pos, CollisionContext.empty()).isEmpty() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 200) {
 					if(WHITE.contains(color)) {
 						blocks.add(Pair.of(pos, Blocks.WHITE_WOOL));
 					} else if(LIGHT_GRAY.contains(color)) {
@@ -97,7 +97,7 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 					}
 				}
 				
-				if((state.getMaterial() == Material.WATER || state.getMaterial() == Material.BUBBLE_COLUMN || state.getBlock() instanceof BaseCoralPlantTypeBlock) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 200) {
+				if((state.is(Blocks.WATER) || state.is(Blocks.BUBBLE_COLUMN) || state.getBlock() instanceof BaseCoralPlantTypeBlock) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 200) {
 					blocks.add(Pair.of(pos, Blocks.BLUE_STAINED_GLASS));
 				}
 				
@@ -109,7 +109,7 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 					blocks.add(Pair.of(pos, Blocks.BLUE_STAINED_GLASS));
 				}
 				
-				if(state.getMaterial() == Material.LAVA && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 200) {
+				if(state.is(Blocks.LAVA) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 200) {
 					blocks.add(Pair.of(pos, Blocks.ORANGE_STAINED_GLASS));
 				}
 			}

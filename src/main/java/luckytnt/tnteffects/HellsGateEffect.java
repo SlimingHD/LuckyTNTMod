@@ -2,6 +2,7 @@ package luckytnt.tnteffects;
 
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -10,6 +11,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -29,9 +31,9 @@ public class HellsGateEffect extends PrimedTNTEffect{
 				
 				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 200 && stateTop.isAir() && !state.isAir() && Math.abs(entity.y() - pos.getY()) <= 20) {
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-					if(state.getMaterial() == Material.WOOD) {
+					if(Materials.isWood(state)) {
 						level.setBlock(posTop, Blocks.OBSIDIAN.defaultBlockState(), 3);
-					} else if(state.getMaterial() == Material.LEAVES) {
+					} else if(state.is(BlockTags.LEAVES)) {
 						level.setBlock(posTop, Blocks.NETHER_BRICKS.defaultBlockState(), 3);
 					} else if(state.getBlock() instanceof LiquidBlock) {
 						level.setBlock(posTop, Blocks.LAVA.defaultBlockState(), 3);

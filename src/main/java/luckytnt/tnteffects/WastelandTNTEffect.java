@@ -1,11 +1,15 @@
 package luckytnt.tnteffects;
 
+import java.util.List;
+
 import luckytnt.registry.BlockRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -16,6 +20,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.IPlantable;
 
 public class WastelandTNTEffect extends PrimedTNTEffect {
+	
+	public static List<Block> GRASS = List.of(Blocks.GRASS_BLOCK, Blocks.PODZOL, Blocks.MYCELIUM, Blocks.MUD, Blocks.MUDDY_MANGROVE_ROOTS);
+	public static List<Block> DIRT = List.of(Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.ROOTED_DIRT);
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
@@ -51,27 +58,27 @@ public class WastelandTNTEffect extends PrimedTNTEffect {
 						BlockState stateDown = ent.getLevel().getBlockState(posDown);
 						
 						if(distance <= radius) {
-							if(state.getBlock() instanceof LiquidBlock || state.getMaterial() == Material.WATER_PLANT || state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getMaterial() == Material.BUBBLE_COLUMN) {
+							if(state.getBlock() instanceof LiquidBlock || Materials.isWaterPlant(state) || state.is(Blocks.BUBBLE_COLUMN)) {
 								ent.getLevel().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 							}
 							if(state.hasProperty(BlockStateProperties.WATERLOGGED) && state.getValue(BlockStateProperties.WATERLOGGED)) {
 								ent.getLevel().setBlock(pos, state.setValue(BlockStateProperties.WATERLOGGED, false), 3);
 							}
 							if(dryArea) {
-								if(state.getMaterial() == Material.PLANT || state.getMaterial() == Material.REPLACEABLE_PLANT || state.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT) {
+								if(Materials.isPlant(state)) {
 									if(stateDown.canSustainPlant(ent.getLevel(), posDown, Direction.UP, (IPlantable)Blocks.DEAD_BUSH)) {
 										ent.getLevel().setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 									}
 								}
-								if(state.getMaterial() == Material.GRASS) {
+								if(GRASS.contains(state.getBlock())) {
 									ent.getLevel().setBlock(pos, Blocks.DIRT.defaultBlockState(), 3);
-								} else if(state.getMaterial() == Material.DIRT) {
+								} else if(DIRT.contains(state.getBlock())) {
 									ent.getLevel().setBlock(pos, Blocks.SAND.defaultBlockState(), 3);
-								} else if(state.getMaterial() == Material.WOOL) {
+								} else if(state.is(BlockTags.WOOL)) {
 									ent.getLevel().setBlock(pos, Blocks.WHITE_WOOL.defaultBlockState(), 3);
 								} else if(state.getBlock() instanceof WetSpongeBlock) {
 									ent.getLevel().setBlock(pos, Blocks.SPONGE.defaultBlockState(), 3);
-								} else if(state.getMaterial() == Material.ICE || state.getMaterial() == Material.ICE_SOLID || state.getMaterial() == Material.SNOW || state.getMaterial() == Material.TOP_SNOW || state.getMaterial() == Material.POWDER_SNOW || state.getMaterial() == Material.LEAVES) {
+								} else if(state.is(BlockTags.ICE) || state.is(BlockTags.SNOW) || state.is(BlockTags.LEAVES)) {
 									ent.getLevel().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 								}
 							}

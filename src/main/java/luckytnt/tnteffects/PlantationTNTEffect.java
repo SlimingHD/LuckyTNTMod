@@ -6,6 +6,7 @@ import org.joml.Vector3f;
 
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
@@ -13,6 +14,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -33,13 +35,9 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-					if((state.getMaterial() == Material.BAMBOO || state.getMaterial() == Material.BAMBOO_SAPLING || state.getMaterial() == Material.CACTUS
-					|| state.getMaterial() == Material.CLOTH_DECORATION || state.getMaterial() == Material.DECORATION || state.getMaterial() == Material.FIRE
-					|| state.getMaterial() == Material.GRASS || state.getMaterial() == Material.LEAVES || state.getMaterial() == Material.MOSS
-					|| state.getMaterial() == Material.NETHER_WOOD || state.getMaterial() == Material.PLANT || state.getMaterial() == Material.REPLACEABLE_FIREPROOF_PLANT
-					|| state.getMaterial() == Material.REPLACEABLE_PLANT || state.getMaterial() == Material.REPLACEABLE_WATER_PLANT || state.getMaterial() == Material.SNOW
-					|| state.getMaterial() == Material.TOP_SNOW || state.getMaterial() == Material.VEGETABLE || state.getMaterial() == Material.WATER_PLANT
-					|| state.getMaterial() == Material.WOOD) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
+					if((!state.isCollisionShapeFullBlock(level, pos) || state.is(Blocks.FIRE) || state.is(Blocks.SOUL_FIRE) 
+					|| state.is(BlockTags.LEAVES) || Materials.isPlant(state) || state.is(BlockTags.SNOW)
+					|| Materials.isWood(state)) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
 					{
 						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					}
@@ -73,7 +71,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 					BlockState stateUp = ent.getLevel().getBlockState(posUp);
 					
 					if(state.getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200 && stateUp.getExplosionResistance(ent.getLevel(), posUp, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200 && !blockFound) {
-						if(state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !stateUp.isCollisionShapeFullBlock(ent.getLevel(), posUp) && state.getMaterial() != Material.LEAVES && stateUp.getMaterial() != Material.WATER && stateUp.getMaterial() != Material.LAVA) {
+						if(state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !stateUp.isCollisionShapeFullBlock(ent.getLevel(), posUp) && !state.is(BlockTags.LEAVES) && !stateUp.is(Blocks.WATER) && !stateUp.is(Blocks.LAVA)) {
 							blockFound = true;
 							if(distance > 40 && distance <= 41) {
 								placeCropsAndFarmland(pos, true, ent);

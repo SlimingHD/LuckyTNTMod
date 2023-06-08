@@ -7,6 +7,7 @@ import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -32,7 +33,7 @@ public class IcyTNTEffect extends PrimedTNTEffect {
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
 				if (distance <= 40 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
-					if(state.getMaterial() == Material.GRASS || state.getMaterial() == Material.LEAVES || state.getMaterial() == Material.SAND) {
+					if(WastelandTNTEffect.GRASS.contains(state.getBlock()) || state.is(BlockTags.LEAVES) || state.is(BlockTags.SAND)) {
 						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())); 
 						level.setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
 					} if(state.getBlock() instanceof LiquidBlock) {

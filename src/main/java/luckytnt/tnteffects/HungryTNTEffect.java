@@ -60,7 +60,7 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 				} else if(target instanceof Player) {
 					DamageSources sources = new DamageSources(ent.getLevel().registryAccess());
 					
-					target.hurt(sources.outOfWorld(), 4f);
+					target.hurt(sources.fellOutOfWorld(), 4f);
 					Vec3 vec3d = new Vec3(target.getX() - ent.x(), target.getY() - ent.y(), target.getZ() - ent.z()).normalize().scale(10);
 					target.setDeltaMovement(vec3d);
 				}

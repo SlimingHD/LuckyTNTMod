@@ -22,7 +22,7 @@ public class LightningTNTEffect extends PrimedTNTEffect{
 				double offX = Math.random() * 40 - 20;
 				double offZ = Math.random() * 40 - 20;
 				for(int offY = 320; offY > -64; offY--) {
-					if(entity.getLevel().getBlockState(new BlockPos(Mth.floor(x + offX), offY, Mth.floor(z + offZ))).getMaterial() != Material.AIR) {
+					if(!entity.getLevel().getBlockState(new BlockPos(Mth.floor(x + offX), offY, Mth.floor(z + offZ))).isAir()) {
 						Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.getLevel());
 						lighting.setPos(x + offX, offY, z + offZ);
 						entity.getLevel().addFreshEntity(lighting);

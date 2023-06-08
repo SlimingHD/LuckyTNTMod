@@ -40,10 +40,9 @@ public class VacuumCleaner extends Item{
 		components.add(Component.translatable("item.vacuum_cleaner.info"));
 	}
 	
-	@SuppressWarnings("removal")
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-		onUsingTick(player.getItemInHand(hand), player, player.getItemInHand(hand).getCount());
+		onUseTick(level, player, player.getItemInHand(hand), player.getItemInHand(hand).getCount());
 		if(!player.getItemInHand(hand).getOrCreateTag().getBoolean("using")) {
 			soundCooldown = 42;
 			player.getItemInHand(hand).getOrCreateTag().putBoolean("using", true);
