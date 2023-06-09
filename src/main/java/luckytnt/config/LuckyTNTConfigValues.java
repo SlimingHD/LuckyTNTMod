@@ -28,7 +28,7 @@ public class LuckyTNTConfigValues {
 	public static void registerConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("TNT Settings").push("Offsets");
 		ISLAND_HEIGHT = builder.comment("Y offset of floating islands").defineInRange("islandHeight", 50, 20, 160);
-		DROP_HEIGHT = builder.comment("Y offset of dropped projectiles").defineInRange("dropHeight", 60, 200, 400);
+		DROP_HEIGHT = builder.comment("Y offset of dropped projectiles").defineInRange("dropHeight", 200, 60, 400);
 		builder.pop();
 		builder.comment("Disaster Settings").push("Disasters");
 		MAXIMUM_DISASTER_TIME  = builder.comment("Maximum duration of disasters in minutes").defineInRange("maximumTime", 12, 2, 24);
