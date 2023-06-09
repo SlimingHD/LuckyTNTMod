@@ -805,6 +805,6 @@
   	"command.ltmdisaster.toxicclouds": "Началось бедствие Токсичные Облака",
   	"command.ltmdisaster.clear": "Все бедствия были остановлены",
   	"command.randomtnt.tick_count_too_low": "Сумма не должна быть ниже %s, найдено %s",
-  	"command.randomtnt.success1": "Successfully distributed ",
-  	"command.randomtnt.success2": " Items"
+  	"command.randomtnt.success1": "Успешно распространено ",
+  	"command.randomtnt.success2": " предметов"
 }
