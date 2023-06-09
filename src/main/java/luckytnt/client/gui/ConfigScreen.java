@@ -37,7 +37,7 @@ public class ConfigScreen extends Screen{
 		addRenderableWidget(island_slider = new ForgeSlider(20, 40, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 20, 160, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), true));		
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.ISLAND_HEIGHT, 50, island_slider)).bounds(width - 220, 40, 200, 20).build());
 		addRenderableWidget(dropped_slider = new ForgeSlider(20, 60, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 60, 400, LuckyTNTConfigValues.DROP_HEIGHT.get(), true));		
-		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.ISLAND_HEIGHT, 50, island_slider)).bounds(width - 220, 60, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.DROP_HEIGHT, 200, dropped_slider)).bounds(width - 220, 60, 200, 20).build());
 		
 		addRenderableWidget(average_disaster_time_silder = new ForgeSlider(20, 80, 200, 20, Component.literal(""), Component.literal(""), 2, 24, LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get().doubleValue(), true));		
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME, 12, average_disaster_time_silder)).bounds(width - 220, 80, 200, 20).build());
