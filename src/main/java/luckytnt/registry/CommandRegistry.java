@@ -1,7 +1,12 @@
 package luckytnt.registry;
 
+import com.mojang.brigadier.arguments.BoolArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
+
 import luckytnt.LuckyTNTMod;
 import luckytnt.commands.LTMDisastersCommand;
+import luckytnt.commands.RandomTNTCommand;
+import luckytnt.commands.RandomTNTCommandArgument;
 import net.minecraft.commands.Commands;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -19,6 +24,41 @@ public class CommandRegistry {
 				.then(Commands.literal("ice_age").executes(LTMDisastersCommand::executeIceAge))
 				.then(Commands.literal("heat_death").executes(LTMDisastersCommand::executeHeatDeath))
 				.then(Commands.literal("tnt_rain").executes(LTMDisastersCommand::executeTNTRain))
+		);
+		
+		event.getDispatcher().register(Commands.literal("randomtnt").requires(s -> s.hasPermission(2))
+				
+				.then(Commands.literal("normal_tnt")
+				.then(Commands.argument("amount", RandomTNTCommandArgument.random()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), true, "n");
+			    })
+				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "n");
+				}))))
+				
+				.then(Commands.literal("dynamite")
+				.then(Commands.argument("amount", RandomTNTCommandArgument.random()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), true, "dy");
+				})
+				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "dy");
+				}))))
+				
+				.then(Commands.literal("god_tnt")
+				.then(Commands.argument("amount", RandomTNTCommandArgument.random()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), true, "g");
+				})
+				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "g");
+				}))))
+				
+				.then(Commands.literal("doomsday_tnt")
+				.then(Commands.argument("amount", RandomTNTCommandArgument.random()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), true, "d");
+				})
+				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "d");
+				}))))
 		);
 	}
 }
