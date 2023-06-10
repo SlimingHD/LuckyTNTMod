@@ -803,5 +803,8 @@
   	"command.ltmdisaster.toxicactive": "Бедствие Токсичные Облака сейчас активно на ",
   	"command.ltmdisaster.minute": " минут",
   	"command.ltmdisaster.toxicclouds": "Началось бедствие Токсичные Облака",
-  	"command.ltmdisaster.clear": "Все бедствия были остановлены"
+  	"command.ltmdisaster.clear": "Все бедствия были остановлены",
+  	"command.randomtnt.tick_count_too_low": "Количество не должно быть меньше %s, заданное количество %s",
+  	"command.randomtnt.success1": "Успешно выдано ",
+  	"command.randomtnt.success2": " предметов"
 }
