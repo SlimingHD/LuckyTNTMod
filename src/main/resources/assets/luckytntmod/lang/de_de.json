@@ -802,5 +802,8 @@
   	"command.ltmdisaster.toxicclouds": "Das Desaster Giftige Wolken wurde gestartet",
   	"command.ltmdisaster.minute": " Minuten",
 	"command.ltmdisaster.clear": "Alle Desaster wurden beendet",
-	"command.ltmdisaster.doomsdayactive": "Das Desaster Weltuntergang ist noch aktiv f\u00fcr "
+	"command.ltmdisaster.doomsdayactive": "Das Desaster Weltuntergang ist noch aktiv f\u00fcr ",
+  	"command.randomtnt.tick_count_too_low": "Anzahl darf nicht geringer sein als %s, war aber %s",
+  	"command.randomtnt.success1": "Verteilte erfolgreich ",
+  	"command.randomtnt.success2": " Gegenstände"
 }
