@@ -6,6 +6,7 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.horse.ZombieHorse;
 import net.minecraft.world.entity.monster.Zombie;
@@ -31,6 +32,7 @@ public class ZombieApocalypseEffect extends PrimedTNTEffect{
 			zombie.setPos(entity.getPos());
 			entity.level().addFreshEntity(zombie);
 		}
+		((ServerLevel)entity.level()).setDayTime(18000);
 	}
 	
 	@Override
