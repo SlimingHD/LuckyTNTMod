@@ -1,8 +1,6 @@
 package luckytnt.registry;
 
 import luckytnt.LuckyTNTMod;
-import luckytnt.commands.RandomTNTCommandArgument;
-import net.minecraft.commands.synchronization.ArgumentTypeInfos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -86,8 +84,5 @@ public class LuckyTNTTabs {
 		event.register(Registries.CREATIVE_MODE_TAB, new ResourceLocation(LuckyTNTMod.MODID, "dynamite"), () -> DYNAMITE);
 		event.register(Registries.CREATIVE_MODE_TAB, new ResourceLocation(LuckyTNTMod.MODID, "minecarts"), () -> MINECART);
 		event.register(Registries.CREATIVE_MODE_TAB, new ResourceLocation(LuckyTNTMod.MODID, "other"), () -> OTHER);
-		
-		event.register(Registries.COMMAND_ARGUMENT_TYPE, new ResourceLocation(LuckyTNTMod.MODID, "random_tnt_argument"), () -> new RandomTNTCommandArgument.Info());
-		ArgumentTypeInfos.registerByClass(RandomTNTCommandArgument.class, new RandomTNTCommandArgument.Info());
 	}
 }
