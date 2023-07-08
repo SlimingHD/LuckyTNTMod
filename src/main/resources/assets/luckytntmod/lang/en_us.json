@@ -803,7 +803,6 @@
   	"command.ltmdisaster.minute": " minutes",
   	"command.ltmdisaster.toxicclouds": "Started the disaster Toxic Clouds",
   	"command.ltmdisaster.clear": "All disasters have been stopped",
-  	"command.randomtnt.tick_count_too_low": "Amount must not be less than %s, found %s",
   	"command.randomtnt.success1": "Successfully distributed ",
   	"command.randomtnt.success2": " Items"
 }
