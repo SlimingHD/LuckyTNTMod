@@ -4,7 +4,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-version = '1.1'
+version = '1.2'
 group = 'luckytnt.luckytntmod'
 archivesBaseName = 'luckytntmod-1.19.3'
 
@@ -90,7 +90,7 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.19.3-44.1.23'
 
-    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.19.3-44.1.2.10")
+    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.19.3-44.1.2.11")
 }
 
 jar {
