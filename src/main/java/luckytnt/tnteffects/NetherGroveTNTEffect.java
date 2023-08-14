@@ -61,9 +61,11 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos.below(), ImprovedExplosion.dummyExplosion(entity.level())) < 100) {
-					level.getBlockState(pos.below()).onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.level()));
-					level.setBlockAndUpdate(pos.below(), topBlock.defaultBlockState());
+				BlockPos posBelow = pos.below();
+				BlockState stateBelow = level.getBlockState(posBelow);
+				if(stateBelow.getExplosionResistance(level, posBelow, ImprovedExplosion.dummyExplosion(level)) < 100) {
+					stateBelow.onBlockExploded(level, posBelow, ImprovedExplosion.dummyExplosion(level));
+					level.setBlockAndUpdate(posBelow, topBlock.defaultBlockState());
 				}
 			}
 		});
