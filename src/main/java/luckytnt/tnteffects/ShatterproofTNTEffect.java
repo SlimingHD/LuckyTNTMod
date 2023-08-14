@@ -23,7 +23,7 @@ public class ShatterproofTNTEffect extends PrimedTNTEffect{
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.isCollisionShapeFullBlock(level, pos) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 1200) {
+				if(!state.getCollisionShape(level, pos).isEmpty() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.level())) < 1200) {
 					level.setBlockAndUpdate(pos, Blocks.OBSIDIAN.defaultBlockState());
 				}
 			}
