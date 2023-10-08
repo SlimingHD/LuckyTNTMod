@@ -5,6 +5,7 @@ import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.block.Block;
 
@@ -24,6 +25,7 @@ public class ArrowTNTEffect extends PrimedTNTEffect{
 			arrow.setDeltaMovement(Math.random() * 3 - Math.random() * 3, Math.random() * 2 - Math.random(), Math.random() * 3 - Math.random() * 3);
 			arrow.setOwner(entity.owner());
 			arrow.setBaseDamage(10);
+			arrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
 			entity.getLevel().addFreshEntity(arrow);
 		}
 	}

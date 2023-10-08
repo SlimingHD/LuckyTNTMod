@@ -21,7 +21,7 @@ public class OverlayTick {
 	
 	private static float contaminatedAmount = 0;
 	
-	@SuppressWarnings({ "resource", "static-access" })
+	@SuppressWarnings({ "resource" })
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onOverlayRender(RenderGuiEvent.Post event) {
@@ -36,7 +36,7 @@ public class OverlayTick {
 			RenderSystem.setShaderColor(1f, 1f, 1f, (float)(player.getPersistentData().getInt("freezeTime")) / 1200f);
 			RenderSystem.setShaderTexture(0, new ResourceLocation("luckytntmod:textures/powder_snow_outline.png"));
 			event.getGuiGraphics().blit(new ResourceLocation("luckytntmod:textures/powder_snow_outline.png"), 0, 0, 0, 0, w, h, w, h);
-		} else if(player.getEffect(EffectRegistry.CONTAMINATED_EFFECT.get()) != null && player.getEffect(EffectRegistry.CONTAMINATED_EFFECT.get()).getDuration() > 0 && LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY.get()) {
+		} else if(player.hasEffect(EffectRegistry.CONTAMINATED_EFFECT.get()) && LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY.get()) {
 			RenderSystem.setShaderColor(1f, 1f, 1f, contaminatedAmount);
 			RenderSystem.setShaderTexture(0, new ResourceLocation("luckytntmod:textures/contaminated_outline.png"));
 			event.getGuiGraphics().blit(new ResourceLocation("luckytntmod:textures/contaminated_outline.png"), 0, 0, 0, 0, w, h, w, h);
