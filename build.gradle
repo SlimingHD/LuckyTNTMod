@@ -90,7 +90,7 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.2-48.0.19'
 
-    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.20.2-48.0.19.0")
+    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.20-46.0.1.2")
 }
 
 jar {
@@ -114,6 +114,7 @@ task sourceJar(type: Jar) {
 }
 
 jar.finalizedBy('reobfJar')
+build.dependsOn('sourceJar')
 
 publishing {
     publications {
