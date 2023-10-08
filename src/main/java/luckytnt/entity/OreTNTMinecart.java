@@ -15,6 +15,6 @@ public class OreTNTMinecart extends LTNTMinecart{
 	public List<BlockPos> availablePos = new ArrayList<>();
 	
 	public OreTNTMinecart(EntityType<LTNTMinecart> type, Level level) {
-		super(type, level, EntityRegistry.ORE_TNT, ItemRegistry.ORE_TNT_MINECART, false);
+		super(type, level, EntityRegistry.ORE_TNT, () -> ItemRegistry.ORE_TNT_MINECART, false);
 	}
 }
