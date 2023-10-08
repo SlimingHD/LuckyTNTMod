@@ -90,7 +90,7 @@ public class TunnelingTNTBlock extends LTNTBlock{
 			tnt.getPersistentData().putString("direction", level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() instanceof TunnelingTNTBlock ? level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getValue(FACING).getName() : "east");
 			level.addFreshEntity(tnt);
 			if(!level.isClientSide) {
-				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> tnt), new ClientboundStringNBTPacket("direction", tnt.getPersistentData().getString("direction"), tnt.getId()));
+				PacketHandler.CHANNEL.send(new ClientboundStringNBTPacket("direction", tnt.getPersistentData().getString("direction"), tnt.getId()), PacketDistributor.TRACKING_ENTITY.with(tnt));
 			}
 			level.playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
 			if(level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {

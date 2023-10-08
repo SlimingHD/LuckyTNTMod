@@ -54,7 +54,7 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 				if(!(target instanceof Player)) {
 					ent.getPersistentData().putInt("amount", ent.getPersistentData().getInt("amount") + 1);
 					if(!ent.getLevel().isClientSide()) {
-        				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)ent), new ClientboundIntNBTPacket("amount", ent.getPersistentData().getInt("amount"), ((Entity)ent).getId()));
+        				PacketHandler.CHANNEL.send(new ClientboundIntNBTPacket("amount", ent.getPersistentData().getInt("amount"), ((Entity)ent).getId()), PacketDistributor.TRACKING_ENTITY.with((Entity)ent));
         			}
         			target.discard();
 				} else if(target instanceof Player) {

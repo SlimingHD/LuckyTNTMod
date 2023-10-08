@@ -1,19 +1,19 @@
 plugins {
     id 'eclipse'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
 }
 
-version = '2.0'
+version = '3.0'
 group = 'luckytnt.luckytntmod'
-archivesBaseName = 'luckytntmod-1.20'
+archivesBaseName = 'luckytntmod-1.20.2'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
 minecraft {
-    mappings channel: 'official', version: '1.20'
+    mappings channel: 'official', version: '1.20.2'
 
     runs {
         client {
@@ -88,7 +88,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.20-46.0.1'
+    minecraft 'net.minecraftforge:forge:1.20.2-48.0.19'
 
     implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.20-46.0.1.0")
 }
@@ -108,7 +108,7 @@ jar {
 }
 
 task sourceJar(type: Jar) {
-    classifier 'sources'
+	archiveClassifier = 'sources'
     from sourceSets.main.allJava
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }

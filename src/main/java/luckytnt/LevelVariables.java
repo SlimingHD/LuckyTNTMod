@@ -4,6 +4,7 @@ import luckytnt.network.ClientboundLevelVariablesPacket;
 import luckytnt.network.PacketHandler;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -45,13 +46,13 @@ public class LevelVariables extends SavedData{
 	
 	public static LevelVariables get(LevelAccessor level) {
 		if(level instanceof ServerLevelAccessor sLevel)
-			return sLevel.getLevel().getServer().getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(f -> LevelVariables.load(f), LevelVariables::new, "ltm_level_variables");
+			return sLevel.getLevel().getServer().getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(new SavedData.Factory<LevelVariables>(LevelVariables::new, f -> LevelVariables.load(f), DataFixTypes.LEVEL), "ltm_level_variables");
 		else
 			return clientSide;
 	}
 	
 	public void sync(ServerLevel level) {
 		setDirty();
-		PacketHandler.CHANNEL.send(PacketDistributor.DIMENSION.with(level::dimension), new ClientboundLevelVariablesPacket(this));
+		PacketHandler.CHANNEL.send(new ClientboundLevelVariablesPacket(this), PacketDistributor.DIMENSION.with(level.dimension()));
 	}
 }

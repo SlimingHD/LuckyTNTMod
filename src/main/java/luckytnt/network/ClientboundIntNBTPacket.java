@@ -1,12 +1,10 @@
 package luckytnt.network;
 
-import java.util.function.Supplier;
-
 import luckytnt.client.ClientAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.NetworkEvent;
 
 public class ClientboundIntNBTPacket {
 	
@@ -32,10 +30,10 @@ public class ClientboundIntNBTPacket {
 		buffer.writeInt(entityId);
 	}
 	
-	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
+	public void handle(CustomPayloadEvent.Context ctx) {
+		ctx.enqueueWork(() -> {
 			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.setEntityIntTag(name, tag, entityId));
 		});
-		ctx.get().setPacketHandled(true);
+		ctx.setPacketHandled(true);
 	}
 }
