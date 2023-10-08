@@ -802,5 +802,7 @@
   	"command.ltmdisaster.toxicactive": "Disaster Toxic Clouds currently active for ",
   	"command.ltmdisaster.minute": " minutes",
   	"command.ltmdisaster.toxicclouds": "Started the disaster Toxic Clouds",
-  	"command.ltmdisaster.clear": "All disasters have been stopped"
+  	"command.ltmdisaster.clear": "All disasters have been stopped",
+  	"command.randomtnt.success1": "Successfully distributed ",
+  	"command.randomtnt.success2": " Items"
 }
