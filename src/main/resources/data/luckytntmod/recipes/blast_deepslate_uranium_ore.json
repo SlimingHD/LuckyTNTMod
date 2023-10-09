@@ -1,11 +1,9 @@
 {
   "type": "minecraft:blasting",
   "experience": 1,
-  "cookingtime": 200,
+  "cookingtime": 100,
   "ingredient": {
     "item": "luckytntmod:deepslate_uranium_ore"
   },
-  "result": {
-    "item": "luckytntmod:uranium_ingot"
-  }
+  "result": "luckytntmod:uranium_ingot"
 }
