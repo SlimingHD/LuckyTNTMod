@@ -25,7 +25,7 @@ public class ToxicCloudEffect extends PrimedTNTEffect {
 	public void explosionTick(IExplosiveEntity ent) {
 		if(ent.getTNTFuse() == 1200 && !ent.getLevel().isClientSide()) {
 			ent.getPersistentData().putDouble("size", 1D + Math.random() * 3D);
-			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)ent), new ClientboundToxicCloudPacket(ent.getPersistentData().getDouble("size"), ((Entity)ent).getId()));
+			PacketHandler.CHANNEL.send(new ClientboundToxicCloudPacket(ent.getPersistentData().getDouble("size"), ((Entity)ent).getId()), PacketDistributor.TRACKING_ENTITY.with((Entity)ent));
 		}
 		((Entity)ent).setDeltaMovement(0, 0, 0);
 		((Entity)ent).setPos(((Entity)ent).xOld, ((Entity)ent).yOld, ((Entity)ent).zOld);

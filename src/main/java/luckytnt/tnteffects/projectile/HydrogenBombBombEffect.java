@@ -34,7 +34,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
 		if(ent.getLevel() instanceof ServerLevel sl) {
-			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)ent), new ClientboundHydrogenBombPacket(((Entity)ent).getId()));
+			PacketHandler.CHANNEL.send(new ClientboundHydrogenBombPacket(((Entity)ent).getId()), PacketDistributor.TRACKING_ENTITY.with((Entity)ent));
 		}
 		
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 230);

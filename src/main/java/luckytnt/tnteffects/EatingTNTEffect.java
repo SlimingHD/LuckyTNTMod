@@ -34,7 +34,7 @@ public class EatingTNTEffect extends PrimedTNTEffect{
 				if(entity.getPos().distanceTo(item.getPosition(1)) < 1) {
 					entity.getPersistentData().putInt("eatLevel", Mth.clamp(entity.getPersistentData().getInt("eatLevel") + item.getItem().getCount(), 0, 300));
 					if(entity.getLevel() instanceof ServerLevel sLevel) {
-						PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)entity), new ClientboundIntNBTPacket("eatLevel", entity.getPersistentData().getInt("eatLevel"), ((Entity)entity).getId()));
+						PacketHandler.CHANNEL.send(new ClientboundIntNBTPacket("eatLevel", entity.getPersistentData().getInt("eatLevel"), ((Entity)entity).getId()), PacketDistributor.TRACKING_ENTITY.with((Entity)entity));
 					}
 					item.discard();
 				}

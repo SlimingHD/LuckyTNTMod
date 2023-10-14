@@ -1,14 +1,12 @@
 package luckytnt.network;
 
-import java.util.function.Supplier;
-
 import luckytnt.LevelVariables;
 import luckytnt.client.ClientAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.network.CustomPayloadEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.NetworkEvent;
 
 public class ClientboundLevelVariablesPacket {
 
@@ -27,10 +25,10 @@ public class ClientboundLevelVariablesPacket {
 		buffer.writeNbt(variables.save(new CompoundTag()));
 	}
 	
-	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
+	public void handle(CustomPayloadEvent.Context ctx) {
+		ctx.enqueueWork(() -> {
 			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.syncLevelVariables(variables));
 		});
-		ctx.get().setPacketHandled(true);
+		ctx.setPacketHandled(true);
 	}
 }

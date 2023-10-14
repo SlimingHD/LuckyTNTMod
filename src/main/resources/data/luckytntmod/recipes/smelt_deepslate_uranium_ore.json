@@ -5,7 +5,5 @@
   "ingredient": {
     "item": "luckytntmod:deepslate_uranium_ore"
   },
-  "result": {
-    "item": "luckytntmod:uranium_ingot"
-  }
+  "result": "luckytntmod:uranium_ingot"
 }

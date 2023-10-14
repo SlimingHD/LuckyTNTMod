@@ -49,7 +49,7 @@ public class ConfigScreen extends Screen{
 	
 	@Override
 	public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks) {
-		renderBackground(stack);
+		renderBackground(stack, mouseX, mouseY, partialTicks);
 		stack.drawCenteredString(font, title, width / 2, 8, 0xFFFFFF);
 		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.island_offset"), width / 2, 46, 0xFFFFFF);
 		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.drop_offset"), width / 2, 66, 0xFFFFFF);

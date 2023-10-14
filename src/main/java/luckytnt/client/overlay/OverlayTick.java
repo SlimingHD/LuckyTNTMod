@@ -21,7 +21,7 @@ public class OverlayTick {
 	
 	private static float contaminatedAmount = 0;
 	
-	@SuppressWarnings({ "resource"})
+	@SuppressWarnings({ "resource" })
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public static void onOverlayRender(RenderGuiEvent.Post event) {

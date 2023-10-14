@@ -48,7 +48,7 @@ public class ConfigScreen2 extends Screen {
 	
 	@Override
 	public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks) {
-		renderBackground(stack);
+		renderBackground(stack, mouseX, mouseY, partialTicks);
 		stack.drawCenteredString(font, title, width / 2, 8, 0xFFFFFF);
 		stack.drawString(font, Component.translatable("luckytntmod.config.custom_tnt"), 20, 46, 0xFFFFFF);
 		stack.drawString(font, Component.translatable("luckytntmod.config.first_tnt"), 20, 66, 0xFFFFFF);

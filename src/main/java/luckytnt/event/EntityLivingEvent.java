@@ -44,23 +44,23 @@ public class EntityLivingEvent {
 						if(sLevel.getBrightness(LightLayer.BLOCK, new BlockPos(Mth.floor(ent.getX()), Mth.floor(ent.getY()), Mth.floor(ent.getZ()))) < 11) {
 							ent.getPersistentData().putInt("freezeTime", ent.getPersistentData().getInt("freezeTime") + LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().intValue());
 							if(ent instanceof ServerPlayer player)
-								PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")));
+								PacketHandler.CHANNEL.send(new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")), PacketDistributor.PLAYER.with(player));
 						}
 						else if(ent.getPersistentData().getInt("freezeTime") > 0){
 							ent.getPersistentData().putInt("freezeTime", (int)Mth.clamp(ent.getPersistentData().getInt("freezeTime") - 0.5f * sLevel.getBrightness(LightLayer.BLOCK, new BlockPos(Mth.floor(ent.getX()), Mth.floor(ent.getY()), Mth.floor(ent.getZ()))), 0, Double.POSITIVE_INFINITY));
 							if(ent instanceof ServerPlayer player)
-								PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")));
+								PacketHandler.CHANNEL.send(new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")), PacketDistributor.PLAYER.with(player));
 						}
 					}
 					else {
 						ent.getPersistentData().putInt("freezeTime", 0);
 						if(ent instanceof ServerPlayer player)
-							PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")));
+							PacketHandler.CHANNEL.send(new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")), PacketDistributor.PLAYER.with(player));
 					}
 				} else if(ent.getPersistentData().getInt("freezeTime") > 0) {
 					ent.getPersistentData().putInt("freezeTime", (int)Mth.clamp(ent.getPersistentData().getInt("freezeTime") - 10, 0, Double.POSITIVE_INFINITY));
 					if(ent instanceof ServerPlayer player)
-						PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")));
+						PacketHandler.CHANNEL.send(new ClientboundFreezeNBTPacket("freezeTime", ent.getPersistentData().getInt("freezeTime")), PacketDistributor.PLAYER.with(player));
 				}
 				if(ent.getPersistentData().getInt("freezeTime") >= 600) {
 					ent.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, ent.getPersistentData().getInt("freezeTime") / 600));
@@ -77,23 +77,23 @@ public class EntityLivingEvent {
 						if(!sLevel.getBlockState(ent.blockPosition()).is(Blocks.WATER)) {
 							ent.getPersistentData().putInt("heatTime", ent.getPersistentData().getInt("heatTime") + LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().intValue());
 							if(ent instanceof ServerPlayer player)
-								PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("heatTime", ent.getPersistentData().getInt("heatTime")));
+								PacketHandler.CHANNEL.send(new ClientboundFreezeNBTPacket("heatTime", ent.getPersistentData().getInt("heatTime")), PacketDistributor.PLAYER.with(player));
 						}
 						else if(ent.getPersistentData().getInt("heatTime") > 0){
 							ent.getPersistentData().putInt("heatTime", (int)Mth.clamp(ent.getPersistentData().getInt("heatTime") - 20, 0, Double.POSITIVE_INFINITY));
 							if(ent instanceof ServerPlayer player)
-								PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("heatTime", ent.getPersistentData().getInt("heatTime")));
+								PacketHandler.CHANNEL.send(new ClientboundFreezeNBTPacket("heatTime", ent.getPersistentData().getInt("heatTime")), PacketDistributor.PLAYER.with(player));
 						}
 					}
 					else {
 						ent.getPersistentData().putInt("heatTime", 0);
 						if(ent instanceof ServerPlayer player)
-							PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("heatTime", ent.getPersistentData().getInt("heatTime")));
+							PacketHandler.CHANNEL.send(new ClientboundFreezeNBTPacket("heatTime", ent.getPersistentData().getInt("heatTime")), PacketDistributor.PLAYER.with(player));
 					}
 				} else if(ent.getPersistentData().getInt("heatTime") > 0) {
 					ent.getPersistentData().putInt("heatTime", (int)Mth.clamp(ent.getPersistentData().getInt("heatTime") - 20, 0, Double.POSITIVE_INFINITY));
 					if(ent instanceof ServerPlayer player)
-						PacketHandler.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new ClientboundFreezeNBTPacket("heatTime", ent.getPersistentData().getInt("heatTime")));
+						PacketHandler.CHANNEL.send(new ClientboundFreezeNBTPacket("heatTime", ent.getPersistentData().getInt("heatTime")), PacketDistributor.PLAYER.with(player));
 				}
 				if(ent.getPersistentData().getInt("heatTime") >= 600) {
 					ent.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
