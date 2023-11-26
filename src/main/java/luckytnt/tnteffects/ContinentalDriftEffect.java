@@ -8,8 +8,8 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -39,11 +39,9 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 	      	
 			((Entity)ent).getPersistentData().putInt("second", 30 + new Random().nextInt(101));
 	      	
-	      	if(!ent.level().isClientSide()) {
-	      		List<ServerPlayer> list = ent.level().getEntitiesOfClass(ServerPlayer.class, new AABB(ent.x() - 200, ent.y() - 200, ent.z() - 200, ent.x() + 200, ent.y() + 200, ent.z() + 200));
-	      		for(ServerPlayer player : list) {
-	      			player.getPersistentData().putInt("shakeTime", 400);
-	      		}
+	      	List<Player> list = ent.level().getEntitiesOfClass(Player.class, new AABB(ent.x() - 200, ent.y() - 200, ent.z() - 200, ent.x() + 200, ent.y() + 200, ent.z() + 200));
+	      	for(Player player : list) {
+	      		player.getPersistentData().putInt("shakeTime", 400);
 	      	}
 		}
 		
