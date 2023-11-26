@@ -3,7 +3,7 @@ loaderVersion="[45,)"
 license="All rights reserved"
 [[mods]]
 modId="luckytntmod"
-version="1.1"
+version="1.2"
 displayName="Lucky TNT Mod"
 logoFile="logo.png"
 credits="Created by SlimingHD and Fleshcrafter"
