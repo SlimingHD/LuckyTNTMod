@@ -370,6 +370,7 @@
  	"item.item_firework.info" : "\u00A77\u00A7oRightclick this TNT with an item to use it in the firework!",
  	"item.custom_tnt.info" : "\u00A77\u00A7oChange the effects of this TNT by adjusting them in the config file! On a server you will also have to adjust the server config file!",
  	"item.custom_firework.info" : "\u00A77\u00A7oThe block below this TNT is chosen for the firework!",
+ 	"item.structure_tnt.info" : "\u00A77\u00A7oRightclick this TNT with the Configuration Wand in order to change the placed structure!",
  	"item.configuration_wand.info": "\u00A77\u00A7oRight-click with this Wand on specific TNTs to change their Configuration!",
 	"item.antimatter.info" : "\u00A77\u00A7oMay be created when Uranium Ore is destroyed by a Death Ray Ray!",
 	"item.obsidian_rail.info" : "\u00A77\u00A7oObsidian Rails have a lot of Explosion Resistance! Minecarts exploding on them will not deal block damage!",
