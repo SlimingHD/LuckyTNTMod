@@ -7,6 +7,7 @@ import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.entity.Entity;
@@ -58,7 +59,7 @@ public class KnockbackTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		List<Entity> entities = ent.getLevel().getEntities((Entity)ent, new AABB(ent.x() - 75, ent.y() - 75, ent.z() - 75, ent.x() + 75, ent.y() + 75, ent.z() + 75));
 		for(Entity entity : entities) {
-			if(!entity.ignoreExplosion()) {
+			if(!entity.ignoreExplosion(ImprovedExplosion.dummyExplosion(ent.getLevel()))) {
 				double distance = Math.sqrt(entity.distanceToSqr(ent.getPos())) / (75 * 2);
 				if(distance <= 1f) {
 					double offX = (entity.getX() - ent.x());

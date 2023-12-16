@@ -157,7 +157,9 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 			ent.getLevel().addFreshEntity(sheep);
 		}
 		
-		List<Sheep> list = ent.getLevel().getEntitiesOfClass(Sheep.class, new AABB(toBlockPos(ent.getPos()).offset(100, 100, 100), toBlockPos(ent.getPos()).offset(-100, -100, -100)));
+		BlockPos min = toBlockPos(ent.getPos()).offset(100, 100, 100);
+		BlockPos max = toBlockPos(ent.getPos()).offset(-100, -100, -100);
+		List<Sheep> list = ent.getLevel().getEntitiesOfClass(Sheep.class, new AABB(min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ()));
 		for(Sheep sheep : list) {
 			sheep.setColor(randomColor());
 		}

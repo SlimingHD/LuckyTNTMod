@@ -6,8 +6,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -30,9 +28,9 @@ public class ConfigScreen extends Screen{
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.next"), button -> nextPage()).bounds(width - 120, height - 30, 100, 20).build());
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.done"), button -> onClose()).bounds((width - 100) / 2, height - 30, 100, 20).build());
 		
-		addRenderableWidget(island_slider = new ForgeSlider(20, 40, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 20, 160, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), true));		
+		addRenderableWidget(island_slider = new ForgeSlider(20, 40, 200, 20, Component.literal(""), Component.literal(""), 20, 160, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), true));		
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.ISLAND_HEIGHT, 50, island_slider)).bounds(width - 220, 40, 200, 20).build());
-		addRenderableWidget(dropped_slider = new ForgeSlider(20, 60, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 60, 400, LuckyTNTConfigValues.DROP_HEIGHT.get(), true));		
+		addRenderableWidget(dropped_slider = new ForgeSlider(20, 60, 200, 20, Component.literal(""), Component.literal(""), 60, 400, LuckyTNTConfigValues.DROP_HEIGHT.get(), true));		
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.DROP_HEIGHT, 200, dropped_slider)).bounds(width - 220, 60, 200, 20).build());
 		
 		addRenderableWidget(average_disaster_time_silder = new ForgeSlider(20, 80, 200, 20, Component.literal(""), Component.literal(""), 2, 24, LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get().doubleValue(), true));		

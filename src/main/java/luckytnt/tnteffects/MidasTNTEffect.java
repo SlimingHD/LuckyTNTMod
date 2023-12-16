@@ -39,7 +39,9 @@ public class MidasTNTEffect extends PrimedTNTEffect {
 			ent.getPersistentData().putInt("size", ent.getPersistentData().getInt("size") + 1);
 			
 			int i = ent.getPersistentData().getInt("size");
-			List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-i, -i, -i), toBlockPos(ent.getPos()).offset(i, i, i)));
+			BlockPos min = toBlockPos(ent.getPos()).offset(-i, -i, -i);
+			BlockPos max = toBlockPos(ent.getPos()).offset(i, i, i);
+			List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ()));
 			for(LivingEntity lent : list) {
 				lent.addEffect(new MobEffectInstance(EffectRegistry.MIDAS_TOUCH_EFFECT.get(), 2000, 0));
 			}

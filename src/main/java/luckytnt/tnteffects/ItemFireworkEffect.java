@@ -113,11 +113,11 @@ public class ItemFireworkEffect extends PrimedTNTEffect {
 				} else if(item instanceof ArrowItem) {
 					for(int count = 0; count < 300; count++) {
 						if(item instanceof SpectralArrowItem) {
-							AbstractArrow arrow = new SpectralArrow(ent.getLevel(), ent.x(), ent.y(), ent.z());
+							AbstractArrow arrow = new SpectralArrow(ent.getLevel(), ent.x(), ent.y(), ent.z(), new ItemStack(Items.SPECTRAL_ARROW));
 							arrow.setDeltaMovement(Math.random() * 6f - 3f, Math.random() * 6f - 3f, Math.random() * 6f - 3f);
 							ent.getLevel().addFreshEntity(arrow);
 						} else {
-							Arrow arrow = new Arrow(ent.getLevel(), ent.x(), ent.y(), ent.z());
+							Arrow arrow = new Arrow(ent.getLevel(), ent.x(), ent.y(), ent.z(), new ItemStack(Items.ARROW));
 							arrow.setEffectsFromItem(stack == null ? new ItemStack(item) : stack);
 							arrow.setDeltaMovement(Math.random() * 6f - 3f, Math.random() * 6f - 3f, Math.random() * 6f - 3f);
 							ent.getLevel().addFreshEntity(arrow);

@@ -6,14 +6,14 @@ plugins {
 
 version = '3.0'
 group = 'luckytnt.luckytntmod'
-archivesBaseName = 'luckytntmod-1.20.2'
+archivesBaseName = 'luckytntmod-1.20.3'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
 minecraft {
-    mappings channel: 'official', version: '1.20.2'
+    mappings channel: 'official', version: '1.20.3'
 
     runs {
         client {
@@ -88,11 +88,9 @@ repositories {
 }
 
 dependencies {
-
-    minecraft 'net.minecraftforge:forge:1.20.2-48.0.19'
-
-    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.20.2-48.0.19.1")
-
+    minecraft 'net.minecraftforge:forge:1.20.3-49.0.2'
+    
+    implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.20.2-48.0.19.0")
 }
 
 jar {

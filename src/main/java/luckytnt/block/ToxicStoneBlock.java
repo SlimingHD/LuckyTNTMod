@@ -39,8 +39,10 @@ public class ToxicStoneBlock extends Block {
 		if(timer >= 0) {
 			timer--;
 		}
-		if(timer == 0) {	
-			List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.offset(-5, -5, -5), pos.offset(5, 5, 5)));
+		if(timer == 0) {
+			BlockPos min = pos.offset(-5, -5, -5);
+			BlockPos max = pos.offset(5, 5, 5);
+			List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ()));
 			for(LivingEntity living : list) {
 				DamageSources sources = new DamageSources(level.registryAccess());
 				if(living instanceof Player player) {

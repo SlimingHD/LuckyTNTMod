@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.joml.Vector3f;
 
+import com.mojang.serialization.MapCodec;
+
 import luckytnt.registry.EffectRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,6 +36,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 @SuppressWarnings("deprecation")
 public class NuclearWasteBlock extends FallingBlock {
+	public static final MapCodec<NuclearWasteBlock> CODEC = simpleCodec(NuclearWasteBlock::new);
+	
 	public NuclearWasteBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 	}
@@ -87,7 +91,12 @@ public class NuclearWasteBlock extends FallingBlock {
 			l_Entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 120, 0, false, true));
 		}
 		else if(entity instanceof ItemEntity i_Entity) {
-			i_Entity.hurt(new Explosion(level, entity, null, null, 0, 0, 0, 0, false, Explosion.BlockInteraction.DESTROY_WITH_DECAY).getDamageSource(), 100);
+			i_Entity.hurt(Explosion.getDefaultDamageSource(level, entity), 100);
 		}
+	}
+
+	@Override
+	protected MapCodec<? extends FallingBlock> codec() {
+		return CODEC;
 	}
 }

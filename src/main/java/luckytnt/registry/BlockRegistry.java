@@ -263,6 +263,6 @@ public class BlockRegistry {
 	});
 	public static final RegistryObject<Block> OBSIDIAN_ACTIVATOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_activator_rail", () -> new PoweredRailBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
 	public static final RegistryObject<Block> OBSIDIAN_DETECTOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_detector_rail", () -> new DetectorRailBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
-	public static final RegistryObject<Block> TOXIC_STONE = LuckyTNTMod.blockRegistry.register("toxic_stone", () -> new ToxicStoneBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.COLOR_GREEN).lootFrom(() -> Blocks.STONE)));
+	public static final RegistryObject<Block> TOXIC_STONE = LuckyTNTMod.blockRegistry.register("toxic_stone", () -> new ToxicStoneBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).mapColor(MapColor.COLOR_GREEN).lootFrom(() -> Blocks.STONE)));
 	
 }

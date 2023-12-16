@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class GunpowderOreBlock extends DropExperienceBlock{
 	
 	public GunpowderOreBlock(BlockBehaviour.Properties properties) {
-		super(properties, UniformInt.of(2, 5));
+		super(UniformInt.of(2, 5), properties);
 	}
 	
 	@SuppressWarnings("deprecation")

@@ -68,7 +68,9 @@ public class AcidicTNTEffect extends PrimedTNTEffect {
 				});
 			}
 			if(ent.getTNTFuse() % 20 == 0) {
-				List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-3, -3, -3), toBlockPos(ent.getPos()).offset(3, 3, 3)));			
+				BlockPos min = toBlockPos(ent.getPos()).offset(-3, -3, -3);
+				BlockPos max = toBlockPos(ent.getPos()).offset(3, 3, 3);
+				List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(min.getX(), min.getY(), min.getZ(), max.getX(), max.getY(), max.getZ()));			
 				DamageSources sources = new DamageSources(ent.getLevel().registryAccess());
 				for(LivingEntity lent : list) {
 					lent.hurt(sources.magic(), 3f);
