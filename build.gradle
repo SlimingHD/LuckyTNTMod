@@ -13,7 +13,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 
 minecraft {
-    mappings channel: 'official', version: '1.20.3'
+    mappings channel: 'official', version: '1.20.4'
 
     runs {
         client {
@@ -88,7 +88,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.20.3-49.0.2'
+    minecraft 'net.minecraftforge:forge:1.20.4-49.0.9'
     
     implementation fg.deobf("com.github.SlimingHD:LuckyTNTLib:1.20.3-49.0.2.0")
 }
