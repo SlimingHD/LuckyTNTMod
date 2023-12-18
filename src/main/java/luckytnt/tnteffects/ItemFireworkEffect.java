@@ -49,6 +49,7 @@ public class ItemFireworkEffect extends PrimedTNTEffect {
 		if(entity instanceof PrimedItemFirework ent) {
 			Item item = ent.item;
 			ItemStack stack = ent.stack;
+			stack.setCount(1);
 			if(item == null) {
 				item = Item.byId(ent.getPersistentData().getInt("itemID"));
 			}
