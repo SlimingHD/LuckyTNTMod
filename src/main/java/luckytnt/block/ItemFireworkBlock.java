@@ -66,7 +66,7 @@ public class ItemFireworkBlock extends LTNTBlock implements EntityBlock {
 		Item item = stack.getItem();
 		if(stack != ItemStack.EMPTY && item != Items.FLINT_AND_STEEL && level.getBlockEntity(pos) != null && level.getBlockEntity(pos) instanceof ItemFireworkBlockEntity block) {
 			block.item = item;
-			block.stack = stack;
+			block.stack = stack.copy();
 			block.getPersistentData().putInt("itemID", Item.getId(item));
 			if(!player.isCreative()) {
 				stack.shrink(1);
