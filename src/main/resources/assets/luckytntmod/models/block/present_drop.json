@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/present_drop_bottom",
+        "up": "luckytntmod:block/chicxulub_top",
+        "north": "luckytntmod:block/present_drop_side",
+        "east": "luckytntmod:block/present_drop_side",
+        "south": "luckytntmod:block/present_drop_side",
+        "west": "luckytntmod:block/present_drop_side",
+        "particle": "luckytntmod:block/present_drop_side"
+    }
+}

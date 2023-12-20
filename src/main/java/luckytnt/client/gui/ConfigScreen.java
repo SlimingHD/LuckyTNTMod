@@ -22,6 +22,7 @@ public class ConfigScreen extends Screen {
 	
 	Button season_events_always_active = null;
 	Button render_contaminated_overlay = null;	
+	Button present_drop_destroy = null;
 	
 	ForgeSlider light_engine_speed_slider = null;
 	
@@ -52,6 +53,9 @@ public class ConfigScreen extends Screen {
 		
 		addRenderableWidget(light_engine_speed_slider = new ForgeSlider(20, 160, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 5, 5000, LuckyTNTConfigValues.LIGHT_ENGINE_SPEED.get(), true));	
 		addRenderableWidget(new Button(width - 220, 160, 200, 20, Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.LIGHT_ENGINE_SPEED, 100, light_engine_speed_slider)));
+		
+		addRenderableWidget(present_drop_destroy = new Button(20, 180, 200, 20, LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS.get().booleanValue() ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"), button -> nextBooleanValue(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS, present_drop_destroy)));
+		addRenderableWidget(new Button(width - 220, 180, 200, 20, Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS, true, present_drop_destroy)));
 	}
 	
 	@Override
@@ -65,6 +69,7 @@ public class ConfigScreen extends Screen {
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.event_always_active"), width / 2, 126, 0xFFFFFF);
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.render_overlay"), width / 2, 146, 0xFFFFFF);
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.light_engine"), width / 2, 166, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.present_drop"), width / 2, 186, 0xFFFFFF);
 		super.render(stack, mouseX, mouseY, partialTicks);
 	}
 	
