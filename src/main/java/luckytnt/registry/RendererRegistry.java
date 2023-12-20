@@ -218,7 +218,8 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SCULK_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DEIMOS.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PHOBOS.get(), LTNTRenderer::new);
-	
+		event.registerEntityRenderer(EntityRegistry.PRESENT_DROP.get(), LTNTRenderer::new);		
+		
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE_X5.get(), LDynamiteRenderer::new);
@@ -386,6 +387,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.MINI_ICE_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DEIMOS_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PHOBOS_METEOR.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.PRESENT_METEOR.get(), LTNTRenderer::new);
 		
 		//Other
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);
