@@ -6,6 +6,7 @@ import luckytnt.block.GotthardTunnelBlock;
 import luckytnt.block.GunpowderOreBlock;
 import luckytnt.block.ItemFireworkBlock;
 import luckytnt.block.NuclearWasteBlock;
+import luckytnt.block.PresentBlock;
 import luckytnt.block.RedstoneTNTBlock;
 import luckytnt.block.SmokeTNTBlock;
 import luckytnt.block.StructureTNTBlock;
@@ -264,5 +265,5 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> OBSIDIAN_ACTIVATOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_activator_rail", () -> new PoweredRailBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
 	public static final RegistryObject<Block> OBSIDIAN_DETECTOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_detector_rail", () -> new DetectorRailBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
 	public static final RegistryObject<Block> TOXIC_STONE = LuckyTNTMod.blockRegistry.register("toxic_stone", () -> new ToxicStoneBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).mapColor(MapColor.COLOR_GREEN).lootFrom(() -> Blocks.STONE)));
-	
+	public static final RegistryObject<Block> PRESENT = LuckyTNTMod.blockRegistry.register("present", () -> new PresentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.WOOL).strength(0.3f, 0f)));
 }
