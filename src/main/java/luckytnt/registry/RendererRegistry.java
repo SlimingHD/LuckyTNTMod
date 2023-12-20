@@ -218,6 +218,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SCULK_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DEIMOS.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PHOBOS.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.PRESENT_DROP.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);

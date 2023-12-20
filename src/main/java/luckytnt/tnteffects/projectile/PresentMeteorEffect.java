@@ -3,6 +3,7 @@ package luckytnt.tnteffects.projectile;
 import java.util.Random;
 
 import luckytnt.block.PresentBlock;
+import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -25,23 +26,25 @@ public class PresentMeteorEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		((ServerLevel)entity.getLevel()).sendParticles(ParticleTypes.WAX_OFF, entity.x(), entity.y() + 2, entity.z(), 500, 3f, 3f, 3f, 0f);
 		Random random = new Random();
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 40);
-		explosion.doEntityExplosion(3, true);
-		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 40, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= (35) && state.getExplosionResistance(level, pos, explosion) <= 100) {
-					state.onBlockExploded(level, pos, explosion);
-				}
-				else if(!state.isAir() && Math.random() < 0.6f && state.getExplosionResistance(level, pos, explosion) <= 100) {
-					state.onBlockExploded(level, pos, explosion);
-					if(Math.random() < 0.25f) {
-						level.setBlockAndUpdate(pos, Math.random() < 0.5f ? Blocks.BLUE_ICE.defaultBlockState() : Blocks.PACKED_ICE.defaultBlockState());
+		if(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS.get()) {
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 40);
+			explosion.doEntityExplosion(3, true);
+			ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 40, new IForEachBlockExplosionEffect() {
+				
+				@Override
+				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
+					if(distance <= (35) && state.getExplosionResistance(level, pos, explosion) <= 100) {
+						state.onBlockExploded(level, pos, explosion);
+					}
+					else if(!state.isAir() && Math.random() < 0.6f && state.getExplosionResistance(level, pos, explosion) <= 100) {
+						state.onBlockExploded(level, pos, explosion);
+						if(Math.random() < 0.25f) {
+							level.setBlockAndUpdate(pos, Math.random() < 0.5f ? Blocks.BLUE_ICE.defaultBlockState() : Blocks.PACKED_ICE.defaultBlockState());
+						}
 					}
 				}
-			}
-		});
+			});
+		}
 		ExplosionHelper.doTopBlockExplosionForAll(entity.getLevel(), entity.getPos(), 70, new IForEachBlockExplosionEffect() {
 			
 			@Override
