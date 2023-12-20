@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "212",
+    "303",
+    "444"
+  ],
+  "key": {
+    "1": {
+      "item": "luckytntmod:meteor_tnt"
+    },
+    "2": {
+      "item": "minecraft:snowball"
+    },
+    "3": {
+      "item": "luckytntmod:christmas_tnt"
+    },
+    "4": {
+      "item": "luckytntmod:snow_tnt"
+    },
+    "0": {
+      "item": "luckytntmod:uranium_ingot"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:present_drop",
+    "count": 1
+  }
+}

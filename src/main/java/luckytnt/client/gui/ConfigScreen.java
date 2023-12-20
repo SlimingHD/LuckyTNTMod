@@ -19,7 +19,8 @@ public class ConfigScreen extends Screen{
 	ForgeSlider average_disaster_strength_slider = null;
 	
 	Button season_events_always_active = null;
-	Button render_contaminated_overlay = null;	
+	Button render_contaminated_overlay = null;
+	Button present_drop_destroy = null;
 	
 	public ConfigScreen() {
 		super(Component.translatable("luckytntmod.config.title"));
@@ -45,6 +46,9 @@ public class ConfigScreen extends Screen{
 		
 		addRenderableWidget(render_contaminated_overlay = new Button.Builder(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY.get().booleanValue() ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"), button -> nextBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, render_contaminated_overlay)).bounds(20, 140, 200, 20).build());
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.RENDER_CONTAMINATED_OVERLAY, true, render_contaminated_overlay)).bounds(width - 220, 140, 200, 20).build());
+		
+		addRenderableWidget(present_drop_destroy = new Button.Builder(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS.get().booleanValue() ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"), button -> nextBooleanValue(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS, present_drop_destroy)).bounds(20, 160, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS, true, present_drop_destroy)).bounds(width - 220, 160, 200, 20).build());		
 	}
 	
 	@Override
@@ -57,6 +61,7 @@ public class ConfigScreen extends Screen{
 		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.average_intensity"), width / 2, 106, 0xFFFFFF);
 		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.event_always_active"), width / 2, 126, 0xFFFFFF);
 		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.render_overlay"), width / 2, 146, 0xFFFFFF);
+		stack.drawCenteredString(font, Component.translatable("luckytntmod.config.present_drop"), width / 2, 166, 0xFFFFFF);
 		super.render(stack, mouseX, mouseY, partialTicks);
 	}
 	

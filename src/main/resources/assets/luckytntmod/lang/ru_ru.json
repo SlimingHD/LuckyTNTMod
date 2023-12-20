@@ -202,6 +202,7 @@
 	"block.luckytntmod.sculk_tnt" : "Скалковый Динамит",
 	"block.luckytntmod.deimos" : "Деймос",
 	"block.luckytntmod.phobos" : "Фобос",
+	"block.luckytntmod.present_drop" : "Подаркопад",
 	
 	"block.luckytntmod.nuclear_waste" : "Ядерные Отходы",
 	"block.luckytntmod.uranium_ore" : "Урановая Руда",
@@ -213,6 +214,7 @@
 	"block.luckytntmod.obsidian_activator_rail" : "Обсидиановые Активирующие Рельсы",
 	"block.luckytntmod.obsidian_detector_rail" : "Обсидиановые Рельсы-Детекторы",
 	"block.luckytntmod.toxic_stone" : "Токсичный Камень",
+	"block.luckytntmod.present" : "Подарок",
 
 	"item.luckytntmod.dynamite" : "Динамитная Шашка",
 	"item.luckytntmod.dynamite_x5" : "Динамитная Шашка x5",
@@ -579,6 +581,7 @@
 	"entity.luckytntmod.sculk_tnt" : "Скалковый Динамит",
 	"entity.luckytntmod.deimos" : "Деймос",
 	"entity.luckytntmod.phobos" : "Фобос",
+	"entity.luckytntmod.present_drop" : "Подаркопад",
 				
 	"entity.luckytntmod.dynamite" : "Динамитная Шашка",
 	"entity.luckytntmod.dynamite_x5" : "Динамитная Шашка x5",
@@ -741,6 +744,7 @@
 	"entity.luckytntmod.mini_ice_meteor" : "Мини-Ледяной Метеор",
 	"entity.luckytntmod.deimos_meteor" : "Осколок Деймоса",
 	"entity.luckytntmod.phobos_meteor" : "Осколок Фобоса",
+	"entity.luckytntmod.present_meteor" : "Подарочный Метеор",
 
 	"entity.luckytntmod.angry_miner" : "Злой Шахтер",
 	"entity.luckytntmod.toxic_cloud" : "Токсичное Облако",
@@ -786,8 +790,7 @@
    	"luckytntmod.config.average_intensity": "Обычная Сила Бедствия",
 	"luckytntmod.config.event_always_active": "Постоянные Сезонные События",
 	"luckytntmod.config.render_overlay": "Прорисовка Контура Загрязнения",
-	"luckytntmod.config.light_engine": "Скорость Светового Двигателя",
-	"luckytntmod.config.light_engine_tooltip": "Определяет скорость, с которой работает световой двигатель. 5 - это значение по умолчанию для Minecraft. Чем выше значение, тем быстрее работает световой двигатель. Высокие значения требуют компьютер по-мощнее.",
+	"luckytntmod.config.present_drop": "Уничтожение блоков Подаркопадом",
 	
 	"death.attack.say_goodbye" : "%1$s сказал прощай",
 	"death.attack.hailstone": "%1$s лишился глаза благодаря градине",
