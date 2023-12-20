@@ -61,7 +61,7 @@
       "y": 270
     },
     "facing=east,type=4": {
-      "model": "luckytntmod:block/present_gold",
+      "model": "luckytntmod:block/present_blue",
       "y": 90
     },
     "facing=north,type=4": {

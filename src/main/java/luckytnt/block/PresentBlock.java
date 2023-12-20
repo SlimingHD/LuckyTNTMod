@@ -6,6 +6,7 @@ import java.util.Random;
 
 import luckytnt.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -88,12 +89,15 @@ public class PresentBlock extends Block {
 				itemCount = 1;
 				xpCount = random.nextInt(64, 96);
 			}
-			ItemEntity itemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(item, itemCount));
+			ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f, new ItemStack(item, itemCount));
 			level.addFreshEntity(itemEntity);
 			rand = random.nextInt(1, 6);
 			for(int i = 0; i < rand; i++) {
-				ExperienceOrb xp = new ExperienceOrb(level, pos.getX(), pos.getY(), pos.getZ(), xpCount / rand);
+				ExperienceOrb xp = new ExperienceOrb(level, pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f, xpCount / rand);
 				level.addFreshEntity(xp);
+			}
+			for(int i = 0; i < 15; i++) {
+				level.addParticle(ParticleTypes.CLOUD, pos.getX() + 0.5f + Math.random() * 2 - 1f, pos.getY() + 0.5f + Math.random() * 2 - 1f, pos.getZ() + 0.5f + Math.random() * 2 - 1f, 0, 0, 0);
 			}
 			return true;
 		}
