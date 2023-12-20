@@ -790,6 +790,8 @@
 	"luckytntmod.config.event_always_active": "Permanent Season Events",
 	"luckytntmod.config.render_overlay": "Render Contaminated Overlay",
 	"luckytntmod.config.present_drop": "Present Drop destroys blocks",
+	"luckytntmod.config.light_engine": "Light Engine Speed",
+	"luckytntmod.config.light_engine_tooltip": "Determines the speed the light engine works at. 5 is the Minecraft default value. The higher the value the faster the light engine will work. Higher values require more resources.",
 	
 	"death.attack.say_goodbye" : "%1$s said goodbye",
 	"death.attack.hailstone": "%1$s got hit in the eye by a hailstone",

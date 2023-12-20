@@ -791,6 +791,8 @@
 	"luckytntmod.config.event_always_active": "Постоянные Сезонные События",
 	"luckytntmod.config.render_overlay": "Прорисовка Контура Загрязнения",
 	"luckytntmod.config.present_drop": "Уничтожение блоков Подаркопадом",
+	"luckytntmod.config.light_engine": "Скорость Светового Двигателя",
+	"luckytntmod.config.light_engine_tooltip": "Определяет скорость, с которой работает световой двигатель. 5 - это значение по умолчанию для Minecraft. Чем выше значение, тем быстрее работает световой двигатель. Высокие значения требуют компьютер по-мощнее.",
 	
 	"death.attack.say_goodbye" : "%1$s сказал прощай",
 	"death.attack.hailstone": "%1$s лишился глаза благодаря градине",
