@@ -6,6 +6,7 @@ import luckytnt.block.GotthardTunnelBlock;
 import luckytnt.block.GunpowderOreBlock;
 import luckytnt.block.ItemFireworkBlock;
 import luckytnt.block.NuclearWasteBlock;
+import luckytnt.block.PresentBlock;
 import luckytnt.block.RedstoneTNTBlock;
 import luckytnt.block.SmokeTNTBlock;
 import luckytnt.block.StructureTNTBlock;
@@ -202,6 +203,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> EYE_OF_THE_SAHARA = LuckyTNTMod.RH.registerTNTBlock("eye_of_the_sahara", EntityRegistry.EYE_OF_THE_SAHARA, "g", MaterialColor.COLOR_YELLOW, true);
 	public static final RegistryObject<LTNTBlock> WORLD_OF_WOOLS = LuckyTNTMod.RH.registerTNTBlock("world_of_wools", EntityRegistry.WORLD_OF_WOOLS, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
 	public static final RegistryObject<LTNTBlock> DEIMOS = LuckyTNTMod.RH.registerTNTBlock("deimos", EntityRegistry.DEIMOS, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
+	public static final RegistryObject<LTNTBlock> PRESENT_DROP = LuckyTNTMod.RH.registerTNTBlock("present_drop", EntityRegistry.PRESENT_DROP, "g", MaterialColor.COLOR_LIGHT_BLUE, true);
 	
 	public static final RegistryObject<LTNTBlock> LUCKY_GOD = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new LuckyTNTBlock(BlockBehaviour.Properties.of(Material.EXPLOSIVE, MaterialColor.COLOR_RED).sound(SoundType.GRASS), LuckyTNTMod.RH.TNTLists.get("g")), new TNTBlockRegistryData.Builder("lucky_god").tab("g").build());
 	
@@ -265,5 +267,5 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> OBSIDIAN_ACTIVATOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_activator_rail", () -> new PoweredRailBlock(BlockBehaviour.Properties.of(Material.DECORATION).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
 	public static final RegistryObject<Block> OBSIDIAN_DETECTOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_detector_rail", () -> new DetectorRailBlock(BlockBehaviour.Properties.of(Material.DECORATION).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
 	public static final RegistryObject<Block> TOXIC_STONE = LuckyTNTMod.blockRegistry.register("toxic_stone", () -> new ToxicStoneBlock(BlockBehaviour.Properties.copy(Blocks.STONE).color(MaterialColor.COLOR_GREEN).lootFrom(() -> Blocks.STONE)));
-	
+	public static final RegistryObject<Block> PRESENT = LuckyTNTMod.blockRegistry.register("present", () -> new PresentBlock(BlockBehaviour.Properties.of(Material.WOOL).color(MaterialColor.COLOR_RED).sound(SoundType.WOOL).strength(0.3f, 0f)));
 }

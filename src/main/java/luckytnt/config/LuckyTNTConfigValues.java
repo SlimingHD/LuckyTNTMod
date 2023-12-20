@@ -23,7 +23,7 @@ public class LuckyTNTConfigValues {
 	
 	public static ForgeConfigSpec.BooleanValue RENDER_CONTAMINATED_OVERLAY;
 	
-	public static ForgeConfigSpec.IntValue LIGHT_ENGINE_SPEED;
+	public static ForgeConfigSpec.BooleanValue PRESENT_DROP_DESTROY_BLOCKS;
 	
 	public static void registerConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("TNT Settings").push("Offsets");
@@ -46,14 +46,12 @@ public class LuckyTNTConfigValues {
 		CUSTOM_TNT_THIRD_EXPLOSION = builder.comment("Explosion Effect of the third Explosion").defineEnum("explosionType", CustomTNTConfig.NO_EXPLOSION);
 		CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY = builder.comment("Multiplier to the power of the third explosion").defineInRange("explosionIntensity", 1, 1, 20);
 		builder.pop();
-		builder.comment("Spcial Events Settings").push("Event Settings");
+		builder.comment("Special Events Settings").push("Event Settings");
 		SEASON_EVENTS_ALWAYS_ACTIVE = builder.comment("Whether season specific events ignore the date").define("seasonEventsAlwaysActive", false);
+		PRESENT_DROP_DESTROY_BLOCKS = builder.comment("Whether the Present Drop destroys blocks").define("presentDropDestroy", true);
 		builder.pop();
 		builder.comment("Contaminated Effect Overlay Settings").push("Render Overlay Settings");
 		RENDER_CONTAMINATED_OVERLAY = builder.comment("Whether an Overlay is rendererd while the Contaminated Effect is active").define("renderContaminatedOverlay", true);
-		builder.pop();
-		builder.comment("Light Engine Speed").push("Light Engine Speed Setting");
-		LIGHT_ENGINE_SPEED = builder.comment("How fast the Light Engine works. 5 is the value that Minecraft uses").defineInRange("lightEngineSpeed", 100, 5, 5000);
 		builder.pop();
 	}
 }

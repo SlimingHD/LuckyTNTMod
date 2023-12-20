@@ -19,7 +19,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ThreadedLevelLightEngine;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -48,11 +47,7 @@ public class LevelEvents {
 	@SubscribeEvent
 	public static void onLevelUpdate(TickEvent.LevelTickEvent event) {
 		Level level = event.level;
-		
-		if(level.getChunkSource().getLightEngine() instanceof ThreadedLevelLightEngine engine) {
-			engine.setTaskPerBatch(LuckyTNTConfigValues.LIGHT_ENGINE_SPEED.get());
-		}
-		
+
 		List<? extends Player> players = level.players();
 		LevelVariables variables = LevelVariables.get(level);
 		if(event.phase == TickEvent.Phase.END && level.dimension() == Level.OVERWORLD) {
