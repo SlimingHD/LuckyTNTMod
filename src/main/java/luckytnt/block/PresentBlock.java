@@ -56,7 +56,7 @@ public class PresentBlock extends Block {
 			Random random = new Random();
 			Item item = Items.COAL;
 			int itemCount = random.nextInt(6, 24);
-			int xpCount = random.nextInt(itemCount / 6, itemCount / 3 + 1);
+			int xpCount = 0;
 			int rand = new Random().nextInt(128);
 			if(rand > 70 && rand <= 100) {
 				item = Items.SNOWBALL;
@@ -76,17 +76,17 @@ public class PresentBlock extends Block {
 			else if(rand > 119 && rand <= 123) {
 				item = BlockRegistry.CHRISTMAS_TNT.get().asItem();
 				itemCount = 1;
-				xpCount = random.nextInt(32, 64);
+				xpCount = random.nextInt(32, 48);
 			}
 			else if(rand > 123 && rand <= 125) {
 				item = BlockRegistry.SNOWSTORM_TNT.get().asItem();
 				itemCount = 1;
-				xpCount = random.nextInt(64, 96);
+				xpCount = random.nextInt(48, 64);
 			}
 			else if(rand > 125 && rand <= 127) {
 				item = Items.TOTEM_OF_UNDYING;
 				itemCount = 1;
-				xpCount = random.nextInt(96, 128);
+				xpCount = random.nextInt(64, 96);
 			}
 			ItemEntity itemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(item, itemCount));
 			level.addFreshEntity(itemEntity);
