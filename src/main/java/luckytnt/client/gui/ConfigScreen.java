@@ -23,6 +23,7 @@ public class ConfigScreen extends Screen{
 	
 	Button season_events_always_active = null;
 	Button render_contaminated_overlay = null;	
+	Button present_drop_destroy = null;
 	
 	ForgeSlider light_engine_speed_slider = null;
 	
@@ -54,6 +55,9 @@ public class ConfigScreen extends Screen{
 		addRenderableWidget(light_engine_speed_slider = new ForgeSlider(20, 160, 200, 20, MutableComponent.create(new LiteralContents("")), MutableComponent.create(new LiteralContents("")), 5, 5000, LuckyTNTConfigValues.LIGHT_ENGINE_SPEED.get(), true));	
 		light_engine_speed_slider.setTooltip(Tooltip.create(Component.translatable("luckytntmod.config.light_engine_tooltip")));
 		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.LIGHT_ENGINE_SPEED, 100, light_engine_speed_slider)).bounds(width - 220, 160, 200, 20).build());
+		
+		addRenderableWidget(present_drop_destroy = new Button.Builder(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS.get().booleanValue() ? Component.translatable("luckytntmod.config.true") : Component.translatable("luckytntmod.config.false"), button -> nextBooleanValue(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS, present_drop_destroy)).bounds(20, 180, 200, 20).build());
+		addRenderableWidget(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS, true, present_drop_destroy)).bounds(width - 220, 180, 200, 20).build());		
 	}
 	
 	@Override
@@ -67,6 +71,7 @@ public class ConfigScreen extends Screen{
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.event_always_active"), width / 2, 126, 0xFFFFFF);
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.render_overlay"), width / 2, 146, 0xFFFFFF);
 		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.light_engine"), width / 2, 166, 0xFFFFFF);
+		drawCenteredString(stack, font, Component.translatable("luckytntmod.config.present_drop"), width / 2, 186, 0xFFFFFF);
 		super.render(stack, mouseX, mouseY, partialTicks);
 	}
 	

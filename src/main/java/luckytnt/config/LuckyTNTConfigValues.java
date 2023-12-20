@@ -25,6 +25,8 @@ public class LuckyTNTConfigValues {
 	
 	public static ForgeConfigSpec.IntValue LIGHT_ENGINE_SPEED;
 	
+	public static ForgeConfigSpec.BooleanValue PRESENT_DROP_DESTROY_BLOCKS;
+	
 	public static void registerConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("TNT Settings").push("Offsets");
 		ISLAND_HEIGHT = builder.comment("Y offset of floating islands").defineInRange("islandHeight", 50, 20, 160);
@@ -46,8 +48,9 @@ public class LuckyTNTConfigValues {
 		CUSTOM_TNT_THIRD_EXPLOSION = builder.comment("Explosion Effect of the third Explosion").defineEnum("explosionType", CustomTNTConfig.NO_EXPLOSION);
 		CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY = builder.comment("Multiplier to the power of the third explosion").defineInRange("explosionIntensity", 1, 1, 20);
 		builder.pop();
-		builder.comment("Spcial Events Settings").push("Event Settings");
+		builder.comment("Special Events Settings").push("Event Settings");
 		SEASON_EVENTS_ALWAYS_ACTIVE = builder.comment("Whether season specific events ignore the date").define("seasonEventsAlwaysActive", false);
+		PRESENT_DROP_DESTROY_BLOCKS = builder.comment("Whether the Present Drop destroys blocks").define("presentDropDestroy", true);
 		builder.pop();
 		builder.comment("Contaminated Effect Overlay Settings").push("Render Overlay Settings");
 		RENDER_CONTAMINATED_OVERLAY = builder.comment("Whether an Overlay is rendererd while the Contaminated Effect is active").define("renderContaminatedOverlay", true);

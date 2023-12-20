@@ -202,6 +202,7 @@
 	"block.luckytntmod.sculk_tnt" : "Sculk TNT",
 	"block.luckytntmod.deimos" : "Deimos",
 	"block.luckytntmod.phobos" : "Phobos",
+	"block.luckytntmod.present_drop" : "Bescherung",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -577,6 +578,7 @@
 	"entity.luckytntmod.sculk_tnt" : "Sculk TNT",
 	"entity.luckytntmod.deimos" : "Deimos",
 	"entity.luckytntmod.phobos" : "Phobos",
+	"entity.luckytntmod.present_drop" : "Bescherung",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
@@ -740,6 +742,7 @@
 	"entity.luckytntmod.mini_ice_meteor" : "Mini Eis Meteor",
 	"entity.luckytntmod.deimos_meteor" : "Deimos Meteor",
 	"entity.luckytntmod.phobos_meteor" : "Phobos Meteor",
+	"entity.luckytntmod.present_meteor" : "Geschenk Meteor",
 	
 	"entity.luckytntmod.angry_miner" : "W\u00FCtender Minenarbeiter",
 	"entity.luckytntmod.toxic_cloud" : "Giftige Wolke",
@@ -785,6 +788,7 @@
    	"luckytntmod.config.average_intensity": "Durchschnittliche Desaster St\u00e4rke",
 	"luckytntmod.config.event_always_active": "Dauerhafte Saisonale Events",
 	"luckytntmod.config.render_overlay": "Zeige Verstrahlt Overlay an",
+	"luckytntmod.config.present_drop": "Bescherung zerst\u00f6rt Bl\u00f6cke",
 	"luckytntmod.config.light_engine": "Light Engine Geschwindigkeit",
 	"luckytntmod.config.light_engine_tooltip": "Bestimmt die Geschwindigkeit, mit der die Light Engine arbeitet. 5 ist der Minecraft Standard-Wert. Je h\u00f6her der Wert, desto schneller arbeitet die Light Engine. H\u00f6here Werte ben\u00f6tigen mehr Ressourcen.",
 	
