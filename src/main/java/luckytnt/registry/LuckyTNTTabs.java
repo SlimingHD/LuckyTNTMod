@@ -75,7 +75,6 @@ public class LuckyTNTTabs {
 			populator.accept(ItemRegistry.DEATH_RAY_RAY.get());
 			populator.accept(ItemRegistry.VACUUM_CLEANER.get());
 			populator.accept(ItemRegistry.TOXIC_STONE.get());
-			populator.accept(ItemRegistry.PRESENT.get());
         }).withTabsBefore(new ResourceLocation(LuckyTNTMod.MODID, "minecarts")).build();
 		
 		

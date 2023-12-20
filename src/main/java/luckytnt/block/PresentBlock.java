@@ -56,37 +56,37 @@ public class PresentBlock extends Block {
 			Random random = new Random();
 			Item item = Items.COAL;
 			int itemCount = random.nextInt(6, 24);
-			int xpCount = random.nextInt(itemCount / 4, itemCount / 2 + 1);
+			int xpCount = random.nextInt(itemCount / 6, itemCount / 3 + 1);
 			int rand = new Random().nextInt(128);
 			if(rand > 70 && rand <= 100) {
 				item = Items.SNOWBALL;
 				itemCount = random.nextInt(8,16);
-				xpCount = random.nextInt(itemCount / 2, itemCount + 1);
+				xpCount = random.nextInt(itemCount / 4, itemCount / 2 + 1);
 			}
 			else if(rand > 100 && rand <= 110) {
 				item = BlockRegistry.SNOW_TNT.get().asItem();
 				itemCount = 1;
-				xpCount = random.nextInt(16, 24);
+				xpCount = random.nextInt(8, 12);
 			}
 			else if(rand > 110 && rand <= 119) {
 				item = Items.DIAMOND;
 				itemCount = random.nextInt(1, 4);
-				xpCount = random.nextInt(16 * itemCount, 32 * itemCount);
+				xpCount = random.nextInt(8 * itemCount, 12 * itemCount);
 			}
 			else if(rand > 119 && rand <= 123) {
 				item = BlockRegistry.CHRISTMAS_TNT.get().asItem();
 				itemCount = 1;
-				xpCount = random.nextInt(128, 192);
+				xpCount = random.nextInt(32, 64);
 			}
 			else if(rand > 123 && rand <= 125) {
 				item = BlockRegistry.SNOWSTORM_TNT.get().asItem();
 				itemCount = 1;
-				xpCount = random.nextInt(192, 256);
+				xpCount = random.nextInt(64, 96);
 			}
 			else if(rand > 125 && rand <= 127) {
 				item = Items.TOTEM_OF_UNDYING;
 				itemCount = 1;
-				xpCount = random.nextInt(256, 512);
+				xpCount = random.nextInt(96, 128);
 			}
 			ItemEntity itemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(item, itemCount));
 			level.addFreshEntity(itemEntity);

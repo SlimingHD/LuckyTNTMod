@@ -224,5 +224,4 @@ public class ItemRegistry {
 	public static final RegistryObject<LDynamiteItem> DEATH_RAY_RAY = LuckyTNTMod.RH.registerDynamiteItem(LuckyTNTMod.itemRegistry, "death_ray_ray", () -> new DeathRayRayItem(), "none", false, true);
 	public static final RegistryObject<Item> VACUUM_CLEANER = LuckyTNTMod.itemRegistry.register("vacuum_cleaner", () -> new VacuumCleaner());
 	public static final RegistryObject<Item> TOXIC_STONE = LuckyTNTMod.itemRegistry.register("toxic_stone", () -> new BlockItem(BlockRegistry.TOXIC_STONE.get(), new Item.Properties()));
-	public static final RegistryObject<Item> PRESENT = LuckyTNTMod.itemRegistry.register("present", () -> new BlockItem(BlockRegistry.PRESENT.get(), new Item.Properties()));
 }
