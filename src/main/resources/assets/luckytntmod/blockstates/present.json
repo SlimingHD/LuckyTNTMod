@@ -1,0 +1,79 @@
+{
+  "variants": {
+    "facing=east,type=0": {
+      "model": "luckytntmod:block/present",
+      "y": 90
+    },
+    "facing=north,type=0": {
+      "model": "luckytntmod:block/present"
+    },
+    "facing=south,type=0": {
+      "model": "luckytntmod:block/present",
+      "y": 180
+    },
+    "facing=west,type=0": {
+      "model": "luckytntmod:block/present",
+      "y": 270
+    },
+    "facing=east,type=1": {
+      "model": "luckytntmod:block/present_gold",
+      "y": 90
+    },
+    "facing=north,type=1": {
+      "model": "luckytntmod:block/present_gold"
+    },
+    "facing=south,type=1": {
+      "model": "luckytntmod:block/present_gold",
+      "y": 180
+    },
+    "facing=west,type=1": {
+      "model": "luckytntmod:block/present_gold",
+      "y": 270
+    },
+    "facing=east,type=2": {
+      "model": "luckytntmod:block/present_orange",
+      "y": 90
+    },
+    "facing=north,type=2": {
+      "model": "luckytntmod:block/present_orange"
+    },
+    "facing=south,type=2": {
+      "model": "luckytntmod:block/present_orange",
+      "y": 180
+    },
+    "facing=west,type=2": {
+      "model": "luckytntmod:block/present_orange",
+      "y": 270
+    },
+    "facing=east,type=3": {
+      "model": "luckytntmod:block/present_pink",
+      "y": 90
+    },
+    "facing=north,type=3": {
+      "model": "luckytntmod:block/present_pink"
+    },
+    "facing=south,type=3": {
+      "model": "luckytntmod:block/present_pink",
+      "y": 180
+    },
+    "facing=west,type=3": {
+      "model": "luckytntmod:block/present_pink",
+      "y": 270
+    },
+    "facing=east,type=4": {
+      "model": "luckytntmod:block/present_blue",
+      "y": 90
+    },
+    "facing=north,type=4": {
+      "model": "luckytntmod:block/present_blue"
+    },
+    "facing=south,type=4": {
+      "model": "luckytntmod:block/present_blue",
+      "y": 180
+    },
+    "facing=west,type=4": {
+      "model": "luckytntmod:block/present_blue",
+      "y": 270
+    }
+  }
+}
