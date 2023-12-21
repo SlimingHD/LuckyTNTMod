@@ -4,7 +4,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '5.1.+'
 }
 
-version = '1.2'
+version = '1.3'
 group = 'luckytnt.luckytntmod'
 archivesBaseName = 'luckytntmod-1.19.4'
 
