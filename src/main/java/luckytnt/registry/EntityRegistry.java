@@ -111,7 +111,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X20 = LuckyTNTMod.RH.registerTNTEntity("tnt_x20", TNT_X20_EFFECT.fuse(160).buildTNT(() -> BlockRegistry.TNT_X20));
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X100 = LuckyTNTMod.RH.registerTNTEntity("tnt_x100", TNT_X100_EFFECT.fuse(200).buildTNT(() -> BlockRegistry.TNT_X100));
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X500 = LuckyTNTMod.RH.registerTNTEntity("tnt_x500", TNT_X500_EFFECT.fuse(240).buildTNT(() -> BlockRegistry.TNT_X500));
-	public static final RegistryObject<EntityType<PrimedLTNT>> COBBLESTONE_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("cooblestone_house_tnt", new HouseTNTEffect(() -> BlockRegistry.COBBLESTONE_HOUSE_TNT, "cobblehouse", -5, -3));
+	public static final RegistryObject<EntityType<PrimedLTNT>> COBBLESTONE_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("cobblestone_house_tnt", new HouseTNTEffect(() -> BlockRegistry.COBBLESTONE_HOUSE_TNT, "cobblehouse", -5, -3));
 	public static final RegistryObject<EntityType<PrimedLTNT>> WOOD_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("woodhouse_tnt", new HouseTNTEffect(() -> BlockRegistry.WOOD_HOUSE_TNT, "woodhouse", -5, -3));
 	public static final RegistryObject<EntityType<PrimedLTNT>> BRICK_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("brickhouse_tnt", new HouseTNTEffect(() -> BlockRegistry.BRICK_HOUSE_TNT, "brickhouse", -5, -3));
 	public static final RegistryObject<EntityType<PrimedLTNT>> DIGGING_TNT = LuckyTNTMod.RH.registerTNTEntity("digging_tnt", new DiggingTNTEffect());
