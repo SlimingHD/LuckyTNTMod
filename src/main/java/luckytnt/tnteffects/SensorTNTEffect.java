@@ -12,6 +12,7 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -29,7 +30,7 @@ public class SensorTNTEffect extends PrimedTNTEffect{
 				if(!player.equals(entity.owner())) {
 					ImprovedExplosion explosion = new ImprovedExplosion(level, entity.getPos(), 10);
 					explosion.doEntityExplosion(1f, true);
-					explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
+					explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
 					level.playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 					entity.destroy();
 				}

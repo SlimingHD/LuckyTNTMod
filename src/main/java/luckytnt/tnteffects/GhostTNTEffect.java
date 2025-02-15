@@ -3,6 +3,7 @@ package luckytnt.tnteffects;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -32,7 +33,7 @@ public class GhostTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 30);
 		explosion.doEntityExplosion(1.5f, true);
-		explosion.doBlockExplosion(1f, 1.1f, 1f, 1.2f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1.2f, false, false, RandomSource.create());
 	}
 	
 	@Override

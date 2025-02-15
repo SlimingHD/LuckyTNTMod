@@ -4,6 +4,7 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 
@@ -14,7 +15,7 @@ public class RussianRouletteEffect extends PrimedTNTEffect{
 		if(Math.random() < 0.2f) {
 			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 80);
 			explosion.doEntityExplosion(5f, true);
-			explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
+			explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
 		}
 	}
 	

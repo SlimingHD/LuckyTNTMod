@@ -9,6 +9,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +24,7 @@ public class PulseTNTEffect extends PrimedTNTEffect{
 				if(entity.getTNTFuse() % 20 == 0) {		      		
 					ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), entity.getPersistentData().getInt("strength"));
 					explosion.doEntityExplosion(1.5f, true);
-					explosion.doBlockExplosion();
+					explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
 		      		
 					if(entity.getTNTFuse() > 0) {
 						level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4,(1.0F + (level.random.nextFloat() - level.random.nextFloat()) * 0.2F) * 0.7F);

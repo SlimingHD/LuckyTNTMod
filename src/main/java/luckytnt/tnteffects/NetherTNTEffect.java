@@ -64,7 +64,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 		});
 		
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), new Vec3(ent.x(), 0, ent.z()), 100);
-		explosion.doBlockExplosion(1f, 0.8f, 1f, 0.2f, false, true);
+		explosion.doImprovedBlockExplosion(1f, 0.2f, false, true, RandomSource.create());
 		
 		ExplosionHelper.doSphericalExplosion(ent.getLevel(), new Vec3(ent.x(), 0, ent.z()), 100, new IForEachBlockExplosionEffect() {
 			

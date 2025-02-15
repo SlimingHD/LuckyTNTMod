@@ -9,6 +9,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -51,7 +52,7 @@ public class LightningStormEffect extends PrimedTNTEffect {
 					
 					ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), new Vec3(lent.getX(), offY, lent.getZ()), 3);
 					explosion.doEntityExplosion(1f, true);
-					explosion.doBlockExplosion(1f, 1.2f, 1f, 1.2f, false, false);
+					explosion.doImprovedBlockExplosion(1f, 1.2f, false, false, RandomSource.create());
 					
 					break;
 				}

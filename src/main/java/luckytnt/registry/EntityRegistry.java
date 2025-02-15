@@ -98,8 +98,8 @@ public class EntityRegistry {
 	public static final TNTXStrengthEffect.Builder TNT_EFFECT = new TNTXStrengthEffect.Builder();
 	public static final TNTXStrengthEffect.Builder TNT_X5_EFFECT = new TNTXStrengthEffect.Builder().strength(10).randomVecLength(1.25f).knockbackStrength(1.5f);
 	public static final TNTXStrengthEffect.Builder TNT_X20_EFFECT = new TNTXStrengthEffect.Builder().strength(20).randomVecLength(1.5f).knockbackStrength(2f);
-	public static final TNTXStrengthEffect.Builder TNT_X100_EFFECT = new TNTXStrengthEffect.Builder().strength(50).yStrength(1.3f).knockbackStrength(3f);
-	public static final TNTXStrengthEffect.Builder TNT_X500_EFFECT = new TNTXStrengthEffect.Builder().strength(80).yStrength(1.3f).knockbackStrength(5f);
+	public static final TNTXStrengthEffect.Builder TNT_X100_EFFECT = new TNTXStrengthEffect.Builder().strength(50).knockbackStrength(3f);
+	public static final TNTXStrengthEffect.Builder TNT_X500_EFFECT = new TNTXStrengthEffect.Builder().strength(80).knockbackStrength(5f);
 	public static final TNTXStrengthEffect.Builder TNT_X2000_EFFECT = new TNTXStrengthEffect.Builder().strength(160).resistanceImpact(0.167f).randomVecLength(0.05f).knockbackStrength(15f).isStrongExplosion(true);
 	public static final TNTXStrengthEffect.Builder TNT_X10000_EFFECT = new TNTXStrengthEffect.Builder().strength(300).resistanceImpact(0.167f).randomVecLength(0.05f).knockbackStrength(30f).isStrongExplosion(true);
 	

@@ -6,6 +6,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -28,7 +29,7 @@ public class MimicTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 20);
 		explosion.doEntityExplosion(2f, true);
-		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, RandomSource.create());
 	}
 
 	@Override

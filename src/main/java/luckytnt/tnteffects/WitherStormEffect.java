@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -30,7 +31,7 @@ public class WitherStormEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 50);
 		explosion.doEntityExplosion(3f, true);
-		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
 		
 		ImprovedExplosion explosion2 = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 50);
 		explosion2.doBlockExplosion(new IForEachBlockExplosionEffect() {

@@ -8,6 +8,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -21,7 +22,7 @@ public class SolarEruptionProjectileEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 8);
 		explosion.doEntityExplosion(1.5f, true);
-		explosion.doBlockExplosion(1f, 1f, 1f, 1.2f, true, false);
+		explosion.doImprovedBlockExplosion(1f, 1.2f, true, false, RandomSource.create());
 		
 		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 5, new IForEachBlockExplosionEffect() {
 			

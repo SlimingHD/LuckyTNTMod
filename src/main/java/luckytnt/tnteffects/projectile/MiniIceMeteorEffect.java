@@ -5,6 +5,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -15,7 +16,7 @@ public class MiniIceMeteorEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 7);
 		explosion.doEntityExplosion(1f, true);
-		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
 		
 		for (BlockPos pos : explosion.getToBlow()) {
 			if (Math.random() > 0.75f && ent.getLevel().getBlockState(pos).isAir() && ent.getLevel().getBlockState(pos.below()).isSolidRender(ent.getLevel(), pos)) {

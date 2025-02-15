@@ -9,6 +9,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageEffects;
 import net.minecraft.world.damagesource.DamageScaling;
 import net.minecraft.world.damagesource.DamageSource;
@@ -36,7 +37,7 @@ public class SayGoodbyeEffect extends PrimedTNTEffect{
 			
 			ImprovedExplosion explosion = new ImprovedExplosion(ent.level(), (Entity) entity, source, ent.getX(), ent.getY(), ent.getZ(), 20);
 			explosion.doEntityExplosion(2f, true);
-			explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
+			explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, RandomSource.create());
 			if(entity.getLevel() instanceof ServerLevel sLevel) {
 				sLevel.sendParticles(ParticleTypes.EXPLOSION, ent.getX(), ent.getY(), ent.getZ(), 60, 2, 2, 2, 0);
 			}

@@ -11,6 +11,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
@@ -57,7 +58,7 @@ public class DividingTNTEffect extends PrimedTNTEffect{
 			if(entity.getPersistentData().getInt("level") >= entity.getPersistentData().getInt("maxLevel")) {
 				ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 				explosion.doEntityExplosion(1f, true);
-				explosion.doBlockExplosion();
+				explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
 				if(entity.getPersistentData().getInt("level") >= entity.getPersistentData().getInt("maxLevel")) {
 					Level level = entity.getLevel();
 					entity.getLevel().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
@@ -67,7 +68,7 @@ public class DividingTNTEffect extends PrimedTNTEffect{
 			else {
 				ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 				explosion.doEntityExplosion(1.5f, true);
-				explosion.doBlockExplosion();
+				explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
 				PrimedLTNT projectile = EntityRegistry.DIVIDING_TNT.get().create(entity.getLevel());
 				projectile.setOwner(entity.owner() instanceof LivingEntity ? (LivingEntity)entity.owner() : null);
 				projectile.setPos(entity.getPos());

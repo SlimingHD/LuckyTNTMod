@@ -11,6 +11,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -25,7 +26,7 @@ public class HomingDynamiteEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 20);
 		explosion.doEntityExplosion(1.5f, true);
-		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
 	}
 	
 	@Override

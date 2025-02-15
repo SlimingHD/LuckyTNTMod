@@ -8,6 +8,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -32,7 +33,7 @@ public class MultiplyingTNTEffect extends PrimedTNTEffect{
 		if(level == 4) {
 			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 			explosion.doEntityExplosion(1f, true);
-			explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
+			explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
 		}
 		else if(level == 0) {
 			for(int count = 0; count < 4; count++) {

@@ -13,6 +13,7 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
@@ -29,7 +30,7 @@ public class CatalystTNTEffect extends PrimedTNTEffect {
 				if(!ent.getLevel().isClientSide()) {
 					ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, new Vec3(x, y, z), 25 + new Random().nextInt(16));
 					explosion.doEntityExplosion(2f, true);
-					explosion.doBlockExplosion(1f, 1f, 0.75f, 1f, false, false);
+					explosion.doImprovedBlockExplosion(1f, 0.75f, false, false, RandomSource.create());
 				}
 				ent.getLevel().playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4, (1.0F + (ent.getLevel().getRandom().nextFloat() - ent.getLevel().getRandom().nextFloat()) * 0.2F) * 0.7F);
 				ent.getPersistentData().putInt("nextExplosion", 4 + (int)Math.round(Math.random()));

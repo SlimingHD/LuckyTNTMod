@@ -5,6 +5,7 @@ import java.util.List;
 
 import luckytntlib.util.explosions.ImprovedExplosion;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
@@ -40,6 +41,6 @@ public class UraniumOreBlock extends Block{
     public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
     	ImprovedExplosion explo = new ImprovedExplosion(level, new Vec3(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f), 10);
     	explo.doEntityExplosion(1.5f, true);
-    	explo.doBlockExplosion();
+    	explo.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
     }
 }

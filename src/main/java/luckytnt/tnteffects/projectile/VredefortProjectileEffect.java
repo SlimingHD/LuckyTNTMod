@@ -8,7 +8,6 @@ import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -23,32 +22,29 @@ public class VredefortProjectileEffect extends PrimedTNTEffect {
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 140);
 		explosion.doEntityExplosion(3f, true);
 		
+		ExplosionHelper.createSphericalCrater(ent.getLevel(), ent.getPos(), 115, 800);
+		
 		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 120, new IForEachBlockExplosionEffect() {
 			
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				BlockPos posDown = pos.offset(0, -1, 0);
-				BlockState stateDown = level.getBlockState(posDown);
 				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 800 && distance < 120) {
-					if(distance >= 115) {
-						if(Math.random() < 0.6f) {
-							state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-							level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-						}
-					}
-					else if(distance < 115) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-						level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);							
-					}	
-					if(Block.isFaceFull(stateDown.getCollisionShape(level, posDown), Direction.UP)) {
-						if(Math.random() < 0.05f && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 800) {
-							state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-							level.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
-						}
+				if(distance >= 115 && !state.isAir() && state.getExplosionResistance(level, pos, explosion) < 800) {
+					if(Math.random() < 0.6f) {
+						state.onBlockExploded(level, pos, explosion);
+						//level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 					}
 				}
-
+			}
+		});
+		
+		ExplosionHelper.doTopBlockExplosionForAll(ent.getLevel(), ent.getPos(), 120, new IForEachBlockExplosionEffect() {
+			
+			@Override
+			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
+				if(Math.random() < 0.05f) {
+					level.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
+				}
 			}
 		});
 		

@@ -10,6 +10,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.block.Block;
@@ -22,7 +23,7 @@ public class EatingTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10 + Mth.floor((1f/7.5f) * entity.getPersistentData().getInt("eatLevel")));
 		explosion.doEntityExplosion(1.5f + entity.getPersistentData().getInt("eatLevel") / 300f, true);
-		explosion.doBlockExplosion();
+		explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
 	}
 	
 	@Override

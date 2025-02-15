@@ -7,6 +7,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 
@@ -16,7 +17,7 @@ public class BouncingTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 		explosion.doEntityExplosion(1.25f, true);
-		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
 	}
 	
 	@Override

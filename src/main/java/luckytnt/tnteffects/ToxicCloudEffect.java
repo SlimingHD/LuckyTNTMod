@@ -11,6 +11,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -41,7 +42,7 @@ public class ToxicCloudEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), (int)Math.round(ent.getPersistentData().getDouble("size") * 5D));
 		explosion.doEntityExplosion(2f, true);
-		explosion.doBlockExplosion(1f, 1f, 1f, 1.1f, true, false);
+		explosion.doImprovedBlockExplosion(1f, 1.1f, true, false, RandomSource.create());
 	}
 	
 	@Override

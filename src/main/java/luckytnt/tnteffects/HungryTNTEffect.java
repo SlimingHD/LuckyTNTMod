@@ -9,6 +9,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -79,13 +80,12 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 		}
 
 		float size = 80f + ((80f / 20f) * amount);
-		float yStrength = 1.3f - ((0.3f / 20f) * amount);
 		float resistanceImpact = 1f - ((0.833f / 20f) * amount);
 		float knockback = 5f + ((10f / 20f) * amount);
 		
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), Mth.floor((double)size));
 		explosion.doEntityExplosion(knockback, true);
-		explosion.doBlockExplosion(1f, yStrength, resistanceImpact, size >= 110f ? 0.05f : 1f, false, size >= 110f ? true : false);
+		explosion.doImprovedBlockExplosion(resistanceImpact, size >= 110f ? 0.05f : 1f, false, size >= 110f ? true : false, RandomSource.create());
 	}
 	
 	@Override

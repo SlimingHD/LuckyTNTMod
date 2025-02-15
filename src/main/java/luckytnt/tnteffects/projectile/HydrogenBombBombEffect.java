@@ -19,6 +19,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -39,7 +40,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 		
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 230);
 		explosion.doEntityExplosion(25f, true);
-		explosion.doBlockExplosion(1f, 1f, 0.167f, 0.05f, false, true);
+		explosion.doImprovedBlockExplosion(0.167f, 0.05f, false, true, RandomSource.create());
 		
 		ExplosionHelper.doModifiedSphericalExplosion(ent.getLevel(), ent.getPos(), 250, new Vec3(1f, (2f/3f), 1f), new IForEachBlockExplosionEffect() {
 			

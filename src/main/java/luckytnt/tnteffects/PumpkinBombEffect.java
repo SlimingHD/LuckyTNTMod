@@ -10,6 +10,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -21,7 +22,7 @@ public class PumpkinBombEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 		explosion.doEntityExplosion(1.5f, true);
-		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
 		Random random = new Random();
 		for(int count = 0; count < 30 + random.nextInt(11); count++) {
 			ItemEntity candy = new ItemEntity(entity.getLevel(), entity.x(), entity.y(), entity.z(), new ItemStack(ItemRegistry.RED_CANDY.get()));

@@ -12,6 +12,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,7 +42,7 @@ public class NuclearTNTEffect extends PrimedTNTEffect{
 				}
 			}
 		});
-		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
 		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), strength * 3, new IForEachBlockExplosionEffect() {		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {

@@ -32,23 +32,25 @@ public class DeathRayEffect extends PrimedTNTEffect {
 			((Entity)ent).setDeltaMovement(0, 0, 0);
 			((Entity)ent).setPos(((Entity)ent).xOld, ((Entity)ent).yOld, ((Entity)ent).zOld);
 			
-			ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), ent.getPersistentData().getInt("explosionSize"), new IForEachBlockExplosionEffect() {
-				
-				@Override
-				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-					if(distance >= 75) {
-						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 2000 && !state.isAir()) {
-							if(Math.random() < 0.1f) {
-								level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
-							} else if(Math.random() < 0.8f) {
-								level.setBlock(pos, Blocks.OBSIDIAN.defaultBlockState(), 3);
+			if(ent.getTNTFuse() > 5) {
+				ExplosionHelper.createSphericalCrater(ent.getLevel(), ent.getPos(), ent.getPersistentData().getInt("explosionSize"), 2000);
+			} else {
+				ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), ent.getPersistentData().getInt("explosionSize"), new IForEachBlockExplosionEffect() {
+					
+					@Override
+					public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
+						if(distance > 70 && distance < 80) {
+							if(!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 2000) {
+								if(Math.random() < 0.1f) {
+									level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
+								} else if(Math.random() < 0.8f) {
+									level.setBlock(pos, Blocks.OBSIDIAN.defaultBlockState(), 3);
+								}
 							}
 						}
-					} else if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 2000 && !state.isAir()) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 					}
-				}
-			});
+				});
+			}
 			
 			ent.getPersistentData().putInt("explosionSize", ent.getPersistentData().getInt("explosionSize") + 1);
 		}

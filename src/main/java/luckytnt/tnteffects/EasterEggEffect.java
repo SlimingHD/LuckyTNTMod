@@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -36,7 +37,7 @@ public class EasterEggEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		int level = ((Entity)entity).getPersistentData().getInt("level");
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 15);
-		explosion.doBlockExplosion(1f, 1f, 1f, 1.25f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {		
 			@Override
 			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {

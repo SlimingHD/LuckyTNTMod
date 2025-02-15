@@ -6,7 +6,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 
-public class StaticTNTEffect extends PrimedTNTEffect{
+public class StaticTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {

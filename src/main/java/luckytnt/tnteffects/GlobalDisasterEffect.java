@@ -4,29 +4,12 @@ import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
-import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 
-public class GlobalDisasterEffect extends PrimedTNTEffect{
+public class GlobalDisasterEffect extends SphereTNTEffect {
 
-	@Override
-	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 50, new IForEachBlockExplosionEffect() {
-		
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 200 && !state.isAir()) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
-				}
-			}
-		});
+	public GlobalDisasterEffect() {
+		super(() -> BlockRegistry.GLOBAL_DISASTER, 50);
 	}
 	
 	@Override
@@ -38,11 +21,6 @@ public class GlobalDisasterEffect extends PrimedTNTEffect{
 		}
 	}
 
-	@Override
-	public Block getBlock() {
-		return BlockRegistry.GLOBAL_DISASTER.get();
-	}
-	
 	@Override
 	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 240;

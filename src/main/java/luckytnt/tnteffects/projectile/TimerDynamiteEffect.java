@@ -11,6 +11,7 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -45,7 +46,7 @@ public class TimerDynamiteEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 5);
 		explosion.doEntityExplosion(1f, true);
-		explosion.doBlockExplosion();
+		explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
 	}
 	
 	@Override

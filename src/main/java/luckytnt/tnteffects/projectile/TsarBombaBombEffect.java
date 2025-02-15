@@ -18,6 +18,7 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,7 +38,7 @@ public class TsarBombaBombEffect extends PrimedTNTEffect implements NuclearBombL
 		
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 160);
 		explosion.doEntityExplosion(15f, true);
-		explosion.doBlockExplosion(1f, 1f, 0.167f, 0.05f, false, true);
+		explosion.doImprovedBlockExplosion(0.167f, 0.05f, false, true, RandomSource.create());
 		
 		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() - 90, entity.y() - 65, entity.z() - 90, entity.x() + 90, entity.y() + 65, entity.z() + 90));
 		for(LivingEntity living : list) {

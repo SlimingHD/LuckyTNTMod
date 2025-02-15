@@ -5,6 +5,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 
@@ -14,7 +15,7 @@ public class GiantTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 100);
 		explosion.doEntityExplosion(7f, true);
-		explosion.doBlockExplosion(1f, 1.3f, 1f, 1f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
 	}
 	
 	@Override

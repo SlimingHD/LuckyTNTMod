@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -30,7 +31,7 @@ public class WitheringTNTEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), strength);
 		explosion.doEntityExplosion(2f, true);
-		explosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, false);
+		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, RandomSource.create());
 		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
 			
 			@Override
