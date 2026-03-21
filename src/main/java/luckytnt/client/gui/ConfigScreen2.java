@@ -1,9 +1,5 @@
 package luckytnt.client.gui;
 
-import static luckytnt.client.gui.ConfigScreen.deactivatedButtonAction;
-
-import java.lang.reflect.Field;
-
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.util.CustomTNTConfig;
 import luckytntlib.client.gui.CenteredStringWidget;
@@ -11,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.StringWidget;
-import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.GridLayout.RowHelper;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
@@ -41,27 +36,16 @@ public class ConfigScreen2 extends Screen {
 	
 	@Override
 	public void init() {
-		try {
-			Field field = HeaderAndFooterLayout.class.getDeclaredField("contentsFrame");
-			field.setAccessible(true);
-			FrameLayout contents = (FrameLayout) field.get(layout);
-			contents.defaultChildLayoutSetting().align(0.5f, 0.5f).paddingTop(-3);
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		
 		LinearLayout linear = layout.addToHeader(new LinearLayout(0, 0, Orientation.VERTICAL));
 		linear.addChild(new StringWidget(title, font), LayoutSettings.defaults().alignHorizontallyCenter());
 		
-		Button empty = new Button.Builder(Component.empty(), button -> deactivatedButtonAction()).size(100, 15).build();
-		
+		Button empty = new Button.Builder(Component.empty(), button -> {}).size(100, 15).build();
 		empty.active = false;
 		empty.visible = false;
 		empty.setAlpha(0f);
 		
 		GridLayout grid = new GridLayout();
 		grid.defaultCellSetting().paddingHorizontal(4).paddingBottom(1).alignHorizontallyCenter();
-		
 		RowHelper rows = grid.createRowHelper(3);
 		
 		rows.addChild(new CenteredStringWidget(Component.translatable("luckytntmod.config.custom_tnt"), font));
@@ -104,16 +88,14 @@ public class ConfigScreen2 extends Screen {
 		rows.addChild(new CenteredStringWidget(Component.translatable("luckytntmod.config.third_intensity"), font));
 		rows.addChild(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY, 1, custom_tnt_third_explosion_intensity)).width(100).build());
 		
-		Button back = new Button.Builder(Component.translatable("luckytntmod.config.back"), button -> lastPage()).width(100).build();
-		Button done = new Button.Builder(CommonComponents.GUI_DONE, button -> onClose()).width(100).build();
-		Button deactivated = new Button.Builder(Component.translatable("luckytntmod.config.next"), button -> deactivatedButtonAction()).width(100).build();
-		
-		deactivated.active = false;
-		
 		GridLayout grid2 = new GridLayout();
 		grid2.defaultCellSetting().paddingHorizontal(20).paddingBottom(4).alignHorizontallyCenter();
-		
 		RowHelper rows2 = grid2.createRowHelper(3);
+		
+		Button back = new Button.Builder(Component.translatable("luckytntmod.config.back"), button -> lastPage()).width(100).build();
+		Button done = new Button.Builder(CommonComponents.GUI_DONE, button -> onClose()).width(100).build();
+		Button deactivated = new Button.Builder(Component.translatable("luckytntmod.config.next"), button -> {}).width(100).build();
+		deactivated.active = false;
 		
 		rows2.addChild(back);
 		rows2.addChild(done);
@@ -138,13 +120,13 @@ public class ConfigScreen2 extends Screen {
 	
 	@Override
 	public void onClose() {
-		if(custom_tnt_first_explosion_intensity != null) {
+		if (custom_tnt_first_explosion_intensity != null) {
 			LuckyTNTConfigValues.CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.set(custom_tnt_first_explosion_intensity.getValueInt());
 		}
-		if(custom_tnt_second_explosion_intensity != null) {
+		if (custom_tnt_second_explosion_intensity != null) {
 			LuckyTNTConfigValues.CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.set(custom_tnt_second_explosion_intensity.getValueInt());
 		}
-		if(custom_tnt_third_explosion_intensity != null) {
+		if (custom_tnt_third_explosion_intensity != null) {
 			LuckyTNTConfigValues.CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.set(custom_tnt_third_explosion_intensity.getValueInt());
 		}
 		super.onClose();
@@ -162,22 +144,17 @@ public class ConfigScreen2 extends Screen {
 	
 	public void nextExplosionValue(ForgeConfigSpec.EnumValue<CustomTNTConfig> config, Button button) {
 		CustomTNTConfig value = config.get();
-		if(value == CustomTNTConfig.NO_EXPLOSION) {
+		if (value == CustomTNTConfig.NO_EXPLOSION) {
 			value = CustomTNTConfig.NORMAL_EXPLOSION;
-		}
-		else if(value == CustomTNTConfig.NORMAL_EXPLOSION) {
+		} else if (value == CustomTNTConfig.NORMAL_EXPLOSION) {
 			value = CustomTNTConfig.SPHERICAL_EXPLOSION;
-		}
-		else if(value == CustomTNTConfig.SPHERICAL_EXPLOSION) {
+		} else if (value == CustomTNTConfig.SPHERICAL_EXPLOSION) {
 			value = CustomTNTConfig.CUBICAL_EXPLOSION;
-		}
-		else if(value == CustomTNTConfig.CUBICAL_EXPLOSION) {
+		} else if (value == CustomTNTConfig.CUBICAL_EXPLOSION) {
 			value = CustomTNTConfig.EASTER_EGG;
-		}
-		else if(value == CustomTNTConfig.EASTER_EGG) {
+		} else if (value == CustomTNTConfig.EASTER_EGG) {
 			value = CustomTNTConfig.FIREWORK;
-		}
-		else if(value == CustomTNTConfig.FIREWORK) {
+		} else if (value == CustomTNTConfig.FIREWORK) {
 			value = CustomTNTConfig.NO_EXPLOSION;
 		}
 		config.set(value);

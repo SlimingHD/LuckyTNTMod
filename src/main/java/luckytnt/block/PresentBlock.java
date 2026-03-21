@@ -35,17 +35,17 @@ public class PresentBlock extends Block {
 	}	
 
 	@Override
-    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
-    	super.createBlockStateDefinition(definition);
-    	definition.add(FACING);
-    	definition.add(TYPE);
-    }
-	
+	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
+		super.createBlockStateDefinition(definition);
+		definition.add(FACING);
+		definition.add(TYPE);
+	}
+
 	@Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-    	return defaultBlockState();
-    }
-	
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return defaultBlockState();
+	}
+
 	@Override
 	public List<ItemStack> getDrops(BlockState state, LootParams.Builder builder) {
 		return Collections.singletonList(ItemStack.EMPTY);
@@ -53,38 +53,33 @@ public class PresentBlock extends Block {
 	
 	@Override
 	public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluidState) {
-		if(!player.isCreative() && super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluidState)) {
+		if (!player.isCreative() && super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluidState)) {
 			Random random = new Random();
 			Item item = Items.COAL;
 			int itemCount = random.nextInt(6, 24);
 			int xpCount = 0;
 			int rand = new Random().nextInt(128);
-			if(rand > 70 && rand <= 100) {
+			if (rand > 70 && rand <= 100) {
 				item = Items.SNOWBALL;
 				itemCount = random.nextInt(8,16);
 				xpCount = random.nextInt(itemCount / 4, itemCount / 2 + 1);
-			}
-			else if(rand > 100 && rand <= 110) {
+			} else if (rand > 100 && rand <= 110) {
 				item = BlockRegistry.SNOW_TNT.get().asItem();
 				itemCount = 1;
 				xpCount = random.nextInt(8, 12);
-			}
-			else if(rand > 110 && rand <= 119) {
+			} else if (rand > 110 && rand <= 119) {
 				item = Items.DIAMOND;
 				itemCount = random.nextInt(1, 4);
 				xpCount = random.nextInt(8 * itemCount, 12 * itemCount);
-			}
-			else if(rand > 119 && rand <= 123) {
+			} else if (rand > 119 && rand <= 123) {
 				item = BlockRegistry.CHRISTMAS_TNT.get().asItem();
 				itemCount = 1;
 				xpCount = random.nextInt(32, 48);
-			}
-			else if(rand > 123 && rand <= 125) {
+			} else if (rand > 123 && rand <= 125) {
 				item = BlockRegistry.SNOWSTORM_TNT.get().asItem();
 				itemCount = 1;
 				xpCount = random.nextInt(48, 64);
-			}
-			else if(rand > 125 && rand <= 127) {
+			} else if (rand > 125 && rand <= 127) {
 				item = Items.TOTEM_OF_UNDYING;
 				itemCount = 1;
 				xpCount = random.nextInt(64, 96);
@@ -92,11 +87,11 @@ public class PresentBlock extends Block {
 			ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f, new ItemStack(item, itemCount));
 			level.addFreshEntity(itemEntity);
 			rand = random.nextInt(1, 6);
-			for(int i = 0; i < rand; i++) {
+			for (int i = 0; i < rand; i++) {
 				ExperienceOrb xp = new ExperienceOrb(level, pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f, xpCount / rand);
 				level.addFreshEntity(xp);
 			}
-			for(int i = 0; i < 15; i++) {
+			for (int i = 0; i < 15; i++) {
 				level.addParticle(ParticleTypes.CLOUD, pos.getX() + 0.5f + Math.random() * 2 - 1f, pos.getY() + 0.5f + Math.random() * 2 - 1f, pos.getZ() + 0.5f + Math.random() * 2 - 1f, 0, 0, 0);
 			}
 			return true;

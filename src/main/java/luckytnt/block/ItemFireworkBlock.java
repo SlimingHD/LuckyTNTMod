@@ -34,20 +34,20 @@ public class ItemFireworkBlock extends LTNTBlock implements EntityBlock {
 	
 	@Override
 	public PrimedLTNT explode(Level level, boolean exploded, double x, double y, double z, @Nullable LivingEntity igniter) throws NullPointerException {
-		if(TNT != null) {
+		if (TNT != null) {
 			BlockEntity blockEntity = level.getBlockEntity(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)));
 			PrimedItemFirework tnt = new PrimedItemFirework(EntityRegistry.ITEM_FIREWORK.get(), level);
 			tnt.setFuse(40);
 			tnt.setPos(x + 0.5f, y, z + 0.5f);
 			tnt.setOwner(igniter);
-			if(blockEntity != null && blockEntity instanceof ItemFireworkBlockEntity block) {
+			if (blockEntity != null && blockEntity instanceof ItemFireworkBlockEntity block) {
 				tnt.item = block.item;
 				tnt.stack = block.stack;
 				tnt.getPersistentData().putInt("itemID", block.getPersistentData().getInt("itemID"));
 			}
 			level.addFreshEntity(tnt);
 			level.playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
-			if(level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
+			if (level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
 				level.setBlock(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), Blocks.AIR.defaultBlockState(), 3);
 			}
 			return tnt;
@@ -64,11 +64,11 @@ public class ItemFireworkBlock extends LTNTBlock implements EntityBlock {
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		ItemStack stack = player.getItemInHand(hand);
 		Item item = stack.getItem();
-		if(stack != ItemStack.EMPTY && item != Items.FLINT_AND_STEEL && level.getBlockEntity(pos) != null && level.getBlockEntity(pos) instanceof ItemFireworkBlockEntity block) {
+		if (stack != ItemStack.EMPTY && item != Items.FLINT_AND_STEEL && level.getBlockEntity(pos) != null && level.getBlockEntity(pos) instanceof ItemFireworkBlockEntity block) {
 			block.item = item;
 			block.stack = stack.copy();
 			block.getPersistentData().putInt("itemID", Item.getId(item));
-			if(!player.isCreative()) {
+			if (!player.isCreative()) {
 				stack.shrink(1);
 			}
 			player.awardStat(Stats.ITEM_USED.get(item));

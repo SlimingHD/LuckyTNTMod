@@ -3,6 +3,7 @@ package luckytnt.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
+import luckytnt.LuckyTNTMod;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -16,7 +17,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
 public class BombModel <T extends Entity> extends EntityModel<T> {
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("luckytntmod", "tsa_bomb_model"), "main");
+	
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(LuckyTNTMod.MODID, "bomb_model"), "main");
+	
 	private final ModelPart TsarBomb;
 
 	public BombModel(ModelPart root) {
@@ -65,12 +68,12 @@ public class BombModel <T extends Entity> extends EntityModel<T> {
 		.texOffs(58, 47).addBox(-11.9156F, -4.9988F, -4.998F, 14.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
 		.texOffs(58, 45).addBox(-11.9156F, 4.0012F, -4.998F, 14.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
 		.texOffs(58, 43).addBox(-11.9156F, 4.0012F, 4.002F, 14.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-0.0012F, 4.0844F, -0.002F, 0.0F, 0.0F, 1.5708F));
+		
 		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-
 	}
 
 	@Override

@@ -1,14 +1,11 @@
 package luckytnt.client.gui;
 
-import java.lang.reflect.Field;
-
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytntlib.client.gui.CenteredStringWidget;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.StringWidget;
-import net.minecraft.client.gui.layouts.FrameLayout;
 import net.minecraft.client.gui.layouts.GridLayout;
 import net.minecraft.client.gui.layouts.GridLayout.RowHelper;
 import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
@@ -21,7 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraftforge.client.gui.widget.ForgeSlider;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class ConfigScreen extends Screen{
+public class ConfigScreen extends Screen {
 
 	ForgeSlider island_slider = null;
 	ForgeSlider dropped_slider = null;
@@ -40,21 +37,11 @@ public class ConfigScreen extends Screen{
 	
 	@Override
 	public void init() {
-		try {
-			Field field = HeaderAndFooterLayout.class.getDeclaredField("contentsFrame");
-			field.setAccessible(true);
-			FrameLayout contents = (FrameLayout) field.get(layout);
-			contents.defaultChildLayoutSetting().align(0.5f, 0.5f).paddingTop(-3);
-		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-		
 		LinearLayout linear = layout.addToHeader(new LinearLayout(0, 0, Orientation.VERTICAL));
 		linear.addChild(new StringWidget(title, font), LayoutSettings.defaults().alignHorizontallyCenter());
 		
 		GridLayout grid = new GridLayout();
 		grid.defaultCellSetting().paddingHorizontal(4).paddingBottom(4).alignHorizontallyCenter();
-		
 		RowHelper rows = grid.createRowHelper(3);
 		
 		rows.addChild(island_slider = new ForgeSlider(0, 0, 100, 20, Component.empty(), Component.empty(), 20, 160, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), true));
@@ -85,16 +72,14 @@ public class ConfigScreen extends Screen{
 		rows.addChild(new CenteredStringWidget(Component.translatable("luckytntmod.config.present_drop"), font));
 		rows.addChild(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetBooleanValue(LuckyTNTConfigValues.PRESENT_DROP_DESTROY_BLOCKS, true, present_drop_destroy)).width(100).build());
 		
-		Button deactivated = new Button.Builder(Component.translatable("luckytntmod.config.back"), button -> deactivatedButtonAction()).width(100).build();
-		Button done = new Button.Builder(CommonComponents.GUI_DONE, button -> onClose()).width(100).build();
-		Button next = new Button.Builder(Component.translatable("luckytntmod.config.next"), button -> nextPage()).width(100).build();
-		
-		deactivated.active = false;
-		
 		GridLayout grid2 = new GridLayout();
 		grid2.defaultCellSetting().paddingHorizontal(20).paddingBottom(4).alignHorizontallyCenter();
-		
 		RowHelper rows2 = grid2.createRowHelper(3);
+		
+		Button deactivated = new Button.Builder(Component.translatable("luckytntmod.config.back"), button -> {}).width(100).build();
+		Button done = new Button.Builder(CommonComponents.GUI_DONE, button -> onClose()).width(100).build();
+		Button next = new Button.Builder(Component.translatable("luckytntmod.config.next"), button -> nextPage()).width(100).build();
+		deactivated.active = false;
 		
 		rows2.addChild(deactivated);
 		rows2.addChild(done);
@@ -119,22 +104,19 @@ public class ConfigScreen extends Screen{
 	
 	@Override
 	public void onClose() {
-		if(island_slider != null) {
+		if (island_slider != null) {
 			LuckyTNTConfigValues.ISLAND_HEIGHT.set(island_slider.getValueInt());
 		}
-		if(dropped_slider != null) {
+		if (dropped_slider != null) {
 			LuckyTNTConfigValues.DROP_HEIGHT.set(dropped_slider.getValueInt());
 		}
-		if(average_disaster_time_silder != null) {
+		if (average_disaster_time_silder != null) {
 			LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.set(average_disaster_time_silder.getValueInt());
 		}
-		if(average_disaster_strength_slider != null) {
+		if (average_disaster_strength_slider != null) {
 			LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.set(average_disaster_strength_slider.getValue());
 		}
 		super.onClose();
-	}
-	
-	public static void deactivatedButtonAction() {
 	}
 	
 	public void nextPage() {
@@ -151,10 +133,10 @@ public class ConfigScreen extends Screen{
 		config.set(newValue);
 		slider.setValue(newValue);
 	}
-	
+
 	public void nextBooleanValue(ForgeConfigSpec.BooleanValue config, Button button) {
 		boolean value = config.get().booleanValue();
-		if(value) {
+		if (value) {
 			value = false;
 		} else {
 			value = true;

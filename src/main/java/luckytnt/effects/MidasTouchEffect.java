@@ -1,6 +1,8 @@
 package luckytnt.effects;
 
+import luckytntlib.util.explosions.ImprovedExplosion;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -24,8 +26,8 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class MidasTouchEffect extends MobEffect {
 
-	public MidasTouchEffect(MobEffectCategory category, int id) {
-		super(category, id);		
+	public MidasTouchEffect(MobEffectCategory category, int color) {
+		super(category, color);		
 	}
 	
 	@Override
@@ -48,105 +50,69 @@ public class MidasTouchEffect extends MobEffect {
 		return true;
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
 		Level level = entity.level();
-		if(!level.isClientSide) {
+		if (level instanceof ServerLevel server) {
+			ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(server);
 
 			BlockHitResult result = level.clip(new ClipContext(entity.getPosition(1), entity.getPosition(1).add(0, -1, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));
-			if(result != null) {
+			if (result != null) {
 				BlockState state = level.getBlockState(result.getBlockPos());
-				if(state.getBlock().getExplosionResistance() < 100 && !state.isAir()) {
+				if (state.getExplosionResistance(level, result.getBlockPos(), dummy) < 100 && !state.isAir()) {
 					level.setBlock(result.getBlockPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
 				}
 			}
 			
 			result = level.clip(new ClipContext(entity.getPosition(1).add(0, entity.getEyeHeight(), 0), entity.getPosition(1).add(0, entity.getEyeHeight(), 0).add(entity.getViewVector(1).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));
-			if(result != null) {
+			if (result != null) {
 				BlockState state = level.getBlockState(result.getBlockPos());
-				if(state.getBlock().getExplosionResistance() < 100 && !state.isAir()) {
+				if (state.getExplosionResistance(level, result.getBlockPos(), dummy) < 100 && !state.isAir()) {
 					level.setBlock(result.getBlockPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
 				}
 			}
-			if(entity.getMainHandItem() != ItemStack.EMPTY) {
-				Item item = entity.getMainHandItem().getItem();
-				if(item instanceof SwordItem && item != Items.GOLDEN_SWORD) {
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_SWORD));
-				}
-				else if(item instanceof ShovelItem && item != Items.GOLDEN_SHOVEL) {
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_SHOVEL));
-				}
-				else if(item instanceof PickaxeItem && item != Items.GOLDEN_PICKAXE) {
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_PICKAXE));
-				}
-				else if(item instanceof AxeItem && item != Items.GOLDEN_AXE) {
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_AXE));
-				}
-				else if(item instanceof HoeItem && item != Items.GOLDEN_HOE) {
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_HOE));
-				}
-				else if(item == Items.APPLE) {
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_APPLE, entity.getMainHandItem().getCount()));					
-				}
-				else if(item == Items.CARROT) {
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLDEN_CARROT, entity.getMainHandItem().getCount()));		
-				}
-				else if(item == Items.MELON_SLICE) {
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GLISTERING_MELON_SLICE, entity.getMainHandItem().getCount()));					
-				}
-				else if(item instanceof BlockItem && item != Items.GOLD_BLOCK){
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLD_BLOCK, entity.getMainHandItem().getCount()));										
-				}
-				else if(!(item instanceof BlockItem) && !(item instanceof TieredItem) && item != Items.GOLDEN_APPLE && item != Items.GOLDEN_CARROT && item != Items.GLISTERING_MELON_SLICE){
-					entity.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.GOLD_INGOT, entity.getMainHandItem().getCount()));										
-				}
-			}
-			if(entity.getOffhandItem() != ItemStack.EMPTY) {
-				Item item = entity.getOffhandItem().getItem();
-				if(item instanceof SwordItem && item != Items.GOLDEN_SWORD) {
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLDEN_SWORD));
-				}
-				else if(item instanceof ShovelItem && item != Items.GOLDEN_SHOVEL) {
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLDEN_SHOVEL));
-				}
-				else if(item instanceof PickaxeItem && item != Items.GOLDEN_PICKAXE) {
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLDEN_PICKAXE));
-				}
-				else if(item instanceof AxeItem && item != Items.GOLDEN_AXE) {
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLDEN_AXE));
-				}
-				else if(item instanceof HoeItem && item != Items.GOLDEN_HOE) {
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLDEN_HOE));
-				}
-				else if(item == Items.APPLE) {
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLDEN_APPLE, entity.getOffhandItem().getCount()));					
-				}
-				else if(item == Items.CARROT) {
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLDEN_CARROT, entity.getOffhandItem().getCount()));		
-				}
-				else if(item == Items.MELON_SLICE) {
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GLISTERING_MELON_SLICE, entity.getOffhandItem().getCount()));					
-				}
-				else if(item instanceof BlockItem && item != Items.GOLD_BLOCK){
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLD_BLOCK, entity.getOffhandItem().getCount()));										
-				}
-				else if(!(item instanceof BlockItem) && !(item instanceof TieredItem) && item != Items.GOLDEN_APPLE && item != Items.GOLDEN_CARROT && item != Items.GLISTERING_MELON_SLICE){
-					entity.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(Items.GOLD_INGOT, entity.getOffhandItem().getCount()));										
-				}
-			}
-			if(entity.getItemBySlot(EquipmentSlot.HEAD) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_HELMET) {
+			
+			makeItemsGolden(entity, InteractionHand.MAIN_HAND);
+			makeItemsGolden(entity, InteractionHand.OFF_HAND);
+			if (entity.getItemBySlot(EquipmentSlot.HEAD) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_HELMET) {
 				entity.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.GOLDEN_HELMET));
 			}
-			if(entity.getItemBySlot(EquipmentSlot.CHEST) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_CHESTPLATE) {
+			if (entity.getItemBySlot(EquipmentSlot.CHEST) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_CHESTPLATE) {
 				entity.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.GOLDEN_CHESTPLATE));
 			}
-			if(entity.getItemBySlot(EquipmentSlot.LEGS) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_LEGGINGS) {
+			if (entity.getItemBySlot(EquipmentSlot.LEGS) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_LEGGINGS) {
 				entity.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.GOLDEN_LEGGINGS));
 			}
-			if(entity.getItemBySlot(EquipmentSlot.FEET) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_BOOTS) {
+			if (entity.getItemBySlot(EquipmentSlot.FEET) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_BOOTS) {
 				entity.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.GOLDEN_BOOTS));
 			}
+		}
+	}
+	
+	private static void makeItemsGolden(LivingEntity ent, InteractionHand hand) {
+		ItemStack stack = ent.getItemInHand(hand);
+		Item item = stack.getItem();
+		
+		if (item instanceof SwordItem && item != Items.GOLDEN_SWORD) {
+			ent.setItemInHand(hand, new ItemStack(Items.GOLDEN_SWORD));
+		} else if (item instanceof ShovelItem && item != Items.GOLDEN_SHOVEL) {
+			ent.setItemInHand(hand, new ItemStack(Items.GOLDEN_SHOVEL));
+		} else if (item instanceof PickaxeItem && item != Items.GOLDEN_PICKAXE) {
+			ent.setItemInHand(hand, new ItemStack(Items.GOLDEN_PICKAXE));
+		} else if (item instanceof AxeItem && item != Items.GOLDEN_AXE) {
+			ent.setItemInHand(hand, new ItemStack(Items.GOLDEN_AXE));
+		} else if (item instanceof HoeItem && item != Items.GOLDEN_HOE) {
+			ent.setItemInHand(hand, new ItemStack(Items.GOLDEN_HOE));
+		} else if (item == Items.APPLE) {
+			ent.setItemInHand(hand, new ItemStack(Items.GOLDEN_APPLE, stack.getCount()));
+		} else if (item == Items.CARROT) {
+			ent.setItemInHand(hand, new ItemStack(Items.GOLDEN_CARROT, stack.getCount()));
+		} else if (item == Items.MELON_SLICE) {
+			ent.setItemInHand(hand, new ItemStack(Items.GLISTERING_MELON_SLICE, stack.getCount()));
+		} else if (item instanceof BlockItem && item != Items.GOLD_BLOCK) {
+			ent.setItemInHand(hand, new ItemStack(Items.GOLD_BLOCK, stack.getCount()));
+		} else if (!(item instanceof BlockItem) && !(item instanceof TieredItem) && item != Items.GOLDEN_APPLE && item != Items.GOLDEN_CARROT && item != Items.GLISTERING_MELON_SLICE) {
+			ent.setItemInHand(hand, new ItemStack(Items.GOLD_INGOT, stack.getCount()));
 		}
 	}
 }

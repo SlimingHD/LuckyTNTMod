@@ -15,6 +15,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.ticks.TickPriority;
 
 public class ToxicStoneBlock extends Block {
+	
 	private int timer = 100;
 	
 	public ToxicStoneBlock(Properties properties) {
@@ -26,7 +27,7 @@ public class ToxicStoneBlock extends Block {
 	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldstate, boolean moving) {
 		super.onPlace(state, level, pos, oldstate, moving);
 		level.scheduleTick(pos, this, 1, TickPriority.EXTREMELY_HIGH);
-		if(level instanceof ServerLevel slevel) {
+		if (level instanceof ServerLevel slevel) {
 			tick(state, slevel, pos, RandomSource.create());
 		}
 	}
@@ -36,15 +37,15 @@ public class ToxicStoneBlock extends Block {
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
 		super.tick(state, level, pos, rand);
 		level.scheduleTick(pos, this, 1, TickPriority.EXTREMELY_HIGH);
-		if(timer >= 0) {
+		if (timer >= 0) {
 			timer--;
 		}
-		if(timer == 0) {	
+		if (timer == 0) {	
 			List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(pos.offset(-5, -5, -5), pos.offset(5, 5, 5)));
-			for(LivingEntity living : list) {
+			for (LivingEntity living : list) {
 				DamageSources sources = new DamageSources(level.registryAccess());
-				if(living instanceof Player player) {
-					if(!player.isCreative() && !player.isSpectator()) {
+				if (living instanceof Player player) {
+					if (!player.isCreative() && !player.isSpectator()) {
 						player.hurt(sources.magic(), 8f);
 					}
 				} else {

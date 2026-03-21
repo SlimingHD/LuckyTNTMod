@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class GotthardTunnelBlock extends LTNTBlock {
+	
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 	public static final BooleanProperty STREETS = BooleanProperty.create("streets");
 
@@ -38,35 +39,35 @@ public class GotthardTunnelBlock extends LTNTBlock {
 	}
 
 	@Override
-    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
-    	super.createBlockStateDefinition(definition);
-    	definition.add(FACING);
-    	definition.add(STREETS);
-    }
-	
+	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
+		super.createBlockStateDefinition(definition);
+		definition.add(FACING);
+		definition.add(STREETS);
+	}
+
 	@Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-    	return defaultBlockState().setValue(FACING, context.getHorizontalDirection()).setValue(STREETS, false);
-    }
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return defaultBlockState().setValue(FACING, context.getHorizontalDirection()).setValue(STREETS, false);
+	}
 	
 	@Override
 	public PrimedLTNT explode(Level level, boolean exploded, double x, double y, double z, @Nullable LivingEntity igniter) throws NullPointerException {
-		if(TNT != null) {
+		if (TNT != null) {
 			BlockState state = level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)));
 			PrimedLTNT tnt = EntityRegistry.GOTTHARD_TUNNEL.get().create(level);
 			tnt.setFuse(40);
 			tnt.setPos(x + 0.5f, y, z + 0.5f);
 			tnt.setOwner(igniter);
 			tnt.setTNTFuse(200);
-			if(state.hasProperty(FACING)) {
+			if (state.hasProperty(FACING)) {
 				tnt.getPersistentData().putString("direction", state.getValue(FACING).getName());
 			}
-			if(state.hasProperty(STREETS)) {
+			if (state.hasProperty(STREETS)) {
 				tnt.getPersistentData().putBoolean("streets", state.getValue(STREETS));
 			}
 			level.addFreshEntity(tnt);
 			level.playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
-			if(level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
+			if (level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
 				level.setBlock(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), Blocks.AIR.defaultBlockState(), 3);
 			}
 			return tnt;
@@ -76,7 +77,7 @@ public class GotthardTunnelBlock extends LTNTBlock {
 
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		ItemStack itemstack = player.getItemInHand(hand);
-		if(itemstack.is(Items.FLINT_AND_STEEL) || itemstack.is(Items.FIRE_CHARGE)) {
+		if (itemstack.is(Items.FLINT_AND_STEEL) || itemstack.is(Items.FIRE_CHARGE)) {
 			onCaughtFire(state, level, pos, result.getDirection(), player);
 			Item item = itemstack.getItem();
 			if (!player.isCreative()) {
@@ -91,15 +92,15 @@ public class GotthardTunnelBlock extends LTNTBlock {
 
 			player.awardStat(Stats.ITEM_USED.get(item));
 			return InteractionResult.sidedSuccess(level.isClientSide);
-		} else if(itemstack.is(ItemRegistry.CONFIGURATION_WAND.get())) {
-			if(state.hasProperty(STREETS)) {
-    			if(state.getValue(STREETS)) {
-    				level.setBlock(pos, state.setValue(STREETS, false), 3);
-    			} else {
-    				level.setBlock(pos, state.setValue(STREETS, true), 3);
-    			}
-    		}
-    		return InteractionResult.SUCCESS;
+		} else if (itemstack.is(ItemRegistry.CONFIGURATION_WAND.get())) {
+			if (state.hasProperty(STREETS)) {
+				if (state.getValue(STREETS)) {
+					level.setBlock(pos, state.setValue(STREETS, false), 3);
+				} else {
+					level.setBlock(pos, state.setValue(STREETS, true), 3);
+				}
+			}
+			return InteractionResult.SUCCESS;
 		} else {
 			return InteractionResult.PASS;
 		}

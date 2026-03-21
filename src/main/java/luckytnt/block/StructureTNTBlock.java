@@ -36,89 +36,75 @@ public class StructureTNTBlock extends LTNTBlock {
     }
 
     @Override
-    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
-    	super.createBlockStateDefinition(definition);
-    	definition.add(STRUCTURE);
-    }
+	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
+		super.createBlockStateDefinition(definition);
+		definition.add(STRUCTURE);
+	}
     
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
-    	ItemStack stack = player.getItemInHand(hand);
-    	if(stack.getItem() == Items.FLINT_AND_STEEL) {
-    		onCaughtFire(state, level, pos, result.getDirection(), player);
-    		level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-    		if(!player.isCreative()) {
-    			stack.hurtAndBreak(1, player, event -> event.broadcastBreakEvent(hand));
-    		}
-        	player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-        	return InteractionResult.sidedSuccess(level.isClientSide);
-    	}
-    	else if(stack.getItem() == ItemRegistry.CONFIGURATION_WAND.get()) {
-    		cycleThroughStructures(level, state, pos);
-    		return InteractionResult.sidedSuccess(level.isClientSide);
-    	}
-    	return InteractionResult.FAIL;
-    }
+	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+		ItemStack stack = player.getItemInHand(hand);
+		if (stack.getItem() == Items.FLINT_AND_STEEL) {
+			onCaughtFire(state, level, pos, result.getDirection(), player);
+			level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+			if (!player.isCreative()) {
+				stack.hurtAndBreak(1, player, event -> event.broadcastBreakEvent(hand));
+			}
+			player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+			return InteractionResult.sidedSuccess(level.isClientSide());
+		} else if (stack.getItem() == ItemRegistry.CONFIGURATION_WAND.get()) {
+			cycleThroughStructures(level, state, pos);
+			return InteractionResult.sidedSuccess(level.isClientSide());
+		}
+		return InteractionResult.FAIL;
+	}
     
-    public void cycleThroughStructures(Level level, BlockState state, BlockPos pos) {
-    	StructureStates structure = state.getValue(STRUCTURE);
-    	if(structure == StructureStates.PILLAGER_OUTPOST) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.MANSION), 3);
-    	}
-    	else if(structure == StructureStates.MANSION) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.JUNGLE_PYRAMID), 3);
-    	}
-    	else if(structure == StructureStates.JUNGLE_PYRAMID) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.DESERT_PYRAMID), 3);
-    	}
-    	else if(structure == StructureStates.DESERT_PYRAMID) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.STRONGHOLD), 3);
-    	}
-    	else if(structure == StructureStates.STRONGHOLD) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.MONUMENT), 3);
-    	}
-    	else if(structure == StructureStates.MONUMENT) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.FORTRESS), 3);
-    	}
-    	else if(structure == StructureStates.FORTRESS) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.END_CITY), 3);
-    	}
-    	else if(structure == StructureStates.END_CITY) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.BASTION), 3);
-    	}
-    	else if(structure == StructureStates.BASTION) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_PLAINS), 3);
-    	}
-    	else if(structure == StructureStates.VILLAGE_PLAINS) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_DESERT), 3);
-    	}
-    	else if(structure == StructureStates.VILLAGE_DESERT) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_SAVANNA), 3);
-    	}
-    	else if(structure == StructureStates.VILLAGE_SAVANNA) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_SNOWY), 3);
-    	}
-    	else if(structure == StructureStates.VILLAGE_SNOWY) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_TAIGA), 3);
-    	}
-    	else if(structure == StructureStates.VILLAGE_TAIGA) {
-    		level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.PILLAGER_OUTPOST), 3);
-    	}
-    }
+	public void cycleThroughStructures(Level level, BlockState state, BlockPos pos) {
+		StructureStates structure = state.getValue(STRUCTURE);
+		if (structure == StructureStates.PILLAGER_OUTPOST) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.MANSION), 3);
+		} else if (structure == StructureStates.MANSION) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.JUNGLE_PYRAMID), 3);
+		} else if (structure == StructureStates.JUNGLE_PYRAMID) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.DESERT_PYRAMID), 3);
+		} else if (structure == StructureStates.DESERT_PYRAMID) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.STRONGHOLD), 3);
+		} else if (structure == StructureStates.STRONGHOLD) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.MONUMENT), 3);
+		} else if (structure == StructureStates.MONUMENT) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.FORTRESS), 3);
+		} else if (structure == StructureStates.FORTRESS) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.END_CITY), 3);
+		} else if (structure == StructureStates.END_CITY) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.BASTION), 3);
+		} else if (structure == StructureStates.BASTION) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_PLAINS), 3);
+		} else if (structure == StructureStates.VILLAGE_PLAINS) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_DESERT), 3);
+		} else if (structure == StructureStates.VILLAGE_DESERT) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_SAVANNA), 3);
+		} else if (structure == StructureStates.VILLAGE_SAVANNA) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_SNOWY), 3);
+		} else if (structure == StructureStates.VILLAGE_SNOWY) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.VILLAGE_TAIGA), 3);
+		} else if (structure == StructureStates.VILLAGE_TAIGA) {
+			level.setBlock(pos, state.setValue(STRUCTURE, StructureStates.PILLAGER_OUTPOST), 3);
+		}
+	}
     
     @Nullable
 	public PrimedLTNT explode(Level level, boolean exploded, double x, double y, double z, @Nullable LivingEntity igniter) throws NullPointerException {
-		if(TNT != null) {
+		if (TNT != null) {
 			PrimedLTNT tnt = TNT.get().create(level);
 			tnt.setFuse(exploded && randomizedFuseUponExploded() ? tnt.getEffect().getDefaultFuse(tnt) / 8 + random.nextInt(Mth.clamp(tnt.getEffect().getDefaultFuse(tnt) / 4, 1, Integer.MAX_VALUE)) : tnt.getEffect().getDefaultFuse(tnt));
 			tnt.setPos(x + 0.5f, y, z + 0.5f);
 			tnt.setOwner(igniter);
-			if(level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).hasProperty(STRUCTURE)) {
+			if (level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).hasProperty(STRUCTURE)) {
 				tnt.getPersistentData().putString("structure", level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getValue(STRUCTURE).getSerializedName());
 			}
 			level.addFreshEntity(tnt);
 			level.playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
-			if(level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
+			if (level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
 				level.setBlock(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), Blocks.AIR.defaultBlockState(), 3);
 			}
 			return tnt;

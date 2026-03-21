@@ -2,7 +2,7 @@ package luckytnt.util;
 
 import net.minecraft.util.StringRepresentable;
 
-public enum StructureStates implements StringRepresentable{
+public enum StructureStates implements StringRepresentable {
 
 	PILLAGER_OUTPOST("pillager_outpost"),
 	MANSION("mansion"),

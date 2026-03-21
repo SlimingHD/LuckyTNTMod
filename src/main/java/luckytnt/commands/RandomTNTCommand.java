@@ -14,11 +14,11 @@ import net.minecraft.world.item.ItemStack;
 public class RandomTNTCommand {
 
 	public static int executeGiveItems(CommandSourceStack command, int amount, boolean allowDuplicate, String key) {
-		if(command.getEntity() instanceof Player player) {
-			if(allowDuplicate) {
+		if (command.getEntity() instanceof Player player) {
+			if (allowDuplicate) {
 				int j = 0;
-				for(int i = 0; i < amount; i++) {
-					if(player.addItem(new ItemStack(LuckyTNTMod.RH.creativeTabItemLists.get(key).get(new Random().nextInt(LuckyTNTMod.RH.creativeTabItemLists.get(key).size())).get()))) {
+				for (int i = 0; i < amount; i++) {
+					if (player.addItem(new ItemStack(LuckyTNTMod.RH.creativeTabItemLists.get(key).get(new Random().nextInt(LuckyTNTMod.RH.creativeTabItemLists.get(key).size())).get()))) {
 						j++;
 					}
 				}
@@ -28,9 +28,9 @@ public class RandomTNTCommand {
 				int j = 0;
 				int tries = 0;
 				List<Item> list = new ArrayList<>();
-				while(j < amount && tries < 1000) {
+				while (j < amount && tries < 1000) {
 					Item item = LuckyTNTMod.RH.creativeTabItemLists.get(key).get(new Random().nextInt(LuckyTNTMod.RH.creativeTabItemLists.get(key).size())).get();
-					if(!list.contains(item) && player.addItem(new ItemStack(item))) {
+					if (!list.contains(item) && player.addItem(new ItemStack(item))) {
 						j++;
 						list.add(item);
 					}

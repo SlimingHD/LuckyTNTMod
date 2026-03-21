@@ -13,7 +13,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 
-public class BombRenderer extends EntityRenderer<LExplosiveProjectile>{
+public class BombRenderer extends EntityRenderer<LExplosiveProjectile> {
 
 	public EntityModel<LExplosiveProjectile> model;
 	
@@ -32,6 +32,7 @@ public class BombRenderer extends EntityRenderer<LExplosiveProjectile>{
 		stack.popPose();
 	}
 	
+	@Override
 	public ResourceLocation getTextureLocation(LExplosiveProjectile entity) {
 		return new ResourceLocation("luckytntmod:textures/tsarbomb.png");
 	}

@@ -33,7 +33,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.PacketDistributor;
 
-public class TunnelingTNTBlock extends LTNTBlock{
+public class TunnelingTNTBlock extends LTNTBlock {
 	
 	public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;    
 	
@@ -42,20 +42,20 @@ public class TunnelingTNTBlock extends LTNTBlock{
 	}
 	
     @Override
-    public BlockState rotate(BlockState state, LevelAccessor level, BlockPos pos, Rotation rotation) {  	
-    	return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-    }
+	public BlockState rotate(BlockState state, LevelAccessor level, BlockPos pos, Rotation rotation) {
+		return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+	}
     
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-    	return defaultBlockState().setValue(FACING, context.getHorizontalDirection());
-    }
+	public BlockState getStateForPlacement(BlockPlaceContext context) {
+		return defaultBlockState().setValue(FACING, context.getHorizontalDirection());
+	}
 
     @Override
-    public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
-    	super.createBlockStateDefinition(definition);
-    	definition.add(FACING);
-    }
+	public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
+		super.createBlockStateDefinition(definition);
+		definition.add(FACING);
+	}
     
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
@@ -67,7 +67,7 @@ public class TunnelingTNTBlock extends LTNTBlock{
 			Item item = itemstack.getItem();
 			if (!player.isCreative()) {
 				if (itemstack.is(Items.FLINT_AND_STEEL)) {
-					itemstack.hurtAndBreak(1, player, (p) -> {
+					itemstack.hurtAndBreak(1, player, p -> {
 						p.broadcastBreakEvent(hand);
 					});
 				} else {
@@ -82,18 +82,18 @@ public class TunnelingTNTBlock extends LTNTBlock{
 
     @Override
     public PrimedLTNT explode(Level level, boolean exploded, double x, double y, double z, @Nullable LivingEntity igniter) throws NullPointerException {
-		if(TNT != null) {
+		if (TNT != null) {
 			PrimedLTNT tnt = TNT.get().create(level);
 			tnt.setFuse(exploded && randomizedFuseUponExploded() ? tnt.getEffect().getDefaultFuse(tnt) / 8 + random.nextInt(Mth.clamp(tnt.getEffect().getDefaultFuse(tnt) / 4, 1, Integer.MAX_VALUE)) : tnt.getEffect().getDefaultFuse(tnt));
 			tnt.setPos(x + 0.5f, y, z + 0.5f);
 			tnt.setOwner(igniter);
 			tnt.getPersistentData().putString("direction", level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() instanceof TunnelingTNTBlock ? level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getValue(FACING).getName() : "east");
 			level.addFreshEntity(tnt);
-			if(!level.isClientSide) {
+			if (!level.isClientSide()) {
 				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> tnt), new ClientboundStringNBTPacket("direction", tnt.getPersistentData().getString("direction"), tnt.getId()));
 			}
 			level.playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
-			if(level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
+			if (level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
 				level.setBlock(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), Blocks.AIR.defaultBlockState(), 3);
 			}
 			return tnt;

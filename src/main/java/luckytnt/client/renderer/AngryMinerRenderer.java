@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
 import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 import net.minecraft.resources.ResourceLocation;
 
-public class AngryMinerRenderer extends HumanoidMobRenderer<AngryMiner, HumanoidModel<AngryMiner>>{
+public class AngryMinerRenderer extends HumanoidMobRenderer<AngryMiner, HumanoidModel<AngryMiner>> {
 
 	public AngryMinerRenderer(EntityRendererProvider.Context context) {
 		super(context, new HumanoidModel<AngryMiner>(context.bakeLayer(ModelLayers.PLAYER)), 0.5f);

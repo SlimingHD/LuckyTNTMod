@@ -23,7 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class AngryMiner extends Monster implements RangedAttackMob{
+public class AngryMiner extends Monster implements RangedAttackMob {
 	
 	public AngryMiner(EntityType<AngryMiner> type, Level level) {
 		super(type, level);

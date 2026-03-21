@@ -1,21 +1,19 @@
 package luckytnt.effects;
 
-import java.lang.reflect.Field;
-
+import luckytnt.registry.EffectRegistry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodData;
 
-public class ContaminatedEffect extends MobEffect{
-
-	private int duration;
+public class ContaminatedEffect extends MobEffect {
 	
-	public ContaminatedEffect(MobEffectCategory category, int id) {
-		super(category, id);
+	public ContaminatedEffect(MobEffectCategory category, int color) {
+		super(category, color);
 	}
 
 	@Override
@@ -25,28 +23,32 @@ public class ContaminatedEffect extends MobEffect{
 	
 	@Override
 	public boolean isDurationEffectTick(int duration, int amplifier) {
-		this.duration = duration;
 		return true;
 	}
 
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		DamageSources sources = new DamageSources(entity.level().registryAccess());
-		
 		if(entity instanceof Player player) {
-			try {
-                Field field = FoodData.class.getDeclaredField("tickTimer");
-                field.setAccessible(true);
-                field.setInt(player.getFoodData(), 0);
-            } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
+			FoodData data = player.getFoodData();
+			CompoundTag tag = new CompoundTag();
+			tag.putInt("foodLevel", data.getFoodLevel());
+			tag.putInt("foodTickTimer", 0);
+			tag.putFloat("foodSaturationLevel", data.getSaturationLevel());
+			tag.putFloat("foodExhaustionLevel", data.getExhaustionLevel());
+			data.readAdditionalSaveData(tag);
 		}
+		
+		MobEffectInstance effect = entity.getEffect(EffectRegistry.CONTAMINATED_EFFECT.get());
+		if (effect == null) {
+			return;
+		}
+		
+		int duration = effect.getDuration();
 		int i = 40 >> duration;
 		if (i > 0) {
-			if(amplifier % i == 0) {
+			if (amplifier % i == 0) {
 				if (entity.getHealth() > 4.0F) {
-					entity.hurt(sources.magic(), 1.0F);
+					entity.hurt(entity.level().damageSources().magic(), 1.0F);
 				}
 			}
 		}

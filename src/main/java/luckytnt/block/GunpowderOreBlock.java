@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class GunpowderOreBlock extends DropExperienceBlock{
+public class GunpowderOreBlock extends DropExperienceBlock {
 	
 	public GunpowderOreBlock(BlockBehaviour.Properties properties) {
 		super(properties, UniformInt.of(2, 5));
@@ -18,8 +18,9 @@ public class GunpowderOreBlock extends DropExperienceBlock{
 	@SuppressWarnings("deprecation")
 	@Override
     public boolean canHarvestBlock(BlockState state, BlockGetter world, BlockPos pos, Player player) {
-        if (player.getInventory().getSelected().getItem() instanceof TieredItem tieredItem)
+        if (player.getInventory().getSelected().getItem() instanceof TieredItem tieredItem) {
             return tieredItem.getTier().getLevel() > 1;
+        }
         return false;
     }
 }

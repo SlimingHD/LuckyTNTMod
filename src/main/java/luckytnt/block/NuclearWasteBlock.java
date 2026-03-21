@@ -34,6 +34,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 @SuppressWarnings("deprecation")
 public class NuclearWasteBlock extends FallingBlock {
+	
 	public NuclearWasteBlock(BlockBehaviour.Properties properties) {
 		super(properties);
 	}
@@ -51,7 +52,7 @@ public class NuclearWasteBlock extends FallingBlock {
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
 		BlockPos posDown = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
-		if(Block.isFaceFull(level.getBlockState(posDown).getCollisionShape(level, posDown), Direction.UP) || level.getBlockState(posDown).isAir()){
+		if (Block.isFaceFull(level.getBlockState(posDown).getCollisionShape(level, posDown), Direction.UP) || level.getBlockState(posDown).isAir()){
 			return true;
 		}
 		return super.canSurvive(state, level, pos);
@@ -60,11 +61,11 @@ public class NuclearWasteBlock extends FallingBlock {
 	@Override
 	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
 		super.tick(state, level, pos, random);
-		if(Math.random() < 0.2f) {
-			if(level.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())).getBlock().getExplosionResistance() < 100) {
+		if (Math.random() < 0.2f) {
+			if (level.getBlockState(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ())).getBlock().getExplosionResistance() < 100) {
 				level.setBlock(new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()), Blocks.AIR.defaultBlockState(), 3);
 				level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
-				if(Math.random() < 0.05f) {
+				if (Math.random() < 0.05f) {
 					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 					level.sendParticles(new DustParticleOptions(new Vector3f(1f, 1f, 0.1f), 1), pos.getX(), pos.getY(), pos.getZ(), 40, 0.6f, 0.6f, 0.6f, 0);
 				}
@@ -81,12 +82,11 @@ public class NuclearWasteBlock extends FallingBlock {
 	@Override
 	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
 		super.entityInside(state, level, pos, entity);
-		if(entity instanceof LivingEntity l_Entity) {
+		if (entity instanceof LivingEntity l_Entity) {
 			l_Entity.addEffect(new MobEffectInstance(MobEffects.POISON, 120, 4, false, true));
 			l_Entity.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 120, 0, false, true));
 			l_Entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 120, 0, false, true));
-		}
-		else if(entity instanceof ItemEntity i_Entity) {
+		} else if (entity instanceof ItemEntity i_Entity) {
 			i_Entity.hurt(new Explosion(level, entity, null, null, 0, 0, 0, 0, false, Explosion.BlockInteraction.DESTROY_WITH_DECAY).getDamageSource(), 100);
 		}
 	}
