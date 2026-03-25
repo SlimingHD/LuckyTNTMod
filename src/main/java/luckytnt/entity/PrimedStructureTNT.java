@@ -8,7 +8,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.network.PacketDistributor;
 
-public class PrimedStructureTNT extends PrimedLTNT{
+public class PrimedStructureTNT extends PrimedLTNT {
 	
 	public PrimedStructureTNT(EntityType<PrimedLTNT> type, Level level) {
 		super(type, level, new StructureTNTEffect());
@@ -16,7 +16,7 @@ public class PrimedStructureTNT extends PrimedLTNT{
 	
 	@Override
 	public void onAddedToWorld() {
-		if(!level().isClientSide()) {
+		if (!level().isClientSide()) {
       		PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> this), new ClientboundStringNBTPacket("structure", getPersistentData().getString("structure"), getId()));
       	}
 	}

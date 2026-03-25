@@ -10,7 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 
-public class OreTNTMinecart extends LTNTMinecart{
+public class OreTNTMinecart extends LTNTMinecart {
 
 	public List<BlockPos> availablePos = new ArrayList<>();
 	

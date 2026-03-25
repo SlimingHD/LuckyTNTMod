@@ -23,6 +23,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult.Type;
+import net.minecraft.world.phys.Vec3;
 
 public class MidasTouchEffect extends MobEffect {
 
@@ -54,37 +56,25 @@ public class MidasTouchEffect extends MobEffect {
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
 		Level level = entity.level();
 		if (level instanceof ServerLevel server) {
-			ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(server);
-
-			BlockHitResult result = level.clip(new ClipContext(entity.getPosition(1), entity.getPosition(1).add(0, -1, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));
-			if (result != null) {
-				BlockState state = level.getBlockState(result.getBlockPos());
-				if (state.getExplosionResistance(level, result.getBlockPos(), dummy) < 100 && !state.isAir()) {
-					level.setBlock(result.getBlockPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
-				}
-			}
-			
-			result = level.clip(new ClipContext(entity.getPosition(1).add(0, entity.getEyeHeight(), 0), entity.getPosition(1).add(0, entity.getEyeHeight(), 0).add(entity.getViewVector(1).scale(5)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));
-			if (result != null) {
-				BlockState state = level.getBlockState(result.getBlockPos());
-				if (state.getExplosionResistance(level, result.getBlockPos(), dummy) < 100 && !state.isAir()) {
-					level.setBlock(result.getBlockPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
-				}
-			}
+			placeGoldBlocks(server, entity.getPosition(1), entity.getPosition(1).add(0, -1, 0), entity);
+			placeGoldBlocks(server, entity.getPosition(1).add(0, entity.getEyeHeight(), 0), entity.getPosition(1).add(0, entity.getEyeHeight(), 0).add(entity.getViewVector(1).scale(5)), entity);
 			
 			makeItemsGolden(entity, InteractionHand.MAIN_HAND);
 			makeItemsGolden(entity, InteractionHand.OFF_HAND);
-			if (entity.getItemBySlot(EquipmentSlot.HEAD) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_HELMET) {
-				entity.setItemSlot(EquipmentSlot.HEAD, new ItemStack(Items.GOLDEN_HELMET));
-			}
-			if (entity.getItemBySlot(EquipmentSlot.CHEST) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_CHESTPLATE) {
-				entity.setItemSlot(EquipmentSlot.CHEST, new ItemStack(Items.GOLDEN_CHESTPLATE));
-			}
-			if (entity.getItemBySlot(EquipmentSlot.LEGS) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_LEGGINGS) {
-				entity.setItemSlot(EquipmentSlot.LEGS, new ItemStack(Items.GOLDEN_LEGGINGS));
-			}
-			if (entity.getItemBySlot(EquipmentSlot.FEET) != ItemStack.EMPTY && entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != Items.GOLDEN_BOOTS) {
-				entity.setItemSlot(EquipmentSlot.FEET, new ItemStack(Items.GOLDEN_BOOTS));
+			
+			replaceArmor(entity, EquipmentSlot.HEAD, Items.GOLDEN_HELMET);
+			replaceArmor(entity, EquipmentSlot.CHEST, Items.GOLDEN_CHESTPLATE);
+			replaceArmor(entity, EquipmentSlot.LEGS, Items.GOLDEN_LEGGINGS);
+			replaceArmor(entity, EquipmentSlot.FEET, Items.GOLDEN_BOOTS);
+		}
+	}
+	
+	private static void placeGoldBlocks(ServerLevel level, Vec3 raytraceFrom, Vec3 raytraceTo, LivingEntity ent) {
+		BlockHitResult result = level.clip(new ClipContext(raytraceFrom, raytraceTo, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, ent));
+		if (result != null && result.getType() != Type.MISS) {
+			BlockState state = level.getBlockState(result.getBlockPos());
+			if (state.getExplosionResistance(level, result.getBlockPos(), ImprovedExplosion.dummyExplosion(level)) < 100 && !state.isAir()) {
+				level.setBlock(result.getBlockPos(), Blocks.GOLD_BLOCK.defaultBlockState(), 3);
 			}
 		}
 	}
@@ -113,6 +103,12 @@ public class MidasTouchEffect extends MobEffect {
 			ent.setItemInHand(hand, new ItemStack(Items.GOLD_BLOCK, stack.getCount()));
 		} else if (!(item instanceof BlockItem) && !(item instanceof TieredItem) && item != Items.GOLDEN_APPLE && item != Items.GOLDEN_CARROT && item != Items.GLISTERING_MELON_SLICE) {
 			ent.setItemInHand(hand, new ItemStack(Items.GOLD_INGOT, stack.getCount()));
+		}
+	}
+	
+	private static void replaceArmor(LivingEntity ent, EquipmentSlot slot, Item item) {
+		if (ent.getItemBySlot(slot) != ItemStack.EMPTY && ent.getItemBySlot(slot).getItem() != item) {
+			ent.setItemSlot(slot, new ItemStack(item));
 		}
 	}
 }

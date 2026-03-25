@@ -28,7 +28,7 @@ public class ContaminatedEffect extends MobEffect {
 
 	@Override
 	public void applyEffectTick(LivingEntity entity, int amplifier) {
-		if(entity instanceof Player player) {
+		if (entity instanceof Player player) {
 			FoodData data = player.getFoodData();
 			CompoundTag tag = new CompoundTag();
 			tag.putInt("foodLevel", data.getFoodLevel());

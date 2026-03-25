@@ -21,9 +21,9 @@ public class BouncingDynamite extends LExplosiveProjectile {
 	@Override
 	public void onHitBlock(BlockHitResult hitResult) {
 		Vec3 flyDir = getDeltaMovement();
-		if(hitResult != null) {
-			if(getPersistentData().getInt("bounces") >= 12) {
-				if(level() instanceof ServerLevel) {
+		if (hitResult != null) {
+			if (getPersistentData().getInt("bounces") >= 12) {
+				if (level() instanceof ServerLevel) {
 					getEffect().serverExplosion(this);
 					level().playSound(this, new BlockPos(Mth.floor(getX()), Mth.floor(getY()), Mth.floor(getZ())), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level().getRandom().nextFloat() - level().getRandom().nextFloat()) * 0.2f) * 0.7f);
 				}

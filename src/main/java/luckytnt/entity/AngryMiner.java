@@ -62,9 +62,7 @@ public class AngryMiner extends Monster implements RangedAttackMob {
 		return false;
 	}
 	
-	public static AttributeSupplier.Builder createAttributes(){
-		return Mob.createMobAttributes()
-			.add(Attributes.MOVEMENT_SPEED, 0.3f)
-			.add(Attributes.MAX_HEALTH, 40);
+	public static AttributeSupplier.Builder createAttributes() {
+		return Mob.createMobAttributes().add(Attributes.MOVEMENT_SPEED, 0.3f).add(Attributes.MAX_HEALTH, 40);
 	}
 }
