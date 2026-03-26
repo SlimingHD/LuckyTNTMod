@@ -13,7 +13,7 @@ public class ClientboundFreezeNBTPacket {
 	public final String nbt;
 	public final int value;
 	
-	public ClientboundFreezeNBTPacket(String nbt,int value) {
+	public ClientboundFreezeNBTPacket(String nbt, int value) {
 		this.nbt = nbt;
 		this.value = value;
 	}
@@ -29,9 +29,7 @@ public class ClientboundFreezeNBTPacket {
 	}
 	
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.updateEntityIntNBT(nbt, value));
-		});
+		ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.updateEntityIntNBT(nbt, value)));
 		ctx.get().setPacketHandled(true);
 	}
 }

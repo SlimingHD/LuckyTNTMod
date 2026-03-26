@@ -376,7 +376,7 @@
  	"item.configuration_wand.info": "\u00A77\u00A7oRight-click with this Wand on specific TNTs to change their Configuration!",
 	"item.antimatter.info" : "\u00A77\u00A7oMay be created when Uranium Ore is destroyed by a Death Ray Ray!",
 	"item.obsidian_rail.info" : "\u00A77\u00A7oObsidian Rails have a lot of Explosion Resistance! Minecarts exploding on them will not deal block damage!",
-	"item.vacuum_cleaner.info" : "\u00A77\u00A7oUse the Vacuum Cleaner to get rid of those pesky Toxic Clouds!",
+	"item.luckytntmod.vacuum_cleaner.info" : "\u00A77\u00A7oUse the Vacuum Cleaner to get rid of those pesky Toxic Clouds!",
 	
 	"item.grande_finale.info" : "\u00A77\u00A7o*Community TNT* Thank you for 100.000 downloads!",
 	

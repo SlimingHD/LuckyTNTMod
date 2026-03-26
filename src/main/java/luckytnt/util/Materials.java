@@ -36,28 +36,28 @@ public class Materials {
 									   Blocks.PISTON, Blocks.STICKY_PISTON, Blocks.OBSERVER, Blocks.DISPENSER, Blocks.DROPPER, Blocks.FURNACE, Blocks.BLAST_FURNACE, Blocks.SMOKER, Blocks.BREWING_STAND, Blocks.LODESTONE, Blocks.STONECUTTER, Blocks.GRINDSTONE, Blocks.RESPAWN_ANCHOR);
 	
 	public static boolean isWood(BlockState state) {
-		for(TagKey<Block> tag : WOOD_TAGS) {
-			if(state.is(tag)) {
+		for (TagKey<Block> tag : WOOD_TAGS) {
+			if (state.is(tag)) {
 				return true;
 			}
 		}
 		return WOOD.contains(state.getBlock());
 	}
-	
+
 	public static boolean isPlant(BlockState state) {
-		if(state.is(BlockTags.SWORD_EFFICIENT) && !EXCLUDED_PLANTS.contains(state.getBlock())) {
+		if (state.is(BlockTags.SWORD_EFFICIENT) && !EXCLUDED_PLANTS.contains(state.getBlock())) {
 			return true;
 		}
 		return INCLUDED_PLANTS.contains(state.getBlock());
 	}
-	
+
 	public static boolean isWaterPlant(BlockState state) {
 		return WATER_PLANTS.contains(state.getBlock()) || state.getBlock() instanceof BaseCoralPlantTypeBlock;
 	}
-	
+
 	public static boolean isStone(BlockState state) {
-		for(TagKey<Block> tag : STONE_TAGS) {
-			if(state.is(tag)) {
+		for (TagKey<Block> tag : STONE_TAGS) {
+			if (state.is(tag)) {
 				return true;
 			}
 		}

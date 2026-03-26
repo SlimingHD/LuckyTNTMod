@@ -28,9 +28,7 @@ public class ClientboundLevelVariablesPacket {
 	}
 	
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.syncLevelVariables(variables));
-		});
+		ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.syncLevelVariables(variables)));
 		ctx.get().setPacketHandled(true);
 	}
 }

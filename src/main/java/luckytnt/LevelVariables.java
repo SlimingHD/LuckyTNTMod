@@ -10,7 +10,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraftforge.network.PacketDistributor;
 
-public class LevelVariables extends SavedData{
+public class LevelVariables extends SavedData {
 
 	public int doomsdayTime = 0;
 	public int toxicCloudsTime = 0;
@@ -28,13 +28,13 @@ public class LevelVariables extends SavedData{
 		tag.putInt("tntRainTime", tntRainTime);
 		return tag;
 	}
-	
+
 	public static LevelVariables load(CompoundTag tag) {
 		LevelVariables variables = new LevelVariables();
 		variables.read(tag);
 		return variables;
 	}
-	
+
 	public void read(CompoundTag tag) {
 		doomsdayTime = tag.getInt("doomsdayTime");
 		toxicCloudsTime = tag.getInt("toxicCloudsTime");
@@ -42,14 +42,15 @@ public class LevelVariables extends SavedData{
 		heatDeathTime = tag.getInt("heatDeathTime");
 		tntRainTime = tag.getInt("tntRainTime");
 	}
-	
+
 	public static LevelVariables get(LevelAccessor level) {
-		if(level instanceof ServerLevelAccessor sLevel)
-			return sLevel.getLevel().getServer().getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(f -> LevelVariables.load(f), LevelVariables::new, "ltm_level_variables");
-		else
+		if (level instanceof ServerLevelAccessor server) {
+			return server.getLevel().getServer().getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(f -> LevelVariables.load(f), LevelVariables::new, "ltm_level_variables");
+		} else {
 			return clientSide;
+		}
 	}
-	
+
 	public void sync(ServerLevel level) {
 		setDirty();
 		PacketHandler.CHANNEL.send(PacketDistributor.DIMENSION.with(level::dimension), new ClientboundLevelVariablesPacket(this));

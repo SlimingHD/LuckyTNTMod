@@ -14,7 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class DeathRayRayItem extends LDynamiteItem{
+public class DeathRayRayItem extends LDynamiteItem {
 
 	public DeathRayRayItem() {
 		super(new Item.Properties(), EntityRegistry.DEATH_RAY_RAY);

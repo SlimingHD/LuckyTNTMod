@@ -29,9 +29,7 @@ public class ClientboundToxicCloudPacket {
 	}
 	
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.setToxicCloudData(size, entityId));
-		});
+		ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.setToxicCloudData(size, entityId)));
 		ctx.get().setPacketHandled(true);
 	}
 }

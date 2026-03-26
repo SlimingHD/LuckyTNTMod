@@ -33,9 +33,7 @@ public class ClientboundStringNBTPacket {
 	}
 	
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.setEntityStringTag(name, tag, entityId));
-		});
+		ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.setEntityStringTag(name, tag, entityId)));
 		ctx.get().setPacketHandled(true);
 	}
 }

@@ -20,17 +20,17 @@ public class BombModel <T extends Entity> extends EntityModel<T> {
 	
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(LuckyTNTMod.MODID, "bomb_model"), "main");
 	
-	private final ModelPart TsarBomb;
+	private final ModelPart bomb;
 
 	public BombModel(ModelPart root) {
-		this.TsarBomb = root.getChild("TsarBomb");
+		bomb = root.getChild("bomb");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		partdefinition.addOrReplaceChild("TsarBomb", CubeListBuilder.create().texOffs(76, 26).addBox(14.8344F, -9.9988F, -0.998F, 5.0F, 6.0F, 2.0F, new CubeDeformation(0.0F))
+		partdefinition.addOrReplaceChild("bomb", CubeListBuilder.create().texOffs(76, 26).addBox(14.8344F, -9.9988F, -0.998F, 5.0F, 6.0F, 2.0F, new CubeDeformation(0.0F))
 		.texOffs(76, 16).addBox(14.8344F, 4.0012F, -0.998F, 5.0F, 6.0F, 2.0F, new CubeDeformation(0.0F))
 		.texOffs(20, 67).addBox(14.8344F, -0.9988F, 4.002F, 5.0F, 2.0F, 6.0F, new CubeDeformation(0.0F))
 		.texOffs(60, 62).addBox(14.8344F, -0.9988F, -9.998F, 5.0F, 2.0F, 6.0F, new CubeDeformation(0.0F))
@@ -78,6 +78,6 @@ public class BombModel <T extends Entity> extends EntityModel<T> {
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		TsarBomb.render(poseStack, buffer, packedLight, packedOverlay);
+		bomb.render(poseStack, buffer, packedLight, packedOverlay);
 	}
 }

@@ -2,6 +2,7 @@ package luckytnt.network;
 
 import java.util.Optional;
 
+import luckytnt.LuckyTNTMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkDirection;
 import net.minecraftforge.network.NetworkRegistry;
@@ -11,7 +12,7 @@ public class PacketHandler {
 
 	public static final String PROTOCOL_VERSION = "1";
 	
-	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation("luckytntmod", "main"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
+	public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation(LuckyTNTMod.MODID, "main"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 	
 	private PacketHandler() {	
 	}

@@ -21,9 +21,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
-public class VacuumCleaner extends Item{
-
-	public int soundCooldown = 0;
+public class VacuumCleaner extends Item {
 	
 	public VacuumCleaner() {
 		super(new Item.Properties().stacksTo(1).durability(1000));
@@ -37,48 +35,50 @@ public class VacuumCleaner extends Item{
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 		super.appendHoverText(stack, level, components, flag);
-		components.add(Component.translatable("item.vacuum_cleaner.info"));
+		components.add(Component.translatable("item.luckytntmod.vacuum_cleaner.info"));
 	}
 	
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-		onUseTick(level, player, player.getItemInHand(hand), player.getItemInHand(hand).getCount());
-		if(!player.getItemInHand(hand).getOrCreateTag().getBoolean("using")) {
-			soundCooldown = 42;
-			player.getItemInHand(hand).getOrCreateTag().putBoolean("using", true);
+		ItemStack stack = player.getItemInHand(hand);
+		if (!level.isClientSide()) {
+			if (!stack.getOrCreateTag().getBoolean("using")) {
+				stack.getOrCreateTag().putInt("soundCooldown", 42);
+				stack.getOrCreateTag().putBoolean("using", true);
+				level.playSound(null, player, SoundRegistry.VACUUM_CLEANER_START.get(), SoundSource.MASTER, 2, 1);
+			} else {
+				stack.getOrCreateTag().putBoolean("using", false);
+			}
 		}
-		else if(player.getItemInHand(hand).getOrCreateTag().getBoolean("using")) {
-			player.getItemInHand(hand).getOrCreateTag().putBoolean("using", false);
-		}
-		if(player.getItemInHand(hand).getOrCreateTag().getBoolean("using"))
-			level.playSound(null, player, SoundRegistry.VACUUM_CLEANER_START.get(), SoundSource.MASTER, 2, 1);
-		return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, player.getItemInHand(hand));
+		
+		return new InteractionResultHolder<ItemStack>(InteractionResult.SUCCESS, stack);
 	}
 	
 	@Override
 	public void inventoryTick(ItemStack stack, Level level, Entity entity, int count, boolean inHand) {		
-		if(stack.getOrCreateTag().getBoolean("using") && inHand) {
-			if(!level.isClientSide)
-				soundCooldown--;
-			if(soundCooldown == 0) {
-				level.playSound(null, entity, SoundRegistry.VACUUM_CLEANER.get(), SoundSource.MASTER, 2, 1);
-				if(!level.isClientSide)
-					soundCooldown = 22;
-			}
-			if(entity instanceof Player player) {
-				if(!player.isCreative()) {
-					stack.setDamageValue(stack.getDamageValue() + 1);
-					if(stack.getDamageValue() > 1960)
-						stack.shrink(1);
+		if (!level.isClientSide()) {
+			if (stack.getOrCreateTag().getBoolean("using") && inHand) {
+				stack.getOrCreateTag().putInt("soundCooldown", stack.getOrCreateTag().getInt("soundCooldown") - 1);
+				if (stack.getOrCreateTag().getInt("soundCooldown") == 0) {
+					level.playSound(null, entity, SoundRegistry.VACUUM_CLEANER.get(), SoundSource.MASTER, 2, 1);
+					stack.getOrCreateTag().putInt("soundCooldown", 22);
 				}
-				LExplosiveProjectile shot = EntityRegistry.VACUUM_SHOT.get().create(level);
-				shot.setPos(player.getPosition(1f).add(0, player.getEyeHeight(), 0));
-				shot.shoot(player.getViewVector(1).x, player.getViewVector(1).y, player.getViewVector(1).z, 4, 0);
-				shot.pickup = Pickup.DISALLOWED;
-				level.addFreshEntity(shot);
+				if (entity instanceof Player player) {
+					if (!player.isCreative()) {
+						stack.setDamageValue(stack.getDamageValue() + 1);
+						if (stack.getDamageValue() > 1960) {
+							stack.shrink(1);
+						}
+					}
+					LExplosiveProjectile shot = EntityRegistry.VACUUM_SHOT.get().create(level);
+					shot.setPos(player.getPosition(1f).add(0, player.getEyeHeight(), 0));
+					shot.shoot(player.getViewVector(1).x, player.getViewVector(1).y, player.getViewVector(1).z, 4, 0);
+					shot.pickup = Pickup.DISALLOWED;
+					level.addFreshEntity(shot);
+				}
+			} else {
+				stack.getOrCreateTag().putBoolean("using", false);
 			}
 		}
-		else
-			stack.getOrCreateTag().putBoolean("using", false);
 	}
 }

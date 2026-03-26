@@ -25,9 +25,7 @@ public class ClientboundHydrogenBombPacket {
 	}
 	
 	public void handle(Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.displayHydrogenBombParticles(entityId));
-		});
+		ctx.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientAccess.displayHydrogenBombParticles(entityId)));
 		ctx.get().setPacketHandled(true);
 	}
 }

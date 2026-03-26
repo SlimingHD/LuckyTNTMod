@@ -1,7 +1,7 @@
 package luckytnt.event;
 
+import java.util.BitSet;
 import java.util.List;
-import java.util.Random;
 
 import luckytnt.LevelVariables;
 import luckytnt.LuckyTNTMod;
@@ -11,6 +11,7 @@ import luckytnt.util.Materials;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.entity.LivingPrimedLTNT;
 import luckytntlib.entity.PrimedLTNT;
+import luckytntlib.util.RandomList;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,276 +23,262 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.levelgen.Heightmap.Types;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = LuckyTNTMod.MODID)
 public class LevelEvents {
+	
+	private static final RandomList<EntityType<?>> TNTS = new RandomList<>(
+		List.of(EntityRegistry.TNT_X20.get(), EntityRegistry.FIRE_TNT.get(), EntityRegistry.SNOW_TNT.get(), EntityRegistry.FREEZE_TNT.get(), EntityRegistry.ATTACKING_TNT.get(), EntityRegistry.BIG_TNT.get(), EntityRegistry.WALKING_TNT.get(), EntityRegistry.NUCLEAR_WASTE_TNT.get(), EntityRegistry.BOUNCING_TNT.get(), EntityRegistry.FARMING_TNT.get(), EntityRegistry.GROVE_TNT.get(), EntityRegistry.COMPACT_TNT.get(), EntityRegistry.RANDOM_TNT.get(), EntityRegistry.TNT_X5.get(), EntityRegistry.TNT.get()), 
+		List.of(1f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 1f, 1f, 16f, 70f)
+	);
 
 	@SubscribeEvent
 	public static void onLevelUpdate(TickEvent.LevelTickEvent event) {
-		Level level = event.level;
-		
-		List<? extends Player> players = level.players();
-		LevelVariables variables = LevelVariables.get(level);
-		if(event.phase == TickEvent.Phase.END && level.dimension() == Level.OVERWORLD) {
-			if(level instanceof ServerLevel sLevel) {
-				if(variables.doomsdayTime > 0)
-					variables.doomsdayTime--;
-				if(variables.toxicCloudsTime > 0)
-					variables.toxicCloudsTime--;
-				if(variables.iceAgeTime > 0)
-					variables.iceAgeTime--;
-				if(variables.heatDeathTime > 0)
-					variables.heatDeathTime--;
-				if(variables.tntRainTime > 0)
-					variables.tntRainTime--;
-				variables.sync(sLevel);
+		if (event.phase == Phase.START && event.side == LogicalSide.SERVER && event.level.dimension() == Level.OVERWORLD) {
+			ServerLevel server = (ServerLevel)event.level;
+			RandomSource random = server.getRandom();
+			LevelVariables variables = LevelVariables.get(server);
+			
+			if (variables.doomsdayTime > 0) {
+				variables.doomsdayTime--;
 			}
-			for(Player player : players) {
-				if(variables != null) {
-					double x = player.getX();
-					double y = player.getY();
-					double z = player.getZ();
-					if(variables.doomsdayTime > 0) {
-						for(int count = 0; count < 6; count++) {
-							Entity ent = EntityRegistry.HAILSTONE.get().create(level);
-							ent.setPos(x + Math.random() * 100 - Math.random() * 100, y + LuckyTNTConfigValues.DROP_HEIGHT.get() / 4 + Math.random() * LuckyTNTConfigValues.DROP_HEIGHT.get() / 4, z + Math.random() * 100 - Math.random() * 100);
-							level.addFreshEntity(ent);
-						}
-						if(Math.random() < 0.00675f * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()) {
-							LExplosiveProjectile ent = EntityRegistry.LITTLE_METEOR.get().create(level);
-							ent.setPos(x + Math.random() * 200 - Math.random() * 200, y + LuckyTNTConfigValues.DROP_HEIGHT.get(), z + Math.random() * 200 - Math.random() * 200);
-							level.addFreshEntity(ent);
-						}
-						if(Math.random() < 0.025f * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()) {
-							Entity ent = EntityRegistry.MINI_METEOR.get().create(level);
-							ent.setPos(x + Math.random() * 200 - Math.random() * 200, y + LuckyTNTConfigValues.DROP_HEIGHT.get(), z + Math.random() * 200 - Math.random() * 200);
-							level.addFreshEntity(ent);
-						}
-						if(Math.random() < 0.1f * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()) {
-							if(level instanceof ServerLevel) {
-								double offX = Math.random() * 200 - Math.random() * 200;
-								double offZ = Math.random() * 200 - Math.random() * 200;
-								for(double offY = 320; offY > -64; offY--) {
-									if(!level.getBlockState(new BlockPos(Mth.floor(x + offX), Mth.floor(offY), Mth.floor(z + offZ))).isAir()) {
-										Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT,  level);
-										lighting.setPos(x + offX, offY, z + offZ);
-										level.addFreshEntity(lighting);
-										break;
-									}
+			if (variables.toxicCloudsTime > 0) {
+				variables.toxicCloudsTime--;
+			}
+			if (variables.iceAgeTime > 0) {
+				variables.iceAgeTime--;
+			}
+			if (variables.heatDeathTime > 0) {
+				variables.heatDeathTime--;
+			}
+			if (variables.tntRainTime > 0) {
+				variables.tntRainTime--;
+			}
+			variables.sync(server);
+			
+			for (ServerPlayer player : server.players()) {
+				if (variables.doomsdayTime > 0) {
+					doomsdayDisaster(server, player, random);
+				}
+				if (variables.toxicCloudsTime > 0) {
+					toxicCloudsDisaster(server, player, random);
+				}
+				if (variables.iceAgeTime > 0) {
+					iceAgeDisaster(server, player, random);
+				}
+				if (variables.heatDeathTime > 0) {
+					heatDeathDisaster(server, player, random);
+				}
+				if (variables.tntRainTime > 0) {
+					tntRainDisaster(server, player, random, variables.tntRainTime);
+				}
+			}
+		}
+	}
+	
+	public static int getTopBlock(Level level, double x, double z, boolean ignoreLeaves) {
+		if (!level.isClientSide()) {
+			for (int y = level.getMaxBuildHeight(); y >= level.getMinBuildHeight(); y--) {
+				BlockPos pos = new BlockPos(Mth.floor(x), y, Mth.floor(z));
+				BlockPos posUp = new BlockPos(Mth.floor(x), y + 1, Mth.floor(z));
+				BlockState state = level.getBlockState(pos);
+				BlockState stateUp = level.getBlockState(posUp);
+				if (ignoreLeaves) {
+					if (state.isCollisionShapeFullBlock(level, pos) && !stateUp.isCollisionShapeFullBlock(level, posUp) && !state.is(BlockTags.LEAVES)) {
+						return y;
+					}
+				} else {
+					if (state.isCollisionShapeFullBlock(level, pos) && !stateUp.isCollisionShapeFullBlock(level, posUp)) {
+						return y;
+					}
+				}
+			}
+		}
+		return 0;
+	}
+	
+	private static void doomsdayDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
+		int dropHeight = LuckyTNTConfigValues.DROP_HEIGHT.get();
+		double intensity = LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get();
+		double x = player.getX();
+		double y = player.getY();
+		double z = player.getZ();
+		
+		for (int count = 0; count < 6; count++) {
+			Entity ent = EntityRegistry.HAILSTONE.get().create(server);
+			ent.setPos(x + random.nextDouble() * 200 - 100, y + dropHeight / 4 + random.nextDouble() * dropHeight / 4, z + random.nextDouble() * 200 - 100);
+			server.addFreshEntity(ent);
+		}
+		if (random.nextDouble() < 0.00675f * intensity) {
+			LExplosiveProjectile ent = EntityRegistry.LITTLE_METEOR.get().create(server);
+			ent.setPos(x + random.nextDouble() * 200 - random.nextDouble() * 200, y + dropHeight, z + random.nextDouble() * 200 - random.nextDouble() * 200);
+			server.addFreshEntity(ent);
+		}
+		if (random.nextDouble() < 0.025f * intensity) {
+			Entity ent = EntityRegistry.MINI_METEOR.get().create(server);
+			ent.setPos(x + random.nextDouble() * 400 - 200, y + dropHeight, z + random.nextDouble() * 400 - 200);
+			server.addFreshEntity(ent);
+		}
+		if (random.nextDouble() < 0.1f * intensity) {
+			int xVal = Mth.floor(x + random.nextDouble() * 400 - 200);
+			int zVal = Mth.floor(z + random.nextDouble() * 400 - 200);
+			int yVal = server.getHeight(Types.WORLD_SURFACE, xVal, zVal) + 1;
+			Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, server);
+			lighting.setPos(xVal + 0.5d, yVal, zVal + 0.5d);
+			server.addFreshEntity(lighting);
+		}
+	}
+	
+	private static void toxicCloudsDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
+		double x = player.getX();
+		double y = player.getY();
+		double z = player.getZ();
+		
+		if (random.nextDouble() < 0.005f * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()) {
+			BlockPos pos = new BlockPos(Mth.floor(x + random.nextDouble() * 200 - 100), Mth.floor(y + random.nextDouble() * 100 - 50), Mth.floor(z + random.nextDouble() * 200 - 100));
+			BlockState state = server.getBlockState(pos);
+			if (state.isAir() || !state.isCollisionShapeFullBlock(server, pos)) {
+				PrimedLTNT cloud = EntityRegistry.TOXIC_CLOUD.get().create(server);
+				cloud.setPos(pos.getX(), pos.getY(), pos.getZ());
+				server.addFreshEntity(cloud);
+			}
+		}
+	}
+	
+	private static void iceAgeDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
+		double x = player.getX();
+		double z = player.getZ();
+		BitSet emptySet = new BitSet(0);
+		
+		Registry<Biome> registry = server.registryAccess().registryOrThrow(Registries.BIOME);
+		Holder<Biome> biome = registry.getHolderOrThrow(Biomes.SNOWY_TAIGA);
+		for (int offX = -32; offX <= 32; offX += 16) {
+			for (int offZ = -32; offZ <= 32; offZ += 16) {
+				boolean needsUpdate = false;
+				LevelChunk chunk = server.getChunk(Mth.floor(x + offX) >> 4, Mth.floor(z + offZ) >> 4);
+				for (LevelChunkSection section : chunk.getSections()) {
+					for (int i = 0; i < 4; ++i) {
+						for (int j = 0; j < 4; ++j) {
+							for (int k = 0; k < 4; ++k) {
+								if (section.getBiomes().get(i, j, k).get() != biome.get() && section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container) {
+									container.getAndSetUnchecked(i, j, k, biome);
+									needsUpdate = true;
 								}
 							}
 						}
 					}
-					if(variables.toxicCloudsTime > 0) {
-						if(Math.random() < 0.005f * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()) {
-							BlockPos pos = new BlockPos(Mth.floor(x + Math.random() * 100 - Math.random() * 100), Mth.floor(y + Math.random() * 50 - Math.random() * 50), Mth.floor(z + Math.random() * 100 - Math.random() * 100));
-							if(!level.getBlockState(pos).isCollisionShapeFullBlock(level, pos) || level.getBlockState(pos).isAir()) {
-								PrimedLTNT cloud = EntityRegistry.TOXIC_CLOUD.get().create(level);
-								cloud.setPos(pos.getX(), pos.getY(), pos.getZ());
-								level.addFreshEntity(cloud);
-							}						
-						}
-					}
-					if(variables.iceAgeTime > 0) {
-						Registry<Biome> registry = level.registryAccess().registryOrThrow(Registries.BIOME);
-						Holder<Biome> biome = registry.wrapAsHolder(registry.getOrThrow(Biomes.SNOWY_TAIGA));
-						if(player instanceof ServerPlayer sPlayer) {	
-							for(double offX = -32; offX <= 32; offX += 16) {
-								for(double offZ = -32; offZ <= 32; offZ += 16) {
-									boolean needsUpdate = false;
-									for(LevelChunkSection section : level.getChunk(new BlockPos(Mth.floor(x + offX), 0, Mth.floor(z + offZ))).getSections()) {
-										for(int i = 0; i < 4; ++i) {
-											for(int j = 0; j < 4; ++j) {
-												for(int k = 0; k < 4; ++k) {
-													if(section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container && section.getBiomes().get(i, j, k).get() != level.registryAccess().registryOrThrow(Registries.BIOME).getOrThrow(Biomes.SNOWY_TAIGA)) {
-														container.getAndSetUnchecked(i, j, k, biome);
-														needsUpdate = true;
-													}
-												}
-											}
-										}
-									}
-									if(needsUpdate) {
-										sPlayer.connection.send(new ClientboundLevelChunkWithLightPacket(level.getChunkAt(new BlockPos(Mth.floor(x + offX), 0, Mth.floor(z + offZ))), level.getLightEngine(), null, null));
-									}
-								}
-							}
-						}
-					}
-					if(variables.heatDeathTime > 0) {
-						Registry<Biome> registry = level.registryAccess().registryOrThrow(Registries.BIOME);
-						Holder<Biome> biome = registry.wrapAsHolder(registry.getOrThrow(Biomes.DESERT));
-						if(player instanceof ServerPlayer sPlayer) {	
-							for(double offX = -32; offX <= 32; offX += 16) {
-								for(double offZ = -32; offZ <= 32; offZ += 16) {
-									boolean needsUpdate = false;
-									for(LevelChunkSection section : level.getChunk(new BlockPos(Mth.floor(x + offX), 0, Mth.floor(z + offZ))).getSections()) {
-										for(int i = 0; i < 4; ++i) {
-											for(int j = 0; j < 4; ++j) {
-												for(int k = 0; k < 4; ++k) {
-													if(section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container && section.getBiomes().get(i, j, k).get() != level.registryAccess().registryOrThrow(Registries.BIOME).getOrThrow(Biomes.DESERT)) {
-														container.getAndSetUnchecked(i, j, k, biome);
-														needsUpdate = true;
-													}
-												}
-											}
-										}
-									}
-									if(needsUpdate) {
-										sPlayer.connection.send(new ClientboundLevelChunkWithLightPacket(level.getChunkAt(new BlockPos(Mth.floor(x + offX), 0, Mth.floor(z + offZ))), level.getLightEngine(), null, null));
-									}
-								}
-							}
-							for(int i = 0; i < 1 + (int)(0.5D * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()); i++) {
-								int offX = new Random().nextInt(60) - 30;
-								int offZ = new Random().nextInt(60) - 30;
-								int posY = getTopBlock(sPlayer.level(), sPlayer.getX() + offX, sPlayer.getZ() + offZ, false);
-								BlockPos pos = new BlockPos(Mth.floor(sPlayer.getX() + offX), Mth.floor(posY + 1), Mth.floor(sPlayer.getZ() + offZ));
-								BlockState state = sPlayer.level().getBlockState(pos);
-								if((Materials.isPlant(state) || state.isAir()) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100) {
-									if(Math.random() > 0.1D) {
-										BlockHitResult result = new BlockHitResult(new Vec3(sPlayer.getX(), sPlayer.getY(), sPlayer.getZ()), Direction.UP, pos, false);
-										BlockPlaceContext ctx = new BlockPlaceContext(sPlayer, InteractionHand.MAIN_HAND, sPlayer.getItemInHand(InteractionHand.MAIN_HAND), result);
-										level.setBlock(pos, Blocks.FIRE.getStateForPlacement(ctx), 3);
-									} else {
-										level.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
-									}
-								}
-							}
-							for(int i = 0; i < 1 + (int)(0.5D * LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get()); i++) {
-								int offX = new Random().nextInt(60) - 30;
-								int offZ = new Random().nextInt(60) - 30;
-								int posY = getTopBlock(sPlayer.level(), sPlayer.getX() + offX, sPlayer.getZ() + offZ, true);
-								BlockPos pos = new BlockPos(Mth.floor(sPlayer.getX() + offX), posY, Mth.floor(sPlayer.getZ() + offZ));
-								BlockState state = sPlayer.level().getBlockState(pos);
-								if(state.is(Blocks.GRASS_BLOCK)) {
-									level.setBlock(pos, Math.random() > 0.5D ? Blocks.COARSE_DIRT.defaultBlockState() : Blocks.DIRT.defaultBlockState(), 3);
-								} else if(sPlayer.level().getBlockState(pos.above()).is(Blocks.WATER) && Math.random() > 0.6D) {
-									level.setBlock(pos, Blocks.MAGMA_BLOCK.defaultBlockState(), 3);
-								}
-							}
-							for(int offX = -30; offX < 30; offX += 2) {
-								for(int offZ = -30; offZ < 30; offZ += 2) {
-									int posY = getTopBlock(sPlayer.level(), sPlayer.getX() + offX, sPlayer.getZ() + offZ, true);
-									BlockPos pos = new BlockPos(Mth.floor(sPlayer.getX() + offX), posY + 1, Mth.floor(sPlayer.getZ() + offZ));
-									BlockState state = sPlayer.level().getBlockState(pos);
-									if((Materials.isPlant(state) || state.isAir()) && sPlayer.level().getBlockState(pos.below()).canSustainPlant(level, pos.below(), Direction.UP, (IPlantable)Blocks.DEAD_BUSH) && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
-										level.setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
-									}
-								}
-							}
-						}
-					}
-					if(variables.tntRainTime > 0) {
-						int i = 4;
-						if(LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().intValue() > 5) {
-							i = 3;
-						} else if(LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().intValue() > 10) {
-							i = 2;
-						} else if(LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().intValue() > 15) {
-							i = 1;
-						}
-						if (!level.isClientSide() && variables.tntRainTime % i == 0) {
-							Entity ent;
-							int rand = new Random().nextInt(100);
-							if (rand == 0) {
-								ent = EntityRegistry.TNT_X20.get().create(level);
-							} else if (rand > 4 && rand <= 6) {
-								ent = EntityRegistry.FIRE_TNT.get().create(level);
-							} else if (rand > 6 && rand <= 8) {
-								ent = EntityRegistry.SNOW_TNT.get().create(level);
-							} else if (rand > 8 && rand <= 10) {
-								ent = EntityRegistry.FREEZE_TNT.get().create(level);
-							} else if (rand > 10 && rand <= 12) {
-								ent = EntityRegistry.ATTACKING_TNT.get().create(level);
-							} else if (rand > 12 && rand <= 14) {
-								ent = EntityRegistry.BIG_TNT.get().create(level);
-							} else if (rand > 14 && rand <= 16) {
-								ent = EntityRegistry.WALKING_TNT.get().create(level);
-							} else if (rand > 16 && rand <= 18) {
-								ent = EntityRegistry.NUCLEAR_WASTE_TNT.get().create(level);
-							} else if (rand > 18 && rand <= 20) {
-								ent = EntityRegistry.BOUNCING_TNT.get().create(level);
-							} else if (rand > 20 && rand <= 22) {
-								ent = EntityRegistry.FARMING_TNT.get().create(level);
-							} else if (rand > 22 && rand <= 24) {
-								ent = EntityRegistry.GROVE_TNT.get().create(level);
-							} else if (rand > 24 && rand <= 26) {
-								ent = EntityRegistry.CUBIC_TNT.get().create(level);
-							} else if (rand > 26 && rand <= 28) {
-								ent = EntityRegistry.BUTTER_TNT.get().create(level);
-							} else if (rand > 28 && rand <= 30) {
-								ent = EntityRegistry.GROVE_TNT.get().create(level);
-							} else if (rand > 30 && rand <= 31) {
-								ent = EntityRegistry.COMPACT_TNT.get().create(level);
-							} else if (rand > 31 && rand <= 32) {
-								ent = EntityRegistry.RANDOM_TNT.get().create(level);
-							} else if (rand > 32 && rand <= 47) {
-								ent = EntityRegistry.TNT_X5.get().create(level);
-							} else {
-								ent = EntityRegistry.TNT.get().create(level);
-							}
-							ent.setPos(player.getX() + (Math.random() * 80D - 40D), player.getY() + 20D + Math.random() * 10D, player.getZ() + (Math.random() * 80D - 40D));
-							if(ent instanceof PrimedLTNT tnt) {
-								tnt.setFuse(120);
-							}
-							if(ent instanceof LivingPrimedLTNT tnt) {
-								tnt.setTNTFuse(120);
-							}
-							level.addFreshEntity(ent);
-						}
+				}
+				if (needsUpdate) {
+					for (ServerPlayer p : server.players()) {
+						p.connection.send(new ClientboundLevelChunkWithLightPacket(chunk, server.getLightEngine(), emptySet, emptySet));
 					}
 				}
 			}
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
-	public static int getTopBlock(Level level, double x, double z, boolean ignoreLeaves) {
-		if(!level.isClientSide) {
-			boolean blockFound = false;
-			int y = 0;
-			for(int offY = level.getMaxBuildHeight(); offY >= level.getMinBuildHeight(); offY--) {	
-				BlockPos pos = new BlockPos(Mth.floor(x), offY, Mth.floor(z));
-				BlockPos posUp = new BlockPos(Mth.floor(x), offY + 1, Mth.floor(z));
-				BlockState state = level.getBlockState(pos);
-				BlockState stateUp = level.getBlockState(posUp);				
-				if(state.getBlock().getExplosionResistance() < 200 && stateUp.getBlock().getExplosionResistance() < 200 && !blockFound) {
-					if(ignoreLeaves) {
-						if(state.isCollisionShapeFullBlock(level, pos) && !stateUp.isCollisionShapeFullBlock(level, posUp) && !state.is(BlockTags.LEAVES)) {
-							blockFound = true;
-							y = offY;
-						}	
-					} else {
-						if(state.isCollisionShapeFullBlock(level, pos) && !stateUp.isCollisionShapeFullBlock(level, posUp)) {
-							blockFound = true;
-							y = offY;
-						}	
+	private static void heatDeathDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
+		double intensity = LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get();
+		double x = player.getX();
+		double z = player.getZ();
+		BitSet emptySet = new BitSet(0);
+		
+		Registry<Biome> registry = server.registryAccess().registryOrThrow(Registries.BIOME);
+		Holder<Biome> biome = registry.getHolderOrThrow(Biomes.DESERT);
+		for (int offX = -32; offX <= 32; offX += 16) {
+			for (int offZ = -32; offZ <= 32; offZ += 16) {
+				boolean needsUpdate = false;
+				LevelChunk chunk = server.getChunk(Mth.floor(x + offX) >> 4, Mth.floor(z + offZ) >> 4);
+				for (LevelChunkSection section : chunk.getSections()) {
+					for (int i = 0; i < 4; ++i) {
+						for (int j = 0; j < 4; ++j) {
+							for (int k = 0; k < 4; ++k) {
+								if (section.getBiomes().get(i, j, k).get() != biome.get() && section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container) {
+									container.getAndSetUnchecked(i, j, k, biome);
+									needsUpdate = true;
+								}
+							}
+						}
+					}
+				}
+				if (needsUpdate) {
+					for (ServerPlayer p : server.players()) {
+						p.connection.send(new ClientboundLevelChunkWithLightPacket(chunk, server.getLightEngine(), emptySet, emptySet));
 					}
 				}
 			}
-			return y;
-		} else {
-			return 0;
+		}
+		
+		for (int i = 0; i < 1 + (int)(0.5d * intensity); i++) {
+			int offX = random.nextInt(60) - 30;
+			int offZ = random.nextInt(60) - 30;
+			int posY = getTopBlock(server, x + offX, z + offZ, false);
+			BlockPos pos = new BlockPos(Mth.floor(x + offX), Mth.floor(posY + 1), Mth.floor(z + offZ));
+			BlockState state = server.getBlockState(pos);
+			if ((Materials.isPlant(state) || state.isAir()) && state.getExplosionResistance(server, pos, ImprovedExplosion.dummyExplosion(server)) <= 100) {
+				if (random.nextDouble() > 0.1D) {
+					server.setBlock(pos, BaseFireBlock.getState(server, pos), 3);
+				} else {
+					server.setBlock(pos, Blocks.LAVA.defaultBlockState(), 3);
+				}
+			}
+		}
+		for (int i = 0; i < 1 + (int) (0.5d * intensity); i++) {
+			int offX = random.nextInt(60) - 30;
+			int offZ = random.nextInt(60) - 30;
+			int posY = getTopBlock(server, x + offX, z + offZ, true);
+			BlockPos pos = new BlockPos(Mth.floor(x + offX), posY, Mth.floor(z + offZ));
+			BlockState state = server.getBlockState(pos);
+			if (state.is(Blocks.GRASS_BLOCK)) {
+				server.setBlock(pos, random.nextDouble() > 0.5D ? Blocks.COARSE_DIRT.defaultBlockState() : Blocks.DIRT.defaultBlockState(), 3);
+			} else if (server.getBlockState(pos.above()).is(Blocks.WATER) && random.nextDouble() > 0.6D) {
+				server.setBlock(pos, Blocks.MAGMA_BLOCK.defaultBlockState(), 3);
+			}
+		}
+		for (int offX = -30; offX < 30; offX += 2) {
+			for (int offZ = -30; offZ < 30; offZ += 2) {
+				int posY = getTopBlock(server, x + offX, z + offZ, true);
+				BlockPos pos = new BlockPos(Mth.floor(x + offX), posY + 1, Mth.floor(z + offZ));
+				BlockState state = server.getBlockState(pos);
+				if ((Materials.isPlant(state) || state.isAir()) && server.getBlockState(pos.below()).canSustainPlant(server, pos.below(), Direction.UP, (IPlantable)Blocks.DEAD_BUSH) && state.getExplosionResistance(server, pos, ImprovedExplosion.dummyExplosion(server)) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
+					server.setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
+				}
+			}
+		}
+	}
+	
+	private static void tntRainDisaster(ServerLevel server, ServerPlayer player, RandomSource random, int tntRainTime) {
+		int i = 4 - LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().intValue() / 3;
+		if (tntRainTime % i == 0) {
+			Entity ent = TNTS.getRandomItem(random).create(server);
+			ent.setPos(player.getX() + random.nextDouble() * 80d - 40d, player.getY() + 20d + random.nextDouble() * 10d, player.getZ() + random.nextDouble() * 80d - 40d);
+			if (ent instanceof PrimedLTNT tnt) {
+				tnt.setFuse(120);
+			}
+			if (ent instanceof LivingPrimedLTNT tnt) {
+				tnt.setTNTFuse(120);
+			}
+			server.addFreshEntity(ent);
 		}
 	}
 }
