@@ -11,28 +11,27 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
-public class PulseDynamiteEffect extends PrimedTNTEffect{
+public class PulseDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
 		if(entity instanceof LExplosiveProjectile ent) {
-			if(ent.inGround()) {
+			if (ent.inGround()) {
 				ent.getPersistentData().putBoolean("hitBefore", true);
 			}
-			if(ent.getTNTFuse() == 0) {
+			if (ent.getTNTFuse() == 0) {
 				ent.destroy();
 			}
-			if(ent.inGround() || ent.getPersistentData().getBoolean("hitBefore")) {
+			if (ent.inGround() || ent.getPersistentData().getBoolean("hitBefore")) {
 				explosionTick(ent);
 				ent.setTNTFuse(ent.getTNTFuse() - 1);
 			}
-			if(level.isClientSide) {
+			if (level.isClientSide) {
 				spawnParticles(entity);
 			}
 		}
@@ -40,16 +39,18 @@ public class PulseDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
+		Entity ent = (Entity)entity;
 		Level level = entity.getLevel();
 		if (entity.getTNTFuse() <= 185) {
-			((Entity)entity).setDeltaMovement(0, 0, 0);
-			((Entity)entity).setPos(((Entity) entity).getPosition(0f));
+			ent.setDeltaMovement(0, 0, 0);
+			ent.setPos(ent.getPosition(0f));
 			if (entity.getTNTFuse() % 20 == 0) {
 				if (entity.getLevel() instanceof ServerLevel) {
-					ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), entity.getPersistentData().getInt("strength"));
+					ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), ent, entity.getPos(), entity.getPersistentData().getInt("strength"));
 					explosion.doEntityExplosion(1f, true);
-					explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
-					level.playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+					explosion.spawnExplosionParticles();
+					level.playSound(ent, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2f) * 0.7f);
 					entity.getPersistentData().putInt("strength", entity.getPersistentData().getInt("strength") + 1);
 				}
 			}
@@ -59,7 +60,7 @@ public class PulseDynamiteEffect extends PrimedTNTEffect{
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		double phi = Math.PI * (3f - Math.sqrt(5f));
-		for(int i = 0; i < 200; i++) {
+		for (int i = 0; i < 200; i++) {
 			double y = 1f - ((double)i / (200f - 1f)) * 2f;
 			double radius = Math.sqrt(1f - y * y);
 			

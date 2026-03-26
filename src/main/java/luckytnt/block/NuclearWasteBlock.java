@@ -55,7 +55,7 @@ public class NuclearWasteBlock extends FallingBlock {
 		if (Block.isFaceFull(level.getBlockState(posDown).getCollisionShape(level, posDown), Direction.UP) || level.getBlockState(posDown).isAir()){
 			return true;
 		}
-		return super.canSurvive(state, level, pos);
+		return false;
 	}
 	
 	@Override

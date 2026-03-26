@@ -10,20 +10,23 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 
-public class ChristmasDynamiteProjectileEffect extends PrimedTNTEffect{
+public class ChristmasDynamiteProjectileEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
+		RandomSource random = entity.getLevel().getRandom();
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 		explosion.doEntityExplosion(0.75f, true);
-		explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
-		((ServerLevel)entity.getLevel()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + Math.random() - 0.5f, entity.z() + Math.random() - 0.5f, 100, 0.5f, 0.5f, 0.5f, 0f);
+		explosion.doImprovedBlockExplosion(1f, 1f, false, false, null);
+		explosion.spawnExplosionParticles();
+		((ServerLevel)entity.getLevel()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + random.nextDouble() - 0.5d, entity.y() + random.nextDouble() - 0.5d, entity.z() + random.nextDouble() - 0.5d, 100, 0.5f, 0.5f, 0.5f, 0f);
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
+		RandomSource random = entity.getLevel().getRandom();
 		for(int i = 0; i < 7; i++) {
-			entity.getLevel().addParticle(ParticleTypes.WAX_OFF, true, entity.x() + Math.random() - 0.5f, entity.y() + Math.random() - 0.5f, entity.z() + Math.random() - 0.5f, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.WAX_OFF, true, entity.x() + random.nextDouble() - 0.5d, entity.y() + random.nextDouble() - 0.5d, entity.z() + random.nextDouble() - 0.5d, 0, 0, 0);
 		}
 	}
 	

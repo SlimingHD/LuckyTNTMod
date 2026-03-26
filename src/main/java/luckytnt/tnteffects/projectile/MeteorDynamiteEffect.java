@@ -9,7 +9,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.Item;
 
-public class MeteorDynamiteEffect extends PrimedTNTEffect{
+public class MeteorDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {

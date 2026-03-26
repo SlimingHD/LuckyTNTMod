@@ -11,37 +11,35 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 
-public class HomingDynamiteEffect extends PrimedTNTEffect{
+public class HomingDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 20);
 		explosion.doEntityExplosion(1.5f, true);
-		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+		explosion.spawnExplosionParticles();
 	}
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(entity.getTNTFuse() < 390) {
+		if (entity.getTNTFuse() < 390) {
 			Entity target = entity.getLevel().getEntity(entity.getPersistentData().getInt("targetID"));
-			if(target == null) {
+			if (target == null) {
 				target = setTarget(entity);
-			}
-			else {
-				Vec3 movement = target.getPosition(1f).subtract(entity.getPos()).normalize();
-				((Entity)entity).setDeltaMovement(movement);
-				if(entity.getLevel() instanceof ServerLevel server) {
-					for(ServerPlayer splayer : server.players()) {
-						splayer.connection.send(new ClientboundSetEntityMotionPacket(((Entity)entity).getId(), ((Entity)entity).getDeltaMovement()));
+			} else {
+				Entity ent = (Entity)entity;
+				ent.setDeltaMovement(target.getPosition(1f).subtract(entity.getPos()).normalize());
+				if (entity.getLevel() instanceof ServerLevel server) {
+					for (ServerPlayer splayer : server.players()) {
+						splayer.connection.send(new ClientboundSetEntityMotionPacket(ent.getId(), ent.getDeltaMovement()));
 					}
 				}
 			}
@@ -53,21 +51,20 @@ public class HomingDynamiteEffect extends PrimedTNTEffect{
 		Level level = entity.getLevel();
 		Entity target = null;
 		List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-100, -100, -100), entity.getPos().add(100, 100, 100)));
-		double distance = Math.sqrt(20000);
-		for(Player player : players) {
+		double distance = Double.MAX_VALUE;
+		for (Player player : players) {
 			double entityDistance = entity.getPos().distanceTo(player.getPosition(1f));
-			if(!player.equals(entity.owner()) && entityDistance <= distance) {
+			if (!player.equals(entity.owner()) && entityDistance <= distance) {
 				entity.getPersistentData().putInt("targetID", player.getId());
 				distance = entityDistance;
 				target = player;
 			}
 		}
-		if(target == null) {
-			distance = Math.sqrt(20000);
+		if (target == null) {
 			List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, new AABB(entity.getPos().add(-100, -100, -100), entity.getPos().add(100, 100, 100)));
-			for(LivingEntity ent : livingEntities) {
+			for (LivingEntity ent : livingEntities) {
 				double entityDistance = entity.getPos().distanceTo(ent.getPosition(1f));
-				if(!ent.equals(entity.owner()) && entityDistance <= distance) {
+				if (!ent.equals(entity.owner()) && entityDistance <= distance) {
 					entity.getPersistentData().putInt("targetID", ent.getId());
 					distance = entityDistance;
 					target = ent;

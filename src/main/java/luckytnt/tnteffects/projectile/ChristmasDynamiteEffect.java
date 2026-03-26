@@ -1,7 +1,5 @@
 package luckytnt.tnteffects.projectile;
 
-import java.util.Random;
-
 import org.joml.Math;
 
 import luckytnt.registry.EntityRegistry;
@@ -19,24 +17,24 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class ChristmasDynamiteEffect extends PrimedTNTEffect{
+public class ChristmasDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
-		if(entity instanceof LExplosiveProjectile ent) {
-			if(ent.inGround() && ent.getTNTFuse() < 60) {
-				if(level instanceof ServerLevel) {
+		if (entity instanceof LExplosiveProjectile ent) {
+			if (ent.inGround() && ent.getTNTFuse() < 60) {
+				if (level instanceof ServerLevel) {
 					level.playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
 					serverExplosion(ent);
 				}
 				ent.destroy();
 			}
-			if(ent.getTNTFuse() > 0) {
+			if (ent.getTNTFuse() > 0) {
 				explosionTick(ent);
 				ent.setTNTFuse(ent.getTNTFuse() - 1);
 			}
-			if(level.isClientSide) {
+			if (level.isClientSide) {
 				spawnParticles(entity);
 			}
 		}
@@ -51,26 +49,26 @@ public class ChristmasDynamiteEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(entity.getTNTFuse() == 220) {
-			entity.getPersistentData().putDouble("vecx", ((Entity)entity).getDeltaMovement().x);
-			entity.getPersistentData().putDouble("vecz", ((Entity)entity).getDeltaMovement().z);
+		Entity ent = (Entity)entity;
+		Level level = entity.getLevel();
+		if (entity.getTNTFuse() > 220) {
+			ent.setDeltaMovement(ent.getDeltaMovement().add(0f, 0.08f, 0f));
 		}
-		if(entity.getTNTFuse() <= 220 && entity.getTNTFuse() > 60) {
-			((Entity)entity).setDeltaMovement(new Vec3(entity.getPersistentData().getDouble("vecx"), 0, entity.getPersistentData().getDouble("vecz")).normalize().scale(0.25f));
-			if(entity.getTNTFuse() % 20 == 0) {
+		if (entity.getTNTFuse() == 220) {
+			entity.getPersistentData().putDouble("vecx", ent.getDeltaMovement().x);
+			entity.getPersistentData().putDouble("vecz", ent.getDeltaMovement().z);
+		}
+		if (entity.getTNTFuse() <= 220 && entity.getTNTFuse() > 60) {
+			ent.setDeltaMovement(new Vec3(entity.getPersistentData().getDouble("vecx"), 0, entity.getPersistentData().getDouble("vecz")).normalize().scale(0.25f));
+			if (entity.getTNTFuse() % 20 == 0) {
 				LExplosiveProjectile dynamite = EntityRegistry.CHRISTMAS_DYNAMITE_PROJECTILE.get().create(entity.getLevel());
 				dynamite.setPos(entity.getPos());
 				dynamite.setOwner(entity.owner());
-				double randomX = Math.random();
-				randomX *= new Random().nextBoolean() ? 1 : -1;
-				double randomZ = Math.random();
-				randomZ *= new Random().nextBoolean() ? 1 : -1;
-				dynamite.setDeltaMovement(randomX, -Math.random() * 0.5f, randomZ);
+				double randomX = level.getRandom().nextDouble() * (level.getRandom().nextBoolean() ? 1 : -1);
+				double randomZ = level.getRandom().nextDouble() * (level.getRandom().nextBoolean() ? 1 : -1);
+				dynamite.setDeltaMovement(randomX, level.getRandom().nextDouble() * -0.5f, randomZ);
 				entity.getLevel().addFreshEntity(dynamite);
 			}
-		}
-		else if(entity.getTNTFuse() > 60){
-			((Entity)entity).setDeltaMovement(((Entity)entity).getDeltaMovement().add(0f, 0.08f, 0f));
 		}
 	}
 	
@@ -79,16 +77,6 @@ public class ChristmasDynamiteEffect extends PrimedTNTEffect{
 		for(int i = 0; i < 7; i++) {
 			entity.getLevel().addParticle(ParticleTypes.WAX_OFF, true, entity.x() + Math.random() - 0.5f, entity.y() + Math.random() - 0.5f, entity.z() + Math.random() - 0.5f, 0, 0, 0);
 		}
-	}
-	
-	@Override
-	public boolean explodesOnImpact() {
-		return false;
-	}
-	
-	@Override
-	public boolean airFuse() {
-		return true;
 	}
 	
 	@Override

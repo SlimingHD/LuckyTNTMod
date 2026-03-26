@@ -4,23 +4,23 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-public class ShrapnelEffect extends PrimedTNTEffect{
+public class ShrapnelEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 3);
 		explosion.doEntityExplosion(0.5f, true);
-		explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
+		explosion.doImprovedBlockExplosion(1f, 1f, false, false, null);
+		explosion.spawnExplosionParticles();
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.getLevel().addParticle(ParticleTypes.CLOUD, true, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0, 0);
+		entity.getLevel().addParticle(ParticleTypes.CLOUD, true, entity.x(), entity.y() + 0.5d, entity.z(), 0, 0, 0);
 	}
 	
 	@Override

@@ -11,29 +11,30 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec3;
 
-public class ClusterDynamiteEffect extends PrimedTNTEffect{
+public class ClusterDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		if(entity instanceof LExplosiveProjectile dynamite) {
-			if(!dynamite.inGround()) {
-				for(int count = 0; count < 75; count++) {
+		if (entity instanceof LExplosiveProjectile dynamite) {
+			RandomSource random = entity.getLevel().getRandom();
+			if (!dynamite.inGround()) {
+				for (int count = 0; count < 75; count++) {
 					LExplosiveProjectile shrapnel = EntityRegistry.SHRAPNEL.get().create(entity.getLevel());
 					shrapnel.setPos(entity.getPos());
 					shrapnel.setOwner(entity.owner());
-					shrapnel.setDeltaMovement(dynamite.getDeltaMovement().add(new Vec3(Math.random() - Math.random(), Math.random() - Math.random(), Math.random() - Math.random()).scale(0.4f)));
+					shrapnel.setDeltaMovement(dynamite.getDeltaMovement().add(new Vec3(random.nextDouble() * 2d - 1d, random.nextDouble() * 2d - 1d, random.nextDouble() * 2d - 1d).scale(0.4f)));
 					entity.getLevel().addFreshEntity(shrapnel);
 				}
-			}
-			else {
+			} else {
 				ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 8);
 				explosion.doEntityExplosion(1f, true);
-				explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
-				for(int count = 0; count < 50; count++) {
+				explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+				explosion.spawnExplosionParticles();
+				for (int count = 0; count < 50; count++) {
 					LExplosiveProjectile shrapnel = EntityRegistry.SHRAPNEL.get().create(entity.getLevel());
 					shrapnel.setPos(entity.getPos());
 					shrapnel.setOwner(entity.owner());
-					shrapnel.setDeltaMovement(dynamite.getDeltaMovement().add(Math.random() * 2f - 1f, Math.random() * 2f - 1f, Math.random() * 2f - 1f).scale(-1f));
+					shrapnel.setDeltaMovement(dynamite.getDeltaMovement().add(random.nextDouble() * 2d - 1d, random.nextDouble() * 2d - 1d, random.nextDouble() * 2d - 1d).scale(-1f));
 					entity.getLevel().addFreshEntity(shrapnel);
 				}
 			}

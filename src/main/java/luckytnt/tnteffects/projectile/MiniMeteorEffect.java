@@ -6,7 +6,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-public class MiniMeteorEffect extends PrimedTNTEffect{
+public class MiniMeteorEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {

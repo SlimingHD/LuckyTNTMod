@@ -4,28 +4,29 @@ import luckytnt.registry.ItemRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 
-public class UltralightDynamiteEffect extends PrimedTNTEffect{
+public class UltralightDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
 		explosion.doEntityExplosion(1.5f, true);
-		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+		explosion.spawnExplosionParticles();
 	}
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(!((Entity)entity).isNoGravity()) {
-			((Entity)entity).setNoGravity(true);
-			entity.getPersistentData().putDouble("vecx", ((Entity)entity).getDeltaMovement().x);
-			entity.getPersistentData().putDouble("vecy", ((Entity)entity).getDeltaMovement().y);
-			entity.getPersistentData().putDouble("vecz", ((Entity)entity).getDeltaMovement().z);
+		Entity ent = (Entity)entity;
+		if(!ent.isNoGravity()) {
+			ent.setNoGravity(true);
+			entity.getPersistentData().putDouble("vecx", ent.getDeltaMovement().x);
+			entity.getPersistentData().putDouble("vecy", ent.getDeltaMovement().y);
+			entity.getPersistentData().putDouble("vecz", ent.getDeltaMovement().z);
 		}
-		((Entity)entity).setDeltaMovement(entity.getPersistentData().getDouble("vecx"), entity.getPersistentData().getDouble("vecy"), entity.getPersistentData().getDouble("vecz"));
+		ent.setDeltaMovement(entity.getPersistentData().getDouble("vecx"), entity.getPersistentData().getDouble("vecy"), entity.getPersistentData().getDouble("vecz"));
 	}
 	
 	@Override

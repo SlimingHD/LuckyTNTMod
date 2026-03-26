@@ -10,20 +10,28 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class DiggingDynamiteEffect extends PrimedTNTEffect{
+public class DiggingDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 2);
+		explosion.spawnExplosionParticles();
+		
 		Vec3 direction = entity.getPos().subtract(((Entity)entity).xOld, ((Entity)entity).yOld, ((Entity)entity).zOld).normalize();
-		explosion: for(float length = 0; length <= 40; length += 0.25f) {
-			BlockPos pos = toBlockPos(entity.getPos().add(direction.scale(length))); 
+		float vectorLength = 120f;
+		BlockPos lastPos = null;
+		for (float step = 0; step <= vectorLength; step += 0.225f) {
+			BlockPos pos = toBlockPos(entity.getPos().add(direction.scale(step)));
+			if (pos == lastPos) {
+				continue;
+			}
+			lastPos = pos;
 			BlockState state = entity.getLevel().getBlockState(pos);
-			if(state.getExplosionResistance(entity.getLevel(), pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100) {
-				state.onBlockExploded(entity.getLevel(), pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
+			vectorLength -= state.getExplosionResistance(entity.getLevel(), pos, explosion);
+			if (step > vectorLength) {
+				break;
 			}
-			else {
-				break explosion;
-			}
+			state.onBlockExploded(entity.getLevel(), pos, explosion);
 		}
 	}
 	

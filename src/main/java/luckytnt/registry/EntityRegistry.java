@@ -25,6 +25,7 @@ import luckytnt.tnteffects.projectile.AnimalDynamiteEffect;
 import luckytnt.tnteffects.projectile.BigDynamiteEffect;
 import luckytnt.tnteffects.projectile.BombEffect;
 import luckytnt.tnteffects.projectile.ChemicalDynamiteEffect;
+import luckytnt.tnteffects.projectile.ChemicalProjectileEffect;
 import luckytnt.tnteffects.projectile.ChicxulubMeteorEffect;
 import luckytnt.tnteffects.projectile.ChristmasDynamiteEffect;
 import luckytnt.tnteffects.projectile.ChristmasDynamiteProjectileEffect;
@@ -498,7 +499,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> SPIRAL_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("spiral_projectile", new StackedPrimedTNTEffect(new SpiralTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.build())));
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ERUPTING_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("erupting_projectile", new StackedPrimedTNTEffect(new EruptingTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.fire(true).build())), 1f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> MINI_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("mini_meteor", new StackedPrimedTNTEffect(new MiniMeteorEffect(), Collections.singletonList(new TNTXStrengthEffect.Builder().strength(7).randomVecLength(1.25f).fire(true).build())), 1f, false);
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHEMICAL_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("chemical_projectile", new ChemicalTNTEffect());
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHEMICAL_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("chemical_projectile", new ChemicalProjectileEffect());
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CLUSTER_BOMB = LuckyTNTMod.RH.registerExplosiveProjectile("cluster_bomb", new ClusterBombEffect());
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> SHRAPNEL = LuckyTNTMod.RH.registerExplosiveProjectile("shrapnel", new ShrapnelEffect(), 0.25f, true);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> BOMB = LuckyTNTMod.RH.registerExplosiveProjectile("bomb", new BombEffect());

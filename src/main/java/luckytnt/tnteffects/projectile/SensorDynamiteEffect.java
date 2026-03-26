@@ -12,26 +12,26 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
-public class SensorDynamiteEffect extends PrimedTNTEffect{
+public class SensorDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
 		if(level instanceof ServerLevel) {
-			List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-5f, -5f, -5f), entity.getPos().add(5f, 5f, 5f)));
+			List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-5d, -5d, -5d), entity.getPos().add(5d, 5d, 5d)));
 			for(Player player : players) {
 				if(!player.equals(entity.owner())) {
 					ImprovedExplosion explosion = new ImprovedExplosion(level, entity.getPos(), 5);
 					explosion.doEntityExplosion(1f, true);
-					explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
-					level.playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+					explosion.spawnExplosionParticles();
+					level.playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2f) * 0.7f);
 					entity.destroy();
 				}
 			}

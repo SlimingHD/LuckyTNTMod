@@ -7,62 +7,39 @@ import org.joml.Vector3f;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
-import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
+import luckytntlib.util.explosions.rules.DistanceExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
+import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
-public class DisintegratingProjectileEffect extends PrimedTNTEffect {
-
-	@Override
-	public void baseTick(IExplosiveEntity entity) {
-		if(!entity.getLevel().isClientSide()) {
-			explosionTick(entity);
-		} else {
-			spawnParticles(entity);
-		}
-		entity.setTNTFuse(entity.getTNTFuse() - 1);
-		if(entity.getTNTFuse() <= 0) {
-			entity.destroy();
-		}
+public class DisintegratingProjectileEffect extends ChemicalProjectileEffect {
+	
+	public DisintegratingProjectileEffect() {
+		super(12, 10);
 	}
 	
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() == 0) {
-			ent.getLevel().playSound(null, toBlockPos(ent.getPos()), SoundEvents.FIRE_EXTINGUISH, SoundSource.MASTER, 1f, 1f);
+	public void explosionTick(IExplosiveEntity entity) {
+		super.explosionTick(entity);
+		if (!entity.getLevel().isClientSide()) {
+			ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 13, 200, DistanceExplosionRule.greaterEqual(11,
+					FilterBlockExplosionRule.applyOnlyWhen(Blocks.STONE,
+							new FilterRandomExplosionRule(0.01f,
+									new SimpleExplosionRule(BlockRegistry.TOXIC_STONE.get().defaultBlockState())
+							)
+					)
+			));
 		}
-		if(!ent.getLevel().isClientSide()) {
-			ExplosionHelper.doCubicalExplosion(ent.getLevel(), ent.getPos(), 12, new IForEachBlockExplosionEffect() {
-					
-				@Override
-				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-					if(distance < (10D + (Math.random() * 2))) {
-						if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200) {
-							state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-						}
-					} else if(distance > 11 && distance <= 13) {
-						if(state.getBlock() == Blocks.STONE && Math.random() < 0.01D) {
-							level.setBlock(pos, BlockRegistry.TOXIC_STONE.get().defaultBlockState(), 3);
-						}
-					}
-				}
-			});
-		}
-		if(ent.getTNTFuse() % 20 == 0) {
-			List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-6, -6, -6), toBlockPos(ent.getPos()).offset(6, 6, 6)));
-			DamageSources sources = new DamageSources(ent.getLevel().registryAccess());
-			for(LivingEntity lent : list) {
+		if (entity.getTNTFuse() % 20 == 0) {
+			List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(entity.getPos()).offset(-6, -6, -6), toBlockPos(entity.getPos()).offset(6, 6, 6)));
+			DamageSources sources = new DamageSources(entity.getLevel().registryAccess());
+			for (LivingEntity lent : list) {
 				lent.hurt(sources.magic(), 5f);
 			}
 		}

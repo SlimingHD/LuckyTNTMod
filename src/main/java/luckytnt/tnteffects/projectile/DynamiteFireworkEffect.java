@@ -6,18 +6,20 @@ import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 
-public class DynamiteFireworkEffect extends PrimedTNTEffect{
+public class DynamiteFireworkEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		for(int count = 0; count <= 300; count++) {
+		RandomSource random = entity.getLevel().getRandom();
+		for (int count = 0; count <= 300; count++) {
 			LExplosiveProjectile dynamite = EntityRegistry.DYNAMITE.get().create(entity.getLevel());
 			dynamite.setPos(entity.getPos());
 			dynamite.setOwner(dynamite.owner());
-			dynamite.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f - 1f, Math.random() * 2f - 1f);
+			dynamite.setDeltaMovement(random.nextDouble() * 2d - 1d, random.nextDouble() * 2d - 1d, random.nextDouble() * 2d - 1d);
 			entity.getLevel().addFreshEntity(dynamite);
 		}
 	}

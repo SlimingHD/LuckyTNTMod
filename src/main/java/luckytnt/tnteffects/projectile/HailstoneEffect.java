@@ -9,7 +9,6 @@ public class HailstoneEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		
 	}
 	
 	@Override

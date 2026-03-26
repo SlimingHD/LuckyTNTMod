@@ -13,8 +13,8 @@ import net.minecraft.world.phys.Vec3;
 public class RingDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		Vec3 vec = ((Entity)ent).getDeltaMovement().normalize().scale(4D);
+	public void serverExplosion(IExplosiveEntity entity) {
+		Vec3 vec = ((Entity)entity).getDeltaMovement().normalize().scale(4d);
 		
 		Vec3 left = (int)Math.round(vec.x) == 0 && (int)Math.round(vec.z) == 0 ? new Vec3(1, 0, 0) : new Vec3(vec.x * Math.cos(0.5 * Math.PI) + vec.z * Math.sin(0.5 * Math.PI), 0, -vec.x * Math.sin(0.5 * Math.PI) + vec.z * Math.cos(0.5 * Math.PI)).normalize();
 		Vec3 right = left.reverse().normalize();
@@ -38,11 +38,11 @@ public class RingDynamiteEffect extends PrimedTNTEffect {
 		array[8] = vec.add(leftup).normalize();
 		
 		for(int i = 1; i <= 8; i++) {
-			LExplosiveProjectile dynamite = EntityRegistry.DYNAMITE.get().create(ent.getLevel());
-			dynamite.setOwner(ent.owner());
-			dynamite.setPos(ent.getPos());
-			dynamite.setDeltaMovement(array[i].scale(2D));
-			ent.getLevel().addFreshEntity(dynamite);
+			LExplosiveProjectile dynamite = EntityRegistry.DYNAMITE.get().create(entity.getLevel());
+			dynamite.setOwner(entity.owner());
+			dynamite.setPos(entity.getPos());
+			dynamite.setDeltaMovement(array[i].scale(2d));
+			entity.getLevel().addFreshEntity(dynamite);
 		}
 	}
 	
@@ -52,7 +52,7 @@ public class RingDynamiteEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 1;
 	}
 	

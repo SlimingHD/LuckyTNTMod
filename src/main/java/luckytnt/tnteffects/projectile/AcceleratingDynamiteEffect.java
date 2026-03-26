@@ -5,24 +5,25 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 
-public class AcceleratingDynamiteEffect extends PrimedTNTEffect{
+public class AcceleratingDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), (int)Math.round(2f * Mth.clamp(entity.getPersistentData().getDouble("speed"), 1f, 20f)));
 		explosion.doEntityExplosion(1.5f, true);
-		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+		explosion.spawnExplosionParticles();
 	}
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		((Entity)entity).setDeltaMovement(((Entity)entity).getDeltaMovement().add(((Entity)entity).getDeltaMovement().scale(0.05f)));
-		if(((Entity)entity).getDeltaMovement().length() > entity.getPersistentData().getDouble("speed")) {
-			entity.getPersistentData().putDouble("speed", ((Entity)entity).getDeltaMovement().length());
+		Entity ent = (Entity)entity;
+		ent.setDeltaMovement(ent.getDeltaMovement().scale(1.05f));
+		if (ent.getDeltaMovement().length() > entity.getPersistentData().getDouble("speed")) {
+			entity.getPersistentData().putDouble("speed", ent.getDeltaMovement().length());
 		}
 	}
 	

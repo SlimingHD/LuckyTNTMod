@@ -8,26 +8,25 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
-public class EruptingDynamiteEffect extends PrimedTNTEffect{
+public class EruptingDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
-		if(entity instanceof LExplosiveProjectile ent) {
-			if(ent.inGround()) {
-				ent.getPersistentData().putBoolean("hitBefore", true);
-			}
-			if(ent.getTNTFuse() == 0) {
+		if (entity instanceof LExplosiveProjectile ent) {
+			if (ent.getTNTFuse() == 0) {
 				ent.destroy();
 			}
-			if(ent.inGround() || ent.getPersistentData().getBoolean("hitBefore")) {
+			if (ent.inGround() || ent.getPersistentData().getBoolean("hitBefore")) {
+				ent.getPersistentData().putBoolean("hitBefore", true);
 				explosionTick(ent);
 				ent.setTNTFuse(ent.getTNTFuse() - 1);
 			}
-			if(level.isClientSide) {
+			if (level.isClientSide()) {
 				spawnParticles(entity);
 			}
 		}
@@ -36,11 +35,12 @@ public class EruptingDynamiteEffect extends PrimedTNTEffect{
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
-		if(entity.getTNTFuse() < 15 && entity.getTNTFuse() % 3 == 0) {
+		RandomSource random = level.getRandom();
+		if (entity.getTNTFuse() < 15 && entity.getTNTFuse() % 3 == 0) {
 			LExplosiveProjectile erupting_tnt = EntityRegistry.ERUPTING_PROJECTILE.get().create(level);
 			erupting_tnt.setPos(entity.getPos());
 			erupting_tnt.setOwner(entity.owner());
-			erupting_tnt.shoot((Math.random() * 2D - 1D) * 0.1f, 0.6f + Math.random() * 0.4f, (Math.random() * 2D - 1D) * 0.1f, 2f + level.random.nextFloat(), 0f);	
+			erupting_tnt.shoot((random.nextDouble() * 2d - 1d) * 0.1d, 0.6d + random.nextDouble() * 0.4d, (random.nextDouble() * 2d - 1d) * 0.1d, 2f + random.nextFloat(), 0f);	
 			erupting_tnt.setSecondsOnFire(1000);
 			level.addFreshEntity(erupting_tnt);
 			level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.MASTER, 3, 1);

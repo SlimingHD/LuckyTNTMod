@@ -11,14 +11,14 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 
-public class SpiralDynamiteEffect extends PrimedTNTEffect{
+public class SpiralDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		Entity ent = (Entity)entity;
 		ent.setDeltaMovement(ent.getDeltaMovement().add(0f, 0.08f, 0f));
-		if(entity.getTNTFuse() < 30) {
-			if(entity.getTNTFuse() % 3 == 0) {
+		if (entity.getTNTFuse() < 30) {
+			if (entity.getTNTFuse() % 3 == 0) {
 				ent.setXRot(180f);
 				ent.setYRot(ent.getPersistentData().getFloat("angle") + 30f);
 				ent.getPersistentData().putFloat("angle", ent.getYRot());

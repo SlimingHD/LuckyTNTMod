@@ -1,19 +1,23 @@
 package luckytnt.tnteffects.projectile;
 
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.RandomList;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.CraterExplosionRule;
+import luckytntlib.util.explosions.rules.DistanceExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterRandomDistanceExplosionRule;
+import luckytntlib.util.explosions.rules.RandomBlockExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class IceMeteorEffect extends PrimedTNTEffect{
+public class IceMeteorEffect extends PrimedTNTEffect {
 	
 	private final int strength;
 	private final float size;
@@ -27,23 +31,19 @@ public class IceMeteorEffect extends PrimedTNTEffect{
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), strength);
 		explosion.doEntityExplosion(3, true);
-		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(!state.isAir()) {
-					if(distance <= (strength - strength / 8) && state.getExplosionResistance(level, pos, explosion) <= 100) {
-						state.onBlockExploded(level, pos, explosion);
-					}
-					else if(Math.random() < 0.6f && state.getExplosionResistance(level, pos, explosion) <= 100) {
-						state.onBlockExploded(level, pos, explosion);
-						if(Math.random() < 0.25f) {
-							level.setBlockAndUpdate(pos, Math.random() < 0.5f ? Blocks.BLUE_ICE.defaultBlockState() : Blocks.PACKED_ICE.defaultBlockState());
-						}
-					}
-				}
-			}
-		});
+		explosion.spawnExplosionParticles();
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), strength, 100, new FilterAirExplosionRule(
+				new StackedExplosionRule(
+						DistanceExplosionRule.lessEqual((strength * 7) / 8, new CraterExplosionRule()),
+						FilterRandomDistanceExplosionRule.quadraticDecrease((strength * 7) / 8, (strength * 9) / 8, 
+								new RandomBlockExplosionRule(RandomList.<BlockState>floatBuilder()
+										.addEntry(Blocks.BLUE_ICE.defaultBlockState(), 0.125f)
+										.addEntry(Blocks.PACKED_ICE.defaultBlockState(), 0.125f)
+										.addEntry(Blocks.AIR.defaultBlockState(), 0.75f).build()
+								)
+						)
+				)
+		));
 	}
 	
 	@Override

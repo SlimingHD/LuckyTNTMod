@@ -3,79 +3,32 @@ package luckytnt.tnteffects.projectile;
 import luckytnt.registry.EntityRegistry;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
-import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.util.RandomSource;
 
-public class VredefortProjectileEffect extends PrimedTNTEffect {
+public class VredefortProjectileEffect extends MeteorEffect {
+
+	public VredefortProjectileEffect() {
+		super(120, 6f);
+	}
 
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), 140);
-		explosion.doEntityExplosion(3f, true);
-		
-		ExplosionHelper.createSphericalCrater(ent.getLevel(), ent.getPos(), 115, 800);
-		
-		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 120, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				
-				if(distance >= 115 && !state.isAir() && state.getExplosionResistance(level, pos, explosion) < 800) {
-					if(Math.random() < 0.6f) {
-						state.onBlockExploded(level, pos, explosion);
-						//level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-					}
-				}
-			}
-		});
-		
-		ExplosionHelper.doTopBlockExplosionForAll(ent.getLevel(), ent.getPos(), 120, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(Math.random() < 0.05f) {
-					level.setBlock(pos, Blocks.FIRE.defaultBlockState(), 3);
-				}
-			}
-		});
+	public void serverExplosion(IExplosiveEntity entity) {
+		super.serverExplosion(entity);
+		RandomSource random = entity.getLevel().getRandom();
 		
 		for(int count = 0; count < 300; count++) {
-			LExplosiveProjectile projectile = EntityRegistry.SOLAR_ERUPTION_PROJECTILE.get().create(ent.getLevel());
-			projectile.setPos(ent.getPos());
-			projectile.setOwner(ent.owner());
-			projectile.setDeltaMovement(Math.random() * 4 - Math.random() * 4, 3 + Math.random() * 2, Math.random() * 4 - Math.random() * 4);
-			ent.getLevel().addFreshEntity(projectile);
+			LExplosiveProjectile projectile = EntityRegistry.SOLAR_ERUPTION_PROJECTILE.get().create(entity.getLevel());
+			projectile.setPos(entity.getPos());
+			projectile.setOwner(entity.owner());
+			projectile.setDeltaMovement(random.nextDouble() * 8d - 4d, 3d + random.nextDouble() * 2d, random.nextDouble() * 8d - 4d);
+			entity.getLevel().addFreshEntity(projectile);
 		}
 		for(int count = 0; count < 6; count++) {
-			LExplosiveProjectile projectile = EntityRegistry.LITTLE_METEOR.get().create(ent.getLevel());
-			projectile.setPos(ent.getPos());
-			projectile.setOwner(ent.owner());
-			projectile.setDeltaMovement(Math.random() * 2 - Math.random() * 2, 3 + Math.random() * 2, Math.random() * 2 - Math.random() * 2);
-			ent.getLevel().addFreshEntity(projectile);
+			LExplosiveProjectile projectile = EntityRegistry.LITTLE_METEOR.get().create(entity.getLevel());
+			projectile.setPos(entity.getPos());
+			projectile.setOwner(entity.owner());
+			projectile.setDeltaMovement(random.nextDouble() * 4d - 2d, 3d + random.nextDouble() * 2d, random.nextDouble() * 4d - 2d);
+			entity.getLevel().addFreshEntity(projectile);
 		}
-	}
-	
-	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.EXPLOSION, ent.x(), ent.y(), ent.z(), 0, 0, 0);
-	}
-	
-	@Override
-	public Block getBlock() {
-		return Blocks.MAGMA_BLOCK;
-	}
-	
-	@Override
-	public float getSize(IExplosiveEntity ent) {
-		return 6f;
 	}
 }
