@@ -1,17 +1,21 @@
 package luckytnt.tnteffects;
 
 import java.util.List;
-import java.util.Random;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -19,105 +23,72 @@ import net.minecraft.world.phys.Vec3;
 public class ContinentalDriftEffect extends PrimedTNTEffect {
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() == 400) {
-			double vecx = Math.random() * 2D - 1D;
-			double vecz = Math.random() * 2D - 1D;
-			Vec3 vec = new Vec3(vecx, 0, vecz).normalize();
-			((Entity)ent).getPersistentData().putDouble("vecx", vec.x);
-			((Entity)ent).getPersistentData().putDouble("vecz", vec.z);
+	public void explosionTick(IExplosiveEntity entity) {
+		Entity ent = (Entity)entity;
+		Level level = ent.level();
+		RandomSource random = level.getRandom();
+		CompoundTag data = entity.getPersistentData();
+		if (entity.getTNTFuse() == 420) {
+			Vec3 vec = new Vec3(random.nextDouble() * 2d - 1d, 0d, random.nextDouble() * 2d - 1d).normalize();
+			data.putDouble("vecx", vec.x);
+			data.putDouble("vecz", vec.z);
+			vec = new Vec3(random.nextDouble() * 2d - 1d, 0d, random.nextDouble() * 2d - 1d).normalize();
+			data.putDouble("vecx2", vec.x);
+			data.putDouble("vecz2", vec.z);
 			
-			double vecx2 = Math.random() * 2D - 1D;
-			double vecz2 = Math.random() * 2D - 1D;
-			Vec3 vec2 = new Vec3(vecx2, 0, vecz2).normalize();
-			((Entity)ent).getPersistentData().putDouble("vecx2", vec2.x);
-			((Entity)ent).getPersistentData().putDouble("vecz2", vec2.z);
-			
-			((Entity)ent).getPersistentData().putDouble("x", ent.x());
-			((Entity)ent).getPersistentData().putDouble("y", ent.y());
-			((Entity)ent).getPersistentData().putDouble("z", ent.z());
+			data.putInt("x", Mth.floor(entity.x()));
+			data.putInt("y", Mth.floor(entity.y()));
+			data.putInt("z", Mth.floor(entity.z()));
 	      	
-			((Entity)ent).getPersistentData().putInt("second", 30 + new Random().nextInt(101));
+			ent.getPersistentData().putInt("second", 30 + random.nextInt(101));
 	      	
-	      	List<Player> list = ent.getLevel().getEntitiesOfClass(Player.class, new AABB(ent.x() - 200, ent.y() - 200, ent.z() - 200, ent.x() + 200, ent.y() + 200, ent.z() + 200));
-	      	for(Player player : list) {
-	      		player.getPersistentData().putInt("shakeTime", 400);
+	      	List<Player> list = level.getEntitiesOfClass(Player.class, new AABB(entity.x() - 200d, entity.y() - 200d, entity.z() - 200d, entity.x() + 200d, entity.y() + 200d, entity.z() + 200d));
+	      	for (Player player : list) {
+	      		player.getPersistentData().putInt("shakeTime", 420);
 	      	}
 		}
 		
-		if(ent.getTNTFuse() <= 400 && (ent.getTNTFuse() % 60 == 0 || ent.getTNTFuse() == 400) && !ent.getLevel().isClientSide()) {
-			BlockPos origin = toBlockPos(new Vec3(((Entity)ent).getPersistentData().getDouble("x"), ((Entity)ent).getPersistentData().getDouble("y"), ((Entity)ent).getPersistentData().getDouble("z")));
-			BlockPos start = origin.offset(toBlockPos(new Vec3(((Entity)ent).getPersistentData().getDouble("vecx") * -80, 0, ((Entity)ent).getPersistentData().getDouble("vecz") * -80)));
-			Vec3 vec = new Vec3(((Entity)ent).getPersistentData().getDouble("vecx"), 0, ((Entity)ent).getPersistentData().getDouble("vecz"));
-			Vec3 vec2 = new Vec3(((Entity)ent).getPersistentData().getDouble("vecx2"), 0, ((Entity)ent).getPersistentData().getDouble("vecz2"));
-			BlockPos start2 = start.offset(toBlockPos(new Vec3(vec.x * ((Entity)ent).getPersistentData().getInt("second"), 0, vec.z * ((Entity)ent).getPersistentData().getInt("second")))).offset(toBlockPos(new Vec3(vec2.x * 8, 0, vec2.z * 8)));
+		if (!level.isClientSide() && entity.getTNTFuse() <= 420 && entity.getTNTFuse() % 60 == 0) {
+			BlockPos origin = new BlockPos(data.getInt("x"), data.getInt("y"), data.getInt("z"));
+			BlockPos start = origin.offset(toBlockPos(new Vec3(data.getDouble("vecx") * -80d, 0, data.getDouble("vecz") * -80d)));
+			Vec3 vec = new Vec3(data.getDouble("vecx"), 0d, data.getDouble("vecz"));
+			Vec3 vec2 = new Vec3(data.getDouble("vecx2"), 0d, data.getDouble("vecz2"));
+			BlockPos start2 = start.offset(toBlockPos(new Vec3(vec.x * ent.getPersistentData().getInt("second"), 0, vec.z * ent.getPersistentData().getInt("second")))).offset(toBlockPos(new Vec3(vec2.x * 8d, 0d, vec2.z * 8d)));
 			
-			for(double i = 0; i < 160D; i += 1D) {
-				for(int offX = -10; offX <= 10; offX++) {
-					for(int offZ = -10; offZ <= 10; offZ++) {
-						double distance = Math.sqrt(offX * offX + offZ * offZ);
-						BlockPos pos = start.offset(toBlockPos(new Vec3(i * vec.x + offX, 0, i * vec.z + offZ)));
-						if(distance <= 7) {
-							if(Math.random() > 0.1D) {
-								BlockPos pos1 = new BlockPos(pos.getX(), ent.getLevel().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.getLevel().getBlockState(pos1).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
-									ent.getLevel().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
-								}
-							}
-						}
-						if(distance <= 9 && distance > 7) {
-							if(Math.random() > 0.5D) {
-								BlockPos pos1 = new BlockPos(pos.getX(), ent.getLevel().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.getLevel().getBlockState(pos1).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
-									ent.getLevel().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
-								}
-							}
-						}
-						if(distance <= 10 && distance > 9) {
-							if(Math.random() > 0.9D) {
-								BlockPos pos1 = new BlockPos(pos.getX(), ent.getLevel().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.getLevel().getBlockState(pos1).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
-									ent.getLevel().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
-								}
-							}
-						}
-					}
-				}
-			}
-			
-			for(double i = 0; i < 60D; i += 1D) {
-				for(int offX = -10; offX <= 10; offX++) {
-					for(int offZ = -10; offZ <= 10; offZ++) {
-						double distance = Math.sqrt(offX * offX + offZ * offZ);
-						BlockPos pos = start2.offset(toBlockPos(new Vec3(i * vec2.x + offX, 0, i * vec2.z + offZ)));
-						if(distance <= 7) {
-							if(Math.random() > 0.1D) {
-								BlockPos pos1 = new BlockPos(pos.getX(), ent.getLevel().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.getLevel().getBlockState(pos1).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
-									ent.getLevel().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
-								}
-							}
-						}
-						if(distance <= 9 && distance > 7) {
-							if(Math.random() > 0.5D) {
-								BlockPos pos1 = new BlockPos(pos.getX(), ent.getLevel().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.getLevel().getBlockState(pos1).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
-									ent.getLevel().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
-								}
-							}
-						}
-						if(distance <= 10 && distance > 9) {
-							if(Math.random() > 0.9D) {
-								BlockPos pos1 = new BlockPos(pos.getX(), ent.getLevel().getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
-								if(ent.getLevel().getBlockState(pos1).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 100) {
-									ent.getLevel().setBlock(pos1, Blocks.AIR.defaultBlockState(), 3);
-								}
-							}
+			carveRavine(160, vec, start, level);
+			carveRavine(60, vec2, start2, level);
+		}
+	}
+	
+	private void carveRavine(int vectorLength, Vec3 vec, BlockPos start, Level level) {
+		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(level);
+		RandomSource random = level.getRandom();
+		for (int i = 0; i < vectorLength; i += 1) {
+			for (int offX = -10; offX <= 10; offX++) {
+				for (int offZ = -10; offZ <= 10; offZ++) {
+					int distanceSqr = offX * offX + offZ * offZ;
+					BlockPos pos = start.offset(toBlockPos(new Vec3(i * vec.x + offX, 0, i * vec.z + offZ)));
+					double rand = random.nextDouble();
+					if (shouldBlockExplode(rand, distanceSqr)) {
+						BlockPos topPos = new BlockPos(pos.getX(), level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
+						BlockState state = level.getBlockState(topPos);
+						if (state.getExplosionResistance(level, pos, dummyExplosion) <= 100) {
+							state.getBlock().wasExploded(level, topPos, dummyExplosion);
+							level.setBlock(topPos, Blocks.AIR.defaultBlockState(), 3);
 						}
 					}
 				}
 			}
 		}
+	}
+	
+	private boolean shouldBlockExplode(double rand, int distanceSqr) {
+		if ((distanceSqr <= 49 && rand < 0.9d) ||
+			(distanceSqr <= 81 && rand < 0.5d) ||
+			(distanceSqr <= 100 && rand < 0.1d)) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
@@ -126,7 +97,7 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
-		return 480;
+	public int getDefaultFuse(IExplosiveEntity entity) {
+		return 500;
 	}
 }

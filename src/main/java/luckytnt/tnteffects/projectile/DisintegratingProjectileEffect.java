@@ -7,8 +7,9 @@ import org.joml.Vector3f;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.rules.DistanceExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
 import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -28,17 +29,17 @@ public class DisintegratingProjectileEffect extends ChemicalProjectileEffect {
 	public void explosionTick(IExplosiveEntity entity) {
 		super.explosionTick(entity);
 		if (!entity.getLevel().isClientSide()) {
-			ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 13, 200, DistanceExplosionRule.greaterEqual(11,
-					FilterBlockExplosionRule.applyOnlyWhen(Blocks.STONE,
-							new FilterRandomExplosionRule(0.01f,
-									new SimpleExplosionRule(BlockRegistry.TOXIC_STONE.get().defaultBlockState())
+			ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 13, 200, new FilterAirExplosionRule(
+					FilterDistanceExplosionRule.greaterEqual(11,
+							FilterBlockExplosionRule.applyOnlyWhen(Blocks.STONE,
+									new FilterRandomExplosionRule(0.01f, new SimpleExplosionRule(BlockRegistry.TOXIC_STONE.get().defaultBlockState()))
 							)
 					)
 			));
 		}
 		if (entity.getTNTFuse() % 20 == 0) {
 			List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(entity.getPos()).offset(-6, -6, -6), toBlockPos(entity.getPos()).offset(6, 6, 6)));
-			DamageSources sources = new DamageSources(entity.getLevel().registryAccess());
+			DamageSources sources = entity.getLevel().damageSources();
 			for (LivingEntity lent : list) {
 				lent.hurt(sources.magic(), 5f);
 			}
@@ -49,8 +50,8 @@ public class DisintegratingProjectileEffect extends ChemicalProjectileEffect {
 	public void spawnParticles(IExplosiveEntity ent) {
 		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1f), ent.x() + 0.2f, ent.y() + 1f, ent.z(), 0, 0, 0);
 		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1f), ent.x() - 0.2f, ent.y() + 1f, ent.z(), 0, 0, 0);
-		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 1f), ent.x(), ent.y() + 1f, ent.z() + 0.2f, 0, 0, 0);
-		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0, 0), 1f), ent.x(), ent.y() + 1f, ent.z() - 0.2f, 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x(), ent.y() + 1f, ent.z() + 0.2f, 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x(), ent.y() + 1f, ent.z() - 0.2f, 0, 0, 0);
 	}
 	
 	@Override

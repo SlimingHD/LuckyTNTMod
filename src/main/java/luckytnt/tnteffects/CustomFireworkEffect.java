@@ -10,6 +10,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
@@ -22,53 +23,64 @@ import net.minecraft.world.phys.Vec3;
 
 public class CustomFireworkEffect extends PrimedTNTEffect {
 
-	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() == 40 && ent instanceof PrimedCustomFirework tnt) {
-			BlockPos pos = toBlockPos(new Vec3(ent.x(), ent.y() - 1f, ent.z()));
-			ent.getPersistentData().putInt("x", pos.getX());
-			ent.getPersistentData().putInt("y", pos.getY());
-			ent.getPersistentData().putInt("z", pos.getZ());
-			tnt.state = ent.getLevel().getBlockState(pos);
+	private static Constructor<FallingBlockEntity> CONSTRUCTOR;
+	
+	static {
+		try {
+			Class<?>[] CONSTRUCTOR_PARAMETERS = new Class<?>[]{Level.class, double.class, double.class, double.class, BlockState.class};
+			CONSTRUCTOR = FallingBlockEntity.class.getDeclaredConstructor(CONSTRUCTOR_PARAMETERS);
+			CONSTRUCTOR.setAccessible(true);		
+		} catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
 		}
-		((Entity)ent).setDeltaMovement(((Entity)ent).getDeltaMovement().x, 0.8f, ((Entity)ent).getDeltaMovement().z);
 	}
 	
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		if(ent instanceof PrimedCustomFirework fire) {
-			BlockState state = ent.getLevel().getBlockState(new BlockPos(ent.getPersistentData().getInt("x"), ent.getPersistentData().getInt("y"), ent.getPersistentData().getInt("z")));
-			if(fire.state != null) {
-				state = fire.state;
+	public void explosionTick(IExplosiveEntity entity) {
+		Entity ent = (Entity)entity;
+		if (entity.getTNTFuse() == 40 && entity instanceof PrimedCustomFirework tnt) {
+			BlockPos pos = toBlockPos(new Vec3(entity.x(), entity.y() - 1f, entity.z()));
+			entity.getPersistentData().putInt("x", pos.getX());
+			entity.getPersistentData().putInt("y", pos.getY());
+			entity.getPersistentData().putInt("z", pos.getZ());
+			tnt.state = entity.getLevel().getBlockState(pos);
+		}
+		ent.setDeltaMovement(ent.getDeltaMovement().x, 0.8f, ent.getDeltaMovement().z);
+	}
+	
+	@Override
+	public void serverExplosion(IExplosiveEntity entity) {
+		if (entity instanceof PrimedCustomFirework firework) {
+			Level level = entity.getLevel();
+			RandomSource random = level.getRandom();
+			BlockState state = level.getBlockState(new BlockPos(entity.getPersistentData().getInt("x"), entity.getPersistentData().getInt("y"), entity.getPersistentData().getInt("z")));
+			if (firework.state != null) {
+				state = firework.state;
 			}
 			
-			for(int count = 0; count < 200; count++) {
-				if(state.getBlock() instanceof TntBlock tnt) {
-					tnt.onCaughtFire(state, ent.getLevel(), toBlockPos(ent.getPos()), null, ent.owner());
+			for (int count = 0; count < 200; count++) {
+				if (state.getBlock() instanceof TntBlock tnt) {
+					tnt.onCaughtFire(state, entity.getLevel(), toBlockPos(entity.getPos()), null, entity.owner());
 				} else {
 					try {
-						@SuppressWarnings("rawtypes")
-						Class[] parameters = new Class[]{Level.class, double.class, double.class, double.class, BlockState.class};
-						Constructor<FallingBlockEntity> sandConstructor = FallingBlockEntity.class.getDeclaredConstructor(parameters);
-						sandConstructor.setAccessible(true);
-						FallingBlockEntity sand = sandConstructor.newInstance(ent.getLevel(), ent.getPos().x, ent.getPos().y, ent.getPos().z, state);
-						sand.setDeltaMovement(Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f);
-						ent.getLevel().addFreshEntity(sand);
-					} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
+						FallingBlockEntity concrete = CONSTRUCTOR.newInstance(level, entity.x(), entity.y(), entity.z(), state);
+						concrete.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
+						level.addFreshEntity(concrete);
+					} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-			List<PrimedTnt> tnts = ent.getLevel().getEntitiesOfClass(PrimedTnt.class, new AABB(toBlockPos(ent.getPos()).offset(2, 2, 2), toBlockPos(ent.getPos()).offset(-2, -2, -2)));
-			for(PrimedTnt tnt : tnts) {
+			List<PrimedTnt> tnts = entity.getLevel().getEntitiesOfClass(PrimedTnt.class, new AABB(entity.getPos().add(-2d, -2d, -2d), entity.getPos().add(2d, 2d, 2d)));
+			for (PrimedTnt tnt : tnts) {
 				tnt.setDeltaMovement(Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f);
 			}
 		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override
@@ -77,7 +89,7 @@ public class CustomFireworkEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 40;
 	}
 }

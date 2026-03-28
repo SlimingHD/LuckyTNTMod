@@ -1,49 +1,50 @@
 package luckytnt.tnteffects;
 
+import java.util.List;
+
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
 
 public class CityFireworkEffect extends PrimedTNTEffect {
 
+	private static List<RegistryObject<EntityType<PrimedLTNT>>> ENTITY_TYPES = List.of(EntityRegistry.COBBLESTONE_HOUSE_TNT,
+																					   EntityRegistry.WOOD_HOUSE_TNT,
+																					   EntityRegistry.BRICK_HOUSE_TNT,
+																					   EntityRegistry.MANKINDS_MARK);
+	
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		((Entity)ent).setDeltaMovement(((Entity)ent).getDeltaMovement().x, 0.8f, ((Entity)ent).getDeltaMovement().z);
+	public void explosionTick(IExplosiveEntity entity) {
+		Entity ent = (Entity)entity;
+		ent.setDeltaMovement(ent.getDeltaMovement().x, 0.8f, ent.getDeltaMovement().z);
 	}
 	
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		for(int count = 0; count < 50; count++) {
-			RegistryObject<EntityType<PrimedLTNT>> type = null;
-			int rand = (int)Math.round(Math.random() * 3);
-			switch(rand) {
-				case 0: type = EntityRegistry.COBBLESTONE_HOUSE_TNT; break;
-				case 1: type = EntityRegistry.WOOD_HOUSE_TNT; break;
-				case 2: type = EntityRegistry.BRICK_HOUSE_TNT; break;
-				case 3: type = EntityRegistry.MANKINDS_MARK; break;
-			}
-			
-			if(type != null) {
-				PrimedLTNT tnt = type.get().create(ent.getLevel());
-				tnt.setPos(ent.getPos());
-				tnt.setOwner(ent.owner() instanceof LivingEntity ? (LivingEntity)ent.owner() : null);
-				tnt.setDeltaMovement(Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f  - Math.random() * 1.5f);
-				ent.getLevel().addFreshEntity(tnt);
-			}
+	public void serverExplosion(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
+		RandomSource random = level.getRandom();
+		for (int count = 0; count < 50; count++) {
+			RegistryObject<EntityType<PrimedLTNT>> type = ENTITY_TYPES.get(random.nextInt(ENTITY_TYPES.size()));
+			PrimedLTNT tnt = type.get().create(level);
+			tnt.setPos(entity.getPos());
+			tnt.setOwner(entity.owner());
+			tnt.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
+			level.addFreshEntity(tnt);
 		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override
@@ -52,7 +53,7 @@ public class CityFireworkEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 40;
 	}
 }

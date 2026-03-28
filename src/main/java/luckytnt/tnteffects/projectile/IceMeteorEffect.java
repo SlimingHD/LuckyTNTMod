@@ -5,8 +5,8 @@ import luckytntlib.util.RandomList;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
-import luckytntlib.util.explosions.rules.DistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.RandomBlockExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
@@ -34,7 +34,7 @@ public class IceMeteorEffect extends PrimedTNTEffect {
 		explosion.spawnExplosionParticles();
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), strength, 100, new FilterAirExplosionRule(
 				new StackedExplosionRule(
-						DistanceExplosionRule.lessEqual((strength * 7) / 8, new CraterExplosionRule()),
+						FilterDistanceExplosionRule.lessEqual((strength * 7) / 8, new CraterExplosionRule()),
 						FilterRandomDistanceExplosionRule.quadraticDecrease((strength * 7) / 8, (strength * 9) / 8, 
 								new RandomBlockExplosionRule(RandomList.<BlockState>floatBuilder()
 										.addEntry(Blocks.BLUE_ICE.defaultBlockState(), 0.125f)

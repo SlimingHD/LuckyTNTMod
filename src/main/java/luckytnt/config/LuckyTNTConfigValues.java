@@ -54,4 +54,22 @@ public class LuckyTNTConfigValues {
 		RENDER_CONTAMINATED_OVERLAY = builder.comment("Whether an overlay is rendererd while the contaminated effect is active").define("renderContaminatedOverlay", true);
 		builder.pop();
 	}
+	
+	public static CustomTNTConfig getCustomTNTExplosion(int level) {
+		switch (level) {
+			case 0: return CUSTOM_TNT_FIRST_EXPLOSION.get();
+			case 1: return CUSTOM_TNT_SECOND_EXPLOSION.get();
+			case 2: return CUSTOM_TNT_THIRD_EXPLOSION.get();
+		}
+		return CUSTOM_TNT_FIRST_EXPLOSION.get();
+	}
+	
+	public static int getCustomTNTExplosionIntensity(int level) {
+		switch (level) {
+			case 0: return CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get();
+			case 1: return CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get();
+			case 2: return CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get();
+		}
+		return CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get();
+	}
 }

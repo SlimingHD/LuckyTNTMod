@@ -1,7 +1,5 @@
 package luckytnt.tnteffects;
 
-import java.util.Random;
-
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
@@ -12,40 +10,43 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 
 public class CatalystTNTEffect extends PrimedTNTEffect {
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() < 200) {
-			if(ent.getPersistentData().getInt("nextExplosion") <= 0) {
-				double x = ent.x() + Math.random() * 40 - Math.random() * 40;
-				double y = ent.y() + Math.random() * 15 - Math.random() * 15;
-				double z = ent.z() + Math.random() * 40 - Math.random() * 40;
-				if(!ent.getLevel().isClientSide()) {
-					ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, new Vec3(x, y, z), 25 + new Random().nextInt(16));
+	public void explosionTick(IExplosiveEntity entity) {
+		if (entity.getTNTFuse() < 200) {
+			Level level = entity.getLevel();
+			if (!level.isClientSide()) {
+				RandomSource random = level.getRandom();
+				if (entity.getPersistentData().getInt("nextExplosion") <= 0) {
+					double x = entity.x() + Math.random() * 40 - Math.random() * 40;
+					double y = entity.y() + Math.random() * 15 - Math.random() * 15;
+					double z = entity.z() + Math.random() * 40 - Math.random() * 40;
+					ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity)entity, new Vec3(x, y, z), 25 + random.nextInt(16));
 					explosion.doEntityExplosion(2f, true);
-					explosion.doImprovedBlockExplosion(1f, 0.75f, false, false, RandomSource.create());
+					explosion.doImprovedBlockExplosion(1f, 0.75f, false, false, null);
+					explosion.spawnExplosionParticles();
+					level.playSound(null, BlockPos.containing(x, y, z), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4, (1f + (random.nextFloat() - random.nextFloat()) * 0.2f) * 0.7f);
+					entity.getPersistentData().putInt("nextExplosion", 4 + random.nextInt(2));
 				}
-				ent.getLevel().playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4, (1.0F + (ent.getLevel().getRandom().nextFloat() - ent.getLevel().getRandom().nextFloat()) * 0.2F) * 0.7F);
-				ent.getPersistentData().putInt("nextExplosion", 4 + (int)Math.round(Math.random()));
+				entity.getPersistentData().putInt("nextExplosion", entity.getPersistentData().getInt("nextExplosion") - 1);
 			}
-			ent.getPersistentData().putInt("nextExplosion", ent.getPersistentData().getInt("nextExplosion") - 1);
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		for(double i = 0D; i < 1D; i += 0.05D) {
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x() + 0.5D, ent.y() + i, ent.z() + 0.5D, 0, 0, 0);
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x() - 0.5D, ent.y() + i, ent.z() + 0.5D, 0, 0, 0);
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x() + 0.5D, ent.y() + i, ent.z() - 0.5D, 0, 0, 0);
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x() - 0.5D, ent.y() + i, ent.z() - 0.5D, 0, 0, 0);
+		for (double i = 0d; i < 1d; i += 0.05d) {
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x() + 0.5d, ent.y() + i, ent.z() + 0.5d, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x() - 0.5d, ent.y() + i, ent.z() + 0.5d, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x() + 0.5d, ent.y() + i, ent.z() - 0.5d, 0, 0, 0);
+			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x() - 0.5d, ent.y() + i, ent.z() - 0.5d, 0, 0, 0);
 		}
 	}
 	

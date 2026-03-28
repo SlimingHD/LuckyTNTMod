@@ -19,6 +19,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -37,6 +38,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.chunk.PalettedContainer;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
@@ -115,6 +117,52 @@ public class LevelEvents {
 			}
 		}
 		return 0;
+	}
+	
+	public static void setBiomeInCylinder(ServerLevel server, Vec3 center, int radius, ResourceKey<Biome> biome) {
+		BitSet emptySet = new BitSet(0);
+		
+		Registry<Biome> registry = server.registryAccess().registryOrThrow(Registries.BIOME);
+		Holder<Biome> biomeHolder = registry.wrapAsHolder(registry.get(biome));
+		int secX = Mth.floor(center.x()) >> 4;
+		int secY = Mth.floor(center.y()) >> 4;
+		int secZ = Mth.floor(center.z()) >> 4;
+		int maxDistanceSqr = radius * radius;
+		int secRadius = radius >> 4;
+		for (int offX = -secRadius; offX <= secRadius; offX++) {
+			for (int offZ = -secRadius; offZ <= secRadius; offZ++) {
+				LevelChunk chunk = server.getChunk(secX + offX, secZ + offZ);
+				boolean needsUpdate = false;
+				for (int offY = -secRadius; offY <= secRadius; offY++) {
+					int index = chunk.getSectionIndexFromSectionY(secY + offY);
+					if (index >= chunk.getMinSection() && index < chunk.getMaxSection()) {
+						LevelChunkSection section = chunk.getSection(offY);
+						PalettedContainer<Holder<Biome>> biomes = (PalettedContainer<Holder<Biome>>)section.getBiomes();
+						for (int x = 0; x < 4; x++) {
+							for (int z = 0; z < 4; z++) {
+								int lX = (offX << 4) + (x << 2);
+								int lZ = (offZ << 4) + (z << 2);
+								int distanceSqr = lX * lX + lZ * lZ;
+								if (distanceSqr > maxDistanceSqr) {
+									continue;
+								}
+								for (int y = 0; y < 4; y++) {
+									if (biomes.get(x, y, z) != biomeHolder) {
+										biomes.getAndSetUnchecked(x, y, z, biomeHolder);
+										needsUpdate = true;
+									}
+								}
+							}
+						}
+					}
+				}
+				if (needsUpdate) {
+					for (ServerPlayer p : server.players()) {
+						p.connection.send(new ClientboundLevelChunkWithLightPacket(chunk, server.getLightEngine(), emptySet, emptySet));
+					}
+				}
+			}
+		}
 	}
 	
 	private static void doomsdayDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {

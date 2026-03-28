@@ -6,7 +6,8 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
-import luckytntlib.util.explosions.rules.DistanceExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -28,9 +29,11 @@ public class ChemicalProjectileEffect extends PrimedTNTEffect {
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		if (!entity.getLevel().isClientSide()) {
-			ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), radius, 100, new StackedExplosionRule(
-					DistanceExplosionRule.lessEqual(3, new CraterExplosionRule()),
-					FilterRandomDistanceExplosionRule.quadraticDecrease(roughEdgeStartRadius, radius, new CraterExplosionRule())
+			ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), radius, 100, new FilterAirExplosionRule(
+					new StackedExplosionRule(
+							FilterDistanceExplosionRule.lessEqual(3, new CraterExplosionRule()),
+							FilterRandomDistanceExplosionRule.quadraticDecrease(roughEdgeStartRadius, radius, new CraterExplosionRule())
+					)
 			));
 		}
 	}

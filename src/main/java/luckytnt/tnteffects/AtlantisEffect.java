@@ -1,143 +1,77 @@
 package luckytnt.tnteffects;
 
-import com.google.common.base.Predicate;
-
+import luckytnt.event.LevelEvents;
+import luckytnt.explosionrules.FilterOffYExplosionRule;
 import luckytnt.registry.BlockRegistry;
-import luckytnt.util.Materials;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
+import luckytntlib.util.explosions.rules.SimpleExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunkSection;
-import net.minecraft.world.level.chunk.PalettedContainer;
-import net.minecraft.world.level.chunk.PalettedContainerRO;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureStart;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.phys.Vec3;
 
 public class AtlantisEffect extends PrimedTNTEffect {
 	
-	Predicate<Holder<Biome>> predicate = (holder) -> {
-		return true;
-	};
-	
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() == 240) {
-			if(ent.getLevel() instanceof ServerLevel s_Level) {
+	public void explosionTick(IExplosiveEntity entity) {
+		if (entity.getTNTFuse() == 240) {
+			if (entity.getLevel() instanceof ServerLevel s_Level) {
 	      		s_Level.setWeatherParameters(0, 10000, true, true);
 	      	}
-	      	ent.getLevel().playSound(null, ent.x(), ent.y(), ent.z(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER, 1000, 1);
+	      	entity.getLevel().playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.WEATHER, 1000, 1);
 		}
 	}
 
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		Registry<Biome> registry = ent.getLevel().registryAccess().registryOrThrow(Registries.BIOME);
-		Holder<Biome> biome = registry.wrapAsHolder(registry.get(Biomes.WARM_OCEAN));
-		for(double offX = -100; offX < 100; offX++) {
-			for(double offZ = -100; offZ < 100; offZ++) {
-				boolean foundBlock = false;
-				double distance = Math.sqrt(offX * offX + offZ * offZ);				
-				if(ent.getLevel() instanceof ServerLevel sLevel) {
-					if(distance < 100) {
-						if(offX % 16 == 0 && offZ % 16 == 0) {
-							for(LevelChunkSection section : ent.getLevel().getChunk(toBlockPos(new Vec3(ent.x() + offX, 0, ent.z() + offZ))).getSections()) {
-								PalettedContainerRO<Holder<Biome>> biomesRO = section.getBiomes();
-								for(int i = 0; i < 4; ++i) {
-									for(int j = 0; j < 4; ++j) {
-										for(int k = 0; k < 4; ++k) {
-											if(biomesRO instanceof PalettedContainer<Holder<Biome>> biomes && biomes.get(i, j, k) != biome) {
-												biomes.getAndSetUnchecked(i, j, k, biome);
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-					for(ServerPlayer player : sLevel.players()) {
-						player.connection.send(new ClientboundLevelChunkWithLightPacket(ent.getLevel().getChunkAt(toBlockPos(new Vec3(ent.x() + offX, 0, ent.z() + offZ))), ent.getLevel().getLightEngine(), null, null));
-					}
-					if(distance < 50) {
-						Registry<Structure> structures = ent.getLevel().registryAccess().registryOrThrow(Registries.STRUCTURE);
-						
-						Structure ocean_ruin = structures.get(BuiltinStructures.OCEAN_RUIN_WARM);
-						
-						for(double offY = ent.getLevel().getMaxBuildHeight(); offY > ent.getLevel().getMinBuildHeight(); offY--) {
-							BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, offY, ent.z() + offZ));
-							BlockState state = ent.getLevel().getBlockState(pos);
-							if(!foundBlock && state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !state.isAir()) {
-								if(Math.random() < 0.0005f) {
-									StructureStart start = ocean_ruin.generate(sLevel.registryAccess(), sLevel.getChunkSource().getGenerator(), sLevel.getChunkSource().getGenerator().getBiomeSource(), sLevel.getChunkSource().randomState(), sLevel.getStructureManager(), sLevel.getSeed(), new ChunkPos(pos), 20, ent.getLevel(), predicate);
-									start.placeInChunk(sLevel, sLevel.structureManager(), sLevel.getChunkSource().getGenerator(), RandomSource.create(), new BoundingBox((int)ent.x() - 150, (int)ent.y() - 150, (int)ent.z() - 150, (int)ent.x() + 150, (int)ent.y() + 150, (int)ent.z() + 150), new ChunkPos(pos));
-								}
-								foundBlock = true;
-							}
-						}
-					}
-				}
-			}
-		}
+	public void serverExplosion(IExplosiveEntity entity) {
+		ServerLevel serverLevel = (ServerLevel)entity.getLevel();
+		LevelEvents.setBiomeInCylinder(serverLevel, entity.getPos(), 100, Biomes.WARM_OCEAN);
 		
-		JungleTNTEffect.replaceNonSolidBlockOrVegetationWithAir(ent, 100, 100, true);
+		ExplosionHelper.createCylindricalCrater(serverLevel, entity.getPos(), 100, 50, 100f, new StackedExplosionRule(
+				new FilterAirExplosionRule(new FilterSurfaceExplosionRule(true, new SimpleExplosionRule(Blocks.SAND.defaultBlockState()))),
+				new FilterOffYExplosionRule(-50, 8, new SimpleExplosionRule(Blocks.WATER.defaultBlockState()))
+		));
 		
-		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos().add(0, 8, 0), 100, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				BlockPos posTop = pos.offset(0, 1, 0);
-				BlockState stateTop = level.getBlockState(posTop);
-				
-				if(((ent.y() + 8) - pos.getY()) >= 0 && ((ent.y() + 8) - pos.getY()) <= 50) {
-					if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 0 || state.getBlock() instanceof LiquidBlock || state.isAir()) && !Materials.isStone(state)) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-						level.setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
-					}
-					if((stateTop.getFluidState().is(Fluids.WATER) || stateTop.getFluidState().is(Fluids.FLOWING_WATER)) && !state.isAir() && (state.getBlock() == Blocks.GRASS_BLOCK || state.getBlock() == Blocks.STONE || state.getBlock() == Blocks.DEEPSLATE || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRAVEL) && level.getBlockState(pos.above()).getBlock() != Blocks.SAND) {
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-						level.setBlock(pos, Blocks.SAND.defaultBlockState(), 3);
-					}
-				}
+		Registry<Structure> structures = serverLevel.registryAccess().registryOrThrow(Registries.STRUCTURE);
+		Structure oceanRuin = structures.get(BuiltinStructures.OCEAN_RUIN_WARM);
+		ExplosionHelper.customSurfaceExplosion(serverLevel, entity.getPos(), 50, (level, center, pos, state) -> {
+			if (level.getRandom().nextDouble() < 0.0005d) {
+				StructureStart start = oceanRuin.generate(serverLevel.registryAccess(), serverLevel.getChunkSource().getGenerator(), serverLevel.getChunkSource().getGenerator().getBiomeSource(), serverLevel.getChunkSource().randomState(), serverLevel.getStructureManager(), serverLevel.getSeed(), new ChunkPos(pos), 20, entity.getLevel(), biomeHolder -> true);
+				start.placeInChunk(serverLevel, serverLevel.structureManager(), serverLevel.getChunkSource().getGenerator(), RandomSource.create(), new BoundingBox(Mth.floor(entity.x()) - 150, Mth.floor(entity.y()) - 150, Mth.floor(entity.z()) - 150, Mth.floor(entity.x()) + 150, Mth.floor(entity.y()) + 150, Mth.floor(entity.z()) + 150), new ChunkPos(pos));			
 			}
 		});
 		
-		for(int count = 0; count < 40; count++) {
-			Entity squid = new Squid(EntityType.SQUID, ent.getLevel());
-			squid.setPos(ent.x() + 50 * Math.random() - 50 * Math.random(), ent.y() + 8, ent.z() + 50 * Math.random() - 50 * Math.random());
-			ent.getLevel().addFreshEntity(squid);
+		RandomSource random = entity.getLevel().getRandom();
+		for (int count = 0; count < 40; count++) {
+			Entity squid = new Squid(EntityType.SQUID, entity.getLevel());
+			squid.setPos(entity.x() + random.nextDouble() * 100d - 50d, entity.y() + 8, entity.z() + random.nextDouble() * 100d - 50d);
+			entity.getLevel().addFreshEntity(squid);
 		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.SPLASH, ent.x(), ent.y() + 1.5f, ent.z(), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		entity.getLevel().addParticle(ParticleTypes.SPLASH, entity.x(), entity.y() + 1.5f, entity.z(), 0, 0, 0);
 	}
 	
 	@Override
@@ -146,7 +80,7 @@ public class AtlantisEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 240;
 	}
 }

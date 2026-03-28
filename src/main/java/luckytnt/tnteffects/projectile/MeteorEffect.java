@@ -4,8 +4,8 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
-import luckytntlib.util.explosions.rules.DistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FireExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
@@ -32,7 +32,7 @@ public class MeteorEffect extends PrimedTNTEffect {
 		explosion.spawnExplosionParticles();
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), explosionSize, 100, new FilterAirExplosionRule(
 				new StackedExplosionRule(
-						DistanceExplosionRule.lessEqual((explosionSize * 7) / 8, new CraterExplosionRule()),
+						FilterDistanceExplosionRule.lessEqual((explosionSize * 7) / 8, new CraterExplosionRule()),
 						FilterRandomDistanceExplosionRule.quadraticDecrease((explosionSize * 7) / 8, (explosionSize * 9) / 8, new CraterExplosionRule())
 				)
 		));

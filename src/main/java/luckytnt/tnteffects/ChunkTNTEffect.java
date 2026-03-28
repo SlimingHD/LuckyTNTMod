@@ -15,29 +15,29 @@ public class ChunkTNTEffect extends CubicTNTEffect {
 	}
 	
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() == 160) {
-			Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, ent.getLevel());
-			lighting.setPos(ent.getPos());
-			ent.getLevel().addFreshEntity(lighting);
+	public void explosionTick(IExplosiveEntity entity) {
+		if (entity.getTNTFuse() == 160) {
+			Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.getLevel());
+			lighting.setPos(entity.getPos());
+			entity.getLevel().addFreshEntity(lighting);
 		}
 	}
 
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		for(float i = 0; i < 3.25f; i += 0.25f) {
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 1.5f, ent.y() - 1 + i, ent.z() + 1.5f, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 1.5f, ent.y() - 1 + i, ent.z() - 1.5f, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 1.5f, ent.y() - 1 + i, ent.z() - 1.5f, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 1.5f, ent.y() - 1 + i, ent.z() + 1.5f, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 1.5f + i, ent.y() - 1, ent.z() + 1.5f, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 1.5f, ent.y() - 1, ent.z() - 1.5f + i, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 1.5f + i, ent.y() + 2, ent.z() + 1.5f, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 1.5f, ent.y() + 2, ent.z() - 1.5f + i, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 1.5f - i, ent.y() - 1, ent.z() - 1.5f, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 1.5f, ent.y() - 1, ent.z() + 1.5f - i, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 1.5f - i, ent.y() + 2, ent.z() - 1.5f, 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 1.5f, ent.y() + 2, ent.z() + 1.5f - i, 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		for (double i = 0; i < 3.25d; i += 0.25d) {
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 1.5d, entity.y() - 1d + i, entity.z() + 1.5d, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 1.5d, entity.y() - 1d + i, entity.z() - 1.5d, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 1.5d, entity.y() - 1d + i, entity.z() - 1.5d, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 1.5d, entity.y() - 1d + i, entity.z() + 1.5d, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 1.5d + i, entity.y() - 1d, entity.z() + 1.5d, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 1.5d, entity.y() - 1d, entity.z() - 1.5d + i, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 1.5d + i, entity.y() + 2d, entity.z() + 1.5d, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 1.5d, entity.y() + 2d, entity.z() - 1.5d + i, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 1.5d - i, entity.y() - 1d, entity.z() - 1.5d, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 1.5d, entity.y() - 1d, entity.z() + 1.5d - i, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 1.5d - i, entity.y() + 2d, entity.z() - 1.5d, 0, 0, 0);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 1.5d, entity.y() + 2d, entity.z() + 1.5d - i, 0, 0, 0);
 		}
 	}
 	

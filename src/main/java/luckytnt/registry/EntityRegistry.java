@@ -21,6 +21,7 @@ import luckytnt.entity.PrimedResetTNT;
 import luckytnt.entity.PrimedStructureTNT;
 import luckytnt.tnteffects.*;
 import luckytnt.tnteffects.projectile.AcceleratingDynamiteEffect;
+import luckytnt.tnteffects.projectile.AcidicProjectileEffect;
 import luckytnt.tnteffects.projectile.AnimalDynamiteEffect;
 import luckytnt.tnteffects.projectile.BigDynamiteEffect;
 import luckytnt.tnteffects.projectile.BombEffect;
@@ -499,7 +500,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> SPIRAL_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("spiral_projectile", new StackedPrimedTNTEffect(new SpiralTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.build())));
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ERUPTING_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("erupting_projectile", new StackedPrimedTNTEffect(new EruptingTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.fire(true).build())), 1f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> MINI_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("mini_meteor", new StackedPrimedTNTEffect(new MiniMeteorEffect(), Collections.singletonList(new TNTXStrengthEffect.Builder().strength(7).randomVecLength(1.25f).fire(true).build())), 1f, false);
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHEMICAL_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("chemical_projectile", new ChemicalProjectileEffect());
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHEMICAL_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("chemical_projectile", new ChemicalProjectileEffect(4, 3));
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CLUSTER_BOMB = LuckyTNTMod.RH.registerExplosiveProjectile("cluster_bomb", new ClusterBombEffect());
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> SHRAPNEL = LuckyTNTMod.RH.registerExplosiveProjectile("shrapnel", new ShrapnelEffect(), 0.25f, true);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> BOMB = LuckyTNTMod.RH.registerExplosiveProjectile("bomb", new BombEffect());
@@ -509,7 +510,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHICXULUB_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("chicxulub_meteor", new ChicxulubMeteorEffect(), 4f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> TSAR_BOMBA_BOMB = LuckyTNTMod.RH.registerExplosiveProjectile("tsar_bomba_bomb", new TsarBombaBombEffect(), 1.2f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> PRESENT = LuckyTNTMod.RH.registerExplosiveProjectile("present", new StackedPrimedTNTEffect(new ChristmasTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.build())));
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> ACIDIC_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("acidic_projectile", new AcidicTNTEffect(), 1f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> ACIDIC_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("acidic_projectile", new AcidicProjectileEffect(), 1f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> HAILSTONE = LuckyTNTMod.entityRegistry.register("hailstone", () -> EntityType.Builder.<LExplosiveProjectile>of((EntityType<LExplosiveProjectile> type, Level level) -> new HailstoneProjectile(type, level, new HailstoneEffect()), MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).sized(0.1f, 0.1f).build("hailstone"));
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite_projectile", new ChristmasDynamiteProjectileEffect(), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DEATH_RAY_RAY = LuckyTNTMod.RH.registerExplosiveProjectile("death_ray_ray", new DeathRayRayEffect(), 0.25f, true);

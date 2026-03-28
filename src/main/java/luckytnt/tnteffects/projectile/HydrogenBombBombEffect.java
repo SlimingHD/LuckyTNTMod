@@ -38,8 +38,17 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 		PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)entity), new ClientboundHydrogenBombPacket(((Entity)entity).getId()));
 		
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 230);
+		explosion.setExplosionFinishWork(exp -> finishNuclearExplosion(entity, exp));
 		explosion.doEntityExplosion(25f, true);
 		explosion.doImprovedBlockExplosion(0.167f, 0.05f, false, true, null);
+		
+		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() - 90, entity.y() - 65, entity.z() - 90, entity.x() + 90, entity.y() + 65, entity.z() + 90));
+		for (LivingEntity living : list) {
+			living.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 4800, 0, true, true, true));
+		}
+	}
+	
+	private void finishNuclearExplosion(IExplosiveEntity entity, ImprovedExplosion explosion) {
 		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 400, new Vector3f(1f, 0.3333f, 1f), 0.2f, new FilterAirExplosionRule(FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new CraterExplosionRule())));
 		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 250, new Vector3f(1f, 0.6666667f, 1f), 0, new FilterRandomExplosionRule(0.5f,
 				FilterRandomDistanceExplosionRule.quadraticDecrease(0, 250,
@@ -48,11 +57,6 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 						)
 				)
 		));
-		
-		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() - 90, entity.y() - 65, entity.z() - 90, entity.x() + 90, entity.y() + 65, entity.z() + 90));
-		for (LivingEntity living : list) {
-			living.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 4800, 0, true, true, true));
-		}
 	}
 	
 	@Override

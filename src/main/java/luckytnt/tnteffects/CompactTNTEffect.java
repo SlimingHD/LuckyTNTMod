@@ -4,37 +4,30 @@ import java.util.function.Supplier;
 
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
+import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.RegistryObject;
 
-public class CompactTNTEffect extends PrimedTNTEffect{
-	private final double chance;
+public class CompactTNTEffect extends PrimedTNTEffect {
+	
+	private final float probability;
 	private final int size;
-	private final Supplier<RegistryObject<LTNTBlock>> place;
+	private final Supplier<RegistryObject<LTNTBlock>> toPlace;
 
-	public CompactTNTEffect(double chance, int size, Supplier<RegistryObject<LTNTBlock>> place) {
-		this.chance = chance;
+	public CompactTNTEffect(float probability, int size, Supplier<RegistryObject<LTNTBlock>> toPlace) {
+		this.probability = probability;
 		this.size = size;
-		this.place = place;
+		this.toPlace = toPlace;
 	}
 
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), size);
-		explosion.doBlockExplosion(new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(Math.random() < chance && !state.isAir() && state.getExplosionResistance(level, pos, explosion) < 100) {
-					state.onBlockExploded(level, pos, explosion);
-					level.setBlockAndUpdate(pos, place.get().get().defaultBlockState());
-				}
-			}
-		});
+		explosion.doImprovedBlockExplosion(size, size, false, true, new FilterAirExplosionRule(
+				new FilterRandomExplosionRule(probability, new SimpleExplosionRule(toPlace.get().get().defaultBlockState()))
+		));
 	}
 }

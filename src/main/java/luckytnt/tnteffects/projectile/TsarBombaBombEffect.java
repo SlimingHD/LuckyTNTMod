@@ -41,8 +41,17 @@ public class TsarBombaBombEffect extends PrimedTNTEffect implements NuclearBombL
 		}
 		
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 160);
+		explosion.setExplosionFinishWork(exp -> finishNuclearExplosion(entity, exp));
 		explosion.doEntityExplosion(15f, true);
 		explosion.doImprovedBlockExplosion(0.167f, 0.05f, false, true, null);
+		
+		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() - 90, entity.y() - 65, entity.z() - 90, entity.x() + 90, entity.y() + 65, entity.z() + 90));
+		for(LivingEntity living : list) {
+			living.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 3600, 0, true, true, true));
+		}
+	}
+
+	private void finishNuclearExplosion(IExplosiveEntity entity, ImprovedExplosion explosion) {
 		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 300, new Vector3f(1f, 0.3333f, 1f), 0.2f, new FilterAirExplosionRule(FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new CraterExplosionRule())));
 		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 150, new Vector3f(1f, 0.6666667f, 1f), 0, new FilterRandomExplosionRule(0.4f,
 				FilterRandomDistanceExplosionRule.quadraticDecrease(0, 150,
@@ -51,11 +60,6 @@ public class TsarBombaBombEffect extends PrimedTNTEffect implements NuclearBombL
 						)
 				)
 		));
-		
-		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() - 90, entity.y() - 65, entity.z() - 90, entity.x() + 90, entity.y() + 65, entity.z() + 90));
-		for(LivingEntity living : list) {
-			living.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 3600, 0, true, true, true));
-		}
 	}
 	
 	@Override

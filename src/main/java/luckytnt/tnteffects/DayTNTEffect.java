@@ -9,18 +9,18 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Block;
 
-public class DayTNTEffect extends PrimedTNTEffect{
+public class DayTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		if(entity.getLevel() instanceof ServerLevel sLevel) {
-			sLevel.setDayTime(6000);
+		if (entity.getLevel() instanceof ServerLevel serverLevel) {
+			serverLevel.setDayTime(6000);
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0, -0.1f, 0);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1f), entity.x(), entity.y() + 1d, entity.z(), 0, -0.1f, 0);
 	}
 	
 	@Override

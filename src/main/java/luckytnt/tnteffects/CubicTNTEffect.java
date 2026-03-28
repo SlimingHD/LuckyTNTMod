@@ -6,7 +6,8 @@ import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.level.block.Block;
 
-public class CubicTNTEffect extends PrimedTNTEffect{
+public class CubicTNTEffect extends PrimedTNTEffect {
+	
 	private final int strength;
 	
 	public CubicTNTEffect(int strength) {

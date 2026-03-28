@@ -4,11 +4,9 @@ import org.joml.Math;
 import org.joml.Vector3f;
 
 import luckytnt.config.LuckyTNTConfigValues;
-import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
@@ -21,56 +19,69 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.phys.Vec3;
 
 public class AetherTNTEffect extends PrimedTNTEffect {
 
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		ExplosionHelper.doModifiedSphericalExplosion(ent.getLevel(), ent.getPos(), 100, new Vec3(1f, 0.5f, 1f), new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(!state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(level)) <= 200 && (ent.y() - pos.getY()) <= 35) {
-					if(state.is(BlockTags.LOGS) && state.hasProperty(BlockStateProperties.AXIS)) {
-						level.setBlock(pos.above(LuckyTNTConfigValues.ISLAND_HEIGHT.get() * 2), Blocks.DARK_OAK_LOG.defaultBlockState().setValue(BlockStateProperties.AXIS, state.getValue(BlockStateProperties.AXIS)), 3);
-					} else if(state.is(BlockTags.LEAVES)) {
-						if(Math.random() < 0.9D) {
-							level.setBlock(pos.above(LuckyTNTConfigValues.ISLAND_HEIGHT.get() * 2), Blocks.AZALEA_LEAVES.defaultBlockState(), 3);
-						} else {
-							level.setBlock(pos.above(LuckyTNTConfigValues.ISLAND_HEIGHT.get() * 2), Blocks.FLOWERING_AZALEA_LEAVES.defaultBlockState(), 3);
-						}
+	public void serverExplosion(IExplosiveEntity entity) {
+		ServerLevel serverLevel = (ServerLevel)entity.getLevel();
+		RandomSource random = serverLevel.getRandom();
+		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(serverLevel);
+		int islandHeight = LuckyTNTConfigValues.ISLAND_HEIGHT.get() * 2;
+		ExplosionHelper.customSpheroidExplosion(serverLevel, entity.getPos(), 100, new Vector3f(1f, 0.5f, 1f), (level, center, pos, state) -> {
+			if (Math.abs(entity.y() - pos.getY()) <= 35 && state.getExplosionResistance(level, pos, dummyExplosion) <= 200) {
+				BlockPos islandPos = pos.above(islandHeight);
+				if (state.is(BlockTags.LOGS) && state.hasProperty(BlockStateProperties.AXIS)) {
+					level.setBlockAndUpdate(islandPos, Blocks.DARK_OAK_LOG.defaultBlockState().setValue(BlockStateProperties.AXIS, state.getValue(BlockStateProperties.AXIS)));
+				} else if (state.is(BlockTags.LEAVES)) {
+					if (random.nextFloat() < 0.9f) {
+						level.setBlockAndUpdate(islandPos, Blocks.AZALEA_LEAVES.defaultBlockState());
 					} else {
-						level.setBlock(pos.above(LuckyTNTConfigValues.ISLAND_HEIGHT.get() * 2), state, 3);
+						level.setBlockAndUpdate(islandPos, Blocks.FLOWERING_AZALEA_LEAVES.defaultBlockState());
 					}
+				} else {
+					level.setBlockAndUpdate(islandPos, state);
 				}
 			}
 		});
 		
-		for(int offX = -100; offX <= 100; offX++) {
-			for(int offZ = -100; offZ <= 100; offZ++) {
-				double distance = Math.sqrt(offX * offX + offZ * offZ);
-				double x = ent.x() + offX;
-				double z = ent.z() + offZ;
-				if(distance <= 100) {
-					BlockPos pos = new BlockPos(Mth.floor(x), LevelEvents.getTopBlock(ent.getLevel(), x, z, true), Mth.floor(z)).above();
-					Registry<ConfiguredFeature<?, ?>> features = ent.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
-					double random = Math.random();
-					
-					if(random > 0.1D && random <= 0.1125D) {
-						features.get(VegetationFeatures.FOREST_FLOWERS).place((WorldGenLevel) ent.getLevel(), ((ServerLevel) ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos);
-					} else if(random > 0.15D && random <= 0.1625D) {
-						features.get(VegetationFeatures.FLOWER_FLOWER_FOREST).place((WorldGenLevel) ent.getLevel(), ((ServerLevel) ent.getLevel()).getChunkSource().getGenerator(), RandomSource.create(), pos);
+		Registry<ConfiguredFeature<?, ?>> features = serverLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
+		ConfiguredFeature<?, ?> flowers = features.get(VegetationFeatures.FOREST_FLOWERS);
+		ConfiguredFeature<?, ?> flowerForestFlowers = features.get(VegetationFeatures.FLOWER_FLOWER_FOREST);
+		int maxDistanceSqr = 100 * 100;
+		for(int offX = -100; offX <= 100; offX += 10) {
+			for(int offZ = -100; offZ <= 100; offZ += 10) {
+				int distanceSqr = offX * offX + offZ * offZ;
+				int x = Mth.floor(entity.x()) + offX;
+				int z = Mth.floor(entity.z()) + offZ;
+				int y = getIslandTop(serverLevel, x, Mth.floor(entity.y()) + islandHeight, z);
+				if(distanceSqr <= maxDistanceSqr && y != Integer.MAX_VALUE) {
+					BlockPos pos = new BlockPos(x, y + 1, z);
+					float rand = random.nextFloat();
+					if (rand < 0.4f) {
+						flowers.place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos);
+					} else if (rand < 0.8f) {
+						flowerForestFlowers.place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos);
 					}
 				}
 			}
 		}
+	}
+	
+	private int getIslandTop(Level level, int x, int islandY, int z) {
+		for (int offY = 35; offY >= -35; offY--) {
+			BlockPos pos = new BlockPos(x, islandY + offY, z);
+			BlockState state = level.getBlockState(pos);
+			if (state.isCollisionShapeFullBlock(level, pos)) {
+				return islandY + offY;
+			}
+		}
+		return Integer.MAX_VALUE;
 	}
 	
 	@Override

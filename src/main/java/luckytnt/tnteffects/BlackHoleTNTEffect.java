@@ -26,54 +26,56 @@ import net.minecraft.world.phys.Vec3;
 public class BlackHoleTNTEffect extends PrimedTNTEffect {
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() < 400 && ent.getTNTFuse() >= 300) {
-			((Entity)ent).setNoGravity(true);
-			((Entity)ent).setDeltaMovement(0, 0.05, 0);
+	public void explosionTick(IExplosiveEntity entity) {
+		Entity ent = (Entity)entity;
+		int fuse = entity.getTNTFuse();
+		if (fuse < 400 && fuse >= 300) {
+			ent.setNoGravity(true);
+			ent.setDeltaMovement(0d, 0.05d, 0d);
 		}
-		if(ent.getTNTFuse() < 300) {
-			((Entity)ent).setDeltaMovement(0, 0, 0);
+		if (fuse < 300) {
+			ent.setDeltaMovement(0d, 0d, 0d);
 		}
-		if(ent.getTNTFuse() < 350) {
-			if(ent.getTNTFuse() % 20 == 0 && !ent.getLevel().isClientSide()) {
-				for(int i = 0; i <= 400 + (int)Math.round((1D / ((double)ent.getTNTFuse() * 0.5D))) * 1600D; i++) {
+		if (fuse < 350) {
+			if (fuse % 20 == 0 && !entity.getLevel().isClientSide()) {
+				for (int i = 0; i <= 400 + (int)Math.round((1d / (fuse * 0.5d))) * 1600d; i++) {
 					int offX = new Random().nextInt(75) - new Random().nextInt(75);
 					int offZ = new Random().nextInt(75) - new Random().nextInt(75);
-					int offY = LevelEvents.getTopBlock(ent.getLevel(), (int)Math.round(ent.x()) + offX, (int)Math.round(ent.z()) + offZ, false);
-					BlockPos pos = toBlockPos(new Vec3(ent.x() + offX, offY, ent.z() + offZ));
-					FallingBlockEntity.fall(ent.getLevel(), pos, ent.getLevel().getBlockState(pos));
-					ent.getLevel().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+					int offY = LevelEvents.getTopBlock(entity.getLevel(), (int)Math.round(entity.x()) + offX, (int)Math.round(entity.z()) + offZ, false);
+					BlockPos pos = toBlockPos(new Vec3(entity.x() + offX, offY, entity.z() + offZ));
+					FallingBlockEntity.fall(entity.getLevel(), pos, entity.getLevel().getBlockState(pos));
+					entity.getLevel().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 				}
 			}
 			
-			List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() + 100, ent.y() + 100, ent.z() + 100, ent.x() - 100, ent.y() - 100, ent.z() - 100));
-			List<FallingBlockEntity> blocks = ent.getLevel().getEntitiesOfClass(FallingBlockEntity.class, new AABB(ent.x() + 100, ent.y() + 100, ent.z() + 100, ent.x() - 100, ent.y() - 100, ent.z() - 100));
+			List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() + 100d, entity.y() + 100d, entity.z() + 100d, entity.x() - 100d, entity.y() - 100d, entity.z() - 100d));
+			List<FallingBlockEntity> blocks = entity.getLevel().getEntitiesOfClass(FallingBlockEntity.class, new AABB(entity.x() + 100d, entity.y() + 100d, entity.z() + 100d, entity.x() - 100d, entity.y() - 100d, entity.z() - 100d));
 			
-			for(FallingBlockEntity block : blocks) {
-				double x = ent.x() - block.getX();
-				double y = ent.y() - block.getY();
-				double z = ent.z() - block.getZ();
+			for (FallingBlockEntity block : blocks) {
+				double x = entity.x() - block.getX();
+				double y = entity.y() - block.getY();
+				double z = entity.z() - block.getZ();
 				Vec3 vec = new Vec3(x, y, z);
-				if(vec.length() <= 2) {
+				if (vec.length() <= 2) {
 					block.discard();
 				}
 				Vec3 vec3 = vec.normalize().scale(0.4D);
 				block.setDeltaMovement(vec3.add(0, 0.1D, 0));
 			}
 			
-			for(LivingEntity living : list) {
-				double x = ent.x() - living.getX();
-				double y = ent.y() - living.getEyeY();
-				double z = ent.z() - living.getZ();
+			for (LivingEntity living : list) {
+				double x = entity.x() - living.getX();
+				double y = entity.y() - living.getEyeY();
+				double z = entity.z() - living.getZ();
 				Vec3 vec = new Vec3(x, y, z);
-				DamageSources sources = new DamageSources(ent.getLevel().registryAccess());
-				if(vec.length() <= 2 && ent.getTNTFuse() % 80 == 0 && living instanceof Player) {
+				DamageSources sources = new DamageSources(entity.getLevel().registryAccess());
+				if (vec.length() <= 2 && fuse % 80 == 0 && living instanceof Player) {
 					living.hurt(sources.inWall(), 6f);
 				}
-				if(vec.length() <= 2 && !(living instanceof Player)) {
+				if (vec.length() <= 2 && !(living instanceof Player)) {
 					living.discard();
 				}
-				Vec3 vec3 = vec.normalize().scale((1D / (0.25D * vec.length() + 0.0001D)) + 0.5D);
+				Vec3 vec3 = vec.normalize().scale((1d / (0.25d * vec.length() + 0.0001d)) + 0.5d);
 				living.setDeltaMovement(vec3);
 			}
 		}
@@ -83,14 +85,14 @@ public class BlackHoleTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		EntityRegistry.TNT_X500_EFFECT.build().serverExplosion(ent);
 		
-		List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() + 100, ent.y() + 100, ent.z() + 100, ent.x() - 100, ent.y() - 100, ent.z() - 100));
-		List<FallingBlockEntity> blocks = ent.getLevel().getEntitiesOfClass(FallingBlockEntity.class, new AABB(ent.x() + 100, ent.y() + 100, ent.z() + 100, ent.x() - 100, ent.y() - 100, ent.z() - 100));
+		List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() + 100d, ent.y() + 100d, ent.z() + 100d, ent.x() - 100d, ent.y() - 100d, ent.z() - 100d));
+		List<FallingBlockEntity> blocks = ent.getLevel().getEntitiesOfClass(FallingBlockEntity.class, new AABB(ent.x() + 100d, ent.y() + 100d, ent.z() + 100d, ent.x() - 100d, ent.y() - 100d, ent.z() - 100d));
 	
-		for(FallingBlockEntity block : blocks) {
+		for (FallingBlockEntity block : blocks) {
 			block.discard();
 		}
 		
-		for(LivingEntity living : list) {
+		for (LivingEntity living : list) {
 			double x = living.getX() - ent.x();
 			double y = living.getEyeY() - ent.y();
 			double z = living.getZ() - ent.z();
@@ -101,18 +103,18 @@ public class BlackHoleTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() < 350) {
-			double phi = Math.PI * (3D - Math.sqrt(5D));
-			for(int i = 0; i < 1000; i++) {
-				double y = 1D - ((double)i / (1000D - 1D)) * 2D;
-				double radius = Math.sqrt(1D - y * y);
+		if (ent.getTNTFuse() < 350) {
+			double phi = Math.PI * (3d - Math.sqrt(5d));
+			for (int i = 0; i < 1000; i++) {
+				double y = 1d - (i / 999d) * 2d;
+				double radius = Math.sqrt(1d - y * y);
 				
 				double theta = phi * i;
 				
 				double x = Math.cos(theta) * radius;
 				double z = Math.sin(theta) * radius;
 				
-				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + x * 2, ent.y() + 0.5D  + y * 2, ent.z() + 2 * z, 0, 0, 0);
+				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.75f), ent.x() + x * 2d, ent.y() + 0.5d + y * 2d, ent.z() + 2d * z, 0, 0, 0);
 			}
 		}
 	}
