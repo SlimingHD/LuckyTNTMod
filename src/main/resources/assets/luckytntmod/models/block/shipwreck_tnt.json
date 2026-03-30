@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/shipwreck_bottom",
+        "up": "luckytntmod:block/monument_top",
+        "north": "luckytntmod:block/shipwreck_side",
+        "east": "luckytntmod:block/shipwreck_side",
+        "south": "luckytntmod:block/shipwreck_side",
+        "west": "luckytntmod:block/shipwreck_side",
+        "particle": "luckytntmod:block/shipwreck_side"
+    }
+}

@@ -106,17 +106,17 @@ public class LevelEvents {
 				BlockState state = level.getBlockState(pos);
 				BlockState stateUp = level.getBlockState(posUp);
 				if (ignoreLeaves) {
-					if (state.isCollisionShapeFullBlock(level, pos) && !stateUp.isCollisionShapeFullBlock(level, posUp) && !state.is(BlockTags.LEAVES)) {
+					if (!state.getCollisionShape(level, pos).isEmpty() && stateUp.getCollisionShape(level, posUp).isEmpty() && !state.is(BlockTags.LEAVES)) {
 						return y;
 					}
 				} else {
-					if (state.isCollisionShapeFullBlock(level, pos) && !stateUp.isCollisionShapeFullBlock(level, posUp)) {
+					if (!state.getCollisionShape(level, pos).isEmpty() && stateUp.getCollisionShape(level, posUp).isEmpty()) {
 						return y;
 					}
 				}
 			}
 		}
-		return 0;
+		return level.getMinBuildHeight() - 1;
 	}
 	
 	public static void setBiomeInCylinder(ServerLevel server, Vec3 center, int radius, ResourceKey<Biome> biome) {

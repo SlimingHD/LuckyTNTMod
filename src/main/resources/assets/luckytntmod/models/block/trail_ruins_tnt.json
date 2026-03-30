@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/mineshaft_bottom",
+        "up": "luckytntmod:block/day_tnt_top",
+        "north": "luckytntmod:block/trail_ruins_side_1",
+        "east": "luckytntmod:block/trail_ruins_side_2",
+        "south": "luckytntmod:block/trail_ruins_side_3",
+        "west": "luckytntmod:block/trail_ruins_side_4",
+        "particle": "luckytntmod:block/trail_ruins_side_1"
+    }
+}

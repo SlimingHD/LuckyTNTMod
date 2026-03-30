@@ -3,20 +3,29 @@
 		"structure=pillager_outpost": {
 			"model": "luckytntmod:block/pillager_outpost_tnt"
 		},
+		"structure=mineshaft": {
+			"model": "luckytntmod:block/mineshaft_tnt"
+		},
 		"structure=mansion": {
 			"model": "luckytntmod:block/woodland_mansion_tnt"
 		},
-		"structure=jungle_pyramid": {
+		"structure=jungle_temple": {
 			"model": "luckytntmod:block/jungle_pyramid_tnt"
 		},
 		"structure=desert_pyramid": {
 			"model": "luckytntmod:block/desert_pyramid_tnt"
+		},
+		"structure=shipwreck": {
+			"model": "luckytntmod:block/shipwreck_tnt"
 		},
 		"structure=stronghold": {
 			"model": "luckytntmod:block/stronghold_tnt"
 		},
 		"structure=monument": {
 			"model": "luckytntmod:block/monument_tnt"
+		},
+		"structure=ocean_ruin": {
+			"model": "luckytntmod:block/ocean_ruin_tnt"
 		},
 		"structure=fortress": {
 			"model": "luckytntmod:block/fortress_tnt"
@@ -41,6 +50,12 @@
 		},
 		"structure=village_taiga": {
 			"model": "luckytntmod:block/village_taiga_tnt"
+		},
+		"structure=ancient_city": {
+			"model": "luckytntmod:block/ancient_city_tnt"
+		},
+		"structure=trail_ruins": {
+			"model": "luckytntmod:block/trail_ruins_tnt"
 		}
 	}
 }

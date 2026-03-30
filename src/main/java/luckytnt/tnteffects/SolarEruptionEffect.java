@@ -8,48 +8,55 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
 public class SolarEruptionEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() < 260) {
-			if(ent.getTNTFuse() % 20 == 0) {
-				for(int count = 0; count < 40; count++) {
-					LExplosiveProjectile tnt = EntityRegistry.SOLAR_ERUPTION_PROJECTILE.get().create(ent.getLevel());
-					tnt.setPos(ent.getPos());
-					tnt.setOwner(ent.owner());
-					tnt.setDeltaMovement(Math.random() * 3f - Math.random() * 3f, 5 + Math.random() * 2, Math.random() * 3f - Math.random() * 3f);		
-					tnt.setSecondsOnFire(1000);
-					ent.getLevel().addFreshEntity(tnt);
-					ent.getLevel().playSound(null, toBlockPos(ent.getPos()), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 3, 1);
-				}
+		Level level = ent.getLevel();
+		if (!level.isClientSide() && ent.getTNTFuse() < 260 && ent.getTNTFuse() % 20 == 0) {
+			RandomSource random = level.getRandom();
+			for (int count = 0; count < 40; count++) {
+				LExplosiveProjectile tnt = EntityRegistry.SOLAR_ERUPTION_PROJECTILE.get().create(level);
+				tnt.setPos(ent.getPos());
+				tnt.setOwner(ent.owner());
+				tnt.setDeltaMovement(random.nextDouble() * 6d - 3d, 5d + random.nextDouble() * 2d, random.nextDouble() * 6d - 3d);
+				tnt.setSecondsOnFire(1000);
+				level.addFreshEntity(tnt);
+				level.playSound(null, toBlockPos(ent.getPos()), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 3f, 1f);
 			}
 		}
 	}
-	
+
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, 0.1f, 0.4f, 0.1f);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, -0.1f, 0.4f, -0.1f);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, 0.1f, 0.4f, -0.1f);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, -0.1f, 0.4f, 0.1f);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, 0.05f, 0f, 0.05f);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, -0.05f, 0f, -0.05f);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5f, ent.y() + 0.5f, ent.z() - 0.5f, 0.05f, 0f, -0.05f);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5f, ent.y() + 0.5f, ent.z() + 0.5f, -0.05f, 0f, 0.05f);
-		ent.getLevel().addParticle(ParticleTypes.LAVA, ent.x() + 0.5f, ent.y() + 1f, ent.z() + 0.5f, 0, 0, 0);
-		ent.getLevel().addParticle(ParticleTypes.LAVA, ent.x() - 0.5f, ent.y() + 1f, ent.z() - 0.5f, 0, 0, 0);
-		ent.getLevel().addParticle(ParticleTypes.LAVA, ent.x() + 0.5f, ent.y() + 1f, ent.z() - 0.5f, 0, 0, 0);
-		ent.getLevel().addParticle(ParticleTypes.LAVA, ent.x() - 0.5f, ent.y() + 1f, ent.z() + 0.5f, 0, 0, 0);
+		Level level = ent.getLevel();
+		double x = ent.x();
+		double y = ent.y();
+		double z = ent.z();
+
+		level.addParticle(ParticleTypes.FLAME, x + 0.5d, y + 0.5d, z + 0.5d, 0.1d, 0.4d, 0.1d);
+		level.addParticle(ParticleTypes.FLAME, x - 0.5d, y + 0.5d, z - 0.5d, -0.1d, 0.4d, -0.1d);
+		level.addParticle(ParticleTypes.FLAME, x + 0.5d, y + 0.5d, z - 0.5d, 0.1d, 0.4d, -0.1d);
+		level.addParticle(ParticleTypes.FLAME, x - 0.5d, y + 0.5d, z + 0.5d, -0.1d, 0.4d, 0.1d);
+		level.addParticle(ParticleTypes.FLAME, x + 0.5d, y + 0.5d, z + 0.5d, 0.05d, 0d, 0.05d);
+		level.addParticle(ParticleTypes.FLAME, x - 0.5d, y + 0.5d, z - 0.5d, -0.05d, 0d, -0.05d);
+		level.addParticle(ParticleTypes.FLAME, x + 0.5d, y + 0.5d, z - 0.5d, 0.05d, 0d, -0.05d);
+		level.addParticle(ParticleTypes.FLAME, x - 0.5d, y + 0.5d, z + 0.5d, -0.05d, 0d, 0.05d);
+		level.addParticle(ParticleTypes.LAVA, x + 0.5d, y + 1d, z + 0.5d, 0d, 0d, 0d);
+		level.addParticle(ParticleTypes.LAVA, x - 0.5d, y + 1d, z - 0.5d, 0d, 0d, 0d);
+		level.addParticle(ParticleTypes.LAVA, x + 0.5d, y + 1d, z - 0.5d, 0d, 0d, 0d);
+		level.addParticle(ParticleTypes.LAVA, x - 0.5d, y + 1d, z + 0.5d, 0d, 0d, 0d);
 	}
-	
+
 	@Override
 	public Block getBlock() {
 		return BlockRegistry.SOLAR_ERUPTION.get();
 	}
-	
+
 	@Override
 	public int getDefaultFuse(IExplosiveEntity ent) {
 		return 360;

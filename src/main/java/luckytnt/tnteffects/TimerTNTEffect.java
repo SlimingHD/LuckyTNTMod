@@ -8,7 +8,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.block.Block;
 
-public class TimerTNTEffect extends PrimedTNTEffect{
+public class TimerTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {

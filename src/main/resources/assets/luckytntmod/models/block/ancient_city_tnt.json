@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/ancient_city_bottom",
+        "up": "luckytntmod:block/ancient_city_top",
+        "north": "luckytntmod:block/ancient_city_side",
+        "east": "luckytntmod:block/ancient_city_side",
+        "south": "luckytntmod:block/ancient_city_side",
+        "west": "luckytntmod:block/ancient_city_side",
+        "particle": "luckytntmod:block/ancient_city_side"
+    }
+}

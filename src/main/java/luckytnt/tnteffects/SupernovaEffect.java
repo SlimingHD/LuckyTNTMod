@@ -3,6 +3,7 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -10,29 +11,29 @@ import net.minecraft.world.entity.LightningBolt;
 public class SupernovaEffect extends SphereTNTEffect {
 
 	public SupernovaEffect() {
-		super(() -> BlockRegistry.SUPERNOVA, 200);
+		super(() -> BlockRegistry.SUPERNOVA, 200, 5000);
 	}
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() == 300) {
-			Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, ent.getLevel());
-			lighting.setPos(ent.x(), ent.y(), ent.z());
-			ent.getLevel().addFreshEntity(lighting);
+	public void explosionTick(IExplosiveEntity entity) {
+		if (entity.getTNTFuse() == 300) {
+			Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.getLevel());
+			lighting.setPos(entity.x(), entity.y(), entity.z());
+			entity.getLevel().addFreshEntity(lighting);
 		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		for(double angle = 0; angle < 360; angle += 6D) {
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 2 * Math.cos(angle * Math.PI / 180), ent.y() + 0.5f, ent.z() + 2 * Math.sin(angle * Math.PI / 180), 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 2 * Math.cos(angle * Math.PI / 180), ent.y() + 0.5f + 2 * Math.sin(angle * Math.PI / 180), ent.z(), 0, 0, 0);
-			ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5f + 2 * Math.cos(angle * Math.PI / 180), ent.z() + 2 * Math.sin(angle * Math.PI / 180), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		for (double angle = 0d; angle < 360d; angle += 6d) {
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 2d * Math.cos(angle * Mth.DEG_TO_RAD), entity.y() + 0.5d, entity.z() + 2d * Math.sin(angle * Mth.DEG_TO_RAD), 0d, 0d, 0d);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 2d * Math.cos(angle * Mth.DEG_TO_RAD), entity.y() + 0.5d + 2d * Math.sin(angle * Mth.DEG_TO_RAD), entity.z(), 0d, 0d, 0d);
+			entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d + 2d * Math.cos(angle * Mth.DEG_TO_RAD), entity.z() + 2d * Math.sin(angle * Mth.DEG_TO_RAD), 0d, 0d, 0d);
 		}
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 300;
 	}
 }

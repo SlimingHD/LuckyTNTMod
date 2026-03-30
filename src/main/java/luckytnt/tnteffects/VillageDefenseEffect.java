@@ -7,11 +7,11 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.level.block.Block;
 
-public class VillageDefenseEffect extends PrimedTNTEffect{
+public class VillageDefenseEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		for(int count = 0; count <= 15; count++) {
+		for (int count = 0; count < 10 + entity.getLevel().getRandom().nextInt(11); count++) {
 			IronGolem golem = new IronGolem(EntityType.IRON_GOLEM, entity.getLevel());
 			golem.setPos(entity.getPos());
 			golem.setPlayerCreated(true);

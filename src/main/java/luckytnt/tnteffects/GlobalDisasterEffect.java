@@ -5,19 +5,20 @@ import org.joml.Vector3f;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.util.Mth;
 
 public class GlobalDisasterEffect extends SphereTNTEffect {
 
 	public GlobalDisasterEffect() {
-		super(() -> BlockRegistry.GLOBAL_DISASTER, 50);
+		super(() -> BlockRegistry.GLOBAL_DISASTER, 50, 1000);
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		for(double angle = 0; angle < 360; angle += 6D) {
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 0.75f), ent.x() + 2 * Math.cos(angle * Math.PI / 180), ent.y() + 0.5f, ent.z() + 2 * Math.sin(angle * Math.PI / 180), 0, 0, 0);
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 0.75f), ent.x() + 2 * Math.cos(angle * Math.PI / 180), ent.y() + 0.5f + 2 * Math.sin(angle * Math.PI / 180), ent.z(), 0, 0, 0);
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 0.75f), ent.x(), ent.y() + 0.5f + 2 * Math.cos(angle * Math.PI / 180), ent.z() + 2 * Math.sin(angle * Math.PI / 180), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		for (double angle = 0d; angle < 360d; angle += 6d) {
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 0.75f), entity.x() + 2d * Math.cos(angle * Mth.DEG_TO_RAD), entity.y() + 0.5d, entity.z() + 2d * Math.sin(angle * Mth.DEG_TO_RAD), 0d, 0d, 0d);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 0.75f), entity.x() + 2d * Math.cos(angle * Mth.DEG_TO_RAD), entity.y() + 0.5d + 2d * Math.sin(angle * Mth.DEG_TO_RAD), entity.z(), 0d, 0d, 0d);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 0.75f), entity.x(), entity.y() + 0.5d + 2d * Math.cos(angle * Mth.DEG_TO_RAD), entity.z() + 2d * Math.sin(angle * Mth.DEG_TO_RAD), 0d, 0d, 0d);
 		}
 	}
 

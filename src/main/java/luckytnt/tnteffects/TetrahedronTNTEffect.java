@@ -1,88 +1,112 @@
 package luckytnt.tnteffects;
 
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 
 public class TetrahedronTNTEffect extends PrimedTNTEffect {
 
+	private static final float SIDE_LENGTH = 0.5f * (float)Math.sqrt(3d);
+	private static final float HEIGHT = ((float)Math.sqrt(6d) / 3f) * SIDE_LENGTH;
+	private static final Quaternionf QUAT = new Quaternionf().setAngleAxis(120d * (Math.PI / 180d), 0d, 1d, 0d);
+	private static final Vector3f COLOR = new Vector3f(1f, 0.42f, 0f);
+
+	@SuppressWarnings("deprecation")
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		BlockPos pos = toBlockPos(ent.getPos());
-		
+	public void serverExplosion(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
+		BlockPos pos = toBlockPos(entity.getPos());
+
 		double heigth = (Math.sqrt(3D) / 2D) * 60D;
 		double sideHeigth = Math.sqrt(60D * 60D - 30D * 30D);
-		
+
 		BlockPos A = pos.offset(-30, -30, (int)-Math.round((1D / 3D) * sideHeigth));
 		BlockPos B = pos.offset(30, -30, (int)-Math.round((1D / 3D) * sideHeigth));
 		BlockPos C = pos.offset(0, -30, (int)Math.round((2D / 3D) * sideHeigth));
 		BlockPos D = pos.offset(0, (int)Math.round(heigth - 30D), 0);
-		
+
 		Vec3 DA = new Vec3(A.getX() - D.getX(), A.getY() - D.getY(), A.getZ() - D.getZ());
 		Vec3 DB = new Vec3(B.getX() - D.getX(), B.getY() - D.getY(), B.getZ() - D.getZ());
 		Vec3 DC = new Vec3(C.getX() - D.getX(), C.getY() - D.getY(), C.getZ() - D.getZ());
 		Vec3 AB = new Vec3(B.getX() - A.getX(), B.getY() - A.getY(), B.getZ() - A.getZ());
 		Vec3 AC = new Vec3(C.getX() - A.getX(), C.getY() - A.getY(), C.getZ() - A.getZ());
-		
+
 		Vec3 NDAB = DB.cross(DA);
 		Vec3 NDAC = DA.cross(DC);
 		Vec3 NDCB = DC.cross(DB);
 		Vec3 NABC = AB.cross(AC);
-		
-		for (int offX = -40; offX <= 40; offX++) {
-			for (int offY = -40; offY <= 40; offY++) {
-				for (int offZ = -40; offZ <= 40; offZ++) {
-					Vec3 vec = new Vec3(Math.round(ent.x() + offX), Math.round(ent.y() + offY), Math.round(ent.z() + offZ));
 
-					if (distance(vec, NDAB, D) <= 0 && distance(vec, NDAC, D) <= 0 && distance(vec, NDCB, D) <= 0 && distance(vec, NABC, A) <= 0) {
-						BlockPos pos5 = toBlockPos(ent.getPos()).offset(offX, offY, offZ);
-
-						if (ent.getLevel().getBlockState(pos5).getExplosionResistance(ent.getLevel(), pos5, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-							ent.getLevel().getBlockState(pos5).onBlockExploded(ent.getLevel(), pos5, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-						}
-					}
+		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
+		ExplosionHelper.customCubicalExplosion(level, entity.getPos(), 40, (l, c, blockpos, state) -> {
+			Vec3 vec = Vec3.atCenterOf(blockpos);
+			if (distance(vec, NDAB, D) <= 0 && distance(vec, NDAC, D) <= 0 && distance(vec, NDCB, D) <= 0 && distance(vec, NABC, A) <= 0) {
+				if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200) {
+					level.setBlockAndUpdate(blockpos, Blocks.AIR.defaultBlockState());
+					state.getBlock().wasExploded(level, blockpos, dummy);
 				}
 			}
+		});
+	}
+	
+	@Override
+	public void spawnParticles(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
+
+		double degrees = (entity.getTNTFuse() / 100d) * 360d;
+		Quaternionf addQuat = new Quaternionf().setAngleAxis(degrees * (Math.PI / 180d), 0d, 1d, 0d);
+		Vector3f origin = entity.getPos().toVector3f().add(0.5f, 1.1f, 0.5f);
+		Vector3f vecToCorner = new Vector3f(0.5f, 0f, 0f);
+		vecToCorner.rotate(addQuat);
+		
+		Vector3f a = new Vector3f();
+		Vector3f b = new Vector3f();
+		Vector3f c = new Vector3f();
+		Vector3f d = new Vector3f();
+		
+		origin.add(vecToCorner, a);
+		origin.add(0f, HEIGHT, 0f, d);
+		vecToCorner.rotate(QUAT);
+		origin.add(vecToCorner, b);
+		vecToCorner.rotate(QUAT);
+		origin.add(vecToCorner, c);
+		
+		Vector3f ab = new Vector3f();
+		Vector3f ac = new Vector3f();
+		Vector3f ad = new Vector3f();
+		Vector3f bc = new Vector3f();
+		Vector3f bd = new Vector3f();
+		Vector3f cd = new Vector3f();
+		
+		b.sub(a, ab);
+		c.sub(a, ac);
+		d.sub(a, ad);
+		c.sub(b, bc);
+		d.sub(b, bd);
+		d.sub(c, cd);
+		
+		for (float f = 0f; f <= ab.length(); f += ab.length() / 20f) {
+			level.addParticle(new DustParticleOptions(COLOR, 0.5f), a.x + f * ab.x, a.y + f * ab.y, a.z + f * ab.z, 0d, 0d, 0d);
+			level.addParticle(new DustParticleOptions(COLOR, 0.5f), a.x + f * ac.x, a.y + f * ac.y, a.z + f * ac.z, 0d, 0d, 0d);
+			level.addParticle(new DustParticleOptions(COLOR, 0.5f), a.x + f * ad.x, a.y + f * ad.y, a.z + f * ad.z, 0d, 0d, 0d);
+			level.addParticle(new DustParticleOptions(COLOR, 0.5f), b.x + f * bc.x, b.y + f * bc.y, b.z + f * bc.z, 0d, 0d, 0d);
+			level.addParticle(new DustParticleOptions(COLOR, 0.5f), b.x + f * bd.x, b.y + f * bd.y, b.z + f * bd.z, 0d, 0d, 0d);
+			level.addParticle(new DustParticleOptions(COLOR, 0.5f), c.x + f * cd.x, c.y + f * cd.y, c.z + f * cd.z, 0d, 0d, 0d);
 		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		for(double i = 0D; i <= 1D; i += 0.05D) {
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), ent.x() - 0.5D + i, ent.y() + 1D, ent.z() - 0.5D, 0, 0, 0);
-		}
-		
-		Vec3 vec1 = new Vec3(0.5D, 0D, 1D);
-		Vec3 vec2 = new Vec3(-0.5D, 0D, 1D);
-		
-		for(double i = 0; i <= vec1.length(); i += vec1.length() / 20D) {
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), ent.x() - 0.5D + vec1.x * i, ent.y() + 1D, ent.z() - 0.5D + vec1.z * i, 0, 0, 0);
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), ent.x() + 0.5D + vec2.x * i, ent.y() + 1D, ent.z() - 0.5D + vec2.z * i, 0, 0, 0);
-		}
-		
-		Vec3 vec3 = new Vec3(0.5D, 0.75D, 0.5D);
-		Vec3 vec4 = new Vec3(-0.5D, 0.75D, 0.5D);
-		Vec3 vec5 = new Vec3(0D, 0.75D, -0.5D);
-		
-		for(double i = 0; i <= vec3.length(); i += vec3.length() / 20D) {
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), ent.x() - 0.5D + vec3.x * i, ent.y() + 1D + vec3.y * i, ent.z() - 0.5D + vec3.z * i, 0, 0, 0);
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), ent.x() + 0.5D + vec4.x * i, ent.y() + 1D + vec3.y * i, ent.z() - 0.5D + vec4.z * i, 0, 0, 0);
-		}
-		
-		for(double i = 0; i <= vec5.length(); i += vec5.length() / 20D) {
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 0.5f), ent.x(), ent.y() + 1D + vec5.y * i, ent.z() + 0.5D + vec5.z * i, 0, 0, 0);
-		}
-	}
-	
-	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 100;
 	}
 	

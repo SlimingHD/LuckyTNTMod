@@ -2,8 +2,8 @@ package luckytnt.tnteffects.projectile;
 
 import org.joml.Vector3f;
 
-import luckytnt.explosionrules.FilterCollidableExplosionRule;
 import luckytnt.registry.ItemRegistry;
+import luckytnt.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;

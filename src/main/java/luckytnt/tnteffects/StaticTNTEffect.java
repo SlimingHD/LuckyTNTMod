@@ -10,10 +10,12 @@ public class StaticTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		((Entity)entity).setPos(((Entity)entity).xo, ((Entity)entity).yo, ((Entity)entity).zo);
-		((Entity)entity).setDeltaMovement(0, 0, 0);
+		if (entity instanceof Entity ent) {
+			ent.setPos(ent.xo, ent.yo, ent.zo);
+			ent.setDeltaMovement(0, 0, 0);
+		}
 	}
-	
+
 	@Override
 	public Block getBlock() {
 		return BlockRegistry.STATIC_TNT.get();

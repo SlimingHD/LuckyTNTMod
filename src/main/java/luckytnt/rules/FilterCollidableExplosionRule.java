@@ -1,8 +1,8 @@
-package luckytnt.explosionrules;
+package luckytnt.rules;
 
 import com.google.gson.JsonObject;
 
-import luckytntlib.LuckyTNTLib;
+import luckytnt.LuckyTNTMod;
 import luckytntlib.util.explosions.rules.ExplosionRule;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +13,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class FilterCollidableExplosionRule implements ExplosionRule {
 
-	public static final ResourceLocation RESOURCE_LOCATION = new ResourceLocation(LuckyTNTLib.MODID, "filter_collidable");
+	public static final ResourceLocation RESOURCE_LOCATION = new ResourceLocation(LuckyTNTMod.MODID, "filter_collidable");
 	
 	private final ExplosionRule rule;
 	

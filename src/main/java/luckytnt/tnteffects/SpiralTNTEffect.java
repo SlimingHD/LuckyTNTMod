@@ -9,25 +9,23 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 
-public class SpiralTNTEffect extends PrimedTNTEffect{
+public class SpiralTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(entity instanceof PrimedLTNT) {
-			Entity ent = (Entity)entity;
+		if (entity instanceof PrimedLTNT ent) {
 			ent.setDeltaMovement(ent.getDeltaMovement().x, 0.15f, ent.getDeltaMovement().z);
-			if(entity.getTNTFuse() < 60) {
-				if(entity.getTNTFuse() % 3 == 0) {
+			if (entity.getTNTFuse() < 60) {
+				if (entity.getTNTFuse() % 3 == 0) {
 					ent.getPersistentData().putFloat("spiral_power", Mth.clamp(ent.getPersistentData().getFloat("spiral_power") + 0.06f, 0.2f, Float.MAX_VALUE));
-					LExplosiveProjectile spiral_tnt = EntityRegistry.SPIRAL_PROJECTILE.get().create(entity.getLevel());
-					spiral_tnt.setPos(entity.x(), entity.y(), entity.z());
-					spiral_tnt.setOwner(entity.owner());
-					spiral_tnt.shoot(ent.getLookAngle().x, ent.getLookAngle().y, ent.getLookAngle().z, ent.getPersistentData().getFloat("spiral_power"), 0);
-					entity.getLevel().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
-					entity.getLevel().addFreshEntity(spiral_tnt);
+					LExplosiveProjectile spiralTnt = EntityRegistry.SPIRAL_PROJECTILE.get().create(entity.getLevel());
+					spiralTnt.setPos(entity.x(), entity.y(), entity.z());
+					spiralTnt.setOwner(entity.owner());
+					spiralTnt.shoot(ent.getLookAngle().x, ent.getLookAngle().y, ent.getLookAngle().z, ent.getPersistentData().getFloat("spiral_power"), 0);
+					ent.level().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
+					ent.level().addFreshEntity(spiralTnt);
 					ent.setYRot(ent.getYRot() + 30f);
 				}
 			}

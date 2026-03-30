@@ -1,7 +1,7 @@
 package luckytnt.tnteffects;
 
-import luckytnt.explosionrules.FilterCollidableExplosionRule;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;

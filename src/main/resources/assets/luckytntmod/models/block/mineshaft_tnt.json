@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/mineshaft_bottom",
+        "up": "luckytntmod:block/mineshaft_top",
+        "north": "luckytntmod:block/mineshaft_side",
+        "east": "luckytntmod:block/mineshaft_side",
+        "south": "luckytntmod:block/mineshaft_side",
+        "west": "luckytntmod:block/mineshaft_side",
+        "particle": "luckytntmod:block/mineshaft_side"
+    }
+}

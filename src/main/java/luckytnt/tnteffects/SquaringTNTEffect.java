@@ -13,45 +13,40 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-public class SquaringTNTEffect extends PrimedTNTEffect{
+public class SquaringTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void baseTick(IExplosiveEntity entity) {
 		super.baseTick(entity);
-		if(((Entity)entity).onGround() && ((Entity)entity).getPersistentData().getInt("level") > 0) {
+		if (!entity.getLevel().isClientSide() && ((Entity)entity).onGround() && entity.getPersistentData().getInt("level") > 0) {
 			serverExplosion(entity);
-			if(((Entity)entity).getPersistentData().getInt("level") == 5) {
-				Level level = entity.getLevel();
-				entity.getLevel().playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
-			}
 		}
 	}
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		int level = ((Entity)entity).getPersistentData().getInt("level");
-		if(level == 5) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 15);
+		Level level = entity.getLevel();
+		int tntLevel = entity.getPersistentData().getInt("level");
+		
+		if (tntLevel == 5) {
+			ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity)entity, entity.getPos(), 15);
 			explosion.doEntityExplosion(1.5f, true);
-			explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
-		} else if(level == 0) {
-			for(int count = 0; count < 4; count++) {
-				PrimedLTNT tnt = EntityRegistry.SQUARING_TNT.get().create(entity.getLevel());
-				tnt.setPos(entity.getPos());
-				tnt.setOwner(entity.owner());
-				tnt.setDeltaMovement(Math.random() * 2.5D - 1.25D, 1 + Math.random(), Math.random() * 2.5D - 1.25D);
-				tnt.getPersistentData().putInt("level", level + 1);
-				entity.getLevel().addFreshEntity(tnt);
-			}
-		} else {
-			for(int count = 0; count < level * level; count++) {
-				PrimedLTNT tnt = EntityRegistry.SQUARING_TNT.get().create(entity.getLevel());
-				tnt.setPos(entity.getPos());
-				tnt.setOwner(entity.owner());
-				tnt.setDeltaMovement(Math.random() * 2.5D - 1.25D, 1 + Math.random(), Math.random() * 2.5D - 1.25D);
-				tnt.getPersistentData().putInt("level", level + 1);
-				entity.getLevel().addFreshEntity(tnt);
-			}
+			explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+			explosion.spawnExplosionParticles();
+			level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2f) * 0.7f);
+			entity.destroy();
+			return;
+		}
+
+		RandomSource random = level.getRandom();
+		int amount = tntLevel == 0 ? 4 : tntLevel * tntLevel;
+		for (int count = 0; count < amount; count++) {
+			PrimedLTNT tnt = EntityRegistry.SQUARING_TNT.get().create(level);
+			tnt.setPos(entity.getPos());
+			tnt.setOwner(entity.owner());
+			tnt.setDeltaMovement(random.nextDouble() * 2.5d - 1.25d, 1 + random.nextDouble(), random.nextDouble() * 2.5d - 1.25d);
+			tnt.getPersistentData().putInt("level", tntLevel + 1);
+			level.addFreshEntity(tnt);
 		}
 		entity.destroy();
 	}
@@ -63,6 +58,6 @@ public class SquaringTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public int getDefaultFuse(IExplosiveEntity entity) {
-		return ((Entity)entity).getPersistentData().getInt("level") == 5 ? 100000 : 200;
+		return entity.getPersistentData().getInt("level") == 5 ? 100000 : 200;
 	}
 }

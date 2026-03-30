@@ -23,32 +23,34 @@ import net.minecraftforge.network.PacketDistributor;
 public class ToxicCloudEffect extends PrimedTNTEffect {
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() == 1200 && !ent.getLevel().isClientSide()) {
-			ent.getPersistentData().putDouble("size", 1D + Math.random() * 3D);
-			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)ent), new ClientboundToxicCloudPacket(ent.getPersistentData().getDouble("size"), ((Entity)ent).getId()));
+	public void explosionTick(IExplosiveEntity entity) {
+		if (entity.getTNTFuse() == 1200 && !entity.getLevel().isClientSide()) {
+			entity.getPersistentData().putDouble("size", 1d + entity.getLevel().getRandom().nextDouble() * 3d);
+			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)entity), new ClientboundToxicCloudPacket(entity.getPersistentData().getDouble("size"), ((Entity)entity).getId()));
 		}
-		((Entity)ent).setDeltaMovement(0, 0, 0);
-		((Entity)ent).setPos(((Entity)ent).xOld, ((Entity)ent).yOld, ((Entity)ent).zOld);
-		List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, ((Entity)ent).getBoundingBox());
-		for(LivingEntity lent : list) {
-			lent.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 4));
-			lent.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 400, 0));
-			lent.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 2));
+		((Entity)entity).setDeltaMovement(0, 0, 0);
+		((Entity)entity).setPos(((Entity)entity).xOld, ((Entity)entity).yOld, ((Entity)entity).zOld);
+		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, ((Entity)entity).getBoundingBox());
+		for (LivingEntity living : list) {
+			living.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 4));
+			living.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 400, 0));
+			living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 2));
 		}
 	}
 	
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), (int)Math.round(ent.getPersistentData().getDouble("size") * 5D));
+	public void serverExplosion(IExplosiveEntity entity) {
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), (int)Math.round(entity.getPersistentData().getDouble("size") * 5D));
 		explosion.doEntityExplosion(2f, true);
-		explosion.doImprovedBlockExplosion(1f, 1.1f, true, false, RandomSource.create());
+		explosion.doImprovedBlockExplosion(1f, 1.1f, true, false, null);
+		explosion.spawnExplosionParticles();
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		for(int count = 0; count < ent.getPersistentData().getDouble("size") * 5; count++) {
-			ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.7f, 1f, 0.5f), 10f), true, ent.x() + ent.getPersistentData().getDouble("size") * 1.5f * Math.random() - ent.getPersistentData().getDouble("size") * 1.5f * Math.random(), ent.y() + ent.getPersistentData().getDouble("size") * 1.5f * Math.random() - ent.getPersistentData().getDouble("size") * 1.5f * Math.random(), ent.z() + ent.getPersistentData().getDouble("size") * 1.5f * Math.random() - ent.getPersistentData().getDouble("size") * 1.5f * Math.random(), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		RandomSource random = entity.getLevel().getRandom();
+		for (int count = 0; count < entity.getPersistentData().getDouble("size") * 5; count++) {
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.7f, 1f, 0.5f), 10f), true, entity.x() + entity.getPersistentData().getDouble("size") * 1.5f * random.nextDouble() - entity.getPersistentData().getDouble("size") * 1.5f * random.nextDouble(), entity.y() + entity.getPersistentData().getDouble("size") * 1.5f * random.nextDouble() - entity.getPersistentData().getDouble("size") * 1.5f * random.nextDouble(), entity.z() + entity.getPersistentData().getDouble("size") * 1.5f * random.nextDouble() - entity.getPersistentData().getDouble("size") * 1.5f * random.nextDouble(), 0, 0, 0);
 		}
 	}
 	

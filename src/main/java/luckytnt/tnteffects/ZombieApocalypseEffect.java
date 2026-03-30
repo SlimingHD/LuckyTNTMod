@@ -13,26 +13,26 @@ import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.level.block.Block;
 
-public class ZombieApocalypseEffect extends PrimedTNTEffect{
+public class ZombieApocalypseEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		for(int count = 0; count <= 30 + Math.random() * 15; count++) {
+		for (int count = 0; count <= 30 + entity.getLevel().getRandom().nextDouble() * 15; count++) {
 			Zombie zombie = new Zombie(EntityType.ZOMBIE, entity.getLevel());
 			zombie.setPos(entity.getPos());
 			entity.getLevel().addFreshEntity(zombie);
 		}
-		for(int count = 0; count <= 10 + Math.random() * 5; count++) {
+		for (int count = 0; count <= 10 + entity.getLevel().getRandom().nextDouble() * 5; count++) {
 			ZombieHorse zombie = new ZombieHorse(EntityType.ZOMBIE_HORSE, entity.getLevel());
 			zombie.setPos(entity.getPos());
 			entity.getLevel().addFreshEntity(zombie);
 		}
-		for(int count = 0; count <= 15 + Math.random() * 10; count++) {
+		for (int count = 0; count <= 15 + entity.getLevel().getRandom().nextDouble() * 10; count++) {
 			ZombieVillager zombie = new ZombieVillager(EntityType.ZOMBIE_VILLAGER, entity.getLevel());
 			zombie.setPos(entity.getPos());
 			entity.getLevel().addFreshEntity(zombie);
 		}
-		((ServerLevel)entity.getLevel()).setDayTime(18000);
+		((ServerLevel) entity.getLevel()).setDayTime(18000);
 	}
 	
 	@Override
