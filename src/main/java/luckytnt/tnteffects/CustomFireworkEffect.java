@@ -23,7 +23,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class CustomFireworkEffect extends PrimedTNTEffect {
 
-	private static Constructor<FallingBlockEntity> CONSTRUCTOR;
+	public static Constructor<FallingBlockEntity> CONSTRUCTOR;
 	
 	static {
 		try {

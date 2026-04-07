@@ -1,13 +1,22 @@
 package luckytnt.tnteffects;
 
-import java.util.Random;
+import java.util.List;
+
+import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
-import luckytnt.util.Materials;
+import luckytnt.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.RandomList;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.CraterExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterRandomDistanceExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,70 +24,34 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.GrassBlock;
-import net.minecraft.world.level.block.MyceliumBlock;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class MineralTNTEffect extends PrimedTNTEffect {
 
+	private static final RandomList<Block> BLOCKS = new RandomList<>(
+		List.of(Blocks.COAL_BLOCK, Blocks.IRON_BLOCK, Blocks.GOLD_BLOCK, Blocks.COPPER_BLOCK, Blocks.REDSTONE_BLOCK, Blocks.EMERALD_BLOCK, Blocks.LAPIS_BLOCK, Blocks.DIAMOND_BLOCK, Blocks.NETHERITE_BLOCK), 
+		List.of(0.9f / 7f, 0.9f / 7f, 0.9f / 7f, 0.9f / 7f, 0.9f / 7f, 0.9f / 7f, 0.9f / 7f, 0.06f, 0.04f)
+	);
+	
+	@SuppressWarnings("deprecation")
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		ExplosionHelper.doCylindricalExplosion(ent.getLevel(), ent.getPos(), 30, 30, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= 50 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-					if((!state.isCollisionShapeFullBlock(level, pos) || state.is(Blocks.FIRE) || state.is(Blocks.SOUL_FIRE) 
-					|| state.is(BlockTags.LEAVES) || Materials.isPlant(state) || state.is(BlockTags.SNOW)
-					|| Materials.isWood(state)) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
-					{
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-					}
-				}
-			}
-		});
+	public void serverExplosion(IExplosiveEntity entity) {
+		ExplosionHelper.legacyCylindricalExplosion(entity.getLevel(), entity.getPos(), 30, 30, 200f, new FilterAirExplosionRule(
+			new StackedExplosionRule(
+				FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.LOGS)).build(new AlwaysExplosionRule()),
+				LogicExplosionRule.not(
+					new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), 
+					new AlwaysExplosionRule()
+				)
+			)
+		));
 		
-		ExplosionHelper.doCubicalExplosion(ent.getLevel(), ent.getPos(), 30, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				double distanceRe = Math.sqrt(Math.pow(ent.x() - pos.getX(), 2D) + Math.pow(ent.y() - pos.getY(), 2D) * 25 + Math.pow(ent.z() - pos.getZ(), 2D));
-				if(distanceRe <= 30 + Math.random() * 2 - Math.random() * 2 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-					level.getBlockState(pos).getBlock().onBlockExploded(level.getBlockState(pos), level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-				}
-			}
-		});
+		ExplosionHelper.legacySpheroidExplosion(entity.getLevel(), entity.getPos(), 33, new Vector3f(1f, 1f / 5f, 1f), 200f, FilterRandomDistanceExplosionRule.quadraticDecrease(28, 33, new CraterExplosionRule()));
 		
-		ExplosionHelper.doCubicalExplosion(ent.getLevel(), ent.getPos(), 40, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				double distanceRe = Math.sqrt(Math.pow(ent.x() - pos.getX(), 2D) + Math.pow(ent.y() - pos.getY(), 2D) * 25 + Math.pow(ent.z() - pos.getZ(), 2D));
-				if(distanceRe <= 37 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200 && state.isCollisionShapeFullBlock(level, pos) && !state.is(BlockTags.LEAVES) && !Materials.isWood(state)) {
-					if(touchesAir(ent, pos)) {
-						level.getBlockState(pos).getBlock().onBlockExploded(level.getBlockState(pos), level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-						double randomNumber = Math.random();
-						if(randomNumber < 0.9D) {
-							Block block = null;
-							int random = new Random().nextInt(7);
-							switch(random) {
-								case 0: block = Blocks.COAL_BLOCK; break;
-								case 1: block = Blocks.IRON_BLOCK; break;
-								case 2: block = Blocks.GOLD_BLOCK; break;
-								case 3: block = Blocks.COPPER_BLOCK; break;
-								case 4: block = Blocks.REDSTONE_BLOCK; break;
-								case 5: block = Blocks.EMERALD_BLOCK; break;
-								case 6: block = Blocks.LAPIS_BLOCK; break;
-								default: block = Blocks.COAL_BLOCK; break;
-							}
-							level.setBlock(pos, block.defaultBlockState(), 3);
-						} else if(randomNumber >= 0.9D && randomNumber < 0.96D) {
-							level.setBlock(pos, Blocks.DIAMOND_BLOCK.defaultBlockState(), 3);
-						} else if(randomNumber >= 0.96D) {
-							level.setBlock(pos, Blocks.NETHERITE_BLOCK.defaultBlockState(), 3);
-						}
-					}
-				}
+		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(entity.getLevel());
+		ExplosionHelper.customSpheroidExplosion(entity.getLevel(), entity.getPos(), 33, new Vector3f(1f, 1f / 5f, 1f), (level, center, pos, state) -> {
+			if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f && !state.is(BlockTags.LOGS) && !state.is(BlockTags.LEAVES) && state.isCollisionShapeFullBlock(level, pos) && touchesAir(level, pos)) {
+				level.setBlockAndUpdate(pos, BLOCKS.getRandomItem(level.getRandom()).defaultBlockState());
+				state.getBlock().wasExploded(level, pos, dummy);
 			}
 		});
 	}
@@ -87,16 +60,16 @@ public class MineralTNTEffect extends PrimedTNTEffect {
 	public Block getBlock() {
 		return BlockRegistry.MINERAL_TNT.get();
 	}
-	
+
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 150;
 	}
-	
-	public boolean touchesAir(IExplosiveEntity ent, BlockPos pos) {
-		for(Direction dir : Direction.values()) {
-			BlockPos pos1 = pos.offset(dir.getNormal());
-			if(ent.getLevel().getBlockState(pos1).isAir()) {
+
+	private static boolean touchesAir(Level level, BlockPos pos) {
+		for (Direction dir : Direction.values()) {
+			BlockPos offset = pos.relative(dir);
+			if (level.getBlockState(offset).isAir()) {
 				return true;
 			}
 		}

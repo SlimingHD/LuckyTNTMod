@@ -7,7 +7,9 @@ import net.minecraft.world.entity.Entity;
 public class LevitatingTNTEffect extends PrimedTNTEffect {
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		((Entity)ent).setDeltaMovement(((Entity)ent).getDeltaMovement().x, 0.15f, ((Entity)ent).getDeltaMovement().z);
+	public void explosionTick(IExplosiveEntity entity) {
+		if (entity instanceof Entity ent) {
+			ent.setDeltaMovement(ent.getDeltaMovement().x, 0.15f, ent.getDeltaMovement().z);
+		}
 	}
 }

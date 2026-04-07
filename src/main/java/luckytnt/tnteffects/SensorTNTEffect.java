@@ -9,8 +9,6 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -29,7 +27,7 @@ public class SensorTNTEffect extends PrimedTNTEffect {
 					explosion.doEntityExplosion(1f, true);
 					explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
 					explosion.spawnExplosionParticles();
-					level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.random.nextFloat() - level.random.nextFloat()) * 0.2f) * 0.7f);
+					playExplosionSound(entity);
 					entity.destroy();
 				}
 			}

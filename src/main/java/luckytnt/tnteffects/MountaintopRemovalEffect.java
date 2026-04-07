@@ -3,6 +3,7 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.Level;
 
 public class MountaintopRemovalEffect extends FlatTNTEffect {
 
@@ -11,20 +12,17 @@ public class MountaintopRemovalEffect extends FlatTNTEffect {
 	}
 
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0.2f, -0.05f, 0);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), -0.2f, -0.05f, 0);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0, -0.05f, 0.2f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0, -0.05f, -0.2f);
-		
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.05f, 0.1f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.05f, -0.1f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), 0.1f, -0.05f, -0.1f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 0.5f, ent.z(), -0.1f, -0.05f, 0.1f);
-	}
-	
-	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
-		return 180;
+	public void spawnParticles(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
+
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z(), 0.2d, -0.05d, 0d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z(), -0.2d, -0.05d, 0d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z(), 0d, -0.05d, 0.2d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z(), 0d, -0.05d, -0.2d);
+
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z(), 0.1d, -0.05d, 0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z(), -0.1d, -0.05d, -0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z(), 0.1d, -0.05d, -0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z(), -0.1d, -0.05d, 0.1d);
 	}
 }

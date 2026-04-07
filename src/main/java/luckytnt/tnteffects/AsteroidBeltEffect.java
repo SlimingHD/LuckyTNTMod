@@ -1,5 +1,6 @@
 package luckytnt.tnteffects;
 
+import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
 import luckytntlib.entity.PrimedLTNT;
@@ -18,7 +19,7 @@ public class AsteroidBeltEffect extends PrimedTNTEffect {
 			tnt.setOwner(ent.owner());
 			double x = ent.x() + 160 * Math.cos(angle * Math.PI / 180);
 			double z = ent.z() + 160 * Math.sin(angle * Math.PI / 180);
-			double y = RingTNTEffect.getFirstMotionBlockingBlock(ent.getLevel(), x, z);
+			double y = LevelEvents.getTopBlock(ent.getLevel(), x, z, false);
 			tnt.setPos(x, y + 1D, z);
 			ent.getLevel().addFreshEntity(tnt);
 		}

@@ -1,111 +1,102 @@
 package luckytnt.tnteffects; 
 
-import java.util.Random;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.joml.Vector3f;
 
+import com.mojang.datafixers.util.Pair;
+
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
-import luckytnt.util.Materials;
+import luckytnt.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.level.block.GrassBlock;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.MyceliumBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class PlantationTNTEffect extends PrimedTNTEffect {
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 41, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-					if((!state.isCollisionShapeFullBlock(level, pos) || state.is(Blocks.FIRE) || state.is(Blocks.SOUL_FIRE) 
-					|| state.is(BlockTags.LEAVES) || Materials.isPlant(state) || state.is(BlockTags.SNOW)
-					|| Materials.isWood(state)) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
-					{
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-					}
-				}
-			}
-		});
+	public void serverExplosion(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
 		
-		for(double offX = -42; offX <= 42; offX++) {
-			for(double offZ = -42; offZ <= 42; offZ++) {
-				double distance = Math.sqrt(offX * offX + offZ * offZ);
-				if(distance <= 42) {
-					int y = LevelEvents.getTopBlock(ent.getLevel(), ent.x() + offX, ent.z() + offZ, true);
-					BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), y, Mth.floor(ent.z() + offZ));
-					ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-					ent.getLevel().setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
+		ExplosionHelper.createCylindricalCrater(level, entity.getPos(), 41, 41, 200, new FilterAirExplosionRule(
+			LogicExplosionRule.or(
+				FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.LOGS)).build(new AlwaysExplosionRule()), 
+				LogicExplosionRule.not(
+					new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), 
+					new AlwaysExplosionRule()
+				), 
+				new AlwaysExplosionRule()
+			)
+		));
+
+		LinkedList<Pair<BlockPos, Integer>> placedCrops = new LinkedList<>();
+		
+		int x = Mth.floor(entity.x());
+		int z = Mth.floor(entity.z());
+		int maxDistanceSqr = 41 * 41;
+		int maxCropDistanceSqr = 40 * 40;
+		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
+		for (int offX = -41; offX <= 41; offX++) {
+			for (int offZ = -41; offZ <= 41; offZ++) {
+				int distanceSqr = offX * offX + offZ * offZ;
+				if (distanceSqr <= maxDistanceSqr) {
+					BlockPos pos = new BlockPos(x + offX, LevelEvents.getTopBlock(level, x + offX, z + offZ, false), z + offZ);
+					BlockPos posAbove = pos.above();
+					BlockState stateAbove = level.getBlockState(posAbove);
+					if (stateAbove.isAir()) {
+						placeCrop(level, pos, dummy, distanceSqr > maxCropDistanceSqr);
+						placedCrops.add(Pair.of(pos, distanceSqr));
+					}
 				}
 			}
 		}
 		
-		BlockPos posBelow = toBlockPos(ent.getPos()).below();
-		placeWater(posBelow, ent);
-		
-		for(double offX = -41; offX <= 41; offX++) {
-			for(double offZ = -41; offZ <= 41; offZ++) {
-				double distance = Math.sqrt(offX * offX + offZ * offZ);
-				boolean blockFound = false;
-				for(double offY = 320; offY > -64; offY--) {	
-					BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY), Mth.floor(ent.z() + offZ));
-					BlockPos posUp = new BlockPos(Mth.floor(ent.x() + offX), Mth.floor(ent.y() + offY + 1), Mth.floor(ent.z() + offZ));
-					BlockState state = ent.getLevel().getBlockState(pos);
-					BlockState stateUp = ent.getLevel().getBlockState(posUp);
-					
-					if(state.getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200 && stateUp.getExplosionResistance(ent.getLevel(), posUp, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 200 && !blockFound) {
-						if(state.isCollisionShapeFullBlock(ent.getLevel(), pos) && !stateUp.isCollisionShapeFullBlock(ent.getLevel(), posUp) && !state.is(BlockTags.LEAVES) && !stateUp.is(Blocks.WATER) && !stateUp.is(Blocks.LAVA)) {
-							blockFound = true;
-							if(distance > 40 && distance <= 41) {
-								placeCropsAndFarmland(pos, true, ent);
-							} else if(distance > 39 && distance <= 40) {
-								placeWater(pos, ent);
-							} else if(distance > 32 && distance <= 39) {
-								placeCropsAndFarmland(pos, false, ent);
-							} else if(distance > 31 && distance <= 32) {
-								placeWater(pos, ent);
-							} else if(distance > 24 && distance <= 31) {
-								placeCropsAndFarmland(pos, false, ent);
-							} else if(distance > 23 && distance <= 24) {
-								placeWater(pos, ent);
-							} else if(distance > 16 && distance <= 23) {
-								placeCropsAndFarmland(pos, false, ent);
-							} else if(distance > 15 && distance <= 16) {
-								placeWater(pos, ent);
-							} else if(distance > 8 && distance <= 15) {
-								placeCropsAndFarmland(pos, false, ent);
-							} else if(distance > 7 && distance <= 8) {
-								placeWater(pos, ent);
-							} else if(distance <= 7) {
-								placeCropsAndFarmland(pos, false, ent);
-							} 
-						}
-					}
+		int[] waterDistances = new int[]{7 * 7, 8 * 8, 15 * 15, 16 * 16, 23 * 23, 24 * 24, 31 * 31, 32 * 32, 39 * 39, 40 * 40};
+		for (Pair<BlockPos, Integer> pair : placedCrops) {
+			int distanceSqr = pair.getSecond();
+			boolean placeWater = false;
+			for (int i = 0; i < waterDistances.length; i += 2) {
+				if (distanceSqr > waterDistances[i] && distanceSqr <= waterDistances[i + 1]) {
+					placeWater = true;
+					break;
 				}
+			}
+			if (placeWater) {
+				BlockPos pos = pair.getFirst();
+				BlockPos posAbove = pos.above();
+				BlockState stateAbove = level.getBlockState(posAbove);
+				if (Math.max(stateAbove.getBlock().getExplosionResistance(), stateAbove.getFluidState().getExplosionResistance()) <= 200f) {
+					level.setBlockAndUpdate(posAbove, Blocks.AIR.defaultBlockState());
+					stateAbove.getBlock().wasExploded(level, posAbove, dummy);
+				}
+				placeWater(level, pos, dummy);
 			}
 		}
 	}
 
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0.1f), 1f), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0.1f), 1f), entity.x(), entity.y() + 1d, entity.z(), 0d, 0d, 0d);
 	}
 	
 	@Override
@@ -114,67 +105,79 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 160;
 	}
 	
-	public void placeCropsAndFarmland(BlockPos pos, boolean melonOrPumpkin, IExplosiveEntity ent) {
-		if(!melonOrPumpkin) { 
-			ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-			int rand = new Random().nextInt(4);
-			BlockState crop = Blocks.POTATOES.defaultBlockState();
-			switch(rand) {
-				case 0: crop = Blocks.CARROTS.defaultBlockState().setValue(BlockStateProperties.AGE_7, new Random().nextInt(8)); break;
-				case 1: crop = Blocks.POTATOES.defaultBlockState().setValue(BlockStateProperties.AGE_7, new Random().nextInt(8)); break;
-				case 2: crop = Blocks.WHEAT.defaultBlockState().setValue(BlockStateProperties.AGE_7, new Random().nextInt(8)); break;
-				case 3: crop = Blocks.BEETROOTS.defaultBlockState().setValue(BlockStateProperties.AGE_3, new Random().nextInt(4)); break;
-			}
-			ent.getLevel().setBlock(pos, Blocks.FARMLAND.defaultBlockState().setValue(FarmBlock.MOISTURE, 7), 3);
-			if(!ent.getLevel().getBlockState(pos.above()).isCollisionShapeFullBlock(ent.getLevel(), pos.above()) && !(ent.getLevel().getBlockState(pos.above()).getBlock() instanceof FarmBlock)) 
-				ent.getLevel().setBlock(pos.above(), crop, 3);
-		} else if(melonOrPumpkin) {
-			ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-			int rand = Math.random() > 0.5 ? 0 : 1;
-			BlockState crop = Blocks.POTATOES.defaultBlockState();
-			switch(rand) {
-				case 0: crop = Blocks.PUMPKIN_STEM.defaultBlockState().setValue(BlockStateProperties.AGE_7, new Random().nextInt(8)); break;
-				case 1: crop = Blocks.MELON_STEM.defaultBlockState().setValue(BlockStateProperties.AGE_7, new Random().nextInt(8)); break;
-			}
-			ent.getLevel().setBlock(pos, Blocks.FARMLAND.defaultBlockState().setValue(FarmBlock.MOISTURE, 7), 3);
-			if(!ent.getLevel().getBlockState(pos.above()).isCollisionShapeFullBlock(ent.getLevel(), pos.above()) && !(ent.getLevel().getBlockState(pos.above()).getBlock() instanceof FarmBlock)) 
-				ent.getLevel().setBlock(pos.above(), crop, 3);
+	@SuppressWarnings("deprecation")
+	private static void placeCrop(Level level, BlockPos pos, ImprovedExplosion dummy, boolean stemCrop) {
+		BlockState crop = stemCrop ? randomStemCrop(level.getRandom()) : randomCrop(level.getRandom());
+		
+		BlockPos posAbove = pos.above();
+		BlockState state = level.getBlockState(pos);
+		BlockState stateAbove = level.getBlockState(posAbove);
+		
+		boolean placedFarmland = false;
+		if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f) {
+			level.setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState().setValue(FarmBlock.MOISTURE, 7));
+			state.getBlock().wasExploded(level, pos, dummy);
+			placedFarmland = true;
+		}
+		if (placedFarmland && Math.max(stateAbove.getBlock().getExplosionResistance(), stateAbove.getFluidState().getExplosionResistance()) <= 200f) {
+			level.setBlockAndUpdate(posAbove, crop);
+			state.getBlock().wasExploded(level, posAbove, dummy);
 		}
 	}
 	
-	public void placeWater(BlockPos pos, IExplosiveEntity ent) {
-		boolean placed = false; 
-		if(!ent.getLevel().getBlockState(pos.north()).isCollisionShapeFullBlock(ent.getLevel(), pos.north()) && !(ent.getLevel().getBlockState(pos.north()).getBlock() instanceof FarmBlock) && !(ent.getLevel().getBlockState(pos.north()).getBlock() instanceof LiquidBlock)) {
-			placeCropsAndFarmland(pos.north(), false, ent);
-		} 
-		if(!ent.getLevel().getBlockState(pos.south()).isCollisionShapeFullBlock(ent.getLevel(), pos.south()) && !(ent.getLevel().getBlockState(pos.south()).getBlock() instanceof FarmBlock) && !(ent.getLevel().getBlockState(pos.south()).getBlock() instanceof LiquidBlock)) {
-			placeCropsAndFarmland(pos.south(), false, ent);
-		} 
-		if(!ent.getLevel().getBlockState(pos.east()).isCollisionShapeFullBlock(ent.getLevel(), pos.east()) && !(ent.getLevel().getBlockState(pos.east()).getBlock() instanceof FarmBlock) && !(ent.getLevel().getBlockState(pos.east()).getBlock() instanceof LiquidBlock)) {
-			placeCropsAndFarmland(pos.east(), false, ent);
-		} 
-		if(!ent.getLevel().getBlockState(pos.west()).isCollisionShapeFullBlock(ent.getLevel(), pos.west()) && !(ent.getLevel().getBlockState(pos.west()).getBlock() instanceof FarmBlock) && !(ent.getLevel().getBlockState(pos.west()).getBlock() instanceof LiquidBlock)) {
-			placeCropsAndFarmland(pos.west(), false, ent);
+	@SuppressWarnings("deprecation")
+	private static void placeWater(Level level, BlockPos pos, ImprovedExplosion dummy) {
+		BlockState state = level.getBlockState(pos);
+		if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) > 200f) {
+			return;
 		}
-		if((ent.getLevel().getBlockState(pos.north()).isCollisionShapeFullBlock(ent.getLevel(), pos.north()) || ent.getLevel().getBlockState(pos.north()).getBlock() instanceof FarmBlock || ent.getLevel().getBlockState(pos.north()).getBlock() instanceof LiquidBlock) 
-			&& (ent.getLevel().getBlockState(pos.south()).isCollisionShapeFullBlock(ent.getLevel(), pos.south()) || ent.getLevel().getBlockState(pos.south()).getBlock() instanceof FarmBlock || ent.getLevel().getBlockState(pos.south()).getBlock() instanceof LiquidBlock) 
-			&& (ent.getLevel().getBlockState(pos.east()).isCollisionShapeFullBlock(ent.getLevel(), pos.east()) || ent.getLevel().getBlockState(pos.east()).getBlock() instanceof FarmBlock || ent.getLevel().getBlockState(pos.east()).getBlock() instanceof LiquidBlock) 
-			&& (ent.getLevel().getBlockState(pos.west()).isCollisionShapeFullBlock(ent.getLevel(), pos.west()) || ent.getLevel().getBlockState(pos.west()).getBlock() instanceof FarmBlock || ent.getLevel().getBlockState(pos.west()).getBlock() instanceof LiquidBlock)) 
-		{
-			ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-			ent.getLevel().setBlock(pos, Blocks.WATER.defaultBlockState(), 3);
-			if(!ent.getLevel().getBlockState(pos.below()).isCollisionShapeFullBlock(ent.getLevel(), pos.below())) {
-				ent.getLevel().getBlockState(pos.below()).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos.below()), ent.getLevel(), pos.below(), ImprovedExplosion.dummyExplosion(ent.getLevel()));
-				ent.getLevel().setBlock(pos.below(), Blocks.DIRT.defaultBlockState(), 3);
+		
+		for (Direction dir : Direction.Plane.HORIZONTAL) {
+			BlockPos posRelative = pos.relative(dir);
+			BlockState stateRelative = level.getBlockState(posRelative);
+			if (!stateRelative.is(Blocks.FARMLAND) && !stateRelative.is(Blocks.WATER) && !stateRelative.isCollisionShapeFullBlock(level, posRelative)) {
+				placeCrop(level, posRelative, dummy, false);
 			}
-			placed = true;
 		}
-		if(!placed) {
-			placeCropsAndFarmland(pos, false, ent);
+		
+		BlockPos posBelow = pos.below();
+		BlockState stateBelow = level.getBlockState(posBelow);
+		if (!stateBelow.is(Blocks.WATER) && !stateBelow.isCollisionShapeFullBlock(level, posBelow) && Math.max(stateBelow.getBlock().getExplosionResistance(), stateBelow.getFluidState().getExplosionResistance()) <= 200f) {
+			level.setBlockAndUpdate(posBelow, Blocks.DIRT.defaultBlockState());
+			stateBelow.getBlock().wasExploded(level, posBelow, dummy);
 		}
+		
+		boolean shouldPlaceWater = true;
+		for (Direction dir : Direction.Plane.HORIZONTAL) {
+			BlockPos posRelative = pos.relative(dir);
+			BlockState stateRelative = level.getBlockState(posRelative);
+			if (!stateRelative.is(Blocks.FARMLAND) && !stateRelative.is(Blocks.WATER) && !stateRelative.isCollisionShapeFullBlock(level, posRelative)) {
+				shouldPlaceWater = false;
+				break;
+			}
+		}
+		if (shouldPlaceWater) {
+			level.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
+			state.getBlock().wasExploded(level, pos, dummy);
+		} else {
+			placeCrop(level, pos, dummy, false);
+		}
+	}
+	
+	private static BlockState randomCrop(RandomSource random) {
+		return switch(random.nextInt(4)) {
+			case 1 -> Blocks.POTATOES.defaultBlockState().setValue(BlockStateProperties.AGE_7, random.nextInt(8));
+			case 2 -> Blocks.WHEAT.defaultBlockState().setValue(BlockStateProperties.AGE_7, random.nextInt(8));
+			case 3 -> Blocks.BEETROOTS.defaultBlockState().setValue(BlockStateProperties.AGE_3, random.nextInt(4));
+			default -> Blocks.CARROTS.defaultBlockState().setValue(BlockStateProperties.AGE_7, random.nextInt(8));
+		};
+	}
+	
+	private static BlockState randomStemCrop(RandomSource random) {
+		return random.nextBoolean() ? Blocks.PUMPKIN_STEM.defaultBlockState().setValue(BlockStateProperties.AGE_7, random.nextInt(8)) : Blocks.MELON_STEM.defaultBlockState().setValue(BlockStateProperties.AGE_7, random.nextInt(8));
 	}
 }

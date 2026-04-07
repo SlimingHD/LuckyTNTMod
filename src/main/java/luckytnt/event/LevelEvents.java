@@ -86,7 +86,7 @@ public class LevelEvents {
 					toxicCloudsDisaster(server, player, random);
 				}
 				if (variables.iceAgeTime > 0) {
-					iceAgeDisaster(server, player, random);
+					iceAgeDisaster(server, player);
 				}
 				if (variables.heatDeathTime > 0) {
 					heatDeathDisaster(server, player, random);
@@ -213,69 +213,16 @@ public class LevelEvents {
 		}
 	}
 	
-	private static void iceAgeDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
-		double x = player.getX();
-		double z = player.getZ();
-		BitSet emptySet = new BitSet(0);
-		
-		Registry<Biome> registry = server.registryAccess().registryOrThrow(Registries.BIOME);
-		Holder<Biome> biome = registry.getHolderOrThrow(Biomes.SNOWY_TAIGA);
-		for (int offX = -32; offX <= 32; offX += 16) {
-			for (int offZ = -32; offZ <= 32; offZ += 16) {
-				boolean needsUpdate = false;
-				LevelChunk chunk = server.getChunk(Mth.floor(x + offX) >> 4, Mth.floor(z + offZ) >> 4);
-				for (LevelChunkSection section : chunk.getSections()) {
-					for (int i = 0; i < 4; ++i) {
-						for (int j = 0; j < 4; ++j) {
-							for (int k = 0; k < 4; ++k) {
-								if (section.getBiomes().get(i, j, k).get() != biome.get() && section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container) {
-									container.getAndSetUnchecked(i, j, k, biome);
-									needsUpdate = true;
-								}
-							}
-						}
-					}
-				}
-				if (needsUpdate) {
-					for (ServerPlayer p : server.players()) {
-						p.connection.send(new ClientboundLevelChunkWithLightPacket(chunk, server.getLightEngine(), emptySet, emptySet));
-					}
-				}
-			}
-		}
+	private static void iceAgeDisaster(ServerLevel server, ServerPlayer player) {
+		setBiomeInCylinder(server, player.getPosition(1f), 32, Biomes.SNOWY_TAIGA);
 	}
 	
 	private static void heatDeathDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
 		double intensity = LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get();
 		double x = player.getX();
 		double z = player.getZ();
-		BitSet emptySet = new BitSet(0);
 		
-		Registry<Biome> registry = server.registryAccess().registryOrThrow(Registries.BIOME);
-		Holder<Biome> biome = registry.getHolderOrThrow(Biomes.DESERT);
-		for (int offX = -32; offX <= 32; offX += 16) {
-			for (int offZ = -32; offZ <= 32; offZ += 16) {
-				boolean needsUpdate = false;
-				LevelChunk chunk = server.getChunk(Mth.floor(x + offX) >> 4, Mth.floor(z + offZ) >> 4);
-				for (LevelChunkSection section : chunk.getSections()) {
-					for (int i = 0; i < 4; ++i) {
-						for (int j = 0; j < 4; ++j) {
-							for (int k = 0; k < 4; ++k) {
-								if (section.getBiomes().get(i, j, k).get() != biome.get() && section.getBiomes() instanceof PalettedContainer<Holder<Biome>> container) {
-									container.getAndSetUnchecked(i, j, k, biome);
-									needsUpdate = true;
-								}
-							}
-						}
-					}
-				}
-				if (needsUpdate) {
-					for (ServerPlayer p : server.players()) {
-						p.connection.send(new ClientboundLevelChunkWithLightPacket(chunk, server.getLightEngine(), emptySet, emptySet));
-					}
-				}
-			}
-		}
+		setBiomeInCylinder(server, player.getPosition(1f), 32, Biomes.DESERT);
 		
 		for (int i = 0; i < 1 + (int)(0.5d * intensity); i++) {
 			int offX = random.nextInt(60) - 30;

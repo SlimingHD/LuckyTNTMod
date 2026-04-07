@@ -2,18 +2,17 @@ package luckytnt.tnteffects;
 
 import java.util.List;
 
+import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -21,42 +20,36 @@ import net.minecraft.world.phys.Vec3;
 public class LightningStormEffect extends PrimedTNTEffect {
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() < 120) {
-			for(int count = 0; count < 10; count++) {
-				if(ent.getLevel() instanceof ServerLevel) {
-					double offX = Math.random() * 150D - 75D;
-					double offZ = Math.random() * 150D - 75D;
-					for(int offY = ent.getLevel().getMaxBuildHeight(); offY > ent.getLevel().getMinBuildHeight(); offY--) {
-						if(!ent.getLevel().getBlockState(new BlockPos(Mth.floor(ent.x() + offX), offY, Mth.floor(ent.z() + offZ))).isAir()) {
-							Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, ent.getLevel());
-							lighting.setPos(ent.x() + offX, offY, ent.z() + offZ);
-							ent.getLevel().addFreshEntity(lighting);
-							break;
-						}
-					}
-				}
+	public void explosionTick(IExplosiveEntity entity) {
+		if (!entity.getLevel().isClientSide() && entity.getTNTFuse() < 120) {
+			Level level = entity.getLevel();
+			RandomSource random = level.getRandom();
+
+			for (int count = 0; count < 10; count++) {
+				double x = entity.x() + random.nextDouble() * 150d - 75d;
+				double z = entity.z() + random.nextDouble() * 150d - 75d;
+				Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
+				lighting.setPos(x, LevelEvents.getTopBlock(level, x, z, false) + 1d, z);
+				level.addFreshEntity(lighting);
 			}
 		}
 	}
 	
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		List<LivingEntity> ents = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 75, ent.y() - 75, ent.z() - 75, ent.x() + 75, ent.y() + 75, ent.z() + 75));
-		for(LivingEntity lent : ents) {
-			for(int offY = ent.getLevel().getMaxBuildHeight(); offY > ent.getLevel().getMinBuildHeight(); offY--) {
-				if(!ent.getLevel().getBlockState(new BlockPos(Mth.floor(lent.getX()), offY, Mth.floor(lent.getZ()))).isAir()) {
-					Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT,  ent.getLevel());
-					lighting.setPos(lent.getX(), offY, lent.getZ());
-					ent.getLevel().addFreshEntity(lighting);
-					
-					ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), new Vec3(lent.getX(), offY, lent.getZ()), 3);
-					explosion.doEntityExplosion(1f, true);
-					explosion.doImprovedBlockExplosion(1f, 1.2f, false, false, RandomSource.create());
-					
-					break;
-				}
-			}
+	public void serverExplosion(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
+
+		List<LivingEntity> entities = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.getPos().add(-75, -75, -75), entity.getPos().add(75, 75, 75)));
+		for (LivingEntity living : entities) {
+			double y = LevelEvents.getTopBlock(level, living.getX(), living.getZ(), false) + 1d;
+			Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.getLevel());
+			lighting.setPos(living.getX(), y, living.getZ());
+			entity.getLevel().addFreshEntity(lighting);
+
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), new Vec3(living.getX(), y, living.getZ()), 3);
+			explosion.doEntityExplosion(1f, true);
+			explosion.doImprovedBlockExplosion(1f, 1.2f, false, false, null);
+			explosion.spawnExplosionParticles();
 		}
 	}
 	
@@ -66,7 +59,7 @@ public class LightningStormEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 160;
 	}
 }

@@ -3,6 +3,7 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.level.Level;
 
 public class MansionEffect extends HouseTNTEffect {
 
@@ -11,14 +12,16 @@ public class MansionEffect extends HouseTNTEffect {
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0.1f, -0.15f, 0.1f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), -0.1f, -0.15f, -0.1f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0.1f, -0.15f, -0.1f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), -0.1f, -0.15f, 0.1f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0f, -0.15f, 0.1f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0f, -0.15f, -0.1f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), 0.1f, -0.15f, 0f);
-		ent.getLevel().addParticle(ParticleTypes.SMOKE, ent.x(), ent.y() + 2f, ent.z(), -0.1f, -0.15f, 0f);
+	public void spawnParticles(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
+		
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 2d, entity.z(), 0.1d, -0.15d, 0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 2d, entity.z(), -0.1d, -0.15d, -0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 2d, entity.z(), 0.1d, -0.15d, -0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 2d, entity.z(), -0.1d, -0.15d, 0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 2d, entity.z(), 0d, -0.15d, 0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 2d, entity.z(), 0d, -0.15d, -0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 2d, entity.z(), 0.1d, -0.15d, 0d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 2d, entity.z(), -0.1d, -0.15d, 0d);
 	}
 }

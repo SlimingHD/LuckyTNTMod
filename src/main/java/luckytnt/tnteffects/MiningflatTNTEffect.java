@@ -3,50 +3,48 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.level.Level;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.Tags;
 
-public class MiningflatTNTEffect extends PrimedTNTEffect{
+public class MiningflatTNTEffect extends PrimedTNTEffect {
 
 	private final int radius;
 	private final int radiusY;
-	
+
 	public MiningflatTNTEffect(int radius, int radiusY) {
 		this.radius = radius;
 		this.radiusY = radiusY;
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doCylindricalExplosion(entity.getLevel(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(pos.getY() >= entity.y() - 0.5f) {
-					if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100) {
-						if(state.is(Tags.Blocks.ORES)) {
-							Block.dropResources(state, level, pos);
-						}
-						state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
-						if(pos.getY() - Math.round(entity.y()) == 0) {
-							if(Math.random() < 0.05f && Block.canSupportCenter(level, pos.below(), Direction.UP)) {
-								level.setBlockAndUpdate(pos, Blocks.TORCH.defaultBlockState());
-							}
-						}
-					}
+		RandomSource random = entity.getLevel().getRandom();
+		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(entity.getLevel());
+		BlockPos centerPos = BlockPos.containing(entity.getPos());
+		ExplosionHelper.customCylindricalExplosion(entity.getLevel(), entity.getPos(), radius, radiusY, (level, center, pos, state) -> {
+			int offY = pos.getY() - centerPos.getY();
+			if (offY >= 0 && Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 100f) {
+				if (state.is(Tags.Blocks.ORES)) {
+					Block.dropResources(state, level, pos);
+				}
+
+				level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+				state.getBlock().wasExploded(level, pos, dummy);
+
+				if (offY == 0 && random.nextFloat() < 0.05f && Block.canSupportCenter(level, pos.below(), Direction.UP)) {
+					level.setBlockAndUpdate(pos, Blocks.TORCH.defaultBlockState());
 				}
 			}
 		});
 	}
-	
+
 	@Override
 	public Block getBlock() {
 		return BlockRegistry.MININGFLAT_TNT.get();

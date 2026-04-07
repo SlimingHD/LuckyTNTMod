@@ -8,56 +8,61 @@ import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EffectRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
+import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
 public class MidasTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() < 80 && ent.getTNTFuse() % 2 == 0 && !ent.getLevel().isClientSide()) {
-			ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), ent.getPersistentData().getInt("size"), new IForEachBlockExplosionEffect() {
-				
-				@Override
-				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-					if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) < 100 && !state.isAir() && state.getBlock() != Blocks.GOLD_BLOCK) {
-						level.setBlock(pos, Blocks.GOLD_BLOCK.defaultBlockState(), 3);
-					}
-				}
-			});
+		if (!ent.getLevel().isClientSide() && ent.getTNTFuse() < 80 && ent.getTNTFuse() % 2 == 0) {
+			Level level = ent.getLevel();
+			int size = Math.max(1, ent.getPersistentData().getInt("size"));
 			
-			ent.getPersistentData().putInt("size", ent.getPersistentData().getInt("size") + 1);
+			ExplosionHelper.createSphericalCrater(level, ent.getPos(), size, 99f, new FilterAirExplosionRule(
+				LogicExplosionRule.and(
+					LogicExplosionRule.not(
+						FilterBlockExplosionRule.applyOnlyWhen(Blocks.GOLD_BLOCK, new AlwaysExplosionRule()), 
+						new AlwaysExplosionRule()
+					), 
+					FilterDistanceExplosionRule.inBetween(Math.max(0, size - 2), size, new AlwaysExplosionRule()),
+					new SimpleExplosionRule(Blocks.GOLD_BLOCK.defaultBlockState())
+				)
+			));
 			
-			int i = ent.getPersistentData().getInt("size");
-			List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(toBlockPos(ent.getPos()).offset(-i, -i, -i), toBlockPos(ent.getPos()).offset(i, i, i)));
-			for(LivingEntity lent : list) {
-				lent.addEffect(new MobEffectInstance(EffectRegistry.MIDAS_TOUCH_EFFECT.get(), 2000, 0));
+			ent.getPersistentData().putInt("size", ++size);
+			
+			List<LivingEntity> entities = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.getPos().add(-size, -size, -size), ent.getPos().add(size, size, size)));
+			for (LivingEntity living : entities) {
+				living.addEffect(new MobEffectInstance(EffectRegistry.MIDAS_TOUCH_EFFECT.get(), 2000, 0));
 			}
 		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 0.4f), 1f), ent.x(), ent.y() + 1f, ent.z(), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 0.4f), 1f), entity.x(), entity.y() + 1d, entity.z(), 0d, 0d, 0d);
 	}
-	
+
 	@Override
 	public Block getBlock() {
 		return BlockRegistry.MIDAS_TNT.get();
 	}
-	
+
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 160;
 	}
 }

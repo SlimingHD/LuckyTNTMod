@@ -1,43 +1,37 @@
 package luckytnt.tnteffects;
 
+import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-public class LightningTNTEffect extends PrimedTNTEffect{
+public class LightningTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		double x = entity.getPos().x;
-		double z = entity.getPos().z;
-		if(entity.getTNTFuse() < 120) {
-			if(entity.getLevel() instanceof ServerLevel) {
-				double offX = Math.random() * 40 - 20;
-				double offZ = Math.random() * 40 - 20;
-				for(int offY = 320; offY > -64; offY--) {
-					if(!entity.getLevel().getBlockState(new BlockPos(Mth.floor(x + offX), offY, Mth.floor(z + offZ))).isAir()) {
-						Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, entity.getLevel());
-						lighting.setPos(x + offX, offY, z + offZ);
-						entity.getLevel().addFreshEntity(lighting);
-						break;
-					}
-				}
-			}
+		if (!entity.getLevel().isClientSide() && entity.getTNTFuse() < 120) {
+			Level level = entity.getLevel();
+			RandomSource random = level.getRandom();
+			
+			double x = entity.x() + random.nextDouble() * 40d - 20d;
+			double z = entity.z() + random.nextDouble() * 40d - 20d;
+			Entity lighting = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
+			lighting.setPos(x, LevelEvents.getTopBlock(level, x, z, false) + 1d, z);
+			level.addFreshEntity(lighting);
 		}
 	}
-	
+
 	@Override
 	public Block getBlock() {
 		return BlockRegistry.LIGHTNING_TNT.get();
 	}
-	
+
 	@Override
 	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 200;

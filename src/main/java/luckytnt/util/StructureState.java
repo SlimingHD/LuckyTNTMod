@@ -142,7 +142,7 @@ public enum StructureState implements StringRepresentable {
 		return new StructureSettings(HolderSet.direct(entity.getLevel().registryAccess().registryOrThrow(Registries.BIOME).holders().toList()), spawnOverrides, step, terrainAdaptation);
 	}
 	
-	private static StructureSettings settings(IExplosiveEntity entity, GenerationStep.Decoration step, TerrainAdjustment terrainAdaptation) {
+	public static StructureSettings settings(IExplosiveEntity entity, GenerationStep.Decoration step, TerrainAdjustment terrainAdaptation) {
 		return settings(entity, Map.of(), step, terrainAdaptation);
 	}
 	

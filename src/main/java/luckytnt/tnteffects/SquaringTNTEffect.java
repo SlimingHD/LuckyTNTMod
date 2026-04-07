@@ -6,8 +6,6 @@ import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -19,6 +17,7 @@ public class SquaringTNTEffect extends PrimedTNTEffect {
 	public void baseTick(IExplosiveEntity entity) {
 		super.baseTick(entity);
 		if (!entity.getLevel().isClientSide() && ((Entity)entity).onGround() && entity.getPersistentData().getInt("level") > 0) {
+			playExplosionSound(entity);
 			serverExplosion(entity);
 		}
 	}
@@ -33,7 +32,7 @@ public class SquaringTNTEffect extends PrimedTNTEffect {
 			explosion.doEntityExplosion(1.5f, true);
 			explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
 			explosion.spawnExplosionParticles();
-			level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (level.getRandom().nextFloat() - level.getRandom().nextFloat()) * 0.2f) * 0.7f);
+
 			entity.destroy();
 			return;
 		}

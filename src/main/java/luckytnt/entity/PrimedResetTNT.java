@@ -1,5 +1,6 @@
 package luckytnt.entity;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.mojang.datafixers.util.Pair;
@@ -15,8 +16,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class PrimedResetTNT extends PrimedLTNT {
 
-	public List<Pair<BlockPos, BlockState>> blocks;
-	public List<Pair<Vec3, Entity>> entities;
+	public List<Pair<BlockPos, BlockState>> blocks = new LinkedList<>();
+	public List<Pair<Vec3, Entity>> entities = new LinkedList<>();
 	
 	public PrimedResetTNT(EntityType<PrimedLTNT> type, Level level) {
 		super(type, level, new ResetTNTEffect());

@@ -1,45 +1,42 @@
 package luckytnt.tnteffects;
 
+import luckytnt.event.LevelEvents;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 
-public class PhantomTNTEffect extends PrimedTNTEffect{
-	
+public class PhantomTNTEffect extends PrimedTNTEffect {
+
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 20);
 		explosion.doEntityExplosion(2f, true);
-		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, RandomSource.create());
+		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
+		explosion.spawnExplosionParticles();
 	}
-	
+
+	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if(entity.getTNTFuse() == 5) {
-			double offX = Math.random() * 90 - 45;
-			double offZ = Math.random() * 90 - 45;
-			boolean foundBlock = false;
-			for(int offY = 320; offY > -64; offY--) {
-	      		BlockPos pos = new BlockPos(Mth.floor(entity.x() + offX), offY, Mth.floor(entity.z() + offZ));
-	      		BlockState state = entity.getLevel().getBlockState(pos);
-	      		if(state.isCollisionShapeFullBlock(entity.getLevel(), pos) && !state.isAir() && !foundBlock) {
-	      			((Entity)entity).setPos(entity.x() + offX, offY + 1, entity.z() + offZ);
-	      			foundBlock = true;
-	      		}
-			}
+		if (!entity.getLevel().isClientSide() && entity.getTNTFuse() == 5 && entity instanceof Entity ent) {
+			Level level = entity.getLevel();
+			RandomSource random = level.getRandom();
+
+			double x = entity.x() + random.nextDouble() * 90d - 45d;
+			double z = entity.z() + random.nextDouble() * 90d - 45d;
+			int y = LevelEvents.getTopBlock(level, x, z, false) + 1;
+			ent.setPos(x, y, z);
 		}
 	}
-	
+
 	@Override
-	public void spawnParticles(IExplosiveEntity entity) {		
+	public void spawnParticles(IExplosiveEntity entity) {
 	}
-	
+
 	@Override
 	public Block getBlock() {
 		return Blocks.AIR;

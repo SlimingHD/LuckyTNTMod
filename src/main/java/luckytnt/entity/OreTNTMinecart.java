@@ -1,6 +1,6 @@
 package luckytnt.entity;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import luckytnt.registry.EntityRegistry;
@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 public class OreTNTMinecart extends LTNTMinecart {
 
-	public List<BlockPos> availablePos = new ArrayList<>();
+	public List<BlockPos> availablePos = new LinkedList<>();
 	
 	public OreTNTMinecart(EntityType<LTNTMinecart> type, Level level) {
 		super(type, level, EntityRegistry.ORE_TNT, () -> ItemRegistry.ORE_TNT_MINECART, false);

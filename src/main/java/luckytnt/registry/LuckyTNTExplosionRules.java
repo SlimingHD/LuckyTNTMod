@@ -14,5 +14,7 @@ public class LuckyTNTExplosionRules {
 		event.register(ExplosionRuleRegistry.EXPLOSION_RULES_KEY, FilterMapColorExplosionRule.RESOURCE_LOCATION, () -> FilterMapColorExplosionRule::decode);
 		event.register(ExplosionRuleRegistry.EXPLOSION_RULES_KEY, DrainAreaExplosionRule.RESOURCE_LOCATION, () -> DrainAreaExplosionRule::decode);
 		event.register(ExplosionRuleRegistry.EXPLOSION_RULES_KEY, FilterOffYExplosionRule.RESOURCE_LOCATION, () -> FilterOffYExplosionRule::decode);
+		event.register(ExplosionRuleRegistry.EXPLOSION_RULES_KEY, MirrorExplosionRule.RESOURCE_LOCATION, () -> MirrorExplosionRule::decode);
+		event.register(ExplosionRuleRegistry.EXPLOSION_RULES_KEY, CopyBlockExplosionRule.RESOURCE_LOCATION, () -> CopyBlockExplosionRule::decode);
 	}
 }

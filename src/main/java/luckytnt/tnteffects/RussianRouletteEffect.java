@@ -2,30 +2,15 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.ImprovedExplosion;
-import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.block.Block;
 
-public class RussianRouletteEffect extends PrimedTNTEffect{
+public class RussianRouletteEffect extends RouletteTNTEffect {
+
+	public RussianRouletteEffect() {
+		super(() -> BlockRegistry.RUSSIAN_ROULETTE, 80);
+	}
 
 	@Override
-	public void serverExplosion(IExplosiveEntity entity) {
-		if(Math.random() < 0.2f) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 80);
-			explosion.doEntityExplosion(5f, true);
-			explosion.doImprovedBlockExplosion(1f, 1f, false, false, RandomSource.create());
-		}
-	}
-	
-	@Override
-	public Block getBlock() {
-		return BlockRegistry.RUSSIAN_ROULETTE.get();
-	}
-	
-	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 160;
 	}
 }

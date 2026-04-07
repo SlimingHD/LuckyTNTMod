@@ -2,29 +2,21 @@ package luckytnt.tnteffects;
 
 import java.util.function.Supplier;
 
+import luckytnt.rules.FilterOffYExplosionRule;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.RegistryObject;
 
-public class FlatTNTEffect extends PrimedTNTEffect{
+public class FlatTNTEffect extends PrimedTNTEffect {
+	
 	private final int radius;
 	private final int radiusY;
-	private int fuse = 80;
+	private int fuse;
 	private Supplier<RegistryObject<LTNTBlock>> block;
-	
-	public FlatTNTEffect(int radius, int radiusY, int fuse) {
-		this.radius = radius;
-		this.radiusY = radiusY;
-		this.fuse = fuse;
-	}
 	
 	public FlatTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int radius, int radiusY, int fuse) {
 		this.radius = radius;
@@ -35,18 +27,11 @@ public class FlatTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.getLevel());
-		ExplosionHelper.doCylindricalExplosion(entity.getLevel(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(pos.getY() >= entity.y() - 0.5f) {
-					if(state.getExplosionResistance(level, pos, dummyExplosion) <= 100) {
-						state.onBlockExploded(level, pos, dummyExplosion);
-					}
-				}
-			}
-		});
+		if (radius > 30) { 
+			ExplosionHelper.createCylindricalCrater(entity.getLevel(), entity.getPos(), radius, radiusY, 200f, new FilterOffYExplosionRule(0, radiusY, new CraterExplosionRule()));
+		} else {
+			ExplosionHelper.legacyCylindricalExplosion(entity.getLevel(), entity.getPos(), radius, radiusY, 200f, new FilterOffYExplosionRule(0, radiusY, new CraterExplosionRule()));
+		}
 	}
 	
 	@Override
@@ -55,7 +40,7 @@ public class FlatTNTEffect extends PrimedTNTEffect{
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return fuse;
 	}
 }

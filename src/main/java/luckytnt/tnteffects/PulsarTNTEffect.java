@@ -7,39 +7,45 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 
 public class PulsarTNTEffect extends PrimedTNTEffect {
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		if(ent.getTNTFuse() == 399) {
-			ent.getPersistentData().putFloat("size", 30f);
-		}
-		if(ent.getTNTFuse() < 305) {
-			if(ent.getTNTFuse() % 30 == 0 && !ent.getLevel().isClientSide()) {
-				ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), Mth.floor(ent.getPersistentData().getFloat("size")));
-				explosion.doEntityExplosion(4f, true);
-				explosion.doImprovedBlockExplosion(1f, ent.getPersistentData().getFloat("size") <= 80f ? 1.25f : 0.05f, false, ent.getPersistentData().getFloat("size") > 80f ? true : false, RandomSource.create());
-			
-				ent.getPersistentData().putFloat("size", ent.getPersistentData().getFloat("size") + 7f);
+	public void explosionTick(IExplosiveEntity entity) {
+		if (!entity.getLevel().isClientSide()) {
+			CompoundTag tag = entity.getPersistentData();
+			if (entity.getTNTFuse() == 399) {
+				tag.putInt("size", 30);
 			}
-			((Entity)ent).setDeltaMovement(0, 0, 0);
-			((Entity)ent).setPos(((Entity)ent).xOld, ((Entity)ent).yOld, ((Entity)ent).zOld);
+			if (entity.getTNTFuse() < 305) {
+				if (entity.getTNTFuse() % 30 == 0) {
+					playExplosionSound(entity);
+					
+					ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), tag.getInt("size"));
+					explosion.doEntityExplosion(4f, true);
+					explosion.doImprovedBlockExplosion(1f, tag.getInt("size") <= 80f ? 1.25f : 0.05f, false, tag.getInt("size") > 80f ? true : false, null);
+					explosion.spawnExplosionParticles();
+
+					tag.putInt("size", tag.getInt("size") + 7);
+				}
+				((Entity)entity).setDeltaMovement(0d, 0d, 0d);
+				((Entity)entity).setPos(((Entity)entity).getPosition(0f));
+			}
 		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		for(double offX = -2; offX <= 2; offX+=0.1) {
-     		for(double offZ = -2; offZ <= 2; offZ+=0.1) {
-     			double offY = Math.sqrt(offX * offX + offZ * offZ);
-     			if(offY <= 1.2) {
-     				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0f, 0.8f), 1f), ent.x() + offX, ent.y() + 1 + (offY * 4), ent.z() + offZ, 0, 0, 0);
-     				ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0f, 0.8f), 1f), ent.x() + offX, ent.y() + (offY * -4), ent.z() + offZ, 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		double distSqr = 1.2d * 1.2d;
+		for (double offX = -2d; offX <= 2d; offX += 0.1d) {
+     		for (double offZ = -2d; offZ <= 2d; offZ += 0.1d) {
+     			double offY = offX * offX + offZ * offZ;
+     			if (offY <= distSqr) {
+     				entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0f, 0.8f), 1f), entity.x() + offX, entity.y() + 1d + (offY * 4d), entity.z() + offZ, 0d, 0d, 0d);
+     				entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0f, 0.8f), 1f), entity.x() + offX, entity.y() + (offY * -4d), entity.z() + offZ, 0d, 0d, 0d);
      			}
      		}
      	}
@@ -51,7 +57,7 @@ public class PulsarTNTEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 400;
 	}
 }

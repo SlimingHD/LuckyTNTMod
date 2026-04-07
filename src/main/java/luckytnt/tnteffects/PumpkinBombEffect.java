@@ -1,8 +1,10 @@
 package luckytnt.tnteffects;
 
-import java.util.Random;
+import java.util.Map;
 
 import org.joml.Vector3f;
+
+import com.google.common.collect.ImmutableMap;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.ItemRegistry;
@@ -13,49 +15,45 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-public class PumpkinBombEffect extends PrimedTNTEffect{
+public class PumpkinBombEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10);
+		Level level = entity.getLevel();
+		RandomSource random = level.getRandom();
+
+		ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity) entity, entity.getPos(), 10);
 		explosion.doEntityExplosion(1.5f, true);
-		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, RandomSource.create());
-		Random random = new Random();
-		for(int count = 0; count < 30 + random.nextInt(11); count++) {
-			ItemEntity candy = new ItemEntity(entity.getLevel(), entity.x(), entity.y(), entity.z(), new ItemStack(ItemRegistry.RED_CANDY.get()));
-			candy.setDeltaMovement(Math.random() - 0.5f, Math.random() - 0.5f, Math.random() - 0.5f);
-			entity.getLevel().addFreshEntity(candy);
-		}
-		for(int count = 0; count < 60 + random.nextInt(21); count++) {
-			ItemEntity candy = new ItemEntity(entity.getLevel(), entity.x(), entity.y(), entity.z(), new ItemStack(ItemRegistry.GREEN_CANDY.get()));
-			candy.setDeltaMovement(Math.random() - 0.5f, Math.random() - 0.5f, Math.random() - 0.5f);
-			entity.getLevel().addFreshEntity(candy);
-		}
-		for(int count = 0; count < 40 + random.nextInt(16); count++) {
-			ItemEntity candy = new ItemEntity(entity.getLevel(), entity.x(), entity.y(), entity.z(), new ItemStack(ItemRegistry.BLUE_CANDY.get()));
-			candy.setDeltaMovement(Math.random() - 0.5f, Math.random() - 0.5f, Math.random() - 0.5f);
-			entity.getLevel().addFreshEntity(candy);
-		}
-		for(int count = 0; count < 20 + random.nextInt(6); count++) {
-			ItemEntity candy = new ItemEntity(entity.getLevel(), entity.x(), entity.y(), entity.z(), new ItemStack(ItemRegistry.PURPLE_CANDY.get()));
-			candy.setDeltaMovement(Math.random() - 0.5f, Math.random() - 0.5f, Math.random() - 0.5f);
-			entity.getLevel().addFreshEntity(candy);
-		}
-		for(int count = 0; count < 70 + random.nextInt(31); count++) {
-			ItemEntity candy = new ItemEntity(entity.getLevel(), entity.x(), entity.y(), entity.z(), new ItemStack(ItemRegistry.YELLOW_CANDY.get()));
-			candy.setDeltaMovement(Math.random() - 0.5f, Math.random() - 0.5f, Math.random() - 0.5f);
-			entity.getLevel().addFreshEntity(candy);
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+		explosion.spawnExplosionParticles();
+
+		Map<Item, Integer> items = ImmutableMap.of(
+			ItemRegistry.RED_CANDY.get(), 30 + random.nextInt(11),
+			ItemRegistry.GREEN_CANDY.get(), 60 + random.nextInt(21), 
+			ItemRegistry.BLUE_CANDY.get(), 40 + random.nextInt(16), 
+			ItemRegistry.PURPLE_CANDY.get(), 20 + random.nextInt(6),
+			ItemRegistry.YELLOW_CANDY.get(), 70 + random.nextInt(31)
+		);
+
+		for (Item item : items.keySet()) {
+			for (int i = 0; i < items.get(item); i++) {
+				ItemEntity candy = new ItemEntity(level, entity.x(), entity.y(), entity.z(), new ItemStack(item));
+				candy.setDeltaMovement(random.nextDouble() - 0.5f, random.nextDouble() - 0.5f, random.nextDouble() - 0.5f);
+				level.addFreshEntity(candy);
+			}
 		}
 	}
-	
+
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1f), entity.x(), entity.y() + 1f, entity.z(), 0f, 0f, 0f);
+		entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0.5f, 0f), 1f), entity.x(), entity.y() + 1d, entity.z(), 0d, 0d, 0d);
 	}
-	
+
 	@Override
 	public Block getBlock() {
 		return BlockRegistry.PUMPKIN_BOMB.get();

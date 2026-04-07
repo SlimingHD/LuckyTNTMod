@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -27,7 +26,7 @@ public class FilterFullBlockExplosionRule implements ExplosionRule {
 	@Override
 	@Nullable
 	public BlockState getState(Level level, BlockState state, Vec3 center, int offX, int offY, int offZ, RandomSource random) {
-		if (Block.isShapeFullBlock(state.getCollisionShape(level, BlockPos.containing(center).offset(offX, offY, offZ)))) {
+		if (state.isCollisionShapeFullBlock(level, BlockPos.containing(center).offset(offX, offY, offZ))) {
 			return rule.getState(level, state, center, offX, offY, offZ, random);
 		}
 		return null;

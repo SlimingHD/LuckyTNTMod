@@ -2,75 +2,72 @@ package luckytnt.tnteffects;
 
 import java.util.function.Supplier;
 
+import luckytnt.rules.FilterFullBlockExplosionRule;
+import luckytnt.rules.FilterOffYExplosionRule;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
+import luckytntlib.util.explosions.rules.SimpleExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Squid;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.RegistryObject;
 
 public class OceanTNTEffect extends PrimedTNTEffect {
+
 	private final int radius;
 	private final int radiusY;
-	private final int squidCound;
+	private final int squidCount;
 	private Supplier<RegistryObject<LTNTBlock>> block;
 
 	public OceanTNTEffect(Supplier<RegistryObject<LTNTBlock>> block, int radius, int radiusY, int squidCount) {
 		this.radius = radius;
 		this.radiusY = radiusY;
-		this.squidCound = squidCount;
+		this.squidCount = squidCount;
 		this.block = block;
 	}
-	
-	public OceanTNTEffect(int radius, int radiusY, int squidCount) {
-		this.radius = radius;
-		this.radiusY = radiusY;
-		this.squidCound = squidCount;
-	}
-	
+
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.getLevel());
-		ExplosionHelper.doCylindricalExplosion(entity.getLevel(), entity.getPos(), radius, radiusY, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(pos.getY() <= entity.getPos().y) {
-					if((!state.isFaceSturdy(level, pos, Direction.UP) && state.getExplosionResistance(level, pos, dummyExplosion) < 100) || state.getExplosionResistance(level, pos, dummyExplosion) < 4) {
-						state.onBlockExploded(level, pos, dummyExplosion);
-						level.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
-					}
-				}
-			}
-		});
-		
-		for(int i = 0; i < squidCound; i++) {
-			Squid squid = new Squid(EntityType.SQUID, entity.getLevel());
-			squid.setPos(entity.x() + (Math.random() * radius * 2 - radius), entity.y(), entity.z() + (Math.random() * radius * 2 - radius));
-			entity.getLevel().addFreshEntity(squid);
+		Level level = entity.getLevel();
+		RandomSource random = level.getRandom();
+
+		ExplosionHelper.legacyCylindricalExplosion(level, entity.getPos(), radius, radiusY, 99.9f, new FilterOffYExplosionRule(-radiusY, 0,
+			new StackedExplosionRule(
+				new FilterBlastResistanceExplosionRule(3.9f, new SimpleExplosionRule(Blocks.WATER.defaultBlockState())),
+				LogicExplosionRule.not(
+					new FilterFullBlockExplosionRule(new AlwaysExplosionRule()),
+					new SimpleExplosionRule(Blocks.WATER.defaultBlockState())
+				)
+			)
+		));
+
+		for (int i = 0; i < squidCount; i++) {
+			Squid squid = new Squid(EntityType.SQUID, level);
+			squid.setPos(entity.x() + random.nextDouble() * radius * 2d - radius, entity.y(), entity.z() + random.nextDouble() * radius * 2d - radius);
+			level.addFreshEntity(squid);
 		}
 	}
-	
+
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.SPLASH, ent.x(), ent.y() + 0.7f, ent.z(), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		entity.getLevel().addParticle(ParticleTypes.SPLASH, entity.x(), entity.y() + 0.7d, entity.z(), 0d, 0d, 0d);
 	}
 
 	@Override
 	public Block getBlock() {
 		return block.get().get();
 	}
-	
+
 	@Override
 	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 160;

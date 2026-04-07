@@ -63,7 +63,7 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 				FilterBlockExplosionRule.builder().filterForBlocks(Blocks.WATER, Blocks.BUBBLE_COLUMN).build(
 					new SimpleExplosionRule(Blocks.BLUE_STAINED_GLASS.defaultBlockState())
 				),
-				FilterBlockExplosionRule.builder().filterForBlocks(Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.KELP, Blocks.KELP_PLANT, Blocks.SEA_PICKLE).build(
+				FilterBlockExplosionRule.builder().filterForBlocks(Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.KELP, Blocks.KELP_PLANT).build(
 					new SimpleExplosionRule(Blocks.GREEN_WOOL.defaultBlockState())
 				),
 				FilterBlockExplosionRule.applyOnlyWhen(Blocks.LAVA, new SimpleExplosionRule(Blocks.ORANGE_STAINED_GLASS.defaultBlockState())),
@@ -212,7 +212,6 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 	}
 	
 	private static DyeColor randomColor(RandomSource random) {
-		int rand = random.nextInt(DyeColor.values().length);
-		return DyeColor.values()[rand];
+		return DyeColor.values()[random.nextInt(DyeColor.values().length)];
 	}
 }

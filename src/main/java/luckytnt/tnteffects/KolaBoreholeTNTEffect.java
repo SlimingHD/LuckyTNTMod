@@ -5,73 +5,56 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 
 public class KolaBoreholeTNTEffect extends PrimedTNTEffect {
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		int y = ((int)Math.ceil(ent.y()) + 64);
-		if(y % 6 != 0) {
-			y += 6;
-			while(y % 6 != 0) {
-				if(y % 6 == 0) {
-					break;
-				} else {
-					y -= 1;
-				}
-			}
+	public void serverExplosion(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
+		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
+		BlockState defaultBlock = Blocks.STONE.defaultBlockState();
+		if (level instanceof ServerLevel server && server.getChunkSource().getGenerator() instanceof NoiseBasedChunkGenerator generator) {
+			defaultBlock = generator.generatorSettings().value().defaultBlock();
 		}
-		int intv = y / 6;
-		int rad = 8;
-		int prevRad = 8;
-			
-		for(int offY = y - 1; offY >= 0; offY--) {
-			for(int offX = -10; offX <= 10; offX++) {
-				for(int offZ = -10; offZ <= 10; offZ++) {
-					double distance = Math.sqrt(offX * offX + offZ * offZ);
-					BlockPos pos = new BlockPos(Mth.floor(ent.x() + offX), offY - 64, Mth.floor(ent.z() + offZ));
-					if(distance <= rad && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-						ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-					}
-					if(distance > rad && distance <= (rad + 1) && ent.getLevel().getBlockState(pos).getExplosionResistance(ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-						if(rad != prevRad) {
-							if((Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above().north()).getShape(ent.getLevel(), pos.above().north())) && ent.getLevel().getBlockState(pos.above().north()).canOcclude())
-							|| (Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above().east()).getShape(ent.getLevel(), pos.above().east())) && ent.getLevel().getBlockState(pos.above().east()).canOcclude())
-							|| (Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above().south()).getShape(ent.getLevel(), pos.above().south())) && ent.getLevel().getBlockState(pos.above().south()).canOcclude())
-							|| (Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above().west()).getShape(ent.getLevel(), pos.above().west())) && ent.getLevel().getBlockState(pos.above().west()).canOcclude()))
-							{
-								ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-								if(pos.getY() > (Math.random() * 2 - Math.random() * 2)) {
-									ent.getLevel().setBlock(pos, Blocks.STONE.defaultBlockState(), 3);
-								} else {
-									ent.getLevel().setBlock(pos, Blocks.DEEPSLATE.defaultBlockState(), 3);
-								}
-							}
-						} else if(prevRad == rad) {
-							if(Block.isShapeFullBlock(ent.getLevel().getBlockState(pos.above()).getShape(ent.getLevel(), pos)) && ent.getLevel().getBlockState(pos.above()).canOcclude()) {
-								Block block = ent.getLevel().getBlockState(pos).getBlock();
-								block.onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-								if(pos.getY() > (Math.random() * 2 - Math.random() * 2)) {
-									ent.getLevel().setBlock(pos, Blocks.STONE.defaultBlockState(), 3);
-								} else {
-									ent.getLevel().setBlock(pos, Blocks.DEEPSLATE.defaultBlockState(), 3);
-								}
-							}
+		
+		int x = Mth.floor(entity.x());
+		int z = Mth.floor(entity.z());
+		int endHeight = Mth.floor(entity.y()) + 32;
+		int sectionHeight = (endHeight - level.getMinBuildHeight()) / 10;
+		int blocksSinceLastIncrease = 0;
+		int radius = 0;
+		for (int y = level.getMinBuildHeight(); y < endHeight; y++) {
+			for (int offX = -radius - 1; offX <= radius + 1; offX++) {
+				for (int offZ = -radius - 1; offZ <= radius + 1; offZ++) {
+					BlockPos pos = new BlockPos(x + offX, y, z + offZ);
+					BlockState state = level.getBlockState(pos);
+					int distanceSqr = offX * offX + offZ * offZ;
+					if (distanceSqr <= radius * radius) {
+						if (y <= level.getMinBuildHeight() + 5 || Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f) {
+							level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+							state.getBlock().wasExploded(level, pos, dummy);
+						}
+					} else if (distanceSqr <= (radius + 1) * (radius + 1)) {
+						if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f && !state.isCollisionShapeFullBlock(level, pos) && level.canSeeSkyFromBelowWater(pos)) {
+							level.setBlockAndUpdate(pos, defaultBlock);
+							state.getBlock().wasExploded(level, pos, dummy);
 						}
 					}
 				}
 			}
-			prevRad = rad;
-			if(offY % intv == 0) {
-				rad--;
+			blocksSinceLastIncrease++;
+			if (blocksSinceLastIncrease >= sectionHeight) {
+				blocksSinceLastIncrease = 0;
+				radius++;
 			}
-		}
-		for(int i = -59; i >= -65; i--) {
-			BlockPos pos = new BlockPos(Mth.floor(ent.x()), i, Mth.floor(ent.z()));
-			ent.getLevel().getBlockState(pos).getBlock().onBlockExploded(ent.getLevel().getBlockState(pos), ent.getLevel(), pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
 		}
 	}
 	
@@ -79,9 +62,9 @@ public class KolaBoreholeTNTEffect extends PrimedTNTEffect {
 	public Block getBlock() {
 		return BlockRegistry.KOLA_BOREHOLE_TNT.get();
 	}
-	
+
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 200;
 	}
 }
