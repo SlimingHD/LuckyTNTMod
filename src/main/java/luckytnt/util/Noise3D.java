@@ -1,8 +1,5 @@
 package luckytnt.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import net.minecraft.world.phys.Vec3;
 
 public class Noise3D {
@@ -12,7 +9,6 @@ public class Noise3D {
 	public final int sizeZ;
 	public final int scale;
 	public NoisePoint[][][] noisePoints;
-	public List<NoisePoint> startingPoints = new ArrayList<>();
 	
 	public Noise3D(int sizeX, int sizeY, int sizeZ, int scale) {
 		this.sizeX = sizeX - 1;

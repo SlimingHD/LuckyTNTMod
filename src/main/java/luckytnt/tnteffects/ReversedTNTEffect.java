@@ -6,8 +6,10 @@ import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.rules.CopyBlockExplosionRule;
 import luckytnt.rules.MirrorExplosionRule;
+import luckytnt.rules.OffsetExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;
@@ -18,9 +20,10 @@ public class ReversedTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity ent) {
-		ExplosionHelper.legacySphericalExplosion(ent.getLevel(), ent.getPos().add(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0), 30, 200, new MirrorExplosionRule(
-			List.of(Axis.Y), 
-			new CopyBlockExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get())
+		ExplosionHelper.legacySphericalExplosion(ent.getLevel(), ent.getPos().add(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0), 30, 200f, new MirrorExplosionRule(List.of(Axis.Y), 
+			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 
+				new FilterBlastResistanceExplosionRule(200f, new CopyBlockExplosionRule())
+			)
 		));
 	}
 	

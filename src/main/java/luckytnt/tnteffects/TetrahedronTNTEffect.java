@@ -10,6 +10,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -17,9 +18,10 @@ import net.minecraft.world.phys.Vec3;
 
 public class TetrahedronTNTEffect extends PrimedTNTEffect {
 
-	private static final float SIDE_LENGTH = 0.5f * (float)Math.sqrt(3d);
+	private static final float RADIUS = 0.5f * (float)Math.sqrt(2d);
+	private static final float SIDE_LENGTH = RADIUS * (float)Math.sqrt(3d);
 	private static final float HEIGHT = ((float)Math.sqrt(6d) / 3f) * SIDE_LENGTH;
-	private static final Quaternionf QUAT = new Quaternionf().setAngleAxis(120d * (Math.PI / 180d), 0d, 1d, 0d);
+	private static final Quaternionf QUAT = new Quaternionf().setAngleAxis(120d * Mth.DEG_TO_RAD, 0d, 1d, 0d);
 	private static final Vector3f COLOR = new Vector3f(1f, 0.42f, 0f);
 
 	@SuppressWarnings("deprecation")
@@ -28,13 +30,13 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 		Level level = entity.getLevel();
 		BlockPos pos = toBlockPos(entity.getPos());
 
-		double heigth = (Math.sqrt(3D) / 2D) * 60D;
-		double sideHeigth = Math.sqrt(60D * 60D - 30D * 30D);
+		double heigth = (Math.sqrt(3d) / 2d) * 60d;
+		double sideHeigth = Math.sqrt(60d * 60d - 30d * 30d);
 
-		BlockPos A = pos.offset(-30, -30, (int)-Math.round((1D / 3D) * sideHeigth));
-		BlockPos B = pos.offset(30, -30, (int)-Math.round((1D / 3D) * sideHeigth));
-		BlockPos C = pos.offset(0, -30, (int)Math.round((2D / 3D) * sideHeigth));
-		BlockPos D = pos.offset(0, (int)Math.round(heigth - 30D), 0);
+		BlockPos A = pos.offset(-30, -30, (int)-Math.round((1d / 3d) * sideHeigth));
+		BlockPos B = pos.offset(30, -30, (int)-Math.round((1d / 3d) * sideHeigth));
+		BlockPos C = pos.offset(0, -30, (int)Math.round((2d / 3d) * sideHeigth));
+		BlockPos D = pos.offset(0, (int)Math.round(heigth - 30d), 0);
 
 		Vec3 DA = new Vec3(A.getX() - D.getX(), A.getY() - D.getY(), A.getZ() - D.getZ());
 		Vec3 DB = new Vec3(B.getX() - D.getX(), B.getY() - D.getY(), B.getZ() - D.getZ());
@@ -50,8 +52,8 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
 		ExplosionHelper.customCubicalExplosion(level, entity.getPos(), 40, (l, c, blockpos, state) -> {
 			Vec3 vec = Vec3.atCenterOf(blockpos);
-			if (distance(vec, NDAB, D) <= 0 && distance(vec, NDAC, D) <= 0 && distance(vec, NDCB, D) <= 0 && distance(vec, NABC, A) <= 0) {
-				if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200) {
+			if (distance(vec, NDAB, D) <= 0d && distance(vec, NDAC, D) <= 0d && distance(vec, NDCB, D) <= 0d && distance(vec, NABC, A) <= 0d) {
+				if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f) {
 					level.setBlockAndUpdate(blockpos, Blocks.AIR.defaultBlockState());
 					state.getBlock().wasExploded(level, blockpos, dummy);
 				}
@@ -64,9 +66,9 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 		Level level = entity.getLevel();
 
 		double degrees = (entity.getTNTFuse() / 100d) * 360d;
-		Quaternionf addQuat = new Quaternionf().setAngleAxis(degrees * (Math.PI / 180d), 0d, 1d, 0d);
-		Vector3f origin = entity.getPos().toVector3f().add(0.5f, 1.1f, 0.5f);
-		Vector3f vecToCorner = new Vector3f(0.5f, 0f, 0f);
+		Quaternionf addQuat = new Quaternionf().setAngleAxis(degrees * Mth.DEG_TO_RAD, 0d, 1d, 0d);
+		Vector3f origin = entity.getPos().toVector3f().add(0f, 1.1f, 0f);
+		Vector3f vecToCorner = new Vector3f(RADIUS, 0f, 0f);
 		vecToCorner.rotate(addQuat);
 		
 		Vector3f a = new Vector3f();

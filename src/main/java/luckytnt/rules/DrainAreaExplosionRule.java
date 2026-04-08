@@ -21,8 +21,7 @@ import net.minecraft.world.phys.Vec3;
 public class DrainAreaExplosionRule implements ExplosionRule {
 
 	public static final ResourceLocation RESOURCE_LOCATION = new ResourceLocation(LuckyTNTMod.MODID, "drain_area");
-	
-	private static final List<Block> BLOCKS_TO_DRY = List.of(Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.SEA_PICKLE, Blocks.KELP, Blocks.KELP_PLANT, Blocks.BUBBLE_COLUMN);
+	public static final List<Block> BLOCKS_TO_DRY = List.of(Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.SEA_PICKLE, Blocks.KELP, Blocks.KELP_PLANT, Blocks.BUBBLE_COLUMN);
 	
 	public DrainAreaExplosionRule() {
 	}

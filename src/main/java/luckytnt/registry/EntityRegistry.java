@@ -8,7 +8,7 @@ import org.joml.Vector3f;
 
 import luckytnt.LuckyTNTMod;
 import luckytnt.block.entity.ItemFireworkBlockEntity;
-import luckytnt.block.entity.SmokeTNTBlockEntity;
+import luckytnt.block.entity.TNTBlockEntity;
 import luckytnt.entity.AngryMiner;
 import luckytnt.entity.BouncingDynamite;
 import luckytnt.entity.HailstoneProjectile;
@@ -258,7 +258,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> PULSAR_TNT = LuckyTNTMod.RH.registerTNTEntity("pulsar_tnt", new PulsarTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> LIGHTNING_STORM = LuckyTNTMod.RH.registerTNTEntity("lightning_storm", new LightningStormEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> SILK_TOUCH_TNT = LuckyTNTMod.RH.registerTNTEntity("silk_touch_tnt", new SilkTouchTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> ITEM_FIREWORK = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "item_firework", () -> EntityType.Builder.<PrimedLTNT>of(PrimedItemFirework::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("item_firework"));
+	public static final RegistryObject<EntityType<PrimedLTNT>> ITEM_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("item_firework", new ItemFireworkEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> ANIMAL_KINGDOM = LuckyTNTMod.RH.registerTNTEntity("animal_kingdom", new AnimalKingdomEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> ICE_AGE = LuckyTNTMod.RH.registerTNTEntity("ice_age", new DisasterTNTEffect("ice_age", true));
 	public static final RegistryObject<EntityType<PrimedLTNT>> GIANT_TNT = LuckyTNTMod.RH.registerTNTEntity("giant_tnt", new GiantTNTEffect(), 10f, true);
@@ -530,8 +530,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> TOXIC_CLOUD = LuckyTNTMod.RH.registerTNTEntity("toxic_cloud", new ToxicCloudEffect());
 	
 	//BlockEntities
-	public static final RegistryObject<BlockEntityType<SmokeTNTBlockEntity>> SMOKE_TNT_BLOCK_ENTITY = LuckyTNTMod.blockEntityRegistry.register("smoke_tnt_block_entity", () -> BlockEntityType.Builder.of(SmokeTNTBlockEntity::new, BlockRegistry.SMOKE_TNT.get()).build(null));
-	public static final RegistryObject<BlockEntityType<ItemFireworkBlockEntity>> ITEM_FIREWORK_BLOCK_ENTITY = LuckyTNTMod.blockEntityRegistry.register("item_firework_block_entity", () -> BlockEntityType.Builder.of(ItemFireworkBlockEntity::new, BlockRegistry.ITEM_FIREWORK.get()).build(null));
+	public static final RegistryObject<BlockEntityType<TNTBlockEntity>> TNT_BLOCK_ENTITY = LuckyTNTMod.blockEntityRegistry.register("smoke_tnt_block_entity", () -> BlockEntityType.Builder.of(TNTBlockEntity::new, BlockRegistry.SMOKE_TNT.get()).build(null));
 
 	public static Predicate<LivingEntity> PREDICATE = living -> { 
 		return living instanceof Player player ? !player.isCreative() && !player.isSpectator() : false;

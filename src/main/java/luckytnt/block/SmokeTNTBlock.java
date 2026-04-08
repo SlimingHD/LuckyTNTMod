@@ -130,6 +130,6 @@ public class SmokeTNTBlock extends LTNTBlock implements EntityBlock {
 	
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return EntityRegistry.SMOKE_TNT_BLOCK_ENTITY.get().create(pos, state);
+		return EntityRegistry.TNT_BLOCK_ENTITY.get().create(pos, state);
 	}	
 }

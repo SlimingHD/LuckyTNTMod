@@ -8,12 +8,13 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -22,83 +23,67 @@ import net.minecraftforge.network.PacketDistributor;
 public class HungryTNTEffect extends PrimedTNTEffect {
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		Entity target = null;
-		double distance = 2000;
-		List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 50, ent.y() - 50, ent.z() - 50, ent.x() + 50, ent.y() + 50, ent.z() + 50));
-
-		for(LivingEntity living : list) {
-			double x = living.getX() - ent.x();
-			double y = living.getEyeY() - ent.y();
-			double z = living.getZ() - ent.z();
-			double magnitude = Math.sqrt(x * x + y * y + z * z);
-
-			if(magnitude < distance) {
-				distance = magnitude;
-				target = living;
-			}
-		}
-		if(target != null) {
-			double x = ent.x() - target.getX();
-			double y = ent.y() - target.getY();
-			double z = ent.z() - target.getZ();
-			double magnitude = Math.sqrt(x * x + y * y + z * z);
-
-			if(magnitude > 2) {
-				Vec3 vec3d = new Vec3(x, y + 0.1D, z).normalize();
-				if(!(target instanceof Player)) {
-					target.setDeltaMovement(vec3d);
-				} else if(target instanceof Player) {
-					target.setDeltaMovement(vec3d.scale(0.3D));
+	public void explosionTick(IExplosiveEntity entity) {
+		if (!entity.getLevel().isClientSide() && entity instanceof Entity ent) {
+			Level level = ent.level();
+			
+			Entity target = null;
+			List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(entity.getPos().add(-50d, -50d, -50d), entity.getPos().add(50d, 50d, 50d)));
+			list.sort((l1, l2) -> {
+				return l1.distanceToSqr(ent) < l2.distanceTo(ent) ? -1 : 1;
+			});
+			for (LivingEntity living : list) {
+				if (living instanceof Player && living.getPersistentData().getInt("hungryTimer") > 0) {
+					living.getPersistentData().putInt("hungryTimer", living.getPersistentData().getInt("hungryTimer") - 1);
+					continue;
 				}
-			} else if(magnitude <= 2) {
-				if(!(target instanceof Player)) {
+				if (target == null) {
+					target = living;
+				}
+			}
+			
+			if (target != null) {
+				double x = entity.x() - target.getX();
+				double y = entity.y() - target.getY();
+				double z = entity.z() - target.getZ();
+				double distanceSqr = x * x + y * y + z * z;
+
+				if (distanceSqr >= 4d) {
+					target.setDeltaMovement(new Vec3(x, y + 0.1d, z).normalize());
+					if (target instanceof Player) {
+						target.hurtMarked = true;
+					}
+				} else {
+					level.playSound(null, target.blockPosition(), SoundEvents.GENERIC_EAT, SoundSource.MASTER, 2f, 1f);
 					ent.getPersistentData().putInt("amount", ent.getPersistentData().getInt("amount") + 1);
-					if(!ent.getLevel().isClientSide()) {
-        				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)ent), new ClientboundIntNBTPacket("amount", ent.getPersistentData().getInt("amount"), ((Entity)ent).getId()));
-        			}
-        			target.discard();
-				} else if(target instanceof Player) {
-					DamageSources sources = new DamageSources(ent.getLevel().registryAccess());
-					
-					target.hurt(sources.fellOutOfWorld(), 4f);
-					Vec3 vec3d = new Vec3(target.getX() - ent.x(), target.getY() - ent.y(), target.getZ() - ent.z()).normalize().scale(10);
-					target.setDeltaMovement(vec3d);
+					PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> ent), new ClientboundIntNBTPacket("amount", ent.getPersistentData().getInt("amount"), ent.getId()));
+					if (target instanceof Player) {
+						target.getPersistentData().putInt("hungryTimer", 80);
+						target.hurt(level.damageSources().fellOutOfWorld(), 15f);
+						target.setDeltaMovement(new Vec3(x, y + 1d, z).reverse().normalize().scale(10d));
+					} else {
+						target.discard();
+					}
 				}
 			}
 		}
 	}
 	
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		int amount = ent.getPersistentData().getInt("amount");
-		if(amount < 0) {
-			amount = 0;
-		}
-		if(amount > 20) {
-			amount = 20;
-		}
-
-		float size = 80f + ((80f / 20f) * amount);
-		float resistanceImpact = 1f - ((0.833f / 20f) * amount);
-		float knockback = 5f + ((10f / 20f) * amount);
+	public void serverExplosion(IExplosiveEntity entity) {
+		int amount = Mth.clamp(entity.getPersistentData().getInt("amount"), 0, 20);
+		int size = 80 + 4 * amount;
+		float resistanceImpact = 1f - (0.833f / 20f) * amount;
+		float knockback = 5f + 0.5f * amount;
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(ent.getLevel(), (Entity)ent, ent.getPos(), Mth.floor((double)size));
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), size);
 		explosion.doEntityExplosion(knockback, true);
-		explosion.doImprovedBlockExplosion(resistanceImpact, size >= 110f ? 0.05f : 1f, false, size >= 110f ? true : false, RandomSource.create());
+		explosion.doImprovedBlockExplosion(resistanceImpact, size >= 110 ? 0.05f : 1f, false, size >= 110 ? true : false, null);
 	}
 	
 	@Override
-	public float getSize(IExplosiveEntity ent) {
-		int amount = ent.getPersistentData().getInt("amount");
-		if(amount < 0) {
-			amount = 0;
-		}
-		if(amount > 20) {
-			amount = 20;
-		}
-
-		return 1f + (3f / 20f) * amount;
+	public float getSize(IExplosiveEntity entity) {
+		return 1f + (3f / 20f) * Mth.clamp(entity.getPersistentData().getInt("amount"), 0, 20);
 	}
 	
 	@Override
@@ -107,7 +92,7 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 600;
 	}
 }

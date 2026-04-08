@@ -2,7 +2,6 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
@@ -18,9 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 
-public class HellfireTNTEffect extends PrimedTNTEffect{
+public class HellfireTNTEffect extends PrimedTNTEffect {
 	
 	private final int strength;
 	private final int ghastCount;
@@ -32,57 +30,57 @@ public class HellfireTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos().x, entity.getPos().y + 0.5f, entity.getPos().z, strength);
+		Level level = entity.getLevel();
+		RandomSource random = level.getRandom();
+		
+		ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity)entity, entity.getPos(), strength);
 		explosion.doEntityExplosion(2f, true);
-		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, RandomSource.create());
-		ImprovedExplosion netherExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos().add(0, 0.5f, 0), Mth.floor(strength * 1.5f));
-		netherExplosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= 25) {
-					if(Math.random() < 0.9f) {
-						state.onBlockExploded(level, pos, netherExplosion);
-						level.setBlockAndUpdate(pos, Blocks.NETHERRACK.defaultBlockState());
-						if(Math.random() < 0.1f) {
-							if(level.getBlockState(pos.above()).isAir()) {
-								level.setBlockAndUpdate(pos.above(), BaseFireBlock.getState(level, pos.above()));
-							}
-						}
-					}
-					else if(Math.random() < 0.3f) {
-						state.onBlockExploded(level, pos, netherExplosion);
-						level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
+		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
+		
+		ImprovedExplosion explosion2 = new ImprovedExplosion(entity.getLevel(), (Entity)entity, null, entity.x(), entity.y(), entity.z(), Mth.floor(strength * 1.5f), false, (lev, center, pos, state) -> {
+			if (random.nextFloat() < 0.9f) {
+				lev.setBlockAndUpdate(pos, Blocks.NETHERRACK.defaultBlockState());
+				if (random.nextFloat() < 0.1f) {
+					BlockPos posAbove = pos.above();
+					if (lev.getBlockState(posAbove).isAir()) {
+						lev.setBlockAndUpdate(posAbove, BaseFireBlock.getState(lev, posAbove));
 					}
 				}
+				state.getBlock().wasExploded(level, pos, explosion);
+			} else if (random.nextFloat() < 0.3f) {
+				level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
+				state.getBlock().wasExploded(level, pos, explosion);
 			}
 		});
-		for(int i = 0; i < ghastCount; i++) {
-			Ghast ghast = new Ghast(EntityType.GHAST, entity.getLevel());
-			ghast.setPos(entity.getPos().add(0, 20 + Math.random() * 20, 0));
-			entity.getLevel().playSound(ghast, ghast.blockPosition(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 3f, 1f);
-			entity.getLevel().addFreshEntity(ghast);
+		explosion2.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
+		
+		for (int i = 0; i < ghastCount; i++) {
+			Ghast ghast = new Ghast(EntityType.GHAST, level);
+			ghast.setPos(entity.getPos().add(0d, 20d + random.nextDouble() * 20d, 0d));
+			level.playSound(ghast, ghast.blockPosition(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 3f, 1f);
+			level.addFreshEntity(ghast);
 		}
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0.1f, 0);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0.05f, 0.1f, 0);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), -0.05f, 0.1f, 0);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0.1f, 0.05f);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0.1f, -0.05f);
 		
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0.2f, 0, 0);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), -0.2f, 0, 0);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0, 0.2f);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0, 0, -0.2f);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0d, 0.1d, 0d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0.05d, 0.1d, 0d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), -0.05d, 0.1d, 0d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0d, 0.1d, 0.05d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0d, 0.1d, -0.05d);
 		
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0.1f, 0, 0.1f);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), -0.1f, 0, -0.1f);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), 0.1f, 0, -0.1f);
-		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5f, entity.z(), -0.1f, 0, 0.1f);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0.2d, 0d, 0d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), -0.2d, 0d, 0d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0d, 0d, 0.2d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0d, 0d, -0.2d);
+		
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0.1d, 0d, 0.1d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), -0.1d, 0d, -0.1d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0.1d, 0d, -0.1d);
+		level.addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), -0.1d, 0d, 0.1d);
 	}
 
 	@Override

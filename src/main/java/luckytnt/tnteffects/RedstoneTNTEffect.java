@@ -73,7 +73,7 @@ public class RedstoneTNTEffect extends PrimedTNTEffect {
 		return states[random.nextInt(states.length)];
 	}
 	
-	private static Direction getRandomDirection(RandomSource random) {
+	public static Direction getRandomDirection(RandomSource random) {
 		return Direction.values()[random.nextInt(Direction.values().length)];
 	}
 	
@@ -81,7 +81,7 @@ public class RedstoneTNTEffect extends PrimedTNTEffect {
 		return DIRECTIONS[random.nextInt(DIRECTIONS.length)];
 	}
 	
-	private static Direction getRandomDirectionHorizontal(RandomSource random) {
+	public static Direction getRandomDirectionHorizontal(RandomSource random) {
 		return Direction.Plane.HORIZONTAL.getRandomDirection(random);
 	}
 }

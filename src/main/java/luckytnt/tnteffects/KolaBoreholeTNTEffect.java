@@ -38,7 +38,7 @@ public class KolaBoreholeTNTEffect extends PrimedTNTEffect {
 					BlockState state = level.getBlockState(pos);
 					int distanceSqr = offX * offX + offZ * offZ;
 					if (distanceSqr <= radius * radius) {
-						if (y <= level.getMinBuildHeight() + 5 || Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f) {
+						if (y <= level.getMinBuildHeight() + 5 || Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f && !state.isAir()) {
 							level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 							state.getBlock().wasExploded(level, pos, dummy);
 						}

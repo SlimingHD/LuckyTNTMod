@@ -1,17 +1,17 @@
 package luckytnt.tnteffects;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InaccessibleObjectException;
 
-import luckytnt.entity.PrimedItemFirework;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.item.LDynamiteItem;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.DragonFireball;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
@@ -25,150 +25,155 @@ import net.minecraft.world.entity.vehicle.Boat.Type;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.BoatItem;
-import net.minecraft.world.item.EggItem;
-import net.minecraft.world.item.FireChargeItem;
 import net.minecraft.world.item.FireworkRocketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SnowballItem;
-import net.minecraft.world.item.SpectralArrowItem;
 import net.minecraft.world.item.ThrowablePotionItem;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 
 public class ItemFireworkEffect extends PrimedTNTEffect {
 
-	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		((Entity)ent).setDeltaMovement(((Entity)ent).getDeltaMovement().x, 0.8f, ((Entity)ent).getDeltaMovement().z);
-	}
+	private static Field TYPE_FIELD;
+	private static Field CHEST_FIELD;
 	
-	@Override
-	public void serverExplosion(IExplosiveEntity entity) {
-		if(entity instanceof PrimedItemFirework ent) {
-			Item item = ent.item;
-			ItemStack stack = ent.stack == null ? ItemStack.EMPTY : ent.stack;
-			stack.setCount(1);
-			if(item == null) {
-				item = Item.byId(ent.getPersistentData().getInt("itemID"));
-			}
-			if(item != null) { 
-				if(item instanceof BoatItem boatitem) {
-					boolean hasChest = false;
-					Type type = Type.OAK;
-					try {
-						Field chest = BoatItem.class.getDeclaredField("hasChest");
-						Field boattype = BoatItem.class.getDeclaredField("type");
-						chest.setAccessible(true);
-						boattype.setAccessible(true);
-						hasChest = chest.getBoolean(boatitem);
-						type = (Type)boattype.get(boatitem);
-					} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
-						e.printStackTrace();
-					}
-					for(int i = 0; i < 300; i++) {
-						Boat boat = new Boat(ent.getLevel(), ent.x(), ent.y(), ent.z());
-						if(hasChest) {
-							boat = new ChestBoat(ent.getLevel(), ent.x(), ent.y(), ent.z());
-						}
-						boat.setVariant(type);
-						boat.setDeltaMovement(Math.random() * 6D - 3D, Math.random() * 6D - 3D, Math.random() * 6D - 3D);
-						ent.getLevel().addFreshEntity(boat);
-					}
-				} else if(item instanceof FireChargeItem) {
-					double phi = Math.PI * (3D - Math.sqrt(5D));
-					for(int i = 0; i < 300; i++) {
-						double y = 1D - ((double)i / (300D - 1D)) * 2D;
-						double radius = Math.sqrt(1D - y * y);
-					
-						double theta = phi * i;
-					
-						double x = Math.cos(theta) * radius;
-						double z = Math.sin(theta) * radius;
-						
-						LargeFireball fireball = new LargeFireball(EntityType.FIREBALL, ent.getLevel());
-						fireball.setPos(ent.x() + x * 15, ent.y() + y * 15, ent.z() + z * 15);
-						Vec3 vec = new Vec3(fireball.getX() - ent.x(), fireball.getY() - ent.y(), fireball.getZ() - ent.z()).normalize().scale(0.5D);
-						fireball.xPower = vec.x;
-						fireball.yPower = vec.y;
-						fireball.zPower = vec.z;
-						ent.getLevel().addFreshEntity(fireball);
-					}
-				} else if(item == Items.DRAGON_BREATH) {
-					for(int i = 0; i < 300; i++) {
-						DragonFireball fireball = new DragonFireball(EntityType.DRAGON_FIREBALL, ent.getLevel());
-						fireball.setPos(ent.getPos());
-						fireball.xPower = Math.random() - 0.5f;
-						fireball.yPower = Math.random() - 0.5f;
-						fireball.zPower = Math.random() - 0.5f;
-						ent.getLevel().addFreshEntity(fireball);
-					}
-				} else if(item instanceof ThrowablePotionItem) {
-					for(int i = 0; i < 300; i++) {
-						ThrownPotion potion = new ThrownPotion(ent.getLevel(), ent.x(), ent.y(), ent.z());
-						potion.setItem(stack != null ? stack : new ItemStack(item));
-						potion.setDeltaMovement(Math.random() * 3D - 1.5D, Math.random() * 3D - 1.5D, Math.random() * 3D - 1.5D);
-						ent.getLevel().addFreshEntity(potion);
-					}
-				} else if(item instanceof ArrowItem) {
-					for(int count = 0; count < 300; count++) {
-						if(item instanceof SpectralArrowItem) {
-							AbstractArrow arrow = new SpectralArrow(ent.getLevel(), ent.x(), ent.y(), ent.z());
-							arrow.setDeltaMovement(Math.random() * 6f - 3f, Math.random() * 6f - 3f, Math.random() * 6f - 3f);
-							ent.getLevel().addFreshEntity(arrow);
-						} else {
-							Arrow arrow = new Arrow(ent.getLevel(), ent.x(), ent.y(), ent.z());
-							arrow.setEffectsFromItem(stack == null ? new ItemStack(item) : stack);
-							arrow.setDeltaMovement(Math.random() * 6f - 3f, Math.random() * 6f - 3f, Math.random() * 6f - 3f);
-							ent.getLevel().addFreshEntity(arrow);
-						}
-					}
-				} else if(item instanceof EggItem) {
-					for(int count = 0; count < 300; count++) {
-						ThrownEgg egg = new ThrownEgg(ent.getLevel(), ent.x(), ent.y(), ent.z());
-						egg.setDeltaMovement(Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f);
-						ent.getLevel().addFreshEntity(egg);
-					}
-				} else if(item instanceof SnowballItem) {
-					for(int count = 0; count < 300; count++) {
-						Snowball ball = new Snowball(ent.getLevel(), ent.x(), ent.y(), ent.z());
-						ball.setDeltaMovement(Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f);
-						ent.getLevel().addFreshEntity(ball);
-					}
-				} else if(item instanceof LDynamiteItem dynamite) {
-					for(int count = 0; count < 300; count++) {
-						dynamite.shoot(ent.getLevel(), ent.x(), ent.y(), ent.z(), new Vec3(Math.random() * 6D - 3D, Math.random() * 6D - 3D, Math.random() * 6D - 3D), 1f + (float)Math.random(), null);
-					}
-				} else if(item instanceof FireworkRocketItem) {
-					for(int count = 0; count < 300; count++) {
-						FireworkRocketEntity rocket = new FireworkRocketEntity(ent.getLevel(), stack == null ? new ItemStack(item) : stack, ent.x(), ent.y(), ent.z(), true);
-						rocket.setDeltaMovement(Math.random() * 2f - 1f, Math.random() * 2f - 1f, Math.random() * 2f - 1f);
-						ent.getLevel().addFreshEntity(rocket);
-					}
-				} else {
-					for(int i = 0; i < 300; i++) {
-						ItemEntity itement = new ItemEntity(ent.getLevel(), ent.x(), ent.y(), ent.z(), stack == null ? new ItemStack(item) : stack.copy());
-						itement.setDeltaMovement(Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f);
-						ent.getLevel().addFreshEntity(itement);
-					}
+	static {
+		try {
+			for (Field field : BoatItem.class.getDeclaredFields()) {
+				field.setAccessible(true);
+				if (field.getDeclaringClass() == Boat.Type.class) {
+					TYPE_FIELD = field;
+				}
+				if (field.getDeclaringClass() == boolean.class) {
+					CHEST_FIELD = field;
 				}
 			}
+		} catch (SecurityException | IllegalArgumentException | InaccessibleObjectException e) {
+			e.printStackTrace();
 		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
+	public void explosionTick(IExplosiveEntity entity) {
+		if (entity instanceof Entity ent) {
+			ent.setDeltaMovement(ent.getDeltaMovement().x, 0.8d, ent.getDeltaMovement().z);
+		}
 	}
-	
+
+	@Override
+	public void serverExplosion(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
+		RandomSource random = level.getRandom();
+		
+		ItemStack stack = ItemStack.of(entity.getPersistentData().getCompound("stack"));
+		stack.setCount(1);
+		Item item = stack.getItem();
+		
+		if (item instanceof BoatItem boatItem) {
+			boolean hasChest = false;
+			Type type = Type.OAK;
+			try {
+				hasChest = CHEST_FIELD.getBoolean(boatItem);
+				type = (Type)TYPE_FIELD.get(boatItem);
+			} catch (NullPointerException | ExceptionInInitializerError | IllegalArgumentException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			for (int i = 0; i < 300; i++) {
+				Boat boat;
+				if (hasChest) {
+					boat = new ChestBoat(level, entity.x(), entity.y(), entity.z());
+				} else {
+					boat = new Boat(level, entity.x(), entity.y(), entity.z());
+				}
+				boat.setVariant(type);
+				addEntity(boat, random, 3d);
+			}
+		} else if (stack.is(Items.FIRE_CHARGE)) {
+			double phi = Math.PI * (3d - Math.sqrt(5d));
+			for (int i = 0; i < 300; i++) {
+				double y = 1d - (i / 299d) * 2d;
+				double radius = Math.sqrt(1d - y * y);
+			
+				double theta = phi * i;
+			
+				double x = Math.cos(theta) * radius;
+				double z = Math.sin(theta) * radius;
+				
+				LargeFireball fireball = new LargeFireball(EntityType.FIREBALL, level);
+				fireball.setPos(entity.x() + x * 15d, entity.y() + y * 15d, entity.z() + z * 15d);
+				Vec3 vec = new Vec3(x, y, z).normalize().scale(0.5d);
+				fireball.xPower = vec.x;
+				fireball.yPower = vec.y;
+				fireball.zPower = vec.z;
+				addEntity(fireball, random, 0d);
+			}
+		} else if (item == Items.DRAGON_BREATH) {
+			for (int i = 0; i < 300; i++) {
+				DragonFireball fireball = new DragonFireball(EntityType.DRAGON_FIREBALL, level);
+				fireball.setPos(entity.getPos());
+				fireball.xPower = random.nextDouble() - 0.5d;
+				fireball.yPower = random.nextDouble() - 0.5d;
+				fireball.zPower = random.nextDouble() - 0.5d;
+				addEntity(fireball, random, 0d);
+			}
+		} else if (item instanceof ThrowablePotionItem) {
+			for (int i = 0; i < 300; i++) {
+				ThrownPotion potion = new ThrownPotion(level, entity.x(), entity.y(), entity.z());
+				potion.setItem(stack);
+				addEntity(potion, random, 1.5d);
+			}
+		} else if (item instanceof ArrowItem) {
+			for (int i = 0; i < 300; i++) {
+				if (stack.is(Items.SPECTRAL_ARROW)) {
+					addEntity(new SpectralArrow(level, entity.x(), entity.y(), entity.z()), random, 3d);
+				} else {
+					Arrow arrow = new Arrow(level, entity.x(), entity.y(), entity.z());
+					arrow.setEffectsFromItem(stack);
+					addEntity(arrow, random, 3d);
+				}
+			}
+		} else if (stack.is(Items.EGG)) {
+			for (int i = 0; i < 300; i++) {
+				addEntity(new ThrownEgg(level, entity.x(), entity.y(), entity.z()), random, 1.5d);
+			}
+		} else if (stack.is(Items.SNOWBALL)) {
+			for (int count = 0; count < 300; count++) {
+				addEntity(new Snowball(level, entity.x(), entity.y(), entity.z()), random, 1.5d);
+			}
+		} else if (item instanceof LDynamiteItem dynamite) {
+			for (int count = 0; count < 300; count++) {
+				dynamite.shoot(level, entity.x(), entity.y(), entity.z(), new Vec3(random.nextDouble() * 6d - 3d, random.nextDouble() * 6d - 3d, random.nextDouble() * 6d - 3d), 1f + random.nextFloat(), null);
+			}
+		} else if (item instanceof FireworkRocketItem) {
+			for (int count = 0; count < 300; count++) {
+				addEntity(new FireworkRocketEntity(level, stack, entity.x(), entity.y(), entity.z(), true), random, 1d);
+			}
+		} else {
+			for (int i = 0; i < 300; i++) {
+				addEntity(new ItemEntity(level, entity.x(), entity.y(), entity.z(), stack.copy()), random, 1.5d);
+			}
+		}
+	}
+
+	@Override
+	public void spawnParticles(IExplosiveEntity entity) {
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0d, 0d, 0d);
+	}
+
 	@Override
 	public Block getBlock() {
 		return BlockRegistry.ITEM_FIREWORK.get();
 	}
-	
+
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 40;
+	}
+	
+	private static void addEntity(Entity entity, RandomSource random, double motion) {
+		entity.setDeltaMovement(random.nextDouble() * motion * 2d - motion, random.nextDouble() * motion * 2d - motion, random.nextDouble() * motion * 2d - motion);
+		entity.level().addFreshEntity(entity);
 	}
 }

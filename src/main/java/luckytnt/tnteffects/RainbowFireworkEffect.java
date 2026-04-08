@@ -35,7 +35,7 @@ public class RainbowFireworkEffect extends PrimedTNTEffect {
 				FallingBlockEntity sand = CustomFireworkEffect.CONSTRUCTOR.newInstance(level, entity.x(), entity.y(), entity.z(), CONCRETE[random.nextInt(CONCRETE.length)].defaultBlockState());
 				sand.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
 				level.addFreshEntity(sand);
-			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ExceptionInInitializerError e) {
 				e.printStackTrace();
 			}
 		}

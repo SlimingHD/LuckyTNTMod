@@ -2,12 +2,11 @@ package luckytnt.block;
 
 import javax.annotation.Nullable;
 
-import luckytnt.block.entity.ItemFireworkBlockEntity;
-import luckytnt.entity.PrimedItemFirework;
 import luckytnt.registry.EntityRegistry;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.entity.PrimedLTNT;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -36,14 +35,12 @@ public class ItemFireworkBlock extends LTNTBlock implements EntityBlock {
 	public PrimedLTNT explode(Level level, boolean exploded, double x, double y, double z, @Nullable LivingEntity igniter) throws NullPointerException {
 		if (TNT != null) {
 			BlockEntity blockEntity = level.getBlockEntity(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)));
-			PrimedItemFirework tnt = new PrimedItemFirework(EntityRegistry.ITEM_FIREWORK.get(), level);
+			PrimedLTNT tnt = EntityRegistry.ITEM_FIREWORK.get().create(level);
 			tnt.setFuse(40);
 			tnt.setPos(x + 0.5f, y, z + 0.5f);
 			tnt.setOwner(igniter);
-			if (blockEntity != null && blockEntity instanceof ItemFireworkBlockEntity block) {
-				tnt.item = block.item;
-				tnt.stack = block.stack;
-				tnt.getPersistentData().putInt("itemID", block.getPersistentData().getInt("itemID"));
+			if (blockEntity != null) {
+				tnt.getPersistentData().put("stack", blockEntity.getPersistentData().get("stack"));
 			}
 			level.addFreshEntity(tnt);
 			level.playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
@@ -57,17 +54,16 @@ public class ItemFireworkBlock extends LTNTBlock implements EntityBlock {
 
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-		return EntityRegistry.ITEM_FIREWORK_BLOCK_ENTITY.get().create(pos, state);
+		return EntityRegistry.TNT_BLOCK_ENTITY.get().create(pos, state);
 	}
 
 	@Override
 	public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
 		ItemStack stack = player.getItemInHand(hand);
 		Item item = stack.getItem();
-		if (stack != ItemStack.EMPTY && item != Items.FLINT_AND_STEEL && level.getBlockEntity(pos) != null && level.getBlockEntity(pos) instanceof ItemFireworkBlockEntity block) {
-			block.item = item;
-			block.stack = stack.copy();
-			block.getPersistentData().putInt("itemID", Item.getId(item));
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+		if (stack != ItemStack.EMPTY && item != Items.FLINT_AND_STEEL && blockEntity != null) {
+			blockEntity.getPersistentData().put("stack", stack.save(new CompoundTag()));
 			if (!player.isCreative()) {
 				stack.shrink(1);
 			}
