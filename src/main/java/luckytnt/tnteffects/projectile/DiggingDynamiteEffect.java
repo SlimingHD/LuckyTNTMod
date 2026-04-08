@@ -7,6 +7,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
@@ -31,7 +32,8 @@ public class DiggingDynamiteEffect extends PrimedTNTEffect {
 			if (step > vectorLength) {
 				break;
 			}
-			state.onBlockExploded(entity.getLevel(), pos, explosion);
+			state.getBlock().wasExploded(entity.getLevel(), pos, explosion);
+			entity.getLevel().setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 		}
 	}
 	

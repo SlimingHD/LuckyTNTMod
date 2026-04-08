@@ -3,6 +3,7 @@ package luckytnt.registry;
 import luckytnt.client.renderer.AngryMinerRenderer;
 import luckytnt.client.renderer.BombRenderer;
 import luckytnt.client.renderer.BouncingTNTRenderer;
+import luckytnt.client.renderer.DeathRayTNTRenderer;
 import luckytntlib.client.renderer.LDynamiteRenderer;
 import luckytntlib.client.renderer.LTNTMinecartRenderer;
 import luckytntlib.client.renderer.LTNTRenderer;
@@ -179,7 +180,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.EXTINCTION.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.MANSION.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.HELIX.get(), LTNTRenderer::new);
-		event.registerEntityRenderer(EntityRegistry.DEATH_RAY.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.DEATH_RAY.get(), DeathRayTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.DOOMSDAY.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FIERY_HELL.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.STONE_COLD.get(), LTNTRenderer::new);

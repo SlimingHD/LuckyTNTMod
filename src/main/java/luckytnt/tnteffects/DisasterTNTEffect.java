@@ -19,33 +19,33 @@ public class DisasterTNTEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		LevelVariables var = LevelVariables.get(ent.getLevel());
+	public void serverExplosion(IExplosiveEntity entity) {
+		LevelVariables variables = LevelVariables.get(entity.getLevel());
 		int time = 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() + 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() * (int)Math.random();
 		
-		if(disaster.equals("doomsday")) {
-			var.doomsdayTime = time;
-		} else if(disaster.equals("toxic_clouds")) {
-			var.toxicCloudsTime = time;
-		} else if(disaster.equals("clear")) {
-			var.doomsdayTime = 0;
-			var.heatDeathTime = 0;
-			var.iceAgeTime = 0;
-			var.tntRainTime = 0;
-			var.toxicCloudsTime = 0;
-			if(ent.getLevel() instanceof ServerLevel sl) {
+		if (disaster.equals("doomsday")) {
+			variables.doomsdayTime = time;
+		} else if (disaster.equals("toxic_clouds")) {
+			variables.toxicCloudsTime = time;
+		} else if (disaster.equals("clear")) {
+			variables.doomsdayTime = 0;
+			variables.heatDeathTime = 0;
+			variables.iceAgeTime = 0;
+			variables.tntRainTime = 0;
+			variables.toxicCloudsTime = 0;
+			if (entity.getLevel() instanceof ServerLevel sl) {
 				sl.setWeatherParameters(1000000, 0, false, false);
 			}
-		} else if(disaster.equals("ice_age")) {
-			var.iceAgeTime = time;
-		} else if(disaster.equals("heat_death")) {
-			var.heatDeathTime = time;
-		} else if(disaster.equals("tnt_rain")) {
-			var.tntRainTime = time;
+		} else if (disaster.equals("ice_age")) {
+			variables.iceAgeTime = time;
+		} else if (disaster.equals("heat_death")) {
+			variables.heatDeathTime = time;
+		} else if (disaster.equals("tnt_rain")) {
+			variables.tntRainTime = time;
 		}
 		
-		if(ent.getLevel() instanceof ServerLevel sl) {
-			var.sync(sl);
+		if (entity.getLevel() instanceof ServerLevel sl) {
+			variables.sync(sl);
 			if(rain) {
 				sl.setWeatherParameters(0, time, true, true);
 			}
