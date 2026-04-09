@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
@@ -24,6 +25,8 @@ public class SphereTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), strength, maxResistance);
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), strength);
+		particleExplosion.spawnExplosionParticles();
 	}
 
 	@Override

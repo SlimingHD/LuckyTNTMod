@@ -23,6 +23,7 @@ public class EnderTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), Mth.floor(strength * 1.5f));
 		explosion.doEntityExplosion(strength, false);
+		explosion.spawnExplosionParticles();
 	}
 	
 	@Override

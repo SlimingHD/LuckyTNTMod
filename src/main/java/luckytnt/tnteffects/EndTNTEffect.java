@@ -28,6 +28,7 @@ public class EndTNTEffect extends PrimedTNTEffect {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), strength);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
+		explosion.spawnExplosionParticles();
 		ImprovedExplosion endExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), Mth.floor(strength * 1.5f));
 		endExplosion.doImprovedBlockExplosion(1f, 1.5f, false, false, new SimpleExplosionRule(Blocks.END_STONE.defaultBlockState()));
 		RandomSource random = entity.getLevel().getRandom();

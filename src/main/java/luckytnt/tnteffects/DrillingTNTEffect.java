@@ -14,20 +14,21 @@ public class DrillingTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.getLevel());
-		float vectorLength = 240f;
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
+		particleExplosion.spawnExplosionParticles();
 		for(int x = -3; x <= 3; x++) {
 			for(int z = -3; z <= 3; z++) {
 				double distance = Math.sqrt(x * x + z * z);
 				if(distance <= 3) {
-					for(float y = vectorLength; y >= 0; y--) {
-						BlockPos pos = toBlockPos(entity.getPos().add(x, -y, z));
+					float vectorLength = 480f;
+					for(float y = 0f; y <= vectorLength; y++) {
+						BlockPos pos = toBlockPos(entity.getPos().subtract(x, y, z));
 						BlockState state = entity.getLevel().getBlockState(pos);
-						y -= state.getExplosionResistance(entity.getLevel(), pos, dummyExplosion);
-						if (y < 0) {
+						vectorLength -= state.getExplosionResistance(entity.getLevel(), pos, particleExplosion);
+						if (vectorLength < y) {
 							break;
 						}
-						state.getBlock().wasExploded(entity.getLevel(), pos, dummyExplosion);
+						state.getBlock().wasExploded(entity.getLevel(), pos, particleExplosion);
 						entity.getLevel().setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 					}
 				}

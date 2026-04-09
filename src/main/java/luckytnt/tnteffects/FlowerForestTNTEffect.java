@@ -80,6 +80,8 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 				}
 			}
 		}
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 8);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

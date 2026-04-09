@@ -7,6 +7,7 @@ import java.util.List;
 import luckytnt.entity.PrimedCustomFirework;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -75,6 +76,8 @@ public class CustomFireworkEffect extends PrimedTNTEffect {
 			for (PrimedTnt tnt : tnts) {
 				tnt.setDeltaMovement(Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f, Math.random() * 1.5f - Math.random() * 1.5f);
 			}
+			ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
+			particleExplosion.spawnExplosionParticles();
 		}
 	}
 	

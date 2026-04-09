@@ -14,16 +14,17 @@ public class DiggingTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.getLevel());
-		float vectorLength = 240f;
-		for (float y = vectorLength; y >= 0; y--) {
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
+		particleExplosion.spawnExplosionParticles();
+		float vectorLength = 480f;
+		for (float y = 0f; y <= vectorLength; y++) {
 			BlockPos pos = toBlockPos(entity.getPos().subtract(0d, y, 0d));
 			BlockState state = entity.getLevel().getBlockState(pos);
-			y -= state.getExplosionResistance(entity.getLevel(), pos, dummyExplosion);
-			if (y < 0) {
+			vectorLength -= state.getExplosionResistance(entity.getLevel(), pos, particleExplosion);
+			if (vectorLength < y) {
 				break;
 			}
-			state.getBlock().wasExploded(entity.getLevel(), pos, dummyExplosion);
+			state.getBlock().wasExploded(entity.getLevel(), pos, particleExplosion);
 			entity.getLevel().setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 		}
 	}

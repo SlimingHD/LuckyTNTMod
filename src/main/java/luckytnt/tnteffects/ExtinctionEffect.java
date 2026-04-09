@@ -1,5 +1,8 @@
 package luckytnt.tnteffects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
@@ -11,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
 
 public class ExtinctionEffect extends PrimedTNTEffect {
@@ -18,10 +22,17 @@ public class ExtinctionEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		if (entity.getLevel() instanceof ServerLevel serverLevel) {
+			List<LightningBolt> lightnings = new ArrayList<LightningBolt>();
 			for (Entity toKill : serverLevel.getAllEntities()) {
-				toKill.hurt(LuckyTNTDamageSources.extinction(serverLevel, entity.owner()), 10000);
+				if (!(toKill instanceof LivingEntity)) {
+					continue;
+				}
+				toKill.hurt(LuckyTNTDamageSources.extinction(serverLevel, entity.owner()), 10000f);
 				LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, serverLevel);
 				lightning.setPos(toKill.position());
+				lightnings.add(lightning);
+			}
+			for (LightningBolt lightning : lightnings) {
 				serverLevel.addFreshEntity(lightning);
 			}
 		}

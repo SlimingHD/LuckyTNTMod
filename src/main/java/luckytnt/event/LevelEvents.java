@@ -45,13 +45,14 @@ import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.RegistryObject;
 
 @Mod.EventBusSubscriber(modid = LuckyTNTMod.MODID)
 public class LevelEvents {
 	
-	private static final RandomList<EntityType<?>> TNTS = new RandomList<>(
-		List.of(EntityRegistry.TNT_X20.get(), EntityRegistry.FIRE_TNT.get(), EntityRegistry.SNOW_TNT.get(), EntityRegistry.FREEZE_TNT.get(), EntityRegistry.ATTACKING_TNT.get(), EntityRegistry.BIG_TNT.get(), EntityRegistry.WALKING_TNT.get(), EntityRegistry.NUCLEAR_WASTE_TNT.get(), EntityRegistry.BOUNCING_TNT.get(), EntityRegistry.FARMING_TNT.get(), EntityRegistry.GROVE_TNT.get(), EntityRegistry.COMPACT_TNT.get(), EntityRegistry.RANDOM_TNT.get(), EntityRegistry.TNT_X5.get(), EntityRegistry.TNT.get()), 
-		List.of(1f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 1f, 1f, 16f, 70f)
+	private static final RandomList<RegistryObject<? extends EntityType<?>>> TNTS = new RandomList<>(
+		List.of(EntityRegistry.TNT_X20, EntityRegistry.FIRE_TNT, EntityRegistry.SNOW_TNT, EntityRegistry.FREEZE_TNT, EntityRegistry.ATTACKING_TNT, EntityRegistry.BIG_TNT, EntityRegistry.WALKING_TNT, EntityRegistry.NUCLEAR_WASTE_TNT, EntityRegistry.BOUNCING_TNT, EntityRegistry.FARMING_TNT, EntityRegistry.GROVE_TNT, EntityRegistry.COMPACT_TNT, EntityRegistry.RANDOM_TNT, EntityRegistry.TNT_X5, EntityRegistry.TNT), 
+		List.of(1f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 2f, 1f, 1f, 16f, 70f)
 	);
 
 	@SubscribeEvent
@@ -265,7 +266,7 @@ public class LevelEvents {
 	private static void tntRainDisaster(ServerLevel server, ServerPlayer player, RandomSource random, int tntRainTime) {
 		int i = 4 - LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().intValue() / 3;
 		if (tntRainTime % i == 0) {
-			Entity ent = TNTS.getRandomItem(random).create(server);
+			Entity ent = TNTS.getRandomItem(random).get().create(server);
 			ent.setPos(player.getX() + random.nextDouble() * 80d - 40d, player.getY() + 20d + random.nextDouble() * 10d, player.getZ() + random.nextDouble() * 80d - 40d);
 			if (ent instanceof PrimedLTNT tnt) {
 				tnt.setFuse(120);

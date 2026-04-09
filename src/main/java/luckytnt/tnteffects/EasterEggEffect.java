@@ -35,6 +35,7 @@ public class EasterEggEffect extends PrimedTNTEffect{
 		int level = entity.getPersistentData().getInt("level");
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 15);
 		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+		explosion.spawnExplosionParticles();
 		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, new FilterRandomExplosionRule(0.66f,
 				new RandomBlockExplosionRule(RandomList.ofEqualProbability(Blocks.MELON.defaultBlockState(), Blocks.PUMPKIN.defaultBlockState()))
 		));

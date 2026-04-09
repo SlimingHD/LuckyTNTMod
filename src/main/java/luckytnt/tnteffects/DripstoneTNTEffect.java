@@ -44,12 +44,13 @@ public class DripstoneTNTEffect extends PrimedTNTEffect {
 						LogicExplosionRule.not(new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), new CraterExplosionRule())
 				)
 		));
-		ImprovedExplosion dummy = new ImprovedExplosion(entity.getLevel(), entity.getPos(), radius);
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), radius);
+		particleExplosion.spawnExplosionParticles();
 		ExplosionHelper.customSphericalExplosion(entity.getLevel(), entity.getPos(), radius, (level, center, pos, state) -> {
 			BlockState stateBelow = level.getBlockState(pos.below());
-			if ((stateBelow.isAir() && !state.is(BlockTags.DRIPSTONE_REPLACEABLE) && state.getExplosionResistance(level, pos, dummy) < 100) ||
-					(state.isAir() && stateBelow.is(BlockTags.DRIPSTONE_REPLACEABLE) && stateBelow.getExplosionResistance(level, pos, dummy) < 100)) {
-				state.getBlock().wasExploded(level, pos, dummy);
+			if ((stateBelow.isAir() && !state.is(BlockTags.DRIPSTONE_REPLACEABLE) && state.getExplosionResistance(level, pos, particleExplosion) < 100) ||
+					(state.isAir() && stateBelow.is(BlockTags.DRIPSTONE_REPLACEABLE) && stateBelow.getExplosionResistance(level, pos, particleExplosion) < 100)) {
+				state.getBlock().wasExploded(level, pos, particleExplosion);
 				level.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState());
 			}
 		});

@@ -2,10 +2,10 @@ package luckytnt.tnteffects;
 
 import java.util.function.Supplier;
 
+import luckytnt.rules.FilterFullBlockExplosionRule;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
-import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
 import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -25,8 +25,8 @@ public class CompactTNTEffect extends PrimedTNTEffect {
 	}
 
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), size);
-		explosion.doImprovedBlockExplosion(size, size, false, true, new FilterAirExplosionRule(
+		ImprovedExplosion tntExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), size);
+		tntExplosion.doImprovedBlockExplosion(size, size, false, true, new FilterFullBlockExplosionRule(
 				new FilterRandomExplosionRule(probability, new SimpleExplosionRule(toPlace.get().get().defaultBlockState()))
 		));
 	}

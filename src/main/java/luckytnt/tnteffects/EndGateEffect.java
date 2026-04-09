@@ -11,6 +11,7 @@ import luckytnt.rules.FilterOffYExplosionRule;
 import luckytnt.rules.OffsetExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
@@ -74,6 +75,9 @@ public class EndGateEffect extends PrimedTNTEffect{
 		if (level instanceof ServerLevel serverLevel) {
 			serverLevel.setDayTime(18000);
 		}
+		
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 12);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

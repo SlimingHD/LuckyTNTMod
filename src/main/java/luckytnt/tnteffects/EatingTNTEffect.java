@@ -22,6 +22,7 @@ public class EatingTNTEffect extends PrimedTNTEffect {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 10 + Mth.floor((1f/7.5f) * entity.getPersistentData().getInt("eatLevel")));
 		explosion.doEntityExplosion(1.5f + entity.getPersistentData().getInt("eatLevel") / 300f, true);
 		explosion.doImprovedBlockExplosion(1f, 1f, false, false, null);
+		explosion.spawnExplosionParticles();
 	}
 	
 	@Override

@@ -56,12 +56,15 @@ public class DividingTNTEffect extends PrimedTNTEffect {
 			ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity)entity, entity.getPos(), 10);
 			explosion.doEntityExplosion(1f, true);
 			explosion.doImprovedBlockExplosion(1f, 1f, false, false, null);
+			explosion.spawnExplosionParticles();
 			playExplosionSound(entity);
 			entity.destroy();
 		} else {
 			ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity)entity, entity.getPos(), 10);
 			explosion.doEntityExplosion(1.5f, true);
 			explosion.doImprovedBlockExplosion(1f, 1f, false, false, null);
+			explosion.spawnExplosionParticles();
+			playExplosionSound(entity);
 			PrimedLTNT projectile = EntityRegistry.DIVIDING_TNT.get().create(level);
 			projectile.setOwner(entity.owner());
 			projectile.setPos(entity.getPos());
