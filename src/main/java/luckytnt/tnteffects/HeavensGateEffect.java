@@ -3,9 +3,11 @@ package luckytnt.tnteffects;
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.rules.CopyBlockExplosionRule;
+import luckytnt.rules.FilterOffYExplosionRule;
 import luckytnt.rules.OffsetExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
@@ -16,11 +18,11 @@ public class HeavensGateEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f, new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 
-			new FilterBlastResistanceExplosionRule(200f, new CopyBlockExplosionRule())
-		));
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f, new FilterOffYExplosionRule(-20, 20,
+			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), new FilterBlastResistanceExplosionRule(200f, new CopyBlockExplosionRule())
+		)));
 		
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 30, 200f);
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 30, 200f, new FilterOffYExplosionRule(-20, 20, new CraterExplosionRule()));
 	}
 	
 	@Override

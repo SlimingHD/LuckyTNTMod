@@ -50,10 +50,10 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 		
 		if (!level.isClientSide() && entity.getTNTFuse() <= 420 && entity.getTNTFuse() % 60 == 0) {
 			BlockPos origin = new BlockPos(data.getInt("x"), data.getInt("y"), data.getInt("z"));
-			BlockPos start = origin.offset(toBlockPos(new Vec3(data.getDouble("vecx") * -80d, 0, data.getDouble("vecz") * -80d)));
 			Vec3 vec = new Vec3(data.getDouble("vecx"), 0d, data.getDouble("vecz"));
+			BlockPos start = origin.offset(toBlockPos(new Vec3(vec.x * -80d, 0, vec.z * -80d)));
 			Vec3 vec2 = new Vec3(data.getDouble("vecx2"), 0d, data.getDouble("vecz2"));
-			BlockPos start2 = start.offset(toBlockPos(new Vec3(vec.x * ent.getPersistentData().getInt("second"), 0, vec.z * ent.getPersistentData().getInt("second")))).offset(toBlockPos(new Vec3(vec2.x * 8d, 0d, vec2.z * 8d)));
+			BlockPos start2 = start.offset(toBlockPos(new Vec3(vec.x * data.getInt("second") + vec2.x * 8d, 0, vec.z * data.getInt("second") + vec2.z * 8d)));
 			
 			carveRavine(160, vec, start, level);
 			carveRavine(60, vec2, start2, level);

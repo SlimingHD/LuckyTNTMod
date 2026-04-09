@@ -1,91 +1,78 @@
 package luckytnt.tnteffects;
 
+import java.util.List;
+
 import luckytnt.config.LuckyTNTConfigValues;
+import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
-import luckytnt.util.Materials;
+import luckytnt.rules.CopyBlockExplosionRule;
+import luckytnt.rules.FilterLiquidExplosionRule;
+import luckytnt.rules.FilterOffYExplosionRule;
+import luckytnt.rules.OffsetExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
+import luckytntlib.util.explosions.rules.CraterExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
+import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
+import luckytntlib.util.explosions.rules.SimpleExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 
 public class EndGateEffect extends PrimedTNTEffect{
 
+	private static final List<TagKey<Block>> WOOD_TAGS = List.of(BlockTags.LOGS, BlockTags.PLANKS, BlockTags.ALL_SIGNS, BlockTags.WOODEN_TRAPDOORS, BlockTags.WOODEN_DOORS, BlockTags.WOODEN_SLABS, BlockTags.WOODEN_STAIRS, BlockTags.WOODEN_BUTTONS, BlockTags.WOODEN_PRESSURE_PLATES, BlockTags.WOODEN_FENCES, BlockTags.FENCE_GATES, BlockTags.BAMBOO_BLOCKS, BlockTags.CAMPFIRES, BlockTags.BEEHIVES, BlockTags.BANNERS);
+
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 30, new IForEachBlockExplosionEffect() {
+		Level level = entity.getLevel();
+		ExplosionHelper.createSphericalCrater(level, entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f, new FilterOffYExplosionRule(-20, 20,
+			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 
+				new FilterBlastResistanceExplosionRule(200f, 
+					new StackedExplosionRule(
+						FilterBlockExplosionRule.applyOnlyWhen(Blocks.AIR, new CopyBlockExplosionRule()),
+						FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new SimpleExplosionRule(Blocks.PURPUR_BLOCK.defaultBlockState())),
+						FilterBlockExplosionRule.builder().filterForTags(WOOD_TAGS).build(new SimpleExplosionRule(Blocks.OBSIDIAN.defaultBlockState())),
+						new FilterLiquidExplosionRule(new SimpleExplosionRule(Blocks.AIR.defaultBlockState())),
+						new SimpleExplosionRule(Blocks.END_STONE.defaultBlockState())
+					)
+				)
+			)
+		));
 		
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				BlockPos posTop = pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0);
-				BlockState stateTop = level.getBlockState(posTop);
-				
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 200 && stateTop.isAir() && !state.isAir() && Math.abs(entity.y() - pos.getY()) <= 20) {
-					level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-					if(Materials.isWood(state)) {
-						level.setBlock(posTop, Blocks.OBSIDIAN.defaultBlockState(), 3);
-					} else if(state.is(BlockTags.LEAVES)) {
-						level.setBlock(posTop, Blocks.END_STONE.defaultBlockState(), 3);
-					} else if(state.getBlock() instanceof LiquidBlock) {
-						level.setBlock(posTop, Blocks.AIR.defaultBlockState(), 3);
-					} else {
-						level.setBlock(posTop, Blocks.END_STONE.defaultBlockState(), 3);
-					}
-				}
-			}
-		});
+		ExplosionHelper.createSphericalCrater(level, entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f,
+			new FilterSurfaceExplosionRule(false, new FilterRandomExplosionRule(0.05f, new CanSurviveExplosionRule(Blocks.CHORUS_FLOWER.defaultBlockState()))
+		));
+
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 30, 200f, new FilterOffYExplosionRule(-20, 20, new CraterExplosionRule()));
 		
-		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), 30, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				BlockPos posTop = pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0);
-				BlockState stateTop = level.getBlockState(posTop);
-				BlockPos posAbove = pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get() + 1, 0);
-				BlockState stateAbove = level.getBlockState(posAbove);
-				
-				if(stateAbove.isAir() && Math.random() <= 0.05D && stateTop.getBlock() == Blocks.END_STONE) {
-					level.setBlock(posAbove, Blocks.CHORUS_FLOWER.defaultBlockState(), 3);
-				}
-			}
-		});
-		
-		for(int i = 0; i < 80; i++) {
-			int offX = (int)Math.round(Math.random() * 30D - 15D);
-			int offZ = (int)Math.round(Math.random() * 30D - 15D);
-			EnderMan man = new EnderMan(EntityType.ENDERMAN, entity.getLevel());
-			for(int offY = 320; offY >= -64; offY--) {
-				BlockPos pos = toBlockPos(new Vec3(entity.x() + offX, offY, entity.z() + offZ));
-				BlockPos posDown = toBlockPos(new Vec3(entity.x() + offX, offY - 1, entity.z() + offZ));
-				BlockState state = entity.getLevel().getBlockState(pos);
-				BlockState stateDown = entity.getLevel().getBlockState(posDown);
-				
-				if(Block.isFaceFull(stateDown.getCollisionShape(entity.getLevel(), posDown), Direction.UP) && !Block.isFaceFull(state.getCollisionShape(entity.getLevel(), pos), Direction.UP)) {
-					man.setPos(entity.x() + offX, offY, entity.z() + offZ);
-					break;
-				}
-			}
-			entity.getLevel().addFreshEntity(man);
+		RandomSource random = level.getRandom();
+		for (int i = 0; i < 80; i++) {
+			double offX = random.nextDouble() * 30d - 15d;
+			double offZ = random.nextDouble() * 30d - 15d;
+			double offY = LevelEvents.getTopBlock(level, entity.x() + offX, entity.z() + offZ, false);
+			EnderMan enderMan = new EnderMan(EntityType.ENDERMAN, level);	
+			enderMan.setPos(entity.x() + offX, offY, entity.z() + offZ);
+			level.addFreshEntity(enderMan);
 		}
 		
-		entity.getLevel().playSound(null, toBlockPos(entity.getPos()), SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 0.5f, 1);
-		if(entity.getLevel() instanceof ServerLevel sLevel) {
-			sLevel.setDayTime(18000);
+		level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 0.5f, 1);
+		if (level instanceof ServerLevel serverLevel) {
+			serverLevel.setDayTime(18000);
 		}
 	}
 	

@@ -6,9 +6,10 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,49 +18,46 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.event.ForgeEventFactory;
+import net.minecraftforge.registries.RegistryManager;
 
 public class EntityFireworkEffect extends PrimedTNTEffect {
 
 	@Override
-	public void explosionTick(IExplosiveEntity ent) {
-		((Entity)ent).setDeltaMovement(((Entity)ent).getDeltaMovement().x, 0.8f, ((Entity)ent).getDeltaMovement().z);
-		if(ent.getTNTFuse() == 40) {
-			List<LivingEntity> ents = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() - 20, ent.y() - 20, ent.z() - 20, ent.x() + 20, ent.y() + 20, ent.z() + 20));
-	      	double distance = 2000;
-	      	for(LivingEntity lent : ents) {
-	      		double xD = lent.getX() - ent.x();
-	      		double yD = lent.getY() - ent.y();
-	      		double zD = lent.getZ() - ent.z();
-	      		double d = Math.sqrt(xD * xD + yD * yD + zD * zD);
-	      		if(d < distance && !(lent instanceof Player)) {
-	      			distance = d;
-	      			ent.getPersistentData().putString("type", EntityType.getKey(lent.getType()).toString());
+	public void explosionTick(IExplosiveEntity entity) {
+		Entity ent = (Entity)entity;
+		ent.setDeltaMovement(ent.getDeltaMovement().x, 0.8f, ent.getDeltaMovement().z);
+		if (entity.getTNTFuse() == 40) {
+			List<LivingEntity> entities = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() - 20, entity.y() - 20, entity.z() - 20, entity.x() + 20, entity.y() + 20, entity.z() + 20));
+	      	double maxDistance = 2000;
+	      	for (LivingEntity livingEntity : entities) {
+	      		double distance = livingEntity.position().distanceTo(entity.getPos());
+	      		if (distance < maxDistance && !(livingEntity instanceof Player)) {
+	      			maxDistance = distance;
+	      			entity.getPersistentData().putString("type", EntityType.getKey(livingEntity.getType()).toString());
 	      		}
 	      	}
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(new ResourceLocation(ent.getPersistentData().getString("type")));
-		if(type == null) {
-			type = EntityType.PIG;
-		}
-		for(int count = 0; count < 300; count++) {
-			Entity lent = type.create(ent.getLevel());	
-			lent.setPos(ent.x(), ent.y(), ent.z());
-			lent.setDeltaMovement(Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f, Math.random() * 3f - 1.5f);
-			if(lent instanceof Mob mob && ent.getLevel() instanceof ServerLevel sLevel) {
-				mob.finalizeSpawn(sLevel, sLevel.getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
+	public void serverExplosion(IExplosiveEntity entity) {
+		EntityType<?> type = RegistryManager.FROZEN.getRegistry(Registries.ENTITY_TYPE).getDelegateOrThrow(new ResourceLocation(entity.getPersistentData().getString("type"))).get();
+		RandomSource random = entity.getLevel().getRandom();
+		for (int count = 0; count < 300; count++) {
+			Entity ent = type.create(entity.getLevel());	
+			ent.setPos(entity.x(), entity.y(), entity.z());
+			ent.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
+			if (ent instanceof Mob mob && entity.getLevel() instanceof ServerLevel sLevel) {
+				ForgeEventFactory.onFinalizeSpawn(mob, sLevel, sLevel.getCurrentDifficultyAt(toBlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
-			ent.getLevel().addFreshEntity(lent);
+			entity.getLevel().addFreshEntity(ent);
 		}
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y(), ent.z(), 0, 0, 0);
+	public void spawnParticles(IExplosiveEntity entity) {
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0, 0, 0);
 	}
 	
 	@Override
@@ -68,7 +66,7 @@ public class EntityFireworkEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 40;
 	}
 }

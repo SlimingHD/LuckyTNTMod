@@ -1,94 +1,69 @@
 package luckytnt.tnteffects;
 
+import java.util.List;
+
 import luckytnt.registry.BlockRegistry;
-import luckytnt.util.Materials;
+import luckytnt.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.CraterExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
+import luckytntlib.util.explosions.rules.FireExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
+import luckytntlib.util.explosions.rules.SimpleExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.Level;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.GrassBlock;
-import net.minecraft.world.level.block.MyceliumBlock;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 
 public class FirestormTNTEffect extends PrimedTNTEffect {
 
+	private static final List<TagKey<Block>> REMOVE_TAGS = List.of(BlockTags.LOGS, BlockTags.PLANKS, BlockTags.BAMBOO_BLOCKS, BlockTags.BEEHIVES, BlockTags.LEAVES);
+
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		ExplosionHelper.doCylindricalExplosion(ent.getLevel(), ent.getPos(), 50, 50, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= 50 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200) {
-					if((!state.isCollisionShapeFullBlock(level, pos) || state.is(Blocks.FIRE) || state.is(Blocks.SOUL_FIRE) 
-					|| state.is(BlockTags.LEAVES) || Materials.isPlant(state) || state.is(BlockTags.SNOW)
-					|| Materials.isWood(state)) && !(state.getBlock() instanceof GrassBlock) && !(state.getBlock() instanceof MyceliumBlock)) 
-					{
-						state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-					}
-				}
-			}
-		});
+	public void serverExplosion(IExplosiveEntity entity) {
+		ExplosionHelper.createCylindricalCrater(entity.getLevel(), entity.getPos(), 50, 50, 200f, FilterDistanceExplosionRule.lessEqual(50,
+			new StackedExplosionRule(
+				LogicExplosionRule.not(new FilterFullBlockExplosionRule(new AlwaysExplosionRule()),
+					FilterBlockExplosionRule.builder().filterForTags(REMOVE_TAGS).build(new CraterExplosionRule())
+				)
+			)
+		));
 		
-		ExplosionHelper.doSphericalExplosion(ent.getLevel(), ent.getPos(), 50, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel())) <= 200 && !state.isAir()) {
-					state.getBlock().onBlockExploded(state, level, pos, ImprovedExplosion.dummyExplosion(ent.getLevel()));
-					level.setBlock(pos, Blocks.NETHERRACK.defaultBlockState(), 3);
-				}
-			}
-		});
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 50, 200f, new FilterAirExplosionRule(new SimpleExplosionRule(Blocks.NETHERRACK.defaultBlockState())));
 		
-		ExplosionHelper.doTopBlockExplosionForAll(ent.getLevel(), ent.getPos(), 50, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(Math.random() < 0.75f) {
-					BlockPlaceContext ctx = new BlockPlaceContext(level, null, InteractionHand.MAIN_HAND, new ItemStack(Items.FLINT_AND_STEEL), new BlockHitResult(new Vec3(ent.x(), ent.y(), ent.z()), Direction.DOWN, pos, true));
-					level.setBlock(pos, Blocks.FIRE.getStateForPlacement(ctx), 3);
-				}
-			}
-		});
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 50, 0f, new FireExplosionRule(0.75f));
 	}
 	
 	@Override
-	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D, ent.y() + 1D, ent.z(), 0.25D, 0.25D, 0);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D, ent.y() + 1D, ent.z(), -0.25D, 0.25D, 0);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 1D, ent.z() + 0.5D, 0, 0.25D, 0.25D);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 1D, ent.z() - 0.5D, 0, 0.25D, -0.25D);
+	public void spawnParticles(IExplosiveEntity entity) {
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 0.5d, entity.y() + 1d, entity.z(), 0.25d, 0.25d, 0);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 0.5d, entity.y() + 1d, entity.z(), -0.25d, 0.25d, 0);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 1d, entity.z() + 0.5d, 0, 0.25d, 0.25d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 1d, entity.z() - 0.5d, 0, 0.25d, -0.25d);
 		
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D, ent.y() + 1D, ent.z() + 0.5D, 0.25D, 0.25D, 0.25D);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D, ent.y() + 1D, ent.z() + 0.5D, -0.25D, 0.25D, 0.25D);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D, ent.y() + 1D, ent.z() - 0.5D, 0.25D, 0.25D, -0.25D);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D, ent.y() + 1D, ent.z() - 0.5D, -0.25D, 0.25D, -0.25D);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 0.5d, entity.y() + 1d, entity.z() + 0.5d, 0.25d, 0.25d, 0.25d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 0.5d, entity.y() + 1d, entity.z() + 0.5d, -0.25d, 0.25d, 0.25d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 0.5d, entity.y() + 1d, entity.z() - 0.5d, 0.25d, 0.25d, -0.25d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 0.5d, entity.y() + 1d, entity.z() - 0.5d, -0.25d, 0.25d, -0.25d);
 		
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D, ent.y() + 0.5D, ent.z(), 0.25D, 0, 0);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D, ent.y() + 0.5D, ent.z(), -0.25D, 0, 0);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5D, ent.z() + 0.5D, 0, 0, 0.25D);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 0.5D, ent.z() - 0.5D, 0, 0, -0.25D);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 0.5d, entity.y() + 0.5d, entity.z(), 0.25d, 0, 0);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 0.5d, entity.y() + 0.5d, entity.z(), -0.25d, 0, 0);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z() + 0.5d, 0, 0, 0.25d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z() - 0.5d, 0, 0, -0.25d);
 		
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D, ent.y() + 0.5D, ent.z() + 0.5D, 0.25D, 0, 0.25D);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D, ent.y() + 0.5D, ent.z() + 0.5D, -0.25D, 0, 0.25D);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() + 0.5D, ent.y() + 0.5D, ent.z() - 0.5D, 0.25D, 0, -0.25D);
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x() - 0.5D, ent.y() + 0.5D, ent.z() - 0.5D, -0.25D, 0, -0.25D);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 0.5d, entity.y() + 0.5d, entity.z() + 0.5d, 0.25d, 0, 0.25d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 0.5d, entity.y() + 0.5d, entity.z() + 0.5d, -0.25d, 0, 0.25d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 0.5d, entity.y() + 0.5d, entity.z() - 0.5d, 0.25d, 0, -0.25d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() - 0.5d, entity.y() + 0.5d, entity.z() - 0.5d, -0.25d, 0, -0.25d);
 
-		ent.getLevel().addParticle(ParticleTypes.FLAME, ent.x(), ent.y() + 1D, ent.z(), 0, 0.25D, 0);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 1d, entity.z(), 0, 0.25d, 0);
 	}
 
 	@Override
@@ -97,7 +72,7 @@ public class FirestormTNTEffect extends PrimedTNTEffect {
 	}
 
 	@Override
-	public int getDefaultFuse(IExplosiveEntity ent) {
+	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 160;
 	}
 }

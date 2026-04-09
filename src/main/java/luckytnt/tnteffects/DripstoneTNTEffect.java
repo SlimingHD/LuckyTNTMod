@@ -1,24 +1,31 @@
 package luckytnt.tnteffects;
 
+import java.util.List;
+
 import luckytnt.registry.BlockRegistry;
+import luckytnt.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.CraterExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.CaveFeatures;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.Level;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
-public class DripstoneTNTEffect extends PrimedTNTEffect{
+public class DripstoneTNTEffect extends PrimedTNTEffect {
 
 	private final int radius;
 	
@@ -28,44 +35,34 @@ public class DripstoneTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100 && (!state.isCollisionShapeFullBlock(level, pos) || state.is(BlockTags.LEAVES) || state.is(BlockTags.LOGS))) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
-				}
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), radius, 100, new FilterAirExplosionRule(
+				new StackedExplosionRule(
+						FilterBlockExplosionRule.builder()
+							.filterForTags(List.of(BlockTags.LOGS, BlockTags.LEAVES))
+							.build(new CraterExplosionRule()
+						),
+						LogicExplosionRule.not(new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), new CraterExplosionRule())
+				)
+		));
+		ImprovedExplosion dummy = new ImprovedExplosion(entity.getLevel(), entity.getPos(), radius);
+		ExplosionHelper.customSphericalExplosion(entity.getLevel(), entity.getPos(), radius, (level, center, pos, state) -> {
+			BlockState stateBelow = level.getBlockState(pos.below());
+			if ((stateBelow.isAir() && !state.is(BlockTags.DRIPSTONE_REPLACEABLE) && state.getExplosionResistance(level, pos, dummy) < 100) ||
+					(state.isAir() && stateBelow.is(BlockTags.DRIPSTONE_REPLACEABLE) && stateBelow.getExplosionResistance(level, pos, dummy) < 100)) {
+				state.getBlock().wasExploded(level, pos, dummy);
+				level.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState());
 			}
 		});
-		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), radius, new IForEachBlockExplosionEffect() {
-
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(level.getBlockState(pos.below()).isAir() && !state.isAir() && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100 && !state.is(BlockTags.DRIPSTONE_REPLACEABLE)) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
-					level.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState());
-				}
-				else if(level.getBlockState(pos.below()).getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100 && !level.getBlockState(pos.below()).isAir() && state.isAir() && !level.getBlockState(pos.below()).is(BlockTags.DRIPSTONE_REPLACEABLE)) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
-					level.setBlockAndUpdate(pos.below(), Blocks.STONE.defaultBlockState());
-				}
-			}
-		});
-		if(entity.getLevel() instanceof ServerLevel sLevel) {
-			ExplosionHelper.doSphericalExplosion(sLevel, entity.getPos(), Math.round(radius * 0.75f), new IForEachBlockExplosionEffect() {
-
-				@Override
-				public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-					if(((level.getBlockState(pos.below()).isAir() && !state.isAir()) || (!level.getBlockState(pos.below()).isAir() && state.isAir())) && Math.random() < 0.1f) {
-						Holder<ConfiguredFeature<?, ?>> feature = null;
-						if(Math.random() < 0.9f) {
-							feature = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.DRIPSTONE_CLUSTER);
-							feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, pos);
-						}
-						else {
-							feature = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getHolderOrThrow(CaveFeatures.LARGE_DRIPSTONE);
-							feature.value().place(sLevel, sLevel.getChunkSource().getGenerator(), sLevel.random, pos);
-						}
+		if (entity.getLevel() instanceof ServerLevel serverLevel) {
+			RandomSource random = entity.getLevel().getRandom();
+			Registry<ConfiguredFeature<?, ?>> featureRegistry = serverLevel.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
+			ExplosionHelper.customSphericalExplosion(serverLevel, entity.getPos(), Math.round(radius * 0.75f), (level, center, pos, state) -> {
+				BlockState stateBelow = level.getBlockState(pos.below());
+				if (((!state.isAir() && stateBelow.isAir()) || (stateBelow.isAir() && !state.isAir())) && random.nextFloat() < 0.1f) {
+					if (random.nextFloat() < 0.9f) {
+						featureRegistry.getHolderOrThrow(CaveFeatures.DRIPSTONE_CLUSTER).get().place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos);
+					} else {
+						featureRegistry.getHolderOrThrow(CaveFeatures.LARGE_DRIPSTONE).get().place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos);
 					}
 				}
 			});

@@ -792,6 +792,8 @@
 	
 	"death.attack.say_goodbye" : "%1$s sagte auf Wiedersehen",
 	"death.attack.hailstone": "%1$s wurde von einem Hagelkorn ins Auge getroffen",
+	"death.attack.extinction": "%1$s ist dank %2$s ausgestorben",
+	"death.attack.extinction_no_source": "%1$s ist ausgestorben",
 	
 	"command.ltmdisaster.iceageactive": "Desaster Eiszeit ist noch aktiv f\u00fcr ",
   	"command.ltmdisaster.iceage": "Das Desaster Eiszeit wurde gestartet",

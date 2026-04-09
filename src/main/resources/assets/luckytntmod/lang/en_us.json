@@ -793,6 +793,8 @@
 	
 	"death.attack.say_goodbye" : "%1$s said goodbye",
 	"death.attack.hailstone": "%1$s got hit in the eye by a hailstone",
+	"death.attack.extinction": "%1$s went extinct thanks to %2$s",
+	"death.attack.extinction_no_source": "%1$s went extinct",
 	
 	"command.ltmdisaster.iceageactive": "Disaster Ice Age currently active for ",
   	"command.ltmdisaster.iceage": "Started the disaster Ice Age",

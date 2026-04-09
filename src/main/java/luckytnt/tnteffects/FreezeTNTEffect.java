@@ -1,20 +1,17 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.rules.FilterCollidableExplosionRule;
+import luckytnt.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.SimpleExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.block.state.BlockState;
 
-public class FreezeTNTEffect extends PrimedTNTEffect{
+public class FreezeTNTEffect extends PrimedTNTEffect {
 
 	private final int strength;
 	
@@ -24,16 +21,10 @@ public class FreezeTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if((state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) < 100 || state.getBlock() instanceof LiquidBlock) && !(state.getBlock() instanceof BushBlock) && !state.isAir()) {
-					state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
-					level.setBlockAndUpdate(pos, Blocks.ICE.defaultBlockState());
-				}
-			}
-		});
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), strength, 101f, new StackedExplosionRule(
+				new FilterCollidableExplosionRule(new SimpleExplosionRule(Blocks.ICE.defaultBlockState())),
+				new FilterLiquidExplosionRule(new SimpleExplosionRule(Blocks.ICE.defaultBlockState()))
+		));
 	}
 	
 	@Override

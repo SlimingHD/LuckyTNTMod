@@ -2,17 +2,16 @@ package luckytnt.tnteffects;
 
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.rules.CopyBlockExplosionRule;
+import luckytnt.rules.FilterOffYExplosionRule;
+import luckytnt.rules.OffsetExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
-import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 
-public class FloatingIslandEffect extends PrimedTNTEffect{
+public class FloatingIslandEffect extends PrimedTNTEffect {
 	
 	private final int strength;
 	
@@ -22,17 +21,9 @@ public class FloatingIslandEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.doSphericalExplosion(entity.getLevel(), entity.getPos(), strength, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= 20 && Math.abs(pos.getY() - entity.getPos().y) <= 15 && state.getExplosionResistance(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 100) {
-					if(level.getBlockState(pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0)).getExplosionResistance(level, pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0), ImprovedExplosion.dummyExplosion(entity.getLevel())) <= 100) {
-						level.setBlockAndUpdate(pos.offset(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0), state);
-					}
-				}
-			}
-		});
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), strength, 101f, new FilterOffYExplosionRule(-strength + 5, strength - 5,
+			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), new FilterBlastResistanceExplosionRule(101f, new CopyBlockExplosionRule()))
+		));
 	}
 
 	@Override

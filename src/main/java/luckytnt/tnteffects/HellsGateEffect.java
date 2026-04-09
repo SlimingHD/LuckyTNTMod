@@ -6,9 +6,11 @@ import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.rules.CopyBlockExplosionRule;
 import luckytnt.rules.FilterLiquidExplosionRule;
+import luckytnt.rules.FilterOffYExplosionRule;
 import luckytnt.rules.OffsetExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FireExplosionRule;
@@ -28,21 +30,23 @@ public class HellsGateEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f, new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 
-			new FilterBlastResistanceExplosionRule(200f, 
-				new StackedExplosionRule(
-					FilterBlockExplosionRule.applyOnlyWhen(Blocks.AIR, new CopyBlockExplosionRule()),
-					FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new SimpleExplosionRule(Blocks.NETHER_BRICKS.defaultBlockState())),
-					FilterBlockExplosionRule.builder().filterForTags(WOOD_TAGS).build(new SimpleExplosionRule(Blocks.OBSIDIAN.defaultBlockState())),
-					new FilterLiquidExplosionRule(new SimpleExplosionRule(Blocks.LAVA.defaultBlockState())),
-					new SimpleExplosionRule(Blocks.NETHERRACK.defaultBlockState())
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f, new FilterOffYExplosionRule(-20, 20,
+			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 
+				new FilterBlastResistanceExplosionRule(200f, 
+					new StackedExplosionRule(
+						FilterBlockExplosionRule.applyOnlyWhen(Blocks.AIR, new CopyBlockExplosionRule()),
+						FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new SimpleExplosionRule(Blocks.NETHER_BRICKS.defaultBlockState())),
+						FilterBlockExplosionRule.builder().filterForTags(WOOD_TAGS).build(new SimpleExplosionRule(Blocks.OBSIDIAN.defaultBlockState())),
+						new FilterLiquidExplosionRule(new SimpleExplosionRule(Blocks.LAVA.defaultBlockState())),
+						new SimpleExplosionRule(Blocks.NETHERRACK.defaultBlockState())
+					)
 				)
 			)
 		));
 		
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f, new FireExplosionRule(0.1f));
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 0f, new FireExplosionRule(0.1f));
 		
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 30, 200f);
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 30, 200f, new FilterOffYExplosionRule(-20, 20, new CraterExplosionRule()));
 	}
 	
 	@Override

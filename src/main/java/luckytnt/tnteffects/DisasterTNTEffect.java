@@ -46,7 +46,7 @@ public class DisasterTNTEffect extends PrimedTNTEffect {
 		
 		if (entity.getLevel() instanceof ServerLevel sl) {
 			variables.sync(sl);
-			if(rain) {
+			if (rain) {
 				sl.setWeatherParameters(0, time, true, true);
 			}
 		}

@@ -2,20 +2,17 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.IForEachBlockExplosionEffect;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.EnderMan;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class EndTNTEffect extends PrimedTNTEffect {
@@ -28,32 +25,22 @@ public class EndTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos().x, entity.getPos().y + 0.5f, entity.getPos().z, strength);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), strength);
 		explosion.doEntityExplosion(2f, true);
-		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, RandomSource.create());
-		ImprovedExplosion endExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos().add(0, 0.5f, 0), Mth.floor(strength * 1.5f));
-		endExplosion.doBlockExplosion(1f, 1f, 1f, 1.5f, false, new IForEachBlockExplosionEffect() {
-			
-			@Override
-			public void doBlockExplosion(Level level, BlockPos pos, BlockState state, double distance) {
-				if(distance <= 25) {
-					if(Math.random() < 0.9f) {
-						state.onBlockExploded(level, pos, endExplosion);
-						level.setBlockAndUpdate(pos, Blocks.END_STONE.defaultBlockState());
-						if(Math.random() < 0.1f) {
-							if(level.getBlockState(pos.above()).isAir()) {
-								level.setBlockAndUpdate(pos.above(), Blocks.CHORUS_FLOWER.defaultBlockState());
-							}
-						}
-						if(Math.random() < 0.025f) {
-							EnderMan enderman = EntityType.ENDERMAN.create(level);
-							enderman.setPos(new Vec3(pos.getX(), pos.getY() + 1f, pos.getZ()));
-							level.addFreshEntity(enderman);
-						}
-					}
-				}
+		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
+		ImprovedExplosion endExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), Mth.floor(strength * 1.5f));
+		endExplosion.doImprovedBlockExplosion(1f, 1.5f, false, false, new SimpleExplosionRule(Blocks.END_STONE.defaultBlockState()));
+		RandomSource random = entity.getLevel().getRandom();
+		ImprovedExplosion decorationExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, null, entity.x(), entity.y(), entity.z(), Mth.floor(strength * 1.5f), false, (level, center, pos, state) -> {
+			if (state.isAir() && level.getBlockState(pos.below()).is(Blocks.END_STONE) && random.nextFloat() < 0.1f) {
+				level.setBlockAndUpdate(pos, Blocks.CHORUS_FLOWER.defaultBlockState());
+			} else if (state.isAir() && level.getBlockState(pos.above()).isAir() && level.getBlockState(pos.above(2)).isAir() && level.getBlockState(pos.below()).is(Blocks.END_STONE) && random.nextFloat() < 0.025f) {
+				EnderMan enderMan = EntityType.ENDERMAN.create(level);
+				enderMan.setPos(Vec3.atBottomCenterOf(pos));
+				level.addFreshEntity(enderMan);
 			}
 		});
+		decorationExplosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
 	}
 	
 	@Override

@@ -11,7 +11,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 
-public class EnderTNTEffect extends PrimedTNTEffect{
+public class EnderTNTEffect extends PrimedTNTEffect {
 
 	private final int strength;
 	
