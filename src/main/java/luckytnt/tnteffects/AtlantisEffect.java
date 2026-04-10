@@ -4,10 +4,10 @@ import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.Registry;
@@ -48,8 +48,8 @@ public class AtlantisEffect extends PrimedTNTEffect {
 		LevelEvents.setBiomeInCylinder(serverLevel, entity.getPos(), 100, Biomes.WARM_OCEAN);
 		
 		ExplosionHelper.createCylindricalCrater(serverLevel, entity.getPos(), 100, 50, 100f, new StackedExplosionRule(
-				new FilterAirExplosionRule(new FilterSurfaceExplosionRule(true, new SimpleExplosionRule(Blocks.SAND.defaultBlockState()))),
-				new FilterOffYExplosionRule(-50, 8, new SimpleExplosionRule(Blocks.WATER.defaultBlockState()))
+				new FilterAirExplosionRule(new FilterSurfaceExplosionRule(true, new BlockExplosionRule(Blocks.SAND.defaultBlockState()))),
+				new FilterOffYExplosionRule(-50, 8, new BlockExplosionRule(Blocks.WATER.defaultBlockState()))
 		));
 		
 		Registry<Structure> structures = serverLevel.registryAccess().registryOrThrow(Registries.STRUCTURE);

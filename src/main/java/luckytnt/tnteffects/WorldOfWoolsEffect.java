@@ -14,9 +14,9 @@ import luckytnt.rules.FilterMapColorExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
@@ -58,31 +58,31 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 100, 200, new FilterAirExplosionRule(
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 100, 200f, new FilterAirExplosionRule(
 			new StackedExplosionRule(
 				FilterBlockExplosionRule.builder().filterForBlocks(Blocks.WATER, Blocks.BUBBLE_COLUMN).build(
-					new SimpleExplosionRule(Blocks.BLUE_STAINED_GLASS.defaultBlockState())
+					new BlockExplosionRule(Blocks.BLUE_STAINED_GLASS.defaultBlockState())
 				),
 				FilterBlockExplosionRule.builder().filterForBlocks(Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.KELP, Blocks.KELP_PLANT).build(
-					new SimpleExplosionRule(Blocks.GREEN_WOOL.defaultBlockState())
+					new BlockExplosionRule(Blocks.GREEN_WOOL.defaultBlockState())
 				),
-				FilterBlockExplosionRule.applyOnlyWhen(Blocks.LAVA, new SimpleExplosionRule(Blocks.ORANGE_STAINED_GLASS.defaultBlockState())),
-				new FilterMapColorExplosionRule(WHITE, new SimpleExplosionRule(Blocks.WHITE_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(LIGHT_GRAY, new SimpleExplosionRule(Blocks.LIGHT_GRAY_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(GRAY, new SimpleExplosionRule(Blocks.GRAY_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(BLACK, new SimpleExplosionRule(Blocks.BLACK_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(BROWN, new SimpleExplosionRule(Blocks.BROWN_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(RED, new SimpleExplosionRule(Blocks.RED_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(ORANGE, new SimpleExplosionRule(Blocks.ORANGE_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(YELLOW, new SimpleExplosionRule(Blocks.YELLOW_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(LIME, new SimpleExplosionRule(Blocks.LIME_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(GREEN, new SimpleExplosionRule(Blocks.GREEN_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(CYAN, new SimpleExplosionRule(Blocks.CYAN_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(LIGHT_BLUE, new SimpleExplosionRule(Blocks.LIGHT_BLUE_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(BLUE, new SimpleExplosionRule(Blocks.BLUE_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(PURPLE, new SimpleExplosionRule(Blocks.PURPLE_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(MAGENTA, new SimpleExplosionRule(Blocks.MAGENTA_WOOL.defaultBlockState())),
-				new FilterMapColorExplosionRule(PINK, new SimpleExplosionRule(Blocks.PINK_WOOL.defaultBlockState()))
+				FilterBlockExplosionRule.applyOnlyWhen(Blocks.LAVA, new BlockExplosionRule(Blocks.ORANGE_STAINED_GLASS.defaultBlockState())),
+				new FilterMapColorExplosionRule(WHITE, new BlockExplosionRule(Blocks.WHITE_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(LIGHT_GRAY, new BlockExplosionRule(Blocks.LIGHT_GRAY_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(GRAY, new BlockExplosionRule(Blocks.GRAY_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(BLACK, new BlockExplosionRule(Blocks.BLACK_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(BROWN, new BlockExplosionRule(Blocks.BROWN_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(RED, new BlockExplosionRule(Blocks.RED_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(ORANGE, new BlockExplosionRule(Blocks.ORANGE_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(YELLOW, new BlockExplosionRule(Blocks.YELLOW_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(LIME, new BlockExplosionRule(Blocks.LIME_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(GREEN, new BlockExplosionRule(Blocks.GREEN_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(CYAN, new BlockExplosionRule(Blocks.CYAN_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(LIGHT_BLUE, new BlockExplosionRule(Blocks.LIGHT_BLUE_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(BLUE, new BlockExplosionRule(Blocks.BLUE_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(PURPLE, new BlockExplosionRule(Blocks.PURPLE_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(MAGENTA, new BlockExplosionRule(Blocks.MAGENTA_WOOL.defaultBlockState())),
+				new FilterMapColorExplosionRule(PINK, new BlockExplosionRule(Blocks.PINK_WOOL.defaultBlockState()))
 			)
 		));
 		

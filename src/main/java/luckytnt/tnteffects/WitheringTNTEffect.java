@@ -9,7 +9,6 @@ import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.RandomBlockExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -19,7 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-public class WitheringTNTEffect extends PrimedTNTEffect{
+public class WitheringTNTEffect extends PrimedTNTEffect {
 
 	private final int strength;
 	
@@ -49,7 +48,7 @@ public class WitheringTNTEffect extends PrimedTNTEffect{
 			if (level instanceof ServerLevel server) {
 				skeleton.finalizeSpawn(server, level.getCurrentDifficultyAt(toBlockPos(entity.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
-			skeleton.setPos(Mth.floor(entity.x()) + 0.5d, LevelEvents.getTopBlock(level, entity.x() + offX, entity.z() + offZ, false) + 1, Mth.floor(entity.z()) + 0.5d);
+			skeleton.setPos(entity.x() + offX, LevelEvents.getTopBlock(level, entity.x() + offX, entity.z() + offZ, false) + 1, entity.z() + offZ);
 			level.addFreshEntity(skeleton);
 		}
 	}

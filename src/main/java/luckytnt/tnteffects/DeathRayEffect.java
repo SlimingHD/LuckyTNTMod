@@ -3,10 +3,10 @@ package luckytnt.tnteffects;
 import luckytnt.registry.SoundRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
 import luckytntlib.util.explosions.rules.ScheduleTickExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.sounds.SoundSource;
@@ -35,8 +35,8 @@ public class DeathRayEffect extends PrimedTNTEffect {
 			} else {
 				ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), entity.getPersistentData().getInt("explosionSize"), 2000, new FilterAirExplosionRule(
 						new StackedExplosionRule(
-								new FilterRandomExplosionRule(0.1f, new ScheduleTickExplosionRule(new SimpleExplosionRule(Blocks.LAVA.defaultBlockState()))),
-								new FilterRandomExplosionRule(0.8f, new SimpleExplosionRule(Blocks.OBSIDIAN.defaultBlockState()))
+								new FilterRandomExplosionRule(0.1f, new ScheduleTickExplosionRule(new BlockExplosionRule(Blocks.LAVA.defaultBlockState()))),
+								new FilterRandomExplosionRule(0.8f, new BlockExplosionRule(Blocks.OBSIDIAN.defaultBlockState()))
 						)
 				));
 			}

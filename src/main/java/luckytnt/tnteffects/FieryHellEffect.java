@@ -8,6 +8,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
@@ -15,7 +16,6 @@ import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
 import luckytntlib.util.explosions.rules.FireExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,17 +33,17 @@ public class FieryHellEffect extends PrimedTNTEffect {
 		RandomSource random = entity.getLevel().getRandom();
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 50, Float.POSITIVE_INFINITY, new FilterOffYExplosionRule(-20, 0,
 			new StackedExplosionRule(
-				new FilterLiquidExplosionRule(new SimpleExplosionRule(Blocks.LAVA.defaultBlockState())),
+				new FilterLiquidExplosionRule(new BlockExplosionRule(Blocks.LAVA.defaultBlockState())),
 				LogicExplosionRule.not(FilterBlockExplosionRule.builder().filterForTags(List.of(net.minecraftforge.common.Tags.Blocks.STONE)).build(new AlwaysExplosionRule()),
-					new FilterBlastResistanceExplosionRule(100f, new SimpleExplosionRule(Blocks.LAVA.defaultBlockState()))
+					new FilterBlastResistanceExplosionRule(100f, new BlockExplosionRule(Blocks.LAVA.defaultBlockState()))
 				)
 			)
 		));
 		
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 90, 100f, new FilterAirExplosionRule(
 			new StackedExplosionRule(
-				new FilterRandomExplosionRule(0.9f, new SimpleExplosionRule(Blocks.NETHERRACK.defaultBlockState())),
-				new FilterRandomExplosionRule(0.3f, new SimpleExplosionRule(Blocks.LAVA.defaultBlockState()))
+				new FilterRandomExplosionRule(0.9f, new BlockExplosionRule(Blocks.NETHERRACK.defaultBlockState())),
+				new FilterRandomExplosionRule(0.3f, new BlockExplosionRule(Blocks.LAVA.defaultBlockState()))
 			)
 		));
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 90, 0f, new FireExplosionRule(0.1f));

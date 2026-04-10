@@ -6,11 +6,11 @@ import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
@@ -43,10 +43,10 @@ public class OceanTNTEffect extends PrimedTNTEffect {
 
 		ExplosionHelper.legacyCylindricalExplosion(level, entity.getPos(), radius, radiusY, 99.9f, new FilterOffYExplosionRule(-radiusY, 0,
 			new StackedExplosionRule(
-				new FilterBlastResistanceExplosionRule(3.9f, new SimpleExplosionRule(Blocks.WATER.defaultBlockState())),
+				new FilterBlastResistanceExplosionRule(3.9f, new BlockExplosionRule(Blocks.WATER.defaultBlockState())),
 				LogicExplosionRule.not(
 					new FilterFullBlockExplosionRule(new AlwaysExplosionRule()),
-					new SimpleExplosionRule(Blocks.WATER.defaultBlockState())
+					new BlockExplosionRule(Blocks.WATER.defaultBlockState())
 				)
 			)
 		));

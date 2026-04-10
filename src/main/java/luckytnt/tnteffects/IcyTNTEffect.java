@@ -5,11 +5,11 @@ import java.util.List;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.tags.BlockTags;
@@ -39,10 +39,10 @@ public class IcyTNTEffect extends PrimedTNTEffect {
 		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), 40, 100f, new FilterAirExplosionRule(
 			new StackedExplosionRule(
 				FilterBlockExplosionRule.builder().filterForBlocks(WastelandTNTEffect.GRASS).filterForTags(List.of(BlockTags.LEAVES, BlockTags.SAND)).build(
-					new SimpleExplosionRule(Blocks.BLUE_ICE.defaultBlockState())
+					new BlockExplosionRule(Blocks.BLUE_ICE.defaultBlockState())
 				),
 				FilterBlockExplosionRule.builder().filterForBlocks(Blocks.WATER, Blocks.BUBBLE_COLUMN, Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.KELP, Blocks.KELP_PLANT).build(
-					new SimpleExplosionRule(Blocks.ICE.defaultBlockState())
+					new BlockExplosionRule(Blocks.ICE.defaultBlockState())
 				)
 			)
 		));

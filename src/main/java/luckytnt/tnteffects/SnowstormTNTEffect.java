@@ -8,6 +8,7 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
@@ -16,7 +17,6 @@ import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -36,7 +36,7 @@ public class SnowstormTNTEffect extends PrimedTNTEffect {
 			new StackedExplosionRule(
 				FilterDistanceExplosionRule.lessEqual(10, 
 					new StackedExplosionRule(
-						new FilterFullBlockExplosionRule(new SimpleExplosionRule(Blocks.BLUE_ICE.defaultBlockState())),
+						new FilterFullBlockExplosionRule(new BlockExplosionRule(Blocks.BLUE_ICE.defaultBlockState())),
 						LogicExplosionRule.and(
 							LogicExplosionRule.not(
 								new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), 
@@ -48,7 +48,7 @@ public class SnowstormTNTEffect extends PrimedTNTEffect {
 					)
 				),
 				FilterDistanceExplosionRule.greaterEqual(10, 
-					FilterBlockExplosionRule.builder().filterForBlocks(Blocks.WATER, Blocks.BUBBLE_COLUMN, Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.KELP, Blocks.KELP_PLANT).build(new SimpleExplosionRule(Blocks.ICE.defaultBlockState()))
+					FilterBlockExplosionRule.builder().filterForBlocks(Blocks.WATER, Blocks.BUBBLE_COLUMN, Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.KELP, Blocks.KELP_PLANT).build(new BlockExplosionRule(Blocks.ICE.defaultBlockState()))
 				)
 			)
 		));

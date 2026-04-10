@@ -8,6 +8,7 @@ import luckytnt.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
@@ -15,7 +16,6 @@ import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.explosions.rules.OffsetExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
@@ -55,7 +55,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 		ExplosionHelper.createSphericalCrater(level, entity.getPos(), 150, 99.9f, new FilterSurfaceExplosionRule(true, 
 			LogicExplosionRule.not(
 				new OffsetExplosionRule(1, new FilterLiquidExplosionRule(new AlwaysExplosionRule())), 
-				new SimpleExplosionRule(Blocks.GRASS.defaultBlockState())
+				new BlockExplosionRule(Blocks.GRASS.defaultBlockState())
 			)
 		));
 		

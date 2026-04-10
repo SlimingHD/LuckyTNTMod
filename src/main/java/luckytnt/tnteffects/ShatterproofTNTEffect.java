@@ -5,8 +5,8 @@ import org.joml.Vector3f;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.block.Block;
@@ -16,7 +16,7 @@ public class ShatterproofTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), 10, 1200, new FilterCollidableExplosionRule(new SimpleExplosionRule(Blocks.OBSIDIAN.defaultBlockState())));
+		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), 10, 1200, new FilterCollidableExplosionRule(new BlockExplosionRule(Blocks.OBSIDIAN.defaultBlockState())));
 	}
 
 	@Override

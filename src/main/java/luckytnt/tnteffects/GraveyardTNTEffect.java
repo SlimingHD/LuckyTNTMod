@@ -6,10 +6,10 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.level.Level;
@@ -23,7 +23,7 @@ public class GraveyardTNTEffect extends PrimedTNTEffect {
 		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos().subtract(0d, 10d, 0d), 20, 100f, new FilterOffYExplosionRule(-20, 10, 
 			LogicExplosionRule.not(
 				new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), 
-				new SimpleExplosionRule(Blocks.GRASS_BLOCK.defaultBlockState())
+				new BlockExplosionRule(Blocks.GRASS_BLOCK.defaultBlockState())
 			)
 		));
 	}

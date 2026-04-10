@@ -14,13 +14,13 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -101,20 +101,20 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 		
 		ImprovedExplosion explosion2 = new ImprovedExplosion(level, pos, 80);
 		explosion2.doImprovedBlockExplosion(1f, 0.2f, true, false, new FilterAirExplosionRule(
-			new FilterCollidableExplosionRule(new SimpleExplosionRule(Blocks.NETHERRACK.defaultBlockState()))
+			new FilterCollidableExplosionRule(new BlockExplosionRule(Blocks.NETHERRACK.defaultBlockState()))
 		));
 		
 		ExplosionHelper.legacyCylindricalExplosion(level, pos.subtract(0d, 40d, 0d), 40, 20, 5f, new FilterOffYExplosionRule(-20, -4, 
 			LogicExplosionRule.not(
 				new FilterAirExplosionRule(new AlwaysExplosionRule()), 
-				new SimpleExplosionRule(Blocks.LAVA.defaultBlockState())
+				new BlockExplosionRule(Blocks.LAVA.defaultBlockState())
 			)
 		));
 		
 		ImprovedExplosion explosion3 = new ImprovedExplosion(level, pos, 80);
 		explosion3.doImprovedBlockExplosion(1f, 0.2f, true, false, new FilterOffYExplosionRule(-80, -10, 
 			FilterBlockExplosionRule.applyOnlyWhen(Blocks.NETHERRACK, 
-				new FilterSurfaceExplosionRule(true, new SimpleExplosionRule(surface))
+				new FilterSurfaceExplosionRule(true, new BlockExplosionRule(surface))
 			)
 		));
 		

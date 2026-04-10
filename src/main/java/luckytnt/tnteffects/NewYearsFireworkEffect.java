@@ -79,7 +79,7 @@ public class NewYearsFireworkEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x() + 0.5d, entity.y(), entity.z() + 0.5d, 0d, 0d, 0d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0d, 0d, 0d);
 	}
 	
 	@Override

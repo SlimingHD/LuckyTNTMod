@@ -6,11 +6,11 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.Registry;
@@ -58,7 +58,7 @@ public class NetherGroveTNTEffect extends PrimedTNTEffect {
 			FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.LOGS, BlockTags.WART_BLOCKS)).build(new AlwaysExplosionRule()),
 			new FilterSurfaceExplosionRule(false, new CraterExplosionRule()), 
 			new FilterSurfaceExplosionRule(true, 
-				new FilterFullBlockExplosionRule(new SimpleExplosionRule(surfaceBlock))
+				new FilterFullBlockExplosionRule(new BlockExplosionRule(surfaceBlock))
 			)
 		));
 

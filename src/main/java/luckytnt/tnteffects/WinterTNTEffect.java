@@ -8,9 +8,12 @@ import luckytnt.entity.SnowySnowball;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
+import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.tags.BlockTags;
@@ -22,13 +25,16 @@ public class WinterTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 150, 200, 
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 150, 200f, 
 			FilterBlockExplosionRule.builder().filterForBlocks(Blocks.BUBBLE_COLUMN, Blocks.WATER, Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.KELP, Blocks.KELP_PLANT).filterForTags(List.of(BlockTags.CORALS)).build(
-				new SimpleExplosionRule(Blocks.ICE.defaultBlockState())
+				new BlockExplosionRule(Blocks.ICE.defaultBlockState())
 			)
 		);
 		
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 150, 200, new CanSurviveExplosionRule(Blocks.SNOW.defaultBlockState()));
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 150, 200f, LogicExplosionRule.not(
+			new FilterCollidableExplosionRule(new AlwaysExplosionRule()), 
+			new CanSurviveExplosionRule(Blocks.SNOW.defaultBlockState())
+		));
 	}
 	
 	@Override

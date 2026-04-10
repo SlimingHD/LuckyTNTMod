@@ -9,6 +9,7 @@ import luckytnt.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
@@ -18,7 +19,6 @@ import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.OffsetExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
@@ -46,10 +46,10 @@ public class EndGateEffect extends PrimedTNTEffect{
 				new FilterBlastResistanceExplosionRule(200f, 
 					new StackedExplosionRule(
 						FilterBlockExplosionRule.applyOnlyWhen(Blocks.AIR, new CopyBlockExplosionRule()),
-						FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new SimpleExplosionRule(Blocks.PURPUR_BLOCK.defaultBlockState())),
-						FilterBlockExplosionRule.builder().filterForTags(WOOD_TAGS).build(new SimpleExplosionRule(Blocks.OBSIDIAN.defaultBlockState())),
-						new FilterLiquidExplosionRule(new SimpleExplosionRule(Blocks.AIR.defaultBlockState())),
-						new SimpleExplosionRule(Blocks.END_STONE.defaultBlockState())
+						FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new BlockExplosionRule(Blocks.PURPUR_BLOCK.defaultBlockState())),
+						FilterBlockExplosionRule.builder().filterForTags(WOOD_TAGS).build(new BlockExplosionRule(Blocks.OBSIDIAN.defaultBlockState())),
+						new FilterLiquidExplosionRule(new BlockExplosionRule(Blocks.AIR.defaultBlockState())),
+						new BlockExplosionRule(Blocks.END_STONE.defaultBlockState())
 					)
 				)
 			)

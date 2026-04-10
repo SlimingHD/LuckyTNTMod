@@ -7,13 +7,13 @@ import luckytnt.rules.DrainAreaExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.ExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
@@ -76,13 +76,13 @@ public class WastelandTNTEffect extends PrimedTNTEffect {
 							)
 						),
 						FilterBlockExplosionRule.builder().filterForBlocks(GRASS).build(
-							new SimpleExplosionRule(Blocks.DIRT.defaultBlockState())
+							new BlockExplosionRule(Blocks.DIRT.defaultBlockState())
 						),
 						FilterBlockExplosionRule.builder().filterForBlocks(DIRT).build(
-							new SimpleExplosionRule(Blocks.SAND.defaultBlockState())
+							new BlockExplosionRule(Blocks.SAND.defaultBlockState())
 						),
 						FilterBlockExplosionRule.applyOnlyWhen(Blocks.WET_SPONGE,
-							new SimpleExplosionRule(Blocks.SPONGE.defaultBlockState())
+							new BlockExplosionRule(Blocks.SPONGE.defaultBlockState())
 						)
 					)
 				);
@@ -91,9 +91,9 @@ public class WastelandTNTEffect extends PrimedTNTEffect {
 			}
 			
 			if (radius > 50) {
-				ExplosionHelper.createSphericalCrater(level, position, radius, 100, rule);
+				ExplosionHelper.createSphericalCrater(level, position, radius, 100f, rule);
 			} else {
-				ExplosionHelper.legacySphericalExplosion(level, position, radius, 100, rule);
+				ExplosionHelper.legacySphericalExplosion(level, position, radius, 100f, rule);
 			}
 		}
 	}

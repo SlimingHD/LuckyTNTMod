@@ -14,7 +14,6 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -56,23 +55,23 @@ public class WitherStormEffect extends PrimedTNTEffect {
 			if (level instanceof ServerLevel server) {
 				skeleton.finalizeSpawn(server, level.getCurrentDifficultyAt(toBlockPos(ent.getPos())), MobSpawnType.MOB_SUMMONED, null, null);
 			}
-			skeleton.setPos(Mth.floor(ent.x()) + 0.5D, LevelEvents.getTopBlock(level, ent.x() + offX, ent.z() + offZ, false) + 1, Mth.floor(ent.z()) + 0.5D);
+			skeleton.setPos(ent.x() + offX, LevelEvents.getTopBlock(level, ent.x() + offX, ent.z() + offZ, false) + 1, ent.z() + offZ);
 			level.addFreshEntity(skeleton);
 		}
 
-		level.playSound(null, toBlockPos(ent.getPos()), SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 3, 1);
+		level.playSound(null, toBlockPos(ent.getPos()), SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 3f, 1f);
 	}
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		if (entity.getLevel() instanceof ServerLevel server) {
-			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 2.25f, entity.z(), 20, 0.1f, 0.5f, 0.1f, 0);
-			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 3f, entity.z(), 20, 0.05f, 0.05f, 0.5f, 0);
-			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 2.5f, entity.z(), 20, 0.05f, 0.05f, 0.3f, 0);
-			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 2f, entity.z(), 20, 0.05f, 0.05f, 0.2f, 0);
-			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 3.5f, entity.z(), 20, 0.2f, 0.2f, 0.2f, 0);
-			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 3.25f, entity.z() + 1, 20, 0.15f, 0.15f, 0.15f, 0);
-			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 3.25f, entity.z() - 1, 20, 0.15f, 0.15f, 0.15f, 0);
+			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 2.25d, entity.z(), 20, 0.1d, 0.5d, 0.1d, 0d);
+			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 3d, entity.z(), 20, 0.05d, 0.05d, 0.5d, 0d);
+			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 2.5d, entity.z(), 20, 0.05d, 0.05d, 0.3d, 0d);
+			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 2d, entity.z(), 20, 0.05d, 0.05d, 0.2d, 0d);
+			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 3.5d, entity.z(), 20, 0.2d, 0.2d, 0.2d, 0d);
+			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 3.25d, entity.z() + 1d, 20, 0.15d, 0.15d, 0.15d, 0d);
+			server.sendParticles(new DustParticleOptions(new Vector3f(0.2f, 0.2f, 0.2f), 1f), entity.x(), entity.y() + 3.25d, entity.z() - 1d, 20, 0.15d, 0.15d, 0.15d, 0d);
 		}
 	}
 	

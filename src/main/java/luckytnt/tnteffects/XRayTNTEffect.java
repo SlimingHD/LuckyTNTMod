@@ -4,10 +4,10 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -23,10 +23,10 @@ public class XRayTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), radius, 100, new FilterAirExplosionRule(
+		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), radius, 100f, new FilterAirExplosionRule(
 			LogicExplosionRule.not(
 				FilterBlockExplosionRule.applyOnlyWhen(Tags.Blocks.ORES, new AlwaysExplosionRule()), 
-				new SimpleExplosionRule(Blocks.GLASS.defaultBlockState())	
+				new BlockExplosionRule(Blocks.GLASS.defaultBlockState())	
 			)
 		));
 	}

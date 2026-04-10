@@ -9,11 +9,11 @@ import luckytnt.registry.EffectRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -38,7 +38,7 @@ public class MidasTNTEffect extends PrimedTNTEffect {
 						new AlwaysExplosionRule()
 					), 
 					FilterDistanceExplosionRule.inBetween(Math.max(0, size - 2), size, new AlwaysExplosionRule()),
-					new SimpleExplosionRule(Blocks.GOLD_BLOCK.defaultBlockState())
+					new BlockExplosionRule(Blocks.GOLD_BLOCK.defaultBlockState())
 				)
 			));
 			

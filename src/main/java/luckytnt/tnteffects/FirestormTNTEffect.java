@@ -6,6 +6,7 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
@@ -13,7 +14,6 @@ import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FireExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
@@ -36,7 +36,7 @@ public class FirestormTNTEffect extends PrimedTNTEffect {
 			)
 		));
 		
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 50, 200f, new FilterAirExplosionRule(new SimpleExplosionRule(Blocks.NETHERRACK.defaultBlockState())));
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 50, 200f, new FilterAirExplosionRule(new BlockExplosionRule(Blocks.NETHERRACK.defaultBlockState())));
 		
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 50, 0f, new FireExplosionRule(0.75f));
 	}

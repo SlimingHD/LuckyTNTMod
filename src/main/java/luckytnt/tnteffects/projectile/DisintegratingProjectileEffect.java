@@ -7,11 +7,11 @@ import org.joml.Vector3f;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
-import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,7 +32,7 @@ public class DisintegratingProjectileEffect extends ChemicalProjectileEffect {
 			ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 13, 200, new FilterAirExplosionRule(
 					FilterDistanceExplosionRule.greaterEqual(11,
 							FilterBlockExplosionRule.applyOnlyWhen(Blocks.STONE,
-									new FilterRandomExplosionRule(0.01f, new SimpleExplosionRule(BlockRegistry.TOXIC_STONE.get().defaultBlockState()))
+									new FilterRandomExplosionRule(0.01f, new BlockExplosionRule(BlockRegistry.TOXIC_STONE.get().defaultBlockState()))
 							)
 					)
 			));
