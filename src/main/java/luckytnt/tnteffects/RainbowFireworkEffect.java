@@ -32,9 +32,10 @@ public class RainbowFireworkEffect extends PrimedTNTEffect {
 		RandomSource random = level.getRandom();
 		for (int count = 0; count <= 300; count++) {
 			try {
-				FallingBlockEntity sand = CustomFireworkEffect.CONSTRUCTOR.newInstance(level, entity.x(), entity.y(), entity.z(), CONCRETE[random.nextInt(CONCRETE.length)].defaultBlockState());
-				sand.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
-				level.addFreshEntity(sand);
+				FallingBlockEntity concrete = CustomFireworkEffect.CONSTRUCTOR.newInstance(level, entity.x(), entity.y(), entity.z(), CONCRETE[random.nextInt(CONCRETE.length)].defaultBlockState());
+				concrete.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
+				concrete.dropItem = false;
+				level.addFreshEntity(concrete);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ExceptionInInitializerError e) {
 				e.printStackTrace();
 			}

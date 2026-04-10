@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-public class SandFireworkEffect extends PrimedTNTEffect{
+public class SandFireworkEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
@@ -30,6 +30,7 @@ public class SandFireworkEffect extends PrimedTNTEffect{
 			try {
 				FallingBlockEntity sand = CustomFireworkEffect.CONSTRUCTOR.newInstance(level, entity.x(), entity.y(), entity.z(), Blocks.SAND.defaultBlockState());
 				sand.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
+				sand.dropItem = false;
 				level.addFreshEntity(sand);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();
@@ -39,7 +40,7 @@ public class SandFireworkEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y() + 0.5d, entity.z(), 0d, 0d, 0d);
+		entity.getLevel().addParticle(ParticleTypes.FLAME, entity.x(), entity.y(), entity.z(), 0d, 0d, 0d);
 	}
 
 	@Override

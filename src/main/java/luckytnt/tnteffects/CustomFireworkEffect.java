@@ -64,9 +64,10 @@ public class CustomFireworkEffect extends PrimedTNTEffect {
 					tnt.onCaughtFire(state, entity.getLevel(), toBlockPos(entity.getPos()), null, entity.owner());
 				} else {
 					try {
-						FallingBlockEntity concrete = CONSTRUCTOR.newInstance(level, entity.x(), entity.y(), entity.z(), state);
-						concrete.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
-						level.addFreshEntity(concrete);
+						FallingBlockEntity fallingBlock = CONSTRUCTOR.newInstance(level, entity.x(), entity.y(), entity.z(), state);
+						fallingBlock.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
+						fallingBlock.dropItem = false;
+						level.addFreshEntity(fallingBlock);
 					} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 						e.printStackTrace();
 					}

@@ -66,9 +66,11 @@ public class GotthardTunnelBlock extends LTNTBlock {
 				tnt.getPersistentData().putBoolean("streets", state.getValue(STREETS));
 			}
 			level.addFreshEntity(tnt);
-			level.playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
-			if (level.getBlockState(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z))).getBlock() == this) {
-				level.setBlock(new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), Blocks.AIR.defaultBlockState(), 3);
+			
+			BlockPos pos = new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z));
+			level.playSound(null, pos, SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);
+			if (level.getBlockState(pos).getBlock() == this) {
+				level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 			}
 			return tnt;
 		}
@@ -82,7 +84,7 @@ public class GotthardTunnelBlock extends LTNTBlock {
 			Item item = itemstack.getItem();
 			if (!player.isCreative()) {
 				if (itemstack.is(Items.FLINT_AND_STEEL)) {
-					itemstack.hurtAndBreak(1, player, (p) -> {
+					itemstack.hurtAndBreak(1, player, p -> {
 						p.broadcastBreakEvent(hand);
 					});
 				} else {
@@ -94,11 +96,7 @@ public class GotthardTunnelBlock extends LTNTBlock {
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		} else if (itemstack.is(ItemRegistry.CONFIGURATION_WAND.get())) {
 			if (state.hasProperty(STREETS)) {
-				if (state.getValue(STREETS)) {
-					level.setBlock(pos, state.setValue(STREETS, false), 3);
-				} else {
-					level.setBlock(pos, state.setValue(STREETS, true), 3);
-				}
+				level.setBlock(pos, state.setValue(STREETS, !state.getValue(STREETS)), 3);
 			}
 			return InteractionResult.SUCCESS;
 		} else {

@@ -3,45 +3,39 @@ package luckytnt.tnteffects;
 import java.util.List;
 
 import luckytnt.registry.BlockRegistry;
-import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.item.PrimedTnt;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
-public class GravityTNTEffect extends PrimedTNTEffect{
+public class GravityTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		int x = Mth.floor(entity.getPos().x);
-		int y = Mth.floor(entity.getPos().y);
-		int z = Mth.floor(entity.getPos().z);
-		if(entity.getTNTFuse() < 200) {
-			List<Entity> ents = entity.getLevel().getEntities((Entity)entity, new AABB(new BlockPos(x - 25, y - 25, z - 25), new BlockPos(x + 25, y + 25, z + 25)));
-			for(Entity ent : ents) {
-				if(!(ent instanceof PrimedTnt) && !(ent instanceof LTNTMinecart)) {
-					double lx = ent.getX() - x;
-					double ly = ent.getY() - y;
-					double lz = ent.getZ() - z;
-					double distance = Math.sqrt(lx * lx + ly * ly + lz * lz) + 0.1f;
-					if(ent instanceof Player) {
-						if(!((Player)ent).isCreative())
-							if(distance > 2 && distance < 25 && ent.getDeltaMovement().y < 5)
-								ent.setDeltaMovement(-lx / distance, -ly / distance + 0.1f, -lz / distance);
-							else if(distance < 2)
-								ent.setDeltaMovement(ent.getDeltaMovement().x, 6, ent.getDeltaMovement().z);
+		if (!entity.getLevel().isClientSide() && entity.getTNTFuse() < 200) {
+			Level level = entity.getLevel();
+			
+			List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, new AABB(entity.getPos().add(-25d, -25d, -25d), entity.getPos().add(25d, 25d, 25d)), EntitySelector.NO_CREATIVE_OR_SPECTATOR);
+			for (LivingEntity living : entities) {
+				Vec3 movement = living.getDeltaMovement();
+				double x = living.getX() - entity.x();
+				double y = living.getY() - entity.y();
+				double z = living.getZ() - entity.z();
+				double distanceSqr = x * x + y * y + z * z;
+				if (movement.y < 5d) {
+					if (distanceSqr > 4d) {
+						living.setDeltaMovement(new Vec3(x, y, z).normalize().add(0d, 0.1d, 0d));
+					} else {
+						living.setDeltaMovement(movement.x, 6d, movement.z);
 					}
-					else {
-						if(distance > 2 && distance < 25 && ent.getDeltaMovement().y < 5)
-							ent.setDeltaMovement(-lx / distance, -ly / distance + 0.1f, -lz / distance);
-						else if(distance < 2)
-							ent.setDeltaMovement(ent.getDeltaMovement().x, 6, ent.getDeltaMovement().z);
+					if (living instanceof Player) {
+						living.hurtMarked = true;
 					}
 				}
 			}
@@ -50,15 +44,17 @@ public class GravityTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() + 2f, entity.y() + 0.5f, entity.z(), -0.2f, 0, 0);
-		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() - 2f, entity.y() + 0.5f, entity.z(), 0.2f, 0, 0);
-		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5f, entity.z() + 2f, 0, 0, -0.2f);
-		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5f, entity.z() - 2f, 0, 0, 0.2f);
+		Level level = entity.getLevel();
 		
-		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() + 1.5f, entity.y() + 0.5f, entity.z() + 1.5f, -0.1f, 0, -0.1f);
-		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() - 1.5f, entity.y() + 0.5f, entity.z() - 1.5f, 0.1f, 0, 0.1f);
-		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() + 1.5f, entity.y() + 0.5f, entity.z() - 1.5f, -0.1f, 0, 0.1f);
-		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x() - 1.5f, entity.y() + 0.5f, entity.z() + 1.5f, 0.1f, 0, -0.1f);
+		level.addParticle(ParticleTypes.SMOKE, entity.x() + 2d, entity.y() + 0.5d, entity.z(), -0.2d, 0d, 0d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x() - 2d, entity.y() + 0.5d, entity.z(), 0.2d, 0d, 0d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z() + 2d, 0d, 0d, -0.2d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 0.5d, entity.z() - 2d, 0d, 0d, 0.2d);
+		
+		level.addParticle(ParticleTypes.SMOKE, entity.x() + 1.5d, entity.y() + 0.5d, entity.z() + 1.5d, -0.1d, 0d, -0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x() - 1.5d, entity.y() + 0.5d, entity.z() - 1.5d, 0.1d, 0d, 0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x() + 1.5d, entity.y() + 0.5d, entity.z() - 1.5d, -0.1d, 0d, 0.1d);
+		level.addParticle(ParticleTypes.SMOKE, entity.x() - 1.5d, entity.y() + 0.5d, entity.z() + 1.5d, 0.1d, 0d, -0.1d);
 	}
 	
 	@Override
