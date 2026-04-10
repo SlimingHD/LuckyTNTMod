@@ -1,11 +1,11 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.level.block.Block;

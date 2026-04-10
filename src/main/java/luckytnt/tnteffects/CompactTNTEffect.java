@@ -2,10 +2,10 @@ package luckytnt.tnteffects;
 
 import java.util.function.Supplier;
 
-import luckytnt.rules.FilterFullBlockExplosionRule;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
 import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;

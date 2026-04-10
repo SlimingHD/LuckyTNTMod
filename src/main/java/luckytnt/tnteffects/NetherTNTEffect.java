@@ -9,8 +9,6 @@ import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.rules.DrainAreaExplosionRule;
-import luckytnt.rules.FilterCollidableExplosionRule;
-import luckytnt.rules.FilterOffYExplosionRule;
 import luckytnt.util.StructureState;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -18,6 +16,8 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
+import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.explosions.rules.SimpleExplosionRule;

@@ -4,7 +4,6 @@ import java.util.List;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.rules.DrainAreaExplosionRule;
-import luckytnt.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
@@ -12,6 +11,7 @@ import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.ExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;

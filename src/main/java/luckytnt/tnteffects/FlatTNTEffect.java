@@ -2,11 +2,11 @@ package luckytnt.tnteffects;
 
 import java.util.function.Supplier;
 
-import luckytnt.rules.FilterOffYExplosionRule;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
+import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;

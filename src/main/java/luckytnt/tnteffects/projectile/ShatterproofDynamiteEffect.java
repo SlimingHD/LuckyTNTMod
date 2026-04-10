@@ -3,10 +3,10 @@ package luckytnt.tnteffects.projectile;
 import org.joml.Vector3f;
 
 import luckytnt.registry.ItemRegistry;
-import luckytnt.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;

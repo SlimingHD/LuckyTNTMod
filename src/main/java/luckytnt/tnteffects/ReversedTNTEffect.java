@@ -4,12 +4,12 @@ import java.util.List;
 
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.CopyBlockExplosionRule;
 import luckytnt.rules.MirrorExplosionRule;
-import luckytnt.rules.OffsetExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
+import luckytntlib.util.explosions.rules.OffsetExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;

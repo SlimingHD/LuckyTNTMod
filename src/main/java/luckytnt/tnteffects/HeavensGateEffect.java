@@ -2,13 +2,13 @@ package luckytnt.tnteffects;
 
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.CopyBlockExplosionRule;
-import luckytnt.rules.FilterOffYExplosionRule;
-import luckytnt.rules.OffsetExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
+import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
+import luckytntlib.util.explosions.rules.OffsetExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.Level;

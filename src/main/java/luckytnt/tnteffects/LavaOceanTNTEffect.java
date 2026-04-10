@@ -3,12 +3,12 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.FilterFullBlockExplosionRule;
-import luckytnt.rules.FilterOffYExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
+import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;

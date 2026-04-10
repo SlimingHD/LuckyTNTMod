@@ -2,10 +2,10 @@ package luckytnt.tnteffects;
 
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.FilterOffYExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.SimpleExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
