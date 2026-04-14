@@ -21,7 +21,7 @@ public class ParticlePhysicsTNTEffect extends PrimedTNTEffect {
 		RandomSource random = level.getRandom();
 		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
 
-		ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity) entity, null, entity.x(), entity.y(), entity.z(), 25, true, (lev, center, pos, state) -> {
+		ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity) entity, null, entity.x(), entity.y(), entity.z(), 25).setCustomExplosionEffect((lev, center, pos, state) -> {
 			lev.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 			state.getBlock().onBlockExploded(state, lev, pos, dummy);
 			try {

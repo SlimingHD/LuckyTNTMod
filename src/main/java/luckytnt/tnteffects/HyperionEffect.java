@@ -41,7 +41,7 @@ public class HyperionEffect extends PrimedTNTEffect {
 			};
 			
 			ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(server);
-			ImprovedExplosion explosion = new ImprovedExplosion(server, (Entity)entity, null, entity.x(), entity.y(), entity.z(), 50, false, (lev, center, pos, state) -> {
+			ImprovedExplosion explosion = new ImprovedExplosion(server, (Entity)entity, null, entity.x(), entity.y(), entity.z(), 50).setCustomExplosionEffect((lev, center, pos, state) -> {
 				if (state.isAir()) {
 					return;
 				}

@@ -35,7 +35,7 @@ public class TunnelingTNTEffect extends PrimedTNTEffect {
 			if (direction.getStepX() > 0) {
 				maxX = 90;
 			} else {
-				minX = 90;
+				minX = -90;
 			}
 		} else {
 			xFactor = 1;

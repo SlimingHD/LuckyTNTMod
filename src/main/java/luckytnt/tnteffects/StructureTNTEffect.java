@@ -55,13 +55,14 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 		if (entity.getLevel() instanceof ServerLevel server) {
 			StructureState state = StructureState.byName(entity.getPersistentData().getString("structure"));
 			
+			BlockPos pos = BlockPos.containing(entity.getPos());
 			ServerChunkCache chunkSource = server.getChunkSource();
 			ChunkGenerator chunkGenerator = chunkSource.getGenerator();
 			ChunkPos chunkPos = new ChunkPos(toBlockPos(entity.getPos()));
 			
 			Structure structure = state.getStructure(entity);
 			StructureStart start = structure.generate(server.registryAccess(), chunkGenerator, chunkGenerator.getBiomeSource(), chunkSource.randomState(), server.getStructureManager(), server.getSeed(), chunkPos, 0, server, b -> true);
-			start.placeInChunk(server, server.structureManager(), chunkGenerator, server.getRandom(), BoundingBox.infinite(), chunkPos);
+			start.placeInChunk(server, server.structureManager(), chunkGenerator, server.getRandom(), BoundingBox.fromCorners(pos.offset(-150, -150, -150), pos.offset(150, 150, 150)), chunkPos);
 		}
 	}
 	
@@ -124,7 +125,7 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 			Rotation rotation = Rotation.getRandom(ctx.random());
 			BlockPos blockpos = new BlockPos(x, y, z);
 			return Optional.of(new Structure.GenerationStub(blockpos, p -> {
-				this.generatePieces(p, ctx, blockpos, rotation);
+				generatePieces(p, ctx, blockpos, rotation);
 			}));
 		}
 
@@ -210,7 +211,7 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 		public Stronghold(Structure.StructureSettings settings, IExplosiveEntity entity) {
 			super(settings);
 			x = Mth.floor(entity.x());
-			y = Mth.floor(entity.y());
+			y = entity.getLevel().getMinBuildHeight() + 64;
 			z = Mth.floor(entity.z());
 		}
 		
@@ -262,14 +263,16 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 		}
 
 		private void generatePieces(StructurePiecesBuilder builder, Structure.GenerationContext ctx) {
-			builder.addPiece(createTopPiece(ctx.chunkPos(), ctx.random()));
+			builder.addPiece(createTopPiece(ctx.random()));
 		}
 
-		private StructurePiece createTopPiece(ChunkPos pos, WorldgenRandom rand) {
+		private StructurePiece createTopPiece(WorldgenRandom rand) {
 			int i = x - 29;
 			int j = z - 29;
 			Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(rand);
-			return new OceanMonumentPieces.MonumentBuilding(rand, i, j, direction);
+			StructurePiece piece = new OceanMonumentPieces.MonumentBuilding(rand, i, j, direction);
+			piece.move(0, y - 39, 0);
+			return piece;
 		}
 	}
 	

@@ -28,7 +28,7 @@ public class PhysicsTNTEffect extends PrimedTNTEffect {
 		RandomSource random = level.getRandom();
 		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity) entity, null, entity.x(), entity.y(), entity.z(), strength, true, (lev, center, pos, state) -> {
+		ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity) entity, null, entity.x(), entity.y(), entity.z(), strength).setCustomExplosionEffect((lev, center, pos, state) -> {
 			if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) < 100f) {
 				lev.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 				state.getBlock().onBlockExploded(state, lev, pos, dummy);

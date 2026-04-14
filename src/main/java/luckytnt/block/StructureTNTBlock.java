@@ -54,7 +54,7 @@ public class StructureTNTBlock extends LTNTBlock {
 			player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
 			return InteractionResult.sidedSuccess(level.isClientSide());
 		} else if (stack.getItem() == ItemRegistry.CONFIGURATION_WAND.get()) {
-			level.setBlock(pos, state.setValue(STRUCTURE, StructureState.next(state.getValue(STRUCTURE))), 3);
+			level.setBlock(pos, state.setValue(STRUCTURE, state.getValue(STRUCTURE).next()), 3);
 			return InteractionResult.sidedSuccess(level.isClientSide());
 		}
 		return InteractionResult.FAIL;

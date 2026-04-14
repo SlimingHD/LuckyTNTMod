@@ -1,6 +1,5 @@
 package luckytnt.tnteffects;
 
-import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
@@ -10,7 +9,6 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -18,10 +16,10 @@ import net.minecraft.world.phys.Vec3;
 
 public class TetrahedronTNTEffect extends PrimedTNTEffect {
 
-	private static final float RADIUS = 0.5f * (float)Math.sqrt(2d);
-	private static final float SIDE_LENGTH = RADIUS * (float)Math.sqrt(3d);
-	private static final float HEIGHT = ((float)Math.sqrt(6d) / 3f) * SIDE_LENGTH;
-	private static final Quaternionf QUAT = new Quaternionf().setAngleAxis(120d * Mth.DEG_TO_RAD, 0d, 1d, 0d);
+	private static final float RADIUS = (float)Math.sqrt(2d) * 0.5f;
+	private static final float HEIGHT = (float)Math.sqrt(2d) * RADIUS;
+	private static final double DEG_TO_RAD = Math.PI / 180d;
+	private static final double THETA = (Math.PI * 2d) / 3d;
 	private static final Vector3f COLOR = new Vector3f(1f, 0.42f, 0f);
 
 	@SuppressWarnings("deprecation")
@@ -65,23 +63,18 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 	public void spawnParticles(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
 
-		double degrees = (entity.getTNTFuse() / 100d) * 360d;
-		Quaternionf addQuat = new Quaternionf().setAngleAxis(degrees * Mth.DEG_TO_RAD, 0d, 1d, 0d);
+		double degrees = (entity.getTNTFuse() / 100d) * 360d * DEG_TO_RAD;
 		Vector3f origin = entity.getPos().toVector3f().add(0f, 1.1f, 0f);
-		Vector3f vecToCorner = new Vector3f(RADIUS, 0f, 0f);
-		vecToCorner.rotate(addQuat);
 		
 		Vector3f a = new Vector3f();
 		Vector3f b = new Vector3f();
 		Vector3f c = new Vector3f();
 		Vector3f d = new Vector3f();
 		
-		origin.add(vecToCorner, a);
+		origin.add(RADIUS * (float)Math.cos(degrees), 0f, RADIUS * (float)Math.sin(degrees), a);
+		origin.add(RADIUS * (float)Math.cos(THETA + degrees), 0f, RADIUS * (float)Math.sin(THETA + degrees), b);
+		origin.add(RADIUS * (float)Math.cos(THETA * 2d + degrees), 0f, RADIUS * (float)Math.sin(THETA * 2d + degrees), c);
 		origin.add(0f, HEIGHT, 0f, d);
-		vecToCorner.rotate(QUAT);
-		origin.add(vecToCorner, b);
-		vecToCorner.rotate(QUAT);
-		origin.add(vecToCorner, c);
 		
 		Vector3f ab = new Vector3f();
 		Vector3f ac = new Vector3f();
@@ -97,7 +90,7 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 		d.sub(b, bd);
 		d.sub(c, cd);
 		
-		for (float f = 0f; f <= ab.length(); f += ab.length() / 20f) {
+		for (float f = 0f; f <= 1f; f += 0.05f) {
 			level.addParticle(new DustParticleOptions(COLOR, 0.5f), a.x + f * ab.x, a.y + f * ab.y, a.z + f * ab.z, 0d, 0d, 0d);
 			level.addParticle(new DustParticleOptions(COLOR, 0.5f), a.x + f * ac.x, a.y + f * ac.y, a.z + f * ac.z, 0d, 0d, 0d);
 			level.addParticle(new DustParticleOptions(COLOR, 0.5f), a.x + f * ad.x, a.y + f * ad.y, a.z + f * ad.z, 0d, 0d, 0d);

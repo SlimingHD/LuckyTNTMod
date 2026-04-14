@@ -121,7 +121,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 		if (level instanceof ServerLevel server) {
 			ChunkGenerator chunkGenerator = server.getChunkSource().getGenerator();
 			BlockPos centerPos = BlockPos.containing(pos);
-			ImprovedExplosion explosion4 = new ImprovedExplosion(server, null, null, pos.x, pos.y, pos.z, 150, false, (lev, center, blockpos, state) -> {
+			ImprovedExplosion explosion4 = new ImprovedExplosion(server, null, null, pos.x, pos.y, pos.z, 150).setCustomExplosionEffect((lev, center, blockpos, state) -> {
 				if (validFeatureSurfaces.contains(state.getBlock())) { 
 					BlockPos posAbove = blockpos.above();
 					BlockState stateAbove = lev.getBlockState(posAbove);

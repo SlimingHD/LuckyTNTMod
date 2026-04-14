@@ -125,8 +125,8 @@ public enum StructureState implements StringRepresentable {
 		return name;
 	}
 	
-	public static StructureState next(StructureState state) {
-		return StructureState.values()[(state.ordinal() + 1) % StructureState.values().length];
+	public StructureState next() {
+		return StructureState.values()[(ordinal() + 1) % StructureState.values().length];
 	}
 	
 	public static StructureState byName(String name) {

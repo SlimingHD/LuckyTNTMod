@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
@@ -45,13 +46,21 @@ public class SwapTNTEffect extends PrimedTNTEffect{
 						Vec3 pos1 = ent1.getPosition(1);
 						Vec3 pos2 = ent2.getPosition(1);
 						
-						ent1.setPos(pos2);
+						if (ent1 instanceof Player player) {
+							player.teleportTo(pos2.x, pos2.y, pos2.z);
+						} else {
+							ent1.setPos(pos2);
+						}
 						level.playSound(null, toBlockPos(pos2), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
 						for (int count = 0; count < 40; count++) {
 							level.addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 1f), 1f), pos2.x + random.nextDouble() * ent1.getBbWidth() - random.nextDouble() * ent1.getBbWidth(), pos2.y + random.nextDouble() * ent1.getBbHeight(), pos2.z + random.nextDouble() * ent1.getBbWidth() - random.nextDouble() * ent1.getBbWidth(), 0, 0, 0);
 						}
 						
-						ent2.setPos(pos1);
+						if (ent2 instanceof Player player) {
+							player.teleportTo(pos1.x, pos1.y, pos1.z);
+						} else {
+							ent2.setPos(pos2);
+						}
 						level.playSound(null, toBlockPos(pos1), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 2, 1);
 						for (int count = 0; count < 40; count++) {
 							level.addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 1f), 1f), pos1.x + random.nextDouble() * ent2.getBbWidth() - random.nextDouble() * ent2.getBbWidth(), pos1.y + random.nextDouble() * ent2.getBbHeight(), pos1.z + random.nextDouble() * ent2.getBbWidth() - random.nextDouble() * ent2.getBbWidth(), 0, 0, 0);

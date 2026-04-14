@@ -44,7 +44,7 @@ public class GroveTNTEffect extends PrimedTNTEffect {
 			};
 
 			ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(server);
-			ImprovedExplosion explosion = new ImprovedExplosion(server, (Entity)entity, null, entity.x(), entity.y(), entity.z(), strength, false, (lev, center, pos, state) -> {
+			ImprovedExplosion explosion = new ImprovedExplosion(server, (Entity)entity, null, entity.x(), entity.y(), entity.z(), strength).setCustomExplosionEffect((lev, center, pos, state) -> {
 				if (state.isAir()) {
 					return;
 				}
