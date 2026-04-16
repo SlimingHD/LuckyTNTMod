@@ -1,7 +1,6 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
-import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.util.RandomSource;
@@ -23,7 +22,7 @@ public class ArrowTNTEffect extends PrimedTNTEffect {
 		RandomSource random = entity.getLevel().getRandom();
 		for (int count = 0; count < arrowCount; count++) {
 			Arrow arrow = new Arrow(EntityType.ARROW, entity.getLevel());
-			arrow.setPos(entity.x(), entity.y() + (entity instanceof PrimedLTNT ? 0.5f : 0f), entity.z());
+			arrow.setPos(entity.x(), entity.y() + 0.5d, entity.z());
 			arrow.setDeltaMovement(random.nextDouble() * 6d - 3d, random.nextDouble() * 2d - random.nextDouble(), random.nextDouble() * 6d - 3d);
 			arrow.setOwner(entity.owner());
 			arrow.setBaseDamage(10);

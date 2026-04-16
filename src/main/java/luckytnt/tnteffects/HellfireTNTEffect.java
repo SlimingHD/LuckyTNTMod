@@ -3,8 +3,11 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.BlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -14,7 +17,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -37,22 +39,13 @@ public class HellfireTNTEffect extends PrimedTNTEffect {
 		explosion.doEntityExplosion(2f, true);
 		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
 		
-		ImprovedExplosion explosion2 = new ImprovedExplosion(entity.getLevel(), (Entity)entity, null, entity.x(), entity.y(), entity.z(), Mth.floor(strength * 1.5f)).setCustomExplosionEffect((lev, center, pos, state) -> {
-			if (random.nextFloat() < 0.9f) {
-				lev.setBlockAndUpdate(pos, Blocks.NETHERRACK.defaultBlockState());
-				if (random.nextFloat() < 0.1f) {
-					BlockPos posAbove = pos.above();
-					if (lev.getBlockState(posAbove).isAir()) {
-						lev.setBlockAndUpdate(posAbove, BaseFireBlock.getState(lev, posAbove));
-					}
-				}
-				state.getBlock().wasExploded(level, pos, explosion);
-			} else if (random.nextFloat() < 0.3f) {
-				level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
-				state.getBlock().wasExploded(level, pos, explosion);
-			}
-		});
-		explosion2.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
+		ImprovedExplosion netherExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), Mth.floor(strength * 1.5f));
+		netherExplosion.doImprovedBlockExplosion(1f, 1.5f, false, true, new FilterAirExplosionRule(
+			new StackedExplosionRule(
+				new FilterRandomExplosionRule(0.9f, new BlockExplosionRule(Blocks.NETHERRACK.defaultBlockState())),
+				new FilterRandomExplosionRule(0.3f, new BlockExplosionRule(Blocks.LAVA.defaultBlockState()))
+			)
+		));
 		
 		for (int i = 0; i < ghastCount; i++) {
 			Ghast ghast = new Ghast(EntityType.GHAST, level);

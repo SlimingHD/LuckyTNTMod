@@ -27,7 +27,7 @@ public class CompactTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion tntExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), size);
 		tntExplosion.doImprovedBlockExplosion(size, size, false, true, new FilterFullBlockExplosionRule(
-				new FilterRandomExplosionRule(probability, new BlockExplosionRule(toPlace.get().get().defaultBlockState()))
+			new FilterRandomExplosionRule(probability, new BlockExplosionRule(toPlace.get().get().defaultBlockState()))
 		));
 	}
 }

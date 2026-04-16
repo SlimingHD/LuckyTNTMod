@@ -1,5 +1,7 @@
 package luckytnt.tnteffects;
 
+import org.joml.Vector2i;
+
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -24,12 +26,14 @@ public class PrismTNTEffect extends PrimedTNTEffect {
 		Level level = entity.getLevel();
 		
 		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
-		BlockPos center = toBlockPos(entity.getPos()).offset(-1 * (size / 2) + 1, 0, -1 * (size / 2) + 1);
+		BlockPos center = toBlockPos(entity.getPos()).offset(-size / 2 + 1, 0, -size / 2 + 1);
+		Direction direction = Direction.values()[level.getRandom().nextInt(Direction.values().length)];
 		for (int offY = size / 2; offY > (-1 * (size / 2) - 1); offY--) {
 			int tri = size;
 			for (int offX = 0; offX < size; offX++) {
 				for (int offZ = 0; offZ < tri; offZ++) {
-					BlockPos pos = center.offset(offX, offY, offZ);
+					Vector2i offset = direction.apply(offX, offZ, size);
+					BlockPos pos = center.offset(offset.x(), offY, offset.y());
 					BlockState state = level.getBlockState(pos);
 					if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 100f) {
 						level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
@@ -44,5 +48,27 @@ public class PrismTNTEffect extends PrimedTNTEffect {
 	@Override
 	public Block getBlock() {
 		return BlockRegistry.PRISM_TNT.get();
+	}
+	
+	private static enum Direction {
+		NORTH((offX, offZ, size) -> new Vector2i(offX, offZ)),
+		EAST((offX, offZ, size) -> new Vector2i(offZ, size - offX - 1)),
+		SOUTH((offX, offZ, size) -> new Vector2i(size - offX - 1, size - offZ - 1)),
+		WEST((offX, offZ, size) -> new Vector2i(size - offZ - 1, offX));
+		
+		private final DirectionFunction offsetFunction;
+		
+		private Direction(DirectionFunction offsetFunction) {
+			this.offsetFunction = offsetFunction;
+		}
+		
+		public Vector2i apply(int offX, int offZ, int size) {
+			return offsetFunction.apply(offX, offZ, size);
+		}
+		
+		@FunctionalInterface
+		private static interface DirectionFunction {
+			Vector2i apply(int offX, int offZ, int size);
+		}
 	}
 }

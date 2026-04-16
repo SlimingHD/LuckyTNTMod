@@ -8,9 +8,6 @@ import luckytnt.registry.ItemRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -36,12 +33,7 @@ public class HomingDynamiteEffect extends PrimedTNTEffect {
 				target = setTarget(entity);
 			} else {
 				Entity ent = (Entity)entity;
-				ent.setDeltaMovement(target.getPosition(1f).subtract(entity.getPos()).normalize());
-				if (entity.getLevel() instanceof ServerLevel server) {
-					for (ServerPlayer splayer : server.players()) {
-						splayer.connection.send(new ClientboundSetEntityMotionPacket(ent.getId(), ent.getDeltaMovement()));
-					}
-				}
+				ent.setDeltaMovement(target.getEyePosition(1f).subtract(entity.getPos()).normalize());
 			}
 		}
 	}

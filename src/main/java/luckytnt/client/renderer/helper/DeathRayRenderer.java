@@ -1,8 +1,6 @@
 package luckytnt.client.renderer.helper;
 
-import org.joml.AxisAngle4f;
 import org.joml.Matrix4f;
-import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -13,19 +11,20 @@ import luckytnt.registry.ShaderRegistry;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.util.Mth;
 
 public class DeathRayRenderer {
 
-	public static void renderDeathRay(Vector3f start, Vector3f end, float rayRadius, float length, float animationSpeed, float rotationSpeed, Vector3f color, PoseStack pose, MultiBufferSource bufferSource) {
+	public static void renderDeathRay(Vector3f start, Vector3f end, float rayRadius, float length, float animationSpeed, boolean axialFalloff, Vector3f viewDir, Vector3f color, Vector3f centerColor, PoseStack pose, MultiBufferSource bufferSource) {
 		VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderTypeRegistry.DEATH_RAY);
 		ShaderInstance shader = ShaderRegistry.DEATH_RAY;
 		shader.safeGetUniform("uTime").set((System.currentTimeMillis() % 100000) / 1000f * animationSpeed);
 		shader.safeGetUniform("uRadius").set(rayRadius * 4f);
 		shader.safeGetUniform("uLength").set(length);
+		shader.safeGetUniform("uAxialFalloffFactor").set(axialFalloff ? 0f : 1f);
 		shader.safeGetUniform("uColor").set(color);
+		shader.safeGetUniform("uCenterColor").set(centerColor);
 		
-		renderRay(start, end, rayRadius, Mth.DEG_TO_RAD * (((System.currentTimeMillis() % 10000) * rotationSpeed) % 90f), pose, vertexConsumer);
+		renderRay(start, end, rayRadius, viewDir, pose, vertexConsumer);
 		if (bufferSource instanceof BufferSource buffer) {
 			buffer.endBatch(RenderTypeRegistry.DEATH_RAY);
 		}
@@ -45,16 +44,10 @@ public class DeathRayRenderer {
 		}
 	}
 	
-	private static void renderRay(Vector3f start, Vector3f end, float radius, float angle, PoseStack pose, VertexConsumer vertexConsumer) {
-		Vector3f dir = new Vector3f(end).sub(start).normalize();
-		
-		Vector3f up = Math.abs(dir.y) < 0.99f ? new Vector3f(0f, 1f, 0f) : new Vector3f(1f, 0f, 0f);
-		Quaternionf rot = new Quaternionf(new AxisAngle4f(angle, dir));
-		Vector3f right = new Vector3f(dir).cross(up).normalize().rotate(rot);
-		Vector3f forward = new Vector3f(dir).cross(right).normalize();
-
-		renderRayQuad(start, end, right, forward, radius, pose.last().pose(), vertexConsumer);
-		renderRayQuad(start, end, right.negate(), forward, radius, pose.last().pose(), vertexConsumer);
+	private static void renderRay(Vector3f start, Vector3f end, float radius, Vector3f viewDir, PoseStack pose, VertexConsumer vertexConsumer) {
+		Vector3f dir = new Vector3f(end).sub(start).normalize();	
+		Vector3f right = new Vector3f(dir).cross(viewDir).normalize();
+		renderRayQuad(start, end, right, new Vector3f(), radius, pose.last().pose(), vertexConsumer);
 	}
 	
 	private static void renderRayQuad(Vector3f start, Vector3f end, Vector3f right, Vector3f forward, float radius, Matrix4f pose, VertexConsumer vertexConsumer) {

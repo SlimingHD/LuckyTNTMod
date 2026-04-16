@@ -793,7 +793,15 @@
 	"luckytntmod.config.present_drop": "Уничтожение блоков Подаркопадом",
 	
 	"death.attack.say_goodbye" : "%1$s сказал прощай",
+	"death.attack.say_goodbye.player" : "%1$s сказал прощай, сражаясь с %2$s",
 	"death.attack.hailstone": "%1$s лишился глаза благодаря градине",
+	"death.attack.hailstone.player": "%1$s лишился глаза из-за градины, сражаясь с %2$s",
+	"death.attack.extinction": "%1$s вымер, благодаря %2$s",
+	"death.attack.extinction_no_source": "%1$s вымер",
+	"death.attack.extinction_no_source.player": "%1$s вымер, сражаясь с %2$s",
+	"death.attack.death_ray": "%1$s был расщеплен %2$s",
+	"death.attack.death_ray_no_source": "%1$s был расщеплен",
+	"death.attack.death_ray_no_source.player": "%1$s был расщеплен, сражаясь с %2$s",
 	
 	"command.ltmdisaster.iceageactive": "Бедствие Ледниковый Период сейчас активно на ",
   	"command.ltmdisaster.iceage": "Началось бедствие Ледниковый Период",

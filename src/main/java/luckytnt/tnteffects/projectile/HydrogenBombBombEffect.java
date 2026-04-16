@@ -14,11 +14,10 @@ import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
-import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
-import luckytntlib.util.explosions.rules.ScheduleTickExplosionRule;
+import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -28,6 +27,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.PacketDistributor;
 
@@ -40,7 +40,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 230);
 		explosion.setExplosionFinishWork(exp -> finishNuclearExplosion(entity, exp));
 		explosion.doEntityExplosion(25f, true);
-		explosion.doImprovedBlockExplosion(0.167f, 0.05f, false, true, null);
+		explosion.doImprovedBlockExplosion(0.167f, 0.05f, true, false, null);
 		
 		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() - 90, entity.y() - 65, entity.z() - 90, entity.x() + 90, entity.y() + 65, entity.z() + 90));
 		for (LivingEntity living : list) {
@@ -49,13 +49,13 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 	}
 	
 	private void finishNuclearExplosion(IExplosiveEntity entity, ImprovedExplosion explosion) {
-		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 400, new Vector3f(1f, 0.3333f, 1f), 0.2f, new FilterAirExplosionRule(FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new CraterExplosionRule())));
-		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 250, new Vector3f(1f, 0.6666667f, 1f), 0, new FilterRandomExplosionRule(0.5f,
+		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 400, new Vector3f(1f, 0.3333f, 1f), 0.2f, FilterBlockExplosionRule.builder().filterForTag(BlockTags.LEAVES).filterForBlocks(Blocks.SNOW, Blocks.VINE).build(new CraterExplosionRule()));
+		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 250, new Vector3f(1f, 0.6666667f, 1f), 0, new FilterSurfaceExplosionRule(false,
+			new FilterRandomExplosionRule(0.5f, 
 				FilterRandomDistanceExplosionRule.quadraticDecrease(0, 250,
-						new ScheduleTickExplosionRule(
-								new CanSurviveExplosionRule(BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState())
-						)
+					new CanSurviveExplosionRule(BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState())
 				)
+			)
 		));
 	}
 	

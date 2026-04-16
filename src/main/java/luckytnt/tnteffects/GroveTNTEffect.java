@@ -8,6 +8,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -44,8 +45,8 @@ public class GroveTNTEffect extends PrimedTNTEffect {
 			};
 
 			ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(server);
-			ImprovedExplosion explosion = new ImprovedExplosion(server, (Entity)entity, null, entity.x(), entity.y(), entity.z(), strength).setCustomExplosionEffect((lev, center, pos, state) -> {
-				if (state.isAir()) {
+			ImprovedExplosion explosion = new ImprovedExplosion(server, (Entity)entity, null, entity.x(), entity.y() + 0.5f, entity.z(), strength).setCustomExplosionEffect((lev, center, pos, state) -> {
+				if (state.isAir() || state.is(BlockTags.LEAVES)) {
 					return;
 				}
 				

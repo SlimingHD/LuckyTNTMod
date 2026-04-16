@@ -792,9 +792,15 @@
 	"luckytntmod.config.present_drop": "Present Drop destroys blocks",
 	
 	"death.attack.say_goodbye" : "%1$s said goodbye",
+	"death.attack.say_goodbye.player" : "%1$s said goodbye whilst fighting %2$s",
 	"death.attack.hailstone": "%1$s got hit in the eye by a hailstone",
+	"death.attack.hailstone.player": "%1$s got hit in the eye by a hailstone whilst fighting %2$s",
 	"death.attack.extinction": "%1$s went extinct thanks to %2$s",
 	"death.attack.extinction_no_source": "%1$s went extinct",
+	"death.attack.extinction_no_source.player": "%1$s went extinct whilst fighting %2$s",
+	"death.attack.death_ray": "%1$s was obliterated by %2$s",
+	"death.attack.death_ray_no_source": "%1$s was obliterated",
+	"death.attack.death_ray_no_source.player": "%1$s was obliterated whilst fighting %2$s",
 	
 	"command.ltmdisaster.iceageactive": "Disaster Ice Age currently active for ",
   	"command.ltmdisaster.iceage": "Started the disaster Ice Age",

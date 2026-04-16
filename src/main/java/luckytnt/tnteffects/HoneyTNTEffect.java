@@ -36,21 +36,21 @@ public class HoneyTNTEffect extends PrimedTNTEffect {
 		
 		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
 		BlockPos centerPos = BlockPos.containing(entity.getPos());
-		int interiorDistanceSqr = Mth.square(radius - 2);
-		int beeHiveDistanceSqr = Mth.square(radius - 3);
-		int scaledRadiusY = Mth.ceil(radius * 1.5f);
+		int interiorDistance = radius - 2;
+		int beeHiveDistance = radius - 3;
+		int scaledRadiusY = Mth.floor(radius * 1.5f);
 		ExplosionHelper.customSpheroidExplosion(entity.getLevel(), entity.getPos(), radius, new Vector3f(1f, 1.5f, 1f), (lev, center, pos, state) -> {
-			if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f) {
-				int distanceSqr = Mth.square(pos.getX() - centerPos.getX()) + Mth.square(pos.getY() - centerPos.getY()) + Mth.square(pos.getZ() - centerPos.getZ());
-				distanceSqr += random.nextInt(2);
-				if (distanceSqr <= interiorDistanceSqr) {
-					if (distanceSqr >= beeHiveDistanceSqr && random.nextFloat() < 0.05f) {
+			if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) < 200f) {
+				double distance = Math.sqrt(Mth.square(pos.getX() - centerPos.getX()) + Mth.square((pos.getY() - centerPos.getY()) / 1.5f) + Mth.square(pos.getZ() - centerPos.getZ()));
+				distance += random.nextDouble() * 2d;
+				if (distance <= interiorDistance) {
+					if (distance >= beeHiveDistance && random.nextFloat() < 0.05f) {
 						level.setBlockAndUpdate(pos, Blocks.BEE_NEST.defaultBlockState().setValue(BeehiveBlock.FACING, RedstoneTNTEffect.getRandomDirectionHorizontal(random)).setValue(BeehiveBlock.HONEY_LEVEL, random.nextInt(6)));
 					} else {
 						level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 						if (random.nextFloat() < 0.025f) {
 							Bee bee = new Bee(EntityType.BEE, level);
-							bee.setPos(pos.getX(), pos.getY(), pos.getZ());
+							bee.setPos(pos.getX() + 0.5d, pos.getY(), pos.getZ() + 0.5d);
 							level.addFreshEntity(bee);
 						}
 					}

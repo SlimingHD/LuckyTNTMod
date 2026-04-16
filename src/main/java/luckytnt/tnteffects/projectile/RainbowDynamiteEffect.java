@@ -54,6 +54,7 @@ public class RainbowDynamiteEffect extends PrimedTNTEffect {
 			}
 			try {
 				FallingBlockEntity concrete = CONSTRUCTOR.newInstance(level, entity.x(), entity.y(), entity.z(), state);
+				concrete.dropItem = false;
 				concrete.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
 				level.addFreshEntity(concrete);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -87,6 +88,7 @@ public class RainbowDynamiteEffect extends PrimedTNTEffect {
 			}
 			try {
 				FallingBlockEntity concrete = CONSTRUCTOR.newInstance(level, entity.x(), entity.y(), entity.z(), state);
+				concrete.dropItem = false;
 				concrete.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
 				level.addFreshEntity(concrete);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

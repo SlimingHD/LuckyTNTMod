@@ -7,7 +7,7 @@ modId="${mod_id}"
 version="${mod_version}" 
 displayName="${mod_name}"
 logoFile="logo.png"
-credits="Created by SlimingHD and Fleshcrafter"
+credits="Russian translation by ZER03CH0"
 authors="${mod_authors}" 
 description='''${mod_description}'''
 

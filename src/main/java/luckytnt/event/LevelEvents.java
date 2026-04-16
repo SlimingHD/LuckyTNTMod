@@ -136,8 +136,8 @@ public class LevelEvents {
 				boolean needsUpdate = false;
 				for (int offY = -secRadius; offY <= secRadius; offY++) {
 					int index = chunk.getSectionIndexFromSectionY(secY + offY);
-					if (index >= chunk.getMinSection() && index < chunk.getMaxSection()) {
-						LevelChunkSection section = chunk.getSection(offY);
+					if (index >= 0 && index < chunk.getSectionsCount()) {
+						LevelChunkSection section = chunk.getSection(index);
 						PalettedContainer<Holder<Biome>> biomes = (PalettedContainer<Holder<Biome>>)section.getBiomes();
 						for (int x = 0; x < 4; x++) {
 							for (int z = 0; z < 4; z++) {

@@ -17,6 +17,8 @@ public class LuckyTNTDamageSources {
 	private static final ResourceKey<DamageType> SAY_GOODBYE = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(LuckyTNTMod.MODID, "say_goodbye"));
 	private static final ResourceKey<DamageType> EXTINCTION = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(LuckyTNTMod.MODID, "extinction"));
 	private static final ResourceKey<DamageType> EXTINCTION_NO_SOURCE = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(LuckyTNTMod.MODID, "extinction_no_source"));
+	private static final ResourceKey<DamageType> DEATH_RAY = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(LuckyTNTMod.MODID, "death_ray"));
+	private static final ResourceKey<DamageType> DEATH_RAY_NO_SOURCE = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(LuckyTNTMod.MODID, "death_ray_no_source"));
 
 	public static DamageSource hailstone(Level level) {
 		return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(HAILSTONE), null, null);
@@ -31,5 +33,12 @@ public class LuckyTNTDamageSources {
 			return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(EXTINCTION_NO_SOURCE), null, null);
 		}
 		return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(EXTINCTION), directSource, null);
+	}
+	
+	public static DamageSource deathRay(Level level, @Nullable Entity directSource) {
+		if (directSource == null) {
+			return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DEATH_RAY_NO_SOURCE), null, null);
+		}
+		return new DamageSource(level.registryAccess().registryOrThrow(Registries.DAMAGE_TYPE).getHolderOrThrow(DEATH_RAY), directSource, null);
 	}
 }

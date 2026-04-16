@@ -26,7 +26,8 @@ public class MiningflatTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		RandomSource random = entity.getLevel().getRandom();
-		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(entity.getLevel());
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), radius);
+		particleExplosion.spawnExplosionParticles();
 		BlockPos centerPos = BlockPos.containing(entity.getPos());
 		ExplosionHelper.customCylindricalExplosion(entity.getLevel(), entity.getPos(), radius, radiusY, (level, center, pos, state) -> {
 			int offY = pos.getY() - centerPos.getY();
@@ -36,7 +37,7 @@ public class MiningflatTNTEffect extends PrimedTNTEffect {
 				}
 
 				level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-				state.getBlock().wasExploded(level, pos, dummy);
+				state.getBlock().wasExploded(level, pos, particleExplosion);
 
 				if (offY == 0 && random.nextFloat() < 0.05f && Block.canSupportCenter(level, pos.below(), Direction.UP)) {
 					level.setBlockAndUpdate(pos, Blocks.TORCH.defaultBlockState());

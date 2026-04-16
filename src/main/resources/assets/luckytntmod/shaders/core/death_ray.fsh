@@ -5,7 +5,9 @@ in vec2 vUV;
 uniform float uTime;
 uniform float uRadius;
 uniform float uLength;
+uniform float uAxialFalloffFactor;
 uniform vec3 uColor;
+uniform vec3 uCenterColor;
 
 out vec4 fragColor;
 
@@ -33,14 +35,13 @@ void main() {
     float falloff = exp(-dist * k);
     float radialFalloff = (falloff - norm) / (1.0 - norm);
 
-    float n = noise(vec2(vUV.x * 10.0, uTime * 2.0));
-    float pulse = sin(vUV.x * 20.0 - uTime * 5.0) * 0.5 + 0.75;
-    float pulse2 = sin(vUV.x * 17.0 - uTime * 8.7) * 0.5 + 0.75;
-    vec2 warp = vec2(noise(vec2(vUV.x * 5.0, uTime)), noise(vec2(vUV.y * 5.0, uTime + 10.0)));
-	float lightning = radialFalloff * noise(vec2(vUV.x * uLength, vUV.y * 10.0) + warp * 0.5 - uTime * 6.0) - dist * 0.25;
+    float pulse = sin(vUV.x * 21.0 - uTime * 7.0) * 0.5 + 0.75;
+    float pulse2 = noise(vec2(vUV.y * 7.3 + uTime * 3.3, 0.0)) * sin(vUV.x * 77.0 - uTime * 23.0) * 0.5 + 0.75;
 	
-    float intensity = radialFalloff * (0.7 + 0.3 * n) * (0.5 + 0.5 * pulse) * (0.75 + 0.5 * pulse2) + lightning * 2.0;
+	float axialFalloff = smoothstep(0.0, 0.1, vUV.x) * (1.0 - smoothstep(0.9, 1.0, vUV.x));
+	axialFalloff = mix(axialFalloff, 1.0, uAxialFalloffFactor);
+    float intensity = (radialFalloff * (0.5 + 0.75 * pulse + 0.5 + 0.75 * pulse2)) * axialFalloff;
 
-    vec3 color = uColor * intensity;
+    vec3 color = mix(uColor, uCenterColor, pow(radialFalloff, 8.0)) * intensity;
     fragColor = vec4(color, intensity);
 }

@@ -22,7 +22,7 @@ public class FloatingIslandEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), strength, 101f, new FilterOffYExplosionRule(-strength + 5, strength - 5,
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), strength, 101f, new FilterOffYExplosionRule(-strength + 4, strength - 4,
 			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), new FilterBlastResistanceExplosionRule(101f, new CopyBlockExplosionRule()))
 		));
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 8);

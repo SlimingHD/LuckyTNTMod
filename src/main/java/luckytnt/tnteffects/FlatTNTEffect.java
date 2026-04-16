@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -27,11 +28,9 @@ public class FlatTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		if (radius > 30) { 
-			ExplosionHelper.createCylindricalCrater(entity.getLevel(), entity.getPos(), radius, radiusY, 200f, new FilterOffYExplosionRule(0, radiusY, new CraterExplosionRule()));
-		} else {
-			ExplosionHelper.legacyCylindricalExplosion(entity.getLevel(), entity.getPos(), radius, radiusY, 200f, new FilterOffYExplosionRule(0, radiusY, new CraterExplosionRule()));
-		}
+		ExplosionHelper.createCylindricalCrater(entity.getLevel(), entity.getPos(), radius, radiusY, 200f, new FilterOffYExplosionRule(0, radiusY, new CraterExplosionRule()));
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), radius);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

@@ -20,7 +20,7 @@ public class SolarEruptionProjectileEffect extends PrimedTNTEffect {
 		
 		ExplosionHelper.customSphericalExplosion(entity.getLevel(), entity.getPos(), 5, (level, center, pos, state) -> {
 			if (entity.y() - pos.getY() >= 0 && entity.y() - pos.getY() <= 3) {
-				if (state.getExplosionResistance(level, pos, explosion) < 100 && state.isCollisionShapeFullBlock(level, pos)) {
+				if (state.getExplosionResistance(level, pos, explosion) < 100f && !state.isCollisionShapeFullBlock(level, pos)) {
 					state.getBlock().wasExploded(level, pos, explosion);
 					level.setBlockAndUpdate(pos, Blocks.LAVA.defaultBlockState());
 				}

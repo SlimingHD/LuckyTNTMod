@@ -22,6 +22,8 @@
 		{ "name": "uTime", "type": "float", "count": 1, "values": [ 0.0 ] },
 		{ "name": "uRadius", "type": "float", "count": 1, "values": [ 1.0 ]},
 		{ "name": "uLength", "type": "float", "count": 1, "values": [ 1.0 ]},
-		{ "name": "uColor", "type": "float", "count": 3, "values": [ 1.0, 1.0, 1.0 ] }
+		{ "name": "uAxialFalloffFactor", "type": "float", "count": 1, "values": [ 0.0 ]},
+		{ "name": "uColor", "type": "float", "count": 3, "values": [ 1.0, 1.0, 1.0 ] },
+		{ "name": "uCenterColor", "type": "float", "count": 3, "values": [ 1.0, 1.0, 1.0 ] }
 	]
 }

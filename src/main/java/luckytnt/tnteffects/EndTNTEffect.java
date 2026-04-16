@@ -4,6 +4,7 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.Mth;
@@ -30,7 +31,7 @@ public class EndTNTEffect extends PrimedTNTEffect {
 		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
 		explosion.spawnExplosionParticles();
 		ImprovedExplosion endExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), Mth.floor(strength * 1.5f));
-		endExplosion.doImprovedBlockExplosion(1f, 1.5f, false, false, new BlockExplosionRule(Blocks.END_STONE.defaultBlockState()));
+		endExplosion.doImprovedBlockExplosion(1f, 1.5f, false, false, new FilterAirExplosionRule(new BlockExplosionRule(Blocks.END_STONE.defaultBlockState())));
 		RandomSource random = entity.getLevel().getRandom();
 		ImprovedExplosion decorationExplosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, null, entity.x(), entity.y(), entity.z(), Mth.floor(strength * 1.5f)).setCustomExplosionEffect((level, center, pos, state) -> {
 			if (state.isAir() && level.getBlockState(pos.below()).is(Blocks.END_STONE) && random.nextFloat() < 0.1f) {

@@ -70,7 +70,7 @@ public class ContinentalDriftEffect extends PrimedTNTEffect {
 					BlockPos pos = start.offset(toBlockPos(new Vec3(i * vec.x + offX, 0, i * vec.z + offZ)));
 					double rand = random.nextDouble();
 					if (shouldBlockExplode(rand, distanceSqr)) {
-						BlockPos topPos = new BlockPos(pos.getX(), level.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()) - 1, pos.getZ());
+						BlockPos topPos = new BlockPos(pos.getX(), level.getHeight(Heightmap.Types.MOTION_BLOCKING, pos.getX(), pos.getZ()) - 1, pos.getZ());
 						BlockState state = level.getBlockState(topPos);
 						if (state.getExplosionResistance(level, pos, dummyExplosion) <= 100) {
 							state.getBlock().wasExploded(level, topPos, dummyExplosion);

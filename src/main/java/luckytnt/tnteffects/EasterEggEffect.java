@@ -8,6 +8,7 @@ import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.RandomList;
 import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
 import luckytntlib.util.explosions.rules.RandomBlockExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -36,8 +37,10 @@ public class EasterEggEffect extends PrimedTNTEffect{
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 15);
 		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
 		explosion.spawnExplosionParticles();
-		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, new FilterRandomExplosionRule(0.66f,
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, new FilterAirExplosionRule(
+			new FilterRandomExplosionRule(0.66f,
 				new RandomBlockExplosionRule(RandomList.ofEqualProbability(Blocks.MELON.defaultBlockState(), Blocks.PUMPKIN.defaultBlockState()))
+			)
 		));
 		if (level + 1 == 4) {
 			return;

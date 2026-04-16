@@ -2,6 +2,7 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.block.Block;
@@ -17,6 +18,8 @@ public class VaporizeTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		WastelandTNTEffect.doVaporizeExplosion(entity.getLevel(), entity.getPos(), strength, false);
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), strength);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

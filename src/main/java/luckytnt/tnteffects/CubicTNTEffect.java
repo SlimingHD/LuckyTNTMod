@@ -17,7 +17,7 @@ public class CubicTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.createCubicalCrater(entity.getLevel(), entity.getPos(), strength, 100);
+		ExplosionHelper.createCubicalCrater(entity.getLevel(), entity.getPos(), strength, 99f);
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), strength);
 		particleExplosion.spawnExplosionParticles();
 	}
