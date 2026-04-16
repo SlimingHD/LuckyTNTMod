@@ -8,9 +8,12 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.network.PacketDistributor;
@@ -27,6 +30,7 @@ public class EatingTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
 		if (entity.getLevel().isClientSide() || entity.getPersistentData().getInt("eatLevel") >= 300) {
 			return;
 		}
@@ -37,6 +41,7 @@ public class EatingTNTEffect extends PrimedTNTEffect {
 				entity.getPersistentData().putInt("eatLevel", Mth.clamp(entity.getPersistentData().getInt("eatLevel") + item.getItem().getCount(), 0, 300));
 				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)entity), new ClientboundIntNBTPacket("eatLevel", entity.getPersistentData().getInt("eatLevel"), ((Entity)entity).getId()));
 				item.discard();
+				level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EAT, SoundSource.MASTER, 2f, 1f);
 			}
 		}
 	}

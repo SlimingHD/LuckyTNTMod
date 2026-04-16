@@ -69,7 +69,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 			ConfiguredFeature<?, ?> jungleTrees = configuredFeatures.get(VegetationFeatures.TREES_JUNGLE);
 			ConfiguredFeature<?, ?> grassPatch = configuredFeatures.get(VegetationFeatures.PATCH_GRASS_JUNGLE);
 			
-			LevelEvents.setBiomeInCylinder(server, entity.getPos(), 150, Biomes.JUNGLE);
+			LevelEvents.setBiomeInCylinder(server, entity.getPos(), 150, 100, Biomes.JUNGLE);
 			
 			ExplosionHelper.customSurfaceExplosion(server, entity.getPos(), 150, (lev, center, pos, state) -> {
 				int offX = pos.getX() - centerPos.getX();

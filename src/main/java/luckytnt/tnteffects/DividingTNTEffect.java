@@ -39,7 +39,7 @@ public class DividingTNTEffect extends PrimedTNTEffect {
 						BlockPos pos = toBlockPos(new Vec3(entity.x() + offX, entity.y() + offY, entity.z() + offZ));
 						if (level.getBlockState(pos).isCollisionShapeFullBlock(level, pos) && !level.getBlockState(pos.above()).isCollisionShapeFullBlock(level, pos.above())) {
 							PrimedLTNT projectile = EntityRegistry.DIVIDING_TNT.get().create(level);
-							projectile.setPos(entity.getPos().add(offX, offY, offZ));
+							projectile.setPos(entity.getPos().add(offX, offY + 1, offZ));
 							projectile.setOwner(entity.owner());
 							projectile.getPersistentData().putInt("maxLevel", random.nextInt(5));
 							projectile.getPersistentData().putInt("level", 1);

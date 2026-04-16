@@ -56,7 +56,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 		
 		RandomSource random = level.getRandom();
 		ServerLevel serverLevel = (ServerLevel)level;
-		LevelEvents.setBiomeInCylinder(serverLevel, entity.getPos(), 75, Biomes.FLOWER_FOREST);
+		LevelEvents.setBiomeInCylinder(serverLevel, entity.getPos(), 75, 75, Biomes.FLOWER_FOREST);
 		Registry<ConfiguredFeature<?, ?>> features = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 		for (int offX = -75; offX < 75; offX++) {
 			for (int offZ = -75; offZ < 75; offZ++) {

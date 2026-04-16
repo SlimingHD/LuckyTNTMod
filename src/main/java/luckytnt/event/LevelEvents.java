@@ -120,7 +120,7 @@ public class LevelEvents {
 		return level.getMinBuildHeight() - 1;
 	}
 	
-	public static void setBiomeInCylinder(ServerLevel server, Vec3 center, int radius, ResourceKey<Biome> biome) {
+	public static void setBiomeInCylinder(ServerLevel server, Vec3 center, int radius, int radiusY, ResourceKey<Biome> biome) {
 		BitSet emptySet = new BitSet(0);
 		
 		Registry<Biome> registry = server.registryAccess().registryOrThrow(Registries.BIOME);
@@ -129,7 +129,7 @@ public class LevelEvents {
 		int secY = Mth.floor(center.y()) >> 4;
 		int secZ = Mth.floor(center.z()) >> 4;
 		int maxDistanceSqr = radius * radius;
-		int secRadius = radius >> 4;
+		int secRadius = radiusY >> 4;
 		for (int offX = -secRadius; offX <= secRadius; offX++) {
 			for (int offZ = -secRadius; offZ <= secRadius; offZ++) {
 				LevelChunk chunk = server.getChunk(secX + offX, secZ + offZ);
@@ -215,7 +215,7 @@ public class LevelEvents {
 	}
 	
 	private static void iceAgeDisaster(ServerLevel server, ServerPlayer player) {
-		setBiomeInCylinder(server, player.getPosition(1f), 32, Biomes.SNOWY_TAIGA);
+		setBiomeInCylinder(server, player.getPosition(1f), 32, 32, Biomes.SNOWY_TAIGA);
 	}
 	
 	private static void heatDeathDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
@@ -223,7 +223,7 @@ public class LevelEvents {
 		double x = player.getX();
 		double z = player.getZ();
 		
-		setBiomeInCylinder(server, player.getPosition(1f), 32, Biomes.DESERT);
+		setBiomeInCylinder(server, player.getPosition(1f), 32, 32, Biomes.DESERT);
 		
 		for (int i = 0; i < 1 + (int)(0.5d * intensity); i++) {
 			int offX = random.nextInt(60) - 30;

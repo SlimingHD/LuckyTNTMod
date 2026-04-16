@@ -6,8 +6,8 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -21,21 +21,24 @@ public class GravityTNTEffect extends PrimedTNTEffect {
 		if (!entity.getLevel().isClientSide() && entity.getTNTFuse() < 200) {
 			Level level = entity.getLevel();
 			
-			List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, new AABB(entity.getPos().add(-25d, -25d, -25d), entity.getPos().add(25d, 25d, 25d)), EntitySelector.NO_CREATIVE_OR_SPECTATOR);
-			for (LivingEntity living : entities) {
-				Vec3 movement = living.getDeltaMovement();
-				double x = living.getX() - entity.x();
-				double y = living.getY() - entity.y();
-				double z = living.getZ() - entity.z();
+			List<Entity> entities = level.getEntities((Entity)entity, new AABB(entity.getPos().add(-25d, -25d, -25d), entity.getPos().add(25d, 25d, 25d)), EntitySelector.NO_CREATIVE_OR_SPECTATOR);
+			for (Entity e : entities) {
+				if (e instanceof IExplosiveEntity explosiveEnt && explosiveEnt.getEffect() == this) {
+					continue;
+				}
+				Vec3 movement = e.getDeltaMovement();
+				double x = entity.x() - e.getX();
+				double y = entity.y() - e.getY();
+				double z = entity.z() - e.getZ();
 				double distanceSqr = x * x + y * y + z * z;
 				if (movement.y < 5d) {
 					if (distanceSqr > 4d) {
-						living.setDeltaMovement(new Vec3(x, y, z).normalize().add(0d, 0.1d, 0d));
+						e.addDeltaMovement(new Vec3(x, y, z).normalize().scale(0.1d).add(0d, 0.1d, 0d));
 					} else {
-						living.setDeltaMovement(movement.x, 6d, movement.z);
+						e.setDeltaMovement(movement.x, 6d, movement.z);
 					}
-					if (living instanceof Player) {
-						living.hurtMarked = true;
+					if (e instanceof Player) {
+						e.hurtMarked = true;
 					}
 				}
 			}

@@ -87,7 +87,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> TIMER_TNT = LuckyTNTMod.RH.registerTNTEntity("timer_tnt", new StackedPrimedTNTEffect(new TimerTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.build())));
 	public static final RegistryObject<EntityType<PrimedLTNT>> FLAT_TNT = LuckyTNTMod.RH.registerTNTEntity("flat_tnt", new FlatTNTEffect(() -> BlockRegistry.FLAT_TNT, 18, 9, 80));
 	public static final RegistryObject<EntityType<PrimedLTNT>> MININGFLAT_TNT = LuckyTNTMod.RH.registerTNTEntity("miningflat_tnt", new MiningflatTNTEffect(30, 9));
-	public static final RegistryObject<EntityType<PrimedLTNT>> COMPACT_TNT = LuckyTNTMod.RH.registerTNTEntity("compact_tnt", new StackedPrimedTNTEffect(TNT_X5_EFFECT.fire(true).fuse(120).buildTNT(() -> BlockRegistry.COMPACT_TNT), Collections.singletonList(new CompactTNTEffect(0.1f, 9, () -> BlockRegistry.TNT))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> COMPACT_TNT = LuckyTNTMod.RH.registerTNTEntity("compact_tnt", new StackedPrimedTNTEffect(TNT_X5_EFFECT.fire(true).fuse(120).buildTNT(() -> BlockRegistry.COMPACT_TNT), Collections.singletonList(new CompactTNTEffect(0.2f, 9, () -> BlockRegistry.TNT))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> ANIMAL_TNT = LuckyTNTMod.RH.registerTNTEntity("animal_tnt", new AnimalTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> METEOR_TNT = LuckyTNTMod.RH.registerTNTEntity("meteor_tnt", new DropProjectileTNTEffect(() -> EntityRegistry.METEOR));
 	public static final RegistryObject<EntityType<PrimedLTNT>> SPIRAL_TNT = LuckyTNTMod.RH.registerTNTEntity("spiral_tnt", new SpiralTNTEffect());

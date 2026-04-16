@@ -18,9 +18,9 @@ public class GravityDynamiteEffect extends PrimedTNTEffect {
 		ent.setDeltaMovement(ent.getDeltaMovement().add(0f, 0.08f, 0f));
 		List<Entity> ents = entity.getLevel().getEntities(ent, new AABB(entity.getPos().add(-10f, -10f, -10f), entity.getPos().add(10f, 10f, 10f)));
 		for (Entity entityToPull : ents) {
-			if (!entityToPull.equals(entity.owner()) && !(entityToPull instanceof IExplosiveEntity explosiveEnt && explosiveEnt.getEffect() != this)) {
+			if (!entityToPull.equals(entity.owner()) && !(entityToPull instanceof IExplosiveEntity explosiveEnt && explosiveEnt.getEffect() == this)) {
 				Vec3 direction = entity.getPos().subtract(entityToPull.getPosition(1f)).normalize();
-				entityToPull.setDeltaMovement(direction.scale(1.5f));
+				entityToPull.addDeltaMovement(direction.scale(0.4d));
 			}
 		}
 	}

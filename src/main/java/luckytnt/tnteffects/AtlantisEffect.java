@@ -45,11 +45,13 @@ public class AtlantisEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ServerLevel serverLevel = (ServerLevel)entity.getLevel();
-		LevelEvents.setBiomeInCylinder(serverLevel, entity.getPos(), 100, Biomes.WARM_OCEAN);
+		LevelEvents.setBiomeInCylinder(serverLevel, entity.getPos(), 100, 50, Biomes.WARM_OCEAN);
 		
-		ExplosionHelper.createCylindricalCrater(serverLevel, entity.getPos(), 100, 50, 100f, new StackedExplosionRule(
+		ExplosionHelper.createCylindricalCrater(serverLevel, entity.getPos(), 100, 50, 100f, new FilterOffYExplosionRule(-50, 8,
+			new StackedExplosionRule(
 				new FilterAirExplosionRule(new FilterSurfaceExplosionRule(true, new BlockExplosionRule(Blocks.SAND.defaultBlockState()))),
-				new FilterOffYExplosionRule(-50, 8, new BlockExplosionRule(Blocks.WATER.defaultBlockState()))
+				new BlockExplosionRule(Blocks.WATER.defaultBlockState())
+			)
 		));
 		
 		Registry<Structure> structures = serverLevel.registryAccess().registryOrThrow(Registries.STRUCTURE);
