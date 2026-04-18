@@ -28,8 +28,7 @@ public class InvertedTNTEffect extends PrimedTNTEffect {
 					double x = 30d * viewVec.x + random.nextDouble() * 8d - 4d;
 					double y = 30d * viewVec.y + random.nextDouble() * 8d - 4d;
 					double z = 30d * viewVec.z + random.nextDouble() * 8d - 4d;
-					double magnitude = Math.sqrt(x * x + y * y + z * z);
-					for (double j = 0d; j < magnitude; j += magnitude / 34d) {
+					for (double j = 0d; j <= 1d; j += 1d / 34d) {
 						BlockPos pos = centerPos.offset(Mth.floor(x * j), Mth.floor(y * j), Mth.floor(z * j));
 						BlockState state = level.getBlockState(pos);
 						BlockState stateDown = level.getBlockState(pos.below(60));

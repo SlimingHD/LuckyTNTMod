@@ -43,6 +43,9 @@ public class PrismTNTEffect extends PrimedTNTEffect {
 				tri--;
 			}
 		}
+		
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), size);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

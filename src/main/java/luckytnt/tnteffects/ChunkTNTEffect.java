@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 public class ChunkTNTEffect extends CubicTNTEffect {
 
 	public ChunkTNTEffect() {
-		super(50);
+		super(75, 2000f);
 	}
 	
 	@Override

@@ -33,7 +33,7 @@ public class HailstoneProjectile extends LExplosiveProjectile {
 	public void onHitEntity(EntityHitResult result) {
 		super.onHitEntity(result);
 		if (!level().isClientSide()) {
-			result.getEntity().hurt(LuckyTNTDamageSources.hailstone(level()), 4f);
+			result.getEntity().hurt(LuckyTNTDamageSources.hailStone(level()), 4f);
 		}
 	} 
 }

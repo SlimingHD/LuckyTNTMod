@@ -41,7 +41,7 @@ public class OceanTNTEffect extends PrimedTNTEffect {
 		Level level = entity.getLevel();
 		RandomSource random = level.getRandom();
 
-		ExplosionHelper.legacyCylindricalExplosion(level, entity.getPos(), radius, radiusY, 99.9f, new FilterOffYExplosionRule(-radiusY, 0,
+		ExplosionHelper.createCylindricalCrater(level, entity.getPos(), radius, radiusY, 99.9f, new FilterOffYExplosionRule(-radiusY, 0,
 			new StackedExplosionRule(
 				new FilterBlastResistanceExplosionRule(3.9f, new BlockExplosionRule(Blocks.WATER.defaultBlockState())),
 				LogicExplosionRule.not(

@@ -802,6 +802,9 @@
 	"death.attack.death_ray": "%1$s был расщеплен %2$s",
 	"death.attack.death_ray_no_source": "%1$s был расщеплен",
 	"death.attack.death_ray_no_source.player": "%1$s был расщеплен, сражаясь с %2$s",
+	"death.attack.devoured": "%1$s был сожран %2$s",
+	"death.attack.devoured_no_source": "%1$s был сожран",
+	"death.attack.devoured_no_source.player": "%1$s был сожран, сражаясь с %2$s",
 	
 	"command.ltmdisaster.iceageactive": "Бедствие Ледниковый Период сейчас активно на ",
   	"command.ltmdisaster.iceage": "Началось бедствие Ледниковый Период",

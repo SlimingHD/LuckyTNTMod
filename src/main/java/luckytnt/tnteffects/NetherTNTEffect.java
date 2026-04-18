@@ -57,91 +57,18 @@ import net.minecraft.world.phys.Vec3;
 public class NetherTNTEffect extends PrimedTNTEffect {
 	
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		Level level = ent.getLevel();
-		RandomSource random = level.getRandom();
-		Vec3 pos = new Vec3(ent.x(), level.getMinBuildHeight() + 64, ent.z());
-		int biome = random.nextInt(3);
+	public void serverExplosion(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
+		Vec3 pos = new Vec3(entity.x(), level.getMinBuildHeight() + 64, entity.z());
 		
-		BlockState surface = Blocks.CRIMSON_NYLIUM.defaultBlockState();
-		if (biome == 1) {
-			surface = Blocks.WARPED_NYLIUM.defaultBlockState();
-		} else if (biome == 2) {
-			surface = Blocks.SOUL_SAND.defaultBlockState();
-		}
-		List<Block> validFeatureSurfaces = List.of(Blocks.NETHERRACK, Blocks.SOUL_SOIL, surface.getBlock());
-		
-		Registry<ConfiguredFeature<?, ?>> configuredFeatures = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
-		ConfiguredFeature<?, ?> glowstone = configuredFeatures.get(NetherFeatures.GLOWSTONE_EXTRA);
-		Map<ConfiguredFeature<?, ?>, Float> features = new HashMap<>();
-		if (biome == 0) {
-			features.put(configuredFeatures.get(NetherFeatures.PATCH_CRIMSON_ROOTS), 0.02f);
-			features.put(configuredFeatures.get(TreeFeatures.CRIMSON_FUNGUS), 0.04f);
-			features.put(configuredFeatures.get(NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL), 0.02f);
-		} else if (biome == 1) {
-			features.put(configuredFeatures.get(NetherFeatures.NETHER_SPROUTS_BONEMEAL), 0.02f);
-			features.put(configuredFeatures.get(NetherFeatures.TWISTING_VINES_BONEMEAL), 0.01f);
-			features.put(configuredFeatures.get(TreeFeatures.WARPED_FUNGUS), 0.04f);
-			features.put(configuredFeatures.get(NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL), 0.02f);
-		} else if (biome == 2) {
-			features.put(new ConfiguredFeature<>(Feature.DISK, new DiskConfiguration(RuleBasedBlockStateProvider.simple(Blocks.SOUL_SOIL), BlockPredicate.matchesBlocks(validFeatureSurfaces), UniformInt.of(3, 6), 2)), 0.025f);
-			features.put(configuredFeatures.get(NetherFeatures.PATCH_SOUL_FIRE), 0.01f);
-			features.put(new ConfiguredFeature<>(new NetherFossilFeature(ent), NoneFeatureConfiguration.INSTANCE), 0.001f);
-		}
-		
-		
-		ExplosionHelper.createSphericalCrater(level, ent.getPos(), 40, 200f);
-		
-		ImprovedExplosion explosion1 = new ImprovedExplosion(level, pos, 100);
-		explosion1.doImprovedBlockExplosion(1f, 0.2f, false, true, null);
-		
+		ExplosionHelper.createSphericalCrater(level, pos, 40, 200f);
+
 		ExplosionHelper.createSphericalCrater(level, pos, 100, 200f, new FilterAirExplosionRule(
 			new FilterOffYExplosionRule(-100, 50, new DrainAreaExplosionRule())
 		));
 		
-		ImprovedExplosion explosion2 = new ImprovedExplosion(level, pos, 80);
-		explosion2.doImprovedBlockExplosion(1f, 0.2f, true, false, new FilterAirExplosionRule(
-			new FilterCollidableExplosionRule(new BlockExplosionRule(Blocks.NETHERRACK.defaultBlockState()))
-		));
-		
-		ExplosionHelper.legacyCylindricalExplosion(level, pos.subtract(0d, 40d, 0d), 40, 20, 5f, new FilterOffYExplosionRule(-20, -4, 
-			LogicExplosionRule.not(
-				new FilterAirExplosionRule(new AlwaysExplosionRule()), 
-				new BlockExplosionRule(Blocks.LAVA.defaultBlockState())
-			)
-		));
-		
-		ImprovedExplosion explosion3 = new ImprovedExplosion(level, pos, 80);
-		explosion3.doImprovedBlockExplosion(1f, 0.2f, true, false, new FilterOffYExplosionRule(-80, -10, 
-			FilterBlockExplosionRule.applyOnlyWhen(Blocks.NETHERRACK, 
-				new FilterSurfaceExplosionRule(true, new BlockExplosionRule(surface))
-			)
-		));
-		
-		if (level instanceof ServerLevel server) {
-			ChunkGenerator chunkGenerator = server.getChunkSource().getGenerator();
-			BlockPos centerPos = BlockPos.containing(pos);
-			ImprovedExplosion explosion4 = new ImprovedExplosion(server, null, null, pos.x, pos.y, pos.z, 150).setCustomExplosionEffect((lev, center, blockpos, state) -> {
-				if (validFeatureSurfaces.contains(state.getBlock())) { 
-					BlockPos posAbove = blockpos.above();
-					BlockState stateAbove = lev.getBlockState(posAbove);
-					if (stateAbove.isAir() && blockpos.getY() - centerPos.getY() <= -10) {
-						for (Map.Entry<ConfiguredFeature<?, ?>, Float> entry : features.entrySet()) {
-							if (random.nextFloat() < entry.getValue()) {
-								entry.getKey().place(server, chunkGenerator, random, posAbove);
-							}
-						}
-					}
-					
-					BlockPos posBelow = blockpos.below();
-					BlockState stateBelow = lev.getBlockState(posBelow);
-					if (stateBelow.isAir() && blockpos.getY() - centerPos.getY() >= 10) {
-						glowstone.place(server, chunkGenerator, random, posBelow);
-					}
-				}
-			});
-			explosion4.doImprovedBlockExplosion(1f, 0.2f, true, false, null);
-		}
+		ImprovedExplosion explosion1 = new ImprovedExplosion(level, pos, 100).setExplosionFinishWork(e -> netherExplosionStep2(entity, level, pos));
+		explosion1.doImprovedBlockExplosion(1f, 0.2f, true, false, null);
 	}
 	
 	@Override
@@ -178,7 +105,89 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 		return 180;
 	}
 	
-	public class NetherFossil extends NetherFossilStructure {
+	private static void netherExplosionStep2(IExplosiveEntity entity, Level level, Vec3 pos) {
+		ImprovedExplosion explosion2 = new ImprovedExplosion(level, pos, 80).setExplosionFinishWork(e -> netherExplosionStep3(entity, level, pos));
+		explosion2.doImprovedBlockExplosion(1f, 0.2f, true, false, new FilterAirExplosionRule(
+			new FilterCollidableExplosionRule(new BlockExplosionRule(Blocks.NETHERRACK.defaultBlockState()))
+		));
+	}
+	
+	private static void netherExplosionStep3(IExplosiveEntity entity, Level level, Vec3 pos) {
+		RandomSource random = level.getRandom();
+		
+		int biome = random.nextInt(3);
+		BlockState surface;
+		if (biome == 0) {
+			surface = Blocks.CRIMSON_NYLIUM.defaultBlockState();
+		} else if (biome == 1) {
+			surface = Blocks.WARPED_NYLIUM.defaultBlockState();
+		} else {
+			surface = Blocks.SOUL_SAND.defaultBlockState();
+		}
+		
+		ExplosionHelper.legacyCylindricalExplosion(level, pos.subtract(0d, 40d, 0d), 40, 20, 5f, new FilterOffYExplosionRule(-20, -4, 
+			LogicExplosionRule.not(
+				new FilterAirExplosionRule(new AlwaysExplosionRule()), 
+				new BlockExplosionRule(Blocks.LAVA.defaultBlockState())
+			)
+		));
+		
+		ImprovedExplosion explosion3 = new ImprovedExplosion(level, pos, 80).setExplosionFinishWork(e -> netherExplosionStep4(entity, level, random, pos, biome, surface));
+		explosion3.doImprovedBlockExplosion(1f, 0.2f, false, false, new FilterOffYExplosionRule(-80, -10, 
+			FilterBlockExplosionRule.applyOnlyWhen(Blocks.NETHERRACK, 
+				new FilterSurfaceExplosionRule(true, new BlockExplosionRule(surface))
+			)
+		));
+	}
+	
+	private static void netherExplosionStep4(IExplosiveEntity entity, Level level, RandomSource random, Vec3 pos, int biome, BlockState surface) {
+		if (level instanceof ServerLevel server) {
+			List<Block> validFeatureSurfaces = List.of(Blocks.NETHERRACK, Blocks.SOUL_SOIL, surface.getBlock());
+			
+			Registry<ConfiguredFeature<?, ?>> configuredFeatures = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
+			ConfiguredFeature<?, ?> glowstone = configuredFeatures.get(NetherFeatures.GLOWSTONE_EXTRA);
+			Map<ConfiguredFeature<?, ?>, Float> features = new HashMap<>();
+			if (biome == 0) {
+				features.put(configuredFeatures.get(NetherFeatures.PATCH_CRIMSON_ROOTS), 0.02f);
+				features.put(configuredFeatures.get(TreeFeatures.CRIMSON_FUNGUS), 0.04f);
+				features.put(configuredFeatures.get(NetherFeatures.CRIMSON_FOREST_VEGETATION_BONEMEAL), 0.02f);
+			} else if (biome == 1) {
+				features.put(configuredFeatures.get(NetherFeatures.NETHER_SPROUTS_BONEMEAL), 0.02f);
+				features.put(configuredFeatures.get(NetherFeatures.TWISTING_VINES_BONEMEAL), 0.01f);
+				features.put(configuredFeatures.get(TreeFeatures.WARPED_FUNGUS), 0.04f);
+				features.put(configuredFeatures.get(NetherFeatures.WARPED_FOREST_VEGETATION_BONEMEAL), 0.02f);
+			} else if (biome == 2) {
+				features.put(new ConfiguredFeature<>(Feature.DISK, new DiskConfiguration(RuleBasedBlockStateProvider.simple(Blocks.SOUL_SOIL), BlockPredicate.matchesBlocks(validFeatureSurfaces), UniformInt.of(3, 6), 2)), 0.025f);
+				features.put(configuredFeatures.get(NetherFeatures.PATCH_SOUL_FIRE), 0.01f);
+				features.put(new ConfiguredFeature<>(new NetherFossilFeature(entity), NoneFeatureConfiguration.INSTANCE), 0.001f);
+			}
+			
+			ChunkGenerator chunkGenerator = server.getChunkSource().getGenerator();
+			BlockPos centerPos = BlockPos.containing(pos);
+			ImprovedExplosion explosion4 = new ImprovedExplosion(server, null, null, pos.x, pos.y, pos.z, 150).setCustomExplosionEffect((lev, center, blockpos, state) -> {
+				if (validFeatureSurfaces.contains(state.getBlock())) { 
+					BlockPos posAbove = blockpos.above();
+					BlockState stateAbove = lev.getBlockState(posAbove);
+					if (stateAbove.isAir() && blockpos.getY() - centerPos.getY() <= -10) {
+						for (Map.Entry<ConfiguredFeature<?, ?>, Float> entry : features.entrySet()) {
+							if (random.nextFloat() < entry.getValue()) {
+								entry.getKey().place(server, chunkGenerator, random, posAbove);
+							}
+						}
+					}
+					
+					BlockPos posBelow = blockpos.below();
+					BlockState stateBelow = lev.getBlockState(posBelow);
+					if (stateBelow.isAir() && blockpos.getY() - centerPos.getY() >= 10 && random.nextFloat() < 0.005f) {
+						glowstone.place(server, chunkGenerator, random, posBelow);
+					}
+				}
+			});
+			explosion4.doImprovedBlockExplosion(1f, 0.2f, true, false, null);
+		}
+	}
+	
+	public static class NetherFossil extends NetherFossilStructure {
 		
 		private final BlockPos pos;
 		
@@ -195,7 +204,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 		}
 	}
 	
-	public class NetherFossilFeature extends Feature<NoneFeatureConfiguration> {
+	public static class NetherFossilFeature extends Feature<NoneFeatureConfiguration> {
 		
 		private final IExplosiveEntity entity;
 		

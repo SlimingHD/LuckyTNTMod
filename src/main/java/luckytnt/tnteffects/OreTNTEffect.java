@@ -11,6 +11,7 @@ import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -53,7 +54,7 @@ public class OreTNTEffect extends PrimedTNTEffect {
 		RandomSource random = level.getRandom();
 		
 		if (ORES == null) {
-			ORES = level.registryAccess().registryOrThrow(Registries.BLOCK).getOrCreateTag(Tags.Blocks.ORES).stream().toArray(l -> new Block[l]);
+			ORES = level.registryAccess().registryOrThrow(Registries.BLOCK).getOrCreateTag(Tags.Blocks.ORES).stream().map(Holder<Block>::value).toArray(Block[]::new);
 		}
 		
 		List<BlockPos> positions = null;

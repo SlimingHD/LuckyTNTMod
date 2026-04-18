@@ -801,6 +801,9 @@
 	"death.attack.death_ray": "%1$s was obliterated by %2$s",
 	"death.attack.death_ray_no_source": "%1$s was obliterated",
 	"death.attack.death_ray_no_source.player": "%1$s was obliterated whilst fighting %2$s",
+	"death.attack.devoured": "%1$s was devoured by %2$s",
+	"death.attack.devoured_no_source": "%1$s was devoured",
+	"death.attack.devoured_no_source.player": "%1$s was devoured whilst fighting %2$s",
 	
 	"command.ltmdisaster.iceageactive": "Disaster Ice Age currently active for ",
   	"command.ltmdisaster.iceage": "Started the disaster Ice Age",

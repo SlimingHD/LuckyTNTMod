@@ -12,6 +12,7 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -19,6 +20,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class PumpkinBombEffect extends PrimedTNTEffect {
 
@@ -27,8 +30,20 @@ public class PumpkinBombEffect extends PrimedTNTEffect {
 		Level level = entity.getLevel();
 		RandomSource random = level.getRandom();
 
+		if (level instanceof ServerLevel server) {
+			server.setDayTime(18000);
+		}
+		
 		ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity) entity, entity.getPos(), 10);
 		explosion.doEntityExplosion(1.5f, true);
+		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
+		explosion.setCustomExplosionEffect((lev, center, pos, state) -> {
+			if (state.isCollisionShapeFullBlock(lev, pos) && random.nextFloat() < 0.1f) {
+				Block block = random.nextBoolean() ? Blocks.CARVED_PUMPKIN : Blocks.JACK_O_LANTERN;
+				lev.setBlockAndUpdate(pos, block.defaultBlockState().setValue(BlockStateProperties.HORIZONTAL_FACING, RedstoneTNTEffect.getRandomDirectionHorizontal(random)));
+				state.getBlock().wasExploded(lev, pos, explosion);
+			}
+		});
 		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
 		explosion.spawnExplosionParticles();
 

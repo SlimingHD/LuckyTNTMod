@@ -27,6 +27,7 @@ public class ParticlePhysicsTNTEffect extends PrimedTNTEffect {
 			try {
 				FallingBlockEntity block = CustomFireworkEffect.CONSTRUCTOR.newInstance(lev, pos.getX() + 0.5d, pos.getY(), pos.getZ() + 0.5d, state);
 				block.setDeltaMovement(random.nextDouble() * 4d - 2d, 1d + random.nextDouble() * 3d, random.nextDouble() * 4d - 2d);
+				block.dropItem = false;
 				lev.addFreshEntity(block);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 				e.printStackTrace();

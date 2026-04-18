@@ -3,12 +3,14 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.ImprovedExplosion;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
+import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
+import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class SnowTNTEffect extends PrimedTNTEffect {
 
@@ -18,18 +20,14 @@ public class SnowTNTEffect extends PrimedTNTEffect {
 		this.strength = strength;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(entity.getLevel());
-		ExplosionHelper.customSurfaceExplosion(entity.getLevel(), entity.getPos(), strength, (level, center, b, s) -> {
-			BlockPos pos = b.above();
-			BlockState state = level.getBlockState(pos);
-			if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) < 100f && Blocks.SNOW.canSurvive(state, level, pos)) {
-				level.setBlockAndUpdate(pos, Blocks.SNOW.defaultBlockState());
-				state.getBlock().wasExploded(level, pos, dummy);
-			}
-		});
+		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), strength, 99f, new FilterSurfaceExplosionRule(false, 
+			LogicExplosionRule.not(
+				new FilterCollidableExplosionRule(new AlwaysExplosionRule()), 
+				new CanSurviveExplosionRule(Blocks.SNOW.defaultBlockState())
+			)
+		));
 	}
 
 	@Override

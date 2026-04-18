@@ -69,7 +69,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> BRICK_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("brickhouse_tnt", new HouseTNTEffect(() -> BlockRegistry.BRICK_HOUSE_TNT, "brickhouse", -5, -3));
 	public static final RegistryObject<EntityType<PrimedLTNT>> DIGGING_TNT = LuckyTNTMod.RH.registerTNTEntity("digging_tnt", new DiggingTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> DRILLING_TNT = LuckyTNTMod.RH.registerTNTEntity("drilling_tnt", new DrillingTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> SPHERE_TNT = LuckyTNTMod.RH.registerTNTEntity("sphere_tnt", new SphereTNTEffect(() -> BlockRegistry.SPHERE_TNT, 9, 100));
+	public static final RegistryObject<EntityType<PrimedLTNT>> SPHERE_TNT = LuckyTNTMod.RH.registerTNTEntity("sphere_tnt", new SphereTNTEffect(() -> BlockRegistry.SPHERE_TNT, 9, 99f));
 	public static final RegistryObject<EntityType<PrimedLTNT>> FLOATING_ISLAND = LuckyTNTMod.RH.registerTNTEntity("floating_island", new FloatingIslandEffect(20));
 	public static final RegistryObject<EntityType<PrimedLTNT>> OCEAN_TNT = LuckyTNTMod.RH.registerTNTEntity("ocean_tnt", new OceanTNTEffect(() -> BlockRegistry.OCEAN_TNT, 30, 10, 10));
 	public static final RegistryObject<EntityType<PrimedLTNT>> HELLFIRE_TNT = LuckyTNTMod.RH.registerTNTEntity("hellfire_tnt", new HellfireTNTEffect(20, 5));
@@ -265,7 +265,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> DEATH_RAY = LuckyTNTMod.RH.registerTNTEntity("death_ray", new DeathRayEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> DOOMSDAY = LuckyTNTMod.RH.registerTNTEntity("doomsday", new DisasterTNTEffect("doomsday", true));
 	public static final RegistryObject<EntityType<PrimedLTNT>> FIERY_HELL = LuckyTNTMod.RH.registerTNTEntity("fiery_hell", new FieryHellEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> STONE_COLD = LuckyTNTMod.RH.registerTNTEntity("stone_cold", new StoneColdEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> STONE_COLD = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "stone_cold", () -> EntityType.Builder.<PrimedLTNT>of((l, t) -> new PrimedOreTNT(l, t, new StoneColdEffect()), MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("stone_cold"));
 	public static final RegistryObject<EntityType<PrimedLTNT>> JUNGLE_TNT = LuckyTNTMod.RH.registerTNTEntity("jungle_tnt", new JungleTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> JUMPING_TNT = LuckyTNTMod.RH.registerTNTEntity("jumping_tnt", new JumpingTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> WASTELAND_TNT = LuckyTNTMod.RH.registerTNTEntity("wasteland_tnt", new WastelandTNTEffect());

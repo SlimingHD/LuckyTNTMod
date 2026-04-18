@@ -34,9 +34,9 @@ public class PulseTNTEffect extends PrimedTNTEffect {
 				}
 			}
 		}
-		if (entity.getTNTFuse() < 205) {
-			((Entity)entity).setDeltaMovement(0d, 0d, 0d);
-			((Entity)entity).setPos(((Entity)entity).getPosition(0f));
+		if (entity.getTNTFuse() < 205 && entity instanceof Entity ent) {
+			ent.setDeltaMovement(0d, 0d, 0d);
+			ent.setPos(ent.getPosition(0f));
 		}
 	}
 	

@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.Block;
 public class HexahedronEffect extends CubicTNTEffect {
 
 	public HexahedronEffect() {
-		super(25);
+		super(25, 200f);
 	}
 
 	@Override

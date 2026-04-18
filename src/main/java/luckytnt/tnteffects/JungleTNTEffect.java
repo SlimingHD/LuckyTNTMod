@@ -55,7 +55,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 		ExplosionHelper.createSphericalCrater(level, entity.getPos(), 150, 99.9f, new FilterSurfaceExplosionRule(true, 
 			LogicExplosionRule.not(
 				new OffsetExplosionRule(1, new FilterLiquidExplosionRule(new AlwaysExplosionRule())), 
-				new BlockExplosionRule(Blocks.GRASS.defaultBlockState())
+				new BlockExplosionRule(Blocks.GRASS_BLOCK.defaultBlockState())
 			)
 		));
 		
@@ -75,6 +75,9 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 				int offX = pos.getX() - centerPos.getX();
 				int offZ = pos.getZ() - centerPos.getZ();
 				BlockPos posAbove = pos.above();
+				if (!lev.getBlockState(posAbove).isAir()) {
+					return;
+				}
 				if (offX % 30 == 0 && offZ % 30 == 0) {
 					melonPatch.place(server, chunkGenerator, random, posAbove);
 				}

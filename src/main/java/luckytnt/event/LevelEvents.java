@@ -129,12 +129,13 @@ public class LevelEvents {
 		int secY = Mth.floor(center.y()) >> 4;
 		int secZ = Mth.floor(center.z()) >> 4;
 		int maxDistanceSqr = radius * radius;
-		int secRadius = radiusY >> 4;
+		int secRadius = radius >> 4;
+		int secRadiusY = radiusY >> 4;
 		for (int offX = -secRadius; offX <= secRadius; offX++) {
 			for (int offZ = -secRadius; offZ <= secRadius; offZ++) {
 				LevelChunk chunk = server.getChunk(secX + offX, secZ + offZ);
 				boolean needsUpdate = false;
-				for (int offY = -secRadius; offY <= secRadius; offY++) {
+				for (int offY = -secRadiusY; offY <= secRadiusY; offY++) {
 					int index = chunk.getSectionIndexFromSectionY(secY + offY);
 					if (index >= 0 && index < chunk.getSectionsCount()) {
 						LevelChunkSection section = chunk.getSection(index);

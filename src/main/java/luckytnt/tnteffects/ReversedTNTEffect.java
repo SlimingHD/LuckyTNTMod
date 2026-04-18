@@ -5,9 +5,9 @@ import java.util.List;
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.rules.MirrorExplosionRule;
+import luckytnt.rules.UpsideDownBlockExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.explosions.rules.OffsetExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -22,7 +22,7 @@ public class ReversedTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity ent) {
 		ExplosionHelper.legacySphericalExplosion(ent.getLevel(), ent.getPos().add(0, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0), 30, 200f, new MirrorExplosionRule(List.of(Axis.Y), 
 			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 
-				new FilterBlastResistanceExplosionRule(200f, new CopyBlockExplosionRule())
+				new FilterBlastResistanceExplosionRule(200f, new UpsideDownBlockExplosionRule())
 			)
 		));
 	}

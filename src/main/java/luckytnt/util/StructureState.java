@@ -92,7 +92,7 @@ public enum StructureState implements StringRepresentable {
 		return new JigsawStructure(villageSettings(entity), templatePools.getHolderOrThrow(TaigaVillagePools.START), 6, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), true);
 	}),
 	ANCIENT_CITY("ancient_city", (entity, templatePools) -> {
-		return new JigsawStructure(settings(entity, StructureState.ANCIENT_CITY_OVERRIDES, GenerationStep.Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.BEARD_BOX), templatePools.getHolderOrThrow(AncientCityStructurePieces.START), Optional.of(new ResourceLocation("city_anchor")), 7, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), false, Optional.empty(), 116);
+		return new JigsawStructure(settings(entity, StructureState.ANCIENT_CITY_OVERRIDES, GenerationStep.Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.BEARD_BOX), templatePools.getHolderOrThrow(AncientCityStructurePieces.START), Optional.of(new ResourceLocation("city_anchor")), 7, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y() + 24)), false, Optional.empty(), 116);
 	}),
 	TRAIL_RUINS("trail_ruins", (entity, templatePools) -> {
 		return new JigsawStructure(settings(entity, Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.BURY), templatePools.getHolderOrThrow(TrailRuinsStructurePools.START), 7, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), false);

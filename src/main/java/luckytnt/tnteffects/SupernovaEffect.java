@@ -11,7 +11,7 @@ import net.minecraft.world.entity.LightningBolt;
 public class SupernovaEffect extends SphereTNTEffect {
 
 	public SupernovaEffect() {
-		super(() -> BlockRegistry.SUPERNOVA, 200, 5000);
+		super(() -> BlockRegistry.SUPERNOVA, 200, 5000f);
 	}
 
 	@Override

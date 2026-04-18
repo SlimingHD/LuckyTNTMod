@@ -7,6 +7,7 @@ import org.joml.Vector3f;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EffectRegistry;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
@@ -34,7 +35,10 @@ public class NuclearTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), strength);
 		explosion.doEntityExplosion(strength / 10f, true);
-		explosion.doImprovedBlockExplosion(1f, 1f, false, false, FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new AlwaysExplosionRule()));
+		explosion.doImprovedBlockExplosion(1f, 1f, false, false, null);
+		
+		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), strength * 3, 99f, FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.SWORD_EFFICIENT)).build(new AlwaysExplosionRule()));
+		
 		explosion.doImprovedBlockExplosion(1f, 1f, false, false, new FilterSurfaceExplosionRule(false, new FilterRandomExplosionRule(1f / 3f, new CanSurviveExplosionRule(BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState()))));
 		explosion.spawnExplosionParticles();
 		

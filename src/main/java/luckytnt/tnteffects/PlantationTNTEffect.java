@@ -71,7 +71,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			}
 		}
 		
-		int[] waterDistances = new int[]{7 * 7, 8 * 8, 15 * 15, 16 * 16, 23 * 23, 24 * 24, 31 * 31, 32 * 32, 39 * 39, 40 * 40};
+		int[] waterDistances = new int[]{0, 7 * 7, 8 * 8, 15 * 15, 16 * 16, 23 * 23, 24 * 24, 31 * 31, 32 * 32, 39 * 39, 40 * 40};
 		for (Pair<BlockPos, Integer> pair : placedCrops) {
 			int distanceSqr = pair.getSecond();
 			boolean placeWater = false;

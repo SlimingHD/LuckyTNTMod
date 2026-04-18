@@ -10,14 +10,20 @@ import net.minecraft.world.level.block.Block;
 public class CubicTNTEffect extends PrimedTNTEffect {
 	
 	private final int strength;
+	private final float maxResistance;
+	
+	public CubicTNTEffect(int strength, float maxResistance) {
+		this.strength = strength;
+		this.maxResistance = maxResistance;
+	}
 	
 	public CubicTNTEffect(int strength) {
-		this.strength = strength;
+		this(strength, 99f);
 	}
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.createCubicalCrater(entity.getLevel(), entity.getPos(), strength, 99f);
+		ExplosionHelper.createCubicalCrater(entity.getLevel(), entity.getPos(), strength, maxResistance);
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), strength);
 		particleExplosion.spawnExplosionParticles();
 	}

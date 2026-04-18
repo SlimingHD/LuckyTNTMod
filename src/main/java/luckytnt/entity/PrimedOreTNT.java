@@ -5,6 +5,7 @@ import java.util.List;
 
 import luckytnt.tnteffects.OreTNTEffect;
 import luckytntlib.entity.PrimedLTNT;
+import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
@@ -15,5 +16,9 @@ public class PrimedOreTNT extends PrimedLTNT {
 	
 	public PrimedOreTNT(EntityType<PrimedLTNT> type, Level level) {
 		super(type, level, new OreTNTEffect());
+	}
+	
+	public PrimedOreTNT(EntityType<PrimedLTNT> type, Level level, PrimedTNTEffect effect) {
+		super(type, level, effect);
 	}
 }

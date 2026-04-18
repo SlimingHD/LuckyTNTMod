@@ -47,7 +47,7 @@ public class AnimalKingdomEffect extends PrimedTNTEffect {
 		for (Mob mob : mobList) {
 			int x = random.nextInt(101) - 50 + Mth.floor(entity.x());
 			int z = random.nextInt(101) - 50 + Mth.floor(entity.z());
-			BlockPos pos = new BlockPos(x, LevelEvents.getTopBlock(serverLevel, x, z, false), z);
+			BlockPos pos = new BlockPos(x, LevelEvents.getTopBlock(serverLevel, x, z, false) + 1, z);
 			mob.setPos(Vec3.atBottomCenterOf(pos));
 			ForgeEventFactory.onFinalizeSpawn(mob, (ServerLevel)serverLevel, serverLevel.getCurrentDifficultyAt(pos), MobSpawnType.MOB_SUMMONED, null, null);
 			serverLevel.addFreshEntity(mob);

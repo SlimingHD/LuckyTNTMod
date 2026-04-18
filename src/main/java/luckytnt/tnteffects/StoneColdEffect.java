@@ -1,9 +1,11 @@
 package luckytnt.tnteffects;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.joml.Vector3f;
 
+import luckytnt.entity.PrimedOreTNT;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -33,6 +35,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.Tags;
 
 public class StoneColdEffect extends PrimedTNTEffect {
 
@@ -41,22 +44,7 @@ public class StoneColdEffect extends PrimedTNTEffect {
 		Level level = entity.getLevel();
 		if (level instanceof ServerLevel server) {
 			server.setDayTime(server.getDayTime() + 200);
-			
-			ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(server);
-			RandomSource random = server.getRandom();
-			BlockPos entPos = BlockPos.containing(entity.getPos());
-			for (int count = 0; count < 7; count++) {
-				int offX = random.nextInt(16) - 30;
-				int offY = random.nextInt(16) - 30;
-				int offZ = random.nextInt(16) - 30;
-				BlockPos pos = entPos.offset(offX, offY, offZ);
-				BlockState state = server.getBlockState(pos);
-				if (state.getExplosionResistance(server, pos, dummy) < 100 && state.isCollisionShapeFullBlock(server, pos)) {
-					server.setBlock(pos, Blocks.BLUE_ICE.defaultBlockState(), 3);
-					state.getBlock().wasExploded(server, pos, dummy);
-					server.playSound(null, entPos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 0.5f, 1);
-				}
-			}
+			tryPlaceStone(entity, 15, 100);
 		}
 	}
 	
@@ -102,5 +90,47 @@ public class StoneColdEffect extends PrimedTNTEffect {
 	@Override
 	public int getDefaultFuse(IExplosiveEntity entity) {
 		return 140;
+	}
+	
+	@SuppressWarnings("deprecation")
+	private static void tryPlaceStone(IExplosiveEntity entity, int maxStone, int maxAttempts) {
+		Level level = entity.getLevel();
+		RandomSource random = level.getRandom();
+		
+		List<BlockPos> positions = null;
+		if (entity instanceof PrimedOreTNT tnt) {
+			positions = tnt.availablePos;
+		} else {
+			return;
+		}
+		
+		if (positions.size() == 0) {
+			calculateAvailablePositions(entity, positions);
+		}
+		
+		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
+		int placedOres = 0;
+		int attempts = 0;
+		while (placedOres < maxStone && attempts < maxAttempts) {
+			BlockPos pos = positions.remove(random.nextInt(positions.size()));
+			BlockState state = level.getBlockState(pos);
+			if (!state.isAir() && !state.is(Tags.Blocks.ORES) && Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) < 100f && state.isCollisionShapeFullBlock(level, pos)) {
+				level.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState());
+				state.getBlock().wasExploded(level, pos, dummy);
+				level.playSound(null, pos, SoundEvents.STONE_PLACE, SoundSource.BLOCKS, 1f, 1f);
+				placedOres++;
+			}
+			attempts++;
+		}
+	}
+	
+	private static void calculateAvailablePositions(IExplosiveEntity entity, List<BlockPos> list) {
+		LinkedList<BlockPos> availablePositions = new LinkedList<>();
+		ExplosionHelper.customSphericalExplosion(entity.getLevel(), entity.getPos(), 15, (lev, center, pos, state) -> {
+			if (!state.isAir() && !state.is(Tags.Blocks.STONE) && state.isCollisionShapeFullBlock(lev, pos)) {
+				availablePositions.add(pos);
+			}
+		});
+		list.addAll(availablePositions);
 	}
 }

@@ -43,10 +43,10 @@ public class ItemFireworkEffect extends PrimedTNTEffect {
 		try {
 			for (Field field : BoatItem.class.getDeclaredFields()) {
 				field.setAccessible(true);
-				if (field.getDeclaringClass() == Boat.Type.class) {
+				if (field.getType() == Boat.Type.class) {
 					TYPE_FIELD = field;
 				}
-				if (field.getDeclaringClass() == boolean.class) {
+				if (field.getType() == boolean.class) {
 					CHEST_FIELD = field;
 				}
 			}

@@ -5,11 +5,14 @@ import java.util.List;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.tags.BlockTags;
@@ -47,8 +50,11 @@ public class IcyTNTEffect extends PrimedTNTEffect {
 			)
 		));
 		
-		ExplosionHelper.legacyCylindricalExplosion(entity.getLevel(), entity.getPos(), 40, 40, 100f, new FilterSurfaceExplosionRule(true, 
-			new CanSurviveExplosionRule(Blocks.SNOW.defaultBlockState())
+		ExplosionHelper.legacyCylindricalExplosion(entity.getLevel(), entity.getPos(), 40, 40, 100f, new FilterSurfaceExplosionRule(false, 
+			LogicExplosionRule.not(
+				new FilterCollidableExplosionRule(new AlwaysExplosionRule()), 
+				new CanSurviveExplosionRule(Blocks.SNOW.defaultBlockState())
+			)
 		));
 	}
 	

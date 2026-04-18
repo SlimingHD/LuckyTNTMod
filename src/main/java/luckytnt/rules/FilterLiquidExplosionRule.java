@@ -36,10 +36,12 @@ public class FilterLiquidExplosionRule implements ExplosionRule {
 
 	@Override
 	public JsonObject encode(JsonObject root) {
+		root.addProperty("type", RESOURCE_LOCATION.toString());
+		root.add("rule", rule.encode(new JsonObject()));
 		return root;
 	}
 
 	public static ExplosionRule decode(JsonObject root) {
-		return new FilterLiquidExplosionRule(null);
+		return new FilterLiquidExplosionRule(ExplosionRule.parse(root.get("rule").getAsJsonObject()));
 	}
 }

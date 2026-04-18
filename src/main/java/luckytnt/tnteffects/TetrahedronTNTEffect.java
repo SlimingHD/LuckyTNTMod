@@ -16,9 +16,10 @@ import net.minecraft.world.phys.Vec3;
 
 public class TetrahedronTNTEffect extends PrimedTNTEffect {
 
-	private static final float RADIUS = (float)Math.sqrt(2d) * 0.5f;
+	public static final float RADIUS = (float)Math.sqrt(2d) * 0.5f;
+	public static final double DEG_TO_RAD = Math.PI / 180d;
+	
 	private static final float HEIGHT = (float)Math.sqrt(2d) * RADIUS;
-	private static final double DEG_TO_RAD = Math.PI / 180d;
 	private static final double THETA = (Math.PI * 2d) / 3d;
 	private static final Vector3f COLOR = new Vector3f(1f, 0.42f, 0f);
 
@@ -57,6 +58,9 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 				}
 			}
 		});
+		
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 30);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

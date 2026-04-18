@@ -13,6 +13,7 @@ import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
+import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -31,9 +32,11 @@ public class WinterTNTEffect extends PrimedTNTEffect {
 			)
 		);
 		
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 150, 200f, LogicExplosionRule.not(
-			new FilterCollidableExplosionRule(new AlwaysExplosionRule()), 
-			new CanSurviveExplosionRule(Blocks.SNOW.defaultBlockState())
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 150, 200f, new FilterSurfaceExplosionRule(false, 
+			LogicExplosionRule.not(
+				new FilterCollidableExplosionRule(new AlwaysExplosionRule()), 
+				new CanSurviveExplosionRule(Blocks.SNOW.defaultBlockState())
+			)
 		));
 	}
 	

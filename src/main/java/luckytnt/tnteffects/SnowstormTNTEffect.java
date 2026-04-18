@@ -64,7 +64,7 @@ public class SnowstormTNTEffect extends PrimedTNTEffect {
 		if (!level.isClientSide() && entity.getTNTFuse() % 4 == 0) {
 			Vector3f vec = new Vector3f(0.5f, 1f, 0f);
 			for (int i = 0; i < 8; i++) {
-				Snowball ball = new Snowball(level, entity.x() + 0.5d + vec.x, entity.y() + vec.y, entity.z() + vec.z);
+				Snowball ball = new Snowball(level, entity.x() + vec.x, entity.y() + vec.y, entity.z() + vec.z);
 				ball.shoot(vec.x, vec.y, vec.z, 1f, 5f);
 				level.addFreshEntity(ball);
 				vec.rotate(QUAT);

@@ -53,6 +53,8 @@ public class HellfireTNTEffect extends PrimedTNTEffect {
 			level.playSound(ghast, ghast.blockPosition(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 3f, 1f);
 			level.addFreshEntity(ghast);
 		}
+		
+		explosion.spawnExplosionParticles();
 	}
 	
 	@Override

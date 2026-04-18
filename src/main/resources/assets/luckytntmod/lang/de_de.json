@@ -800,6 +800,9 @@
 	"death.attack.death_ray": "%1$s wurde von %2$s vernichtet",
 	"death.attack.death_ray_no_source": "%1$s wurde vernichtet",
 	"death.attack.death_ray_no_source.player": "%1$s wurde im Kampf gegen %2$s vernichtet",
+	"death.attack.devoured": "%1$s wurde von %2$s verschlungen",
+	"death.attack.devoured_no_source": "%1$s wurde verschlungen",
+	"death.attack.devoured_no_source.player": "%1$s wurde im Kampf gegen %2$s verschlungen",
 	
 	"command.ltmdisaster.iceageactive": "Desaster Eiszeit ist noch aktiv f\u00fcr ",
   	"command.ltmdisaster.iceage": "Das Desaster Eiszeit wurde gestartet",

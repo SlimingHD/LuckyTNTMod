@@ -1,5 +1,7 @@
 package luckytnt.tnteffects;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InaccessibleObjectException;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.SinglePieceStructure;
@@ -79,13 +82,12 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 	
 	public static class Mineshaft extends MineshaftStructure {
 		
-		private final int x, y, z;
+		private final int x, z;
 		private final MineshaftStructure.Type type;
 		
 		private Mineshaft(Structure.StructureSettings settings, IExplosiveEntity entity, MineshaftStructure.Type mineshaftType) {
 			super(settings, mineshaftType);
 			x = Mth.floor(entity.x());
-			y = Mth.floor(entity.y());
 			z = Mth.floor(entity.z());
 			type = mineshaftType;
 		}
@@ -96,16 +98,30 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 		
 		@Override
 		public Optional<Structure.GenerationStub> findGenerationPoint(Structure.GenerationContext ctx) {
+			BlockPos blockpos = new BlockPos(x, 50, z);
 			StructurePiecesBuilder builder = new StructurePiecesBuilder();
-			generatePieces(builder, ctx);
-			return Optional.of(new Structure.GenerationStub(new BlockPos(x, y, z), Either.right(builder)));
+			int i = generatePiecesAndAdjust(builder, ctx);
+			return Optional.of(new Structure.GenerationStub(blockpos.offset(0, i, 0), Either.right(builder)));
 		}
 
-		private void generatePieces(StructurePiecesBuilder builder, Structure.GenerationContext ctx) {
-			WorldgenRandom random = ctx.random();
-			MineshaftPieces.MineShaftRoom mineshaftroom = new MineshaftPieces.MineShaftRoom(0, random, x, z, type);
-			builder.addPiece(mineshaftroom);
-			mineshaftroom.addChildren(mineshaftroom, builder, random);
+		@SuppressWarnings("deprecation")
+		private int generatePiecesAndAdjust(StructurePiecesBuilder builder, Structure.GenerationContext ctx) {
+			WorldgenRandom worldgenrandom = ctx.random();
+			ChunkGenerator chunkgenerator = ctx.chunkGenerator();
+			MineshaftPieces.MineShaftRoom mineshaftpieces$mineshaftroom = new MineshaftPieces.MineShaftRoom(0, worldgenrandom, x, z, type);
+			builder.addPiece(mineshaftpieces$mineshaftroom);
+			mineshaftpieces$mineshaftroom.addChildren(mineshaftpieces$mineshaftroom, builder, worldgenrandom);
+			int i = chunkgenerator.getSeaLevel();
+			if (type == MineshaftStructure.Type.MESA) {
+				BlockPos blockpos = builder.getBoundingBox().getCenter();
+				int j = chunkgenerator.getBaseHeight(blockpos.getX(), blockpos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, ctx.heightAccessor(), ctx.randomState());
+				int k = j <= i ? i : Mth.randomBetweenInclusive(worldgenrandom, i, j);
+				int l = k - blockpos.getY();
+				builder.offsetPiecesVertically(l);
+				return l;
+			} else {
+				return builder.moveBelowSeaLevel(i, chunkgenerator.getMinY(), worldgenrandom, 10);
+			}
 		}
 	}
 	
@@ -222,6 +238,7 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 			}));
 		}
 
+		@SuppressWarnings("deprecation")
 		private void generatePieces(StructurePiecesBuilder builder, Structure.GenerationContext ctx) {
 			int i = 0;
 
@@ -240,13 +257,31 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 					StructurePiece structurepiece = list.remove(j);
 					structurepiece.addChildren(startPiece, builder, ctx.random());
 				}
+				
+		        builder.moveBelowSeaLevel(ctx.chunkGenerator().getSeaLevel(), ctx.chunkGenerator().getMinY(), ctx.random(), 10);
 			} while (builder.isEmpty() || startPiece.portalRoomPiece == null);
 		}
 	}
 	
 	public static class Monument extends OceanMonumentStructure {
 		
+		private static Field CHILDREN;
+		
 		private final int x, y, z;
+		
+		static {
+			try {
+				for (Field field : OceanMonumentPieces.MonumentBuilding.class.getDeclaredFields()) {
+					field.setAccessible(true);
+					if (field.getType() == List.class) {
+						CHILDREN = field;
+						break;
+					}
+				}
+			} catch (SecurityException | IllegalArgumentException | InaccessibleObjectException e) {
+				e.printStackTrace();
+			}
+		}
 		
 		public Monument(Structure.StructureSettings settings, IExplosiveEntity entity) {
 			super(settings);
@@ -266,12 +301,25 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 			builder.addPiece(createTopPiece(ctx.random()));
 		}
 
+		@SuppressWarnings("unchecked")
 		private StructurePiece createTopPiece(WorldgenRandom rand) {
 			int i = x - 29;
 			int j = z - 29;
 			Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(rand);
 			StructurePiece piece = new OceanMonumentPieces.MonumentBuilding(rand, i, j, direction);
 			piece.move(0, y - 39, 0);
+			
+			List<? extends StructurePiece> children = List.of();
+			try {
+				children = (List<? extends StructurePiece>)CHILDREN.get(piece);
+			} catch (NullPointerException | ExceptionInInitializerError | IllegalArgumentException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			
+			for (StructurePiece p : children) {
+				p.move(0, y - 39, 0);
+			}
+			
 			return piece;
 		}
 	}
@@ -314,6 +362,7 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 			}));
 		}
 
+		@SuppressWarnings("deprecation")
 		private void generatePieces(StructurePiecesBuilder builder, Structure.GenerationContext ctx) {
 			NetherFortressPieces.StartPiece startPiece = new NetherFortressPieces.StartPiece(ctx.random(), x, z);
 			builder.addPiece(startPiece);
@@ -325,6 +374,8 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 				StructurePiece structurepiece = list.remove(i);
 				structurepiece.addChildren(startPiece, builder, ctx.random());
 			}
+			
+			builder.moveInsideHeights(ctx.random(), y - 11, y + 11);
 		}
 	}
 	

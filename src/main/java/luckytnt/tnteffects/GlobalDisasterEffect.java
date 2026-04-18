@@ -10,7 +10,7 @@ import net.minecraft.util.Mth;
 public class GlobalDisasterEffect extends SphereTNTEffect {
 
 	public GlobalDisasterEffect() {
-		super(() -> BlockRegistry.GLOBAL_DISASTER, 50, 1000);
+		super(() -> BlockRegistry.GLOBAL_DISASTER, 50, 1000f);
 	}
 	
 	@Override

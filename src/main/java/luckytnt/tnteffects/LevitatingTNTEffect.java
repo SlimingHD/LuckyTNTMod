@@ -8,8 +8,7 @@ public class LevitatingTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if (entity instanceof Entity ent) {
-			ent.setDeltaMovement(ent.getDeltaMovement().x, 0.15f, ent.getDeltaMovement().z);
-		}
+		Entity ent = (Entity)entity;
+		ent.setDeltaMovement(ent.getDeltaMovement().x, 0.15f, ent.getDeltaMovement().z);
 	}
 }

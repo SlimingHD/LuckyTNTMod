@@ -32,7 +32,7 @@ public class SayGoodbyeEffect extends PrimedTNTEffect {
 			position = player.getPosition(1f);
 		}
 		
-		ImprovedExplosion explosion = new ImprovedExplosion(player.level(), (Entity)entity, LuckyTNTDamageSources.sayGoodbye(level), position.x, position.y, position.z, 20);
+		ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity)entity, LuckyTNTDamageSources.sayGoodbye(level), position.x, position.y, position.z, 20);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
 		explosion.spawnExplosionParticles();

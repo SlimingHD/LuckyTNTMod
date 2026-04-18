@@ -43,7 +43,7 @@ public class KolaBoreholeTNTEffect extends PrimedTNTEffect {
 							state.getBlock().wasExploded(level, pos, dummy);
 						}
 					} else if (distanceSqr <= (radius + 1) * (radius + 1)) {
-						if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f && !state.isCollisionShapeFullBlock(level, pos) && level.canSeeSkyFromBelowWater(pos)) {
+						if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f && !state.isCollisionShapeFullBlock(level, pos) && !level.canSeeSky(pos)) {
 							level.setBlockAndUpdate(pos, defaultBlock);
 							state.getBlock().wasExploded(level, pos, dummy);
 						}

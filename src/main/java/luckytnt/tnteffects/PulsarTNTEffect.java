@@ -26,14 +26,16 @@ public class PulsarTNTEffect extends PrimedTNTEffect {
 					
 					ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), tag.getInt("size"));
 					explosion.doEntityExplosion(4f, true);
-					explosion.doImprovedBlockExplosion(1f, tag.getInt("size") <= 80f ? 1.25f : 0.05f, false, tag.getInt("size") > 80f ? true : false, null);
+					explosion.doImprovedBlockExplosion(1f, tag.getInt("size") <= 80f ? 1.25f : 0.05f, tag.getInt("size") > 80f, false, null);
 					explosion.spawnExplosionParticles();
 
 					tag.putInt("size", tag.getInt("size") + 7);
 				}
-				((Entity)entity).setDeltaMovement(0d, 0d, 0d);
-				((Entity)entity).setPos(((Entity)entity).getPosition(0f));
 			}
+		}
+		if (entity.getTNTFuse() < 305 && entity instanceof Entity ent) {
+			ent.setDeltaMovement(0d, 0d, 0d);
+			ent.setPos(ent.getPosition(0f));
 		}
 	}
 	

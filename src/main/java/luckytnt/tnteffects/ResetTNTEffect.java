@@ -12,6 +12,7 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -51,6 +52,10 @@ public class ResetTNTEffect extends PrimedTNTEffect {
 				} else {
 					if (!e.isAlive()) {
 						e.revive();
+						if (e instanceof LivingEntity living) {
+							living.setHealth(living.getMaxHealth());
+						}
+						level.addFreshEntity(e);
 					}
 					e.setPos(pos);
 				}
