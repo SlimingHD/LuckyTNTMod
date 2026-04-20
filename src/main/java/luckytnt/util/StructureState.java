@@ -78,19 +78,19 @@ public enum StructureState implements StringRepresentable {
 	}),
 	VILLAGE_PLAINS("village_plains", (entity, templatePools) -> {
 		return new JigsawStructure(villageSettings(entity), templatePools.getHolderOrThrow(PlainVillagePools.START), 6, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), true);
-	}),
+	}, true),
 	VILLAGE_DESERT("village_desert", (entity, templatePools) -> {
 		return new JigsawStructure(villageSettings(entity), templatePools.getHolderOrThrow(DesertVillagePools.START), 6, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), true);
-	}),
+	}, true),
 	VILLAGE_SAVANNA("village_savanna", (entity, templatePools) -> {
 		return new JigsawStructure(villageSettings(entity), templatePools.getHolderOrThrow(SavannaVillagePools.START), 6, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), true);
-	}),
+	}, true),
 	VILLAGE_SNOWY("village_snowy", (entity, templatePools) -> {
 		return new JigsawStructure(villageSettings(entity), templatePools.getHolderOrThrow(SnowyVillagePools.START), 6, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), true);
-	}),
+	}, true),
 	VILLAGE_TAIGA("village_taiga", (entity, templatePools) -> {
 		return new JigsawStructure(villageSettings(entity), templatePools.getHolderOrThrow(TaigaVillagePools.START), 6, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), true);
-	}),
+	}, true),
 	ANCIENT_CITY("ancient_city", (entity, templatePools) -> {
 		return new JigsawStructure(settings(entity, StructureState.ANCIENT_CITY_OVERRIDES, GenerationStep.Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.BEARD_BOX), templatePools.getHolderOrThrow(AncientCityStructurePieces.START), Optional.of(new ResourceLocation("city_anchor")), 7, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y() + 24)), false, Optional.empty(), 116);
 	}),
@@ -109,10 +109,16 @@ public enum StructureState implements StringRepresentable {
 	
 	private final String name;
 	private final StructureFactory factory;
+	private final boolean removeVegetation;
 	
-	private StructureState(String name, StructureFactory factory) {
+	private StructureState(String name, StructureFactory factory, boolean removeVegetation) {
 		this.name = name;
 		this.factory = factory;
+		this.removeVegetation = removeVegetation;
+	}
+	
+	private StructureState(String name, StructureFactory factory) {
+		this(name, factory, false);
 	}
 	
 	@NotNull
@@ -123,6 +129,10 @@ public enum StructureState implements StringRepresentable {
  	
 	public String getSerializedName() {
 		return name;
+	}
+	
+	public boolean removeVegetation() {
+		return removeVegetation;
 	}
 	
 	public StructureState next() {

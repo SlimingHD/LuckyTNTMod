@@ -12,13 +12,23 @@ import luckytnt.block.StructureTNTBlock;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.util.StructureState;
 import luckytntlib.util.IExplosiveEntity;
+import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
+import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
+import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -57,6 +67,22 @@ public class StructureTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		if (entity.getLevel() instanceof ServerLevel server) {
 			StructureState state = StructureState.byName(entity.getPersistentData().getString("structure"));
+			
+			if (state.removeVegetation()) {
+				ExplosionHelper.createSphericalCrater(server, entity.getPos(), 100, 99.9f, new FilterAirExplosionRule(
+					new StackedExplosionRule(
+						FilterBlockExplosionRule.builder().filterForBlocks(Blocks.SEA_PICKLE, Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.KELP, Blocks.KELP_PLANT, Blocks.BUBBLE_COLUMN).filterForTags(List.of(BlockTags.CORALS, BlockTags.WALL_CORALS)).build(new CopyBlockExplosionRule()),
+						LogicExplosionRule.or(
+							FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.LOGS)).build(new AlwaysExplosionRule()), 
+							LogicExplosionRule.not(
+								new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), 
+								new AlwaysExplosionRule()
+							), 
+							new AlwaysExplosionRule()
+						)
+					)
+				));
+			}
 			
 			BlockPos pos = BlockPos.containing(entity.getPos());
 			ServerChunkCache chunkSource = server.getChunkSource();
