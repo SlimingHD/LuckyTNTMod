@@ -4,7 +4,6 @@ import java.util.List;
 
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
@@ -12,6 +11,7 @@ import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FireExplosionRule;
 import luckytntlib.util.explosions.rules.OffsetExplosionRule;
@@ -37,7 +37,7 @@ public class HellsGateEffect extends PrimedTNTEffect {
 						FilterBlockExplosionRule.applyOnlyWhen(Blocks.AIR, new CopyBlockExplosionRule()),
 						FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new BlockExplosionRule(Blocks.NETHER_BRICKS.defaultBlockState())),
 						FilterBlockExplosionRule.builder().filterForTags(WOOD_TAGS).build(new BlockExplosionRule(Blocks.OBSIDIAN.defaultBlockState())),
-						new FilterLiquidExplosionRule(new BlockExplosionRule(Blocks.LAVA.defaultBlockState())),
+						new FilterLiquidExplosionRule(true, new BlockExplosionRule(Blocks.LAVA.defaultBlockState())),
 						new BlockExplosionRule(Blocks.NETHERRACK.defaultBlockState())
 					)
 				)

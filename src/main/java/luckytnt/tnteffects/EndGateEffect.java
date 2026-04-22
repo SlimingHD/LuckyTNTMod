@@ -5,7 +5,6 @@ import java.util.List;
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -15,6 +14,7 @@ import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
 import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
@@ -48,7 +48,7 @@ public class EndGateEffect extends PrimedTNTEffect{
 						FilterBlockExplosionRule.applyOnlyWhen(Blocks.AIR, new CopyBlockExplosionRule()),
 						FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new BlockExplosionRule(Blocks.PURPUR_BLOCK.defaultBlockState())),
 						FilterBlockExplosionRule.builder().filterForTags(WOOD_TAGS).build(new BlockExplosionRule(Blocks.OBSIDIAN.defaultBlockState())),
-						new FilterLiquidExplosionRule(new BlockExplosionRule(Blocks.AIR.defaultBlockState())),
+						new FilterLiquidExplosionRule(true, new BlockExplosionRule(Blocks.AIR.defaultBlockState())),
 						new BlockExplosionRule(Blocks.END_STONE.defaultBlockState())
 					)
 				)

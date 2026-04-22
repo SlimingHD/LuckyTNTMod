@@ -3,7 +3,6 @@ package luckytnt.tnteffects;
 import java.util.List;
 
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.BiomeSetter;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -13,6 +12,7 @@ import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.explosions.rules.OffsetExplosionRule;
@@ -54,7 +54,7 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 		
 		ExplosionHelper.createSphericalCrater(level, entity.getPos(), 150, 99.9f, new FilterSurfaceExplosionRule(true, 
 			LogicExplosionRule.not(
-				new OffsetExplosionRule(1, new FilterLiquidExplosionRule(new AlwaysExplosionRule())), 
+				new OffsetExplosionRule(1, new FilterLiquidExplosionRule(false, new AlwaysExplosionRule())), 
 				new BlockExplosionRule(Blocks.GRASS_BLOCK.defaultBlockState())
 			)
 		));

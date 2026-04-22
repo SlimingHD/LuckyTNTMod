@@ -27,7 +27,7 @@ public class GhostTNTEffect extends PrimedTNTEffect {
 				if (targets.isEmpty()) {
 					return;
 				}
-				targets.sort((ent1, ent2) -> ent1.distanceToSqr(ent) < ent2.distanceToSqr(ent) ? 1 : -1);
+				targets.sort((ent1, ent2) -> ent1.distanceToSqr(ent) < ent2.distanceToSqr(ent) ? -1 : 1);
 				LivingEntity target = targets.get(0);
 				ent.setPos(target.getX(), target.getY(), target.getZ());
 			}

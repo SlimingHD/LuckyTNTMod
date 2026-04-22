@@ -1,9 +1,6 @@
 package luckytnt.tnteffects;
 
-import java.util.List;
-
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -12,6 +9,7 @@ import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterRandomExplosionRule;
 import luckytntlib.util.explosions.rules.FireExplosionRule;
@@ -25,16 +23,17 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 
 public class FieryHellEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		RandomSource random = entity.getLevel().getRandom();
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 50, Float.POSITIVE_INFINITY, new FilterOffYExplosionRule(-20, 0,
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 50, 5000f, new FilterOffYExplosionRule(-20, 0,
 			new StackedExplosionRule(
-				new FilterLiquidExplosionRule(new BlockExplosionRule(Blocks.LAVA.defaultBlockState())),
-				LogicExplosionRule.not(FilterBlockExplosionRule.builder().filterForTags(List.of(net.minecraftforge.common.Tags.Blocks.STONE)).build(new AlwaysExplosionRule()),
+				new FilterLiquidExplosionRule(false, new BlockExplosionRule(Blocks.LAVA.defaultBlockState())),
+				LogicExplosionRule.not(FilterBlockExplosionRule.applyOnlyWhen(Tags.Blocks.STONE, new AlwaysExplosionRule()),
 					new FilterBlastResistanceExplosionRule(100f, new BlockExplosionRule(Blocks.LAVA.defaultBlockState()))
 				)
 			)

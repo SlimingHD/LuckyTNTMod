@@ -1,12 +1,12 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
-import luckytnt.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
+import luckytntlib.util.explosions.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.level.block.Block;
@@ -24,7 +24,7 @@ public class FreezeTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), strength, 101f, new StackedExplosionRule(
 				new FilterCollidableExplosionRule(new BlockExplosionRule(Blocks.ICE.defaultBlockState())),
-				new FilterLiquidExplosionRule(new BlockExplosionRule(Blocks.ICE.defaultBlockState()))
+				new FilterLiquidExplosionRule(false, new BlockExplosionRule(Blocks.ICE.defaultBlockState()))
 		));
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
 		particleExplosion.spawnExplosionParticles();
