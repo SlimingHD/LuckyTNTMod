@@ -18,16 +18,17 @@ public class BouncingTNTEffect extends PrimedTNTEffect {
 		Entity ent = (Entity)entity;
 		Level level = entity.getLevel();
 		RandomSource random = level.getRandom();
+		int bounces = ent.getPersistentData().getInt("bounces");
 		if (ent.onGround()) {
-			ent.getPersistentData().putInt("bounces", ent.getPersistentData().getInt("bounces") + 1);
+			ent.getPersistentData().putInt("bounces", bounces + 1);
 			ent.setDeltaMovement(random.nextDouble() * 2d - 1d, random.nextDouble() * 1.5d, random.nextDouble() * 2d - 1d);
 			level.playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);
-		}
-		if (ent.getPersistentData().getInt("bounces") >= 12) {
-			level.playSound(ent, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (random.nextFloat() - random.nextFloat()) * 0.2f) * 0.7f);
-			if (!level.isClientSide()) {
-				serverExplosion(entity);
-				entity.destroy();
+			if (bounces >= 12) {
+				if (!level.isClientSide()) {
+					playExplosionSound(entity);
+					serverExplosion(entity);
+					entity.destroy();
+				}
 			}
 		}
 	}

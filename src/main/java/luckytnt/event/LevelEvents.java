@@ -1,25 +1,19 @@
 package luckytnt.event;
 
-import java.util.BitSet;
 import java.util.List;
 
 import luckytnt.LevelVariables;
 import luckytnt.LuckyTNTMod;
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.EntityRegistry;
-import luckytnt.util.Materials;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.entity.LivingPrimedLTNT;
 import luckytntlib.entity.PrimedLTNT;
+import luckytntlib.util.BiomeSetter;
 import luckytntlib.util.RandomList;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
@@ -29,16 +23,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.level.chunk.LevelChunkSection;
-import net.minecraft.world.level.chunk.PalettedContainer;
 import net.minecraft.world.level.levelgen.Heightmap.Types;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
@@ -120,53 +109,6 @@ public class LevelEvents {
 		return level.getMinBuildHeight() - 1;
 	}
 	
-	public static void setBiomeInCylinder(ServerLevel server, Vec3 center, int radius, int radiusY, ResourceKey<Biome> biome) {
-		BitSet emptySet = new BitSet(0);
-		
-		Registry<Biome> registry = server.registryAccess().registryOrThrow(Registries.BIOME);
-		Holder<Biome> biomeHolder = registry.wrapAsHolder(registry.get(biome));
-		int secX = Mth.floor(center.x()) >> 4;
-		int secY = Mth.floor(center.y()) >> 4;
-		int secZ = Mth.floor(center.z()) >> 4;
-		int maxDistanceSqr = radius * radius;
-		int secRadius = radius >> 4;
-		int secRadiusY = radiusY >> 4;
-		for (int offX = -secRadius; offX <= secRadius; offX++) {
-			for (int offZ = -secRadius; offZ <= secRadius; offZ++) {
-				LevelChunk chunk = server.getChunk(secX + offX, secZ + offZ);
-				boolean needsUpdate = false;
-				for (int offY = -secRadiusY; offY <= secRadiusY; offY++) {
-					int index = chunk.getSectionIndexFromSectionY(secY + offY);
-					if (index >= 0 && index < chunk.getSectionsCount()) {
-						LevelChunkSection section = chunk.getSection(index);
-						PalettedContainer<Holder<Biome>> biomes = (PalettedContainer<Holder<Biome>>)section.getBiomes();
-						for (int x = 0; x < 4; x++) {
-							for (int z = 0; z < 4; z++) {
-								int lX = (offX << 4) + (x << 2);
-								int lZ = (offZ << 4) + (z << 2);
-								int distanceSqr = lX * lX + lZ * lZ;
-								if (distanceSqr > maxDistanceSqr) {
-									continue;
-								}
-								for (int y = 0; y < 4; y++) {
-									if (biomes.get(x, y, z) != biomeHolder) {
-										biomes.getAndSetUnchecked(x, y, z, biomeHolder);
-										needsUpdate = true;
-									}
-								}
-							}
-						}
-					}
-				}
-				if (needsUpdate) {
-					for (ServerPlayer p : server.players()) {
-						p.connection.send(new ClientboundLevelChunkWithLightPacket(chunk, server.getLightEngine(), emptySet, emptySet));
-					}
-				}
-			}
-		}
-	}
-	
 	private static void doomsdayDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
 		int dropHeight = LuckyTNTConfigValues.DROP_HEIGHT.get();
 		double intensity = LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get();
@@ -216,7 +158,11 @@ public class LevelEvents {
 	}
 	
 	private static void iceAgeDisaster(ServerLevel server, ServerPlayer player) {
-		setBiomeInCylinder(server, player.getPosition(1f), 32, 32, Biomes.SNOWY_TAIGA);
+		BiomeSetter.setBiomeInCylinder(server, player.position(), 32, 32, Biomes.SNOWY_TAIGA);
+	}
+	
+	private static boolean isPlant(BlockState state) {
+		return state.is(BlockTags.SWORD_EFFICIENT) || state.is(Blocks.CACTUS) || state.is(Blocks.BAMBOO) || state.is(Blocks.BAMBOO_SAPLING);
 	}
 	
 	private static void heatDeathDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
@@ -224,7 +170,7 @@ public class LevelEvents {
 		double x = player.getX();
 		double z = player.getZ();
 		
-		setBiomeInCylinder(server, player.getPosition(1f), 32, 32, Biomes.DESERT);
+		BiomeSetter.setBiomeInCylinder(server, player.position(), 32, 32, Biomes.DESERT);
 		
 		for (int i = 0; i < 1 + (int)(0.5d * intensity); i++) {
 			int offX = random.nextInt(60) - 30;
@@ -232,7 +178,7 @@ public class LevelEvents {
 			int posY = getTopBlock(server, x + offX, z + offZ, false);
 			BlockPos pos = new BlockPos(Mth.floor(x + offX), Mth.floor(posY + 1), Mth.floor(z + offZ));
 			BlockState state = server.getBlockState(pos);
-			if ((Materials.isPlant(state) || state.isAir()) && state.getExplosionResistance(server, pos, ImprovedExplosion.dummyExplosion(server)) <= 100) {
+			if ((isPlant(state) || state.isAir()) && state.getExplosionResistance(server, pos, ImprovedExplosion.dummyExplosion(server)) <= 100) {
 				if (random.nextDouble() > 0.1D) {
 					server.setBlock(pos, BaseFireBlock.getState(server, pos), 3);
 				} else {
@@ -247,7 +193,7 @@ public class LevelEvents {
 			BlockPos pos = new BlockPos(Mth.floor(x + offX), posY, Mth.floor(z + offZ));
 			BlockState state = server.getBlockState(pos);
 			if (state.is(Blocks.GRASS_BLOCK)) {
-				server.setBlock(pos, random.nextDouble() > 0.5D ? Blocks.COARSE_DIRT.defaultBlockState() : Blocks.DIRT.defaultBlockState(), 3);
+				server.setBlock(pos, random.nextBoolean() ? Blocks.COARSE_DIRT.defaultBlockState() : Blocks.DIRT.defaultBlockState(), 3);
 			} else if (server.getBlockState(pos.above()).is(Blocks.WATER) && random.nextDouble() > 0.6D) {
 				server.setBlock(pos, Blocks.MAGMA_BLOCK.defaultBlockState(), 3);
 			}
@@ -257,7 +203,7 @@ public class LevelEvents {
 				int posY = getTopBlock(server, x + offX, z + offZ, true);
 				BlockPos pos = new BlockPos(Mth.floor(x + offX), posY + 1, Mth.floor(z + offZ));
 				BlockState state = server.getBlockState(pos);
-				if ((Materials.isPlant(state) || state.isAir()) && server.getBlockState(pos.below()).canSustainPlant(server, pos.below(), Direction.UP, (IPlantable)Blocks.DEAD_BUSH) && state.getExplosionResistance(server, pos, ImprovedExplosion.dummyExplosion(server)) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
+				if (isPlant(state) && server.getBlockState(pos.below()).canSustainPlant(server, pos.below(), Direction.UP, (IPlantable)Blocks.DEAD_BUSH) && state.getExplosionResistance(server, pos, ImprovedExplosion.dummyExplosion(server)) <= 100 && state.getBlock() != Blocks.DEAD_BUSH) {
 					server.setBlock(pos, Blocks.DEAD_BUSH.defaultBlockState(), 3);
 				}
 			}

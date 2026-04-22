@@ -24,8 +24,8 @@ public class PompeiiEffect extends PrimedTNTEffect {
 				pompeii.shoot(random.nextDouble() * 0.3d - 0.15d, 0.6d + random.nextDouble() * 0.4d, random.nextDouble() * 0.3d - 0.15D, 3f + random.nextFloat() * 2f, 0f);
 				pompeii.setSecondsOnFire(1000);
 				level.addFreshEntity(pompeii);
-				playExplosionSound(entity);
 			}
+			playExplosionSound(entity);
 		}
 	}
 

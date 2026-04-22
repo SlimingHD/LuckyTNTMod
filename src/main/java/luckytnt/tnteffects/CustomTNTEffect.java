@@ -48,21 +48,25 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 		int explosionIntensity = LuckyTNTConfigValues.getCustomTNTExplosionIntensity(customLevel);
 		
 		if (config == CustomTNTConfig.NORMAL_EXPLOSION) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), explosionIntensity);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), explosionIntensity * 5);
 			explosion.doEntityExplosion(3f, true);
 			explosion.doImprovedBlockExplosion(1f, 1.2f, explosionIntensity > 10 ? true : false, false, null);
 			explosion.spawnExplosionParticles();
 		} else if (config == CustomTNTConfig.SPHERICAL_EXPLOSION) {
 			ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), explosionIntensity, 200);
+			ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), explosionIntensity);
+			particleExplosion.spawnExplosionParticles();
 		} else if (config == CustomTNTConfig.CUBICAL_EXPLOSION) {
 			ExplosionHelper.createCubicalCrater(entity.getLevel(), entity.getPos(), explosionIntensity, 200);
+			ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), explosionIntensity);
+			particleExplosion.spawnExplosionParticles();
 		} else if (config == CustomTNTConfig.EASTER_EGG) {
 			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), explosionIntensity * 3);
 			explosion.doImprovedBlockExplosion(1f, explosionIntensity > 10 ? 1.75f : 1.5f, false, false, null);
 			explosion.doImprovedBlockExplosion(1f, 1f, false, false, new FilterAirExplosionRule(
-					new FilterRandomExplosionRule(0.66f,
-							new RandomBlockExplosionRule(RandomList.ofEqualProbability(Blocks.MELON.defaultBlockState(), Blocks.PUMPKIN.defaultBlockState()))
-					)
+				new FilterRandomExplosionRule(0.66f,
+					new RandomBlockExplosionRule(RandomList.ofEqualProbability(Blocks.MELON.defaultBlockState(), Blocks.PUMPKIN.defaultBlockState()))
+				)
 			));
 		}
 		spawnChildren(entity, config, explosionIntensity);
@@ -77,7 +81,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 			Level level = entity.getLevel();
 			RandomSource random = level.getRandom();
 			int customLevel = entity.getPersistentData().getInt("level");
-			if (customLevel >= 3 || LuckyTNTConfigValues.getCustomTNTExplosion(customLevel + 1) == CustomTNTConfig.NO_EXPLOSION) {
+			if (customLevel + 1 >= 3 || LuckyTNTConfigValues.getCustomTNTExplosion(customLevel + 1) == CustomTNTConfig.NO_EXPLOSION) {
 				return;
 			}
 			int maxCount = config == CustomTNTConfig.EASTER_EGG ? explosionIntensity : 3;
@@ -97,7 +101,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 		RandomSource random = level.getRandom();
 		int customLevel = entity.getPersistentData().getInt("level");
 		boolean finalLevel = customLevel >= 3;
-		for(int count = 0; count < 15 * explosionIntensity; count++) {
+		for(int count = 0; count < 10 * explosionIntensity; count++) {
 			PrimedLTNT custom = finalLevel ? EntityRegistry.TNT.get().create(level) : EntityRegistry.CUSTOM_TNT.get().create(level);
 			custom.setPos(entity.getPos());
 			custom.setOwner(entity.owner());

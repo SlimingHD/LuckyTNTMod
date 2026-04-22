@@ -21,7 +21,6 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
@@ -52,11 +51,9 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 					level.setBlock(pos, Blocks.GRASS_BLOCK.defaultBlockState(), 3);
 				}
 			}
-		}
-		
+		}	
 		RandomSource random = level.getRandom();
-		ServerLevel serverLevel = (ServerLevel)level;
-		LevelEvents.setBiomeInCylinder(serverLevel, entity.getPos(), 75, 75, Biomes.FLOWER_FOREST);
+		ServerLevel serverLevel = (ServerLevel)level;		
 		Registry<ConfiguredFeature<?, ?>> features = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 		for (int offX = -75; offX < 75; offX++) {
 			for (int offZ = -75; offZ < 75; offZ++) {

@@ -32,13 +32,13 @@ public class KnockbackTNTEffect extends PrimedTNTEffect {
 				double distance = Math.sqrt(x * x + y * y + z * z) + 0.1d;
 				Vec3 vec = new Vec3(x, y, z).normalize().scale(1d / (distance * 0.2d) + 0.5d).add(0d, 0.1d, 0d);
 				if (distance > 2.1d && distance <= 75d && living.getPersistentData().getInt("knockbacktime") <= 0) {
-					living.setDeltaMovement(living.getDeltaMovement().add(vec));
+					living.addDeltaMovement(vec.scale(0.4d));
 					if (living instanceof Player player) {
 						player.hurtMarked = true;
 					}
 				} else if (distance <= 2.1d) {
 					living.getPersistentData().putInt("knockbacktime", 60);
-					living.setDeltaMovement(living.getDeltaMovement().add(vec.reverse().normalize().scale(5d).add(0d, 0.5d, 0d)));
+					living.addDeltaMovement(vec.reverse().normalize().scale(5d).add(0d, 0.5d, 0d));
 					if (living instanceof Player player) {
 						player.hurtMarked = true;
 					}

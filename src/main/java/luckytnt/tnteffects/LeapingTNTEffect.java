@@ -15,17 +15,16 @@ public class LeapingTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if (!entity.getLevel().isClientSide() && entity instanceof Entity ent) {
-			Level level = ent.level();
-			RandomSource random = level.getRandom();
-			int bounces = ent.getPersistentData().getInt("bounces");
-
-			if (ent.onGround()) {
-				ent.getPersistentData().putInt("bounces", ++bounces);
-				ent.setDeltaMovement(random.nextDouble() * 3d - 1.5d, 1d + random.nextDouble(), random.nextDouble() * 3d - 1.5d);
-				level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1, 1);
-
-				if (bounces >= 1) {
+		Entity ent = (Entity)entity;
+		Level level = entity.getLevel();
+		RandomSource random = level.getRandom();
+		int bounces = ent.getPersistentData().getInt("bounces");
+		if (ent.onGround()) {
+			ent.getPersistentData().putInt("bounces", bounces + 1);
+			ent.setDeltaMovement(random.nextDouble() * 2d - 1d, random.nextDouble() * 1.5d, random.nextDouble() * 2d - 1d);
+			level.playSound(null, entity.x(), entity.y(), entity.z(), SoundEvents.SLIME_JUMP, SoundSource.MASTER, 1f, 1f);
+			if (bounces >= 1) {
+				if (!level.isClientSide()) {
 					playExplosionSound(entity);
 					serverExplosion(entity);
 					if (bounces >= 24) {

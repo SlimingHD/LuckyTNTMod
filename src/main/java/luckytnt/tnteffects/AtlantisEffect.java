@@ -1,13 +1,20 @@
 package luckytnt.tnteffects;
 
-import luckytnt.event.LevelEvents;
+import java.util.List;
+
 import luckytnt.registry.BlockRegistry;
+import luckytntlib.util.BiomeSetter;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
+import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
+import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
+import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.Registry;
@@ -16,6 +23,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
@@ -45,19 +53,23 @@ public class AtlantisEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ServerLevel serverLevel = (ServerLevel)entity.getLevel();
-		LevelEvents.setBiomeInCylinder(serverLevel, entity.getPos(), 100, 50, Biomes.WARM_OCEAN);
 		
+		BiomeSetter.setBiomeInCylinder(serverLevel, entity.getPos(), 120, 60, Biomes.WARM_OCEAN);
+		
+		ExplosionHelper.createCylindricalCrater(serverLevel, entity.getPos(), 100, 50, 100f, new FilterOffYExplosionRule(-50, 8,
+			FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.LOGS)).build(new CraterExplosionRule()))
+		);
 		ExplosionHelper.createCylindricalCrater(serverLevel, entity.getPos(), 100, 50, 100f, new FilterOffYExplosionRule(-50, 8,
 			new StackedExplosionRule(
 				new FilterAirExplosionRule(new FilterSurfaceExplosionRule(true, new BlockExplosionRule(Blocks.SAND.defaultBlockState()))),
-				new BlockExplosionRule(Blocks.WATER.defaultBlockState())
+				LogicExplosionRule.not(new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), new BlockExplosionRule(Blocks.WATER.defaultBlockState()))
 			)
 		));
 		
 		Registry<Structure> structures = serverLevel.registryAccess().registryOrThrow(Registries.STRUCTURE);
 		Structure oceanRuin = structures.get(BuiltinStructures.OCEAN_RUIN_WARM);
 		ExplosionHelper.customSurfaceExplosion(serverLevel, entity.getPos(), 50, (level, center, pos, state) -> {
-			if (level.getRandom().nextDouble() < 0.0005d) {
+			if (level.getRandom().nextDouble() < 0.001d) {
 				StructureStart start = oceanRuin.generate(serverLevel.registryAccess(), serverLevel.getChunkSource().getGenerator(), serverLevel.getChunkSource().getGenerator().getBiomeSource(), serverLevel.getChunkSource().randomState(), serverLevel.getStructureManager(), serverLevel.getSeed(), new ChunkPos(pos), 20, entity.getLevel(), biomeHolder -> true);
 				start.placeInChunk(serverLevel, serverLevel.structureManager(), serverLevel.getChunkSource().getGenerator(), RandomSource.create(), new BoundingBox(Mth.floor(entity.x()) - 150, Mth.floor(entity.y()) - 150, Mth.floor(entity.z()) - 150, Mth.floor(entity.x()) + 150, Mth.floor(entity.y()) + 150, Mth.floor(entity.z()) + 150), new ChunkPos(pos));			
 			}
@@ -67,7 +79,7 @@ public class AtlantisEffect extends PrimedTNTEffect {
 		for (int count = 0; count < 40; count++) {
 			Entity squid = new Squid(EntityType.SQUID, entity.getLevel());
 			squid.setPos(entity.x() + random.nextDouble() * 100d - 50d, entity.y() + 8, entity.z() + random.nextDouble() * 100d - 50d);
-			entity.getLevel().addFreshEntity(squid);
+			serverLevel.addFreshEntity(squid);
 		}
 	}
 	

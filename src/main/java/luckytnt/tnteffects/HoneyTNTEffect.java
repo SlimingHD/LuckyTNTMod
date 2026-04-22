@@ -3,7 +3,6 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
-import luckytnt.util.Noise3D;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -18,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.synth.ImprovedNoise;
 
 public class HoneyTNTEffect extends PrimedTNTEffect {
 
@@ -30,18 +30,17 @@ public class HoneyTNTEffect extends PrimedTNTEffect {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		Noise3D noise = new Noise3D(radius * 4, radius * 4, radius * 4, 5);
 		Level level = entity.getLevel();
 		RandomSource random = level.getRandom();
-		
+		ImprovedNoise noise = new ImprovedNoise(random);
+				
 		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
 		BlockPos centerPos = BlockPos.containing(entity.getPos());
-		int interiorDistance = radius - 2;
-		int beeHiveDistance = radius - 3;
-		int scaledRadiusY = Mth.floor(radius * 1.5f);
+		int interiorDistance = radius - 3;
+		int beeHiveDistance = radius - 4;
 		ExplosionHelper.customSpheroidExplosion(entity.getLevel(), entity.getPos(), radius, new Vector3f(1f, 1.5f, 1f), (lev, center, pos, state) -> {
 			if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) < 200f) {
-				double distance = Math.sqrt(Mth.square(pos.getX() - centerPos.getX()) + Mth.square((pos.getY() - centerPos.getY()) / 1.5f) + Mth.square(pos.getZ() - centerPos.getZ()));
+				double distance = Math.sqrt(Mth.square(pos.getX() - centerPos.getX()) + Mth.square((pos.getY() - centerPos.getY())) / 1.5f + Mth.square(pos.getZ() - centerPos.getZ()));
 				distance += random.nextDouble() * 2d;
 				if (distance <= interiorDistance) {
 					if (distance >= beeHiveDistance && random.nextFloat() < 0.05f) {
@@ -54,8 +53,8 @@ public class HoneyTNTEffect extends PrimedTNTEffect {
 							level.addFreshEntity(bee);
 						}
 					}
-				} else {
-					if (noise.getValue(pos.getX() - centerPos.getX() + radius, pos.getY() - centerPos.getY() + scaledRadiusY, pos.getX() - centerPos.getX() + radius) > 0.7d) {
+				} else if (distance < radius - 0.2d) {
+					if (noise.noise(pos.getX() - centerPos.getX(), pos.getY() - centerPos.getY(), pos.getX() - centerPos.getX()) > 0.2d) {
 						level.setBlockAndUpdate(pos, Blocks.HONEY_BLOCK.defaultBlockState());
 					} else {
 						level.setBlockAndUpdate(pos, Blocks.HONEYCOMB_BLOCK.defaultBlockState());
