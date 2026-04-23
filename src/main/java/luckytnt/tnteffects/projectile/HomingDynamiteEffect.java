@@ -9,11 +9,12 @@ import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 
 public class HomingDynamiteEffect extends PrimedTNTEffect {
 
@@ -29,8 +30,11 @@ public class HomingDynamiteEffect extends PrimedTNTEffect {
 	public void explosionTick(IExplosiveEntity entity) {
 		if (entity.getTNTFuse() < 390) {
 			Entity target = entity.getLevel().getEntity(entity.getPersistentData().getInt("targetID"));
-			if (target == null) {
+			if (target == null || (target instanceof LivingEntity ent && ent.isDeadOrDying())) {
 				target = setTarget(entity);
+				if (target != null) {
+					entity.getPersistentData().putInt("targetID", target.getId());
+				}
 			} else {
 				Entity ent = (Entity)entity;
 				ent.setDeltaMovement(target.getEyePosition(1f).subtract(entity.getPos()).normalize());
@@ -42,24 +46,37 @@ public class HomingDynamiteEffect extends PrimedTNTEffect {
 	public Entity setTarget(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
 		Entity target = null;
-		List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-100, -100, -100), entity.getPos().add(100, 100, 100)));
-		double distance = Double.MAX_VALUE;
-		for (Player player : players) {
-			double entityDistance = entity.getPos().distanceTo(player.getPosition(1f));
-			if (!player.equals(entity.owner()) && entityDistance <= distance) {
-				entity.getPersistentData().putInt("targetID", player.getId());
-				distance = entityDistance;
+		double distance = Double.POSITIVE_INFINITY;
+		boolean seen = false;
+		for (Player player : level.players()) {
+			double playerDistanceSqr = entity.getPos().distanceToSqr(player.getPosition(1f));
+			if (playerDistanceSqr > 10000d || player == entity.owner() || player.isDeadOrDying() || !EntitySelector.NO_CREATIVE_OR_SPECTATOR.test(player) || playerDistanceSqr >= distance) {
+				continue;
+			}
+			boolean canSee = Explosion.getSeenPercent(entity.getPos(), player) >= 0.5f;
+			if (!seen || canSee) {
+				distance = playerDistanceSqr;
 				target = player;
+				if (canSee) {
+					seen = true;
+				}
 			}
 		}
 		if (target == null) {
-			List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, new AABB(entity.getPos().add(-100, -100, -100), entity.getPos().add(100, 100, 100)));
+			seen = false;
+			List<LivingEntity> livingEntities = level.getEntitiesOfClass(LivingEntity.class, ((Entity)entity).getBoundingBox().inflate(100d), e -> !(e instanceof Player));
 			for (LivingEntity ent : livingEntities) {
-				double entityDistance = entity.getPos().distanceTo(ent.getPosition(1f));
-				if (!ent.equals(entity.owner()) && entityDistance <= distance) {
-					entity.getPersistentData().putInt("targetID", ent.getId());
-					distance = entityDistance;
+				double entityDistanceSqr = entity.getPos().distanceToSqr(ent.getPosition(1f));
+				if (entityDistanceSqr > 10000d || ent == entity.owner() || ent.isDeadOrDying() || entityDistanceSqr >= distance) {
+					continue;
+				}
+				boolean canSee = Explosion.getSeenPercent(entity.getPos(), ent) >= 0.5f;
+				if (!seen || canSee) {
+					distance = entityDistanceSqr;
 					target = ent;
+					if (canSee) {
+						seen = true;
+					}
 				}
 			}
 		}

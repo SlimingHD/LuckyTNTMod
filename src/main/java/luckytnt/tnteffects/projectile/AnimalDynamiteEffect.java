@@ -15,7 +15,10 @@ import net.minecraftforge.event.ForgeEventFactory;
 
 public class AnimalDynamiteEffect extends PrimedTNTEffect {
 	
-	private static final List<EntityType<?>> ENTITIES = List.of(EntityType.SPIDER, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.CREEPER, EntityType.PILLAGER, EntityType.VILLAGER, EntityType.ENDERMAN, EntityType.SHEEP, EntityType.COW, EntityType.PIG, EntityType.CHICKEN, EntityType.SLIME);
+	private static final List<EntityType<?>> ENTITIES = List.of(EntityType.SPIDER, EntityType.SKELETON, EntityType.ZOMBIE,
+																EntityType.CREEPER, EntityType.PILLAGER, EntityType.VILLAGER,
+																EntityType.ENDERMAN, EntityType.SHEEP, EntityType.COW,
+																EntityType.PIG, EntityType.CHICKEN, EntityType.SLIME);
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {

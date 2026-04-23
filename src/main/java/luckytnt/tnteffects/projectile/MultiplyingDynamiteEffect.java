@@ -6,12 +6,11 @@ import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class MultiplyingDynamiteEffect extends PrimedTNTEffect {
 
@@ -40,29 +39,31 @@ public class MultiplyingDynamiteEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
+		Entity ent = (Entity)entity;
 		RandomSource random = level.getRandom();
 		if (entity.getPersistentData().getInt("level") < 3) {	
 			for (int count = 0; count < 4; count++) {
 				LExplosiveProjectile dynamite = EntityRegistry.MULTIPLYING_DYNAMITE.get().create(entity.getLevel());
 				dynamite.setPos(entity.getPos());
 				dynamite.setOwner(entity.owner());
-				dynamite.setDeltaMovement(((Entity)entity).getDeltaMovement().add(random.nextDouble() * 0.5d - 0.25d, random.nextDouble() * 0.5d - 0.25d, random.nextDouble() * 0.5d - 0.25d));
+				dynamite.setDeltaMovement(ent.getDeltaMovement().add(random.nextDouble() * 0.5d - 0.25d, random.nextDouble() * 0.5d - 0.25d, random.nextDouble() * 0.5d - 0.25d));
 				dynamite.getPersistentData().putInt("level", entity.getPersistentData().getInt("level") + 1);
 				entity.getLevel().addFreshEntity(dynamite);
 			}
 		} else {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 8);
+			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), ent, entity.getPos(), 8);
 			explosion.doEntityExplosion(0.75f, true);
 			explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
 			explosion.spawnExplosionParticles();
-			level.playSound((Entity)entity, toBlockPos(entity.getPos()), SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4f, (1f + (random.nextFloat() - random.nextFloat()) * 0.2f) * 0.7f);
+			playExplosionSound(entity);
 		}
 	}
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
+		Entity ent = (Entity)entity;
 		if (entity.getPersistentData().getInt("level") < 3) {
-			((Entity)entity).setDeltaMovement(((Entity)entity).getDeltaMovement().add(0f, 0.08f, 0f));
+			ent.addDeltaMovement(new Vec3(0d, 0.08d, 0d));
 		}
 	}
 	

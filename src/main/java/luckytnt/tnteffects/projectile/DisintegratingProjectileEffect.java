@@ -30,11 +30,11 @@ public class DisintegratingProjectileEffect extends ChemicalProjectileEffect {
 		super.explosionTick(entity);
 		if (!entity.getLevel().isClientSide()) {
 			ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 13, 200, new FilterAirExplosionRule(
-					FilterDistanceExplosionRule.greaterEqual(11,
-							FilterBlockExplosionRule.applyOnlyWhen(Blocks.STONE,
-									new FilterRandomExplosionRule(0.01f, new BlockExplosionRule(BlockRegistry.TOXIC_STONE.get().defaultBlockState()))
-							)
+				FilterDistanceExplosionRule.greaterEqual(11,
+					FilterBlockExplosionRule.applyOnlyWhen(Blocks.STONE,
+						new FilterRandomExplosionRule(0.05f, new BlockExplosionRule(BlockRegistry.TOXIC_STONE.get().defaultBlockState()))
 					)
+				)
 			));
 		}
 		if (entity.getTNTFuse() % 20 == 0) {
