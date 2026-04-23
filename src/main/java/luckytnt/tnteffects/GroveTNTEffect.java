@@ -22,6 +22,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.TreeFeatures;
+import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
@@ -60,6 +61,7 @@ public class GroveTNTEffect extends PrimedTNTEffect {
 			
 			Registry<ConfiguredFeature<?, ?>> registry = server.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 			List<List<ConfiguredFeature<?, ?>>> features = TreeType.getFeatures(registry, bigTrees);
+			ConfiguredFeature<?, ?> vegetation = registry.getOrThrow(VegetationFeatures.PATCH_GRASS);
 			
 			ExplosionHelper.createCylindricalCrater(server, entity.getPos(), size, size, 99f, new StackedExplosionRule(
 				FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.LOGS)).build(new AlwaysExplosionRule()),
@@ -70,24 +72,31 @@ public class GroveTNTEffect extends PrimedTNTEffect {
 			));
 			
 			BlockPos centerPos = BlockPos.containing(entity.getPos());
-			List<Pair<ConfiguredFeature<?, ?>, BlockPos>> featuresToPlace = new LinkedList<>();
+			List<Pair<ConfiguredFeature<?, ?>, BlockPos>> treesToPlace = new LinkedList<>();
+			List<BlockPos> grassToPlace = new LinkedList<>();
 			ExplosionHelper.customSurfaceExplosion(server, entity.getPos(), size, (lev, center, pos, state) -> {
 				int offX = pos.getX() - centerPos.getX() + size;
 				int offZ = pos.getZ() - centerPos.getZ() + size;
 				if (!occupiedBlocks.get((offX << shiftAmount) | offZ) && random.nextFloat() < treeChance) {
 					int tree = random.nextInt(features.size());
-					featuresToPlace.add(Pair.of(features.get(tree).get(random.nextInt(features.get(tree).size())), pos.above()));
+					treesToPlace.add(Pair.of(features.get(tree).get(random.nextInt(features.get(tree).size())), pos.above()));
 					for (int x = Mth.clamp(offX - rangeToOccupy, 0, size * 2); x <= Mth.clamp(offX + rangeToOccupy, 0, size * 2); x++) {
 						for (int z = Mth.clamp(offZ - rangeToOccupy, 0, size * 2); z <= Mth.clamp(offZ + rangeToOccupy, 0, size * 2); z++) {
 							occupiedBlocks.set((x << shiftAmount) | z);
 						}
 					}
 				}
+				if (random.nextFloat() < 0.1f) {
+					grassToPlace.add(pos.above());
+				}
 			});
 			
 			ChunkGenerator chunkGenerator = server.getChunkSource().getGenerator();
-			for (Pair<ConfiguredFeature<?, ?>, BlockPos> featureToPlace : featuresToPlace) {
-				featureToPlace.getFirst().place(server, chunkGenerator, random, featureToPlace.getSecond());
+			for (Pair<ConfiguredFeature<?, ?>, BlockPos> tree : treesToPlace) {
+				tree.getFirst().place(server, chunkGenerator, random, tree.getSecond());
+			}
+			for (BlockPos pos : grassToPlace) {
+				vegetation.place(server, chunkGenerator, random, pos);
 			}
 		}
 	}

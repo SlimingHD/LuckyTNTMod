@@ -27,7 +27,7 @@ public class FlakTNTEffect extends PrimedTNTEffect {
 					double yVel = player.getY() - 0.6f;
 					double zVel = player.getZ() - entity.z();
 					Vec3 dir = new Vec3(xVel + (random.nextDouble() * 0.4f - 0.2f), yVel - entity.y() - 0.5f + Math.sqrt(xVel * xVel + zVel * zVel) * 0.2f + (random.nextDouble() * 0.4f - 0.2f), zVel + (random.nextDouble() * 0.4f - 0.2f));
-					ItemRegistry.DYNAMITE.get().shoot(level, entity.x(), entity.y() + 0.5f, entity.z(), dir, 3, entity.owner());
+					ItemRegistry.DYNAMITE_X20.get().shoot(level, entity.x(), entity.y() + 0.5f, entity.z(), dir, 3, entity.owner());
 				}
 			}
 		}

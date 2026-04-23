@@ -4,6 +4,7 @@ import java.util.List;
 
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
+import luckytntlib.util.BiomeSetter;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -21,10 +22,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.phys.Vec3;
 
@@ -37,7 +40,7 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 		Level level = entity.getLevel();
 		ExplosionHelper.createCylindricalCrater(level, entity.getPos(), 75, 75, 200f, new StackedExplosionRule(
 			new FilterSurfaceExplosionRule(false, new CraterExplosionRule()),
-			FilterBlockExplosionRule.builder().filterForTags(REMOVE_TAGS).build(new CraterExplosionRule())
+			FilterBlockExplosionRule.builder().filterForTags(REMOVE_TAGS).filterForBlocks(Blocks.VINE, Blocks.BAMBOO, Blocks.BAMBOO_SAPLING).build(new CraterExplosionRule())
 		));
 		
 		int maxDistanceSqr = 75 * 75;
@@ -53,7 +56,9 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 			}
 		}	
 		RandomSource random = level.getRandom();
-		ServerLevel serverLevel = (ServerLevel)level;		
+		ServerLevel server = (ServerLevel)level;
+		ChunkGenerator generator = server.getChunkSource().getGenerator();
+		BiomeSetter.setBiomeInCylinder(server, entity.getPos(), 85, 75, Biomes.FLOWER_FOREST);
 		Registry<ConfiguredFeature<?, ?>> features = entity.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE);
 		for (int offX = -75; offX < 75; offX++) {
 			for (int offZ = -75; offZ < 75; offZ++) {
@@ -65,20 +70,18 @@ public class FlowerForestTNTEffect extends PrimedTNTEffect {
 					if (state.isCollisionShapeFullBlock(level, pos) && !state.isAir() && !(level.getBlockState(pos.above()).getBlock() instanceof LiquidBlock)) {
 						float rand = random.nextFloat();
 						if (rand <= 0.1d) {
-							features.get(VegetationFeatures.TREES_FLOWER_FOREST).place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos.above());
+							features.get(VegetationFeatures.TREES_FLOWER_FOREST).place(server, generator, random, pos.above());
 						} else if (rand <= 0.1125d) {
-							features.get(VegetationFeatures.FOREST_FLOWERS).place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos.above());
+							features.get(VegetationFeatures.FOREST_FLOWERS).place(server, generator, random, pos.above());
 						} else if (rand <= 0.125d) {
-							features.get(VegetationFeatures.FLOWER_FLOWER_FOREST).place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos.above());
+							features.get(VegetationFeatures.FLOWER_FLOWER_FOREST).place(server, generator, random, pos.above());
 						} else if (rand <= 0.1375d) {
-							features.get(VegetationFeatures.PATCH_GRASS).place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos.above());
+							features.get(VegetationFeatures.PATCH_GRASS).place(server, generator, random, pos.above());
 						}
 					}
 				}
 			}
 		}
-		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 8);
-		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override
