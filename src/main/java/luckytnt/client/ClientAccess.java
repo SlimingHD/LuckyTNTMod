@@ -32,6 +32,14 @@ public class ClientAccess {
 			ent.getPersistentData().putInt(name, tag);
 		}
 	}
+	
+	public static void setEntityDoubleTag(String name, double tag, int id) {
+		Minecraft minecraft = Minecraft.getInstance();
+		Entity ent = minecraft.level.getEntity(id);
+		if (ent != null) {
+			ent.getPersistentData().putDouble(name, tag);
+		}
+	}
 
 	public static void syncLevelVariables(LevelVariables variables) {
 		LevelVariables.clientSide = variables;

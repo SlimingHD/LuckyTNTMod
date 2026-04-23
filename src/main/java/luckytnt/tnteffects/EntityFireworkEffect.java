@@ -29,6 +29,7 @@ public class EntityFireworkEffect extends PrimedTNTEffect {
 		Entity ent = (Entity)entity;
 		ent.setDeltaMovement(ent.getDeltaMovement().x, 0.8f, ent.getDeltaMovement().z);
 		if (entity.getTNTFuse() == 40) {
+  			entity.getPersistentData().putString("type", EntityType.getKey(EntityType.PIG).toString());
 			List<LivingEntity> entities = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() - 20, entity.y() - 20, entity.z() - 20, entity.x() + 20, entity.y() + 20, entity.z() + 20));
 	      	double maxDistance = 2000;
 	      	for (LivingEntity livingEntity : entities) {

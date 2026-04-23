@@ -13,8 +13,8 @@ public class MimicTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		if (!entity.getLevel().isClientSide()) {
-			Player player = entity.getLevel().getNearestPlayer((Entity)entity, 5);
-			if (player != null && player != entity.owner()) {
+			Player player = entity.getLevel().getNearestPlayer(entity.x(), entity.y(), entity.z(), 5d, p -> p != entity.owner());
+			if (player != null) {
 				playExplosionSound(entity);
 				serverExplosion(entity);
 				entity.destroy();

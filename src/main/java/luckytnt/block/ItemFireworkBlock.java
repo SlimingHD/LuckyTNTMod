@@ -7,6 +7,7 @@ import luckytntlib.block.LTNTBlock;
 import luckytntlib.entity.PrimedLTNT;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -40,7 +41,11 @@ public class ItemFireworkBlock extends LTNTBlock implements EntityBlock {
 			tnt.setPos(x + 0.5f, y, z + 0.5f);
 			tnt.setOwner(igniter);
 			if (blockEntity != null) {
-				tnt.getPersistentData().put("stack", blockEntity.getPersistentData().get("stack"));
+				Tag tag = blockEntity.getPersistentData().get("stack");
+				if (tag == null) {
+					tag = new ItemStack(Items.AIR).save(new CompoundTag());
+				}
+				tnt.getPersistentData().put("stack", tag);
 			}
 			level.addFreshEntity(tnt);
 			level.playSound(null, new BlockPos(Mth.floor(x), Mth.floor(y), Mth.floor(z)), SoundEvents.TNT_PRIMED, SoundSource.MASTER, 1, 1);

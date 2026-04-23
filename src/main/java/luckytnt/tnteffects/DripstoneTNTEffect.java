@@ -76,7 +76,7 @@ public class DripstoneTNTEffect extends PrimedTNTEffect {
 					BlockState stateBelow = lev.getBlockState(posBelow);
 					BlockState stateAbove = lev.getBlockState(posAbove);
 					
-					if (!stateBelow.isAir() || !stateAbove.isAir() && random.nextDouble() < 0.0125d) {
+					if ((!stateBelow.isAir() || !stateAbove.isAir()) && random.nextDouble() < 0.1d) {
 						double rand = random.nextDouble();
 						if (rand < 0.1d) {
 							largeDripstone.place(server, chunkGenerator, random, pos);

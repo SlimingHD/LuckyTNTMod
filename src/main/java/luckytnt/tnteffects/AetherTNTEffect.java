@@ -4,7 +4,6 @@ import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.rules.CopyPropertiesExplosionRule;
-import luckytnt.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.BiomeSetter;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.RandomList;
@@ -15,6 +14,8 @@ import luckytntlib.util.explosions.rules.CopyBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
+import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.explosions.rules.FilterOffYExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
@@ -29,14 +30,14 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.phys.Vec3;
 
 public class AetherTNTEffect extends PrimedTNTEffect {
 
@@ -44,16 +45,20 @@ public class AetherTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		ServerLevel serverLevel = (ServerLevel)entity.getLevel();
 		RandomSource random = serverLevel.getRandom();
+		
 		int islandHeight = 80;
-		ExplosionHelper.createSphericalCrater(serverLevel, entity.getPos().add(0d, islandHeight, 0d), 100, 200f, new FilterOffYExplosionRule(-25, 25,
+		Vec3 explosionCenter = entity.getPos().add(0d, islandHeight, 0d);
+		ExplosionHelper.createSphericalCrater(serverLevel, explosionCenter, 100, 200f, new FilterOffYExplosionRule(-25, 25,
 			new OffsetExplosionRule(-islandHeight, 
 				new FilterBlastResistanceExplosionRule(200f, 
 					new StackedExplosionRule(
 						FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LEAVES, new CopyPropertiesExplosionRule(new RandomBlockExplosionRule(RandomList.<BlockState>floatBuilder().addEntry(Blocks.FLOWERING_AZALEA_LEAVES.defaultBlockState(), 0.1f).addEntry(Blocks.AZALEA_LEAVES.defaultBlockState(), 0.9f).build()))),
 						FilterBlockExplosionRule.applyOnlyWhen(BlockTags.LOGS, new CopyPropertiesExplosionRule(new BlockExplosionRule(Blocks.DARK_OAK_LOG.defaultBlockState()))),
 						LogicExplosionRule.not(new FilterCollidableExplosionRule(new AlwaysExplosionRule()), new AlwaysExplosionRule()),
-						new FilterSurfaceExplosionRule(true, new BlockExplosionRule(Blocks.GRASS_BLOCK.defaultBlockState())),
-						new FilterLiquidExplosionRule(new BlockExplosionRule(Blocks.WATER.defaultBlockState())),
+						new FilterFullBlockExplosionRule(
+							new FilterSurfaceExplosionRule(true, new BlockExplosionRule(Blocks.GRASS_BLOCK.defaultBlockState()))
+						),
+						new FilterLiquidExplosionRule(false, new BlockExplosionRule(Blocks.WATER.defaultBlockState())),
 						new CopyBlockExplosionRule()
 					)
 				)
@@ -65,41 +70,29 @@ public class AetherTNTEffect extends PrimedTNTEffect {
 		ConfiguredFeature<?, ?> flowerForestFlowers = features.get(VegetationFeatures.FLOWER_FLOWER_FOREST);
 		ConfiguredFeature<?, ?> grassPatch = features.get(VegetationFeatures.PATCH_GRASS);
 		ConfiguredFeature<?, ?> tallGrassPatch = features.get(VegetationFeatures.PATCH_TALL_GRASS);
-		int maxDistanceSqr = 100 * 100;
-		for(int offX = -100; offX <= 100; offX += 5) {
-			for(int offZ = -100; offZ <= 100; offZ += 5) {
-				int distanceSqr = offX * offX + offZ * offZ;
-				int x = Mth.floor(entity.x()) + offX;
-				int z = Mth.floor(entity.z()) + offZ;
-				int y = getIslandTop(serverLevel, x, Mth.floor(entity.y()) + islandHeight, z);
-				if(distanceSqr <= maxDistanceSqr && y != Integer.MAX_VALUE) {
-					BlockPos pos = new BlockPos(x, y, z);
+		ChunkGenerator generator = serverLevel.getChunkSource().getGenerator();
+		BlockPos centerPos = BlockPos.containing(explosionCenter);
+		ExplosionHelper.customSphericalExplosion(serverLevel, explosionCenter, 100, (lev, center, pos, state) -> {
+			int offY = Math.abs(centerPos.getY() - pos.getY());
+			if (offY <= 25) {
+				BlockPos posBelow = pos.below();
+				BlockState stateBelow = lev.getBlockState(posBelow);
+				if (state.isAir() && stateBelow.is(Blocks.GRASS_BLOCK) && random.nextFloat() < 0.1f) {
 					float rand = random.nextFloat();
 					if (rand < 0.3f) {
-						flowers.place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos);
+						flowers.place(serverLevel, generator, random, pos);
 					} else if (rand < 0.6f) {
-						flowerForestFlowers.place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos);
+						flowerForestFlowers.place(serverLevel, generator, random, pos);
 					} else if (rand < 0.75f) {
-						grassPatch.place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos);
+						grassPatch.place(serverLevel, generator, random, pos);
 					} else if (rand < 0.8f) {
-						tallGrassPatch.place(serverLevel, serverLevel.getChunkSource().getGenerator(), random, pos);
+						tallGrassPatch.place(serverLevel, generator, random, pos);
 					}
 				}
 			}
-		}
+		});
 		
-		BiomeSetter.setBiomeInCylinder(serverLevel, entity.getPos().add(0d, islandHeight, 0d), 120, 60, Biomes.CHERRY_GROVE);
-	}
-	
-	private int getIslandTop(Level level, int x, int islandY, int z) {
-		for (int offY = 35; offY >= -35; offY--) {
-			BlockPos pos = new BlockPos(x, islandY + offY, z);
-			BlockState state = level.getBlockState(pos);
-			if (state.isCollisionShapeFullBlock(level, pos)) {
-				return islandY + offY;
-			}
-		}
-		return Integer.MAX_VALUE;
+		BiomeSetter.setBiomeInCylinder(serverLevel, explosionCenter, 120, 30, Biomes.CHERRY_GROVE);
 	}
 	
 	@Override

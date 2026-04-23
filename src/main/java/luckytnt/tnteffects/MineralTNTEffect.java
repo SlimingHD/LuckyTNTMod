@@ -2,25 +2,23 @@ package luckytnt.tnteffects;
 
 import java.util.List;
 
-import org.joml.Vector3f;
-
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.RandomList;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
-import luckytntlib.util.explosions.rules.CraterExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
-import luckytntlib.util.explosions.rules.FilterRandomDistanceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -35,9 +33,9 @@ public class MineralTNTEffect extends PrimedTNTEffect {
 	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.legacyCylindricalExplosion(entity.getLevel(), entity.getPos(), 30, 30, 200f, new FilterAirExplosionRule(
+		ExplosionHelper.legacyCylindricalExplosion(entity.getLevel(), entity.getPos(), 33, 7, 200f, new FilterAirExplosionRule(
 			new StackedExplosionRule(
-				FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.LOGS)).build(new AlwaysExplosionRule()),
+				FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.LOGS)).filterForBlocks(Blocks.VINE, Blocks.BAMBOO, Blocks.BAMBOO_SAPLING).build(new AlwaysExplosionRule()),
 				LogicExplosionRule.not(
 					new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), 
 					new AlwaysExplosionRule()
@@ -45,11 +43,22 @@ public class MineralTNTEffect extends PrimedTNTEffect {
 			)
 		));
 		
-		ExplosionHelper.legacySpheroidExplosion(entity.getLevel(), entity.getPos(), 33, new Vector3f(1f, 1f / 5f, 1f), 200f, FilterRandomDistanceExplosionRule.quadraticDecrease(28, 33, new CraterExplosionRule()));
-		
+		RandomSource random = entity.getLevel().getRandom();
 		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(entity.getLevel());
-		ExplosionHelper.customSpheroidExplosion(entity.getLevel(), entity.getPos(), 33, new Vector3f(1f, 1f / 5f, 1f), (level, center, pos, state) -> {
-			if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f && !state.is(BlockTags.LOGS) && !state.is(BlockTags.LEAVES) && state.isCollisionShapeFullBlock(level, pos) && touchesAir(level, pos)) {
+		BlockPos centerPos = BlockPos.containing(entity.getPos());
+		ExplosionHelper.customSphericalExplosion(entity.getLevel(), entity.getPos(), 30, (lev, center, pos, state) -> {
+			int distanceSqr = Mth.square(centerPos.getX() - pos.getX()) + Mth.square(centerPos.getY() - pos.getY()) * 5 + Mth.square(centerPos.getZ() - pos.getZ());
+			int maxDistanceSqr = Mth.square(26 + random.nextInt(8));
+			if (distanceSqr <= maxDistanceSqr && !state.isAir() && Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f) {
+				lev.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+				state.getBlock().wasExploded(lev, pos, dummy);
+			}
+		});
+		
+		int maxDistanceSqr = 33 * 33;
+		ExplosionHelper.customSphericalExplosion(entity.getLevel(), entity.getPos(), 33, (level, center, pos, state) -> {
+			int distanceSqr = Mth.square(centerPos.getX() - pos.getX()) + Mth.square(centerPos.getY() - pos.getY()) * 5 + Mth.square(centerPos.getZ() - pos.getZ());
+			if (distanceSqr <= maxDistanceSqr && Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f && !state.is(BlockTags.LOGS) && !state.is(BlockTags.LEAVES) && state.isCollisionShapeFullBlock(level, pos) && touchesAir(level, pos)) {
 				level.setBlockAndUpdate(pos, BLOCKS.getRandomItem(level.getRandom()).defaultBlockState());
 				state.getBlock().wasExploded(level, pos, dummy);
 			}

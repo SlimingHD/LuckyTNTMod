@@ -4,7 +4,6 @@ import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.server.level.ServerLevel;
@@ -17,8 +16,6 @@ public class DayTNTEffect extends PrimedTNTEffect {
 		if (entity.getLevel() instanceof ServerLevel serverLevel) {
 			serverLevel.setDayTime(6000);
 		}
-		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
-		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

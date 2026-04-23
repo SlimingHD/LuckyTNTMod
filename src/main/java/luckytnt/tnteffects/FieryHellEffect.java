@@ -1,5 +1,7 @@
 package luckytnt.tnteffects;
 
+import java.util.List;
+
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -31,15 +33,28 @@ public class FieryHellEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		RandomSource random = entity.getLevel().getRandom();
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 50, 5000f, new FilterOffYExplosionRule(-20, 0,
-			new StackedExplosionRule(
-				new FilterLiquidExplosionRule(false, new BlockExplosionRule(Blocks.LAVA.defaultBlockState())),
-				LogicExplosionRule.not(FilterBlockExplosionRule.applyOnlyWhen(Tags.Blocks.STONE, new AlwaysExplosionRule()),
-					new FilterBlastResistanceExplosionRule(100f, new BlockExplosionRule(Blocks.LAVA.defaultBlockState()))
-				)
+			LogicExplosionRule.and(
+				LogicExplosionRule.not(
+					FilterBlockExplosionRule.builder().filterForTags(List.of(Tags.Blocks.STONE, Tags.Blocks.ORES)).build(new AlwaysExplosionRule()),
+					new AlwaysExplosionRule()
+				),
+				LogicExplosionRule.or(
+					LogicExplosionRule.or(
+						LogicExplosionRule.not(
+							new FilterAirExplosionRule(new AlwaysExplosionRule()),
+							new AlwaysExplosionRule()
+						),
+						new FilterLiquidExplosionRule(false, new AlwaysExplosionRule()),
+						new AlwaysExplosionRule()
+					), 
+					new FilterBlastResistanceExplosionRule(99.9f, new AlwaysExplosionRule()),
+					new AlwaysExplosionRule()
+				), 
+				new BlockExplosionRule(Blocks.LAVA.defaultBlockState())
 			)
 		));
 		
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 90, 100f, new FilterAirExplosionRule(
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 90, 99.9f, new FilterAirExplosionRule(
 			new StackedExplosionRule(
 				new FilterRandomExplosionRule(0.9f, new BlockExplosionRule(Blocks.NETHERRACK.defaultBlockState())),
 				new FilterRandomExplosionRule(0.3f, new BlockExplosionRule(Blocks.LAVA.defaultBlockState()))

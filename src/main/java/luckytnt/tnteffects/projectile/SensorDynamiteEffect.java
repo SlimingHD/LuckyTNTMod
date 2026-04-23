@@ -1,7 +1,5 @@
 package luckytnt.tnteffects.projectile;
 
-import java.util.List;
-
 import org.joml.Vector3f;
 
 import luckytnt.registry.ItemRegistry;
@@ -12,7 +10,6 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 
 public class SensorDynamiteEffect extends PrimedTNTEffect {
 
@@ -20,26 +17,14 @@ public class SensorDynamiteEffect extends PrimedTNTEffect {
 	public void explosionTick(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
 		if (!level.isClientSide()) {
-			List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-5d, -5d, -5d), entity.getPos().add(5d, 5d, 5d)));
-			for (Player player : players) {
-				if (!player.equals(entity.owner())) {
-					entity.setTNTFuse(0);
-				}
-			}
-		}
-	}
-	
-	@Override
-	public void serverExplosion(IExplosiveEntity entity) {
-		Level level = entity.getLevel();
-		List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-5d, -5d, -5d), entity.getPos().add(5d, 5d, 5d)));
-		for (Player player : players) {
-			if (!player.equals(entity.owner())) {
+			Player player = entity.getLevel().getNearestPlayer(entity.x(), entity.y(), entity.z(), 5d, p -> p != entity.owner());
+			if (player != null) {
 				ImprovedExplosion explosion = new ImprovedExplosion(level, entity.getPos(), 5);
 				explosion.doEntityExplosion(1f, true);
 				explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
 				explosion.spawnExplosionParticles();
 				playExplosionSound(entity);
+				entity.destroy();
 			}
 		}
 	}

@@ -30,7 +30,7 @@ public class EyeOfTheSaharaEffect extends PrimedTNTEffect {
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		for (double angle = 0; angle < 360; angle += 4D) {
-			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0f, 0f), 1f), entity.x() + 2d * Math.cos(angle * Math.PI / 180d), entity.y() + 0.5d, entity.z() + 2d * Math.sin(angle * Math.PI / 180d), 0d, 0d, 0d);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0.41f, 0.71f), 1f), entity.x() + 2d * Math.cos(angle * Math.PI / 180d), entity.y() + 0.5d, entity.z() + 2d * Math.sin(angle * Math.PI / 180d), 0d, 0d, 0d);
 		}
 	}
 	

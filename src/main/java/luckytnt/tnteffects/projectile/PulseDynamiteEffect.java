@@ -69,7 +69,7 @@ public class PulseDynamiteEffect extends PrimedTNTEffect {
 			double x = Math.cos(theta) * radius;
 			double z = Math.sin(theta) * radius;
 			
-			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + x, entity.y() + y + 0.5f, entity.z() + z, 0, 0, 0);
+			entity.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.4f, 0.4f, 1f), 0.75f), entity.x() + x, entity.y() + y, entity.z() + z, 0, 0, 0);
 		}
 	}
 	

@@ -17,8 +17,8 @@ public class ShatterproofDynamiteEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), 9, 1200, new FilterAirExplosionRule(
-				new FilterCollidableExplosionRule(new BlockExplosionRule(Blocks.OBSIDIAN.defaultBlockState()))
+		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), 9, 1200f, new FilterAirExplosionRule(
+			new FilterCollidableExplosionRule(new BlockExplosionRule(Blocks.OBSIDIAN.defaultBlockState()))
 		));
 	}
 	

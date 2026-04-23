@@ -33,10 +33,6 @@ public class CopyPropertiesExplosionRule implements ExplosionRule {
 		}
 		return stateToPlace;
 	}
-	
-	private <T extends Comparable<T>, V extends T> BlockState copyProperty(BlockState copyFrom, BlockState copyTo, Property<T> property) {
-		return copyTo.setValue(property, copyFrom.getValue(property));
-	}
 
 	@Override
 	public JsonObject encode(JsonObject root) {
@@ -47,5 +43,9 @@ public class CopyPropertiesExplosionRule implements ExplosionRule {
 	
 	public static ExplosionRule decode(JsonObject root) {
 		return new CopyPropertiesExplosionRule(ExplosionRule.parse(root.get("rule").getAsJsonObject()));
+	}
+	
+	private static <T extends Comparable<T>, V extends T> BlockState copyProperty(BlockState copyFrom, BlockState copyTo, Property<T> property) {
+		return copyTo.setValue(property, copyFrom.getValue(property));
 	}
 }

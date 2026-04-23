@@ -1,7 +1,5 @@
 package luckytnt.tnteffects.projectile;
 
-import java.util.Random;
-
 import luckytnt.block.PresentBlock;
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
@@ -34,21 +32,27 @@ public class PresentMeteorEffect extends PrimedTNTEffect {
 			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 40);
 			explosion.doEntityExplosion(3, true);
 			ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 40, 100, new FilterAirExplosionRule(
-					new StackedExplosionRule(
-							FilterDistanceExplosionRule.lessEqual(35,new CraterExplosionRule()),
-							FilterRandomDistanceExplosionRule.quadraticDecrease(35, 40, 
-									new RandomBlockExplosionRule(RandomList.<BlockState>floatBuilder()
-											.addEntry(Blocks.BLUE_ICE.defaultBlockState(), 0.125f)
-											.addEntry(Blocks.PACKED_ICE.defaultBlockState(), 0.125f)
-											.addEntry(Blocks.AIR.defaultBlockState(), 0.75f).build()
-									)
-							)
+				new StackedExplosionRule(
+					FilterDistanceExplosionRule.lessEqual(35,new CraterExplosionRule()),
+						FilterRandomDistanceExplosionRule.quadraticDecrease(35, 40, 
+							new RandomBlockExplosionRule(RandomList.<BlockState>floatBuilder()
+								.addEntry(Blocks.BLUE_ICE.defaultBlockState(), 0.125f)
+								.addEntry(Blocks.PACKED_ICE.defaultBlockState(), 0.125f)
+								.addEntry(Blocks.AIR.defaultBlockState(), 0.75f).build()
+						)
 					)
+				)
 			));
 		}
 		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.getLevel());
 		ExplosionHelper.customSurfaceExplosion(entity.getLevel(), entity.getPos(), 70, (level, center, pos, state) -> {
-			BlockPos placePos = pos.above();
+			BlockPos placePos;
+			if (!state.isCollisionShapeFullBlock(level, pos)) {
+				placePos = pos;
+			} else {
+				placePos = pos.above();
+			}
+			
 			int distanceSqr = (int)pos.distSqr(toBlockPos(center));
 			if (level.getRandom().nextFloat() < 0.025f) {
 				Direction facing = Direction.Plane.HORIZONTAL.getRandomDirection(level.getRandom());
@@ -77,7 +81,7 @@ public class PresentMeteorEffect extends PrimedTNTEffect {
 	public BlockState getBlockState(IExplosiveEntity entity) {
 		if (!entity.getPersistentData().getBoolean("has_present")) {
 			entity.getPersistentData().putBoolean("has_present", true);
-			entity.getPersistentData().putInt("type", new Random().nextInt(4));
+			entity.getPersistentData().putInt("type", entity.getLevel().getRandom().nextInt(4));
 		}
 		return BlockRegistry.PRESENT.get().defaultBlockState().setValue(PresentBlock.TYPE, entity.getPersistentData().getInt("type"));
 	}

@@ -32,10 +32,10 @@ public class AcidicProjectileEffect extends ChemicalProjectileEffect {
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity ent) {
-		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1f), ent.x() + 0.2f, ent.y() + 1f, ent.z(), 0, 0, 0);
-		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 1f, 1f), 1f), ent.x() - 0.2f, ent.y() + 1f, ent.z(), 0, 0, 0);
-		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x(), ent.y() + 1f, ent.z() + 0.2f, 0, 0, 0);
-		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(1f, 0f, 0f), 1f), ent.x(), ent.y() + 1f, ent.z() - 0.2f, 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.95f, 0.95f, 0f), 1f), ent.x() + 0.2f, ent.y() + 1f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0.95f, 0.95f, 0f), 1f), ent.x() - 0.2f, ent.y() + 1f, ent.z(), 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0.53f, 0.25f), 1f), ent.x(), ent.y() + 1f, ent.z() + 0.2f, 0, 0, 0);
+		ent.getLevel().addParticle(new DustParticleOptions(new Vector3f(0f, 0.53f, 0.25f), 1f), ent.x(), ent.y() + 1f, ent.z() - 0.2f, 0, 0, 0);
 	}
 	
 	@Override
