@@ -763,7 +763,6 @@
 	"luckytntmod.config.title" : "Lucky TNT Configuration",
 	"luckytntmod.config.done" : "Done",
 	"luckytntmod.config.reset" : "Reset",
-	"luckytntmod.config.island_offset" : "Floating Island height",
 	"luckytntmod.config.drop_offset" : "Dropped projectiles height",
   	"luckytntmod.config.first_tnt": "First Custom TNT Explosion",  	
   	"luckytntmod.config.first_type": "First Explosion Type",  	

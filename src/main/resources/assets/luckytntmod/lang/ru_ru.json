@@ -764,7 +764,6 @@
 	"luckytntmod.config.title" : "Настройки Lucky TNT",
 	"luckytntmod.config.done" : "Завершить",
 	"luckytntmod.config.reset" : "Сбросить",
-	"luckytntmod.config.island_offset" : "Высота парящего острова",
 	"luckytntmod.config.drop_offset" : "Высота сбрасываемых снарядов",
   	"luckytntmod.config.first_tnt": "Первый Взрыв Настраиваемого Динамита",  	
   	"luckytntmod.config.first_type": "Тип Первого Взрыва",  	

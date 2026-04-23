@@ -20,7 +20,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ConfigScreen extends Screen {
 
-	ForgeSlider island_slider = null;
 	ForgeSlider dropped_slider = null;
 	ForgeSlider average_disaster_time_silder = null;
 	ForgeSlider average_disaster_strength_slider = null;
@@ -43,10 +42,6 @@ public class ConfigScreen extends Screen {
 		GridLayout grid = new GridLayout();
 		grid.defaultCellSetting().paddingHorizontal(4).paddingBottom(4).alignHorizontallyCenter();
 		RowHelper rows = grid.createRowHelper(3);
-		
-		rows.addChild(island_slider = new ForgeSlider(0, 0, 100, 20, Component.empty(), Component.empty(), 20, 160, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), true));
-		rows.addChild(new CenteredStringWidget(Component.translatable("luckytntmod.config.island_offset"), font));
-		rows.addChild(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.ISLAND_HEIGHT, 50, island_slider)).width(100).build());
 		
 		rows.addChild(dropped_slider = new ForgeSlider(0, 0, 100, 20, Component.empty(), Component.empty(), 60, 400, LuckyTNTConfigValues.DROP_HEIGHT.get(), true));
 		rows.addChild(new CenteredStringWidget(Component.translatable("luckytntmod.config.drop_offset"), font));
@@ -104,9 +99,6 @@ public class ConfigScreen extends Screen {
 	
 	@Override
 	public void onClose() {
-		if (island_slider != null) {
-			LuckyTNTConfigValues.ISLAND_HEIGHT.set(island_slider.getValueInt());
-		}
 		if (dropped_slider != null) {
 			LuckyTNTConfigValues.DROP_HEIGHT.set(dropped_slider.getValueInt());
 		}

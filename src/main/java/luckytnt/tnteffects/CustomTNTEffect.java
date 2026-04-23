@@ -81,7 +81,7 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 			Level level = entity.getLevel();
 			RandomSource random = level.getRandom();
 			int customLevel = entity.getPersistentData().getInt("level");
-			if (customLevel + 1 >= 3 || LuckyTNTConfigValues.getCustomTNTExplosion(customLevel + 1) == CustomTNTConfig.NO_EXPLOSION) {
+			if (LuckyTNTConfigValues.getCustomTNTExplosion(customLevel + 1) == CustomTNTConfig.NO_EXPLOSION) {
 				return;
 			}
 			int maxCount = config == CustomTNTConfig.EASTER_EGG ? explosionIntensity : 3;

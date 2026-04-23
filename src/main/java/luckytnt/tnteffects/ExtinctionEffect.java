@@ -16,6 +16,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.entity.EntityTypeTest;
 
 public class ExtinctionEffect extends PrimedTNTEffect {
 
@@ -23,10 +24,7 @@ public class ExtinctionEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		if (entity.getLevel() instanceof ServerLevel serverLevel) {
 			List<LightningBolt> lightnings = new ArrayList<LightningBolt>();
-			for (Entity toKill : serverLevel.getAllEntities()) {
-				if (!(toKill instanceof LivingEntity)) {
-					continue;
-				}
+			for (Entity toKill : serverLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), e -> true)) {
 				toKill.hurt(LuckyTNTDamageSources.extinction(serverLevel, entity.owner()), 10000f);
 				LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, serverLevel);
 				lightning.setPos(toKill.position());

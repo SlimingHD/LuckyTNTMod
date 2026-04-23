@@ -762,7 +762,6 @@
 	"luckytntmod.config.title" : "Lucky TNT Konfiguration",
 	"luckytntmod.config.done" : "Fertig",
 	"luckytntmod.config.reset" : "Zur\u00fccksetzen",
-	"luckytntmod.config.island_offset" : "Schwebende Insel H\u00f6he",
 	"luckytntmod.config.drop_offset" : "Fallende Projektil H\u00f6he",
   	"luckytntmod.config.first_tnt": "Erste Custom TNT Explosion",  	
   	"luckytntmod.config.first_type": "Erste Explosionsart",  	

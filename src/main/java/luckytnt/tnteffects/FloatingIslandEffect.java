@@ -1,6 +1,5 @@
 package luckytnt.tnteffects;
 
-import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -22,8 +21,9 @@ public class FloatingIslandEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), strength, 101f, new FilterOffYExplosionRule(-strength + 4, strength - 4,
-			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), new FilterBlastResistanceExplosionRule(101f, new CopyBlockExplosionRule()))
+		int islandHeight = 50;
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, islandHeight, 0d), strength, 101f, new FilterOffYExplosionRule(-strength + 4, strength - 4,
+			new OffsetExplosionRule(-islandHeight, new FilterBlastResistanceExplosionRule(101f, new CopyBlockExplosionRule()))
 		));
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 8);
 		particleExplosion.spawnExplosionParticles();

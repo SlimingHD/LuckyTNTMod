@@ -5,7 +5,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class LuckyTNTConfigValues {
 	
-	public static ForgeConfigSpec.IntValue ISLAND_HEIGHT;
 	public static ForgeConfigSpec.IntValue DROP_HEIGHT;
 	public static ForgeConfigSpec.IntValue MAXIMUM_DISASTER_TIME;
 	public static ForgeConfigSpec.DoubleValue AVERAGE_DIASTER_INTENSITY;
@@ -27,7 +26,6 @@ public class LuckyTNTConfigValues {
 	
 	public static void registerConfig(ForgeConfigSpec.Builder builder) {
 		builder.comment("TNT settings").push("Offsets");
-		ISLAND_HEIGHT = builder.comment("y offset of floating islands").defineInRange("islandHeight", 50, 20, 160);
 		DROP_HEIGHT = builder.comment("y offset of dropped projectiles").defineInRange("dropHeight", 200, 60, 400);
 		builder.pop();
 		builder.comment("Disaster settings").push("Disasters");
@@ -61,7 +59,7 @@ public class LuckyTNTConfigValues {
 			case 1: return CUSTOM_TNT_SECOND_EXPLOSION.get();
 			case 2: return CUSTOM_TNT_THIRD_EXPLOSION.get();
 		}
-		return CUSTOM_TNT_FIRST_EXPLOSION.get();
+		return CustomTNTConfig.NO_EXPLOSION;
 	}
 	
 	public static int getCustomTNTExplosionIntensity(int level) {
@@ -70,6 +68,6 @@ public class LuckyTNTConfigValues {
 			case 1: return CUSTOM_TNT_SECOND_EXPLOSION_INTENSITY.get();
 			case 2: return CUSTOM_TNT_THIRD_EXPLOSION_INTENSITY.get();
 		}
-		return CUSTOM_TNT_FIRST_EXPLOSION_INTENSITY.get();
+		return 0;
 	}
 }

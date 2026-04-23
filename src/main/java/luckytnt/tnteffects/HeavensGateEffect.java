@@ -1,6 +1,5 @@
 package luckytnt.tnteffects;
 
-import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -18,8 +17,9 @@ public class HeavensGateEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f, new FilterOffYExplosionRule(-20, 20,
-			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), new FilterBlastResistanceExplosionRule(200f, new CopyBlockExplosionRule())
+		int islandHeight = 50;
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos().add(0d, islandHeight, 0d), 30, 200f, new FilterOffYExplosionRule(-20, 20,
+			new OffsetExplosionRule(-islandHeight, new FilterBlastResistanceExplosionRule(200f, new CopyBlockExplosionRule())
 		)));
 		
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), 30, 200f, new FilterOffYExplosionRule(-20, 20, new CraterExplosionRule()));

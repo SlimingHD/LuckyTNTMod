@@ -2,7 +2,6 @@ package luckytnt.tnteffects;
 
 import java.util.List;
 
-import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.rules.FilterLiquidExplosionRule;
@@ -41,8 +40,9 @@ public class EndGateEffect extends PrimedTNTEffect{
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
-		ExplosionHelper.createSphericalCrater(level, entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f, new FilterOffYExplosionRule(-20, 20,
-			new OffsetExplosionRule(-LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 
+		int islandHeight = 50;
+		ExplosionHelper.createSphericalCrater(level, entity.getPos().add(0d, islandHeight, 0d), 30, 200f, new FilterOffYExplosionRule(-20, 20,
+			new OffsetExplosionRule(-islandHeight, 
 				new FilterBlastResistanceExplosionRule(200f, 
 					new StackedExplosionRule(
 						FilterBlockExplosionRule.applyOnlyWhen(Blocks.AIR, new CopyBlockExplosionRule()),
@@ -55,7 +55,7 @@ public class EndGateEffect extends PrimedTNTEffect{
 			)
 		));
 		
-		ExplosionHelper.createSphericalCrater(level, entity.getPos().add(0d, LuckyTNTConfigValues.ISLAND_HEIGHT.get(), 0d), 30, 200f,
+		ExplosionHelper.createSphericalCrater(level, entity.getPos().add(0d, islandHeight, 0d), 30, 200f,
 			new FilterSurfaceExplosionRule(false, new FilterRandomExplosionRule(0.05f, new CanSurviveExplosionRule(Blocks.CHORUS_FLOWER.defaultBlockState()))
 		));
 
