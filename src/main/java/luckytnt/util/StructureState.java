@@ -1,9 +1,7 @@
 package luckytnt.util;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -23,25 +21,21 @@ import net.minecraft.data.worldgen.TaigaVillagePools;
 import net.minecraft.data.worldgen.TrailRuinsStructurePools;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.util.random.WeightedRandomList;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.Structure.StructureSettings;
 import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
-import net.minecraft.world.level.levelgen.structure.Structure.StructureSettings;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
-import net.minecraft.world.level.levelgen.structure.structures.NetherFortressStructure;
 
 public enum StructureState implements StringRepresentable {
 	
 	PILLAGER_OUTPOST("pillager_outpost", (entity, templatePools) -> {
-		return new JigsawStructure(settings(entity, StructureState.PILLAGER_OUTPOST_OVERRIDES, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN), templatePools.getHolderOrThrow(PillagerOutpostPools.START), 7, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), true);
+		return new JigsawStructure(settings(entity, StructureTNTEffect.PILLAGER_OUTPOST_OVERRIDES, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN), templatePools.getHolderOrThrow(PillagerOutpostPools.START), 7, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), true);
 	}),
 	MINESHAFT("mineshaft", (entity, templatePools) -> {
 		return new StructureTNTEffect.Mineshaft(settings(entity, GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), entity);
@@ -62,13 +56,13 @@ public enum StructureState implements StringRepresentable {
 		return new StructureTNTEffect.Stronghold(settings(entity, TerrainAdjustment.BURY), entity);
 	}),
 	MONUMENT("monument", (entity, templatePools) -> {
-		return new StructureTNTEffect.Monument(settings(entity, StructureState.MONUMENT_OVERRIDES, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE), entity);
+		return new StructureTNTEffect.Monument(settings(entity, StructureTNTEffect.MONUMENT_OVERRIDES, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE), entity);
 	}),
 	OCEAN_RUIN("ocean_ruin", (entity, templatePools) -> {
 		return new StructureTNTEffect.OceanRuin(settings(entity), entity);
 	}),
 	FORTRESS("fortress", (entity, templatePools) -> {
-		return new StructureTNTEffect.Fortress(settings(entity, StructureState.FORTRESS_OVERRIDES, GenerationStep.Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.NONE), entity);
+		return new StructureTNTEffect.Fortress(settings(entity, StructureTNTEffect.FORTRESS_OVERRIDES, GenerationStep.Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.NONE), entity);
 	}),
 	END_CITY("end_city", (entity, templatePools) -> {
 		return new StructureTNTEffect.EndCity(settings(entity), entity);
@@ -92,20 +86,11 @@ public enum StructureState implements StringRepresentable {
 		return new JigsawStructure(villageSettings(entity), templatePools.getHolderOrThrow(TaigaVillagePools.START), 6, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), true);
 	}, true),
 	ANCIENT_CITY("ancient_city", (entity, templatePools) -> {
-		return new JigsawStructure(settings(entity, StructureState.ANCIENT_CITY_OVERRIDES, GenerationStep.Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.BEARD_BOX), templatePools.getHolderOrThrow(AncientCityStructurePieces.START), Optional.of(new ResourceLocation("city_anchor")), 7, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y() + 24)), false, Optional.empty(), 116);
+		return new JigsawStructure(settings(entity, StructureTNTEffect.ANCIENT_CITY_OVERRIDES, GenerationStep.Decoration.UNDERGROUND_DECORATION, TerrainAdjustment.BEARD_BOX), templatePools.getHolderOrThrow(AncientCityStructurePieces.START), Optional.of(new ResourceLocation("city_anchor")), 7, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y() + 24)), false, Optional.empty(), 116);
 	}),
 	TRAIL_RUINS("trail_ruins", (entity, templatePools) -> {
 		return new JigsawStructure(settings(entity, Map.of(), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.BURY), templatePools.getHolderOrThrow(TrailRuinsStructurePools.START), 7, ConstantHeight.of(VerticalAnchor.absolute((int)entity.y())), false);
 	});
-
-	private static final Map<MobCategory, StructureSpawnOverride> FORTRESS_OVERRIDES = Map.of(MobCategory.MONSTER, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.PIECE, NetherFortressStructure.FORTRESS_ENEMIES));
-	private static final Map<MobCategory, StructureSpawnOverride> MONUMENT_OVERRIDES = Map.of(MobCategory.MONSTER, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(EntityType.GUARDIAN, 1, 2, 4))), MobCategory.UNDERGROUND_WATER_CREATURE, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, MobSpawnSettings.EMPTY_MOB_LIST), MobCategory.AXOLOTLS, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, MobSpawnSettings.EMPTY_MOB_LIST));
-	private static final Map<MobCategory, StructureSpawnOverride> PILLAGER_OUTPOST_OVERRIDES = Map.of(MobCategory.MONSTER, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(EntityType.PILLAGER, 1, 1, 1))));
-	private static final Map<MobCategory, StructureSpawnOverride> ANCIENT_CITY_OVERRIDES = Arrays.stream(MobCategory.values()).collect(Collectors.toMap(category -> {
-		return category;
-	}, category -> {
-		return new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, WeightedRandomList.create());
-	}));
 	
 	private final String name;
 	private final StructureFactory factory;
