@@ -12,7 +12,6 @@ import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -29,23 +28,23 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
-		if (entity instanceof Entity ent) {
-			Level level = ent.level();
+		if (entity instanceof PrimedLTNT tnt) {
+			Level level = tnt.level();
 			RandomSource random = level.getRandom();
 			if (!level.isClientSide() && entity.getTNTFuse() == 240) {
-				ent.setNoGravity(true);
+				tnt.setNoGravity(true);
 				Vec3 flying = new Vec3(random.nextDouble() * 2d - 1d, 0, random.nextDouble() * 2d - 1d).normalize().scale(40d);
 				entity.getPersistentData().putDouble("flyingX", flying.x);
 				entity.getPersistentData().putDouble("flyingY", flying.y);
 				entity.getPersistentData().putDouble("flyingZ", flying.z);
-				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> ent), new ClientboundDoubleNBTPacket("flyingX", flying.x, ent.getId()));
-				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> ent), new ClientboundDoubleNBTPacket("flyingY", flying.y, ent.getId()));
-				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> ent), new ClientboundDoubleNBTPacket("flyingZ", flying.z, ent.getId()));
+				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> tnt), new ClientboundDoubleNBTPacket("flyingX", flying.x, tnt.getId()));
+				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> tnt), new ClientboundDoubleNBTPacket("flyingY", flying.y, tnt.getId()));
+				PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> tnt), new ClientboundDoubleNBTPacket("flyingZ", flying.z, tnt.getId()));
 				Vec3 flyingPos = new Vec3(entity.x() + flying.reverse().normalize().scale(20).x, entity.y() + 30, entity.z() + flying.reverse().normalize().scale(20d).z);
-				ent.setPos(flyingPos.x, flyingPos.y, flyingPos.z);
+				tnt.setPos(flyingPos.x, flyingPos.y, flyingPos.z);
 			}
 			if (entity.getTNTFuse() <= 220) {
-				ent.setDeltaMovement(new Vec3(entity.getPersistentData().getDouble("flyingX"), entity.getPersistentData().getDouble("flyingY"), entity.getPersistentData().getDouble("flyingZ")).normalize().scale(40d / 220d));
+				tnt.setDeltaMovement(new Vec3(entity.getPersistentData().getDouble("flyingX"), entity.getPersistentData().getDouble("flyingY"), entity.getPersistentData().getDouble("flyingZ")).normalize().scale(40d / 220d));
 				if (!level.isClientSide() && entity.getTNTFuse() % 10 == 0) {
 					LExplosiveProjectile present = EntityRegistry.PRESENT.get().create(level);
 					present.setPos(entity.getPos());

@@ -33,16 +33,16 @@ public class IceMeteorEffect extends PrimedTNTEffect {
 		explosion.doEntityExplosion(3, true);
 		explosion.spawnExplosionParticles();
 		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), strength, 100, new FilterAirExplosionRule(
-				new StackedExplosionRule(
-						FilterDistanceExplosionRule.lessEqual((strength * 7) / 8, new CraterExplosionRule()),
-						FilterRandomDistanceExplosionRule.quadraticDecrease((strength * 7) / 8, (strength * 9) / 8, 
-								new RandomBlockExplosionRule(RandomList.<BlockState>floatBuilder()
-										.addEntry(Blocks.BLUE_ICE.defaultBlockState(), 0.125f)
-										.addEntry(Blocks.PACKED_ICE.defaultBlockState(), 0.125f)
-										.addEntry(Blocks.AIR.defaultBlockState(), 0.75f).build()
-								)
-						)
+			new StackedExplosionRule(
+				FilterDistanceExplosionRule.lessEqual((strength * 7) / 8, new CraterExplosionRule()),
+				FilterRandomDistanceExplosionRule.quadraticDecrease((strength * 7) / 8, (strength * 9) / 8, 
+					new RandomBlockExplosionRule(RandomList.<BlockState>floatBuilder()
+						.addEntry(Blocks.BLUE_ICE.defaultBlockState(), 0.125f)
+						.addEntry(Blocks.PACKED_ICE.defaultBlockState(), 0.125f)
+						.addEntry(Blocks.AIR.defaultBlockState(), 0.75f).build()
+					)
 				)
+			)
 		));
 	}
 	

@@ -28,6 +28,8 @@ public class DeathRayRayEffect extends PrimedTNTEffect {
 				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 			}
 		});
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

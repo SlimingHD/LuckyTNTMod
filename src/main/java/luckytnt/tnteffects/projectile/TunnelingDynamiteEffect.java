@@ -18,12 +18,13 @@ public class TunnelingDynamiteEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		Entity ent = (Entity)entity;
 		Vec3 direction = entity.getPos().subtract(ent.getPosition(0f)).normalize();
-		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.getLevel());
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
+		particleExplosion.spawnExplosionParticles();
 		float vectorLength = 120f;
 		for (float step = 0; step <= vectorLength; step += 1f) {
 			BlockPos pos = toBlockPos(entity.getPos().add(direction.scale(step)));
 			BlockState state = entity.getLevel().getBlockState(pos);
-			vectorLength -= state.getExplosionResistance(entity.getLevel(), pos, dummyExplosion);
+			vectorLength -= state.getExplosionResistance(entity.getLevel(), pos, particleExplosion);
 			if (step > vectorLength) {
 				break;
 			}
