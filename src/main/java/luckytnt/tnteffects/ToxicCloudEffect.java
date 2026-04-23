@@ -24,13 +24,14 @@ public class ToxicCloudEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
+		Entity ent = (Entity)entity;
 		if (entity.getTNTFuse() == 1200 && !entity.getLevel().isClientSide()) {
 			entity.getPersistentData().putDouble("size", 1d + entity.getLevel().getRandom().nextDouble() * 3d);
-			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)entity), new ClientboundToxicCloudPacket(entity.getPersistentData().getDouble("size"), ((Entity)entity).getId()));
+			PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> ent), new ClientboundToxicCloudPacket(entity.getPersistentData().getDouble("size"), ((Entity)entity).getId()));
 		}
-		((Entity)entity).setDeltaMovement(0, 0, 0);
-		((Entity)entity).setPos(((Entity)entity).xOld, ((Entity)entity).yOld, ((Entity)entity).zOld);
-		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, ((Entity)entity).getBoundingBox());
+		ent.setDeltaMovement(0, 0, 0);
+		ent.setPos(ent.xOld, ent.yOld, ent.zOld);
+		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, ent.getBoundingBox().inflate(entity.getPersistentData().getDouble("size")));
 		for (LivingEntity living : list) {
 			living.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 4));
 			living.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 400, 0));
