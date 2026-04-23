@@ -1,6 +1,5 @@
 package luckytnt.tnteffects.projectile;
 
-
 import luckytnt.registry.EntityRegistry;
 import luckytnt.registry.ItemRegistry;
 import luckytntlib.entity.LExplosiveProjectile;

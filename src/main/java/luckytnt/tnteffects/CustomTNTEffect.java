@@ -68,10 +68,9 @@ public class CustomTNTEffect extends PrimedTNTEffect {
 					new RandomBlockExplosionRule(RandomList.ofEqualProbability(Blocks.MELON.defaultBlockState(), Blocks.PUMPKIN.defaultBlockState()))
 				)
 			));
+			explosion.spawnExplosionParticles();
 		}
 		spawnChildren(entity, config, explosionIntensity);
-		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), explosionIntensity);
-		particleExplosion.spawnExplosionParticles();
 	}
 	
 	private void spawnChildren(IExplosiveEntity entity, CustomTNTConfig config, int explosionIntensity) {
