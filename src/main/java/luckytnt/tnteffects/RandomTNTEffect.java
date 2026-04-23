@@ -17,7 +17,7 @@ public class RandomTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), 3 + entity.getLevel().getRandom().nextInt(maxStrength + 1));
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), 3 + entity.getLevel().getRandom().nextInt(maxStrength - 2));
 		explosion.doEntityExplosion(1.25f, true);
 		explosion.doImprovedBlockExplosion(1f, 1f, false, false, null);
 		explosion.spawnExplosionParticles();

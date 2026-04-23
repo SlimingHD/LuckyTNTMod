@@ -34,6 +34,7 @@ public class ParticlePhysicsTNTEffect extends PrimedTNTEffect {
 			}
 		});
 		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
+		explosion.spawnExplosionParticles();
 	}
 
 	@Override

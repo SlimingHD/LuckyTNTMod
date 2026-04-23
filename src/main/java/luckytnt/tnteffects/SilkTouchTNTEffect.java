@@ -15,10 +15,10 @@ public class SilkTouchTNTEffect extends PrimedTNTEffect {
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(ent.getLevel());
-		ExplosionHelper.customSphericalExplosion(ent.getLevel(), ent.getPos(), 15, (level, center, pos, state) -> {
-			if (!state.isAir() && Math.abs(ent.y() - pos.getY()) <= 5d && Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) < 100f) {
+	public void serverExplosion(IExplosiveEntity entity) {
+		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(entity.getLevel());
+		ExplosionHelper.customSphericalExplosion(entity.getLevel(), entity.getPos(), 15, (level, center, pos, state) -> {
+			if (!state.isAir() && Math.abs(entity.y() - pos.getY()) <= 5d && Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) < 100f) {
 				level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 				state.getBlock().wasExploded(level, pos, dummy);
 				
@@ -26,6 +26,9 @@ public class SilkTouchTNTEffect extends PrimedTNTEffect {
 				level.addFreshEntity(item);
 			}
 		});
+
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 15);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

@@ -75,6 +75,9 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 				}
 			}
 		}
+		
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 15);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

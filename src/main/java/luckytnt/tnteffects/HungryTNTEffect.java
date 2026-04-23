@@ -78,6 +78,7 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), size);
 		explosion.doEntityExplosion(knockback, true);
 		explosion.doImprovedBlockExplosion(resistanceImpact, size >= 110 ? 0.05f : 1f, false, size >= 110 ? true : false, null);
+		explosion.spawnExplosionParticles();
 	}
 	
 	@Override

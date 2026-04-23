@@ -65,6 +65,7 @@ public class FieryHellEffect extends PrimedTNTEffect {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 20);
 		explosion.doEntityExplosion(2f, true);
 		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
+		explosion.spawnExplosionParticles();
 		
 		for (int count = 0; count < 15; count++) {
 			Entity ghast = new Ghast(EntityType.GHAST, entity.getLevel());

@@ -63,6 +63,9 @@ public class TunnelingTNTEffect extends PrimedTNTEffect {
 				}
 			}
 		}
+		
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 10);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

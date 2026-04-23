@@ -6,6 +6,7 @@ import luckytnt.registry.BlockRegistry;
 import luckytnt.rules.DrainAreaExplosionRule;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
@@ -32,6 +33,8 @@ public class WastelandTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		doVaporizeExplosion(entity.getLevel(), entity.getPos(), 75, true);
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 75);
+		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

@@ -184,6 +184,7 @@ public class NetherTNTEffect extends PrimedTNTEffect {
 				}
 			});
 			explosion4.doImprovedBlockExplosion(1f, 0.2f, true, false, null);
+			explosion4.spawnExplosionParticles();
 		}
 	}
 	

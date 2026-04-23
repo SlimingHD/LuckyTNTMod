@@ -5,6 +5,7 @@ import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
+import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -44,6 +45,9 @@ public class PickyTNTEffect extends PrimedTNTEffect {
 		}
 
 		ExplosionHelper.legacySphericalExplosion(level, pos, radius, 99f, FilterBlockExplosionRule.applyOnlyWhen(blockToDestroy, new AlwaysExplosionRule()));
+		
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), radius);
+		particleExplosion.spawnExplosionParticles();
 	}
 
 	@Override

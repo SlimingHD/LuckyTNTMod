@@ -4,7 +4,6 @@ import java.util.List;
 
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
-import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -55,8 +54,6 @@ public class EntityFireworkEffect extends PrimedTNTEffect {
 			}
 			entity.getLevel().addFreshEntity(ent);
 		}
-		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
-		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

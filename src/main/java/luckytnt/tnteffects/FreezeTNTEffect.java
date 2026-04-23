@@ -3,7 +3,6 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
-import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.explosions.rules.FilterLiquidExplosionRule;
@@ -26,8 +25,6 @@ public class FreezeTNTEffect extends PrimedTNTEffect {
 				new FilterCollidableExplosionRule(new BlockExplosionRule(Blocks.ICE.defaultBlockState())),
 				new FilterLiquidExplosionRule(false, new BlockExplosionRule(Blocks.ICE.defaultBlockState()))
 		));
-		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
-		particleExplosion.spawnExplosionParticles();
 	}
 	
 	@Override

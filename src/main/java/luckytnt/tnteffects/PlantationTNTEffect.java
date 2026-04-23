@@ -16,6 +16,7 @@ import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
+import luckytntlib.util.explosions.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
@@ -33,7 +34,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class PlantationTNTEffect extends PrimedTNTEffect {
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		Level level = entity.getLevel();
@@ -41,10 +41,17 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 		ExplosionHelper.createCylindricalCrater(level, entity.getPos(), 41, 41, 200, new FilterAirExplosionRule(
 			LogicExplosionRule.or(
 				FilterBlockExplosionRule.builder().filterForTags(List.of(BlockTags.LEAVES, BlockTags.LOGS)).build(new AlwaysExplosionRule()), 
-				LogicExplosionRule.not(
-					new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), 
+				LogicExplosionRule.and(
+					LogicExplosionRule.not(
+						new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), 
+						new AlwaysExplosionRule()
+					),
+					LogicExplosionRule.not(
+						new FilterLiquidExplosionRule(false, new AlwaysExplosionRule()),
+						new AlwaysExplosionRule()
+					),
 					new AlwaysExplosionRule()
-				), 
+				),
 				new AlwaysExplosionRule()
 			)
 		));
@@ -71,7 +78,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			}
 		}
 		
-		int[] waterDistances = new int[]{0, 7 * 7, 8 * 8, 15 * 15, 16 * 16, 23 * 23, 24 * 24, 31 * 31, 32 * 32, 39 * 39, 40 * 40};
+		int[] waterDistances = new int[]{-1, 0, 7 * 7, 8 * 8, 15 * 15, 16 * 16, 23 * 23, 24 * 24, 31 * 31, 32 * 32, 39 * 39, 40 * 40};
 		for (Pair<BlockPos, Integer> pair : placedCrops) {
 			int distanceSqr = pair.getSecond();
 			boolean placeWater = false;
@@ -83,12 +90,6 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			}
 			if (placeWater) {
 				BlockPos pos = pair.getFirst();
-				BlockPos posAbove = pos.above();
-				BlockState stateAbove = level.getBlockState(posAbove);
-				if (Math.max(stateAbove.getBlock().getExplosionResistance(), stateAbove.getFluidState().getExplosionResistance()) <= 200f) {
-					level.setBlockAndUpdate(posAbove, Blocks.AIR.defaultBlockState());
-					stateAbove.getBlock().wasExploded(level, posAbove, dummy);
-				}
 				placeWater(level, pos, dummy);
 			}
 		}
@@ -116,16 +117,13 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 		BlockPos posAbove = pos.above();
 		BlockState state = level.getBlockState(pos);
 		BlockState stateAbove = level.getBlockState(posAbove);
-		
-		boolean placedFarmland = false;
 		if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) <= 200f) {
 			level.setBlockAndUpdate(pos, Blocks.FARMLAND.defaultBlockState().setValue(FarmBlock.MOISTURE, 7));
 			state.getBlock().wasExploded(level, pos, dummy);
-			placedFarmland = true;
-		}
-		if (placedFarmland && Math.max(stateAbove.getBlock().getExplosionResistance(), stateAbove.getFluidState().getExplosionResistance()) <= 200f) {
-			level.setBlockAndUpdate(posAbove, crop);
-			state.getBlock().wasExploded(level, posAbove, dummy);
+			if (Math.max(stateAbove.getBlock().getExplosionResistance(), stateAbove.getFluidState().getExplosionResistance()) <= 200f) {
+				level.setBlockAndUpdate(posAbove, crop);
+				state.getBlock().wasExploded(level, posAbove, dummy);
+			}
 		}
 	}
 	
@@ -139,14 +137,15 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 		for (Direction dir : Direction.Plane.HORIZONTAL) {
 			BlockPos posRelative = pos.relative(dir);
 			BlockState stateRelative = level.getBlockState(posRelative);
-			if (!stateRelative.is(Blocks.FARMLAND) && !stateRelative.is(Blocks.WATER) && !stateRelative.isCollisionShapeFullBlock(level, posRelative)) {
+			if (!stateRelative.is(Blocks.FARMLAND) && !stateRelative.is(Blocks.WATER) && !stateRelative.is(Blocks.LANTERN) && !stateRelative.isCollisionShapeFullBlock(level, posRelative)) {
 				placeCrop(level, posRelative, dummy, false);
 			}
 		}
 		
+		boolean placeLantern = level.getBiomeManager().getBiome(pos).get().coldEnoughToSnow(pos);
 		BlockPos posBelow = pos.below();
 		BlockState stateBelow = level.getBlockState(posBelow);
-		if (!stateBelow.is(Blocks.WATER) && !stateBelow.isCollisionShapeFullBlock(level, posBelow) && Math.max(stateBelow.getBlock().getExplosionResistance(), stateBelow.getFluidState().getExplosionResistance()) <= 200f) {
+		if ((placeLantern || !stateBelow.is(Blocks.WATER)) && !stateBelow.isCollisionShapeFullBlock(level, posBelow) && Math.max(stateBelow.getBlock().getExplosionResistance(), stateBelow.getFluidState().getExplosionResistance()) <= 200f) {
 			level.setBlockAndUpdate(posBelow, Blocks.DIRT.defaultBlockState());
 			stateBelow.getBlock().wasExploded(level, posBelow, dummy);
 		}
@@ -155,14 +154,22 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 		for (Direction dir : Direction.Plane.HORIZONTAL) {
 			BlockPos posRelative = pos.relative(dir);
 			BlockState stateRelative = level.getBlockState(posRelative);
-			if (!stateRelative.is(Blocks.FARMLAND) && !stateRelative.is(Blocks.WATER) && !stateRelative.isCollisionShapeFullBlock(level, posRelative)) {
+			if (!stateRelative.is(Blocks.FARMLAND) && !stateRelative.is(Blocks.WATER) && !stateRelative.is(Blocks.LANTERN) && !stateRelative.isCollisionShapeFullBlock(level, posRelative)) {
 				shouldPlaceWater = false;
 				break;
 			}
 		}
 		if (shouldPlaceWater) {
-			level.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
+			BlockPos posAbove = pos.above();
+			BlockState stateAbove = level.getBlockState(posAbove);
+			if (stateAbove.is(BlockTags.CROPS)) {
+				level.setBlockAndUpdate(posAbove, Blocks.AIR.defaultBlockState());
+			}
+			level.setBlockAndUpdate(pos, placeLantern ? Blocks.LANTERN.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true) : Blocks.WATER.defaultBlockState());
 			state.getBlock().wasExploded(level, pos, dummy);
+			if ((stateAbove.isAir() || stateAbove.is(BlockTags.CROPS)) && level.getRandom().nextFloat() < 0.25f) {
+				level.setBlockAndUpdate(posAbove, Blocks.LILY_PAD.defaultBlockState());
+			}
 		} else {
 			placeCrop(level, pos, dummy, false);
 		}
