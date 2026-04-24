@@ -1,22 +1,7 @@
 package luckytnt.registry;
 
 import luckytnt.LuckyTNTMod;
-import luckytnt.block.ChristmasTNTBlock;
-import luckytnt.block.GotthardTunnelBlock;
-import luckytnt.block.GunpowderOreBlock;
-import luckytnt.block.ItemFireworkBlock;
-import luckytnt.block.NuclearWasteBlock;
-import luckytnt.block.PresentBlock;
-import luckytnt.block.RedstoneTNTBlock;
-import luckytnt.block.SmokeTNTBlock;
-import luckytnt.block.StructureTNTBlock;
-import luckytnt.block.ToxicStoneBlock;
-import luckytnt.block.TrollTNTBlock;
-import luckytnt.block.TrollTNTMk2Block;
-import luckytnt.block.TrollTNTMk3Block;
-import luckytnt.block.TunnelingTNTBlock;
-import luckytnt.block.UraniumOreBlock;
-import luckytnt.block.XRayTNTBlock;
+import luckytnt.block.*;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.block.LuckyTNTBlock;
 import luckytntlib.registry.TNTBlockRegistryData;
