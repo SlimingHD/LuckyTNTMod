@@ -18,7 +18,55 @@ import luckytnt.entity.PrimedReplayTNT;
 import luckytnt.entity.PrimedResetTNT;
 import luckytnt.entity.PrimedStructureTNT;
 import luckytnt.tnteffects.*;
-import luckytnt.tnteffects.projectile.*;
+import luckytnt.tnteffects.projectile.AcceleratingDynamiteEffect;
+import luckytnt.tnteffects.projectile.AcidicProjectileEffect;
+import luckytnt.tnteffects.projectile.AnimalDynamiteEffect;
+import luckytnt.tnteffects.projectile.BigDynamiteEffect;
+import luckytnt.tnteffects.projectile.BombEffect;
+import luckytnt.tnteffects.projectile.ChemicalDynamiteEffect;
+import luckytnt.tnteffects.projectile.ChemicalProjectileEffect;
+import luckytnt.tnteffects.projectile.ChicxulubMeteorEffect;
+import luckytnt.tnteffects.projectile.ChristmasDynamiteEffect;
+import luckytnt.tnteffects.projectile.ChristmasDynamiteProjectileEffect;
+import luckytnt.tnteffects.projectile.ClusterBombEffect;
+import luckytnt.tnteffects.projectile.ClusterDynamiteEffect;
+import luckytnt.tnteffects.projectile.DeathRayRayEffect;
+import luckytnt.tnteffects.projectile.DeimosMeteorEffect;
+import luckytnt.tnteffects.projectile.DiggingDynamiteEffect;
+import luckytnt.tnteffects.projectile.DisintegratingProjectileEffect;
+import luckytnt.tnteffects.projectile.DynamiteFireworkEffect;
+import luckytnt.tnteffects.projectile.EruptingDynamiteEffect;
+import luckytnt.tnteffects.projectile.FloatingDynamiteEffect;
+import luckytnt.tnteffects.projectile.GravityDynamiteEffect;
+import luckytnt.tnteffects.projectile.HailstoneEffect;
+import luckytnt.tnteffects.projectile.HomingDynamiteEffect;
+import luckytnt.tnteffects.projectile.HydrogenBombBombEffect;
+import luckytnt.tnteffects.projectile.IceMeteorDynamiteEffect;
+import luckytnt.tnteffects.projectile.IceMeteorEffect;
+import luckytnt.tnteffects.projectile.LightningDynamiteEffect;
+import luckytnt.tnteffects.projectile.MeteorDynamiteEffect;
+import luckytnt.tnteffects.projectile.MeteorEffect;
+import luckytnt.tnteffects.projectile.MiniIceMeteorEffect;
+import luckytnt.tnteffects.projectile.MiniMeteorEffect;
+import luckytnt.tnteffects.projectile.MultiplyingDynamiteEffect;
+import luckytnt.tnteffects.projectile.PhobosMeteorEffect;
+import luckytnt.tnteffects.projectile.PompeiiProjectileEffect;
+import luckytnt.tnteffects.projectile.PresentMeteorEffect;
+import luckytnt.tnteffects.projectile.PulseDynamiteEffect;
+import luckytnt.tnteffects.projectile.RainbowDynamiteEffect;
+import luckytnt.tnteffects.projectile.ReactionDynamiteEffect;
+import luckytnt.tnteffects.projectile.RingDynamiteEffect;
+import luckytnt.tnteffects.projectile.SensorDynamiteEffect;
+import luckytnt.tnteffects.projectile.ShatterproofDynamiteEffect;
+import luckytnt.tnteffects.projectile.ShrapnelEffect;
+import luckytnt.tnteffects.projectile.SolarEruptionProjectileEffect;
+import luckytnt.tnteffects.projectile.SpiralDynamiteEffect;
+import luckytnt.tnteffects.projectile.TimerDynamiteEffect;
+import luckytnt.tnteffects.projectile.TsarBombaBombEffect;
+import luckytnt.tnteffects.projectile.TunnelingDynamiteEffect;
+import luckytnt.tnteffects.projectile.UltralightDynamiteEffect;
+import luckytnt.tnteffects.projectile.VacuumShotEffect;
+import luckytnt.tnteffects.projectile.VredefortProjectileEffect;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.LivingPrimedLTNT;
@@ -55,6 +103,7 @@ public class EntityRegistry {
 	public static final TNTXStrengthEffect.Builder TNT_X500_EFFECT = new TNTXStrengthEffect.Builder().strength(80).knockbackStrength(5f);
 	public static final TNTXStrengthEffect.Builder TNT_X2000_EFFECT = new TNTXStrengthEffect.Builder().strength(160).resistanceImpact(0.167f).randomVecLength(0.05f).knockbackStrength(15f).isStrongExplosion(true);
 	public static final TNTXStrengthEffect.Builder TNT_X10000_EFFECT = new TNTXStrengthEffect.Builder().strength(300).resistanceImpact(0.167f).randomVecLength(0.05f).knockbackStrength(30f).isStrongExplosion(true);
+	public static final TNTXStrengthEffect.Builder TNT_X50000_EFFECT = new TNTXStrengthEffect.Builder().strength(600).resistanceImpact(0.133f).randomVecLength(0.025f).knockbackStrength(60f).isStrongExplosion(true);
 	
 	//TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT = LuckyTNTMod.RH.registerTNTEntity("tnt", TNT_EFFECT.buildTNT(() -> BlockRegistry.TNT));
@@ -305,6 +354,9 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> NETHER_TNT = LuckyTNTMod.RH.registerTNTEntity("nether_tnt", new NetherTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> AETHER_TNT = LuckyTNTMod.RH.registerTNTEntity("aether_tnt", new AetherTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> PHOBOS = LuckyTNTMod.RH.registerTNTEntity("phobos", new DropProjectileTNTEffect(() -> EntityRegistry.PHOBOS_METEOR));
+	
+	//Something new
+	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X50000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x50000", TNT_X50000_EFFECT.fuse(540).buildTNT(() -> BlockRegistry.TNT_X50000));
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);
