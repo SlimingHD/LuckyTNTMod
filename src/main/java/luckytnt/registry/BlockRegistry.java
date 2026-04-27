@@ -191,7 +191,7 @@ public class BlockRegistry {
 	
 	public static final RegistryObject<LTNTBlock> LUCKY_GOD = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new LuckyTNTBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.GRASS), LuckyTNTMod.RH.TNTLists.get("g")), new TNTBlockRegistryData.Builder("lucky_god").tab("g").build());
 	
-	//Doomsday
+	//Doomsday TNT
 	public static final RegistryObject<LTNTBlock> SUPERNOVA = LuckyTNTMod.RH.registerTNTBlock("supernova", EntityRegistry.SUPERNOVA, "d", MapColor.COLOR_PURPLE, false);
 	public static final RegistryObject<LTNTBlock> CITY_FIREWORK = LuckyTNTMod.RH.registerTNTBlock("city_firework", EntityRegistry.CITY_FIREWORK, "d", MapColor.COLOR_RED, true);
 	public static final RegistryObject<LTNTBlock> METEOR_STORM = LuckyTNTMod.RH.registerTNTBlock("meteor_storm", EntityRegistry.METEOR_STORM, "d", MapColor.COLOR_BLUE, true);
@@ -235,8 +235,8 @@ public class BlockRegistry {
 	
 	public static final RegistryObject<LTNTBlock> LUCKY_DOOMSDAY = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new LuckyTNTBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.GRASS), LuckyTNTMod.RH.TNTLists.get("d")), new TNTBlockRegistryData.Builder("lucky_doomsday").tab("d").build());
 	
-	//Something new
-	public static final RegistryObject<LTNTBlock> TNT_X50000 = LuckyTNTMod.RH.registerTNTBlock("tnt_x50000", EntityRegistry.TNT_X50000, "n", MapColor.COLOR_MAGENTA, true);
+	//Annihilation TNT
+	public static final RegistryObject<LTNTBlock> TNT_X50000 = LuckyTNTMod.RH.registerTNTBlock("tnt_x50000", EntityRegistry.TNT_X50000, "a", MapColor.COLOR_LIGHT_GREEN, true);
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));

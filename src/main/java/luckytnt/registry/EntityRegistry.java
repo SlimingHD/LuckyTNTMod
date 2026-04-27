@@ -240,7 +240,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> DEIMOS = LuckyTNTMod.RH.registerTNTEntity("deimos", new DropProjectileTNTEffect(() -> EntityRegistry.DEIMOS_METEOR));
 	public static final RegistryObject<EntityType<PrimedLTNT>> PRESENT_DROP = LuckyTNTMod.RH.registerTNTEntity("present_drop", new DropProjectileTNTEffect(() -> EntityRegistry.PRESENT_METEOR));
 	
-	//Doomsday
+	//Doomsday TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERNOVA = LuckyTNTMod.RH.registerTNTEntity("supernova", new SupernovaEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CITY_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("city_firework", new CityFireworkEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> METEOR_STORM = LuckyTNTMod.RH.registerTNTEntity("meteor_storm", new MeteorStormEffect());
@@ -293,7 +293,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> AETHER_TNT = LuckyTNTMod.RH.registerTNTEntity("aether_tnt", new AetherTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> PHOBOS = LuckyTNTMod.RH.registerTNTEntity("phobos", new DropProjectileTNTEffect(() -> EntityRegistry.PHOBOS_METEOR));
 	
-	//Something new
+	//Annihilation TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X50000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x50000", TNT_X50000_EFFECT.fuse(540).buildTNT(() -> BlockRegistry.TNT_X50000));
 	
 	//Dynamite
