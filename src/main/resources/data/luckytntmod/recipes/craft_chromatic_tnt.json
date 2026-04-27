@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "1#1",
+    "#0#",
+    "1#1"
+  ],
+  "key": {
+    "#": {
+      "item": "luckytntmod:strange_matter"
+    },
+    "0": {
+      "item": "luckytntmod:supernova"
+    },
+    "1": {
+      "item": "luckytntmod:rainbow_firework"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:chromatic_tnt",
+    "count": 1
+  }
+}

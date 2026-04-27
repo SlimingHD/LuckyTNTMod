@@ -182,6 +182,7 @@ public class ItemRegistry {
 			components.add(Component.translatable("item.antimatter.info"));
 		}
 	});
+	public static final RegistryObject<Item> STRANGE_MATTER = LuckyTNTMod.itemRegistry.register("strange_matter", () -> new Item(new Item.Properties()));
 	public static final RegistryObject<Item> URANIUM_ORE = LuckyTNTMod.itemRegistry.register("uranium_ore", () -> new BlockItem(BlockRegistry.URANIUM_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> DEEPSLATE_URANIUM_ORE = LuckyTNTMod.itemRegistry.register("deepslate_uranium_ore", () -> new BlockItem(BlockRegistry.DEEPSLATE_URANIUM_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> GUNPOWDER_ORE = LuckyTNTMod.itemRegistry.register("gunpowder_ore", () -> new BlockItem(BlockRegistry.GUNPOWDER_ORE.get(), new Item.Properties()));

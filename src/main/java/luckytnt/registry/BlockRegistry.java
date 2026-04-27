@@ -237,6 +237,7 @@ public class BlockRegistry {
 	
 	//Annihilation TNT
 	public static final RegistryObject<LTNTBlock> TNT_X50000 = LuckyTNTMod.RH.registerTNTBlock("tnt_x50000", EntityRegistry.TNT_X50000, "a", MapColor.COLOR_LIGHT_GREEN, true);
+	public static final RegistryObject<LTNTBlock> CHROMATIC_TNT = LuckyTNTMod.RH.registerTNTBlock("chromatic_tnt", EntityRegistry.CHROMATIC_TNT, "a", MapColor.COLOR_PINK, true);
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));
