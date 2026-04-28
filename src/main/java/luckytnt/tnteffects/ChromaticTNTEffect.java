@@ -62,7 +62,7 @@ public class ChromaticTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
 		int step = entity.getPersistentData().getInt("particleStep");
-		entity.getPersistentData().putInt("particleStep", (step + 1) % 20);
+		entity.getPersistentData().putInt("particleStep", (step + 1) % 11);
 		Vector3f color = PARTICLE_COLORS[step];
 		double radius = Math.sqrt(0.5d) + step / 4d;
 		for (double angle = 0d; angle < 360d; angle += 6d / radius) {

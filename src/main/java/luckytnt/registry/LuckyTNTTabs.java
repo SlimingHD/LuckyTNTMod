@@ -69,7 +69,8 @@ public class LuckyTNTTabs {
 			populator.accept(ItemRegistry.PURPLE_CANDY.get());
 			populator.accept(ItemRegistry.YELLOW_CANDY.get());			
 			populator.accept(ItemRegistry.URANIUM_INGOT.get());			
-			populator.accept(ItemRegistry.ANTIMATTER.get());			
+			populator.accept(ItemRegistry.ANTIMATTER.get());	
+			populator.accept(ItemRegistry.STRANGE_MATTER.get());		
 			populator.accept(ItemRegistry.URANIUM_ORE.get());			
 			populator.accept(ItemRegistry.DEEPSLATE_URANIUM_ORE.get());			
 			populator.accept(ItemRegistry.GUNPOWDER_ORE.get());			
@@ -82,7 +83,6 @@ public class LuckyTNTTabs {
 			populator.accept(ItemRegistry.DEATH_RAY_RAY.get());
 			populator.accept(ItemRegistry.VACUUM_CLEANER.get());
 			populator.accept(ItemRegistry.TOXIC_STONE.get());
-			populator.accept(ItemRegistry.STRANGE_MATTER.get());
         }).withTabsBefore(new ResourceLocation(LuckyTNTMod.MODID, "minecarts")).build();
 		
 		
