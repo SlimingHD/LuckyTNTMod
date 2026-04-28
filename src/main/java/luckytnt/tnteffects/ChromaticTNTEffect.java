@@ -10,7 +10,6 @@ import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.explosions.rules.FilterDistanceExplosionRule;
-import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterLiquidExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
 import luckytntlib.util.explosions.rules.StackedExplosionRule;

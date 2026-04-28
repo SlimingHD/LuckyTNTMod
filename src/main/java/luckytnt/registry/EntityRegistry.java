@@ -295,7 +295,10 @@ public class EntityRegistry {
 	
 	//Annihilation TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X50000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x50000", TNT_X50000_EFFECT.fuse(540).buildTNT(() -> BlockRegistry.TNT_X50000));
+	public static final RegistryObject<EntityType<PrimedLTNT>> HYPERNOVA = LuckyTNTMod.RH.registerTNTEntity("hypernova", new HypernovaEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> REGION_TNT = LuckyTNTMod.RH.registerTNTEntity("region_tnt", new RegionTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHROMATIC_TNT = LuckyTNTMod.RH.registerTNTEntity("chromatic_tnt", new ChromaticTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> CRAMMED_TNT = LuckyTNTMod.RH.registerTNTEntity("crammed_tnt", new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(25).randomVecLength(1f).knockbackStrength(1.5f).fire(true).fuse(380).buildTNT(() -> BlockRegistry.CRAMMED_TNT), Collections.singletonList(new CompactTNTEffect(0.02f, 25, () -> BlockRegistry.COMPRESSED_TNT))));
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);

@@ -43,7 +43,7 @@ public class LuckyTNTTabs {
 			}
         }).withTabsBefore(new ResourceLocation(LuckyTNTMod.MODID, "god_tnt")).withTabsAfter(new ResourceLocation(LuckyTNTMod.MODID, "annihilation_tnt")).build();
 		
-		ANNIHILATION_TNT = CreativeModeTab.builder().title(Component.translatable("item_group.luckytntmod.annihilation_tnt")).icon(() -> new ItemStack(BlockRegistry.TNT_X50000.get())).displayItems((enabledFlags, populator) -> {
+		ANNIHILATION_TNT = CreativeModeTab.builder().title(Component.translatable("item_group.luckytntmod.annihilation_tnt")).icon(() -> new ItemStack(BlockRegistry.CHROMATIC_TNT.get())).displayItems((enabledFlags, populator) -> {
 			for(RegistryObject<? extends Item> item : LuckyTNTMod.RH.creativeTabItemLists.get("a")) {
 				populator.accept(item.get());
 			}

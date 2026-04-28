@@ -237,7 +237,12 @@ public class BlockRegistry {
 	
 	//Annihilation TNT
 	public static final RegistryObject<LTNTBlock> TNT_X50000 = LuckyTNTMod.RH.registerTNTBlock("tnt_x50000", EntityRegistry.TNT_X50000, "a", MapColor.COLOR_LIGHT_GREEN, true);
+	public static final RegistryObject<LTNTBlock> HYPERNOVA = LuckyTNTMod.RH.registerTNTBlock("hypernova", EntityRegistry.HYPERNOVA, "a", MapColor.CRIMSON_STEM, false);
+	public static final RegistryObject<LTNTBlock> REGION_TNT = LuckyTNTMod.RH.registerTNTBlock("region_tnt", EntityRegistry.REGION_TNT, "a", MapColor.CRIMSON_STEM, false);
 	public static final RegistryObject<LTNTBlock> CHROMATIC_TNT = LuckyTNTMod.RH.registerTNTBlock("chromatic_tnt", EntityRegistry.CHROMATIC_TNT, "a", MapColor.COLOR_PINK, true);
+	public static final RegistryObject<LTNTBlock> CRAMMED_TNT = LuckyTNTMod.RH.registerTNTBlock("crammed_tnt", EntityRegistry.CRAMMED_TNT, "a", MapColor.CRIMSON_HYPHAE, true);
+	
+	public static final RegistryObject<LTNTBlock> LUCKY_ANNIHILATION = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new LuckyTNTBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.GRASS), LuckyTNTMod.RH.TNTLists.get("a")), new TNTBlockRegistryData.Builder("lucky_annihilation").tab("a").build());
 	
 	//Other
 	public static final RegistryObject<Block> NUCLEAR_WASTE = LuckyTNTMod.blockRegistry.register("nuclear_waste", () -> new NuclearWasteBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).sound(SoundType.SLIME_BLOCK).instabreak().noCollission().noLootTable().randomTicks().lightLevel(s -> 8)));

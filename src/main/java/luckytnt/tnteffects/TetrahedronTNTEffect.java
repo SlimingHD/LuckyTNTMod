@@ -9,6 +9,7 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -21,7 +22,7 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 	
 	private static final float HEIGHT = (float)Math.sqrt(2d) * RADIUS;
 	private static final double THETA = (Math.PI * 2d) / 3d;
-	private static final Vector3f COLOR = new Vector3f(1f, 0.42f, 0f);
+	private static final ParticleOptions PARTICLE = new DustParticleOptions(new Vector3f(1f, 0.42f, 0f), 0.5f);
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -95,12 +96,12 @@ public class TetrahedronTNTEffect extends PrimedTNTEffect {
 		d.sub(c, cd);
 		
 		for (float f = 0f; f <= 1f; f += 0.05f) {
-			level.addParticle(new DustParticleOptions(COLOR, 0.5f), a.x + f * ab.x, a.y + f * ab.y, a.z + f * ab.z, 0d, 0d, 0d);
-			level.addParticle(new DustParticleOptions(COLOR, 0.5f), a.x + f * ac.x, a.y + f * ac.y, a.z + f * ac.z, 0d, 0d, 0d);
-			level.addParticle(new DustParticleOptions(COLOR, 0.5f), a.x + f * ad.x, a.y + f * ad.y, a.z + f * ad.z, 0d, 0d, 0d);
-			level.addParticle(new DustParticleOptions(COLOR, 0.5f), b.x + f * bc.x, b.y + f * bc.y, b.z + f * bc.z, 0d, 0d, 0d);
-			level.addParticle(new DustParticleOptions(COLOR, 0.5f), b.x + f * bd.x, b.y + f * bd.y, b.z + f * bd.z, 0d, 0d, 0d);
-			level.addParticle(new DustParticleOptions(COLOR, 0.5f), c.x + f * cd.x, c.y + f * cd.y, c.z + f * cd.z, 0d, 0d, 0d);
+			level.addParticle(PARTICLE, a.x + f * ab.x, a.y + f * ab.y, a.z + f * ab.z, 0d, 0d, 0d);
+			level.addParticle(PARTICLE, a.x + f * ac.x, a.y + f * ac.y, a.z + f * ac.z, 0d, 0d, 0d);
+			level.addParticle(PARTICLE, a.x + f * ad.x, a.y + f * ad.y, a.z + f * ad.z, 0d, 0d, 0d);
+			level.addParticle(PARTICLE, b.x + f * bc.x, b.y + f * bc.y, b.z + f * bc.z, 0d, 0d, 0d);
+			level.addParticle(PARTICLE, b.x + f * bd.x, b.y + f * bd.y, b.z + f * bd.z, 0d, 0d, 0d);
+			level.addParticle(PARTICLE, c.x + f * cd.x, c.y + f * cd.y, c.z + f * cd.z, 0d, 0d, 0d);
 		}
 	}
 	
