@@ -296,6 +296,7 @@ public class EntityRegistry {
 	//Annihilation TNT
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X50000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x50000", TNT_X50000_EFFECT.fuse(540).buildTNT(() -> BlockRegistry.TNT_X50000));
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHROMATIC_TNT = LuckyTNTMod.RH.registerTNTEntity("chromatic_tnt", new ChromaticTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERFLAT_TNT = LuckyTNTMod.RH.registerTNTEntity("superflat_tnt", new SuperflatTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);
