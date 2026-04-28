@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "000",
+    "313",
+    "222"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:flat_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:strange_matter"
+    },
+    "2": {
+      "item": "luckytntmod:flat_earth"
+    },
+    "3": {
+      "item": "luckytntmod:mountaintop_removal"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:superflat_tnt",
+    "count": 1
+  }
+}

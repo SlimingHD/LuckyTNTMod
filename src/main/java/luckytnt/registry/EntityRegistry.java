@@ -299,6 +299,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> REGION_TNT = LuckyTNTMod.RH.registerTNTEntity("region_tnt", new RegionTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHROMATIC_TNT = LuckyTNTMod.RH.registerTNTEntity("chromatic_tnt", new ChromaticTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CRAMMED_TNT = LuckyTNTMod.RH.registerTNTEntity("crammed_tnt", new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(25).randomVecLength(1f).knockbackStrength(1.5f).fire(true).fuse(380).buildTNT(() -> BlockRegistry.CRAMMED_TNT), Collections.singletonList(new CompactTNTEffect(0.02f, 25, () -> BlockRegistry.COMPRESSED_TNT))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERFLAT_TNT = LuckyTNTMod.RH.registerTNTEntity("superflat_tnt", new SuperflatTNTEffect());
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);

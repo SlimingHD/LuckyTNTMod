@@ -225,6 +225,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.REGION_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CHROMATIC_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.CRAMMED_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.SUPERFLAT_TNT.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
