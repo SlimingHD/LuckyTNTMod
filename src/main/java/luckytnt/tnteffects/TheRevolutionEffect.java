@@ -15,18 +15,16 @@ public class TheRevolutionEffect extends PrimedTNTEffect {
 	public void explosionTick(IExplosiveEntity entity) {
 		if (entity instanceof PrimedLTNT ent) {
 			ent.setDeltaMovement(ent.getDeltaMovement().x, 0.15f, ent.getDeltaMovement().z);
-			if (entity.getTNTFuse() < 60) {
-				if (entity.getTNTFuse() % 6 == 0) {
-					ent.getPersistentData().putFloat("spiral_power", ent.getPersistentData().getFloat("spiral_power") + 0.15f);
-					PrimedLTNT spiralTnt = EntityRegistry.SPIRAL_TNT.get().create(entity.getLevel());
-					spiralTnt.setTNTFuse(140);
-					spiralTnt.setPos(entity.x(), entity.y(), entity.z());
-					spiralTnt.setOwner(entity.owner());
-					spiralTnt.setDeltaMovement(ent.getLookAngle().normalize().scale(ent.getPersistentData().getFloat("spiral_power")));
-					entity.getLevel().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
-					entity.getLevel().addFreshEntity(spiralTnt);
-					ent.setYRot(ent.getYRot() + 60f);
-				}
+			if (!ent.level().isClientSide() && entity.getTNTFuse() < 60 && entity.getTNTFuse() % 6 == 0) {
+				ent.getPersistentData().putFloat("spiral_power", ent.getPersistentData().getFloat("spiral_power") + 0.15f);
+				PrimedLTNT spiral = EntityRegistry.SPIRAL_TNT.get().create(entity.getLevel());
+				spiral.setTNTFuse(140);
+				spiral.setPos(entity.x(), entity.y(), entity.z());
+				spiral.setOwner(entity.owner());
+				spiral.setDeltaMovement(ent.getLookAngle().normalize().scale(ent.getPersistentData().getFloat("spiral_power")));
+				entity.getLevel().playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
+				entity.getLevel().addFreshEntity(spiral);
+				ent.setYRot(ent.getYRot() + 60f);
 			}
 		}
 	}

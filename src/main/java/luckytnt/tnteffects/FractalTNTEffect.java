@@ -11,7 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-public class HelixEffect extends PrimedTNTEffect {
+public class FractalTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
@@ -19,22 +19,22 @@ public class HelixEffect extends PrimedTNTEffect {
 		if (!entity.getLevel().isClientSide()) {
 			Level level = entity.getLevel();
 			
-			if (entity.getTNTFuse() == 140) {
-				ent.getPersistentData().putFloat("power", 0.35f);
+			if (entity.getTNTFuse() == 260) {
+				ent.getPersistentData().putFloat("power", 0.25f);
 			}
 			if (entity.getTNTFuse() < 60 && entity.getTNTFuse() % 6 == 0) {
 				float power = ent.getPersistentData().getFloat("power");
 				
-				PrimedLTNT revolution = EntityRegistry.THE_REVOLUTION.get().create(level);
-				revolution.setPos(entity.getPos());
-				revolution.setOwner(entity.owner());
-				revolution.setTNTFuse(140);
-				revolution.setDeltaMovement(ent.getLookAngle().normalize().scale(power));
-				level.addFreshEntity(revolution);
+				PrimedLTNT helix = EntityRegistry.HELIX.get().create(level);
+				helix.setPos(entity.getPos());
+				helix.setOwner(entity.owner());
+				helix.setTNTFuse(200);
+				helix.setDeltaMovement(ent.getLookAngle().normalize().scale(power));
+				level.addFreshEntity(helix);
 				
 				level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.DISPENSER_LAUNCH, SoundSource.MASTER, 3, 1);
-				ent.getPersistentData().putFloat("power", power + 0.35f);
-				ent.setYRot(ent.getYRot() + 60f);
+				ent.getPersistentData().putFloat("power", power + 0.25f);
+				ent.setYRot(ent.getYRot() + 30f);
 			}
 		}
 		ent.setDeltaMovement(ent.getDeltaMovement().x, 0.2f, ent.getDeltaMovement().z);
@@ -42,11 +42,11 @@ public class HelixEffect extends PrimedTNTEffect {
 	
 	@Override
 	public Block getBlock() {
-		return BlockRegistry.HELIX.get();
+		return BlockRegistry.FRACTAL_TNT.get();
 	}
 	
 	@Override
 	public int getDefaultFuse(IExplosiveEntity entity) {
-		return 140;
+		return 260;
 	}
 }

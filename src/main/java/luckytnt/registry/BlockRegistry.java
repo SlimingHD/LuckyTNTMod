@@ -242,6 +242,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> CHROMATIC_TNT = LuckyTNTMod.RH.registerTNTBlock("chromatic_tnt", EntityRegistry.CHROMATIC_TNT, "a", MapColor.COLOR_PINK, true);
 	public static final RegistryObject<LTNTBlock> CRAMMED_TNT = LuckyTNTMod.RH.registerTNTBlock("crammed_tnt", EntityRegistry.CRAMMED_TNT, "a", MapColor.CRIMSON_HYPHAE, true);
 	public static final RegistryObject<LTNTBlock> SUPERFLAT_TNT = LuckyTNTMod.RH.registerTNTBlock("superflat_tnt", EntityRegistry.SUPERFLAT_TNT, "a", MapColor.COLOR_LIGHT_BLUE, true);
+	public static final RegistryObject<LTNTBlock> FRACTAL_TNT = LuckyTNTMod.RH.registerTNTBlock("fractal_tnt", EntityRegistry.FRACTAL_TNT, "a", MapColor.COLOR_LIGHT_BLUE, false);
 	
 	public static final RegistryObject<LTNTBlock> LUCKY_ANNIHILATION = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new LuckyTNTBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.GRASS), LuckyTNTMod.RH.TNTLists.get("a")), new TNTBlockRegistryData.Builder("lucky_annihilation").tab("a").build());
 	

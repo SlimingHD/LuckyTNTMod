@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#1#",
+    "#0#",
+    "###"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:levitating_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:strange_matter"
+    },
+    "#": {
+      "item": "luckytntmod:helix"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:fractal_tnt",
+    "count": 1
+  }
+}

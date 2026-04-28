@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "121",
+    "#0#",
+    "121"
+  ],
+  "key": {
+    "0": {
+      "item": "luckytntmod:chunk_tnt"
+    },
+    "1": {
+      "item": "luckytntmod:cubic_tnt"
+    },
+    "#": {
+      "item": "luckytntmod:hexahedron"
+    },
+    "2": {
+      "item": "luckytntmod:strange_matter"
+    }
+  },
+  "result": {
+    "item": "luckytntmod:region_tnt",
+    "count": 1
+  }
+}
