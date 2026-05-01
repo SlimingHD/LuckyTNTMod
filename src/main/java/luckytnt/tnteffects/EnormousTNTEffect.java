@@ -8,19 +8,19 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-public class ColossalTNTEffect extends PrimedTNTEffect {
+public class EnormousTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 190);
-		explosion.doEntityExplosion(20f, true);
-		explosion.doImprovedBlockExplosion(0.5f, 0.167f, false, false, null);
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 380);
+		explosion.doEntityExplosion(25f, true);
+		explosion.doImprovedBlockExplosion(0.167f, 0.1f, true, false, null);
 		explosion.spawnExplosionParticles();
 	}
 	
 	@Override
 	public void spawnParticles(IExplosiveEntity entity) {
-		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 19.5d, entity.z(), 0d, 0d, 0d);
+		entity.getLevel().addParticle(ParticleTypes.SMOKE, entity.x(), entity.y() + 39.5d, entity.z(), 0d, 0d, 0d);
 	}
 	
 	@Override
@@ -30,11 +30,11 @@ public class ColossalTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public int getDefaultFuse(IExplosiveEntity entity) {
-		return 400;
+		return 520;
 	}
 	
 	@Override
 	public float getSize(IExplosiveEntity entity) {
-		return 20f;
+		return 40f;
 	}
 }

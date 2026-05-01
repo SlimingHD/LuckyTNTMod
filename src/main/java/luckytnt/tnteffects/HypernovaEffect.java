@@ -18,7 +18,7 @@ public class HypernovaEffect extends SphereTNTEffect {
 	public static final ParticleOptions PARTICLE = new DustColorTransitionOptions(new Vector3f(0.4f, 0.8f, 1f), new Vector3f(0f, 0f, 0.6f), 1f);
 	
 	public HypernovaEffect() {
-		super(() -> BlockRegistry.HYPERNOVA, 450, 100000f);
+		super(() -> BlockRegistry.HYPERNOVA, 500, 100000f);
 	}
 	
 	@Override

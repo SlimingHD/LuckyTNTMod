@@ -211,6 +211,7 @@
 	"block.luckytntmod.superflat_tnt" : "Superflat TNT",
 	"block.luckytntmod.fractal_tnt" : "Fractal TNT",
 	"block.luckytntmod.lucky_annihilation" : "Lucky Annihilation",
+	"block.luckytntmod.enormous_tnt" : "Enormous TNT",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -598,6 +599,7 @@
 	"entity.luckytntmod.superflat_tnt" : "Superflat TNT",
 	"entity.luckytntmod.fractal_tnt" : "Fractal TNT",
 	"entity.luckytntmod.lucky_annihilation" : "Lucky Annihilation",
+	"entity.luckytntmod.enormous_tnt" : "Enormous TNT",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",

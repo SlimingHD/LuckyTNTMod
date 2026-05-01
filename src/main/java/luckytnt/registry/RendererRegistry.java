@@ -1,9 +1,6 @@
 package luckytnt.registry;
 
-import luckytnt.client.renderer.AngryMinerRenderer;
-import luckytnt.client.renderer.BombRenderer;
-import luckytnt.client.renderer.BouncingTNTRenderer;
-import luckytnt.client.renderer.DeathRayTNTRenderer;
+import luckytnt.client.renderer.*;
 import luckytntlib.client.renderer.LDynamiteRenderer;
 import luckytntlib.client.renderer.LTNTMinecartRenderer;
 import luckytntlib.client.renderer.LTNTRenderer;
@@ -192,7 +189,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.ATLANTIS.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SOLAR_ERUPTION.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.VREDEFORT.get(), LTNTRenderer::new);
-		event.registerEntityRenderer(EntityRegistry.COLOSSAL_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.COLOSSAL_TNT.get(), AlwaysLTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.STRUCTURE_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.GRANDE_FINALE.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FLAT_EARTH.get(), LTNTRenderer::new);
@@ -227,6 +224,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.CRAMMED_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.SUPERFLAT_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FRACTAL_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.ENORMOUS_TNT.get(), AlwaysLTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
