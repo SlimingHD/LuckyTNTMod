@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/real_estate_rookie",
+  "criteria": {
+    "explode_mankinds_mark": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.real_estate_agent.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:mankinds_mark"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.real_estate_agent.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_mankinds_mark"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

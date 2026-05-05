@@ -374,21 +374,19 @@
 	"item.luckytntmod.death_ray_ray" : "Death Ray Ray",
 	"item.luckytntmod.vacuum_cleaner" : "Vacuum Cleaner",
 	"item.luckytntmod.strange_matter" : "Strange matter",
-  
-	"item.floating_island.info" : "\u00A77\u00A7oChange the height of the island by adjusting the config file! On a server you will also have to adjust the server config file!",	
-	"item.smoke_tnt.info" : "\u00A77\u00A7oChange the color of the smoke by rightclicking the TNT with red, green, blue, white or black dye!",
-   	"item.gotthard_tunnel.info" : "\u00A77\u00A7oChange wether this TNT generates streets too by right-clicking the Block with the Configuration Wand!",
- 	"item.entity_firework.info" : "\u00A77\u00A7oThe closest non-player entity to the TNT is chosen for the firework!",
- 	"item.item_firework.info" : "\u00A77\u00A7oRightclick this TNT with an item to use it in the firework!",
- 	"item.custom_tnt.info" : "\u00A77\u00A7oChange the effects of this TNT by adjusting them in the config file! On a server you will also have to adjust the server config file!",
- 	"item.custom_firework.info" : "\u00A77\u00A7oThe block below this TNT is chosen for the firework!",
- 	"item.structure_tnt.info" : "\u00A77\u00A7oRightclick this TNT with the Configuration Wand in order to change the placed structure!",
- 	"item.configuration_wand.info": "\u00A77\u00A7oRight-click with this Wand on specific TNTs to change their Configuration!",
-	"item.antimatter.info" : "\u00A77\u00A7oMay be created when Uranium Ore is destroyed by a Death Ray Ray!",
-	"item.obsidian_rail.info" : "\u00A77\u00A7oObsidian Rails have a lot of Explosion Resistance! Minecarts exploding on them will not deal block damage!",
+  	
+	"item.luckytntmod.smoke_tnt.info" : "\u00A77\u00A7oChange the color of the smoke by rightclicking the TNT with red, green, blue, white or black dye!",
+   	"item.luckytntmod.gotthard_tunnel.info" : "\u00A77\u00A7oChange whether this TNT generates streets too by right-clicking the Block with the Configuration Wand!",
+ 	"item.luckytntmod.entity_firework.info" : "\u00A77\u00A7oThe closest non-player entity to the TNT is chosen for the firework!",
+ 	"item.luckytntmod.item_firework.info" : "\u00A77\u00A7oRightclick this TNT with an item to use it in the firework!",
+ 	"item.luckytntmod.custom_tnt.info" : "\u00A77\u00A7oChange the effects of this TNT by adjusting them in the config file! On a server you will also have to adjust the server config file!",
+ 	"item.luckytntmod.custom_firework.info" : "\u00A77\u00A7oThe block below this TNT is chosen for the firework!",
+ 	"item.luckytntmod.structure_tnt.info" : "\u00A77\u00A7oRightclick this TNT with the Configuration Wand in order to change the placed structure!",
+ 	"item.luckytntmod.configuration_wand.info": "\u00A77\u00A7oRight-click with this Wand on specific TNTs to change their Configuration!",
+	"item.luckytntmod.antimatter.info" : "\u00A77\u00A7oMay be created when Uranium Ore is destroyed by a Death Ray Ray!",
+	"item.luckytntmod.obsidian_rail.info" : "\u00A77\u00A7oObsidian Rails have a lot of Explosion Resistance! Minecarts exploding on them will not deal block damage!",
 	"item.luckytntmod.vacuum_cleaner.info" : "\u00A77\u00A7oUse the Vacuum Cleaner to get rid of those pesky Toxic Clouds!",
-	
-	"item.grande_finale.info" : "\u00A77\u00A7o*Community TNT* Thank you for 100.000 downloads!",
+	"item.luckytntmod.grande_finale.info" : "\u00A77\u00A7o*Community TNT* Thank you for 100.000 downloads!",
 	
 	"entity.luckytntmod.tnt" : "TNT",
 	"entity.luckytntmod.tnt_x5" : "TNT x5",
@@ -838,5 +836,14 @@
   	"command.ltmdisaster.toxicclouds": "Started the disaster Toxic Clouds",
   	"command.ltmdisaster.clear": "All disasters have been stopped",
   	"command.randomtnt.success1": "Successfully distributed ",
-  	"command.randomtnt.success2": " Items"
+  	"command.randomtnt.success2": " Items",
+  	
+  	"advancement.luckytntmod.root.title": "Lucky TNT Mod",
+  	"advancement.luckytntmod.root.description": "Welcome to the Lucky TNT Mod with over 200 new TNTs! This is where your wildest dreams of destruction come true... As long as your PC can handle it.",
+  	"advancement.luckytntmod.real_estate_rookie.title": "Real Estate Rookie",
+  	"advancement.luckytntmod.real_estate_rookie.description": "Better than sleeping outside... But not by much.",
+  	"advancement.luckytntmod.real_estate_agent.title": "Real Estate Agent",
+  	"advancement.luckytntmod.real_estate_agent.description": "Still not the best, but we're getting there. By the way: really taps into that gothic vibe, doesn't it?",
+  	"advancement.luckytntmod.real_estate_master.title": "Real Estate Master",
+  	"advancement.luckytntmod.real_estate_master.description": "The finest of the finest we have to offer. Which is evidently not very fine."
 }

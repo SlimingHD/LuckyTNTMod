@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/real_estate_agent",
+  "criteria": {
+    "explode_mansion": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.real_estate_master.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:mansion"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.real_estate_master.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_mansion"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

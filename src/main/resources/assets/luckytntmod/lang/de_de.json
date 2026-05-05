@@ -373,21 +373,19 @@
 	"item.luckytntmod.death_ray_ray" : "Todesstrahl-Strahl",
 	"item.luckytntmod.vacuum_cleaner" : "Staubsauger",
 	"item.luckytntmod.strange_matter" : "Seltsame Materie",
-	
-	"item.floating_island.info" : "\u00A77\u00A7o\u00c4ndere die H\u00f6he der Insel indem du die Konfiguration bearbeitest! Auf einem Server wirst du auch die Server-Konfiguration bearbeiten m\u00fcssen!",	
-	"item.smoke_tnt.info" : "\u00A77\u00A7o\u00c4ndere die Farbe des Rauchs indem du mit roter, gr\u00fcner, blauer, wei\u00dfer oder schwarzer Farbe darauf rechtsklickst!", 	
- 	"item.configuration_wand.info": "\u00A77\u00A7oRechtklicke mit diesem Stab bestimmte TNTs, um deren Konfiguration zu \u00e4ndern!",
-   	"item.gotthard_tunnel.info": "\u00A77\u00A7o\u00c4ndere, dass das TNT auch Stra\u00dfen generiert, indem du mit dem Konfigurierungs-Stab auf den Block rechtsklickst!",
- 	"item.entity_firework.info" : "\u00A77\u00A7oDer diesem TNT n\u00e4heste NPC wird f\u00fcr das Feuerwerk verwendet!",
- 	"item.item_firework.info" : "\u00A77\u00A7oRechtsklicke dieses TNT mit einem Item in der Hand, um dieses f\u00fcr das Feuerwerk zu verwenden!",
- 	"item.structure_tnt.info" : "\u00A77\u00A7oRechtsklicke dieses TNT mit dem Konfigurations-Stab, um die platzierte Struktur zu \u00e4ndern!", 
- 	"item.custom_tnt.info" : "\u00A77\u00A7o\u00c4ndere die Effekte des TNTs indem du die Konfiguration bearbeitest! Auf einem Server wirst du auch die Server-Konfiguration bearbeiten m\u00fcssen!",
- 	"item.custom_firework.info" : "\u00A77\u00A7oDer Block unter diesem TNT wird f\u00fcr das Feuerwerk verwendet!",
- 	"item.antimatter.info": "\u00A77\u00A7oKann erstellt werden, wenn Uranerz von einem Todesstrahl-Strahl zerst\u00f6rt wurde!",
-	"item.obsidian_rails.info": "\u00A77\u00A7oObsidian Schienen haben eine Menge Explosionsresistenz! TNT-Loren, die auf ihnen explodieren verursachen keinen Block-Schaden!",
+		
+	"item.luckytntmod.smoke_tnt.info" : "\u00A77\u00A7o\u00c4ndere die Farbe des Rauchs indem du mit roter, gr\u00fcner, blauer, wei\u00dfer oder schwarzer Farbe darauf rechtsklickst!", 	
+ 	"item.luckytntmod.configuration_wand.info": "\u00A77\u00A7oRechtklicke mit diesem Stab bestimmte TNTs, um deren Konfiguration zu \u00e4ndern!",
+   	"item.luckytntmod.gotthard_tunnel.info": "\u00A77\u00A7o\u00c4ndere, dass das TNT auch Stra\u00dfen generiert, indem du mit dem Konfigurierungs-Stab auf den Block rechtsklickst!",
+ 	"item.luckytntmod.entity_firework.info" : "\u00A77\u00A7oDer diesem TNT n\u00e4heste NPC wird f\u00fcr das Feuerwerk verwendet!",
+ 	"item.luckytntmod.item_firework.info" : "\u00A77\u00A7oRechtsklicke dieses TNT mit einem Item in der Hand, um dieses f\u00fcr das Feuerwerk zu verwenden!",
+ 	"item.luckytntmod.structure_tnt.info" : "\u00A77\u00A7oRechtsklicke dieses TNT mit dem Konfigurations-Stab, um die platzierte Struktur zu \u00e4ndern!", 
+ 	"item.luckytntmod.custom_tnt.info" : "\u00A77\u00A7o\u00c4ndere die Effekte des TNTs indem du die Konfiguration bearbeitest! Auf einem Server wirst du auch die Server-Konfiguration bearbeiten m\u00fcssen!",
+ 	"item.luckytntmod.custom_firework.info" : "\u00A77\u00A7oDer Block unter diesem TNT wird f\u00fcr das Feuerwerk verwendet!",
+ 	"item.luckytntmod.antimatter.info": "\u00A77\u00A7oKann erstellt werden, wenn Uranerz von einem Todesstrahl-Strahl zerst\u00f6rt wurde!",
+	"item.luckytntmod.obsidian_rails.info": "\u00A77\u00A7oObsidian Schienen haben eine Menge Explosionsresistenz! TNT-Loren, die auf ihnen explodieren verursachen keinen Block-Schaden!",
 	"item.luckytntmod.vacuum_cleaner.info" : "\u00A77\u00A7oBenutze den Staubsauger um die nervigen Giftigen Wolken los zu werden",
-	
-	"item.grande_finale.info": "\u00A77\u00A7o*Community TNT* Danke f\u00fcr 100.000 Downloads!",
+	"item.luckytntmod.grande_finale.info": "\u00A77\u00A7o*Community TNT* Danke f\u00fcr 100.000 Downloads!",
 	
 	"entity.luckytntmod.tnt" : "TNT",
 	"entity.luckytntmod.tnt_x5" : "TNT x5",
@@ -837,5 +835,14 @@
 	"command.ltmdisaster.clear": "Alle Desaster wurden beendet",
 	"command.ltmdisaster.doomsdayactive": "Das Desaster Weltuntergang ist noch aktiv f\u00fcr ",
   	"command.randomtnt.success1": "Verteilte erfolgreich ",
-  	"command.randomtnt.success2": " Gegenstände"
+  	"command.randomtnt.success2": " Gegenstände",
+  	
+  	"advancement.luckytntmod.root.title": "Lucky TNT Mod",
+  	"advancement.luckytntmod.root.description": "Willkommen bei der Lucky TNT Mod mit über 200 neuen TNTs! Hier werden deine kühnsten Träume über Zerstörung wahr... Solange dein PC klarkommt.",
+  	"advancement.luckytntmod.real_estate_rookie.title": "Immobilien-Neuling",
+  	"advancement.luckytntmod.real_estate_rookie.description": "Besser als draußen zu schlafen... Aber nicht viel besser.",
+  	"advancement.luckytntmod.real_estate_agent.title": "Immobilienmakler",
+  	"advancement.luckytntmod.real_estate_agent.description": "Immer noch nicht das Beste, aber wir sind auf einem guten Weg. Nebenbei: Gibt ganz schöne Gothic-Vibes ab, oder?",
+  	"advancement.luckytntmod.real_estate_master.title": "Immobilien-Meister",
+  	"advancement.luckytntmod.real_estate_master.description": "Das Beste vom Besten, das wir zu bieten haben. Was offenkundig nicht sonderlich gut ist."
 }

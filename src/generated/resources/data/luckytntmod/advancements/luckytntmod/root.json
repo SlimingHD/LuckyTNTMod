@@ -1,0 +1,38 @@
+{
+  "criteria": {
+    "aquire_tnt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:tnt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "minecraft:textures/block/tnt_side.png",
+    "description": {
+      "translate": "advancement.luckytntmod.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:tnt"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.luckytntmod.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

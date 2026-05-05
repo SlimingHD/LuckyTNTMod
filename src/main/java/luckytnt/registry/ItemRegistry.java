@@ -175,14 +175,14 @@ public class ItemRegistry {
 	public static final RegistryObject<Item> PURPLE_CANDY = LuckyTNTMod.itemRegistry.register("purple_candy", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().alwaysEat().fast().nutrition(1).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 3), 1).effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 2000, 1), 1).build())));
 	public static final RegistryObject<Item> YELLOW_CANDY = LuckyTNTMod.itemRegistry.register("yellow_candy", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().alwaysEat().fast().nutrition(1).effect(() -> new MobEffectInstance(MobEffects.DIG_SPEED, 2000, 3), 1).build())));;
 	public static final RegistryObject<Item> URANIUM_INGOT = LuckyTNTMod.itemRegistry.register("uranium_ingot", () -> new Item(new Item.Properties()));
-	public static final RegistryObject<Item> ANTIMATTER = LuckyTNTMod.itemRegistry.register("antimatter", () -> new Item(new Item.Properties().rarity(Rarity.RARE)) {
+	public static final RegistryObject<Item> ANTIMATTER = LuckyTNTMod.itemRegistry.register("antimatter", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)) {
 		@Override
 		public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 			super.appendHoverText(stack, level, components, flag);
-			components.add(Component.translatable("item.antimatter.info"));
+			components.add(Component.translatable("item.luckytntmod.antimatter.info"));
 		}
 	});
-	public static final RegistryObject<Item> STRANGE_MATTER = LuckyTNTMod.itemRegistry.register("strange_matter", () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON)));
+	public static final RegistryObject<Item> STRANGE_MATTER = LuckyTNTMod.itemRegistry.register("strange_matter", () -> new Item(new Item.Properties().rarity(Rarity.RARE)));
 	public static final RegistryObject<Item> URANIUM_ORE = LuckyTNTMod.itemRegistry.register("uranium_ore", () -> new BlockItem(BlockRegistry.URANIUM_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> DEEPSLATE_URANIUM_ORE = LuckyTNTMod.itemRegistry.register("deepslate_uranium_ore", () -> new BlockItem(BlockRegistry.DEEPSLATE_URANIUM_ORE.get(), new Item.Properties()));
 	public static final RegistryObject<Item> GUNPOWDER_ORE = LuckyTNTMod.itemRegistry.register("gunpowder_ore", () -> new BlockItem(BlockRegistry.GUNPOWDER_ORE.get(), new Item.Properties()));
@@ -191,35 +191,35 @@ public class ItemRegistry {
 		@Override
 		public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 			super.appendHoverText(stack, level, components, flag);
-			components.add(Component.translatable("item.configuration_wand.info"));
+			components.add(Component.translatable("item.luckytntmod.configuration_wand.info"));
 		}
 	});
 	public static final RegistryObject<Item> OBSIDIAN_RAIL = LuckyTNTMod.itemRegistry.register("obsidian_rail", () -> new BlockItem(BlockRegistry.OBSIDIAN_RAIL.get(), new Item.Properties()) {
 		@Override
 		public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 			super.appendHoverText(stack, level, components, flag);
-			components.add(Component.translatable("item.obsidian_rail.info"));
+			components.add(Component.translatable("item.luckytntmod.obsidian_rail.info"));
 		}
 	});
 	public static final RegistryObject<Item> OBSIDIAN_POWERED_RAIL = LuckyTNTMod.itemRegistry.register("obsidian_powered_rail", () -> new BlockItem(BlockRegistry.OBSIDIAN_POWERED_RAIL.get(), new Item.Properties()) {
 		@Override
 		public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 			super.appendHoverText(stack, level, components, flag);
-			components.add(Component.translatable("item.obsidian_rail.info"));
+			components.add(Component.translatable("item.luckytntmod.obsidian_rail.info"));
 		}
 	});
 	public static final RegistryObject<Item> OBSIDIAN_ACTIVATOR_RAIL = LuckyTNTMod.itemRegistry.register("obsidian_activator_rail", () -> new BlockItem(BlockRegistry.OBSIDIAN_ACTIVATOR_RAIL.get(), new Item.Properties()) {
 		@Override
 		public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 			super.appendHoverText(stack, level, components, flag);
-			components.add(Component.translatable("item.obsidian_rail.info"));
+			components.add(Component.translatable("item.luckytntmod.obsidian_rail.info"));
 		}
 	});
 	public static final RegistryObject<Item> OBSIDIAN_DETECTOR_RAIL = LuckyTNTMod.itemRegistry.register("obsidian_detector_rail", () -> new BlockItem(BlockRegistry.OBSIDIAN_DETECTOR_RAIL.get(),new Item.Properties()) {
 		@Override
 		public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> components, TooltipFlag flag) {
 			super.appendHoverText(stack, level, components, flag);
-			components.add(Component.translatable("item.obsidian_rail.info"));
+			components.add(Component.translatable("item.luckytntmod.obsidian_rail.info"));
 		}
 	});
 	public static final RegistryObject<LDynamiteItem> DEATH_RAY_RAY = LuckyTNTMod.RH.registerDynamiteItem(LuckyTNTMod.itemRegistry, "death_ray_ray", () -> new DeathRayRayItem(), "none", false, true);

@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "explode_any_house_tnt": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.real_estate_rookie.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:woodhouse_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.real_estate_rookie.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_any_house_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

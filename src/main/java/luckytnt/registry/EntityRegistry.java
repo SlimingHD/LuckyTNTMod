@@ -9,6 +9,7 @@ import org.joml.Vector3f;
 import luckytnt.LuckyTNTMod;
 import luckytnt.block.entity.TNTBlockEntity;
 import luckytnt.entity.*;
+import luckytnt.registry.keys.AdvancementKeys;
 import luckytnt.tnteffects.*;
 import luckytnt.tnteffects.projectile.*;
 import luckytntlib.entity.*;
@@ -51,9 +52,9 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X20 = LuckyTNTMod.RH.registerTNTEntity("tnt_x20", TNT_X20_EFFECT.fuse(160).buildTNT(() -> BlockRegistry.TNT_X20));
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X100 = LuckyTNTMod.RH.registerTNTEntity("tnt_x100", TNT_X100_EFFECT.fuse(200).buildTNT(() -> BlockRegistry.TNT_X100));
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X500 = LuckyTNTMod.RH.registerTNTEntity("tnt_x500", TNT_X500_EFFECT.fuse(240).buildTNT(() -> BlockRegistry.TNT_X500));
-	public static final RegistryObject<EntityType<PrimedLTNT>> COBBLESTONE_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("cobblestone_house_tnt", new HouseTNTEffect(() -> BlockRegistry.COBBLESTONE_HOUSE_TNT, "cobblehouse", -5, -3));
-	public static final RegistryObject<EntityType<PrimedLTNT>> WOOD_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("woodhouse_tnt", new HouseTNTEffect(() -> BlockRegistry.WOOD_HOUSE_TNT, "woodhouse", -5, -3));
-	public static final RegistryObject<EntityType<PrimedLTNT>> BRICK_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("brickhouse_tnt", new HouseTNTEffect(() -> BlockRegistry.BRICK_HOUSE_TNT, "brickhouse", -5, -3));
+	public static final RegistryObject<EntityType<PrimedLTNT>> COBBLESTONE_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("cobblestone_house_tnt", new StackedPrimedTNTEffect(new HouseTNTEffect(() -> BlockRegistry.COBBLESTONE_HOUSE_TNT, "cobblehouse", -5, -3), List.of(new AdvancementEffect(AdvancementKeys.REAL_ESTATE_ROOKIE))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> WOOD_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("woodhouse_tnt", new StackedPrimedTNTEffect(new HouseTNTEffect(() -> BlockRegistry.WOOD_HOUSE_TNT, "woodhouse", -5, -3), List.of(new AdvancementEffect(AdvancementKeys.REAL_ESTATE_ROOKIE))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> BRICK_HOUSE_TNT = LuckyTNTMod.RH.registerTNTEntity("brickhouse_tnt", new StackedPrimedTNTEffect(new HouseTNTEffect(() -> BlockRegistry.BRICK_HOUSE_TNT, "brickhouse", -5, -3), List.of(new AdvancementEffect(AdvancementKeys.REAL_ESTATE_ROOKIE))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> DIGGING_TNT = LuckyTNTMod.RH.registerTNTEntity("digging_tnt", new DiggingTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> DRILLING_TNT = LuckyTNTMod.RH.registerTNTEntity("drilling_tnt", new DrillingTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> SPHERE_TNT = LuckyTNTMod.RH.registerTNTEntity("sphere_tnt", new SphereTNTEffect(() -> BlockRegistry.SPHERE_TNT, 9, 99f));
@@ -170,7 +171,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> GLOBAL_DISASTER = LuckyTNTMod.RH.registerTNTEntity("global_disaster", new GlobalDisasterEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HEAVENS_GATE = LuckyTNTMod.RH.registerTNTEntity("heavens_gate", new HeavensGateEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HELLS_GATE = LuckyTNTMod.RH.registerTNTEntity("hells_gate", new HellsGateEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> MANKINDS_MARK = LuckyTNTMod.RH.registerTNTEntity("mankinds_mark", new MankindsMarkEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> MANKINDS_MARK = LuckyTNTMod.RH.registerTNTEntity("mankinds_mark", new StackedPrimedTNTEffect(new MankindsMarkEffect(), List.of(new AdvancementEffect(AdvancementKeys.REAL_ESTATE_AGENT))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> POSEIDONS_WAVE = LuckyTNTMod.RH.registerTNTEntity("poseidons_wave", new PoseidonsWaveEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> HEXAHEDRON = LuckyTNTMod.RH.registerTNTEntity("hexahedron", new HexahedronEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> MOUNTAINTOP_REMOVAL = LuckyTNTMod.RH.registerTNTEntity("mountaintop_removal", new MountaintopRemovalEffect());
@@ -247,7 +248,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHUNK_TNT = LuckyTNTMod.RH.registerTNTEntity("chunk_tnt", new ChunkTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> COMPRESSED_TNT = LuckyTNTMod.RH.registerTNTEntity("compressed_tnt", new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(15).randomVecLength(1.1f).knockbackStrength(1.5f).fire(true).fuse(240).buildTNT(() -> BlockRegistry.COMPRESSED_TNT), Collections.singletonList(new CompactTNTEffect(0.02f, 14, () -> BlockRegistry.DENSE_TNT))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> EXTINCTION = LuckyTNTMod.RH.registerTNTEntity("extinction", new ExtinctionEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> MANSION = LuckyTNTMod.RH.registerTNTEntity("mansion", new MansionEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> MANSION = LuckyTNTMod.RH.registerTNTEntity("mansion", new StackedPrimedTNTEffect(new MansionEffect(), List.of(new AdvancementEffect(AdvancementKeys.REAL_ESTATE_MASTER))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> HELIX = LuckyTNTMod.RH.registerTNTEntity("helix", new HelixEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> DEATH_RAY = LuckyTNTMod.RH.registerTNTEntity("death_ray", new DeathRayEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> DOOMSDAY = LuckyTNTMod.RH.registerTNTEntity("doomsday", new DisasterTNTEffect("doomsday", true));
