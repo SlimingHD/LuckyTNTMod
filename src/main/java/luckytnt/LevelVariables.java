@@ -17,6 +17,7 @@ public class LevelVariables extends SavedData {
 	public int iceAgeTime = 0;
 	public int heatDeathTime = 0;
 	public int tntRainTime = 0;
+	public int noMoonTime = 0;
 	
 	public static LevelVariables clientSide = new LevelVariables();
 	
@@ -26,6 +27,7 @@ public class LevelVariables extends SavedData {
 		tag.putInt("iceAgeTime", iceAgeTime);
 		tag.putInt("heatDeathTime", heatDeathTime);
 		tag.putInt("tntRainTime", tntRainTime);
+		tag.putInt("noMoonTime", noMoonTime);
 		return tag;
 	}
 
@@ -41,6 +43,7 @@ public class LevelVariables extends SavedData {
 		iceAgeTime = tag.getInt("iceAgeTime");
 		heatDeathTime = tag.getInt("heatDeathTime");
 		tntRainTime = tag.getInt("tntRainTime");
+		noMoonTime = tag.getInt("noMoonTime");
 	}
 
 	public static LevelVariables get(LevelAccessor level) {

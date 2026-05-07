@@ -1,6 +1,11 @@
 package luckytnt.registry;
 
-import luckytnt.client.renderer.*;
+import luckytnt.client.renderer.AlwaysLTNTRenderer;
+import luckytnt.client.renderer.AngryMinerRenderer;
+import luckytnt.client.renderer.BombRenderer;
+import luckytnt.client.renderer.BouncingTNTRenderer;
+import luckytnt.client.renderer.DeathRayTNTRenderer;
+import luckytnt.client.renderer.MoonfallMeteorRenderer;
 import luckytntlib.client.renderer.LDynamiteRenderer;
 import luckytntlib.client.renderer.LTNTMinecartRenderer;
 import luckytntlib.client.renderer.LTNTRenderer;
@@ -225,6 +230,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SUPERFLAT_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.FRACTAL_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ENORMOUS_TNT.get(), AlwaysLTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.MOONFALL.get(), LTNTRenderer::new);
 	
 		//Dynamite
 		event.registerEntityRenderer(EntityRegistry.DYNAMITE.get(), LDynamiteRenderer::new);
@@ -394,6 +400,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.DEIMOS_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PHOBOS_METEOR.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.PRESENT_METEOR.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.MOONFALL_METEOR.get(), MoonfallMeteorRenderer::new);
 		
 		//Other
 		event.registerEntityRenderer(EntityRegistry.ANGRY_MINER.get(), AngryMinerRenderer::new);

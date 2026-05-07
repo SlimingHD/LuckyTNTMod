@@ -66,6 +66,9 @@ public class LevelEvents {
 			if (variables.tntRainTime > 0) {
 				variables.tntRainTime--;
 			}
+			if (variables.noMoonTime > 0) {
+				variables.noMoonTime--;
+			}
 			variables.sync(server);
 			
 			for (ServerPlayer player : server.players()) {

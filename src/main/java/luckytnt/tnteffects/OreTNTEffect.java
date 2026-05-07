@@ -74,6 +74,9 @@ public class OreTNTEffect extends PrimedTNTEffect {
 		int placedOres = 0;
 		int attempts = 0;
 		while (placedOres < maxOres && attempts < maxAttempts) {
+			if (positions.size() == 0) {
+				return;
+			}
 			BlockPos pos = positions.remove(random.nextInt(positions.size()));
 			BlockState state = level.getBlockState(pos);
 			if (!state.isAir() && !state.is(Tags.Blocks.ORES) && Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) < 100f && state.isCollisionShapeFullBlock(level, pos)) {

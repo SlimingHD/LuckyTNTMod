@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": 
+    {
+        "down": "luckytntmod:block/moonfall_bottom",
+        "up": "luckytntmod:block/moonfall_top",
+        "north": "luckytntmod:block/moonfall_side",
+        "east": "luckytntmod:block/moonfall_side",
+        "south": "luckytntmod:block/moonfall_side",
+        "west": "luckytntmod:block/moonfall_side",
+        "particle": "luckytntmod:block/moonfall_side"
+    }
+}

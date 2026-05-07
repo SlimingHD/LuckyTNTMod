@@ -212,6 +212,7 @@
 	"block.luckytntmod.fractal_tnt" : "Fraktal TNT",
 	"block.luckytntmod.lucky_annihilation" : "Lucky Vernichtung",
 	"block.luckytntmod.enormous_tnt" : "Riesengroßes TNT",
+	"block.luckytntmod.moonfall" : "Moonfall",
 			
 	"block.luckytntmod.nuclear_waste" : "Atomm\u00FCll",
 	"block.luckytntmod.uranium_ore" : "Uranerz",
@@ -223,6 +224,8 @@
 	"block.luckytntmod.obsidian_activator_rail" : "Obsidian Aktivierungsschiene",
 	"block.luckytntmod.obsidian_detector_rail" : "Obsidian Sensorschiene",
 	"block.luckytntmod.toxic_stone" : "Giftiger Stein",
+	
+	"block.luckytntmod.moon" : "Mond",
 
 	"item.luckytntmod.dynamite" : "Dynamit",
 	"item.luckytntmod.dynamite_x5" : "Dynamit x5",
@@ -596,6 +599,7 @@
 	"entity.luckytntmod.fractal_tnt" : "Fraktal TNT",
 	"entity.luckytntmod.lucky_annihilation" : "Lucky Vernichtung",
 	"entity.luckytntmod.enormous_tnt" : "Riesengroßes TNT",
+	"entity.luckytntmod.moonfall" : "Moonfall",
 		
 	"entity.luckytntmod.dynamite" : "Dynamit",
 	"entity.luckytntmod.dynamite_x5" : "Dynamit x5",
@@ -760,6 +764,7 @@
 	"entity.luckytntmod.deimos_meteor" : "Deimos Meteor",
 	"entity.luckytntmod.phobos_meteor" : "Phobos Meteor",
 	"entity.luckytntmod.present_meteor" : "Geschenk Meteor",
+	"entity.luckytntmod.moonfall_meteor" : "Mond",
 	
 	"entity.luckytntmod.angry_miner" : "W\u00FCtender Minenarbeiter",
 	"entity.luckytntmod.toxic_cloud" : "Giftige Wolke",

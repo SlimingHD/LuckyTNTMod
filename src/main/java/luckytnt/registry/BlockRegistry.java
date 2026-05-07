@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.PoweredRailBlock;
 import net.minecraft.world.level.block.RailBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
@@ -244,6 +245,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> SUPERFLAT_TNT = LuckyTNTMod.RH.registerTNTBlock("superflat_tnt", EntityRegistry.SUPERFLAT_TNT, "a", MapColor.COLOR_LIGHT_BLUE, true);
 	public static final RegistryObject<LTNTBlock> FRACTAL_TNT = LuckyTNTMod.RH.registerTNTBlock("fractal_tnt", EntityRegistry.FRACTAL_TNT, "a", MapColor.COLOR_LIGHT_BLUE, false);
 	public static final RegistryObject<LTNTBlock> ENORMOUS_TNT = LuckyTNTMod.RH.registerTNTBlock("enormous_tnt", EntityRegistry.ENORMOUS_TNT, "a", MapColor.COLOR_RED, true);
+	public static final RegistryObject<LTNTBlock> MOONFALL = LuckyTNTMod.RH.registerTNTBlock("moonfall", EntityRegistry.MOONFALL, "a", MapColor.SNOW, true);
 	
 	public static final RegistryObject<LTNTBlock> LUCKY_ANNIHILATION = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new LuckyTNTBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.GRASS), LuckyTNTMod.RH.TNTLists.get("a")), new TNTBlockRegistryData.Builder("lucky_annihilation").tab("a").build());
 	
@@ -264,4 +266,7 @@ public class BlockRegistry {
 	public static final RegistryObject<Block> OBSIDIAN_DETECTOR_RAIL = LuckyTNTMod.blockRegistry.register("obsidian_detector_rail", () -> new DetectorRailBlock(BlockBehaviour.Properties.of().mapColor(MapColor.NONE).sound(SoundType.METAL).requiresCorrectToolForDrops().strength(0.7f, 1200f).noCollission()));
 	public static final RegistryObject<Block> TOXIC_STONE = LuckyTNTMod.blockRegistry.register("toxic_stone", () -> new ToxicStoneBlock(BlockBehaviour.Properties.copy(Blocks.STONE).mapColor(MapColor.COLOR_GREEN).lootFrom(() -> Blocks.STONE)));
 	public static final RegistryObject<Block> PRESENT = LuckyTNTMod.blockRegistry.register("present", () -> new PresentBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).sound(SoundType.WOOL).strength(0.3f, 0f)));
+
+	//No Functions / Visual Only
+	public static final RegistryObject<Block> MOON = LuckyTNTMod.blockRegistry.register("moon", () -> new Block(Properties.of()));
 }

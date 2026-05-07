@@ -212,6 +212,7 @@
 	"block.luckytntmod.fractal_tnt" : "Fractal TNT",
 	"block.luckytntmod.lucky_annihilation" : "Lucky Annihilation",
 	"block.luckytntmod.enormous_tnt" : "Enormous TNT",
+	"block.luckytntmod.moonfall" : "Moonfall",
 	
 	"block.luckytntmod.nuclear_waste" : "Nuclear Waste",
 	"block.luckytntmod.uranium_ore" : "Uranium Ore",
@@ -225,6 +226,8 @@
 	"block.luckytntmod.toxic_stone" : "Toxic Stone",
 	"block.luckytntmod.present" : "Present",
 
+	"block.luckytntmod.moon" : "Moon",
+	
 	"item.luckytntmod.dynamite" : "Dynamite",
 	"item.luckytntmod.dynamite_x5" : "Dynamite x5",
 	"item.luckytntmod.dynamite_x20" : "Dynamite x20",
@@ -598,6 +601,7 @@
 	"entity.luckytntmod.fractal_tnt" : "Fractal TNT",
 	"entity.luckytntmod.lucky_annihilation" : "Lucky Annihilation",
 	"entity.luckytntmod.enormous_tnt" : "Enormous TNT",
+	"entity.luckytntmod.moonfall" : "Moonfall",
 				
 	"entity.luckytntmod.dynamite" : "Dynamite",
 	"entity.luckytntmod.dynamite_x5" : "Dynamite x5",
@@ -761,6 +765,7 @@
 	"entity.luckytntmod.deimos_meteor" : "Deimos Meteor",
 	"entity.luckytntmod.phobos_meteor" : "Phobos Meteor",
 	"entity.luckytntmod.present_meteor" : "Present Meteor",
+	"entity.luckytntmod.moonfall_meteor" : "Moon",
 
 	"entity.luckytntmod.angry_miner" : "Angry Miner",
 	"entity.luckytntmod.toxic_cloud" : "Toxic Cloud",

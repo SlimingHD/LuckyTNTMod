@@ -303,6 +303,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERFLAT_TNT = LuckyTNTMod.RH.registerTNTEntity("superflat_tnt", new SuperflatTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> FRACTAL_TNT = LuckyTNTMod.RH.registerTNTEntity("fractal_tnt", new FractalTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> ENORMOUS_TNT = LuckyTNTMod.RH.registerTNTEntity("enormous_tnt", new EnormousTNTEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> MOONFALL = LuckyTNTMod.RH.registerTNTEntity("moonfall", new MoonfallTNTEffect(() -> EntityRegistry.MOONFALL_METEOR));
 	
 	//Dynamite
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("dynamite", WEAK_TNT_EFFECT.buildDynamite(() -> ItemRegistry.DYNAMITE), 0.25f, false);
@@ -472,6 +473,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DEIMOS_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("deimos_meteor", new DeimosMeteorEffect(), 4f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> PHOBOS_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("phobos_meteor", new PhobosMeteorEffect(), 6f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> PRESENT_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("present_meteor", new PresentMeteorEffect(), 6f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> MOONFALL_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("moonfall_meteor", new MoonfallMeteorEffect(), 10f, false);
 	
 	//Other
 	public static RegistryObject<EntityType<AngryMiner>> ANGRY_MINER = LuckyTNTMod.entityRegistry.register("angry_miner", () -> EntityType.Builder.<AngryMiner>of(AngryMiner::new, MobCategory.MISC).sized(0.6f, 1.8f).build("angry_miner"));

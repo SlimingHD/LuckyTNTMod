@@ -4,7 +4,8 @@ import org.joml.Vector3f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import luckytnt.client.renderer.helper.DeathRayRenderer;
+import luckytnt.client.renderer.DeathRayRenderQueue.ChargeUpContent;
+import luckytnt.client.renderer.DeathRayRenderQueue.DeathRayContent;
 import luckytnt.tnteffects.DeathRayEffect;
 import luckytntlib.client.renderer.LTNTRenderer;
 import luckytntlib.util.IExplosiveEntity;
@@ -39,26 +40,25 @@ public class DeathRayTNTRenderer extends LTNTRenderer {
 			entity.getPersistentData().putFloat("smoothFuse", smoothFuse);
 			if (fuse >= DeathRayEffect.RAY_START) {
 				float pointerRadius = 3f * (DeathRayEffect.RAY_START / (float)fuse);
-				DeathRayRenderer.renderChargeUp(new Vector3f(0f, 0.05f, 0f), new Vector3f(0f, 1f, 0f), pointerRadius, 4f, CHARGE_COLOR, CHARGE_COLOR, posestack, buffer);
+				DeathRayRenderQueue.addChargeUp(new ChargeUpContent(new Vector3f(0f, 0.05f, 0f), new Vector3f(0f, 1f, 0f), pointerRadius, 4f, CHARGE_COLOR, DARK_CHARGE_COLOR, posestack.last()));
 			}
 			if (fuse >= DeathRayEffect.RAY_END) {
 				float chargeRadius = (DeathRayEffect.DURATION - partialFuse) / (DeathRayEffect.DURATION - DeathRayEffect.RAY_END);
 				chargeRadius = 30f * (1f - Mth.square(chargeRadius * 2f - 1f));
 				chargeRadius += 0.5f;
-				DeathRayRenderer.renderChargeUp(new Vector3f(0f, RAY_START_HEIGHT - (float)ent.y(), 0f), new Vector3f(0f, -1f, 0f), chargeRadius, 8f, RAY_COLOR, RAY_CENTER_COLOR, posestack, buffer);
+				DeathRayRenderQueue.addChargeUp(new ChargeUpContent(new Vector3f(0f, RAY_START_HEIGHT - (float)ent.y(), 0f), new Vector3f(0f, -1f, 0f), chargeRadius, 8f, RAY_COLOR, RAY_CENTER_COLOR, posestack.last()));
 			}
 			if (fuse <= DeathRayEffect.LASER_START && fuse >= DeathRayEffect.SHOOT_START) {
 				Vector3f laserStart = new Vector3f(0f, RAY_START_HEIGHT - (float)ent.y(), 0f);
 				Vector3f laserEnd = new Vector3f(0f, 0.05f, 0f);
-				Vector3f cameraPos = entityRenderDispatcher.camera.getPosition().toVector3f().mul(1f, 0f, 1f);
-				Vector3f viewDir = entity.position().toVector3f().mul(1f, 0f, 1f).sub(cameraPos).normalize();
 				float laserRadius = Mth.sqrt((DeathRayEffect.LASER_START - partialFuse) / (DeathRayEffect.LASER_START - DeathRayEffect.SHOOT_START));
 				laserRadius *= 0.5f;
-				DeathRayRenderer.renderDeathRay(laserStart, laserEnd, laserRadius, laserEnd.y() - laserStart.y(), 1f, false, viewDir, CHARGE_COLOR, DARK_CHARGE_COLOR, posestack, buffer);
+				DeathRayRenderQueue.addDeathRay(new DeathRayContent(laserStart, laserEnd, laserRadius * 0.75f, 0.075f, 0f, 0.4f, 1f, 0.0f, CHARGE_COLOR, posestack.last()));
+				DeathRayRenderQueue.addDeathRay(new DeathRayContent(laserStart, laserEnd, laserRadius, 0.075f, 0f, 0.4f, 1f, 0.0f, DARK_CHARGE_COLOR, posestack.last()));
 			}
 			if (fuse <= DeathRayEffect.SHOOT_START && fuse >= DeathRayEffect.FADEOUT_END) {
 				Vector3f rayStart = new Vector3f(0f, RAY_START_HEIGHT + 10f - (float)ent.y(), 0f);
-				Vector3f rayEnd = new Vector3f(0f, -entity.getPersistentData().getInt("explosionSize") - 10f - partialTick, 0f);
+				Vector3f rayEnd = new Vector3f(0f, -entity.getPersistentData().getInt("explosionSize") - partialTick, 0f);
 				if (fuse >= DeathRayEffect.RAY_START) {
 					float progress = (DeathRayEffect.SHOOT_START - partialFuse) / (DeathRayEffect.SHOOT_START - DeathRayEffect.RAY_START);
 					rayEnd = new Vector3f(0f, Mth.lerp(progress, rayStart.y(), -10f), 0f);
@@ -71,9 +71,8 @@ public class DeathRayTNTRenderer extends LTNTRenderer {
 				}
 				rayRadius *= 6f;
 				rayRadius += 1f;
-				Vector3f cameraPos = entityRenderDispatcher.camera.getPosition().toVector3f().mul(1f, 0f, 1f);
-				Vector3f viewDir = entity.position().toVector3f().mul(1f, 0f, 1f).sub(cameraPos).normalize();
-				DeathRayRenderer.renderDeathRay(rayStart, rayEnd, rayRadius, rayEnd.y() - rayStart.y(), 2f, true, viewDir, RAY_COLOR, RAY_CENTER_COLOR, posestack, buffer);
+				DeathRayRenderQueue.addDeathRay(new DeathRayContent(rayStart, rayEnd, rayRadius * 0.7f, 0.075f, 2f, 1f, 2.3f, 0.5f, RAY_CENTER_COLOR, posestack.last()));
+				DeathRayRenderQueue.addDeathRay(new DeathRayContent(rayStart, rayEnd, rayRadius, 0.075f, 2f, 1f, 2f, 0.3f, RAY_COLOR, posestack.last()));
 			}
 		}
 	}

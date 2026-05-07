@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"package": "luckytnt.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"refmap": "mixins.luckytntmod.refmap.json",
+	"client": [
+		"LevelRendererMixin"
+	],
+	"server": [],
+	"mixins": [],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "luckytntmod:tnt_x50000"
+    },
+    {
+      "item": "luckytntmod:chromatic_tnt"
+    },
+    {
+      "item": "luckytntmod:hypernova"
+    },
+    {
+      "item": "luckytntmod:region_tnt"
+    },
+    {
+      "item": "luckytntmod:moonfall"
+    },
+    {
+      "item": "luckytntmod:enormous_tnt"
+    },
+    {
+      "item": "luckytntmod:superflat_tnt"
+    },
+    {
+      "item": "luckytntmod:crammed_tnt"
+    },
+    {
+      "item": "luckytntmod:fractal_tnt"
+    }
+  ],
+  "result": {
+    "item": "luckytntmod:lucky_annihilation",
+    "count": 4
+  }
+}
