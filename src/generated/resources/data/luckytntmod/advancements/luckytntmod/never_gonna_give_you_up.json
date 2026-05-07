@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "break_bedrock_with_death_ray_ray": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.never_gonna_give_you_up.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:death_ray_ray"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.never_gonna_give_you_up.title"
+    }
+  },
+  "requirements": [
+    [
+      "break_bedrock_with_death_ray_ray"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,6 +1,5 @@
 package luckytnt.registry;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -22,7 +21,6 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.OpenDoorGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.player.Player;
@@ -68,14 +66,14 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> GRAVITY_TNT = LuckyTNTMod.RH.registerTNTEntity("gravity_tnt", new GravityTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> LIGHTNING_TNT = LuckyTNTMod.RH.registerTNTEntity("lightning_tnt", new LightningTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CUBIC_TNT = LuckyTNTMod.RH.registerTNTEntity("cubic_tnt", new CubicTNTEffect(3));
-	public static final RegistryObject<EntityType<PrimedLTNT>> FLOATING_TNT = LuckyTNTMod.RH.registerTNTEntity("floating_tnt", new StackedPrimedTNTEffect(new FloatingTNTEffect(), Collections.singletonList(TNT_X100_EFFECT.build())));
+	public static final RegistryObject<EntityType<PrimedLTNT>> FLOATING_TNT = LuckyTNTMod.RH.registerTNTEntity("floating_tnt", new StackedPrimedTNTEffect(new FloatingTNTEffect(), List.of(TNT_X100_EFFECT.build())));
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("tnt_firework", new TNTFireworkEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> SAND_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("sand_firework", new SandFireworkEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> ARROW_TNT = LuckyTNTMod.RH.registerTNTEntity("arrow_tnt", new ArrowTNTEffect(300));
-	public static final RegistryObject<EntityType<PrimedLTNT>> TIMER_TNT = LuckyTNTMod.RH.registerTNTEntity("timer_tnt", new StackedPrimedTNTEffect(new TimerTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.build())));
+	public static final RegistryObject<EntityType<PrimedLTNT>> TIMER_TNT = LuckyTNTMod.RH.registerTNTEntity("timer_tnt", new TimerTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> FLAT_TNT = LuckyTNTMod.RH.registerTNTEntity("flat_tnt", new FlatTNTEffect(() -> BlockRegistry.FLAT_TNT, 18, 9, 80));
 	public static final RegistryObject<EntityType<PrimedLTNT>> MININGFLAT_TNT = LuckyTNTMod.RH.registerTNTEntity("miningflat_tnt", new MiningflatTNTEffect(30, 9));
-	public static final RegistryObject<EntityType<PrimedLTNT>> COMPACT_TNT = LuckyTNTMod.RH.registerTNTEntity("compact_tnt", new StackedPrimedTNTEffect(TNT_X5_EFFECT.fire(true).fuse(120).buildTNT(() -> BlockRegistry.COMPACT_TNT), Collections.singletonList(new CompactTNTEffect(0.2f, 9, () -> BlockRegistry.TNT))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> COMPACT_TNT = LuckyTNTMod.RH.registerTNTEntity("compact_tnt", new StackedPrimedTNTEffect(TNT_X5_EFFECT.fire(true).fuse(120).buildTNT(() -> BlockRegistry.COMPACT_TNT), List.of(new CompactTNTEffect(0.2f, 9, () -> BlockRegistry.TNT))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> ANIMAL_TNT = LuckyTNTMod.RH.registerTNTEntity("animal_tnt", new AnimalTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> METEOR_TNT = LuckyTNTMod.RH.registerTNTEntity("meteor_tnt", new DropProjectileTNTEffect(() -> EntityRegistry.METEOR));
 	public static final RegistryObject<EntityType<PrimedLTNT>> SPIRAL_TNT = LuckyTNTMod.RH.registerTNTEntity("spiral_tnt", new SpiralTNTEffect());
@@ -95,25 +93,21 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> SHATTERPROOF_TNT = LuckyTNTMod.RH.registerTNTEntity("shatterproof_tnt", new ShatterproofTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> GRAVEL_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("gravel_firework", new GravelFireworkEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> LAVA_OCEAN_TNT = LuckyTNTMod.RH.registerTNTEntity("lava_ocean_tnt", new LavaOceanTNTEffect(15, 10));
-	public static final RegistryObject<EntityType<LivingPrimedLTNT>> ATTACKING_TNT = LuckyTNTMod.RH.registerLivingTNTEntity("attacking_tnt", () -> EntityType.Builder.<LivingPrimedLTNT>of((EntityType<LivingPrimedLTNT> type, Level level) -> new LivingPrimedLTNT(type, level, TNT_EFFECT.fuse(400).buildTNT(() -> BlockRegistry.ATTACKING_TNT)) {		
+	public static final RegistryObject<EntityType<LivingPrimedLTNT>> ATTACKING_TNT = LuckyTNTMod.RH.registerLivingTNTEntity("attacking_tnt", () -> EntityType.Builder.<LivingPrimedLTNT>of((EntityType<LivingPrimedLTNT> type, Level level) -> new LivingPrimedLTNT(type, level, new StackedPrimedTNTEffect(TNT_EFFECT.fuse(400).buildTNT(() -> BlockRegistry.ATTACKING_TNT), List.of(new AdvancementEffect(AdvancementKeys.LIFE_FINDS_A_WAY)))) {
 		@Override
 		public void registerGoals() {
-			super.registerGoals();
 			targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, 10, false, false, PREDICATE));
-			goalSelector.addGoal(1, new MeleeAttackGoal(this, 1, false));
+			goalSelector.addGoal(0, new FloatGoal(this));
+			goalSelector.addGoal(1, new MeleeAttackGoal(this, 1d, false));
 			goalSelector.addGoal(2, new OpenDoorGoal(this, true));
-			goalSelector.addGoal(3, new RandomStrollGoal(this, 1));
-			goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-			goalSelector.addGoal(5, new FloatGoal(this));
+			goalSelector.addGoal(3, new RandomStrollGoal(this, 1d));
 		}	
 	}, MobCategory.MISC).fireImmune().sized(1f, 1f).build("attacking_tnt"));
-	public static final RegistryObject<EntityType<LivingPrimedLTNT>> WALKING_TNT = LuckyTNTMod.RH.registerLivingTNTEntity("walking_tnt", () -> EntityType.Builder.<LivingPrimedLTNT>of((EntityType<LivingPrimedLTNT> type, Level level) -> new LivingPrimedLTNT(type, level, TNT_EFFECT.fuse(400).buildTNT(() -> BlockRegistry.WALKING_TNT)) {		
+	public static final RegistryObject<EntityType<LivingPrimedLTNT>> WALKING_TNT = LuckyTNTMod.RH.registerLivingTNTEntity("walking_tnt", () -> EntityType.Builder.<LivingPrimedLTNT>of((EntityType<LivingPrimedLTNT> type, Level level) -> new LivingPrimedLTNT(type, level, new StackedPrimedTNTEffect(TNT_EFFECT.fuse(400).buildTNT(() -> BlockRegistry.WALKING_TNT), List.of(new AdvancementEffect(AdvancementKeys.LIFE_FINDS_A_WAY)))) {		
 		@Override
 		public void registerGoals() {
-			super.registerGoals();
-			goalSelector.addGoal(0, new RandomStrollGoal(this, 1));
-			goalSelector.addGoal(1, new RandomLookAroundGoal(this));
-			goalSelector.addGoal(2, new FloatGoal(this));
+			goalSelector.addGoal(0, new FloatGoal(this));
+			goalSelector.addGoal(1, new RandomStrollGoal(this, 1d));
 		}	
 	}, MobCategory.MISC).fireImmune().sized(1f, 1f).build("walking_tnt"));
 	public static final RegistryObject<EntityType<PrimedLTNT>> WOOL_TNT = LuckyTNTMod.RH.registerTNTEntity("wool_tnt", new WoolTNTEffect(40));
@@ -121,7 +115,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> ANGRY_MINERS = LuckyTNTMod.RH.registerTNTEntity("angry_miners", new AngryMinersEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> WITHERING_TNT = LuckyTNTMod.RH.registerTNTEntity("withering_tnt", new WitheringTNTEffect(20));
 	public static final RegistryObject<EntityType<PrimedLTNT>> NUCLEAR_WASTE_TNT = LuckyTNTMod.RH.registerTNTEntity("nuclear_waste_tnt", new NuclearWasteTNTEffect(15));
-	public static final RegistryObject<EntityType<PrimedLTNT>> STATIC_TNT = LuckyTNTMod.RH.registerTNTEntity("static_tnt", new StackedPrimedTNTEffect(new StaticTNTEffect(), Collections.singletonList(TNT_EFFECT.build())));
+	public static final RegistryObject<EntityType<PrimedLTNT>> STATIC_TNT = LuckyTNTMod.RH.registerTNTEntity("static_tnt", new StackedPrimedTNTEffect(new StaticTNTEffect(), List.of(TNT_EFFECT.build())));
 	public static final RegistryObject<EntityType<PrimedLTNT>> PUMPKIN_BOMB = LuckyTNTMod.RH.registerTNTEntity("pumpkin_bomb", new PumpkinBombEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> SMOKE_TNT = LuckyTNTMod.RH.registerTNTEntity("smoke_tnt", new SmokeTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> TROLL_TNT = LuckyTNTMod.RH.registerTNTEntity("troll_tnt", new TrollTNTEffect());
@@ -158,10 +152,10 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> GEODE_TNT = LuckyTNTMod.RH.registerTNTEntity("geode_tnt", new GeodeTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> NETHER_GROVE_TNT = LuckyTNTMod.RH.registerTNTEntity("nether_grove_tnt", new NetherGroveTNTEffect(30));
 	public static final RegistryObject<EntityType<PrimedLTNT>> DRIPSTONE_TNT = LuckyTNTMod.RH.registerTNTEntity("dripstone_tnt", new DripstoneTNTEffect(20));
-	public static final RegistryObject<EntityType<PrimedLTNT>> GRAVEYARD_TNT = LuckyTNTMod.RH.registerTNTEntity("graveyard_tnt", new StackedPrimedTNTEffect(new GraveyardTNTEffect(), Collections.singletonList(new HouseTNTEffect(() -> BlockRegistry.GRAVEYARD_TNT, "graveyard", -10, -10))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> GRAVEYARD_TNT = LuckyTNTMod.RH.registerTNTEntity("graveyard_tnt", new StackedPrimedTNTEffect(new GraveyardTNTEffect(), List.of(new HouseTNTEffect(() -> BlockRegistry.GRAVEYARD_TNT, "graveyard", -10, -10))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> REPLAY_TNT = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "replay_tnt", () -> EntityType.Builder.<PrimedLTNT>of(PrimedReplayTNT::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("replay_tnt"));
 	public static final RegistryObject<EntityType<PrimedLTNT>> END_TNT = LuckyTNTMod.RH.registerTNTEntity("end_tnt", new EndTNTEffect(20));
-	public static final RegistryObject<EntityType<PrimedLTNT>> CHRISTMAS_TNT = LuckyTNTMod.RH.registerTNTEntity("christmas_tnt", new StackedPrimedTNTEffect(new ChristmasTNTEffect(), Collections.singletonList(new SnowTNTEffect(50))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> CHRISTMAS_TNT = LuckyTNTMod.RH.registerTNTEntity("christmas_tnt", new StackedPrimedTNTEffect(new ChristmasTNTEffect(), List.of(new SnowTNTEffect(50))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> EARTHQUAKE_TNT = LuckyTNTMod.RH.registerTNTEntity("earthquake_tnt", new EarthquakeTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> PRISM_TNT = LuckyTNTMod.RH.registerTNTEntity("prism_tnt", new PrismTNTEffect(10));
 	public static final RegistryObject<EntityType<PrimedLTNT>> RING_TNT = LuckyTNTMod.RH.registerTNTEntity("ring_tnt", new RingTNTEffect());
@@ -181,8 +175,8 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHICXULUB = LuckyTNTMod.RH.registerTNTEntity("chicxulub", new DropProjectileTNTEffect(() -> EntityRegistry.CHICXULUB_METEOR));
 	public static final RegistryObject<EntityType<PrimedLTNT>> UNBREAKABLE_TNT = LuckyTNTMod.RH.registerTNTEntity("unbreakable_tnt", new UnbreakableTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> END_GATE = LuckyTNTMod.RH.registerTNTEntity("end_gate", new EndGateEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> DENSE_TNT = LuckyTNTMod.RH.registerTNTEntity("dense_tnt", new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(12).randomVecLength(1.1f).knockbackStrength(1.5f).fire(true).fuse(160).buildTNT(() -> BlockRegistry.DENSE_TNT), Collections.singletonList(new CompactTNTEffect(0.03f, 11, () -> BlockRegistry.COMPACT_TNT))));
-	public static final RegistryObject<EntityType<PrimedLTNT>> HYPERION = LuckyTNTMod.RH.registerTNTEntity("hyperion", new HyperionEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> DENSE_TNT = LuckyTNTMod.RH.registerTNTEntity("dense_tnt", new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(12).randomVecLength(1.1f).knockbackStrength(1.5f).fire(true).fuse(160).buildTNT(() -> BlockRegistry.DENSE_TNT), List.of(new CompactTNTEffect(0.03f, 11, () -> BlockRegistry.COMPACT_TNT))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> HYPERION = LuckyTNTMod.RH.registerTNTEntity("hyperion", new StackedPrimedTNTEffect(new HyperionEffect(), List.of(new AdvancementEffect(AdvancementKeys.REACH_FOR_THE_STARS))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X2000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x2000", TNT_X2000_EFFECT.fuse(400).buildTNT(() -> BlockRegistry.TNT_X2000));
 	public static final RegistryObject<EntityType<PrimedLTNT>> TSAR_BOMBA = LuckyTNTMod.RH.registerTNTEntity("tsar_bomba", new DropProjectileTNTEffect(() -> EntityRegistry.TSAR_BOMBA_BOMB));
 	public static final RegistryObject<EntityType<PrimedLTNT>> TOXIC_CLOUDS = LuckyTNTMod.RH.registerTNTEntity("toxic_clouds", new DisasterTNTEffect("toxic_clouds", false));
@@ -205,16 +199,14 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> ENTITY_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("entity_firework", new EntityFireworkEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CUSTOM_TNT = LuckyTNTMod.RH.registerTNTEntity("custom_tnt", new CustomTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> RESET_TNT = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "reset_tnt", () -> EntityType.Builder.<PrimedLTNT>of(PrimedResetTNT::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("reset_tnt"));
-	public static final RegistryObject<EntityType<LivingPrimedLTNT>> VICIOUS_TNT = LuckyTNTMod.RH.registerLivingTNTEntity("vicious_tnt", () -> EntityType.Builder.<LivingPrimedLTNT>of((EntityType<LivingPrimedLTNT> type, Level level) -> new LivingPrimedLTNT(type, level, TNT_X5_EFFECT.fuse(400).buildTNT(() -> BlockRegistry.VICIOUS_TNT)) {		
+	public static final RegistryObject<EntityType<LivingPrimedLTNT>> VICIOUS_TNT = LuckyTNTMod.RH.registerLivingTNTEntity("vicious_tnt", () -> EntityType.Builder.<LivingPrimedLTNT>of((EntityType<LivingPrimedLTNT> type, Level level) -> new LivingPrimedLTNT(type, level, new StackedPrimedTNTEffect(TNT_X5_EFFECT.fuse(400).buildTNT(() -> BlockRegistry.VICIOUS_TNT), List.of(new AdvancementEffect(AdvancementKeys.LIFE_FINDS_A_WAY)))) {		
 		@Override
 		public void registerGoals() {
-			super.registerGoals();
 			targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, 10, false, false, PREDICATE));
-			goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2D, false));
+			goalSelector.addGoal(0, new FloatGoal(this));
+			goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2d, false));
 			goalSelector.addGoal(2, new OpenDoorGoal(this, true));
-			goalSelector.addGoal(3, new RandomStrollGoal(this, 1));
-			goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-			goalSelector.addGoal(5, new FloatGoal(this));
+			goalSelector.addGoal(3, new RandomStrollGoal(this, 1d));
 		}	
 	}, MobCategory.MISC).fireImmune().sized(1f, 1f).build("vicious_tnt"));
 	public static final RegistryObject<EntityType<PrimedLTNT>> HUNGRY_TNT = LuckyTNTMod.RH.registerTNTEntity("hungry_tnt", new HungryTNTEffect());
@@ -246,7 +238,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> CITY_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("city_firework", new CityFireworkEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> METEOR_STORM = LuckyTNTMod.RH.registerTNTEntity("meteor_storm", new MeteorStormEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHUNK_TNT = LuckyTNTMod.RH.registerTNTEntity("chunk_tnt", new ChunkTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> COMPRESSED_TNT = LuckyTNTMod.RH.registerTNTEntity("compressed_tnt", new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(15).randomVecLength(1.1f).knockbackStrength(1.5f).fire(true).fuse(240).buildTNT(() -> BlockRegistry.COMPRESSED_TNT), Collections.singletonList(new CompactTNTEffect(0.02f, 14, () -> BlockRegistry.DENSE_TNT))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> COMPRESSED_TNT = LuckyTNTMod.RH.registerTNTEntity("compressed_tnt", new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(15).randomVecLength(1.1f).knockbackStrength(1.5f).fire(true).fuse(240).buildTNT(() -> BlockRegistry.COMPRESSED_TNT), List.of(new CompactTNTEffect(0.02f, 14, () -> BlockRegistry.DENSE_TNT))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> EXTINCTION = LuckyTNTMod.RH.registerTNTEntity("extinction", new ExtinctionEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> MANSION = LuckyTNTMod.RH.registerTNTEntity("mansion", new StackedPrimedTNTEffect(new MansionEffect(), List.of(new AdvancementEffect(AdvancementKeys.REAL_ESTATE_MASTER))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> HELIX = LuckyTNTMod.RH.registerTNTEntity("helix", new HelixEffect());
@@ -257,7 +249,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> JUNGLE_TNT = LuckyTNTMod.RH.registerTNTEntity("jungle_tnt", new JungleTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> JUMPING_TNT = LuckyTNTMod.RH.registerTNTEntity("jumping_tnt", new JumpingTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> WASTELAND_TNT = LuckyTNTMod.RH.registerTNTEntity("wasteland_tnt", new WastelandTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X10000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x10000",  TNT_X10000_EFFECT.fuse(480).buildTNT(() -> BlockRegistry.TNT_X10000));
+	public static final RegistryObject<EntityType<PrimedLTNT>> TNT_X10000 = LuckyTNTMod.RH.registerTNTEntity("tnt_x10000", new StackedPrimedTNTEffect(TNT_X10000_EFFECT.fuse(480).buildTNT(() -> BlockRegistry.TNT_X10000), List.of(new AdvancementEffect(AdvancementKeys.OVER_9000))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> CUSTOM_FIREWORK = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "custom_firework", () -> EntityType.Builder.<PrimedLTNT>of(PrimedCustomFirework::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("custom_firework"));
 	public static final RegistryObject<EntityType<PrimedLTNT>> ATLANTIS = LuckyTNTMod.RH.registerTNTEntity("atlantis", new AtlantisEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> SOLAR_ERUPTION = LuckyTNTMod.RH.registerTNTEntity("solar_eruption", new SolarEruptionEffect());
@@ -266,16 +258,14 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> STRUCTURE_TNT = LuckyTNTMod.RH.registerTNTEntity(LuckyTNTMod.entityRegistry, "structure_tnt", () -> EntityType.Builder.<PrimedLTNT>of(PrimedStructureTNT::new, MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).fireImmune().sized(1f, 1f).build("structure_tnt"));
 	public static final RegistryObject<EntityType<PrimedLTNT>> GRANDE_FINALE = LuckyTNTMod.RH.registerTNTEntity("grande_finale", new GrandeFinaleEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> FLAT_EARTH = LuckyTNTMod.RH.registerTNTEntity("flat_earth", new FlatTNTEffect(() -> BlockRegistry.FLAT_EARTH, 200, 50, 200));
-	public static final RegistryObject<EntityType<LivingPrimedLTNT>> EVIL_TNT = LuckyTNTMod.RH.registerLivingTNTEntity("evil_tnt", () -> EntityType.Builder.<LivingPrimedLTNT>of((EntityType<LivingPrimedLTNT> type, Level level) -> new LivingPrimedLTNT(type, level, TNT_X20_EFFECT.fuse(400).buildTNT(() -> BlockRegistry.EVIL_TNT)) {		
+	public static final RegistryObject<EntityType<LivingPrimedLTNT>> EVIL_TNT = LuckyTNTMod.RH.registerLivingTNTEntity("evil_tnt", () -> EntityType.Builder.<LivingPrimedLTNT>of((EntityType<LivingPrimedLTNT> type, Level level) -> new LivingPrimedLTNT(type, level, new StackedPrimedTNTEffect(TNT_X20_EFFECT.fuse(400).buildTNT(() -> BlockRegistry.EVIL_TNT), List.of(new AdvancementEffect(AdvancementKeys.LIFE_FINDS_A_WAY)))) {		
 		@Override
 		public void registerGoals() {
-			super.registerGoals();
 			targetSelector.addGoal(0, new NearestAttackableTargetGoal<Player>(this, Player.class, 10, false, false, PREDICATE));
-			goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2D, false));
+			goalSelector.addGoal(0, new FloatGoal(this));
+			goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2d, false));
 			goalSelector.addGoal(2, new OpenDoorGoal(this, true));
-			goalSelector.addGoal(3, new RandomStrollGoal(this, 1));
-			goalSelector.addGoal(4, new RandomLookAroundGoal(this));
-			goalSelector.addGoal(5, new FloatGoal(this));
+			goalSelector.addGoal(3, new RandomStrollGoal(this, 1d));
 		}	
 	}, MobCategory.MISC).fireImmune().sized(1f, 1f).build("evil_tnt"));
 	public static final RegistryObject<EntityType<PrimedLTNT>> KOLA_BOREHOLE_TNT = LuckyTNTMod.RH.registerTNTEntity("kola_borehole_tnt", new KolaBoreholeTNTEffect());
@@ -299,7 +289,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> HYPERNOVA = LuckyTNTMod.RH.registerTNTEntity("hypernova", new HypernovaEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> REGION_TNT = LuckyTNTMod.RH.registerTNTEntity("region_tnt", new RegionTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> CHROMATIC_TNT = LuckyTNTMod.RH.registerTNTEntity("chromatic_tnt", new ChromaticTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> CRAMMED_TNT = LuckyTNTMod.RH.registerTNTEntity("crammed_tnt", new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(25).randomVecLength(1f).knockbackStrength(1.5f).fire(true).fuse(380).buildTNT(() -> BlockRegistry.CRAMMED_TNT), Collections.singletonList(new CompactTNTEffect(0.02f, 25, () -> BlockRegistry.COMPRESSED_TNT))));
+	public static final RegistryObject<EntityType<PrimedLTNT>> CRAMMED_TNT = LuckyTNTMod.RH.registerTNTEntity("crammed_tnt", new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(25).randomVecLength(1f).knockbackStrength(1.5f).fire(true).fuse(380).buildTNT(() -> BlockRegistry.CRAMMED_TNT), List.of(new CompactTNTEffect(0.02f, 25, () -> BlockRegistry.COMPRESSED_TNT))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> SUPERFLAT_TNT = LuckyTNTMod.RH.registerTNTEntity("superflat_tnt", new SuperflatTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> FRACTAL_TNT = LuckyTNTMod.RH.registerTNTEntity("fractal_tnt", new FractalTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> ENORMOUS_TNT = LuckyTNTMod.RH.registerTNTEntity("enormous_tnt", new EnormousTNTEffect());
@@ -328,7 +318,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ARROW_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("arrow_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.ARROW_DYNAMITE, new ArrowTNTEffect(150)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> LIGHTNING_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("lightning_dynamite", new LightningDynamiteEffect(), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> DIGGING_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("digging_dynamite", new DiggingDynamiteEffect(), 0.25f, false);
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> COMPACT_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("compact_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.COMPACT_DYNAMITE, new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(10).randomVecLength(1.1f).knockbackStrength(1.5f).fire(true).build(), Collections.singletonList(new CompactTNTEffect(0.1f, 9, () -> BlockRegistry.TNT)))), 0.25f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> COMPACT_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("compact_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.COMPACT_DYNAMITE, new StackedPrimedTNTEffect(new TNTXStrengthEffect.Builder().strength(10).randomVecLength(1.1f).knockbackStrength(1.5f).fire(true).build(), List.of(new CompactTNTEffect(0.1f, 9, () -> BlockRegistry.TNT)))), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ANIMAL_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("animal_dynamite", new AnimalDynamiteEffect(), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> OCEAN_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("ocean_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.OCEAN_DYNAMITE, ParticleTypes.SPLASH, new OceanTNTEffect(() -> BlockRegistry.OCEAN_TNT, 15, 5, 5)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> SPIRAL_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("spiral_dynamite", new SpiralDynamiteEffect(), 0.25f, false);
@@ -447,19 +437,19 @@ public class EntityRegistry {
 	//Projectile
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("meteor", new MeteorEffect(40, 2f), 2f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> LITTLE_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("little_meteor", new MeteorEffect(20, 1.5f), 1.5f, false);
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> SPIRAL_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("spiral_projectile", new StackedPrimedTNTEffect(new SpiralTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.build())));
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> ERUPTING_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("erupting_projectile", new StackedPrimedTNTEffect(new EruptingTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.fire(true).build())), 1f, false);
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> MINI_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("mini_meteor", new StackedPrimedTNTEffect(new MiniMeteorEffect(), Collections.singletonList(new TNTXStrengthEffect.Builder().strength(7).randomVecLength(1.25f).fire(true).build())), 1f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> SPIRAL_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("spiral_projectile", new StackedPrimedTNTEffect(new SpiralTNTEffect(), List.of(TNT_X5_EFFECT.build())));
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> ERUPTING_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("erupting_projectile", new StackedPrimedTNTEffect(new EruptingTNTEffect(), List.of(TNT_X5_EFFECT.fire(true).build())), 1f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> MINI_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("mini_meteor", new StackedPrimedTNTEffect(new MiniMeteorEffect(), List.of(new TNTXStrengthEffect.Builder().strength(7).randomVecLength(1.25f).fire(true).build())), 1f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHEMICAL_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("chemical_projectile", new ChemicalProjectileEffect(4, 3));
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CLUSTER_BOMB = LuckyTNTMod.RH.registerExplosiveProjectile("cluster_bomb", new ClusterBombEffect());
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> SHRAPNEL = LuckyTNTMod.RH.registerExplosiveProjectile("shrapnel", new ShrapnelEffect(), 0.25f, true);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> BOMB = LuckyTNTMod.RH.registerExplosiveProjectile("bomb", new BombEffect());
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ICE_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("ice_meteor", new IceMeteorEffect(40, 2f), 2f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> LITTLE_ICE_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("little_ice_meteor", new IceMeteorEffect(20, 1.5f), 1.5f, false);
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> POMPEII_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("pompeii_projectile", new StackedPrimedTNTEffect(new PompeiiProjectileEffect(), Collections.singletonList(new TNTXStrengthEffect.Builder().strength(6).randomVecLength(1.25f).knockbackStrength(1.5f).fire(true).build())), 1f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> POMPEII_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("pompeii_projectile", new StackedPrimedTNTEffect(new PompeiiProjectileEffect(), List.of(new TNTXStrengthEffect.Builder().strength(6).randomVecLength(1.25f).knockbackStrength(1.5f).fire(true).build())), 1f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHICXULUB_METEOR = LuckyTNTMod.RH.registerExplosiveProjectile("chicxulub_meteor", new ChicxulubMeteorEffect(), 4f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> TSAR_BOMBA_BOMB = LuckyTNTMod.RH.registerExplosiveProjectile("tsar_bomba_bomb", new TsarBombaBombEffect(), 1.2f, false);
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> PRESENT = LuckyTNTMod.RH.registerExplosiveProjectile("present", new StackedPrimedTNTEffect(new ChristmasTNTEffect(), Collections.singletonList(TNT_X5_EFFECT.build())));
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> PRESENT = LuckyTNTMod.RH.registerExplosiveProjectile("present", new StackedPrimedTNTEffect(new ChristmasTNTEffect(), List.of(TNT_X5_EFFECT.build())));
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ACIDIC_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("acidic_projectile", new AcidicProjectileEffect(), 1f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> HAILSTONE = LuckyTNTMod.entityRegistry.register("hailstone", () -> EntityType.Builder.<LExplosiveProjectile>of((EntityType<LExplosiveProjectile> type, Level level) -> new HailstoneProjectile(type, level, new HailstoneEffect()), MobCategory.MISC).setShouldReceiveVelocityUpdates(true).setTrackingRange(64).sized(0.1f, 0.1f).build("hailstone"));
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CHRISTMAS_DYNAMITE_PROJECTILE = LuckyTNTMod.RH.registerExplosiveProjectile("christmas_dynamite_projectile", new ChristmasDynamiteProjectileEffect(), 0.25f, false);
@@ -482,7 +472,5 @@ public class EntityRegistry {
 	//BlockEntities
 	public static final RegistryObject<BlockEntityType<TNTBlockEntity>> TNT_BLOCK_ENTITY = LuckyTNTMod.blockEntityRegistry.register("smoke_tnt_block_entity", () -> BlockEntityType.Builder.of(TNTBlockEntity::new, BlockRegistry.SMOKE_TNT.get()).build(null));
 
-	public static Predicate<LivingEntity> PREDICATE = living -> { 
-		return living instanceof Player player ? !player.isCreative() && !player.isSpectator() : false;
-	};
+	public static Predicate<LivingEntity> PREDICATE = living -> living instanceof Player player && !player.isCreative() && !player.isSpectator();
 }

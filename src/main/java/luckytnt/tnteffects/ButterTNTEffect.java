@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
@@ -17,6 +19,7 @@ public class ButterTNTEffect extends PrimedTNTEffect {
 		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), 9, 100, new FilterAirExplosionRule(
 			new FilterCollidableExplosionRule(new BlockExplosionRule(Blocks.GOLD_BLOCK.defaultBlockState()))
 		));
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.ALL_THAT_GLITTERS);
 	}
 
 	@Override

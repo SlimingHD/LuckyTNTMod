@@ -5,6 +5,8 @@ import luckytnt.network.ClientboundBooleanNBTPacket;
 import luckytnt.network.ClientboundStringNBTPacket;
 import luckytnt.network.PacketHandler;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -78,6 +80,10 @@ public class GotthardTunnelEffect extends PrimedTNTEffect {
 		
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 15);
 		particleExplosion.spawnExplosionParticles();
+		
+		if (streets) {
+			AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.STREET_LEGAL);
+		}
 	}
 	
 	@Override

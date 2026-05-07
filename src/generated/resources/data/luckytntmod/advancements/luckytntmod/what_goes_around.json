@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "die_by_any_sensor_tnt_of_your_own": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.what_goes_around.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:sensor_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.what_goes_around.title"
+    }
+  },
+  "requirements": [
+    [
+      "die_by_any_sensor_tnt_of_your_own"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.LuckyTNTDamageSources;
 import luckytnt.registry.SoundRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -36,6 +38,11 @@ public class SayGoodbyeEffect extends PrimedTNTEffect {
 		explosion.doEntityExplosion(2f, true);
 		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
 		explosion.spawnExplosionParticles();
+		for (Player p : explosion.getHitPlayers().keySet()) {
+			if (p.isDeadOrDying()) {
+				AdvancementHelper.grantAdvancementOnePlayer(p, AdvancementKeys.RICKROLLED);
+			}
+		}
 	}
 
 	@Override

@@ -9,6 +9,8 @@ import org.joml.Vector3f;
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
@@ -82,23 +84,25 @@ public class BlackHoleTNTEffect extends PrimedTNTEffect {
 	}
 	
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		EntityRegistry.TNT_X500_EFFECT.build().serverExplosion(ent);
+	public void serverExplosion(IExplosiveEntity entity) {
+		EntityRegistry.TNT_X500_EFFECT.build().serverExplosion(entity);
 		
-		List<LivingEntity> list = ent.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(ent.x() + 100d, ent.y() + 100d, ent.z() + 100d, ent.x() - 100d, ent.y() - 100d, ent.z() - 100d));
-		List<FallingBlockEntity> blocks = ent.getLevel().getEntitiesOfClass(FallingBlockEntity.class, new AABB(ent.x() + 100d, ent.y() + 100d, ent.z() + 100d, ent.x() - 100d, ent.y() - 100d, ent.z() - 100d));
+		List<LivingEntity> list = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.x() + 100d, entity.y() + 100d, entity.z() + 100d, entity.x() - 100d, entity.y() - 100d, entity.z() - 100d));
+		List<FallingBlockEntity> blocks = entity.getLevel().getEntitiesOfClass(FallingBlockEntity.class, new AABB(entity.x() + 100d, entity.y() + 100d, entity.z() + 100d, entity.x() - 100d, entity.y() - 100d, entity.z() - 100d));
 	
 		for (FallingBlockEntity block : blocks) {
 			block.discard();
 		}
 		
 		for (LivingEntity living : list) {
-			double x = living.getX() - ent.x();
-			double y = living.getEyeY() - ent.y();
-			double z = living.getZ() - ent.z();
+			double x = living.getX() - entity.x();
+			double y = living.getEyeY() - entity.y();
+			double z = living.getZ() - entity.z();
 			Vec3 vec = new Vec3(x, y, z).normalize().scale(4);
 			living.setDeltaMovement(vec);
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.WHAT_LIES_BEYOND);
 	}
 	
 	@Override

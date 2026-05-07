@@ -3,7 +3,9 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
 import luckytnt.rules.CopyPropertiesExplosionRule;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.BiomeSetter;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.RandomList;
@@ -93,6 +95,8 @@ public class AetherTNTEffect extends PrimedTNTEffect {
 		});
 		
 		BiomeSetter.setBiomeInCylinder(serverLevel, explosionCenter, 120, 30, Biomes.CHERRY_GROVE);
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.SHARED_DELUSION);
 	}
 	
 	@Override

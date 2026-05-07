@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/rickrolled",
+  "criteria": {
+    "die_by_extinction": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.nail_in_the_coffin.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:extinction"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.nail_in_the_coffin.title"
+    }
+  },
+  "requirements": [
+    [
+      "die_by_extinction"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

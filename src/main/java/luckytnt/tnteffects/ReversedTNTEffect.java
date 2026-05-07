@@ -3,8 +3,10 @@ package luckytnt.tnteffects;
 import java.util.List;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
 import luckytnt.rules.MirrorExplosionRule;
 import luckytnt.rules.UpsideDownBlockExplosionRule;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.FilterBlastResistanceExplosionRule;
@@ -18,13 +20,14 @@ import net.minecraft.world.level.block.Block;
 public class ReversedTNTEffect extends PrimedTNTEffect {
 
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
+	public void serverExplosion(IExplosiveEntity entity) {
 		int islandHeight = 80;
-		ExplosionHelper.legacySphericalExplosion(ent.getLevel(), ent.getPos().add(0, islandHeight, 0), 30, 200f, new MirrorExplosionRule(List.of(Axis.Y), 
+		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos().add(0, islandHeight, 0), 30, 200f, new MirrorExplosionRule(List.of(Axis.Y), 
 			new OffsetExplosionRule(-islandHeight, 
 				new FilterBlastResistanceExplosionRule(200f, new UpsideDownBlockExplosionRule())
 			)
 		));
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.WHAT_GOES_UP);
 	}
 	
 	@Override

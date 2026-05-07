@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -15,6 +17,7 @@ public class DustBowlEffect extends PrimedTNTEffect {
 		WastelandTNTEffect.doVaporizeExplosion(entity.getLevel(), entity.getPos(), 25, true);
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 25);
 		particleExplosion.spawnExplosionParticles();
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.SURFIN_IN_THE_USA);
 	}
 	
 	@Override

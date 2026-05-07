@@ -4,7 +4,9 @@ import org.joml.Math;
 
 import luckytnt.registry.EntityRegistry;
 import luckytnt.registry.ItemRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
 import luckytnt.tnteffects.SnowTNTEffect;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -45,6 +47,7 @@ public class ChristmasDynamiteEffect extends PrimedTNTEffect {
 		SnowTNTEffect snowEffect = new SnowTNTEffect(25);
 		snowEffect.serverExplosion(entity);
 		((ServerLevel)entity.getLevel()).sendParticles(ParticleTypes.WAX_OFF, entity.x() + Math.random() - 0.5f, entity.y() + Math.random() - 0.5f, entity.z() + Math.random() - 0.5f, 500, 0.5f, 0.5f, 0.5f, 0f);
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.TIS_THE_SEASON);
 	}
 	
 	@Override

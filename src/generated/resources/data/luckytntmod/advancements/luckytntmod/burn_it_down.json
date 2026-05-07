@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_present_drop_with_block_destruction": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.burn_it_down.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:present_drop"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.burn_it_down.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_present_drop_with_block_destruction"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

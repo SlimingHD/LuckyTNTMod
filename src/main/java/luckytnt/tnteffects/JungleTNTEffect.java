@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import java.util.List;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.BiomeSetter;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -87,6 +89,8 @@ public class JungleTNTEffect extends PrimedTNTEffect {
 				}
 			});
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.REFORESTATION);
 	}
 	
 	@Override

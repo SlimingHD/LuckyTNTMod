@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -16,6 +18,7 @@ public class DayTNTEffect extends PrimedTNTEffect {
 		if (entity.getLevel() instanceof ServerLevel serverLevel) {
 			serverLevel.setDayTime(6000);
 		}
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.DAYLIGHT_SAVINGS);
 	}
 	
 	@Override

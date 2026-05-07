@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "explode_xray_tnt": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.i_can_see_clearly_now.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:xray_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.i_can_see_clearly_now.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_xray_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

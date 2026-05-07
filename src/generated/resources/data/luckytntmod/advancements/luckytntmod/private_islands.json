@@ -1,0 +1,113 @@
+{
+  "parent": "luckytntmod:luckytntmod/shared_delusion",
+  "criteria": {
+    "aquire_aether_tnt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:aether_tnt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_end_gate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:end_gate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_floating_island": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:floating_island"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_heavens_gate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:heavens_gate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_hells_gate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:hells_gate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_reversed_tnt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:reversed_tnt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.private_islands.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:floating_island"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.private_islands.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_hells_gate"
+    ],
+    [
+      "aquire_end_gate"
+    ],
+    [
+      "aquire_aether_tnt"
+    ],
+    [
+      "aquire_reversed_tnt"
+    ],
+    [
+      "aquire_floating_island"
+    ],
+    [
+      "aquire_heavens_gate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

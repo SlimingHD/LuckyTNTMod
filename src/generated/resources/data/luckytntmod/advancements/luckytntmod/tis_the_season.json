@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "explode_christmas_tnt": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.tis_the_season.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:christmas_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.tis_the_season.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_christmas_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
@@ -26,6 +28,7 @@ public class GraveyardTNTEffect extends PrimedTNTEffect {
 				new BlockExplosionRule(Blocks.GRASS_BLOCK.defaultBlockState())
 			)
 		));
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.REST_IN_PIECES);
 	}
 	
 	@Override

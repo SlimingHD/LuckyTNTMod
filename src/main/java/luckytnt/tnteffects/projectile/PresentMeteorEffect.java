@@ -3,6 +3,8 @@ package luckytnt.tnteffects.projectile;
 import luckytnt.block.PresentBlock;
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.RandomList;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -43,6 +45,7 @@ public class PresentMeteorEffect extends PrimedTNTEffect {
 					)
 				)
 			));
+			AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.BURN_IT_DOWN);
 		}
 		ImprovedExplosion dummyExplosion = ImprovedExplosion.dummyExplosion(entity.getLevel());
 		ExplosionHelper.customSurfaceExplosion(entity.getLevel(), entity.getPos(), 70, (level, center, pos, state) -> {

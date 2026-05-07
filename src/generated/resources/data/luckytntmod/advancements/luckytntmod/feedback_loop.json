@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/antithesis",
+  "criteria": {
+    "light_custom_firework_atop_custom_firework": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.feedback_loop.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:custom_firework"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.feedback_loop.title"
+    }
+  },
+  "requirements": [
+    [
+      "light_custom_firework_atop_custom_firework"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

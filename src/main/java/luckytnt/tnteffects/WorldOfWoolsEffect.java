@@ -10,7 +10,9 @@ import com.google.common.collect.ImmutableMap;
 
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
 import luckytnt.rules.FilterMapColorExplosionRule;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -117,6 +119,8 @@ public class WorldOfWoolsEffect extends PrimedTNTEffect {
 		for (Sheep sheep : list) {
 			sheep.setColor(randomColor(random));
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.OVER_THE_RAINBOW);
 	}
 	
 	@Override

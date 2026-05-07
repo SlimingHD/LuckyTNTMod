@@ -1,0 +1,38 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "aquire_uranium_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:uranium_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.it_glows_in_the_dark.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:uranium_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.it_glows_in_the_dark.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_uranium_ingot"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "explode_pumpkin_bomb": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.trick_or_treat.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:pumpkin_bomb"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.trick_or_treat.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_pumpkin_bomb"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

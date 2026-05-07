@@ -1,6 +1,8 @@
 package luckytnt.tnteffects.projectile;
 
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
 import net.minecraft.util.RandomSource;
@@ -24,5 +26,7 @@ public class ChicxulubMeteorEffect extends MeteorEffect {
 			pompeiiProjectile.setTNTFuse(100000);
 			entity.getLevel().addFreshEntity(pompeiiProjectile);
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.BAD_DAY);
 	}
 }

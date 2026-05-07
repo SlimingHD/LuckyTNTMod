@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/antithesis",
+  "criteria": {
+    "explode_death_ray": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.orbital_strike.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:death_ray"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.orbital_strike.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_death_ray"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

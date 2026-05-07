@@ -15,6 +15,6 @@ public class AdvancementEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		AdvancementHelper.grantAdvancement(entity, key);
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, key);
 	}
 }

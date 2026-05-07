@@ -4,6 +4,8 @@ import java.util.List;
 
 import luckytnt.registry.LuckyTNTDamageSources;
 import luckytnt.registry.SoundRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
@@ -67,6 +69,11 @@ public class DeathRayEffect extends PrimedTNTEffect {
 			
 			entity.getPersistentData().putInt("explosionSize", explosionSize + 1);
 		}
+	}
+	
+	@Override
+	public void serverExplosion(IExplosiveEntity entity) {
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.ORBITAL_STRIKE);
 	}
 	
 	@Override

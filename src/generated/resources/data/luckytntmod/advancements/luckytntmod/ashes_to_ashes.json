@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_pompeii": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.ashes_to_ashes.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:pompeii"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.ashes_to_ashes.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_pompeii"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

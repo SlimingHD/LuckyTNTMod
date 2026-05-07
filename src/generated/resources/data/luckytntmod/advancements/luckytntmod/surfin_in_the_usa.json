@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_dust_bowl": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.surfin_in_the_usa.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:dust_bowl"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.surfin_in_the_usa.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_dust_bowl"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

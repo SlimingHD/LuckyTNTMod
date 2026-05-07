@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_reversed_tnt": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.what_goes_up.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:reversed_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.what_goes_up.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_reversed_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,68 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "aquire_cubic_tnt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:cubic_tnt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_prism_tnt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:prism_tnt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_sphere_tnt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:sphere_tnt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.shape_101.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:sphere_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.shape_101.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_sphere_tnt"
+    ],
+    [
+      "aquire_cubic_tnt"
+    ],
+    [
+      "aquire_prism_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

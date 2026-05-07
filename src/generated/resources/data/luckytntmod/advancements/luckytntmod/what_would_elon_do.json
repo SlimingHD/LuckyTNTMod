@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/stranger_things",
+  "criteria": {
+    "explode_moonfall": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.what_would_elon_do.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:moonfall"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.what_would_elon_do.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_moonfall"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

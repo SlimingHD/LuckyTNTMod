@@ -7,6 +7,8 @@ import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.LuckyTNTDamageSources;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -15,6 +17,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.entity.EntityTypeTest;
 
@@ -25,6 +28,9 @@ public class ExtinctionEffect extends PrimedTNTEffect {
 		if (entity.getLevel() instanceof ServerLevel serverLevel) {
 			List<LightningBolt> lightnings = new ArrayList<LightningBolt>();
 			for (Entity toKill : serverLevel.getEntities(EntityTypeTest.forClass(LivingEntity.class), e -> true)) {
+				if (toKill instanceof Player player) {
+					AdvancementHelper.grantAdvancementOnePlayer(player, AdvancementKeys.NAIL_IN_THE_COFFIN);
+				}
 				toKill.hurt(LuckyTNTDamageSources.extinction(serverLevel, entity.owner()), 10000f);
 				LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, serverLevel);
 				lightning.setPos(toKill.position());

@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -17,6 +19,7 @@ public class DiggingTNTEffect extends PrimedTNTEffect {
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 4);
 		particleExplosion.spawnExplosionParticles();
 		float vectorLength = 480f;
+		int removedBlocks = 0;
 		for (float y = 0f; y <= vectorLength; y++) {
 			BlockPos pos = toBlockPos(entity.getPos().subtract(0d, y, 0d));
 			BlockState state = entity.getLevel().getBlockState(pos);
@@ -24,8 +27,12 @@ public class DiggingTNTEffect extends PrimedTNTEffect {
 			if (vectorLength < y) {
 				break;
 			}
+			++removedBlocks;
 			state.getBlock().wasExploded(entity.getLevel(), pos, particleExplosion);
 			entity.getLevel().setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+		}
+		if (removedBlocks <= 3) {
+			AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.SIZE_MATTERS);
 		}
 	}
 	

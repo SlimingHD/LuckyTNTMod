@@ -73,6 +73,7 @@ public class VacuumCleaner extends Item {
 					LExplosiveProjectile shot = EntityRegistry.VACUUM_SHOT.get().create(level);
 					shot.setPos(player.getPosition(1f).add(0, player.getEyeHeight(), 0));
 					shot.shoot(player.getViewVector(1).x, player.getViewVector(1).y, player.getViewVector(1).z, 4, 0);
+					shot.setOwner(entity);
 					shot.pickup = Pickup.DISALLOWED;
 					level.addFreshEntity(shot);
 				}

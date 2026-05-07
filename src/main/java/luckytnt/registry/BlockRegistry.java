@@ -217,7 +217,7 @@ public class BlockRegistry {
 	public static final RegistryObject<LTNTBlock> STRUCTURE_TNT = LuckyTNTMod.RH.registerTNTBlock(LuckyTNTMod.blockRegistry, LuckyTNTMod.itemRegistry, () -> new StructureTNTBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).sound(SoundType.GRASS)), new TNTBlockRegistryData.Builder("structure_tnt").description(Component.translatable("item.luckytntmod.structure_tnt.info")).tab("d").build());
 	public static final RegistryObject<LTNTBlock> GRANDE_FINALE = LuckyTNTMod.RH.registerTNTBlock(EntityRegistry.GRANDE_FINALE, new TNTBlockRegistryData.Builder("grande_finale").color(MapColor.COLOR_BLACK).description(Component.translatable("item.luckytntmod.grande_finale.info")).tab("d").build());
 	public static final RegistryObject<LTNTBlock> FLAT_EARTH = LuckyTNTMod.RH.registerTNTBlock("flat_earth", EntityRegistry.FLAT_EARTH, "d", MapColor.COLOR_BLACK, true);
-	public static final RegistryObject<LTNTBlock> EVIL_TNT = LuckyTNTMod.RH.registerLivingTNTBlock("evil_tnt", EntityRegistry.EVIL_TNT, "d", MapColor.COLOR_RED, true);
+	public static final RegistryObject<LTNTBlock> EVIL_TNT = LuckyTNTMod.RH.registerLivingTNTBlock("evil_tnt", EntityRegistry.EVIL_TNT, "d", MapColor.COLOR_RED, false);
 	public static final RegistryObject<LTNTBlock> KOLA_BOREHOLE_TNT = LuckyTNTMod.RH.registerTNTBlock("kola_borehole_tnt", EntityRegistry.KOLA_BOREHOLE_TNT, "d", MapColor.COLOR_BLACK, true);
 	public static final RegistryObject<LTNTBlock> HYDROGEN_BOMB = LuckyTNTMod.RH.registerTNTBlock("hydrogen_bomb", EntityRegistry.HYDROGEN_BOMB, "d", MapColor.COLOR_PURPLE, true);
 	public static final RegistryObject<LTNTBlock> FLUORINE_TNT = LuckyTNTMod.RH.registerTNTBlock("fluorine_tnt", EntityRegistry.FLUORINE_TNT, "d", MapColor.COLOR_YELLOW, false);

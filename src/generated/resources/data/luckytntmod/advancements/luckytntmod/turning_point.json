@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_the_revolution": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.turning_point.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:the_revolution"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.turning_point.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_the_revolution"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

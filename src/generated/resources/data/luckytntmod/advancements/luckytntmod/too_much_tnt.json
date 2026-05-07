@@ -1,0 +1,37 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "craft_tnt_x100_100_times": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "luckytntmod:craft_100"
+          }
+        ],
+        "recipe_id": "luckytntmod:craft_tnt_x100"
+      },
+      "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.too_much_tnt.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:tnt_x100"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.too_much_tnt.title"
+    }
+  },
+  "requirements": [
+    [
+      "craft_tnt_x100_100_times"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

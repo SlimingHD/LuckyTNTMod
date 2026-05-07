@@ -3,6 +3,8 @@ package luckytnt.tnteffects.projectile;
 import org.joml.Vector3f;
 
 import luckytnt.registry.ItemRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -11,6 +13,7 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
@@ -41,6 +44,11 @@ public class TimerDynamiteEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 5);
+		explosion.doEntityExplosion((ent, dist) -> {
+			if (ent instanceof Player player) {
+				AdvancementHelper.grantAdvancementOnePlayer(player, AdvancementKeys.BAD_TIMING);
+			}
+		});
 		explosion.doEntityExplosion(1f, true);
 		explosion.doImprovedBlockExplosion(1f, 1f, false, false, null);
 		explosion.spawnExplosionParticles();

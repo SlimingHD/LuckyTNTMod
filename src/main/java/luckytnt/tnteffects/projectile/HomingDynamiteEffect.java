@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import luckytnt.registry.ItemRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -21,6 +23,9 @@ public class HomingDynamiteEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 20);
+		explosion.doEntityExplosion((ent, dist) -> {
+			AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.BULLSEYE);
+		});
 		explosion.doEntityExplosion(1.5f, true);
 		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
 		explosion.spawnExplosionParticles();

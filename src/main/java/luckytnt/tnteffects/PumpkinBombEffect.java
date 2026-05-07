@@ -8,6 +8,8 @@ import com.google.common.collect.ImmutableMap;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.ItemRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -62,6 +64,8 @@ public class PumpkinBombEffect extends PrimedTNTEffect {
 				level.addFreshEntity(candy);
 			}
 		}
+
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.TRICK_OR_TREAT);
 	}
 
 	@Override

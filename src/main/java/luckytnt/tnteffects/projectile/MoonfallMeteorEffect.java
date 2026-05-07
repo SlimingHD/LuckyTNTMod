@@ -2,6 +2,8 @@ package luckytnt.tnteffects.projectile;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -41,6 +43,8 @@ public class MoonfallMeteorEffect extends PrimedTNTEffect {
 			meteorProjectile.setTNTFuse(100000);
 			entity.getLevel().addFreshEntity(meteorProjectile);
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.WHAT_WOULD_ELON_DO);
 	}
 
 	@Override

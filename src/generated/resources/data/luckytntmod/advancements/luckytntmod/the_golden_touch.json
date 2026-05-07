@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/all_that_glitters",
+  "criteria": {
+    "explode_midas_tnt": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.the_golden_touch.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:midas_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.the_golden_touch.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_midas_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

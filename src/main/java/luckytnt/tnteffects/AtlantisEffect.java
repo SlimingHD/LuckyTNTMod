@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import java.util.List;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.BiomeSetter;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -81,6 +83,8 @@ public class AtlantisEffect extends PrimedTNTEffect {
 			squid.setPos(entity.x() + random.nextDouble() * 100d - 50d, entity.y() + 8, entity.z() + random.nextDouble() * 100d - 50d);
 			serverLevel.addFreshEntity(squid);
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.THE_LOST_EMPIRE);
 	}
 	
 	@Override

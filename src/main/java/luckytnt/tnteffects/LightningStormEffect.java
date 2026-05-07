@@ -4,6 +4,8 @@ import java.util.List;
 
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -51,6 +53,8 @@ public class LightningStormEffect extends PrimedTNTEffect {
 			explosion.doImprovedBlockExplosion(1f, 1.2f, false, false, null);
 			explosion.spawnExplosionParticles();
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.UNLIMITED_POWER);
 	}
 	
 	@Override

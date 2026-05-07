@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/antithesis",
+  "criteria": {
+    "explode_illuminati_tnt": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.all_seeing.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:illuminati_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.all_seeing.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_illuminati_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

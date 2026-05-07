@@ -6,6 +6,8 @@ import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EffectRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
@@ -49,6 +51,11 @@ public class MidasTNTEffect extends PrimedTNTEffect {
 				living.addEffect(new MobEffectInstance(EffectRegistry.MIDAS_TOUCH_EFFECT.get(), 2000, 0));
 			}
 		}
+	}
+	
+	@Override
+	public void serverExplosion(IExplosiveEntity entity) {
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.THE_GOLDEN_TOUCH);
 	}
 	
 	@Override

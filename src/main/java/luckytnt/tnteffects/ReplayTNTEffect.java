@@ -9,6 +9,8 @@ import com.mojang.datafixers.util.Pair;
 
 import luckytnt.entity.PrimedReplayTNT;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -46,6 +48,11 @@ public class ReplayTNTEffect extends PrimedTNTEffect {
 			tnt.setDeltaMovement(0d, 0d, 0d);
 			tnt.setPos(tnt.getPosition(0f));
 		}
+	}
+	
+	@Override
+	public void serverExplosion(IExplosiveEntity entity) {
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.DEJA_VU);
 	}
 	
 	@Override

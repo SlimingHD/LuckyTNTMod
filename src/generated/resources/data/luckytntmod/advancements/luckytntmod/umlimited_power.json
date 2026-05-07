@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_lightning_storm": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.umlimited_power.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:lightning_storm"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.umlimited_power.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_lightning_storm"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

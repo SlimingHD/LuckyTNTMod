@@ -4,6 +4,8 @@ import java.util.List;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -17,10 +19,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class CityFireworkEffect extends PrimedTNTEffect {
 
-	private static List<RegistryObject<EntityType<PrimedLTNT>>> ENTITY_TYPES = List.of(EntityRegistry.COBBLESTONE_HOUSE_TNT,
-																					   EntityRegistry.WOOD_HOUSE_TNT,
-																					   EntityRegistry.BRICK_HOUSE_TNT,
-																					   EntityRegistry.MANKINDS_MARK);
+	private static List<RegistryObject<EntityType<PrimedLTNT>>> ENTITY_TYPES = List.of(EntityRegistry.COBBLESTONE_HOUSE_TNT, EntityRegistry.WOOD_HOUSE_TNT, EntityRegistry.BRICK_HOUSE_TNT, EntityRegistry.MANKINDS_MARK);
 	
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
@@ -40,6 +39,8 @@ public class CityFireworkEffect extends PrimedTNTEffect {
 			tnt.setDeltaMovement(random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d, random.nextDouble() * 3d - 1.5d);
 			level.addFreshEntity(tnt);
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.ORGANIZED_CHAOS);
 	}
 	
 	@Override

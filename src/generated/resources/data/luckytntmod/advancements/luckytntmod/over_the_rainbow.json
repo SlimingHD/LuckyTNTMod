@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_world_of_wools": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.over_the_rainbow.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:world_of_wools"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.over_the_rainbow.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_world_of_wools"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

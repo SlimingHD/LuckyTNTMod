@@ -146,7 +146,7 @@ public class RendererRegistry {
 		event.registerEntityRenderer(EntityRegistry.SILK_TOUCH_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ITEM_FIREWORK.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ANIMAL_KINGDOM.get(), LTNTRenderer::new);
-		event.registerEntityRenderer(EntityRegistry.GIANT_TNT.get(), LTNTRenderer::new);
+		event.registerEntityRenderer(EntityRegistry.GIANT_TNT.get(), AlwaysLTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.MIMIC_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.REVERSED_TNT.get(), LTNTRenderer::new);
 		event.registerEntityRenderer(EntityRegistry.ENTITY_FIREWORK.get(), LTNTRenderer::new);

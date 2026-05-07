@@ -1,8 +1,12 @@
 package luckytnt.tnteffects;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -29,6 +33,8 @@ public class FarmingTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		RandomSource random = entity.getLevel().getRandom();
+		
+		AtomicBoolean frozen = new AtomicBoolean(false);
 		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(entity.getLevel());
 		ExplosionHelper.customSurfaceExplosion(entity.getLevel(), entity.getPos(), radius, (level, center, pos, state) -> {
 			BlockPos posAbove = pos.above();
@@ -56,6 +62,7 @@ public class FarmingTNTEffect extends PrimedTNTEffect {
 					if ((placeLantern || !stateBelow.is(Blocks.WATER)) && !stateBelow.isCollisionShapeFullBlock(level, posBelow) && Math.max(stateBelow.getBlock().getExplosionResistance(), stateBelow.getFluidState().getExplosionResistance()) <= 200f) {
 						level.setBlockAndUpdate(posBelow, Blocks.DIRT.defaultBlockState());
 						stateBelow.getBlock().wasExploded(level, posBelow, dummy);
+						frozen.set(frozen.get() || placeLantern);
 					}
 					
 					level.setBlockAndUpdate(pos, placeLantern ? Blocks.LANTERN.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true) : Blocks.WATER.defaultBlockState());
@@ -66,6 +73,10 @@ public class FarmingTNTEffect extends PrimedTNTEffect {
 				}
 			}
 		});
+		
+		if (frozen.get()) {
+			AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.FROZEN_HARVEST);
+		}
 	}
 	
 	private static BlockState getRandomCrop(RandomSource random) {

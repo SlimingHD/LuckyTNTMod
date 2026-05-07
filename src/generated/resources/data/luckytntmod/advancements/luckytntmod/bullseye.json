@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "hit_entity_with_homing_dynamite": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.bullseye.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:homing_dynamite"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.bullseye.title"
+    }
+  },
+  "requirements": [
+    [
+      "hit_entity_with_homing_dynamite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

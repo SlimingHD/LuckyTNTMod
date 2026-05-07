@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
@@ -57,6 +59,8 @@ public class ChromaticTNTEffect extends PrimedTNTEffect {
 				new BlockExplosionRule(Blocks.PINK_CONCRETE.defaultBlockState())
 			)
 		));
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.CHROMATIC_ABERRATION);
 	}
 	
 	@Override

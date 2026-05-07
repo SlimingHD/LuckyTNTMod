@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "explode_easter_egg": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.false_advertising.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:easter_egg"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.false_advertising.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_easter_egg"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -4,6 +4,8 @@ import org.joml.Vector3f;
 
 import luckytnt.block.UraniumOreBlock;
 import luckytnt.registry.ItemRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -25,6 +27,9 @@ public class DeathRayRayEffect extends PrimedTNTEffect {
 				ItemEntity antimatter = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ItemRegistry.ANTIMATTER.get()));
 				level.addFreshEntity(antimatter);
 			} else {
+				if (state.is(Blocks.BEDROCK)) {
+					AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.NEVER_GONNA_GIVE_YOU_UP);
+				}
 				state.onBlockExploded(level, pos, ImprovedExplosion.dummyExplosion(entity.getLevel()));
 			}
 		});

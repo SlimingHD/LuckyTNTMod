@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_tsar_bomba": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.big_ivan.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:tsar_bomba"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.big_ivan.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_tsar_bomba"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

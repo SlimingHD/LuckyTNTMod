@@ -1,0 +1,103 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "aquire_lucky_annihilation": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lucky_annihilation"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_lucky_doomsday": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lucky_doomsday"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_lucky_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lucky_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_lucky_god": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lucky_god"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_lucky_tnt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lucky_tnt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_lucky_tnt_minecart": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lucky_tnt_minecart"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.the_die_is_cast.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:lucky_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.the_die_is_cast.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_lucky_tnt",
+      "aquire_lucky_god",
+      "aquire_lucky_tnt_minecart",
+      "aquire_lucky_dynamite",
+      "aquire_lucky_doomsday",
+      "aquire_lucky_annihilation"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

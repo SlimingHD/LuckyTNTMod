@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "die_by_say_goodbye": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.rickrolled.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:say_goodbye"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.rickrolled.title"
+    }
+  },
+  "requirements": [
+    [
+      "die_by_say_goodbye"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

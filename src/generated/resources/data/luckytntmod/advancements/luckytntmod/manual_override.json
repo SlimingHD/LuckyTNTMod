@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "use_config_wand": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.manual_override.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:configuration_wand"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.manual_override.title"
+    }
+  },
+  "requirements": [
+    [
+      "use_config_wand"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

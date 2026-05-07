@@ -4,6 +4,8 @@ import javax.annotation.Nullable;
 
 import luckytnt.registry.EntityRegistry;
 import luckytnt.registry.ItemRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.entity.PrimedLTNT;
 import net.minecraft.core.BlockPos;
@@ -96,6 +98,7 @@ public class GotthardTunnelBlock extends LTNTBlock {
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		} else if (itemstack.is(ItemRegistry.CONFIGURATION_WAND.get())) {
 			if (state.hasProperty(STREETS)) {
+				AdvancementHelper.grantAdvancementOnePlayer(player, AdvancementKeys.MANUAL_OVERRIDE);
 				level.setBlock(pos, state.setValue(STREETS, !state.getValue(STREETS)), 3);
 			}
 			return InteractionResult.SUCCESS;

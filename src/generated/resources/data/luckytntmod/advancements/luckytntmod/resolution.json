@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_new_years_firework_on_new_years": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.resolution.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:new_years_firework"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.resolution.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_new_years_firework_on_new_years"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

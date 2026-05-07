@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/big_ivan",
+  "criteria": {
+    "explode_hydrogen_bomb": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.boundless_incompetence.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:hydrogen_bomb"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.boundless_incompetence.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_hydrogen_bomb"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

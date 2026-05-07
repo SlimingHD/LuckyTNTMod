@@ -15,7 +15,7 @@
   },
   "display": {
     "announce_to_chat": false,
-    "background": "minecraft:textures/block/tnt_side.png",
+    "background": "luckytntmod:textures/block/gunpowder_ore.png",
     "description": {
       "translate": "advancement.luckytntmod.root.description"
     },

@@ -4,6 +4,8 @@ import javax.annotation.Nullable;
 
 import luckytnt.registry.EntityRegistry;
 import luckytnt.registry.ItemRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytnt.util.StructureState;
 import luckytntlib.block.LTNTBlock;
 import luckytntlib.entity.PrimedLTNT;
@@ -54,6 +56,7 @@ public class StructureTNTBlock extends LTNTBlock {
 			player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
 			return InteractionResult.sidedSuccess(level.isClientSide());
 		} else if (stack.getItem() == ItemRegistry.CONFIGURATION_WAND.get()) {
+			AdvancementHelper.grantAdvancementOnePlayer(player, AdvancementKeys.MANUAL_OVERRIDE);
 			level.setBlock(pos, state.setValue(STRUCTURE, state.getValue(STRUCTURE).next()), 3);
 			return InteractionResult.sidedSuccess(level.isClientSide());
 		}

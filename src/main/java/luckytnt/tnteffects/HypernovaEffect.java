@@ -4,6 +4,8 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import net.minecraft.core.particles.DustColorTransitionOptions;
@@ -32,6 +34,12 @@ public class HypernovaEffect extends SphereTNTEffect {
 			explosion.doImprovedBlockExplosion(1f, 1f, false, false, null);
 			explosion.spawnExplosionParticles();
 		}
+	}
+	
+	@Override
+	public void serverExplosion(IExplosiveEntity entity) {
+		super.serverExplosion(entity);
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.STAR_KILLER);
 	}
 
 	@Override

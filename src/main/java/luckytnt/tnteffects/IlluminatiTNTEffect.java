@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -21,10 +23,10 @@ public class IlluminatiTNTEffect extends PrimedTNTEffect {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public void serverExplosion(IExplosiveEntity ent) {
-		Level level = ent.getLevel();
+	public void serverExplosion(IExplosiveEntity entity) {
+		Level level = entity.getLevel();
 		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
-		BlockPos centerPos = BlockPos.containing(ent.getPos());
+		BlockPos centerPos = BlockPos.containing(entity.getPos());
 		for (int offY = 60; offY >= -60; offY--) {
 			int xzRadius = Mth.ceil(60f * (1f - ((offY + 60f) / 121f)));
 			for (int offX = -xzRadius; offX <= xzRadius; offX++) {
@@ -39,8 +41,10 @@ public class IlluminatiTNTEffect extends PrimedTNTEffect {
 			}
 		}
 		
-		ImprovedExplosion particleExplosion = new ImprovedExplosion(level, ent.getPos(), 60);
+		ImprovedExplosion particleExplosion = new ImprovedExplosion(level, entity.getPos(), 60);
 		particleExplosion.spawnExplosionParticles();
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.ALL_SEEING);
 	}
 	
 	@Override

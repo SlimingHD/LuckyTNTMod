@@ -3,6 +3,8 @@ package luckytnt.tnteffects.projectile;
 import org.joml.Vector3f;
 
 import luckytnt.registry.ItemRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -25,6 +27,11 @@ public class SensorDynamiteEffect extends PrimedTNTEffect {
 				explosion.spawnExplosionParticles();
 				playExplosionSound(entity);
 				entity.destroy();
+				for (Player p : explosion.getHitPlayers().keySet()) {
+					if (p == entity.owner() && p.isDeadOrDying()) {
+						AdvancementHelper.grantAdvancementOnePlayer(p, AdvancementKeys.WHAT_GOES_AROUND);
+					}
+				}
 			}
 		}
 	}

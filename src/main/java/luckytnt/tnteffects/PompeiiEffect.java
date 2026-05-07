@@ -2,6 +2,8 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -27,6 +29,11 @@ public class PompeiiEffect extends PrimedTNTEffect {
 			}
 			playExplosionSound(entity);
 		}
+	}
+	
+	@Override
+	public void serverExplosion(IExplosiveEntity entity) {
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.ASHES_TO_ASHES);
 	}
 
 	@Override

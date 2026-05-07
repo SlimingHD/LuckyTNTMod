@@ -4,6 +4,8 @@ import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.RandomList;
@@ -54,6 +56,7 @@ public class EasterEggEffect extends PrimedTNTEffect{
 			tnt.getPersistentData().putInt("level", level + 1);
 			entity.getLevel().addFreshEntity(tnt);
 		}
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.FALSE_ADVERTISING);
 	}
 	
 	@Override

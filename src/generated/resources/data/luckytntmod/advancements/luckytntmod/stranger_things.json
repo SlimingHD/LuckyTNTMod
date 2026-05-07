@@ -1,0 +1,38 @@
+{
+  "parent": "luckytntmod:luckytntmod/antithesis",
+  "criteria": {
+    "aquire_strange_matter": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:strange_matter"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.stranger_things.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:strange_matter"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.stranger_things.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_strange_matter"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

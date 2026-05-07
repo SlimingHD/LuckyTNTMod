@@ -8,6 +8,8 @@ import luckytnt.network.ClientboundHydrogenBombPacket;
 import luckytnt.network.PacketHandler;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EffectRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytnt.util.NuclearBombLike;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -45,6 +47,8 @@ public class TsarBombaBombEffect extends PrimedTNTEffect implements NuclearBombL
 		for(LivingEntity living : list) {
 			living.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 3600, 0, true, true, true));
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.BIG_IVAN);
 	}
 
 	private void finishNuclearExplosion(IExplosiveEntity entity, ImprovedExplosion explosion) {

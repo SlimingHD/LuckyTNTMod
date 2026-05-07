@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "explode_any_farming_tnt_in_frozen_biome": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.frozen_harvest.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:farming_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.frozen_harvest.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_any_farming_tnt_in_frozen_biome"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

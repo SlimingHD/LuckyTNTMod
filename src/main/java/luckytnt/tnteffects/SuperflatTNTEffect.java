@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.BiomeSetter;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -32,6 +34,8 @@ public class SuperflatTNTEffect extends PrimedTNTEffect {
 		BiomeSetter.setBiomeInCylinder(entity.getLevel(), entity.getPos(), 410, 50, Biomes.PLAINS);
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 400);
 		particleExplosion.spawnExplosionParticles();
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.ENDLESS_EXPANSES);
 	}
 	
 	@Override

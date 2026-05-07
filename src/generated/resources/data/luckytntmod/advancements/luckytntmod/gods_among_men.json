@@ -1,0 +1,98 @@
+{
+  "parent": "luckytntmod:luckytntmod/antithesis",
+  "criteria": {
+    "aquire_aether_tnt": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:aether_tnt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_deimos": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:deimos"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_hyperion": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:hyperion"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_phobos": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:phobos"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_poseidons_wave": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:poseidons_wave"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.gods_among_men.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:poseidons_wave"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.gods_among_men.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_deimos"
+    ],
+    [
+      "aquire_aether_tnt"
+    ],
+    [
+      "aquire_poseidons_wave"
+    ],
+    [
+      "aquire_hyperion"
+    ],
+    [
+      "aquire_phobos"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

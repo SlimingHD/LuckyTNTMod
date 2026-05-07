@@ -2,6 +2,7 @@ package luckytnt.tnteffects;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.joml.Vector3f;
 
@@ -9,6 +10,8 @@ import com.mojang.datafixers.util.Pair;
 
 import luckytnt.event.LevelEvents;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -78,6 +81,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			}
 		}
 		
+		AtomicBoolean frozen = new AtomicBoolean(false);
 		int[] waterDistances = new int[]{-1, 0, 7 * 7, 8 * 8, 15 * 15, 16 * 16, 23 * 23, 24 * 24, 31 * 31, 32 * 32, 39 * 39, 40 * 40};
 		for (Pair<BlockPos, Integer> pair : placedCrops) {
 			int distanceSqr = pair.getSecond();
@@ -90,8 +94,12 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			}
 			if (placeWater) {
 				BlockPos pos = pair.getFirst();
-				placeWater(level, pos, dummy);
+				placeWater(level, pos, dummy, frozen);
 			}
+		}
+		
+		if (frozen.get()) {
+			AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.FROZEN_HARVEST);
 		}
 	}
 
@@ -128,7 +136,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 	}
 	
 	@SuppressWarnings("deprecation")
-	private static void placeWater(Level level, BlockPos pos, ImprovedExplosion dummy) {
+	private static void placeWater(Level level, BlockPos pos, ImprovedExplosion dummy, AtomicBoolean frozen) {
 		BlockState state = level.getBlockState(pos);
 		if (Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance()) > 200f) {
 			return;
@@ -167,6 +175,7 @@ public class PlantationTNTEffect extends PrimedTNTEffect {
 			}
 			level.setBlockAndUpdate(pos, placeLantern ? Blocks.LANTERN.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true) : Blocks.WATER.defaultBlockState());
 			state.getBlock().wasExploded(level, pos, dummy);
+			frozen.set(frozen.get() || placeLantern);
 			if ((stateAbove.isAir() || stateAbove.is(BlockTags.CROPS)) && level.getRandom().nextFloat() < 0.25f) {
 				level.setBlockAndUpdate(posAbove, Blocks.LILY_PAD.defaultBlockState());
 			}

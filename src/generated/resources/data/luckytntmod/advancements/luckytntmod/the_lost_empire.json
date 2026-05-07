@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/antithesis",
+  "criteria": {
+    "explode_atlantis": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.the_lost_empire.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:atlantis"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.the_lost_empire.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_atlantis"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

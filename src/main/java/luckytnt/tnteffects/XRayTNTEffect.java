@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.AlwaysExplosionRule;
@@ -23,12 +25,13 @@ public class XRayTNTEffect extends PrimedTNTEffect {
 	
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), radius, 100f, new FilterAirExplosionRule(
+		ExplosionHelper.createSphericalCrater(entity.getLevel(), entity.getPos(), radius, 100f, new FilterAirExplosionRule(
 			LogicExplosionRule.not(
 				FilterBlockExplosionRule.applyOnlyWhen(Tags.Blocks.ORES, new AlwaysExplosionRule()), 
 				new BlockExplosionRule(Blocks.GLASS.defaultBlockState())	
 			)
 		));
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.I_CAN_SEE_CLEARLY_NOW);
 	}
 	
 	@Override

@@ -1,0 +1,32 @@
+{
+  "parent": "luckytntmod:luckytntmod/rest_in_pieces",
+  "criteria": {
+    "loot_grave_rare": {
+      "conditions": {
+        "loot_table": "luckytntmod:chests/grave_loot_rare"
+      },
+      "trigger": "minecraft:player_generates_container_loot"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.indiana_jones.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:cobweb"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.indiana_jones.title"
+    }
+  },
+  "requirements": [
+    [
+      "loot_grave_rare"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

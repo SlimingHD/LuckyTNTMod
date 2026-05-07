@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/antithesis",
+  "criteria": {
+    "explode_aether_tnt": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.shared_delusion.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:aether_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.shared_delusion.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_aether_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

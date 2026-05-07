@@ -1,0 +1,38 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "aquire_antimatter": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:antimatter"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.antithesis.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:antimatter"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.antithesis.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_antimatter"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

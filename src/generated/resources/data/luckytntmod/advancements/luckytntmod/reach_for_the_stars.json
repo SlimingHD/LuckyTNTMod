@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "criteria": {
+    "explode_hyperion": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.reach_for_the_stars.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:hyperion"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.reach_for_the_stars.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_hyperion"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

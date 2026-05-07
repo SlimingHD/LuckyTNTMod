@@ -6,6 +6,8 @@ import java.util.List;
 
 import luckytnt.entity.PrimedCustomFirework;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
@@ -56,6 +58,10 @@ public class CustomFireworkEffect extends PrimedTNTEffect {
 			BlockState state = level.getBlockState(new BlockPos(entity.getPersistentData().getInt("x"), entity.getPersistentData().getInt("y"), entity.getPersistentData().getInt("z")));
 			if (firework.state != null) {
 				state = firework.state;
+			}
+			if (state.is(getBlock())) {
+				AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.FEEDBACK_LOOP);
+				return;
 			}
 			
 			for (int count = 0; count < 200; count++) {

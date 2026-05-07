@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import org.joml.Vector3f;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.explosions.rules.BlockExplosionRule;
@@ -17,6 +19,7 @@ public class UnbreakableTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), 15, 2000, new FilterAirExplosionRule(new BlockExplosionRule(Blocks.BEDROCK.defaultBlockState())));
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.BEDROCK_EDITION);
 	}
 	
 	@Override

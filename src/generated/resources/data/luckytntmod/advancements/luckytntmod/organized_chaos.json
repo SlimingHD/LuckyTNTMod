@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/real_estate_rookie",
+  "criteria": {
+    "explode_city_firework": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.organized_chaos.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:city_firework"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.organized_chaos.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_city_firework"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

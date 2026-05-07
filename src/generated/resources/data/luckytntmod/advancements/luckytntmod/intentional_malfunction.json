@@ -1,0 +1,30 @@
+{
+  "parent": "luckytntmod:luckytntmod/root",
+  "criteria": {
+    "suck_toxic_cloud_away": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.intentional_malfunction.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:vacuum_cleaner",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.intentional_malfunction.title"
+    }
+  },
+  "requirements": [
+    [
+      "suck_toxic_cloud_away"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

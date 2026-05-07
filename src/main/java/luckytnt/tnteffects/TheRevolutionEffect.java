@@ -2,6 +2,8 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -27,6 +29,11 @@ public class TheRevolutionEffect extends PrimedTNTEffect {
 				ent.setYRot(ent.getYRot() + 60f);
 			}
 		}
+	}
+	
+	@Override
+	public void serverExplosion(IExplosiveEntity entity) {
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.TURNING_POINT);
 	}
 	
 	@Override

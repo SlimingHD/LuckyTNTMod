@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/stranger_things",
+  "criteria": {
+    "explode_hypernova": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.star_killer.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:hypernova"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.star_killer.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_hypernova"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

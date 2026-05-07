@@ -5,6 +5,8 @@ import luckytnt.network.ClientboundDoubleNBTPacket;
 import luckytnt.network.PacketHandler;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.LExplosiveProjectile;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
@@ -24,6 +26,7 @@ public class ChristmasTNTEffect extends PrimedTNTEffect{
 		ServerLevel serverLevel = (ServerLevel)entity.getLevel();
 		RandomSource random = serverLevel.getRandom();
 		serverLevel.sendParticles(ParticleTypes.WAX_OFF, entity.x() + random.nextDouble() - 0.5d, entity.y() + 1d + random.nextDouble() * 0.5d, entity.z() + random.nextDouble() - 0.5d, entity instanceof PrimedLTNT ? 500 : 100, 0.5d, 0.5d, 0.5d, 0d);
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.TIS_THE_SEASON);
 	}
 	
 	@Override

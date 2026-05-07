@@ -1,0 +1,1028 @@
+{
+  "parent": "luckytntmod:luckytntmod/bullseye",
+  "criteria": {
+    "aquire_accelerating_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:accelerating_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_animal_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:animal_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_arrow_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:arrow_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_big_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:big_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_bouncing_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:bouncing_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_chemical_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:chemical_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_christmas_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:christmas_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_cluster_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:cluster_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_compact_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:compact_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_cubic_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:cubic_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_digging_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:digging_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_dripstone_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:dripstone_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_dynamite_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:dynamite_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_dynamite_x100": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:dynamite_x100"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_dynamite_x20": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:dynamite_x20"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_dynamite_x5": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:dynamite_x5"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_dynamite_x500": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:dynamite_x500"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_end_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:end_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_ender_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:ender_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_erupting_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:erupting_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_farming_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:farming_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_fire_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:fire_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_flat_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:flat_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_floating_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:floating_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_floating_island_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:floating_island_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_freeze_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:freeze_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_gravity_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:gravity_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_grove_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:grove_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_hellfire_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:hellfire_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_homing_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:homing_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_honey_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:honey_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_ice_meteor_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:ice_meteor_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_igniter_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:igniter_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_lava_ocean_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lava_ocean_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_lightning_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lightning_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_lucky_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lucky_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_lush_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:lush_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_meteor_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:meteor_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_miningflat_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:miningflat_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_multiplying_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:multiplying_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_nether_grove_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:nether_grove_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_nuclear_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:nuclear_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_nuclear_waste_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:nuclear_waste_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_ocean_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:ocean_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_physics_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:physics_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_picky_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:picky_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_prism_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:prism_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_pulse_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:pulse_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_rainbow_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:rainbow_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_random_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:random_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_reaction_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:reaction_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_ring_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:ring_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_roulette_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:roulette_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_sculk_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:sculk_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_sensor_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:sensor_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_shatterproof_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:shatterproof_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_snow_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:snow_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_sphere_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:sphere_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_spiral_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:spiral_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_timer_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:timer_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_tunneling_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:tunneling_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_ultralight_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:ultralight_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_vaporize_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:vaporize_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_withering_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:withering_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_wool_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:wool_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_xray_dynamite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:xray_dynamite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.stick_with_it.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:dynamite_x5"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.stick_with_it.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_igniter_dynamite"
+    ],
+    [
+      "aquire_dynamite_x5"
+    ],
+    [
+      "aquire_homing_dynamite"
+    ],
+    [
+      "aquire_ice_meteor_dynamite"
+    ],
+    [
+      "aquire_ultralight_dynamite"
+    ],
+    [
+      "aquire_roulette_dynamite"
+    ],
+    [
+      "aquire_multiplying_dynamite"
+    ],
+    [
+      "aquire_dynamite_x500"
+    ],
+    [
+      "aquire_snow_dynamite"
+    ],
+    [
+      "aquire_dynamite_firework"
+    ],
+    [
+      "aquire_dynamite_x100"
+    ],
+    [
+      "aquire_lightning_dynamite"
+    ],
+    [
+      "aquire_sculk_dynamite"
+    ],
+    [
+      "aquire_shatterproof_dynamite"
+    ],
+    [
+      "aquire_cluster_dynamite"
+    ],
+    [
+      "aquire_reaction_dynamite"
+    ],
+    [
+      "aquire_nether_grove_dynamite"
+    ],
+    [
+      "aquire_wool_dynamite"
+    ],
+    [
+      "aquire_digging_dynamite"
+    ],
+    [
+      "aquire_gravity_dynamite"
+    ],
+    [
+      "aquire_sensor_dynamite"
+    ],
+    [
+      "aquire_grove_dynamite"
+    ],
+    [
+      "aquire_farming_dynamite"
+    ],
+    [
+      "aquire_picky_dynamite"
+    ],
+    [
+      "aquire_compact_dynamite"
+    ],
+    [
+      "aquire_nuclear_waste_dynamite"
+    ],
+    [
+      "aquire_christmas_dynamite"
+    ],
+    [
+      "aquire_sphere_dynamite"
+    ],
+    [
+      "aquire_honey_dynamite"
+    ],
+    [
+      "aquire_dripstone_dynamite"
+    ],
+    [
+      "aquire_vaporize_dynamite"
+    ],
+    [
+      "aquire_animal_dynamite"
+    ],
+    [
+      "aquire_fire_dynamite"
+    ],
+    [
+      "aquire_ender_dynamite"
+    ],
+    [
+      "aquire_random_dynamite"
+    ],
+    [
+      "aquire_big_dynamite"
+    ],
+    [
+      "aquire_ocean_dynamite"
+    ],
+    [
+      "aquire_physics_dynamite"
+    ],
+    [
+      "aquire_arrow_dynamite"
+    ],
+    [
+      "aquire_xray_dynamite"
+    ],
+    [
+      "aquire_lucky_dynamite"
+    ],
+    [
+      "aquire_tunneling_dynamite"
+    ],
+    [
+      "aquire_floating_dynamite"
+    ],
+    [
+      "aquire_lava_ocean_dynamite"
+    ],
+    [
+      "aquire_cubic_dynamite"
+    ],
+    [
+      "aquire_meteor_dynamite"
+    ],
+    [
+      "aquire_withering_dynamite"
+    ],
+    [
+      "aquire_dynamite"
+    ],
+    [
+      "aquire_ring_dynamite"
+    ],
+    [
+      "aquire_hellfire_dynamite"
+    ],
+    [
+      "aquire_dynamite_x20"
+    ],
+    [
+      "aquire_bouncing_dynamite"
+    ],
+    [
+      "aquire_timer_dynamite"
+    ],
+    [
+      "aquire_lush_dynamite"
+    ],
+    [
+      "aquire_nuclear_dynamite"
+    ],
+    [
+      "aquire_flat_dynamite"
+    ],
+    [
+      "aquire_miningflat_dynamite"
+    ],
+    [
+      "aquire_chemical_dynamite"
+    ],
+    [
+      "aquire_floating_island_dynamite"
+    ],
+    [
+      "aquire_rainbow_dynamite"
+    ],
+    [
+      "aquire_erupting_dynamite"
+    ],
+    [
+      "aquire_freeze_dynamite"
+    ],
+    [
+      "aquire_pulse_dynamite"
+    ],
+    [
+      "aquire_end_dynamite"
+    ],
+    [
+      "aquire_prism_dynamite"
+    ],
+    [
+      "aquire_spiral_dynamite"
+    ],
+    [
+      "aquire_accelerating_dynamite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,11 +1,15 @@
 package luckytnt.tnteffects;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 
 import javax.annotation.Nullable;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -63,6 +67,13 @@ public class NewYearsFireworkEffect extends PrimedTNTEffect {
 				createShape(entity, 1d, CREEPER_VELOCITIES, true, state);
 			} else {
 				createShape(entity, 1d, STAR_VELOCITIES, false, state);
+			}
+			
+			LocalDate date = LocalDate.now();
+			int month = date.get(ChronoField.MONTH_OF_YEAR);
+			int day = date.get(ChronoField.DAY_OF_MONTH);
+			if ((month == 12 && day == 31) || (month == 1 && day == 1)) {
+				AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.RESOLUTION);
 			}
 		}
 	}

@@ -1,6 +1,8 @@
 package luckytnt.tnteffects.projectile;
 
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -13,7 +15,8 @@ public class VacuumShotEffect extends PrimedTNTEffect {
 	public void explosionTick(IExplosiveEntity entity) {
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 2);
 		explosion.doEntityExplosion((ent, distance) -> {
-			if(ent.getType().equals(EntityRegistry.TOXIC_CLOUD.get()) && ent.level().getRandom().nextFloat() < 0.2f) {
+			if (ent.getType().equals(EntityRegistry.TOXIC_CLOUD.get()) && ent.level().getRandom().nextFloat() < 0.2f) {
+				AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.INTENTIONAL_MALFUNCTION);
 				ent.discard();
 			}
 		});

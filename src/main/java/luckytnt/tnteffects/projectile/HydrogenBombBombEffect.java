@@ -8,6 +8,8 @@ import luckytnt.network.ClientboundHydrogenBombPacket;
 import luckytnt.network.PacketHandler;
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EffectRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytnt.util.NuclearBombLike;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
@@ -38,7 +40,7 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 		PacketHandler.CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> (Entity)entity), new ClientboundHydrogenBombPacket(((Entity)entity).getId()));
 		
 		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity)entity, entity.getPos(), 230);
-		explosion.setExplosionFinishWork(exp -> finishNuclearExplosion(entity, exp));
+		explosion.setExplosionFinishWork(exp -> finishNuclearExplosion(entity));
 		explosion.doEntityExplosion(25f, true);
 		explosion.doImprovedBlockExplosion(0.167f, 0.05f, true, false, null);
 		
@@ -46,9 +48,11 @@ public class HydrogenBombBombEffect extends PrimedTNTEffect implements NuclearBo
 		for (LivingEntity living : list) {
 			living.addEffect(new MobEffectInstance(EffectRegistry.CONTAMINATED_EFFECT.get(), 4800, 0, true, true, true));
 		}
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.BOUNDLESS_INCOMPETENCE);
 	}
 	
-	private void finishNuclearExplosion(IExplosiveEntity entity, ImprovedExplosion explosion) {
+	private void finishNuclearExplosion(IExplosiveEntity entity) {
 		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 400, new Vector3f(1f, 0.3333f, 1f), 0.2f, FilterBlockExplosionRule.builder().filterForTag(BlockTags.LEAVES).filterForBlocks(Blocks.SNOW, Blocks.VINE).build(new CraterExplosionRule()));
 		ExplosionHelper.createSpheroidCrater(entity.getLevel(), entity.getPos(), 250, new Vector3f(1f, 0.6666667f, 1f), 0, new FilterSurfaceExplosionRule(false,
 			new FilterRandomExplosionRule(0.5f, 

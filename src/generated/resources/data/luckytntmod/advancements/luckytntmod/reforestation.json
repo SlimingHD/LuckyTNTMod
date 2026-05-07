@@ -1,0 +1,29 @@
+{
+  "parent": "luckytntmod:luckytntmod/reach_for_the_stars",
+  "criteria": {
+    "explode_jungle_tnt": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.reforestation.description"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:jungle_tnt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.reforestation.title"
+    }
+  },
+  "requirements": [
+    [
+      "explode_jungle_tnt"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
