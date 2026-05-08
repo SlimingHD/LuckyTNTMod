@@ -2,6 +2,8 @@ package luckytnt.tnteffects;
 
 import java.util.List;
 
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -40,6 +42,12 @@ public class GhostTNTEffect extends PrimedTNTEffect {
 		explosion.doEntityExplosion(1.5f, true);
 		explosion.doImprovedBlockExplosion(1f, 1.2f, false, false, null);
 		explosion.spawnExplosionParticles();
+		
+		for (Player player : explosion.getHitPlayers().keySet()) {
+			if (player == entity.owner() && player.isDeadOrDying()) {
+				AdvancementHelper.grantAdvancementOnePlayer(player, AdvancementKeys.BACKFIRE);
+			}
+		}
 	}
 	
 	@Override

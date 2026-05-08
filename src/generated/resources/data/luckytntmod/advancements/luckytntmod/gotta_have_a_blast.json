@@ -1,0 +1,173 @@
+{
+  "parent": "luckytntmod:luckytntmod/the_good_the_bad_and_the_ugly",
+  "criteria": {
+    "aquire_city_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:city_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_custom_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:custom_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_entity_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:entity_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_grande_finale": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:grande_finale"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_gravel_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:gravel_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_item_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:item_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_new_years_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:new_years_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_rainbow_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:rainbow_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_sand_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:sand_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "aquire_tnt_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "luckytntmod:tnt_firework"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.luckytntmod.gotta_have_a_blast.description"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "luckytntmod:entity_firework"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.luckytntmod.gotta_have_a_blast.title"
+    }
+  },
+  "requirements": [
+    [
+      "aquire_gravel_firework"
+    ],
+    [
+      "aquire_item_firework"
+    ],
+    [
+      "aquire_city_firework"
+    ],
+    [
+      "aquire_custom_firework"
+    ],
+    [
+      "aquire_grande_finale"
+    ],
+    [
+      "aquire_sand_firework"
+    ],
+    [
+      "aquire_new_years_firework"
+    ],
+    [
+      "aquire_rainbow_firework"
+    ],
+    [
+      "aquire_entity_firework"
+    ],
+    [
+      "aquire_tnt_firework"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

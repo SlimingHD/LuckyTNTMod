@@ -34,6 +34,7 @@ public class PumpkinBombEffect extends PrimedTNTEffect {
 
 		if (level instanceof ServerLevel server) {
 			server.setDayTime(18000);
+			server.getServer().forceTimeSynchronization();
 		}
 		
 		ImprovedExplosion explosion = new ImprovedExplosion(level, (Entity) entity, entity.getPos(), 10);

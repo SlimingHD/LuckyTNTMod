@@ -2,6 +2,8 @@ package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
 import luckytnt.registry.EntityRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
@@ -10,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
@@ -41,6 +44,12 @@ public class JumpingTNTEffect extends PrimedTNTEffect {
 		explosion.doEntityExplosion(2f, true);
 		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
 		explosion.spawnExplosionParticles();
+		
+		for (Player player : explosion.getHitPlayers().keySet()) {
+			if (player.isDeadOrDying()) {
+				AdvancementHelper.grantAdvancementOnePlayer(player, AdvancementKeys.HOP_TIL_YOU_DROP);
+			}
+		}
 		
 		PrimedLTNT tnt = EntityRegistry.LEAPING_TNT.get().create(entity.getLevel());
 		tnt.setPos(entity.getPos());

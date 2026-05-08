@@ -55,13 +55,13 @@
   },
   "requirements": [
     [
-      "aquire_sphere_tnt"
-    ],
-    [
       "aquire_cubic_tnt"
     ],
     [
       "aquire_prism_tnt"
+    ],
+    [
+      "aquire_sphere_tnt"
     ]
   ],
   "sends_telemetry_event": true

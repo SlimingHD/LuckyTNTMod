@@ -23,6 +23,7 @@ public class AdvancementKeys {
 	public static ResourceLocation INDIANA_JONES = createAdvancement("indiana_jones");
 	public static ResourceLocation DEJA_VU = createAdvancement("deja_vu");
 	public static ResourceLocation TIS_THE_SEASON = createAdvancement("tis_the_season");
+	public static ResourceLocation MIX_UP = createAdvancement("mix_up");
 	
 	//God TNTs
 	public static ResourceLocation REAL_ESTATE_AGENT = createAdvancement("real_estate_agent");
@@ -40,6 +41,8 @@ public class AdvancementKeys {
 	public static ResourceLocation BURN_IT_DOWN = createAdvancement("burn_it_down");
 	public static ResourceLocation REACH_FOR_THE_STARS = createAdvancement("reach_for_the_stars");
 	public static ResourceLocation UNLIMITED_POWER = createAdvancement("umlimited_power");
+	public static ResourceLocation OH_MY_PC = createAdvancement("oh_my_pc");
+	public static ResourceLocation RESURRECTION = createAdvancement("resurrection");
 	
 	//Doomsday TNTs
 	public static ResourceLocation NAIL_IN_THE_COFFIN = createAdvancement("nail_in_the_coffin");
@@ -76,6 +79,11 @@ public class AdvancementKeys {
 	public static ResourceLocation GODS_AMONG_MEN = createAdvancement("gods_among_men");
 	public static ResourceLocation SHAPE_101 = createAdvancement("shape_101");
 	public static ResourceLocation TOO_MUCH_TNT = createAdvancement("too_much_tnt");
+	public static ResourceLocation THE_GOOD_THE_BAD_AND_THE_UGLY = createAdvancement("the_good_the_bad_and_the_ugly");
+	public static ResourceLocation GOTTA_HAVE_A_BLAST = createAdvancement("gotta_have_a_blast");
+	public static ResourceLocation GAMBLING = createAdvancement("gambling");
+	public static ResourceLocation BACKFIRE = createAdvancement("backfire");
+	public static ResourceLocation HOP_TIL_YOU_DROP = createAdvancement("hop_til_you_drop");
 	
 	//Miscellaneous
 	public static ResourceLocation IT_GLOWS_IN_THE_DARK = createAdvancement("it_glows_in_the_dark");

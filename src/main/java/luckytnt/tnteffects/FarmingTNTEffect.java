@@ -62,9 +62,9 @@ public class FarmingTNTEffect extends PrimedTNTEffect {
 					if ((placeLantern || !stateBelow.is(Blocks.WATER)) && !stateBelow.isCollisionShapeFullBlock(level, posBelow) && Math.max(stateBelow.getBlock().getExplosionResistance(), stateBelow.getFluidState().getExplosionResistance()) <= 200f) {
 						level.setBlockAndUpdate(posBelow, Blocks.DIRT.defaultBlockState());
 						stateBelow.getBlock().wasExploded(level, posBelow, dummy);
-						frozen.set(frozen.get() || placeLantern);
 					}
-					
+
+					frozen.set(frozen.get() || placeLantern);
 					level.setBlockAndUpdate(pos, placeLantern ? Blocks.LANTERN.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true) : Blocks.WATER.defaultBlockState());
 					BlockState s = level.getBlockState(posAbove);
 					if (s.isAir() && level.getRandom().nextFloat() < 0.25f) {

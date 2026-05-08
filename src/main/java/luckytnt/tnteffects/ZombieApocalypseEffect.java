@@ -40,6 +40,7 @@ public class ZombieApocalypseEffect extends PrimedTNTEffect {
 		
 		if (level instanceof ServerLevel server) {
 			server.setDayTime(18000);
+			server.getServer().forceTimeSynchronization();
 		}
 	}
 	

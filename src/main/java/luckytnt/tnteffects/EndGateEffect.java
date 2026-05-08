@@ -73,6 +73,7 @@ public class EndGateEffect extends PrimedTNTEffect{
 		level.playSound(null, toBlockPos(entity.getPos()), SoundEvents.END_PORTAL_SPAWN, SoundSource.BLOCKS, 0.5f, 1);
 		if (level instanceof ServerLevel serverLevel) {
 			serverLevel.setDayTime(18000);
+			serverLevel.getServer().forceTimeSynchronization();
 		}
 	}
 	

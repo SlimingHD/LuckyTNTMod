@@ -17,6 +17,7 @@ public class DayTNTEffect extends PrimedTNTEffect {
 	public void serverExplosion(IExplosiveEntity entity) {
 		if (entity.getLevel() instanceof ServerLevel serverLevel) {
 			serverLevel.setDayTime(6000);
+			serverLevel.getServer().forceTimeSynchronization();
 		}
 		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.DAYLIGHT_SAVINGS);
 	}

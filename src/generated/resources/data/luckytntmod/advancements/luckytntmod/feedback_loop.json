@@ -1,5 +1,5 @@
 {
-  "parent": "luckytntmod:luckytntmod/antithesis",
+  "parent": "luckytntmod:luckytntmod/the_good_the_bad_and_the_ugly",
   "criteria": {
     "light_custom_firework_atop_custom_firework": {
       "trigger": "minecraft:impossible"

@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.entity.LTNTMinecart;
 import luckytntlib.entity.PrimedLTNT;
 import luckytntlib.util.IExplosiveEntity;
@@ -48,6 +50,8 @@ public class PickyTNTEffect extends PrimedTNTEffect {
 		
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), radius);
 		particleExplosion.spawnExplosionParticles();
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.PATTERN_RECOGNITION);
 	}
 
 	@Override

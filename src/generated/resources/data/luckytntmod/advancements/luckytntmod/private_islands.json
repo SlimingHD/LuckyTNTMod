@@ -91,15 +91,6 @@
   },
   "requirements": [
     [
-      "aquire_hells_gate"
-    ],
-    [
-      "aquire_end_gate"
-    ],
-    [
-      "aquire_aether_tnt"
-    ],
-    [
       "aquire_reversed_tnt"
     ],
     [
@@ -107,6 +98,15 @@
     ],
     [
       "aquire_heavens_gate"
+    ],
+    [
+      "aquire_hells_gate"
+    ],
+    [
+      "aquire_end_gate"
+    ],
+    [
+      "aquire_aether_tnt"
     ]
   ],
   "sends_telemetry_event": true

@@ -3,6 +3,8 @@ package luckytnt.tnteffects;
 import java.lang.reflect.InvocationTargetException;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -35,6 +37,8 @@ public class ParticlePhysicsTNTEffect extends PrimedTNTEffect {
 		});
 		explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
 		explosion.spawnExplosionParticles();
+		
+		AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.OH_MY_PC);
 	}
 
 	@Override

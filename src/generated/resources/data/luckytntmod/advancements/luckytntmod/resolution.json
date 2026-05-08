@@ -1,5 +1,5 @@
 {
-  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
+  "parent": "luckytntmod:luckytntmod/the_good_the_bad_and_the_ugly",
   "criteria": {
     "explode_new_years_firework_on_new_years": {
       "trigger": "minecraft:impossible"

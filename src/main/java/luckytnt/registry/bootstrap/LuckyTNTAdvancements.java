@@ -60,9 +60,20 @@ public class LuckyTNTAdvancements implements AdvancementGenerator {
 		advancement(root, BlockRegistry.XRAY_TNT.get(), FrameType.TASK, AdvancementKeys.I_CAN_SEE_CLEARLY_NOW, "explode_xray_tnt", saver, existingFileHelper);
 		Advancement allThatGlitters = advancement(root, BlockRegistry.BUTTER_TNT.get(), FrameType.TASK, AdvancementKeys.ALL_THAT_GLITTERS, "explode_butter_tnt", saver, existingFileHelper);
 		Advancement restInPieces = advancement(root, BlockRegistry.GRAVEYARD_TNT.get(), FrameType.TASK, AdvancementKeys.REST_IN_PIECES, "explode_graveyard_tnt", saver, existingFileHelper);
+		advancement(root, BlockRegistry.PICKY_TNT.get(), FrameType.TASK, AdvancementKeys.PATTERN_RECOGNITION, "explode_picky_tnt", saver, existingFileHelper);
 		advancement(restInPieces, Blocks.COBWEB, FrameType.GOAL, AdvancementKeys.INDIANA_JONES, saver, existingFileHelper, Map.of("loot_grave_rare", LootTableTrigger.TriggerInstance.lootTableUsed(new ResourceLocation(LuckyTNTMod.MODID, "chests/grave_loot_rare"))));
-		advancement(root, BlockRegistry.REPLAY_TNT.get(), FrameType.TASK, AdvancementKeys.DEJA_VU, "explode_replay_tnt", saver, existingFileHelper);
+		Advancement dejaVu = advancement(root, BlockRegistry.REPLAY_TNT.get(), FrameType.TASK, AdvancementKeys.DEJA_VU, "explode_replay_tnt", saver, existingFileHelper);
 		advancement(root, BlockRegistry.CHRISTMAS_TNT.get(), FrameType.TASK, AdvancementKeys.TIS_THE_SEASON, "explode_christmas_tnt", saver, existingFileHelper);
+		Advancement mixUp = advancement(root, BlockRegistry.GROVE_TNT.get(), FrameType.TASK, AdvancementKeys.MIX_UP, "explode_grove_tnt", saver, existingFileHelper);
+		
+		//should be with cross-category but is needed for other advancements as root
+		Map<String, CriterionTriggerInstance> theGoodTheBadAndTheUglyCriteria = Map.of(
+			"aquire_tnt_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.TNT_FIREWORK.get()),
+			"aquire_sand_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.SAND_FIREWORK.get()),
+			"aquire_gravel_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.GRAVEL_FIREWORK.get()),
+			"aquire_rainbow_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.RAINBOW_FIREWORK.get())
+		);
+		Advancement theGoodTheBadAndTheUgly = advancement(root, BlockRegistry.GRAVEL_FIREWORK.get(), FrameType.TASK, AdvancementKeys.THE_GOOD_THE_BAD_AND_THE_UGLY, saver, existingFileHelper, theGoodTheBadAndTheUglyCriteria, new String[][]{{"aquire_sand_firework", "aquire_rainbow_firework"}, {"aquire_tnt_firework"}, {"aquire_gravel_firework"}});
 		
 		Advancement realEstateAgent = advancement(realEstateRookie, BlockRegistry.MANKINDS_MARK.get(), FrameType.TASK, AdvancementKeys.REAL_ESTATE_AGENT, "explode_mankinds_mark", saver, existingFileHelper);
 		advancement(itGlowsInTheDark, BlockRegistry.DUST_BOWL.get(), FrameType.TASK, AdvancementKeys.SURFIN_IN_THE_USA, "explode_dust_bowl", saver, existingFileHelper);
@@ -72,13 +83,15 @@ public class LuckyTNTAdvancements implements AdvancementGenerator {
 		advancement(itGlowsInTheDark, BlockRegistry.UNBREAKABLE_TNT.get(), FrameType.TASK, AdvancementKeys.BEDROCK_EDITION, "explode_unbreakable_tnt", saver, existingFileHelper);
 		Advancement bigIvan = advancement(itGlowsInTheDark, BlockRegistry.TSAR_BOMBA.get(), FrameType.TASK, AdvancementKeys.BIG_IVAN, "explode_tsar_bomba", saver, existingFileHelper);
 		advancement(allThatGlitters, BlockRegistry.MIDAS_TNT.get(), FrameType.TASK, AdvancementKeys.THE_GOLDEN_TOUCH, "explode_midas_tnt", saver, existingFileHelper);
-		advancement(itGlowsInTheDark, BlockRegistry.NEW_YEARS_FIREWORK.get(), FrameType.CHALLENGE, AdvancementKeys.RESOLUTION, "explode_new_years_firework_on_new_years", saver, existingFileHelper);
+		advancement(theGoodTheBadAndTheUgly, BlockRegistry.NEW_YEARS_FIREWORK.get(), FrameType.CHALLENGE, AdvancementKeys.RESOLUTION, "explode_new_years_firework_on_new_years", saver, existingFileHelper);
 		advancement(itGlowsInTheDark, BlockRegistry.REVERSED_TNT.get(), FrameType.TASK, AdvancementKeys.WHAT_GOES_UP, "explode_reversed_tnt", saver, existingFileHelper);
 		advancement(manualOverride, BlockRegistry.GOTTHARD_TUNNEL.get(), FrameType.TASK, AdvancementKeys.STREET_LEGAL, "explode_gotthard_tunnel_with_streets", saver, existingFileHelper);
 		advancement(itGlowsInTheDark, BlockRegistry.WORLD_OF_WOOLS.get(), FrameType.TASK, AdvancementKeys.OVER_THE_RAINBOW, "explode_world_of_wools", saver, existingFileHelper);
 		advancement(itGlowsInTheDark, BlockRegistry.PRESENT_DROP.get(), FrameType.TASK, AdvancementKeys.BURN_IT_DOWN, "explode_present_drop_with_block_destruction", saver, existingFileHelper);
-		Advancement reachForTheStars = advancement(itGlowsInTheDark, BlockRegistry.HYPERION.get(), FrameType.TASK, AdvancementKeys.REACH_FOR_THE_STARS, "explode_hyperion", saver, existingFileHelper);
+		Advancement reachForTheStars = advancement(mixUp, BlockRegistry.HYPERION.get(), FrameType.TASK, AdvancementKeys.REACH_FOR_THE_STARS, "explode_hyperion", saver, existingFileHelper);
 		advancement(itGlowsInTheDark, BlockRegistry.LIGHTNING_STORM.get(), FrameType.TASK, AdvancementKeys.UNLIMITED_POWER, "explode_lightning_storm", saver, existingFileHelper);
+		advancement(itGlowsInTheDark, BlockRegistry.PARTICLE_PHYSICS_TNT.get(), FrameType.TASK, AdvancementKeys.OH_MY_PC, "explode_particle_physics_tnt", saver, existingFileHelper);
+		advancement(dejaVu, BlockRegistry.RESET_TNT.get(), FrameType.TASK, AdvancementKeys.RESURRECTION, "have_reset_tnt_revive_an_entity_that_died", saver, existingFileHelper);
 
 		advancement(rickrolled, BlockRegistry.EXTINCTION.get(), FrameType.GOAL, AdvancementKeys.NAIL_IN_THE_COFFIN, "die_by_extinction", saver, existingFileHelper);
 		advancement(realEstateAgent, BlockRegistry.MANSION.get(), FrameType.GOAL, AdvancementKeys.REAL_ESTATE_MASTER, "explode_mansion", saver, existingFileHelper);
@@ -89,8 +102,8 @@ public class LuckyTNTAdvancements implements AdvancementGenerator {
 		advancement(antithesis, BlockRegistry.ILLUMINATI_TNT.get(), FrameType.GOAL, AdvancementKeys.ALL_SEEING, "explode_illuminati_tnt", saver, existingFileHelper);
 		Advancement sharedDelusion = advancement(antithesis, BlockRegistry.AETHER_TNT.get(), FrameType.GOAL, AdvancementKeys.SHARED_DELUSION, "explode_aether_tnt", saver, existingFileHelper);
 		advancement(bigIvan, BlockRegistry.HYDROGEN_BOMB.get(), FrameType.GOAL, AdvancementKeys.BOUNDLESS_INCOMPETENCE, "explode_hydrogen_bomb", saver, existingFileHelper);
-		advancement(realEstateRookie, BlockRegistry.CITY_FIREWORK.get(), FrameType.GOAL, AdvancementKeys.ORGANIZED_CHAOS, "explode_city_firework", saver, existingFileHelper);
-		advancement(antithesis, BlockRegistry.CUSTOM_FIREWORK.get(), FrameType.CHALLENGE, AdvancementKeys.FEEDBACK_LOOP, "light_custom_firework_atop_custom_firework", saver, existingFileHelper);
+		advancement(theGoodTheBadAndTheUgly, BlockRegistry.CITY_FIREWORK.get(), FrameType.GOAL, AdvancementKeys.ORGANIZED_CHAOS, "explode_city_firework", saver, existingFileHelper);
+		advancement(theGoodTheBadAndTheUgly, BlockRegistry.CUSTOM_FIREWORK.get(), FrameType.CHALLENGE, AdvancementKeys.FEEDBACK_LOOP, "light_custom_firework_atop_custom_firework", saver, existingFileHelper);
 		advancement(antithesis, BlockRegistry.TNT_X10000.get(), FrameType.GOAL, AdvancementKeys.OVER_9000, "explode_tnt_x10000", saver, existingFileHelper);
 		
 		advancement(strangerThings, BlockRegistry.CHROMATIC_TNT.get(), FrameType.CHALLENGE, AdvancementKeys.CHROMATIC_ABERRATION, "explode_chromatic_tnt", saver, existingFileHelper);
@@ -157,6 +170,22 @@ public class LuckyTNTAdvancements implements AdvancementGenerator {
 		);
 		advancement(root, BlockRegistry.SPHERE_TNT.get(), FrameType.TASK, AdvancementKeys.SHAPE_101, saver, existingFileHelper, shape101Criteria);
 		advancement(root, BlockRegistry.TNT_X100.get(), FrameType.CHALLENGE, AdvancementKeys.TOO_MUCH_TNT, saver, existingFileHelper, Map.of("craft_tnt_x100_100_times", new RecipeCraftedTrigger.TriggerInstance(ContextAwarePredicate.create(Craft100Condition.INSTANCE), new ResourceLocation(LuckyTNTMod.MODID, "craft_tnt_x100"), List.of())));
+		Map<String, CriterionTriggerInstance> gottaHaveABlastCriteria = Map.of(
+			"aquire_tnt_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.TNT_FIREWORK.get()),
+			"aquire_sand_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.SAND_FIREWORK.get()),
+			"aquire_gravel_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.GRAVEL_FIREWORK.get()),
+			"aquire_rainbow_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.RAINBOW_FIREWORK.get()),
+			"aquire_new_years_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.NEW_YEARS_FIREWORK.get()),
+			"aquire_item_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.ITEM_FIREWORK.get()),
+			"aquire_entity_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.ENTITY_FIREWORK.get()),
+			"aquire_city_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.CITY_FIREWORK.get()),
+			"aquire_custom_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.CUSTOM_FIREWORK.get()),
+			"aquire_grande_finale", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.GRANDE_FINALE.get())
+		);
+		advancement(theGoodTheBadAndTheUgly, BlockRegistry.ENTITY_FIREWORK.get(), FrameType.CHALLENGE, AdvancementKeys.GOTTA_HAVE_A_BLAST, saver, existingFileHelper, gottaHaveABlastCriteria);
+		advancement(root, BlockRegistry.ROULETTE_TNT.get(), FrameType.GOAL, AdvancementKeys.GAMBLING, "hit_by_any_roulette_tnt_without_dying", saver, existingFileHelper);
+		advancement(itGlowsInTheDark, BlockRegistry.GHOST_TNT.get(), FrameType.GOAL, AdvancementKeys.BACKFIRE, "die_by_own_ghost_tnt", saver, existingFileHelper);
+		advancement(root, BlockRegistry.BOUNCING_TNT.get(), FrameType.GOAL, AdvancementKeys.HOP_TIL_YOU_DROP, "die_by_any_bouncing_tnt", saver, existingFileHelper);
 	}
 	
 	private static Advancement advancement(@Nullable Advancement parent, ItemLike item, FrameType frame, ResourceLocation key, String criterionName, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper) {
@@ -179,6 +208,15 @@ public class LuckyTNTAdvancements implements AdvancementGenerator {
 		if (or) {
 			builder.requirements(RequirementsStrategy.OR);
 		}
+		return builder.save(saver, key, existingFileHelper);
+	}
+	
+	private static Advancement advancement(@Nullable Advancement parent, ItemLike item, FrameType frame, ResourceLocation key, Consumer<Advancement> saver, ExistingFileHelper existingFileHelper, Map<String, CriterionTriggerInstance> criteria, String[][] requirements) {
+		Advancement.Builder builder = Advancement.Builder.advancement().parent(parent).display(display(item, key.getPath().replace(LuckyTNTMod.MODID + "/", ""), frame));
+		for (Map.Entry<String, CriterionTriggerInstance> criterion : criteria.entrySet()) {
+			builder.addCriterion(criterion.getKey(), criterion.getValue());
+		}
+		builder.requirements(requirements);
 		return builder.save(saver, key, existingFileHelper);
 	}
 	

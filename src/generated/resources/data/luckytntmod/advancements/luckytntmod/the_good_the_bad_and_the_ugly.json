@@ -1,60 +1,48 @@
 {
-  "parent": "luckytntmod:luckytntmod/antithesis",
+  "parent": "luckytntmod:luckytntmod/root",
   "criteria": {
-    "aquire_aether_tnt": {
+    "aquire_gravel_firework": {
       "conditions": {
         "items": [
           {
             "items": [
-              "luckytntmod:aether_tnt"
+              "luckytntmod:gravel_firework"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_deimos": {
+    "aquire_rainbow_firework": {
       "conditions": {
         "items": [
           {
             "items": [
-              "luckytntmod:deimos"
+              "luckytntmod:rainbow_firework"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_hyperion": {
+    "aquire_sand_firework": {
       "conditions": {
         "items": [
           {
             "items": [
-              "luckytntmod:hyperion"
+              "luckytntmod:sand_firework"
             ]
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_phobos": {
+    "aquire_tnt_firework": {
       "conditions": {
         "items": [
           {
             "items": [
-              "luckytntmod:phobos"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "aquire_poseidons_wave": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "luckytntmod:poseidons_wave"
+              "luckytntmod:tnt_firework"
             ]
           }
         ]
@@ -65,33 +53,28 @@
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.luckytntmod.gods_among_men.description"
+      "translate": "advancement.luckytntmod.the_good_the_bad_and_the_ugly.description"
     },
-    "frame": "challenge",
+    "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "luckytntmod:poseidons_wave"
+      "item": "luckytntmod:gravel_firework"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.luckytntmod.gods_among_men.title"
+      "translate": "advancement.luckytntmod.the_good_the_bad_and_the_ugly.title"
     }
   },
   "requirements": [
     [
-      "aquire_poseidons_wave"
+      "aquire_sand_firework",
+      "aquire_rainbow_firework"
     ],
     [
-      "aquire_hyperion"
+      "aquire_tnt_firework"
     ],
     [
-      "aquire_phobos"
-    ],
-    [
-      "aquire_deimos"
-    ],
-    [
-      "aquire_aether_tnt"
+      "aquire_gravel_firework"
     ]
   ],
   "sends_telemetry_event": true

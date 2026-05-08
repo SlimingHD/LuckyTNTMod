@@ -6,6 +6,8 @@ import com.mojang.datafixers.util.Pair;
 
 import luckytnt.entity.PrimedResetTNT;
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ExplosionHelper;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -56,6 +58,7 @@ public class ResetTNTEffect extends PrimedTNTEffect {
 							living.setHealth(living.getMaxHealth());
 						}
 						level.addFreshEntity(e);
+						AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.RESURRECTION);
 					}
 					e.setPos(pos);
 				}

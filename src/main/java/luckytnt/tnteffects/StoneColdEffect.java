@@ -15,7 +15,6 @@ import luckytntlib.util.explosions.rules.BlockExplosionRule;
 import luckytntlib.util.explosions.rules.CanSurviveExplosionRule;
 import luckytntlib.util.explosions.rules.FilterAirExplosionRule;
 import luckytntlib.util.explosions.rules.FilterBlockExplosionRule;
-import luckytntlib.util.explosions.rules.FilterCollidableExplosionRule;
 import luckytntlib.util.explosions.rules.FilterFullBlockExplosionRule;
 import luckytntlib.util.explosions.rules.FilterSurfaceExplosionRule;
 import luckytntlib.util.explosions.rules.LogicExplosionRule;
@@ -57,12 +56,8 @@ public class StoneColdEffect extends PrimedTNTEffect {
 			new StackedExplosionRule(
 				new FilterFullBlockExplosionRule(new BlockExplosionRule(Blocks.BLUE_ICE.defaultBlockState())),
 				FilterBlockExplosionRule.builder().filterForBlocks(Blocks.WATER, Blocks.BUBBLE_COLUMN, Blocks.SEAGRASS, Blocks.TALL_SEAGRASS, Blocks.KELP, Blocks.KELP_PLANT).build(new BlockExplosionRule(Blocks.ICE.defaultBlockState())),
-				LogicExplosionRule.and(
-					LogicExplosionRule.not(
-						new FilterFullBlockExplosionRule(new AlwaysExplosionRule()), 
-						new AlwaysExplosionRule()
-					),
-					new FilterCollidableExplosionRule(new AlwaysExplosionRule()),
+				LogicExplosionRule.not(
+					new FilterFullBlockExplosionRule(new AlwaysExplosionRule()),
 					new AlwaysExplosionRule()
 				)
 			)

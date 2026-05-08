@@ -91,12 +91,12 @@
   },
   "requirements": [
     [
-      "aquire_lucky_tnt",
       "aquire_lucky_god",
       "aquire_lucky_tnt_minecart",
       "aquire_lucky_dynamite",
       "aquire_lucky_doomsday",
-      "aquire_lucky_annihilation"
+      "aquire_lucky_annihilation",
+      "aquire_lucky_tnt"
     ]
   ],
   "sends_telemetry_event": true

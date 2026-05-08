@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -8,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
@@ -35,16 +38,24 @@ public class LeapingTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		if (entity.getPersistentData().getInt("bounces") < 24) {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), 10);
-			explosion.doEntityExplosion(1.5f, true);
-			explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
-			explosion.spawnExplosionParticles();
-		} else {
-			ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), 20);
-			explosion.doEntityExplosion(2f, true);
-			explosion.doImprovedBlockExplosion(1f, 1.5f, false, false, null);
-			explosion.spawnExplosionParticles();
+		int size = 10;
+		float knockback = 1.5f;
+		float vecLength = 1.25f;
+		if (entity.getPersistentData().getInt("bounces") >= 24) {
+			size = 20;
+			knockback = 2f;
+			vecLength = 1.5f;
+		}
+		
+		ImprovedExplosion explosion = new ImprovedExplosion(entity.getLevel(), (Entity) entity, entity.getPos(), size);
+		explosion.doEntityExplosion(knockback, true);
+		explosion.doImprovedBlockExplosion(1f, vecLength, false, false, null);
+		explosion.spawnExplosionParticles();
+		
+		for (Player player : explosion.getHitPlayers().keySet()) {
+			if (player.isDeadOrDying()) {
+				AdvancementHelper.grantAdvancementOnePlayer(player, AdvancementKeys.HOP_TIL_YOU_DROP);
+			}
 		}
 	}
 

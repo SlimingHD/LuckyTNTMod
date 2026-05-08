@@ -1,28 +1,28 @@
 {
-  "parent": "luckytntmod:luckytntmod/the_good_the_bad_and_the_ugly",
+  "parent": "luckytntmod:luckytntmod/root",
   "criteria": {
-    "explode_city_firework": {
+    "hit_by_any_roulette_tnt_without_dying": {
       "trigger": "minecraft:impossible"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.luckytntmod.organized_chaos.description"
+      "translate": "advancement.luckytntmod.gambling.description"
     },
     "frame": "goal",
     "hidden": false,
     "icon": {
-      "item": "luckytntmod:city_firework"
+      "item": "luckytntmod:roulette_tnt"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.luckytntmod.organized_chaos.title"
+      "translate": "advancement.luckytntmod.gambling.title"
     }
   },
   "requirements": [
     [
-      "explode_city_firework"
+      "hit_by_any_roulette_tnt_without_dying"
     ]
   ],
   "sends_telemetry_event": true

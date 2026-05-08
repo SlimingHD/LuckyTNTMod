@@ -1,28 +1,28 @@
 {
-  "parent": "luckytntmod:luckytntmod/mix_up",
+  "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
   "criteria": {
-    "explode_hyperion": {
+    "explode_particle_physics_tnt": {
       "trigger": "minecraft:impossible"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.luckytntmod.reach_for_the_stars.description"
+      "translate": "advancement.luckytntmod.oh_my_pc.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "luckytntmod:hyperion"
+      "item": "luckytntmod:particle_physics_tnt"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.luckytntmod.reach_for_the_stars.title"
+      "translate": "advancement.luckytntmod.oh_my_pc.title"
     }
   },
   "requirements": [
     [
-      "explode_hyperion"
+      "explode_particle_physics_tnt"
     ]
   ],
   "sends_telemetry_event": true

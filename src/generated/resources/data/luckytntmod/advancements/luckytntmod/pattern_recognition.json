@@ -1,28 +1,28 @@
 {
-  "parent": "luckytntmod:luckytntmod/mix_up",
+  "parent": "luckytntmod:luckytntmod/root",
   "criteria": {
-    "explode_hyperion": {
+    "explode_picky_tnt": {
       "trigger": "minecraft:impossible"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.luckytntmod.reach_for_the_stars.description"
+      "translate": "advancement.luckytntmod.pattern_recognition.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "luckytntmod:hyperion"
+      "item": "luckytntmod:picky_tnt"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.luckytntmod.reach_for_the_stars.title"
+      "translate": "advancement.luckytntmod.pattern_recognition.title"
     }
   },
   "requirements": [
     [
-      "explode_hyperion"
+      "explode_picky_tnt"
     ]
   ],
   "sends_telemetry_event": true

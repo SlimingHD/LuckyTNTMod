@@ -78,7 +78,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> METEOR_TNT = LuckyTNTMod.RH.registerTNTEntity("meteor_tnt", new DropProjectileTNTEffect(() -> EntityRegistry.METEOR));
 	public static final RegistryObject<EntityType<PrimedLTNT>> SPIRAL_TNT = LuckyTNTMod.RH.registerTNTEntity("spiral_tnt", new SpiralTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> ERUPTING_TNT = LuckyTNTMod.RH.registerTNTEntity("erupting_tnt", new EruptingTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> GROVE_TNT = LuckyTNTMod.RH.registerTNTEntity("grove_tnt", new GroveTNTEffect(20));
+	public static final RegistryObject<EntityType<PrimedLTNT>> GROVE_TNT = LuckyTNTMod.RH.registerTNTEntity("grove_tnt", new StackedPrimedTNTEffect(new GroveTNTEffect(20), List.of(new AdvancementEffect(AdvancementKeys.MIX_UP))));
 	public static final RegistryObject<EntityType<PrimedLTNT>> ENDER_TNT = LuckyTNTMod.RH.registerTNTEntity("ender_tnt", new EnderTNTEffect(20));
 	public static final RegistryObject<EntityType<PrimedLTNT>> METEOR_SHOWER = LuckyTNTMod.RH.registerTNTEntity("meteor_shower", new MeteorShowerEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> INVERTED_TNT = LuckyTNTMod.RH.registerTNTEntity("inverted_tnt", new InvertedTNTEffect());
@@ -183,7 +183,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<PrimedLTNT>> DISASTER_CLEARER = LuckyTNTMod.RH.registerTNTEntity("disaster_clearer", new DisasterTNTEffect("clear", false));
 	public static final RegistryObject<EntityType<PrimedLTNT>> WITHER_STORM = LuckyTNTMod.RH.registerTNTEntity("wither_storm", new WitherStormEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> LEAPING_TNT = LuckyTNTMod.RH.registerTNTEntity("leaping_tnt", new LeapingTNTEffect());
-	public static final RegistryObject<EntityType<PrimedLTNT>> RUSSIAN_ROULETTE = LuckyTNTMod.RH.registerTNTEntity("russian_roulette", new RussianRouletteEffect());
+	public static final RegistryObject<EntityType<PrimedLTNT>> RUSSIAN_ROULETTE = LuckyTNTMod.RH.registerTNTEntity("russian_roulette", new RouletteTNTEffect(() -> BlockRegistry.RUSSIAN_ROULETTE, 80, 160));
 	public static final RegistryObject<EntityType<PrimedLTNT>> KNOCKBACK_TNT = LuckyTNTMod.RH.registerTNTEntity("knockback_tnt", new KnockbackTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> MIDAS_TNT = LuckyTNTMod.RH.registerTNTEntity("midas_tnt", new MidasTNTEffect());
 	public static final RegistryObject<EntityType<PrimedLTNT>> NEW_YEARS_FIREWORK = LuckyTNTMod.RH.registerTNTEntity("new_years_firework", new NewYearsFireworkEffect());
@@ -313,7 +313,7 @@ public class EntityRegistry {
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> VAPORIZE_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("vaporize_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.VAPORIZE_DYNAMITE, new VaporizeTNTEffect(6)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> METEOR_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("meteor_dynamite", new MeteorDynamiteEffect(), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> CUBIC_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("cubic_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.CUBIC_DYNAMITE, new CubicTNTEffect(2)), 0.25f, false);
-	public static final RegistryObject<EntityType<LExplosiveProjectile>> GROVE_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("grove_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.GROVE_DYNAMITE, new GroveTNTEffect(10)), 0.25f, false);
+	public static final RegistryObject<EntityType<LExplosiveProjectile>> GROVE_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("grove_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.GROVE_DYNAMITE, new StackedPrimedTNTEffect(new GroveTNTEffect(10),  List.of(new AdvancementEffect(AdvancementKeys.MIX_UP)))), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ENDER_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("ender_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.ENDER_DYNAMITE, new DustParticleOptions(new Vector3f(0.6f, 0f, 0.9f), 1f), new EnderTNTEffect(10)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> ARROW_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("arrow_dynamite", new GeneralDynamiteEffect(() -> ItemRegistry.ARROW_DYNAMITE, new ArrowTNTEffect(150)), 0.25f, false);
 	public static final RegistryObject<EntityType<LExplosiveProjectile>> LIGHTNING_DYNAMITE = LuckyTNTMod.RH.registerExplosiveProjectile("lightning_dynamite", new LightningDynamiteEffect(), 0.25f, false);

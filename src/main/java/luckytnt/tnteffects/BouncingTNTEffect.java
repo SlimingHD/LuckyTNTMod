@@ -1,6 +1,8 @@
 package luckytnt.tnteffects;
 
 import luckytnt.registry.BlockRegistry;
+import luckytnt.registry.keys.AdvancementKeys;
+import luckytnt.util.AdvancementHelper;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
@@ -8,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
@@ -37,6 +40,12 @@ public class BouncingTNTEffect extends PrimedTNTEffect {
 		explosion.doEntityExplosion(1.25f, true);
 		explosion.doImprovedBlockExplosion(1f, 1.25f, false, false, null);
 		explosion.spawnExplosionParticles();
+		
+		for (Player player : explosion.getHitPlayers().keySet()) {
+			if (player.isDeadOrDying()) {
+				AdvancementHelper.grantAdvancementOnePlayer(player, AdvancementKeys.HOP_TIL_YOU_DROP);
+			}
+		}
 	}
 	
 	@Override

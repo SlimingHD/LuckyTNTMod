@@ -1,28 +1,28 @@
 {
-  "parent": "luckytntmod:luckytntmod/mix_up",
+  "parent": "luckytntmod:luckytntmod/deja_vu",
   "criteria": {
-    "explode_hyperion": {
+    "have_reset_tnt_revive_an_entity_that_died": {
       "trigger": "minecraft:impossible"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.luckytntmod.reach_for_the_stars.description"
+      "translate": "advancement.luckytntmod.resurrection.description"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "luckytntmod:hyperion"
+      "item": "luckytntmod:reset_tnt"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.luckytntmod.reach_for_the_stars.title"
+      "translate": "advancement.luckytntmod.resurrection.title"
     }
   },
   "requirements": [
     [
-      "explode_hyperion"
+      "have_reset_tnt_revive_an_entity_that_died"
     ]
   ],
   "sends_telemetry_event": true
