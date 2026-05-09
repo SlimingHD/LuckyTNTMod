@@ -26,21 +26,12 @@ public class CommandRegistry {
 		);
 		
 		event.getDispatcher().register(Commands.literal("randomtnt").requires(s -> s.hasPermission(2))
-				
 				.then(Commands.literal("normal_tnt")
 				.then(Commands.argument("amount", IntegerArgumentType.integer(1)).executes((p) -> {
 					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), true, "n");
 			    })
 				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
 					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "n");
-				}))))
-				
-				.then(Commands.literal("dynamite")
-				.then(Commands.argument("amount", IntegerArgumentType.integer(1)).executes((p) -> {
-					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), true, "dy");
-				})
-				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
-					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "dy");
 				}))))
 				
 				.then(Commands.literal("god_tnt")
@@ -57,6 +48,30 @@ public class CommandRegistry {
 				})
 				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
 					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "d");
+				}))))
+				
+				.then(Commands.literal("annihilation_tnt")
+				.then(Commands.argument("amount", IntegerArgumentType.integer(1)).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), true, "a");
+				})
+				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "a");
+				}))))
+				
+				.then(Commands.literal("dynamite")
+				.then(Commands.argument("amount", IntegerArgumentType.integer(1)).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), true, "dy");
+				})
+				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "dy");
+				}))))
+				
+				.then(Commands.literal("minecart")
+				.then(Commands.argument("amount", IntegerArgumentType.integer(1)).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), true, "m");
+				})
+				.then(Commands.argument("allowDuplicate", BoolArgumentType.bool()).executes((p) -> {
+					return RandomTNTCommand.executeGiveItems(p.getSource(), IntegerArgumentType.getInteger(p, "amount"), BoolArgumentType.getBool(p, "allowDuplicate"), "m");
 				}))))
 		);
 	}

@@ -1,8 +1,8 @@
 package luckytnt.commands;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.util.Set;
 
 import luckytnt.LuckyTNTMod;
 import net.minecraft.commands.CommandSourceStack;
@@ -10,35 +10,34 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.RegistryObject;
 
 public class RandomTNTCommand {
 
 	public static int executeGiveItems(CommandSourceStack command, int amount, boolean allowDuplicate, String key) {
 		if (command.getEntity() instanceof Player player) {
+			int j = 0;
+			List<RegistryObject<? extends Item>> items = LuckyTNTMod.RH.creativeTabItemLists.get(key);
 			if (allowDuplicate) {
-				int j = 0;
-				for (int i = 0; i < amount; i++) {
-					if (player.addItem(new ItemStack(LuckyTNTMod.RH.creativeTabItemLists.get(key).get(new Random().nextInt(LuckyTNTMod.RH.creativeTabItemLists.get(key).size())).get()))) {
-						j++;
+				for (int i = 0; i < amount; ++i) {
+					if (player.addItem(new ItemStack(items.get(player.getRandom().nextInt(items.size())).get()))) {
+						++j;
 					}
 				}
-				int l = j;
-				command.sendSuccess(() -> Component.translatable("command.randomtnt.success1").append(Component.literal(Integer.toString(l))).append(Component.translatable("command.randomtnt.success2")), false);
 			} else {
-				int j = 0;
 				int tries = 0;
-				List<Item> list = new ArrayList<>();
-				while (j < amount && tries < 1000) {
-					Item item = LuckyTNTMod.RH.creativeTabItemLists.get(key).get(new Random().nextInt(LuckyTNTMod.RH.creativeTabItemLists.get(key).size())).get();
-					if (!list.contains(item) && player.addItem(new ItemStack(item))) {
-						j++;
-						list.add(item);
+				Set<Item> set = new HashSet<>();
+				while (j < amount && j < items.size() && tries < items.size() * 10) {
+					Item item = items.get(player.getRandom().nextInt(items.size())).get();
+					if (!set.contains(item) && player.addItem(new ItemStack(item))) {
+						set.add(item);
+						++j;
 					}
-					tries++;
+					++tries;
 				}
-				int l = j;
-				command.sendSuccess(() -> Component.translatable("command.randomtnt.success1").append(Component.literal(Integer.toString(l))).append(Component.translatable("command.randomtnt.success2")), false);
 			}
+			int l = j;
+			command.sendSuccess(() -> Component.translatable("command.luckytntmod.randomtnt.success", Integer.valueOf(l)), false);
 		}
 		return 1;
 	}

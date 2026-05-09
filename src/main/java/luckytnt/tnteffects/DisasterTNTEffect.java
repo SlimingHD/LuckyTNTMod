@@ -1,7 +1,7 @@
 package luckytnt.tnteffects;
 
 import luckytnt.LevelVariables;
-import luckytnt.config.LuckyTNTConfigValues;
+import luckytnt.commands.LTMDisastersCommand;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.server.level.ServerLevel;
@@ -21,7 +21,7 @@ public class DisasterTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		LevelVariables variables = LevelVariables.get(entity.getLevel());
-		int time = 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() + 1000 * LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get() * (int)Math.random();
+		int time = LTMDisastersCommand.randomLength(entity.getLevel());
 		
 		if (disaster.equals("doomsday")) {
 			variables.doomsdayTime = time;
