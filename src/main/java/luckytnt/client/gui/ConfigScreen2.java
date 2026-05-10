@@ -37,7 +37,7 @@ public class ConfigScreen2 extends Screen {
 	@Override
 	public void init() {
 		if (layout instanceof LTLHeaderAndFooterLayoutExtension layout) {
-			layout.getContentsFrameLayoutLTL().defaultChildLayoutSetting().paddingTop(15);
+			layout.getContentsFrameLayoutLTL().defaultChildLayoutSetting().paddingTop(-3);
 		}
 		
 		LinearLayout linear = layout.addToHeader(new LinearLayout(0, 0, Orientation.VERTICAL));
