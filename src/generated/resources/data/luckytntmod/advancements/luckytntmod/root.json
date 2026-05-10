@@ -1,6 +1,6 @@
 {
   "criteria": {
-    "aquire_tnt": {
+    "acquire_tnt": {
       "conditions": {
         "items": [
           {
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "aquire_tnt"
+      "acquire_tnt"
     ]
   ],
   "sends_telemetry_event": true

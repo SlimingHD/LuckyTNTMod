@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/root",
   "criteria": {
-    "aquire_uranium_ingot": {
+    "acquire_uranium_ingot": {
       "conditions": {
         "items": [
           {
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "aquire_uranium_ingot"
+      "acquire_uranium_ingot"
     ]
   ],
   "sends_telemetry_event": true

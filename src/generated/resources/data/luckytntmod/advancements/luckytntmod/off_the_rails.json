@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/root",
   "criteria": {
-    "aquire_air_strike_minecart": {
+    "acquire_air_strike_minecart": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_angry_miners_minecart": {
+    "acquire_angry_miners_minecart": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_animal_tnt_minecart": {
+    "acquire_animal_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_arrow_tnt_minecart": {
+    "acquire_arrow_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -49,7 +49,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_big_tnt_minecart": {
+    "acquire_big_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -61,7 +61,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_butter_tnt_minecart": {
+    "acquire_butter_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -73,7 +73,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_chemical_tnt_minecart": {
+    "acquire_chemical_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -85,7 +85,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_compact_tnt_minecart": {
+    "acquire_compact_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -97,7 +97,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_cubic_tnt_minecart": {
+    "acquire_cubic_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -109,7 +109,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_digging_tnt_minecart": {
+    "acquire_digging_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -121,7 +121,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_drilling_tnt_minecart": {
+    "acquire_drilling_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -133,7 +133,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_dripstone_tnt_minecart": {
+    "acquire_dripstone_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -145,7 +145,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_eating_tnt_minecart": {
+    "acquire_eating_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -157,7 +157,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_end_tnt_minecart": {
+    "acquire_end_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -169,7 +169,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_ender_tnt_minecart": {
+    "acquire_ender_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -181,7 +181,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_erupting_tnt_minecart": {
+    "acquire_erupting_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -193,7 +193,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_farming_tnt_minecart": {
+    "acquire_farming_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -205,7 +205,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_fire_tnt_minecart": {
+    "acquire_fire_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -217,7 +217,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_flat_tnt_minecart": {
+    "acquire_flat_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -229,7 +229,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_floating_island_minecart": {
+    "acquire_floating_island_minecart": {
       "conditions": {
         "items": [
           {
@@ -241,7 +241,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_freeze_tnt_minecart": {
+    "acquire_freeze_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -253,7 +253,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_geode_tnt_minecart": {
+    "acquire_geode_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -265,7 +265,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_gravity_tnt_minecart": {
+    "acquire_gravity_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -277,7 +277,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_grove_tnt_minecart": {
+    "acquire_grove_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -289,7 +289,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_hellfire_tnt_minecart": {
+    "acquire_hellfire_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -301,7 +301,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_honey_tnt_minecart": {
+    "acquire_honey_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -313,7 +313,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_igniter_tnt_minecart": {
+    "acquire_igniter_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -325,7 +325,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_inverted_tnt_minecart": {
+    "acquire_inverted_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -337,7 +337,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_lava_ocean_tnt_minecart": {
+    "acquire_lava_ocean_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -349,7 +349,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_lightning_tnt_minecart": {
+    "acquire_lightning_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -361,7 +361,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_lucky_tnt_minecart": {
+    "acquire_lucky_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -373,7 +373,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_lush_tnt_minecart": {
+    "acquire_lush_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -385,7 +385,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_meteor_shower_minecart": {
+    "acquire_meteor_shower_minecart": {
       "conditions": {
         "items": [
           {
@@ -397,7 +397,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_miningflat_tnt_minecart": {
+    "acquire_miningflat_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -409,7 +409,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_nether_grove_tnt_minecart": {
+    "acquire_nether_grove_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -421,7 +421,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_nuclear_tnt_minecart": {
+    "acquire_nuclear_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -433,7 +433,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_nuclear_waste_tnt_minecart": {
+    "acquire_nuclear_waste_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -445,7 +445,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_ocean_tnt_minecart": {
+    "acquire_ocean_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -457,7 +457,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_ore_tnt_minecart": {
+    "acquire_ore_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -469,7 +469,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_physics_tnt_minecart": {
+    "acquire_physics_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -481,7 +481,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_picky_tnt_minecart": {
+    "acquire_picky_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -493,7 +493,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_prism_tnt_minecart": {
+    "acquire_prism_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -505,7 +505,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_pulse_tnt_minecart": {
+    "acquire_pulse_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -517,7 +517,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_pumpkin_bomb_minecart": {
+    "acquire_pumpkin_bomb_minecart": {
       "conditions": {
         "items": [
           {
@@ -529,7 +529,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_random_tnt_minecart": {
+    "acquire_random_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -541,7 +541,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_reaction_tnt_minecart": {
+    "acquire_reaction_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -553,7 +553,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_redstone_tnt_minecart": {
+    "acquire_redstone_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -565,7 +565,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_ring_tnt_minecart": {
+    "acquire_ring_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -577,7 +577,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_roulette_tnt_minecart": {
+    "acquire_roulette_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -589,7 +589,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_say_goodbye_minecart": {
+    "acquire_say_goodbye_minecart": {
       "conditions": {
         "items": [
           {
@@ -601,7 +601,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_sculk_tnt_minecart": {
+    "acquire_sculk_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -613,7 +613,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_shatterproof_tnt_minecart": {
+    "acquire_shatterproof_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -625,7 +625,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_snow_tnt_minecart": {
+    "acquire_snow_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -637,7 +637,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_spamming_tnt_minecart": {
+    "acquire_spamming_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -649,7 +649,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_sphere_tnt_minecart": {
+    "acquire_sphere_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -661,7 +661,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_swap_tnt_minecart": {
+    "acquire_swap_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -673,7 +673,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_timer_tnt_minecart": {
+    "acquire_timer_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -685,7 +685,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_tnt_x100_minecart": {
+    "acquire_tnt_x100_minecart": {
       "conditions": {
         "items": [
           {
@@ -697,7 +697,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_tnt_x20_minecart": {
+    "acquire_tnt_x20_minecart": {
       "conditions": {
         "items": [
           {
@@ -709,7 +709,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_tnt_x500_minecart": {
+    "acquire_tnt_x500_minecart": {
       "conditions": {
         "items": [
           {
@@ -721,7 +721,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_tnt_x5_minecart": {
+    "acquire_tnt_x5_minecart": {
       "conditions": {
         "items": [
           {
@@ -733,7 +733,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_turret_tnt_minecart": {
+    "acquire_turret_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -745,7 +745,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_vaporize_tnt_minecart": {
+    "acquire_vaporize_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -757,7 +757,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_village_defense_minecart": {
+    "acquire_village_defense_minecart": {
       "conditions": {
         "items": [
           {
@@ -769,7 +769,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_withering_tnt_minecart": {
+    "acquire_withering_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -781,7 +781,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_wool_tnt_minecart": {
+    "acquire_wool_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -793,7 +793,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_xray_tnt_minecart": {
+    "acquire_xray_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -805,7 +805,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_zombie_apocalypse_minecart": {
+    "acquire_zombie_apocalypse_minecart": {
       "conditions": {
         "items": [
           {
@@ -835,208 +835,208 @@
   },
   "requirements": [
     [
-      "aquire_snow_tnt_minecart"
+      "acquire_chemical_tnt_minecart"
     ],
     [
-      "aquire_lush_tnt_minecart"
+      "acquire_fire_tnt_minecart"
     ],
     [
-      "aquire_geode_tnt_minecart"
+      "acquire_lucky_tnt_minecart"
     ],
     [
-      "aquire_ore_tnt_minecart"
+      "acquire_geode_tnt_minecart"
     ],
     [
-      "aquire_erupting_tnt_minecart"
+      "acquire_flat_tnt_minecart"
     ],
     [
-      "aquire_lightning_tnt_minecart"
+      "acquire_pulse_tnt_minecart"
     ],
     [
-      "aquire_arrow_tnt_minecart"
+      "acquire_ore_tnt_minecart"
     ],
     [
-      "aquire_big_tnt_minecart"
+      "acquire_say_goodbye_minecart"
     ],
     [
-      "aquire_prism_tnt_minecart"
+      "acquire_withering_tnt_minecart"
     ],
     [
-      "aquire_pulse_tnt_minecart"
+      "acquire_igniter_tnt_minecart"
     ],
     [
-      "aquire_reaction_tnt_minecart"
+      "acquire_arrow_tnt_minecart"
     ],
     [
-      "aquire_redstone_tnt_minecart"
+      "acquire_prism_tnt_minecart"
     ],
     [
-      "aquire_gravity_tnt_minecart"
+      "acquire_digging_tnt_minecart"
     ],
     [
-      "aquire_meteor_shower_minecart"
+      "acquire_lava_ocean_tnt_minecart"
     ],
     [
-      "aquire_vaporize_tnt_minecart"
+      "acquire_compact_tnt_minecart"
     ],
     [
-      "aquire_random_tnt_minecart"
+      "acquire_dripstone_tnt_minecart"
     ],
     [
-      "aquire_wool_tnt_minecart"
+      "acquire_spamming_tnt_minecart"
     ],
     [
-      "aquire_honey_tnt_minecart"
+      "acquire_tnt_x100_minecart"
     ],
     [
-      "aquire_butter_tnt_minecart"
+      "acquire_hellfire_tnt_minecart"
     ],
     [
-      "aquire_igniter_tnt_minecart"
+      "acquire_sphere_tnt_minecart"
     ],
     [
-      "aquire_hellfire_tnt_minecart"
+      "acquire_ocean_tnt_minecart"
     ],
     [
-      "aquire_angry_miners_minecart"
+      "acquire_turret_tnt_minecart"
     ],
     [
-      "aquire_ring_tnt_minecart"
+      "acquire_angry_miners_minecart"
     ],
     [
-      "aquire_tnt_x100_minecart"
+      "acquire_physics_tnt_minecart"
     ],
     [
-      "aquire_sculk_tnt_minecart"
+      "acquire_gravity_tnt_minecart"
     ],
     [
-      "aquire_ocean_tnt_minecart"
+      "acquire_miningflat_tnt_minecart"
     ],
     [
-      "aquire_lucky_tnt_minecart"
+      "acquire_inverted_tnt_minecart"
     ],
     [
-      "aquire_fire_tnt_minecart"
+      "acquire_eating_tnt_minecart"
     ],
     [
-      "aquire_lava_ocean_tnt_minecart"
+      "acquire_shatterproof_tnt_minecart"
     ],
     [
-      "aquire_inverted_tnt_minecart"
+      "acquire_wool_tnt_minecart"
     ],
     [
-      "aquire_village_defense_minecart"
+      "acquire_sculk_tnt_minecart"
     ],
     [
-      "aquire_drilling_tnt_minecart"
+      "acquire_lightning_tnt_minecart"
     ],
     [
-      "aquire_spamming_tnt_minecart"
+      "acquire_air_strike_minecart"
     ],
     [
-      "aquire_withering_tnt_minecart"
+      "acquire_drilling_tnt_minecart"
     ],
     [
-      "aquire_freeze_tnt_minecart"
+      "acquire_ring_tnt_minecart"
     ],
     [
-      "aquire_chemical_tnt_minecart"
+      "acquire_village_defense_minecart"
     ],
     [
-      "aquire_digging_tnt_minecart"
+      "acquire_nether_grove_tnt_minecart"
     ],
     [
-      "aquire_nether_grove_tnt_minecart"
+      "acquire_tnt_x5_minecart"
     ],
     [
-      "aquire_tnt_x500_minecart"
+      "acquire_meteor_shower_minecart"
     ],
     [
-      "aquire_animal_tnt_minecart"
+      "acquire_end_tnt_minecart"
     ],
     [
-      "aquire_miningflat_tnt_minecart"
+      "acquire_cubic_tnt_minecart"
     ],
     [
-      "aquire_nuclear_waste_tnt_minecart"
+      "acquire_redstone_tnt_minecart"
     ],
     [
-      "aquire_dripstone_tnt_minecart"
+      "acquire_lush_tnt_minecart"
     ],
     [
-      "aquire_tnt_x5_minecart"
+      "acquire_nuclear_tnt_minecart"
     ],
     [
-      "aquire_sphere_tnt_minecart"
+      "acquire_nuclear_waste_tnt_minecart"
     ],
     [
-      "aquire_xray_tnt_minecart"
+      "acquire_pumpkin_bomb_minecart"
     ],
     [
-      "aquire_cubic_tnt_minecart"
+      "acquire_floating_island_minecart"
     ],
     [
-      "aquire_end_tnt_minecart"
+      "acquire_farming_tnt_minecart"
     ],
     [
-      "aquire_timer_tnt_minecart"
+      "acquire_honey_tnt_minecart"
     ],
     [
-      "aquire_nuclear_tnt_minecart"
+      "acquire_vaporize_tnt_minecart"
     ],
     [
-      "aquire_say_goodbye_minecart"
+      "acquire_tnt_x20_minecart"
     ],
     [
-      "aquire_swap_tnt_minecart"
+      "acquire_reaction_tnt_minecart"
     ],
     [
-      "aquire_tnt_x20_minecart"
+      "acquire_zombie_apocalypse_minecart"
     ],
     [
-      "aquire_farming_tnt_minecart"
+      "acquire_picky_tnt_minecart"
     ],
     [
-      "aquire_eating_tnt_minecart"
+      "acquire_timer_tnt_minecart"
     ],
     [
-      "aquire_ender_tnt_minecart"
+      "acquire_roulette_tnt_minecart"
     ],
     [
-      "aquire_roulette_tnt_minecart"
+      "acquire_xray_tnt_minecart"
     ],
     [
-      "aquire_pumpkin_bomb_minecart"
+      "acquire_ender_tnt_minecart"
     ],
     [
-      "aquire_floating_island_minecart"
+      "acquire_big_tnt_minecart"
     ],
     [
-      "aquire_grove_tnt_minecart"
+      "acquire_animal_tnt_minecart"
     ],
     [
-      "aquire_picky_tnt_minecart"
+      "acquire_random_tnt_minecart"
     ],
     [
-      "aquire_compact_tnt_minecart"
+      "acquire_tnt_x500_minecart"
     ],
     [
-      "aquire_air_strike_minecart"
+      "acquire_freeze_tnt_minecart"
     ],
     [
-      "aquire_turret_tnt_minecart"
+      "acquire_swap_tnt_minecart"
     ],
     [
-      "aquire_physics_tnt_minecart"
+      "acquire_snow_tnt_minecart"
     ],
     [
-      "aquire_flat_tnt_minecart"
+      "acquire_grove_tnt_minecart"
     ],
     [
-      "aquire_shatterproof_tnt_minecart"
+      "acquire_butter_tnt_minecart"
     ],
     [
-      "aquire_zombie_apocalypse_minecart"
+      "acquire_erupting_tnt_minecart"
     ]
   ],
   "sends_telemetry_event": true

@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/shared_delusion",
   "criteria": {
-    "aquire_aether_tnt": {
+    "acquire_aether_tnt": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_end_gate": {
+    "acquire_end_gate": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_floating_island": {
+    "acquire_floating_island": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_heavens_gate": {
+    "acquire_heavens_gate": {
       "conditions": {
         "items": [
           {
@@ -49,7 +49,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_hells_gate": {
+    "acquire_hells_gate": {
       "conditions": {
         "items": [
           {
@@ -61,7 +61,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_reversed_tnt": {
+    "acquire_reversed_tnt": {
       "conditions": {
         "items": [
           {
@@ -91,22 +91,22 @@
   },
   "requirements": [
     [
-      "aquire_reversed_tnt"
+      "acquire_aether_tnt"
     ],
     [
-      "aquire_floating_island"
+      "acquire_end_gate"
     ],
     [
-      "aquire_heavens_gate"
+      "acquire_heavens_gate"
     ],
     [
-      "aquire_hells_gate"
+      "acquire_hells_gate"
     ],
     [
-      "aquire_end_gate"
+      "acquire_floating_island"
     ],
     [
-      "aquire_aether_tnt"
+      "acquire_reversed_tnt"
     ]
   ],
   "sends_telemetry_event": true

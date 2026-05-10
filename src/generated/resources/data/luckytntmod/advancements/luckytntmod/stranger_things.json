@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/antithesis",
   "criteria": {
-    "aquire_strange_matter": {
+    "acquire_strange_matter": {
       "conditions": {
         "items": [
           {
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "aquire_strange_matter"
+      "acquire_strange_matter"
     ]
   ],
   "sends_telemetry_event": true

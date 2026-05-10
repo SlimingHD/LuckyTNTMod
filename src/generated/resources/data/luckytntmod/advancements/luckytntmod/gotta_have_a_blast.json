@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/the_good_the_bad_and_the_ugly",
   "criteria": {
-    "aquire_city_firework": {
+    "acquire_city_firework": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_custom_firework": {
+    "acquire_custom_firework": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_entity_firework": {
+    "acquire_entity_firework": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_grande_finale": {
+    "acquire_grande_finale": {
       "conditions": {
         "items": [
           {
@@ -49,7 +49,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_gravel_firework": {
+    "acquire_gravel_firework": {
       "conditions": {
         "items": [
           {
@@ -61,7 +61,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_item_firework": {
+    "acquire_item_firework": {
       "conditions": {
         "items": [
           {
@@ -73,7 +73,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_new_years_firework": {
+    "acquire_new_years_firework": {
       "conditions": {
         "items": [
           {
@@ -85,7 +85,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_rainbow_firework": {
+    "acquire_rainbow_firework": {
       "conditions": {
         "items": [
           {
@@ -97,7 +97,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_sand_firework": {
+    "acquire_sand_firework": {
       "conditions": {
         "items": [
           {
@@ -109,7 +109,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_tnt_firework": {
+    "acquire_tnt_firework": {
       "conditions": {
         "items": [
           {
@@ -139,34 +139,34 @@
   },
   "requirements": [
     [
-      "aquire_gravel_firework"
+      "acquire_grande_finale"
     ],
     [
-      "aquire_item_firework"
+      "acquire_sand_firework"
     ],
     [
-      "aquire_city_firework"
+      "acquire_city_firework"
     ],
     [
-      "aquire_custom_firework"
+      "acquire_item_firework"
     ],
     [
-      "aquire_grande_finale"
+      "acquire_rainbow_firework"
     ],
     [
-      "aquire_sand_firework"
+      "acquire_tnt_firework"
     ],
     [
-      "aquire_new_years_firework"
+      "acquire_custom_firework"
     ],
     [
-      "aquire_rainbow_firework"
+      "acquire_entity_firework"
     ],
     [
-      "aquire_entity_firework"
+      "acquire_gravel_firework"
     ],
     [
-      "aquire_tnt_firework"
+      "acquire_new_years_firework"
     ]
   ],
   "sends_telemetry_event": true

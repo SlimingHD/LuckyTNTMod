@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/antithesis",
   "criteria": {
-    "aquire_aether_tnt": {
+    "acquire_aether_tnt": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_deimos": {
+    "acquire_deimos": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_hyperion": {
+    "acquire_hyperion": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_phobos": {
+    "acquire_phobos": {
       "conditions": {
         "items": [
           {
@@ -49,7 +49,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_poseidons_wave": {
+    "acquire_poseidons_wave": {
       "conditions": {
         "items": [
           {
@@ -79,19 +79,19 @@
   },
   "requirements": [
     [
-      "aquire_poseidons_wave"
+      "acquire_hyperion"
     ],
     [
-      "aquire_hyperion"
+      "acquire_deimos"
     ],
     [
-      "aquire_phobos"
+      "acquire_aether_tnt"
     ],
     [
-      "aquire_deimos"
+      "acquire_phobos"
     ],
     [
-      "aquire_aether_tnt"
+      "acquire_poseidons_wave"
     ]
   ],
   "sends_telemetry_event": true

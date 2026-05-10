@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/root",
   "criteria": {
-    "aquire_gravel_firework": {
+    "acquire_gravel_firework": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_rainbow_firework": {
+    "acquire_rainbow_firework": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_sand_firework": {
+    "acquire_sand_firework": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_tnt_firework": {
+    "acquire_tnt_firework": {
       "conditions": {
         "items": [
           {
@@ -67,14 +67,14 @@
   },
   "requirements": [
     [
-      "aquire_sand_firework",
-      "aquire_rainbow_firework"
+      "acquire_sand_firework",
+      "acquire_rainbow_firework"
     ],
     [
-      "aquire_tnt_firework"
+      "acquire_tnt_firework"
     ],
     [
-      "aquire_gravel_firework"
+      "acquire_gravel_firework"
     ]
   ],
   "sends_telemetry_event": true

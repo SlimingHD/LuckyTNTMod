@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/root",
   "criteria": {
-    "aquire_lucky_annihilation": {
+    "acquire_lucky_annihilation": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_lucky_doomsday": {
+    "acquire_lucky_doomsday": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_lucky_dynamite": {
+    "acquire_lucky_dynamite": {
       "conditions": {
         "items": [
           {
@@ -37,7 +37,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_lucky_god": {
+    "acquire_lucky_god": {
       "conditions": {
         "items": [
           {
@@ -49,7 +49,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_lucky_tnt": {
+    "acquire_lucky_tnt": {
       "conditions": {
         "items": [
           {
@@ -61,7 +61,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_lucky_tnt_minecart": {
+    "acquire_lucky_tnt_minecart": {
       "conditions": {
         "items": [
           {
@@ -91,12 +91,12 @@
   },
   "requirements": [
     [
-      "aquire_lucky_god",
-      "aquire_lucky_tnt_minecart",
-      "aquire_lucky_dynamite",
-      "aquire_lucky_doomsday",
-      "aquire_lucky_annihilation",
-      "aquire_lucky_tnt"
+      "acquire_lucky_doomsday",
+      "acquire_lucky_dynamite",
+      "acquire_lucky_god",
+      "acquire_lucky_annihilation",
+      "acquire_lucky_tnt",
+      "acquire_lucky_tnt_minecart"
     ]
   ],
   "sends_telemetry_event": true

@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/it_glows_in_the_dark",
   "criteria": {
-    "aquire_antimatter": {
+    "acquire_antimatter": {
       "conditions": {
         "items": [
           {
@@ -31,7 +31,7 @@
   },
   "requirements": [
     [
-      "aquire_antimatter"
+      "acquire_antimatter"
     ]
   ],
   "sends_telemetry_event": true

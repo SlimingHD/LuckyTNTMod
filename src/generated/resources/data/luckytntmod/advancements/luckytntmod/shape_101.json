@@ -1,7 +1,7 @@
 {
   "parent": "luckytntmod:luckytntmod/root",
   "criteria": {
-    "aquire_cubic_tnt": {
+    "acquire_cubic_tnt": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_prism_tnt": {
+    "acquire_prism_tnt": {
       "conditions": {
         "items": [
           {
@@ -25,7 +25,7 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "aquire_sphere_tnt": {
+    "acquire_sphere_tnt": {
       "conditions": {
         "items": [
           {
@@ -55,13 +55,13 @@
   },
   "requirements": [
     [
-      "aquire_cubic_tnt"
+      "acquire_sphere_tnt"
     ],
     [
-      "aquire_prism_tnt"
+      "acquire_cubic_tnt"
     ],
     [
-      "aquire_sphere_tnt"
+      "acquire_prism_tnt"
     ]
   ],
   "sends_telemetry_event": true
