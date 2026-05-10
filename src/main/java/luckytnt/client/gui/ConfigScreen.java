@@ -2,7 +2,7 @@ package luckytnt.client.gui;
 
 import luckytnt.config.LuckyTNTConfigValues;
 import luckytntlib.client.gui.CenteredStringWidget;
-import net.minecraft.client.Minecraft;
+import luckytntlib.util.LTLHeaderAndFooterLayoutExtension;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.StringWidget;
@@ -36,6 +36,10 @@ public class ConfigScreen extends Screen {
 	
 	@Override
 	public void init() {
+		if (layout instanceof LTLHeaderAndFooterLayoutExtension layout) {
+			layout.getContentsFrameLayoutLTL().defaultChildLayoutSetting().paddingTop(15);
+		}
+		
 		LinearLayout linear = layout.addToHeader(new LinearLayout(0, 0, Orientation.VERTICAL));
 		linear.addChild(new StringWidget(title, font), LayoutSettings.defaults().alignHorizontallyCenter());
 		
@@ -43,15 +47,30 @@ public class ConfigScreen extends Screen {
 		grid.defaultCellSetting().paddingHorizontal(4).paddingBottom(4).alignHorizontallyCenter();
 		RowHelper rows = grid.createRowHelper(3);
 		
-		rows.addChild(dropped_slider = new ForgeSlider(0, 0, 100, 20, Component.empty(), Component.empty(), 60, 400, LuckyTNTConfigValues.DROP_HEIGHT.get(), true));
+		rows.addChild(dropped_slider = new ForgeSlider(0, 0, 100, 20, Component.empty(), Component.empty(), 60, 400, LuckyTNTConfigValues.DROP_HEIGHT.get(), true) {
+			@Override
+			protected void applyValue() {
+				LuckyTNTConfigValues.DROP_HEIGHT.set(getValueInt());
+			}
+		});
 		rows.addChild(new CenteredStringWidget(Component.translatable("luckytntmod.config.drop_offset"), font));
 		rows.addChild(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.DROP_HEIGHT, 200, dropped_slider)).width(100).build());
 		
-		rows.addChild(average_disaster_time_silder = new ForgeSlider(0, 0, 100, 20, Component.empty(), Component.empty(), 2, 24, LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get().doubleValue(), true));
+		rows.addChild(average_disaster_time_silder = new ForgeSlider(0, 0, 100, 20, Component.empty(), Component.empty(), 2, 24, LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.get().doubleValue(), true) {
+			@Override
+			protected void applyValue() {
+				LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.set(getValueInt());
+			}
+		});
 		rows.addChild(new CenteredStringWidget(Component.translatable("luckytntmod.config.maximum_time"), font));
 		rows.addChild(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetIntValue(LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME, 12, average_disaster_time_silder)).width(100).build());
 		
-		rows.addChild(average_disaster_strength_slider = new ForgeSlider(0, 0, 100, 20, Component.empty(), Component.empty(), 1d, 10d, LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().doubleValue(), true));
+		rows.addChild(average_disaster_strength_slider = new ForgeSlider(0, 0, 100, 20, Component.empty(), Component.empty(), 1d, 10d, LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get().doubleValue(), true) {
+			@Override
+			protected void applyValue() {
+				LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.set(getValue());
+			}
+		});
 		rows.addChild(new CenteredStringWidget(Component.translatable("luckytntmod.config.average_intensity"), font));
 		rows.addChild(new Button.Builder(Component.translatable("luckytntmod.config.reset"), button -> resetDoubleValue(LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY, 1d, average_disaster_strength_slider)).width(100).build());
 		
@@ -72,8 +91,8 @@ public class ConfigScreen extends Screen {
 		RowHelper rows2 = grid2.createRowHelper(3);
 		
 		Button deactivated = new Button.Builder(Component.translatable("luckytntmod.config.back"), button -> {}).width(100).build();
-		Button done = new Button.Builder(CommonComponents.GUI_DONE, button -> onClose()).width(100).build();
-		Button next = new Button.Builder(Component.translatable("luckytntmod.config.next"), button -> nextPage()).width(100).build();
+		Button done = new Button.Builder(CommonComponents.GUI_DONE, button -> minecraft.setScreen(null)).width(100).build();
+		Button next = new Button.Builder(Component.translatable("luckytntmod.config.next"), button -> minecraft.pushGuiLayer(new ConfigScreen2())).width(100).build();
 		deactivated.active = false;
 		
 		rows2.addChild(deactivated);
@@ -93,27 +112,8 @@ public class ConfigScreen extends Screen {
 	
 	@Override
 	public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTicks) {
-		renderBackground(graphics);
+		renderDirtBackground(graphics);
 		super.render(graphics, mouseX, mouseY, partialTicks);
-	}
-	
-	@Override
-	public void onClose() {
-		if (dropped_slider != null) {
-			LuckyTNTConfigValues.DROP_HEIGHT.set(dropped_slider.getValueInt());
-		}
-		if (average_disaster_time_silder != null) {
-			LuckyTNTConfigValues.MAXIMUM_DISASTER_TIME.set(average_disaster_time_silder.getValueInt());
-		}
-		if (average_disaster_strength_slider != null) {
-			LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.set(average_disaster_strength_slider.getValue());
-		}
-		super.onClose();
-	}
-	
-	public void nextPage() {
-		onClose();
-		Minecraft.getInstance().setScreen(new ConfigScreen2());
 	}
 	
 	public void resetIntValue(ForgeConfigSpec.IntValue config, int newValue, ForgeSlider slider) {
@@ -127,12 +127,7 @@ public class ConfigScreen extends Screen {
 	}
 
 	public void nextBooleanValue(ForgeConfigSpec.BooleanValue config, Button button) {
-		boolean value = config.get().booleanValue();
-		if (value) {
-			value = false;
-		} else {
-			value = true;
-		}
+		boolean value = !config.get().booleanValue();
 		config.set(value);
 		button.setMessage(value ? CommonComponents.OPTION_ON : CommonComponents.OPTION_OFF);
 	}
