@@ -42,6 +42,6 @@ public class GravityDynamiteEffect extends PrimedTNTEffect {
 	
 	@Override
 	public int getDefaultFuse(IExplosiveEntity entity) {
-		return 60;
+		return 80;
 	}
 }

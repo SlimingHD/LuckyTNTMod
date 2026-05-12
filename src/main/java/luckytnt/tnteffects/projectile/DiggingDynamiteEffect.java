@@ -20,7 +20,7 @@ public class DiggingDynamiteEffect extends PrimedTNTEffect {
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 2);
 		particleExplosion.spawnExplosionParticles();
 		Vec3 direction = entity.getPos().subtract(((Entity)entity).xOld, ((Entity)entity).yOld, ((Entity)entity).zOld).normalize();
-		float vectorLength = 480f;
+		float vectorLength = 240f;
 		int removedBlocks = 0;
 		BlockPos lastPos = null;
 		for (float step = 0; step <= vectorLength; step += 0.225f) {
@@ -35,8 +35,8 @@ public class DiggingDynamiteEffect extends PrimedTNTEffect {
 				break;
 			}
 			++removedBlocks;
-			state.getBlock().wasExploded(entity.getLevel(), pos, particleExplosion);
 			entity.getLevel().setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+			state.getBlock().wasExploded(entity.getLevel(), pos, particleExplosion);
 		}
 		if (removedBlocks <= 3) {
 			AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.SIZE_MATTERS);

@@ -28,8 +28,8 @@ public class DrillingTNTEffect extends PrimedTNTEffect {
 						if (vectorLength < y) {
 							break;
 						}
-						state.getBlock().wasExploded(entity.getLevel(), pos, particleExplosion);
 						entity.getLevel().setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+						state.getBlock().wasExploded(entity.getLevel(), pos, particleExplosion);
 					}
 				}
 			}

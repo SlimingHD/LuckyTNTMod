@@ -1,6 +1,5 @@
 package luckytnt.tnteffects;
 
-
 import java.util.List;
 
 import org.joml.Vector3f;
@@ -9,8 +8,8 @@ import luckytnt.registry.BlockRegistry;
 import luckytntlib.util.IExplosiveEntity;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
@@ -21,25 +20,28 @@ public class KnockbackTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void explosionTick(IExplosiveEntity entity) {
 		if (!entity.getLevel().isClientSide() && entity.getTNTFuse() >= 1) {
-			List<LivingEntity> entities = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.getPos().add(-75d, -75d, -75d), entity.getPos().add(75d, 75d, 75d)), EntitySelector.NO_CREATIVE_OR_SPECTATOR);
-			for (LivingEntity living : entities) {
-				if (living.getPersistentData().getInt("knockbacktime") > 0) {
-					living.getPersistentData().putInt("knockbacktime", living.getPersistentData().getInt("knockbacktime") - 1);
+			List<Entity> entities = entity.getLevel().getEntities((Entity)entity, new AABB(entity.getPos().add(-75d, -75d, -75d), entity.getPos().add(75d, 75d, 75d)), EntitySelector.NO_CREATIVE_OR_SPECTATOR);
+			for (Entity ent : entities) {
+				if (ent instanceof IExplosiveEntity explosiveEnt && explosiveEnt.getEffect() == this) {
+					continue;
 				}
-				double x = entity.x() - living.getX();
-				double y = entity.y() - living.getY();
-				double z = entity.z() - living.getZ();
+				if (ent.getPersistentData().getInt("knockbacktime") > 0) {
+					ent.getPersistentData().putInt("knockbacktime", ent.getPersistentData().getInt("knockbacktime") - 1);
+				}
+				double x = entity.x() - ent.getX();
+				double y = entity.y() - ent.getY();
+				double z = entity.z() - ent.getZ();
 				double distance = Math.sqrt(x * x + y * y + z * z) + 0.1d;
 				Vec3 vec = new Vec3(x, y, z).normalize().scale(1d / (distance * 0.2d) + 0.5d).add(0d, 0.1d, 0d);
-				if (distance > 2.1d && distance <= 75d && living.getPersistentData().getInt("knockbacktime") <= 0) {
-					living.addDeltaMovement(vec.scale(0.4d));
-					if (living instanceof Player player) {
+				if (distance > 2.1d && distance <= 75d && ent.getPersistentData().getInt("knockbacktime") <= 0) {
+					ent.addDeltaMovement(vec.scale(0.4d));
+					if (ent instanceof Player player) {
 						player.hurtMarked = true;
 					}
 				} else if (distance <= 2.1d) {
-					living.getPersistentData().putInt("knockbacktime", 60);
-					living.addDeltaMovement(vec.reverse().normalize().scale(5d).add(0d, 0.5d, 0d));
-					if (living instanceof Player player) {
+					ent.getPersistentData().putInt("knockbacktime", 60);
+					ent.addDeltaMovement(vec.reverse().normalize().scale(5d).add(0d, 0.5d, 0d));
+					if (ent instanceof Player player) {
 						player.hurtMarked = true;
 					}
 				}
@@ -50,16 +52,19 @@ public class KnockbackTNTEffect extends PrimedTNTEffect {
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		double maxDistanceSqr = 75d * 75d;
-		List<LivingEntity> entities = entity.getLevel().getEntitiesOfClass(LivingEntity.class, new AABB(entity.getPos().add(-75, -75, -75), entity.getPos().add(75, 75, 75)), EntitySelector.NO_CREATIVE_OR_SPECTATOR);
-		for (LivingEntity living : entities) {
-			double x = living.getX() - entity.x();
-			double y = living.getY() - entity.y();
-			double z = living.getZ() - entity.z();
+		List<Entity> entities = entity.getLevel().getEntities((Entity)entity, new AABB(entity.getPos().add(-75d, -75d, -75d), entity.getPos().add(75d, 75d, 75d)), EntitySelector.NO_CREATIVE_OR_SPECTATOR);
+		for (Entity ent : entities) {
+			if (ent instanceof IExplosiveEntity explosiveEnt && explosiveEnt.getEffect() == this) {
+				continue;
+			}
+			double x = ent.getX() - entity.x();
+			double y = ent.getY() - entity.y();
+			double z = ent.getZ() - entity.z();
 			double distanceSqr = x * x + y * y + z * z;
 			if (distanceSqr <= maxDistanceSqr) {
 				Vec3 vec = new Vec3(x, y, z).normalize().scale(15d).add(0d, 0.5d, 0d);
-				living.setDeltaMovement(vec);
-				if (living instanceof Player player) {
+				ent.setDeltaMovement(vec);
+				if (ent instanceof Player player) {
 					player.hurtMarked = true;
 				}
 			}

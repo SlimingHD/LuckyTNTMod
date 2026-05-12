@@ -28,8 +28,8 @@ public class DiggingTNTEffect extends PrimedTNTEffect {
 				break;
 			}
 			++removedBlocks;
-			state.getBlock().wasExploded(entity.getLevel(), pos, particleExplosion);
 			entity.getLevel().setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+			state.getBlock().wasExploded(entity.getLevel(), pos, particleExplosion);
 		}
 		if (removedBlocks <= 3) {
 			AdvancementHelper.grantAdvancementToOwnerOrNearby(entity, AdvancementKeys.SIZE_MATTERS);

@@ -7,65 +7,66 @@ import luckytntlib.util.explosions.ImprovedExplosion;
 import luckytntlib.util.tnteffects.PrimedTNTEffect;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Direction.Axis;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class TunnelingTNTEffect extends PrimedTNTEffect {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
 		Direction direction = Direction.byName(entity.getPersistentData().getString("direction")) != null ? Direction.byName(entity.getPersistentData().getString("direction")) : Direction.EAST;
 		
 		Level level = entity.getLevel();
 		BlockPos center = BlockPos.containing(entity.getPos());
-		ImprovedExplosion dummy = ImprovedExplosion.dummyExplosion(level);
-		
-		int xFactor = 0;
-		int zFactor = 0;
-		int minX = 0;
-		int maxX = 0;
-		int minZ = 0;
-		int maxZ = 0;
-		if (direction.getAxis() == Axis.X) {
-			zFactor = 1;
-			minZ = -4;
-			maxZ = 4;
-			if (direction.getStepX() > 0) {
-				maxX = 90;
-			} else {
-				minX = -90;
-			}
-		} else {
-			xFactor = 1;
-			minX = -4;
-			maxX = 4;
-			if (direction.getStepZ() > 0) {
-				maxZ = 90;
-			} else {
-				minZ = -90;
-			}
-		}
-		
-		for (int offX = minX; offX <= maxX; offX++) {
-			for (int offY = -4; offY <= 4; offY++) {
-				for (int offZ = minZ; offZ <= maxZ; offZ++) {
-					double distanceSqr = offX * offX * xFactor + offY * offY + offZ * offZ * zFactor;
-					if (distanceSqr <= 16) {
-						BlockPos pos = center.offset(offX, offY, offZ);
-						BlockState state = level.getBlockState(pos);
-						if (state.getExplosionResistance(level, pos, dummy) < 100) {
-							state.getBlock().wasExploded(level, pos, dummy);
-							level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-						}
-					}
-				}
-			}
-		}
 		
 		ImprovedExplosion particleExplosion = new ImprovedExplosion(entity.getLevel(), entity.getPos(), 10);
 		particleExplosion.spawnExplosionParticles();
+		
+		float[][] vectorLengths = new float[9][9];
+		for (int i = 0; i <= 8; i++) {
+			for (int j = 0; j <= 8; j++) {
+				vectorLengths[i][j] = 480f;
+			}
+		}
+		Vec3i dir = direction.getNormal();
+		int xFactor = 1 - Math.abs(dir.getX());
+		int zFactor = 1 - Math.abs(dir.getZ());
+		for (int step = 0; step < 480; step++) {
+			int circleCount = 0;
+			int finishedCount = 0;
+			for (int i = 0; i <= 8; i++) {
+				for (int j = 0; j <= 8; j++) {
+					int distanceSqr = (i - 4) * (i - 4) + (j - 4) * (j - 4);
+					if (distanceSqr > 16) {
+						continue;
+					}
+					
+					circleCount++;
+			
+					float vectorLength = vectorLengths[i][j];
+					if (vectorLength <= 0) {
+						finishedCount++;
+						continue;
+					}
+					
+					BlockPos pos = center.offset(dir.multiply(step)).offset((i - 4) * xFactor, j - 4, (i - 4) * zFactor);
+					BlockState state = level.getBlockState(pos);
+					float resistance = Math.max(state.getBlock().getExplosionResistance(), state.getFluidState().getExplosionResistance());
+					vectorLengths[i][j] -= resistance;
+					if (resistance > vectorLength) {
+						continue;
+					}
+					level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+					state.getBlock().wasExploded(level, pos, particleExplosion);
+				}
+			}
+			if (finishedCount == circleCount) {
+				break;
+			}
+		}
 	}
 	
 	@Override
