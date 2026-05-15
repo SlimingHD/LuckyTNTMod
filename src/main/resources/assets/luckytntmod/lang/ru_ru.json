@@ -780,8 +780,8 @@
 	"item_group.luckytntmod.minecarts" : "Вагонетки с Динамитом",
 	"item_group.luckytntmod.other" : "Прочее",
 	
-	"effect.contaminated_effect" : "Облучение",
-	"effect.midas_touch" : "Прикосновение Мидаса",
+	"effect.luckytntmod.contaminated_effect" : "Облучение",
+	"effect.luckytntmod.midas_touch" : "Прикосновение Мидаса",
 	
 	"luckytntmod.config.title" : "Настройки Lucky TNT",
 	"luckytntmod.config.done" : "Завершить",

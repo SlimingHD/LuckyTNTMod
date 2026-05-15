@@ -18,7 +18,7 @@ public class ContaminatedEffect extends MobEffect {
 
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable("effect.contaminated_effect");
+		return Component.translatable("effect.luckytntmod.contaminated_effect");
 	}
 	
 	@Override

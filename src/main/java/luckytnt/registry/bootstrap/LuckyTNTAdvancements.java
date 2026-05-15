@@ -66,7 +66,7 @@ public class LuckyTNTAdvancements implements AdvancementGenerator {
 		advancement(root, BlockRegistry.CHRISTMAS_TNT.get(), FrameType.TASK, AdvancementKeys.TIS_THE_SEASON, "explode_christmas_tnt", saver, existingFileHelper);
 		Advancement mixUp = advancement(root, BlockRegistry.GROVE_TNT.get(), FrameType.TASK, AdvancementKeys.MIX_UP, "explode_grove_tnt", saver, existingFileHelper);
 		
-		//should be with cross-category but is needed for other advancements as root
+		//should be with cross-category but is needed for other advancements as parent
 		Map<String, CriterionTriggerInstance> theGoodTheBadAndTheUglyCriteria = Map.of(
 			"acquire_tnt_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.TNT_FIREWORK.get()),
 			"acquire_sand_firework", InventoryChangeTrigger.TriggerInstance.hasItems(BlockRegistry.SAND_FIREWORK.get()),

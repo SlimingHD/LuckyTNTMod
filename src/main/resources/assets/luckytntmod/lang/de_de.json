@@ -779,8 +779,8 @@
 	"item_group.luckytntmod.minecarts" : "TNT-Loren",
 	"item_group.luckytntmod.other" : "Anderes",
 	
-	"effect.contaminated_effect" : "Kontaminiert",
-	"effect.midas_touch" : "Fluch von Midas",
+	"effect.luckytntmod.contaminated_effect" : "Kontaminiert",
+	"effect.luckytntmod.midas_touch" : "Fluch von Midas",
 	
 	"luckytntmod.config.title" : "Lucky TNT Konfiguration",
 	"luckytntmod.config.done" : "Fertig",

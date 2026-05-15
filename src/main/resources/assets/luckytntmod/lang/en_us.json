@@ -780,8 +780,8 @@
 	"item_group.luckytntmod.minecarts" : "TNT Minecarts",
 	"item_group.luckytntmod.other" : "Other",
 	
-	"effect.contaminated_effect" : "Contaminated",
-	"effect.midas_touch" : "Midas Touch",
+	"effect.luckytntmod.contaminated_effect" : "Contaminated",
+	"effect.luckytntmod.midas_touch" : "Midas Touch",
 	
 	"luckytntmod.config.title" : "Lucky TNT Configuration",
 	"luckytntmod.config.done" : "Done",

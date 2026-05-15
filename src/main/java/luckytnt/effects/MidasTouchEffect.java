@@ -64,7 +64,7 @@ public class MidasTouchEffect extends MobEffect {
 	
 	@Override
 	public Component getDisplayName() {
-		return Component.translatable("effect.midas_touch");
+		return Component.translatable("effect.luckytntmod.midas_touch");
 	}
 	
 	@Override

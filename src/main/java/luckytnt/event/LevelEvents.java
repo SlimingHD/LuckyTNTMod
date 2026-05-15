@@ -164,10 +164,6 @@ public class LevelEvents {
 		BiomeSetter.setBiomeInCylinder(server, player.position(), 32, 32, Biomes.SNOWY_TAIGA);
 	}
 	
-	private static boolean isPlant(BlockState state) {
-		return state.is(BlockTags.SWORD_EFFICIENT) || state.is(Blocks.CACTUS) || state.is(Blocks.BAMBOO) || state.is(Blocks.BAMBOO_SAPLING);
-	}
-	
 	private static void heatDeathDisaster(ServerLevel server, ServerPlayer player, RandomSource random) {
 		double intensity = LuckyTNTConfigValues.AVERAGE_DIASTER_INTENSITY.get();
 		double x = player.getX();
@@ -226,5 +222,9 @@ public class LevelEvents {
 			}
 			server.addFreshEntity(ent);
 		}
+	}
+	
+	private static boolean isPlant(BlockState state) {
+		return state.is(BlockTags.SWORD_EFFICIENT) || state.is(Blocks.CACTUS) || state.is(Blocks.BAMBOO) || state.is(Blocks.BAMBOO_SAPLING);
 	}
 }
