@@ -102,7 +102,7 @@ public class RegionTNTEffect extends CubicTNTEffect {
 
 	@Override
 	public Block getBlock() {
-		return BlockRegistry.CHUNK_TNT.get();
+		return BlockRegistry.REGION_TNT.get();
 	}
 	
 	@Override
