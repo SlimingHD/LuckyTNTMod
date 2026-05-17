@@ -51,11 +51,8 @@ public class NuclearWasteBlock extends FallingBlock {
 
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-		BlockPos posDown = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ());
-		if (Block.isFaceFull(level.getBlockState(posDown).getCollisionShape(level, posDown), Direction.UP) || level.getBlockState(posDown).isAir()){
-			return true;
-		}
-		return false;
+		BlockPos posDown = pos.below();
+		return Block.isFaceFull(level.getBlockState(posDown).getCollisionShape(level, posDown), Direction.UP) || level.getBlockState(posDown).isAir();
 	}
 	
 	@Override

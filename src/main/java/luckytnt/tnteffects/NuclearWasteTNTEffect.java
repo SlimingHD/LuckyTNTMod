@@ -24,7 +24,7 @@ public class NuclearWasteTNTEffect extends PrimedTNTEffect {
 
 	@Override
 	public void serverExplosion(IExplosiveEntity entity) {
-		ExplosionHelper.legacySurfaceExplosion(entity.getLevel(), entity.getPos(), radius, 99f, new FilterSurfaceExplosionRule(false, 
+		ExplosionHelper.legacySphericalExplosion(entity.getLevel(), entity.getPos(), radius, 99f, new FilterSurfaceExplosionRule(false, 
 			LogicExplosionRule.not(
 				new FilterCollidableExplosionRule(new AlwaysExplosionRule()), 
 				new CanSurviveExplosionRule(BlockRegistry.NUCLEAR_WASTE.get().defaultBlockState())
