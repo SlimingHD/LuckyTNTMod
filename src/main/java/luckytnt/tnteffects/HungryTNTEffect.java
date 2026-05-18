@@ -30,7 +30,7 @@ public class HungryTNTEffect extends PrimedTNTEffect {
 			
 			Entity target = null;
 			List<LivingEntity> list = level.getEntitiesOfClass(LivingEntity.class, new AABB(entity.getPos().add(-50d, -50d, -50d), entity.getPos().add(50d, 50d, 50d)));
-			list.sort((l1, l2) -> l1.distanceToSqr(ent) < l2.distanceTo(ent) ? -1 : 1);
+			list.sort((l1, l2) -> Double.compare(l1.distanceToSqr(ent), l2.distanceToSqr(ent)));
 			for (LivingEntity living : list) {
 				if (living instanceof Player && living.getPersistentData().getInt("hungryTimer") > 0) {
 					living.getPersistentData().putInt("hungryTimer", living.getPersistentData().getInt("hungryTimer") - 1);
