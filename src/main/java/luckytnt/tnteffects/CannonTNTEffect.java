@@ -22,7 +22,7 @@ public class CannonTNTEffect extends PrimedTNTEffect {
 		if (!level.isClientSide() && entity.getTNTFuse() <= 400) {
 			List<Player> players = level.getEntitiesOfClass(Player.class, new AABB(entity.getPos().add(-100, -100, -100), entity.getPos().add(100, 100, 100)));
 			for (Player player : players) {
-				if (!player.equals(entity.owner())) {
+				if (player != entity.owner()) {
 					double xVel = player.getX() - entity.x();
 					double yVel = player.getY() - 0.6d;
 					double zVel = player.getZ() - entity.z();
